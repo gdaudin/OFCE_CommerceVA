@@ -29,7 +29,7 @@ insheet using "$dir/Bases_Sources/TIVA/ICIO2016_`i'.csv", clear
 sort v1 aus_c01t05agr-disc in 1/2159
 order aus_c01t05agr-row_c95pvh, alphabetic after (v1)
 order aus_hc-row_consabr, alphabetic after (zaf_c95pvh)
-save "$dir/Bases/OECD`i'.dta", replace
+save "$dir/Bases/TIVA_ICIO_`i'.dta", replace
 }
 
 *Same with the database for wages
@@ -56,19 +56,19 @@ program prepare_database
 	args yrs 
 
 *From the ICIO database I keep only the output vector
-use "$dir/Bases/OECD`yrs'.dta"
+use "$dir/Bases/TIVA_ICIO_`yrs'.dta"
 keep if v1 == "OUT"
 drop v1
 drop arg_consabr-disc
-save "$dir/Bases/OECD_`yrs'_OUT.dta", replace
+save "$dir/Bases/TIVA_ICIO_`yrs'_OUT.dta", replace
 
 *From the ICIO database I keep only the table for inter-industry inter-country trade
 clear
-use "$dir/Bases/OECD`yrs'.dta"
+use "$dir/Bases/TIVA_ICIO_`yrs'.dta"
 drop arg_consabr-disc
 drop if v1 == "VA.TAXSUB" | v1 == "OUT"
 drop v1
-save "$dir/Bases/OECD_`yrs'_Z.dta", replace
+save "$dir/Bases/TIVA_ICIO_`yrs'_Z.dta", replace
 
 *From the ICIO database I keep only the table for final demand
 clear
@@ -253,7 +253,7 @@ args yrs
 
 /*Y vecteur de production*/ 
 clear
-use "$dir/Bases/OECD_`yrs'_OUT.dta"
+use "$dir/Bases/TIVA_ICIO_`yrs'_OUT.dta"
 *drop arg_consabr-disc
 rename * prod*
 generate year = `yrs'
@@ -285,7 +285,7 @@ capture program drop compute_X
 program compute_X
 	args yrs
 
-use "$dir/Bases/OECD`yrs'.dta", clear
+use "$dir/Bases/TIVA_ICIO_`yrs'.dta", clear
 
 global country2 "arg aus aut bel bgr bra brn can che chl chn chn.npr chn.pro chn.dom col cri cyp cze deu dnk esp est fin fra gbr grc hkg hrv hun idn ind irl isl isr ita jpn khm kor ltu lux lva mex mex.ngm mex.gmf mlt mys nld nor nzl phl pol prt rou row rus sau sgp svk svn swe tha tun tur twn usa vnm zaf"
 

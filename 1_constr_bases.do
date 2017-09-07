@@ -3,7 +3,7 @@ clear
 
 
 if ("`c(username)'"=="guillaumedaudin") global dir "~/Dropbox/commerce en VA"
-if ("`c(username)'"=="L841580") global dir "H:/Agents/Cochard/Papier_chocCVA"
+else global "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
 
 
 
@@ -23,8 +23,8 @@ program save_data
 clear
 *Loop to save data for each year
 set more off
-foreach i of numlist 1995 2000 2005 2008 2009 2010 2011 {
-insheet using "$dir/Bases/ICIO/OECD_ICIO_June2015_`i'.csv", clear
+foreach i of numlist 1995 (1) 2011  {
+insheet using "$dir/Bases_Sources/TIVA/ICIO2016_`i'.csv", clear
 *I sort the ICIO: 
 sort v1 aus_c01t05agr-disc in 1/2159
 order aus_c01t05agr-row_c95pvh, alphabetic after (v1)

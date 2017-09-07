@@ -64,7 +64,7 @@ program prepare_database
 	args yrs 
 
 *From the ICIO database I keep only the output vector
-use "$dir/Bases/TIVA_ICIO__`yrs'.dta"
+use "$dir/Bases/TIVA_ICIO_`yrs'.dta"
 keep if v1 == "OUT"
 drop v1
 drop arg_consabr-disc

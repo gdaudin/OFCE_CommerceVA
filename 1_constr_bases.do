@@ -19,31 +19,39 @@ set more off
 *-------------------------------------------------------------------------------
 capture program drop save_data
 program save_data
+args source
+*ex: save_data TIVA
+
 
 clear
-*Loop to save data for each year
-set more off
-foreach i of numlist 1995 (1) 2011  {
-insheet using "$dir/Bases_Sources/TIVA/ICIO2016_`i'.csv", clear
-*I sort the ICIO: 
-sort v1 aus_c01t05agr-disc in 1/2159
-order aus_c01t05agr-row_c95pvh, alphabetic after (v1)
-order aus_hc-row_consabr, alphabetic after (zaf_c95pvh)
-save "$dir/Bases/TIVA_ICIO_`i'.dta", replace
-}
 
-*Same with the database for wages
-clear
-set more off
-local tab "WAGE OUT"
-foreach n of local tab{
-	foreach i of numlist 1995 2000 2005 {
-	clear
-	import excel "$dir/Bases/ICIO/WAGE_`i'.xlsx", sheet("`n'") firstrow
-	keep A-VNM
-	drop if A == ""
-	save "$dir/Bases/`n'_`i'.dta", replace
+if "`source'"=="TIVA" {
+
+	*Loop to save data for each year
+	set more off
+	foreach i of numlist 1995 (1) 2011 {
+	insheet using "$dir/Bases_Sources/TIVA/ICIO2016_`i'.csv", clear
+	*I sort the ICIO: 
+	sort v1 aus_c01t05agr-disc in 1/2159
+	order aus_c01t05agr-row_c95pvh, alphabetic after (v1)
+	order aus_hc-row_consabr, alphabetic after (zaf_c95pvh)
+	save "$dir/Bases/TIVA_ICIO_`i'.dta", replace
 	}
+
+	*Same with the database for wages
+	clear
+	set more off
+	local tab "WAGE OUT"
+	foreach n of local tab{
+		foreach i of numlist 1995 2000 2005 {
+		clear
+		import excel "$dir/Bases/ICIO/WAGE_`i'.xlsx", sheet("`n'") firstrow
+		keep A-VNM
+		drop if A == ""
+		save "$dir/Bases/`n'_`i'.dta", replace
+		}
+	}
+
 }
 
 end
@@ -56,7 +64,7 @@ program prepare_database
 	args yrs 
 
 *From the ICIO database I keep only the output vector
-use "$dir/Bases/TIVA_ICIO_`yrs'.dta"
+use "$dir/Bases/TIVA_ICIO__`yrs'.dta"
 keep if v1 == "OUT"
 drop v1
 drop arg_consabr-disc
@@ -72,7 +80,7 @@ save "$dir/Bases/TIVA_ICIO_`yrs'_Z.dta", replace
 
 *From the ICIO database I keep only the table for final demand
 clear
-use "$dir/Bases/OECD`yrs'.dta"
+use "$dir/Bases/TIVA_ICIO_`yrs'.dta"
 drop if v1 == "VA.TAXSUB" | v1 == "OUT"
 keep arg_consabr-disc
 save "$dir/Bases/finaldemand_`yrs'.dta", replace
@@ -345,7 +353,7 @@ end
 
 **** Lancement des programmes ****************
 
-save_data 
+save_data TIVA
 
 foreach i of numlist 1995 2000 2005{
 	clear

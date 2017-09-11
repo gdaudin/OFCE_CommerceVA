@@ -61,7 +61,7 @@ if "`source'"=="TIVA" {
 if "`source'"=="WIOD" {	 
 	*Loop to save data for each year
 	set more off
-	foreach i of numlist 2000 (1) 2000 {
+	foreach i of numlist 2000 (1) 2011 {
 	use "$dir/Bases_Sources/`source'/WIOT`i'_October16_ROW.dta", clear
 	
 	save "$dir/Bases/WIOD_ICIO_`i'.dta", replace

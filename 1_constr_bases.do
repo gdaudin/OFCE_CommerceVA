@@ -63,7 +63,7 @@ if "`source'"=="WIOD" {
 	set more off
 	foreach i of numlist 2000 (1) 2011 {
 	use "$dir/Bases_Sources/`source'/WIOT`i'_October16_ROW.dta", clear
-	
+	order vAUS1-vROW61, alphabetic
 	save "$dir/Bases/WIOD_ICIO_`i'.dta", replace
 	}
 

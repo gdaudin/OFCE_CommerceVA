@@ -97,29 +97,54 @@ end
 *-------------------------------------------------------------------------------
 capture program drop prepare_database
 program prepare_database
-	args yrs 
+	args yrs source
 
-*From the ICIO database I keep only the output vector
-use "$dir/Bases/TIVA_ICIO_`yrs'.dta"
-keep if v1 == "OUT"
-drop v1
-drop arg_consabr-disc
-save "$dir/Bases/TIVA_ICIO_`yrs'_OUT.dta", replace
 
-*From the ICIO database I keep only the table for inter-industry inter-country trade
-clear
-use "$dir/Bases/TIVA_ICIO_`yrs'.dta"
-drop arg_consabr-disc
-drop if v1 == "VA.TAXSUB" | v1 == "OUT"
-drop v1
-save "$dir/Bases/TIVA_ICIO_`yrs'_Z.dta", replace
+if "`source'"=="TIVA" {	
+		
+	*From the ICIO database I keep only the output vector
+	use "$dir/Bases/TIVA_ICIO_`yrs'.dta"
+	keep if v1 == "OUT"
+	drop v1
+	drop arg_consabr-disc
+	save "$dir/Bases/TIVA_ICIO_`yrs'_OUT.dta", replace
+	
+	*From the ICIO database I keep only the table for inter-industry inter-country trade
+	clear
+	use "$dir/Bases/TIVA_ICIO_`yrs'.dta"
+	drop arg_consabr-disc
+	drop if v1 == "VA.TAXSUB" | v1 == "OUT"
+	drop v1
+	save "$dir/Bases/TIVA_ICIO_`yrs'_Z.dta", replace
+	
+	*From the ICIO database I keep only the table for final demand
+	clear
+	use "$dir/Bases/TIVA_ICIO_`yrs'.dta"
+	drop if v1 == "VA.TAXSUB" | v1 == "OUT"
+	keep arg_consabr-disc
+	save "$dir/Bases/finaldemand_`yrs'.dta", replace
+}
 
-*From the ICIO database I keep only the table for final demand
-clear
-use "$dir/Bases/TIVA_ICIO_`yrs'.dta"
-drop if v1 == "VA.TAXSUB" | v1 == "OUT"
-keep arg_consabr-disc
-save "$dir/Bases/finaldemand_`yrs'.dta", replace
+if "`source'"=="WIOD" {	
+
+*Output vector
+	use "$dir/Bases/WIOD_ICIO_`yrs'.dta"
+	keep if IndustryCode == "GO"
+	drop IndustryCode-TOT
+	save "$dir/Bases/WIOD_ICIO_`yrs'_OUT.dta", replace
+	
+* Only the I/O table itself
+	clear
+	use "$dir/Bases/WIOD_ICIO_`yrs'.dta"
+	drop if RNr >=65
+	drop IndustryCode-TOT
+	save "$dir/Bases/WIOD_ICIO_`yrs'_Z.dta", replace
+	
+*Only final demand
+	*** Je laisse tomber car c'est compliqué et pas sûr que cela soit utile
+
+	
+}
 
 end
 
@@ -389,17 +414,21 @@ end
 
 **** Lancement des programmes ****************
 
-save_data WIOD
+*save_data WIOD
 
-foreach i of numlist 1995 2000 2005{
+/*
+foreach i of numlist 1995 2000 2005 2008 2009 2010 2011 {
 	clear
-	prepare_database `i'
+	prepare_database `i' TIVA
 }
 
-foreach i of numlist 2008 2009 2010 2011 {
+*/
+
+foreach i of numlist 2000(1)2014 {
 	clear
-	prepare_database `i'
+	prepare_database `i' WIOD
 }
+
 
 
 

@@ -56,6 +56,37 @@ if "`source'"=="TIVA" {
 
 }
 
+
+
+if "`source'"=="WIOD" {	 
+	*Loop to save data for each year
+	set more off
+	foreach i of numlist 2000 (1) 2000 {
+	use "$dir/Bases_Sources/`source'/WIOT`i'_October16_ROW.dta", clear
+	
+	save "$dir/Bases/WIOD_ICIO_`i'.dta", replace
+	}
+
+	/*
+	*Same with the database for wages
+	clear
+	set more off
+	local tab "WAGE OUT"
+	foreach n of local tab{
+		foreach i of numlist 1995 2000 2005 {
+		clear
+		import excel "$dir/Bases/ICIO/WAGE_`i'.xlsx", sheet("`n'") firstrow
+		keep A-VNM
+		drop if A == ""
+		save "$dir/Bases/`n'_`i'.dta", replace
+		}
+	}
+	
+	*/
+
+}
+
+
 end
 
 *-------------------------------------------------------------------------------
@@ -355,7 +386,7 @@ end
 
 **** Lancement des programmes ****************
 
-save_data TIVA
+save_data WIOD
 
 foreach i of numlist 1995 2000 2005{
 	clear

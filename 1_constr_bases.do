@@ -2,7 +2,7 @@ clear
 
 
 
-if ("`c(username)'"=="guillaumedaudin") global dir "~/Dropbox/commerce en VA"
+if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/OFCE Commerce VA/2017 Bdf"
 else global "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
 
 
@@ -39,7 +39,7 @@ if "`source'"=="TIVA" {
 	
 	save "$dir/Bases/TIVA_ICIO_`i'.dta", replace
 	}
-
+/*
 	*Same with the database for wages
 	clear
 	set more off
@@ -52,8 +52,10 @@ if "`source'"=="TIVA" {
 		drop if A == ""
 		save "$dir/Bases/`n'_`i'.dta", replace
 		}
+
 	}
 
+	*/	
 }
 
 
@@ -106,13 +108,13 @@ if "`source'"=="TIVA" {
 	use "$dir/Bases/TIVA_ICIO_`yrs'.dta"
 	keep if v1 == "OUT"
 	drop v1
-	drop arg_consabr-disc
+	drop dirp_arg-nps_zaf
 	save "$dir/Bases/TIVA_ICIO_`yrs'_OUT.dta", replace
 	
 	*From the ICIO database I keep only the table for inter-industry inter-country trade
 	clear
 	use "$dir/Bases/TIVA_ICIO_`yrs'.dta"
-	drop arg_consabr-disc
+	drop dirp_arg-nps_zaf
 	drop if v1 == "VA.TAXSUB" | v1 == "OUT"
 	drop v1
 	save "$dir/Bases/TIVA_ICIO_`yrs'_Z.dta", replace
@@ -121,7 +123,7 @@ if "`source'"=="TIVA" {
 	clear
 	use "$dir/Bases/TIVA_ICIO_`yrs'.dta"
 	drop if v1 == "VA.TAXSUB" | v1 == "OUT"
-	keep arg_consabr-disc
+	keep dirp_arg-nps_zaf
 	save "$dir/Bases/finaldemand_`yrs'.dta", replace
 }
 
@@ -361,11 +363,11 @@ end
 
 capture program drop compute_y
 program compute_y
-args yrs
+args source yrs
 
 /*Y vecteur de production*/ 
 clear
-use "$dir/Bases/TIVA_ICIO_`yrs'_OUT.dta"
+use "$dir/Bases/`source'_ICIO_`yrs'_OUT.dta"
 *drop arg_consabr-disc
 rename * prod*
 generate year = `yrs'
@@ -377,13 +379,20 @@ end
 
 capture program drop append_y
 program append_y
+args source
 
-foreach i of numlist 1995 2000 2005 2008 2009 2010 2011{ 
-	compute_y `i'
-	if `i'!=1995 {
-		append using "$dir/Bases/prod.dta"
+if "`source'"=="TIVA" local yr_list 1995(1)2011
+if "`source'"=="WIOD" local yr_list 2000(1)2011
+
+if "`source'"=="TIVA" local first_yr 1995
+if "`source'"=="WIOD" local first_yr 2000
+
+foreach y of numlist `yr_list' { 
+	compute_y `source' `y'
+	if `y'!=`first_yr' {
+		append using "$dir/Bases/`source'_prod.dta"
 				}
-	save "$dir/Bases/prod.dta", replace
+	save "$dir/Bases/`source'_prod.dta", replace
 	}
 sort year , stable
 end
@@ -395,16 +404,35 @@ end
 *Creation of the vector of export X
 capture program drop compute_X
 program compute_X
-	args yrs
+	args source yrs
 
-use "$dir/Bases/TIVA_ICIO_`yrs'.dta", clear
+use "$dir/Bases/`source'_ICIO_`yrs'.dta", clear
 
-global country2 "arg aus aut bel bgr bra brn can che chl chn chn.npr chn.pro chn.dom col cri cyp cze deu dnk esp est fin fra gbr grc hkg hrv hun idn ind irl isl isr ita jpn khm kor ltu lux lva mex mex.ngm mex.gmf mlt mys nld nor nzl phl pol prt rou row rus sau sgp svk svn swe tha tun tur twn usa vnm zaf"
+if "`source'"=="TIVA" {
+	global country2 "arg aus aut bel bgr bra brn can che chl"
+	global country2 "$country2  chn chndom chnnpr chnpro col cri cyp cze deu dnk esp est fin"
+	global country2 "$country2  fra gbr grc hkg hrv hun idn ind irl isl ita jpn khm kor"
+	global country2 "$country2  ltu lux lva mex mexgmf mexngm mlt mys nld nor nzl phl pol prt"
+	global country2 "$country2  rou row rus sau sgp svk svn swe tha tun tur twn usa vnm zaf"	
+}
+				
+				
+if "`source'"=="WIOD" {
+	global country2 "aus aut bel bgr bra can che" 
+	global country2 "$country2 chn cyp cze deu dnk esp est fin"
+	global country2 "$country2 fra gbr grc hrv hum idn ind irl isl ita jpn kor"
+	global country2 "$country2 ltu lux lva mex mlt nld nor pol prt"
+	global country2 "$country2 rou row rus svk svn swe tur twn usa"
+	
+}
 
+
+	
 generate pays = strlower(substr(v1,1,strpos(v1,"_")-1))
 drop if pays==""
 
 egen utilisations = rowtotal(arg_c01t05agr-disc)
+
 gen utilisations_dom = .
 
 foreach j of global country2 {
@@ -433,13 +461,23 @@ end
 
 capture program drop append_X
 program append_X
+args source
 *We create a .dta that includes all vectors of export of all years
-foreach i of numlist 1995 2000 2005 2008 2009 2010 2011{ 
-	compute_X `i'
-	if `i'!=1995 {
-	append using "$dir/Bases/exports.dta" 
+
+
+
+if "`source'"=="TIVA" local yr_list 1995(1)2011
+if "`source'"=="WIOD" local yr_list 2000(1)2011
+
+if "`source'"=="TIVA" local first_yr 1995
+if "`source'"=="WIOD" local first_yr 2000
+
+foreach y of numlist `yr_list' { 
+	compute_X `source' `y'
+	if `y'!=`first_yr' {
+	append using "$dir/Bases/exports_`source'.dta" 
 	}
-	save "$dir/Bases/exports.dta", replace
+	save "$dir/Bases/exports_`source'.dta", replace
 }	
 
 replace pays = "CHNNPR" if pays == "CHN.NPR"
@@ -449,23 +487,27 @@ replace pays = "MEXNGM" if pays == "MEX.NGM"
 replace pays = "MEXGMF" if pays == "MEX.GMF"
  
 sort year , stable
-save "$dir/Bases/exports.dta", replace
+save "$dir/Bases/exports_`source'.dta", replace
  
 
 end
 
 
 **** Lancement des programmes ****************
-
-*save_data WIOD
-
 /*
-foreach i of numlist 1995 2000 2005 2008 2009 2010 2011 {
+
+save_data WIOD
+save_data TIVA
+
+
+foreach i of numlist 1995(1)2011 {
 	clear
 	prepare_database `i' TIVA
 }
 
 
+
+/*
 
 foreach i of numlist 2000(1)2014 {
 	clear
@@ -488,5 +530,12 @@ database_csv TIVA
 database_csv WIOD
 
 set more off
-append_y
-append_X
+
+
+append_y TIVA
+
+*/
+append_X TIVA
+
+append_y WIOD
+append_X WIOD

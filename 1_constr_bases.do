@@ -240,30 +240,51 @@ args source
 
 clear
 set more off
-if "`source'"=="TIVA" global country "ARG AUS AUT BEL BGR BRA BRN CAN CHE CHL /// 
-				CHN CHNDOM CHNNPR CHNPRO COL CRI CYP CZE DEU DNK ESP EST FIN ///
-				FRA GBR GRC HKG HRV HUN IDN IND IRL ISL ISR ITA JPN KHM KOR  ///
-				LTU LUX LVA MEX MEXGMF MEXNGM MLT MYS NLD NOR NZL PHL POL PRT /// 
-				ROU ROW RUS SAU SGP SVK SVN SWE THA TUN TUR TWN USA VNM ZAF"
+if "`source'"=="TIVA" {
+	global country "ARG AUS AUT BEL BGR BRA BRN CAN CHE CHL"
+	global country "$country  CHN CHNDOM CHNNPR CHNPRO COL CRI CYP CZE DEU DNK ESP EST FIN"
+	global country "$country  FRA GBR GRC HKG HRV HUN IDN IND IRL ISL ISR ITA JPN KHM KOR"
+	global country "$country  LTU LUX LVA MEX MEXGMF MEXNGM MLT MYS NLD NOR NZL PHL POL PRT"
+	global country "$country  ROU ROW RUS SAU SGP SVK SVN SWE THA TUN TUR TWN USA VNM ZAF"
+	
+	
+	global sector "C01T05 C10T14 C15T16 C17T19 C20 C21T22"
+	global sector "$sector C23 C24 C25 C26 C27 C28 C29 C30T33X C31 C34 C35 C36T37 C40T41 C45"
+	global sector "$sector C50T52 C55 C60T63 C64 C65T67 C70 C71 C72 C73T74 C75 C80 C85 C90T93 C95"
+	
+}
+				
+				
+if "`source'"=="WIOD" {
+	global country "   AUS AUT BEL BGR BRA     CAN CHE" 
+	global country "$country CHN                             CYP CZE DEU DNK ESP EST FIN"
+	global country "$country FRA GBR GRC     HRV HUN IDN IND IRL ISL      ITA JPN     KOR"
+	global country "$country LTU LUX LVA MEX              MLT     NLD NOR        POL PRT"
+	global country "$country ROU ROW RUS       SVK SVN SWE       TUR TWN USA        "
+}
 
+
+				
+local nbr_sect=wordcount("$sector")				
+				
 generate c = ""
 local num_pays 0
 foreach i of global country {
-	foreach j of numlist 1/34 {
+	foreach j of numlist 1/`nbr_sect' {
 		local new = _N + 1
 		set obs `new'
-		local ligne = `j' + 34*`num_pays'
+		local ligne = `j' + `nbr_sect'*`num_pays'
 		replace c = "`i'" in `ligne'
 	}
 	local num_pays = `num_pays'+1
 }
 
-if "`source'"=="TIVA" global sector "C01T05 C10T14 C15T16 C17T19 C20 C21T22 C23 C24 C25 C26 C27 C28 C29 C30T33X C31 C34 C35 C36T37 C40T41 C45 C50T52 C55 C60T63 C64 C65T67 C70 C71 C72 C73T74 C75 C80 C85 C90T93 C95"
+
 
 generate s =""
 local num_sector 0
 foreach i of global sector {
-	forvalues j = 1(34)2278 {
+	forvalues j = 1(`nbr_sect')2278 {
 		local ligne = `j' + 1*`num_sector'
 		replace s = "`i'" in `ligne'
 	}

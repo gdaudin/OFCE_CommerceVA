@@ -261,11 +261,21 @@ if "`source'"=="WIOD" {
 	global country "$country FRA GBR GRC     HRV HUN IDN IND IRL ISL      ITA JPN     KOR"
 	global country "$country LTU LUX LVA MEX              MLT     NLD NOR        POL PRT"
 	global country "$country ROU ROW RUS       SVK SVN SWE       TUR TWN USA        "
+	
+	
+	global sector "A01 A02 A03 B C10-C12 C13-C15 C16 C17 C18 C19 C20 C21 C22"
+	global sector "$sector C23 C24 C25 C26 C27 C28 C29 C31_C32 C33 C35 E35 E36 E37-E39"
+	global sector "$sector F G45 G46 G47 H49 H50 H51 H52 H53 I J58 J59_J60"
+	global sector "$sector J61 J62_J63 K64 K65 K66 L68 M69_M70 M71 M72 M73"
+	global sector "$sector M74_M75 N O84 O85 Q R_S T U"
 }
 
 
 				
-local nbr_sect=wordcount("$sector")				
+local nbr_sect=wordcount("$sector")	
+local nbr_ctry=wordcount("$country")
+local nbr_lig= `nbr_ctry'*`nbr_sect'
+				
 				
 generate c = ""
 local num_pays 0
@@ -284,7 +294,7 @@ foreach i of global country {
 generate s =""
 local num_sector 0
 foreach i of global sector {
-	forvalues j = 1(`nbr_sect')2278 {
+	forvalues j = 1(`nbr_sect')`nbr_lig' {
 		local ligne = `j' + 1*`num_sector'
 		replace s = "`i'" in `ligne'
 	}
@@ -341,12 +351,6 @@ save "$dir/Bases/pays_en_ligne_`source'.dta", replace
 
 
 end
-
-
-
-
-
-
 
 
 
@@ -481,6 +485,7 @@ foreach i of numlist 1995 2000 2005 {
 */
 
 database_csv TIVA
+database_csv WIOD
 
 set more off
 append_y

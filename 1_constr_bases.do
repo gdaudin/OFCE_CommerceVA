@@ -153,6 +153,8 @@ end
 *-------------------------------------------------------------------------------
 *TRIMMING THE DATABASE FOR WAGES
 *-------------------------------------------------------------------------------
+
+**Pas mis à jour : nous n'avons pas les salaire WIOD et nous ne trouvons pas les salaire TIVA
 capture program drop base_wage
 program base_wage
 	args yrs n
@@ -232,10 +234,17 @@ end
 *----------------------------------------------------------------------------------
 capture program drop database_csv
 program database_csv
+args source
+
+*Exemple : database_csv TIVA
 
 clear
 set more off
-global country "ARG AUS AUT BEL BGR BRA BRN CAN CHE CHL CHN CHNDOM CHNNPR CHNPRO COL CRI CYP CZE DEU DNK ESP EST FIN FRA GBR GRC HKG HRV HUN IDN IND IRL ISL ISR ITA JPN KHM KOR LTU LUX LVA MEX MEXGMF MEXNGM MLT MYS NLD NOR NZL PHL POL PRT ROU ROW RUS SAU SGP SVK SVN SWE THA TUN TUR TWN USA VNM ZAF"
+if "`source'"=="TIVA" global country "ARG AUS AUT BEL BGR BRA BRN CAN CHE CHL /// 
+				CHN CHNDOM CHNNPR CHNPRO COL CRI CYP CZE DEU DNK ESP EST FIN ///
+				FRA GBR GRC HKG HRV HUN IDN IND IRL ISL ISR ITA JPN KHM KOR  ///
+				LTU LUX LVA MEX MEXGMF MEXNGM MLT MYS NLD NOR NZL PHL POL PRT /// 
+				ROU ROW RUS SAU SGP SVK SVN SWE THA TUN TUR TWN USA VNM ZAF"
 
 generate c = ""
 local num_pays 0
@@ -249,7 +258,7 @@ foreach i of global country {
 	local num_pays = `num_pays'+1
 }
 
-global sector "C01T05 C10T14 C15T16 C17T19 C20 C21T22 C23 C24 C25 C26 C27 C28 C29 C30T33X C31 C34 C35 C36T37 C40T41 C45 C50T52 C55 C60T63 C64 C65T67 C70 C71 C72 C73T74 C75 C80 C85 C90T93 C95"
+if "`source'"=="TIVA" global sector "C01T05 C10T14 C15T16 C17T19 C20 C21T22 C23 C24 C25 C26 C27 C28 C29 C30T33X C31 C34 C35 C36T37 C40T41 C45 C50T52 C55 C60T63 C64 C65T67 C70 C71 C72 C73T74 C75 C80 C85 C90T93 C95"
 
 generate s =""
 local num_sector 0
@@ -262,6 +271,8 @@ foreach i of global sector {
 }
 
 gen v1=0
+
+if "`source'"=="TIVA" {
 
 *I withdraw the industries for different types of CHN and MEX that are not in the dataset from v1
 
@@ -297,17 +308,24 @@ foreach i of global sector5 {
 		drop if (c == "`j'" & s == "`i'")
 	}
 }
+}
 
 rename v1 p_shock
 
-save "$dir/Bases/csv.dta", replace
+save "$dir/Bases/csv_`source'.dta", replace
 
 collapse (sum) p_shock, by(c)
 
-save "$dir/Bases/pays_en_ligne.dta", replace
+save "$dir/Bases/pays_en_ligne_`source'.dta", replace
 
 
 end
+
+
+
+
+
+
 
 
 
@@ -422,7 +440,7 @@ foreach i of numlist 1995 2000 2005 2008 2009 2010 2011 {
 	prepare_database `i' TIVA
 }
 
-*/
+
 
 foreach i of numlist 2000(1)2014 {
 	clear
@@ -439,9 +457,9 @@ foreach i of numlist 1995 2000 2005 {
 		}
 }
 
+*/
 
-
-database_csv
+database_csv TIVA
 
 set more off
 append_y

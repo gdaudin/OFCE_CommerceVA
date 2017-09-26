@@ -244,9 +244,9 @@ clear
 set more off
 if "`source'"=="TIVA" {
 	global country "ARG AUS AUT BEL BGR BRA BRN CAN CHE CHL"
-	global country "$country  CHN CHNDOM CHNNPR CHNPRO COL CRI CYP CZE DEU DNK ESP EST FIN"
+	global country "$country  CHN CN1 CN2 CN2 CN3 COL CRI CYP CZE DEU DNK ESP EST FIN"
 	global country "$country  FRA GBR GRC HKG HRV HUN IDN IND IRL ISL ISR ITA JPN KHM KOR"
-	global country "$country  LTU LUX LVA MEX MEXGMF MEXNGM MLT MYS NLD NOR NZL PHL POL PRT"
+	global country "$country  LTU LUX LVA MEX MLT MX1 MX2 MX3 MYS NLD NOR NZL PHL POL PRT"
 	global country "$country  ROU ROW RUS SAU SGP SVK SVN SWE THA TUN TUR TWN USA VNM ZAF"
 	
 	
@@ -307,6 +307,9 @@ gen v1=0
 
 if "`source'"=="TIVA" {
 
+
+/*
+****This is obsolete in the 2016 version
 *I withdraw the industries for different types of CHN and MEX that are not in the dataset from v1
 
 *CHINA
@@ -343,6 +346,8 @@ foreach i of global sector5 {
 }
 }
 
+
+*/
 rename v1 p_shock
 
 save "$dir/Bases/csv_`source'.dta", replace
@@ -410,9 +415,9 @@ use "$dir/Bases/`source'_ICIO_`yrs'.dta", clear
 
 if "`source'"=="TIVA" {
 	global country2 "arg aus aut bel bgr bra brn can che chl"
-	global country2 "$country2  chn chndom chnnpr chnpro col cri cyp cze deu dnk esp est fin"
+	global country2 "$country2  chn cn1 cn2 cn3 cn4 col cri cyp cze deu dnk esp est fin"
 	global country2 "$country2  fra gbr grc hkg hrv hun idn ind irl isl ita jpn khm kor"
-	global country2 "$country2  ltu lux lva mex mexgmf mexngm mlt mys nld nor nzl phl pol prt"
+	global country2 "$country2  ltu lux lva mex mlt mx1 mx2 mx3 mys nld nor nzl phl pol prt"
 	global country2 "$country2  rou row rus sau sgp svk svn swe tha tun tur twn usa vnm zaf"	
 }
 				
@@ -526,16 +531,20 @@ foreach i of numlist 1995 2000 2005 {
 
 */
 
+*/
+
 database_csv TIVA
 database_csv WIOD
 
 set more off
 
+blouf
 
 append_y TIVA
 
-*/
+
 append_X TIVA
 
+/*
 append_y WIOD
 append_X WIOD

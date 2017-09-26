@@ -124,7 +124,7 @@ if "`source'"=="TIVA" {
 	use "$dir/Bases/TIVA_ICIO_`yrs'.dta"
 	drop if v1 == "VA.TAXSUB" | v1 == "OUT"
 	keep dirp_arg-nps_zaf
-	save "$dir/Bases/finaldemand_`yrs'.dta", replace
+	save "$dir/Bases/`source’_`year’_finaldemand.dta", replace
 }
 
 if "`source'"=="WIOD" {	

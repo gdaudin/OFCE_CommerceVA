@@ -388,7 +388,7 @@ end
 
 
 ***************************************************************************************************
-* 1- Création des tables Y de production : on crée le vecteur 1*67 des productions totales de chauqe pays
+* 1- Création des tables Y de production : on crée le vecteur 1*67 des productions totales de chaque pays
 ***************************************************************************************************
 
 capture program drop compute_y
@@ -402,8 +402,15 @@ use "$dir/Bases/`source'_`yrs'_OUT.dta"
 rename * prod*
 generate year = `yrs'
 reshape long prod, i(year) j(pays_sect) string
-generate pays = strupper(substr(pays_sect,1,strpos(pays_sect,"_")-1))
+
+
+blif
+if `source'=="TIVA" generate pays = strupper(substr(pays_sect,1,strpos(pays_sect,"_")-1))
+if `source'=="WIOD" generate pays = substr(pays_sect,2,3)
+
+
 collapse (sum) prod, by(pays year)
+
 
 end 
 
@@ -564,22 +571,27 @@ foreach i of numlist 1995 2000 2005 {
 
 */
 
-*/
+
 
 database_csv TIVA
 database_csv WIOD
-/*
+
 set more off
 
 
 
 append_y TIVA
 
-*/
+
 append_X TIVA
+*/
+
+
+
+
+append_y WIOD
 
 /*
-append_y WIOD
 append_X WIOD
 
 */

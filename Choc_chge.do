@@ -4,10 +4,10 @@
 
 clear
 
-global dir "H:\Agents\Cochard\Papier_chocCVA"
+if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/OFCE Commerce VA/2017 Bdf"
+else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
 
-if ("`c(username)'"=="guillaumedaudin") global dir "~/Dropbox/commerce en VA"
-if ("`c(username)'"=="L841580") global dir "H:\Agents\Cochard\Papier_chocCVA"
+
 
 
 capture log using "$dir/$S_DATE $S_TIME.log", replace
@@ -19,18 +19,18 @@ global test 0
 
 
 *global country "ARG AUS AUT BEL BGR BRA BRN CAN CHE CHL CHN CHNDOM CHNNPR CHNPRO COL CRI CYP CZE DEU DNK ESP EST FIN FRA GBR GRC HKG HRV HUN IDN IND IRL ISL ISR ITA JPN KHM KOR LTU LUX LVA MEX MEXGMF MEXNGM MLT MYS NLD NOR NZL PHL POL PRT ROU ROW RUS SAU SGP SVK SVN SWE THA TUN TUR TWN USA VNM ZAF"
-global country "ARG AUS AUT BEL BGR BRA BRN CAN CHE CHL CHN COL CRI CYP CZE DEU DNK ESP EST FIN FRA GBR GRC HKG HRV HUN IDN IND IRL ISL ISR ITA JPN KHM KOR LTU LUX LVA MEX MLT MYS NLD NOR NZL PHL POL PRT ROU ROW RUS SAU SGP SVK SVN SWE THA TUN TUR TWN USA VNM ZAF"
+global country "ARG AUS AUT BEL BGR BRA BRN CAN CHE CHL CHN CN1 CN2 CN3 CN4 COL CRI CYP CZE DEU DNK ESP EST FIN FRA GBR GRC HKG HRV HUN IDN IND IRL ISL ISR ITA JPN KHM KOR LTU LUX LVA MEX MLT MX1 MX2 MX3 MYS NLD NOR NZL PHL POL PRT ROU ROW RUS SAU SGP SVK SVN SWE THA TUN TUR TWN USA VNM ZAF"
 
 
 local eurozone "AUT BEL CYP DEU ESP EST FIN FRA GRC IRL ITA LTU LUX LVA MLT NLD PRT SVK SVN"
-local noneuro "ARG AUS BGR BRA BRN CAN CHE CHL CHN COL CRI CZE DNK GBR HKG HRV HUN IDN IND ISL ISR JPN KHM KOR MEX MYS NOR NZL PHL POL ROU ROW RUS SAU SGP SWE THA TUN TUR TWN USA VNM ZAF"
-local china "CHN CHNDOM CHNNPR CHNPRO"
+local noneuro "ARG AUS BGR BRA BRN CAN CHE CHL CHN  CN1 CN2 CN3 CN4  COL CRI CZE DNK GBR HKG HRV HUN IDN IND ISL ISR JPN KHM KOR MEX MX1 MX2 MX3 MYS NOR NZL PHL POL ROU ROW RUS SAU SGP SWE THA TUN TUR TWN USA VNM ZAF"
+local china "CHN CN1 CN2 CN3 CN4"
 local eastern "BGR CZE HRV HUN POL ROU "
 
 
 global eurozone "AUT BEL CYP DEU ESP EST FIN FRA GRC IRL ITA LTU LUX LVA MLT NLD PRT SVK SVN"
-global noneuro "ARG AUS BGR BRA BRN CAN CHE CHL CHN COL CRI CZE DNK GBR HKG HRV HUN IDN IND ISL ISR JPN KHM KOR MEX MYS NOR NZL PHL POL ROU ROW RUS SAU SGP SWE THA TUN TUR TWN USA VNM ZAF"
-global china "CHN CHNDOM CHNNPR CHNPRO"
+global noneuro "ARG AUS BGR BRA BRN CAN CHE CHL CHN COL CRI CZE DNK GBR HKG HRV HUN IDN IND ISL ISR JPN KHM KOR MEX MX1 MX2 MX3 MYS NOR NZL PHL POL ROU ROW RUS SAU SGP SWE THA TUN TUR TWN USA VNM ZAF"
+global china "CHN CN1 CN2 CN3 CN4"
 global eastern "BGR CZE HRV HUN POL ROU "
 
 
@@ -42,14 +42,15 @@ set more off
 *set matsize 7000
 capture program drop compute_leontief
 program compute_leontief
-	args yrs
+	args yrs source
+	
 *Create vector Y of output from troncated database
 clear
-use "$dir/Bases/OECD_`yrs'_OUT.dta"
+use "$dir/Bases/`source'_`yrs'_OUT.dta"
 mkmat arg_c01t05agr-zaf_c95pvh, matrix(Y)
 
 *Create matrix Z of inter-industry inter-country trade
-use "$dir/Bases/OECD_`yrs'_Z.dta"
+use "$dir/Bases/`source'_`yrs'_Z.dta"
 
 
 
@@ -656,7 +657,7 @@ set more off
 foreach i of numlist 1995  2005 2009 2010 2011 {
 	clear
 	set more off
-	compute_leontief `i'
+	compute_leontief `i' TIVA
 	compute_X `i'
 	create_y `i'
 	compute_VA `i'

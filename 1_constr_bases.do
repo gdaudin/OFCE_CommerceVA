@@ -445,17 +445,21 @@ gen utilisations_dom = .
 
 foreach j of global country2 {
 	local i = "`j'"
-	if  ("`j'"=="chn.npr" | "`j'"=="chn.pro" |"`j'"=="chn.dom" ) {
-		local i = "chn" 
+	if  ("`j'"=="cn1" | "`j'"=="cn2" |"`j'"=="cn3" |"`j'"=="cn4" ) {
+		local i = "cn" 
 	}
-	if  ("`j'"=="mex.ngm" | "`j'"=="mex.gmf") {
-			local i = "mex"
+	if  ("`j'"=="mx1" | "`j'"=="mx2" | "`j'"=="mx3" ) {
+			local i = "mx"
 	}
 	egen blouk = rowtotal(`i'*)
 	display "`i'" "`j'"
 	replace utilisations_dom = blouk if pays=="`j'"
 	codebook utilisations_dom if pays=="`j'"
 	drop blouk
+	
+	
+	*** cn = cn1 + cn2 + cn3 + cn4
+	*** mx = mx1 + mx2 + mx3
 }
 generate X = utilisations - utilisations_dom
 	
@@ -516,7 +520,7 @@ foreach i of numlist 1995(1)2011 {
 
 
 
-*/
+
 
 foreach i of numlist 2000(1)2014 {
 	clear
@@ -541,8 +545,8 @@ database_csv TIVA
 database_csv WIOD
 
 set more off
+*/
 
-blouf
 
 append_y TIVA
 

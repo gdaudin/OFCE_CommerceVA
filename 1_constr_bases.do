@@ -168,14 +168,36 @@ program base_wage
 	global restcountry "ISL BRN COL CRI HKG HRV KHM MEX_GMF MEX_NGM MYS PHL ROW SAU SGP THA TUN "
 	global chncountry "CHN_DOM CHN_NPR CHN_PRO"
 
-*List of all countries
-	global country "ARG AUS AUT BEL BGR BRA BRN CAN CHE CHL CHN CHN_DOM CHN_NPR CHN_PRO COL CRI CYP CZE DEU DNK ESP EST FIN FRA GBR GRC HKG HRV HUN IDN IND IRL ISL ISR ITA JPN KHM KOR LTU LUX LVA MEX MEX_GMF MEX_NGM MLT MYS NLD NOR NZL PHL POL PRT ROU ROW RUS SAU SGP SVK SVN SWE THA TUN TUR TWN USA VNM ZAF"
-*Lists of sectors
-	global sector "C01T05 C10T14 C15T16 C17T19 C20 C21T22 C23 C24 C25 C26 C27 C28 C29 C30T33X C31 C34 C35 C36T37 C40T41 C45 C50T52 C55 C60T63 C64 C65T67 C70 C71 C72 C73T74 C75 C80 C85 C90T93 C95"
-	global sector2 "C01T05 C10T14 C15T16 C17T19 C20 C21T22 C23 C24 C25 C26 C27 C28 C29 C30T33X C31 C34 C35 C36T37 "
-	global sector3 "C40T41 C45 C50T52 C55 C60T63 C64 C65T67 C70 C71 C72 C73T74 C75 C80 C85 C90T93 C95"
-	global sector4 "C15T16 C17T19 C20 C21T22 C23 C24 C25 C26 C27 C28 C29 C30T33X C31 C34 C35 C36T37"
-	global sector5 "C01T05 C10T14 C40T41 C45 C50T52 C55 C60T63 C64 C65T67 C70 C71 C72 C73T74 C75 C80 C85 C90T93 C95"
+if "`source'"=="TIVA" {
+	global country "ARG AUS AUT BEL BGR BRA BRN CAN CHE CHL"
+	global country "$country  CHN CN1 CN2 CN2 CN3 COL CRI CYP CZE DEU DNK ESP EST FIN"
+	global country "$country  FRA GBR GRC HKG HRV HUN IDN IND IRL ISL ISR ITA JPN KHM KOR"
+	global country "$country  LTU LUX LVA MAR MEX MLT MX1 MX2 MX3 MYS NLD NOR NZL PER PHL POL PRT"
+	global country "$country  ROU ROW RUS SAU SGP SVK SVN SWE THA TUN TUR TWN USA VNM ZAF"
+	
+	
+	global sector "C01T05 C10T14 C15T16 C17T19 C20 C21T22"
+	global sector "$sector C23 C24 C25 C26 C27 C28 C29 C30T33X C31 C34 C35 C36T37 C40T41 C45"
+	global sector "$sector C50T52 C55 C60T63 C64 C65T67 C70 C71 C72 C73T74 C75 C80 C85 C90T93 C95"
+	
+}
+				
+				
+if "`source'"=="WIOD" {
+	global country "   AUS AUT BEL BGR BRA     CAN CHE" 
+	global country "$country CHN                             CYP CZE DEU DNK ESP EST FIN"
+	global country "$country FRA GBR GRC     HRV HUN IDN IND IRL ISL      ITA JPN     KOR"
+	global country "$country LTU LUX LVA MEX              MLT     NLD NOR        POL PRT"
+	global country "$country ROU ROW RUS       SVK SVN SWE       TUR TWN USA        "
+	
+	
+	global sector "A01 A02 A03 B C10-C12 C13-C15 C16 C17 C18 C19 C20 C21 C22"
+	global sector "$sector C23 C24 C25 C26 C27 C28 C29 C31_C32 C33 C35 E35 E36 E37-E39"
+	global sector "$sector F G45 G46 G47 H49 H50 H51 H52 H53 I J58 J59_J60"
+	global sector "$sector J61 J62_J63 K64 K65 K66 L68 M69_M70 M71 M72 M73"
+	global sector "$sector M74_M75 N O84 O85 Q R_S T U"
+}
+
 
 	foreach i of global chncountry {
 			gen `i'=CHN
@@ -246,7 +268,7 @@ if "`source'"=="TIVA" {
 	global country "ARG AUS AUT BEL BGR BRA BRN CAN CHE CHL"
 	global country "$country  CHN CN1 CN2 CN2 CN3 COL CRI CYP CZE DEU DNK ESP EST FIN"
 	global country "$country  FRA GBR GRC HKG HRV HUN IDN IND IRL ISL ISR ITA JPN KHM KOR"
-	global country "$country  LTU LUX LVA MEX MLT MX1 MX2 MX3 MYS NLD NOR NZL PHL POL PRT"
+	global country "$country  LTU LUX LVA MAR MEX MLT MX1 MX2 MX3 MYS NLD NOR NZL PER PHL POL PRT"
 	global country "$country  ROU ROW RUS SAU SGP SVK SVN SWE THA TUN TUR TWN USA VNM ZAF"
 	
 	
@@ -419,8 +441,8 @@ use "$dir/Bases/`source'_ICIO_`yrs'.dta", clear
 if "`source'"=="TIVA" {
 	global country2 "arg aus aut bel bgr bra brn can che chl"
 	global country2 "$country2  chn cn1 cn2 cn3 cn4 col cri cyp cze deu dnk esp est fin"
-	global country2 "$country2  fra gbr grc hkg hrv hun idn ind irl isl ita jpn khm kor"
-	global country2 "$country2  ltu lux lva mex mlt mx1 mx2 mx3 mys nld nor nzl phl pol prt"
+	global country2 "$country2  fra gbr grc hkg hrv hun idn ind irl isl isr ita jpn khm kor"
+	global country2 "$country2  ltu lux lva mar mex mlt mx1 mx2 mx3 mys nld nor nzl per phl pol prt"
 	global country2 "$country2  rou row rus sau sgp svk svn swe tha tun tur twn usa vnm zaf"	
 }
 				

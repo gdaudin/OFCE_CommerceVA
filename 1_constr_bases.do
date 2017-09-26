@@ -397,7 +397,7 @@ args source yrs
 
 /*Y vecteur de production*/ 
 clear
-use "$dir/Bases/`source'_ICIO_`yrs'_OUT.dta"
+use "$dir/Bases/`source'_`yrs'_OUT.dta"
 *drop arg_consabr-disc
 rename * prod*
 generate year = `yrs'
@@ -461,7 +461,8 @@ if "`source'"=="WIOD" {
 generate pays = strlower(substr(v1,1,strpos(v1,"_")-1))
 drop if pays==""
 
-egen utilisations = rowtotal(arg_c01t05agr-disc)
+if "`source'"=="TIVA"  egen utilisations = rowtotal(arg_c01t05agr-nps_zaf)
+
 
 gen utilisations_dom = .
 
@@ -473,16 +474,18 @@ foreach j of global country2 {
 	if  ("`j'"=="mx1" | "`j'"=="mx2" | "`j'"=="mx3" ) {
 			local i = "mx"
 	}
-	egen blouk = rowtotal(`i'*)
+	egen blouk = rowtotal(*`i'*)
 	display "`i'" "`j'"
 	replace utilisations_dom = blouk if pays=="`j'"
 	codebook utilisations_dom if pays=="`j'"
 	drop blouk
-	
+
+
 	
 	*** cn = cn1 + cn2 + cn3 + cn4
 	*** mx = mx1 + mx2 + mx3
 }
+
 generate X = utilisations - utilisations_dom
 	
 replace pays = strupper(pays)
@@ -561,18 +564,18 @@ foreach i of numlist 1995 2000 2005 {
 
 */
 
-
+*/
 
 database_csv TIVA
 database_csv WIOD
-
+/*
 set more off
-*/
+
 
 
 append_y TIVA
 
-
+*/
 append_X TIVA
 
 /*

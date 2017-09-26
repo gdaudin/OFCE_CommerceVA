@@ -499,9 +499,10 @@ end
 
 
 **** Lancement des programmes ****************
-/*
 
+/*
 save_data WIOD
+
 save_data TIVA
 
 
@@ -512,14 +513,14 @@ foreach i of numlist 1995(1)2011 {
 
 
 
-/*
+*/
 
 foreach i of numlist 2000(1)2014 {
 	clear
 	prepare_database `i' WIOD
 }
 
-
+/*
 
 
 foreach i of numlist 1995 2000 2005 {
@@ -531,7 +532,7 @@ foreach i of numlist 1995 2000 2005 {
 
 */
 
-*/
+
 
 database_csv TIVA
 database_csv WIOD
@@ -548,3 +549,7 @@ append_X TIVA
 /*
 append_y WIOD
 append_X WIOD
+
+*/
+
+

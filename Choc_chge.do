@@ -124,14 +124,16 @@ foreach p of local groupeduchoc {
 	replace grchoc_ligne = 1 if pays_choqué == "`p'" 
 
 	if ("`p'"=="MEX") {
-		replace grchoc_ligne = 1 if pays_choqué == "MEXGMF" 
-		replace grchoc_ligne = 1 if pays_choqué == "MEXNGM"
- 		replace grchoc_ligne = 1 if strpos("MEXGMF MEXNGM", pays_choqué)!=0
+		replace grchoc_ligne = 1 if pays_choqué == "MX1" 
+		replace grchoc_ligne = 1 if pays_choqué == "MX2" 
+		replace grchoc_ligne = 1 if pays_choqué == "MX3"
+ 		replace grchoc_ligne = 1 if strpos("MX1 MX2 MX3", pays_choqué)!=0
 	}
 	if ("`p'"=="CHN") {
-		replace grchoc_ligne = 1 if pays_choqué == "CHNDOM" 
-		replace grchoc_ligne = 1 if pays_choqué == "CHNNPR" 
-		replace grchoc_ligne = 1 if pays_choqué == "CHNPRO" 
+		replace grchoc_ligne = 1 if pays_choqué == "CN1" 
+		replace grchoc_ligne = 1 if pays_choqué == "CN3" 
+		replace grchoc_ligne = 1 if pays_choqué == "CN3" 
+		replace grchoc_ligne = 1 if pays_choqué == "CN4" 
 		replace grchoc_ligne = 1 if strpos("$china", pays_choqué)!=0
 	}
 	if ("`p'"=="EUR") {
@@ -162,13 +164,15 @@ foreach var of varlist arg_c01t05agr-zaf_c95pvh {
 		
 
 		if ("`p'"=="MEX") {
-			replace grchoc2 = 1 if pays_origine == "MEXGMF" 
-			replace grchoc2 = 1 if pays_origine == "MEXNGM" 
+			replace grchoc2 = 1 if pays_origine == "MX1" 
+			replace grchoc2 = 1 if pays_origine == "MX2"
+			replace grchoc2 = 1 if pays_origine == "MX3"
 		}
 		if ("`p'"=="CHN") {
-			replace grchoc2 = 1 if pays_origine == "CHNDOM" 
-			replace grchoc2 = 1 if pays_origine == "CHNNPR" 
-			replace grchoc2 = 1 if pays_origine == "CHNPRO" 
+			replace grchoc2 = 1 if pays_origine == "CN1" 
+			replace grchoc2 = 1 if pays_origine == "CN2" 
+			replace grchoc2 = 1 if pays_origine == "CN3" 
+			replace grchoc2 = 1 if pays_origine == "CN4" 
 		}
 		if ("`p'"=="EUR") {
 			replace grchoc2 = 1 if strpos("$eurozone", pays_origine)!=0
@@ -210,13 +214,15 @@ foreach p of local groupeduchoc {
 	replace grchoc_ligne = 1 if c == "`p'" 
 
 	if ("`p'"=="MEX") {
-		replace grchoc_ligne = 1 if c == "MEXGMF" 
-		replace grchoc_ligne = 1 if c == "MEXNGM" 
+		replace grchoc_ligne = 1 if c == "MX1" 
+		replace grchoc_ligne = 1 if c == "MX2" 
+		replace grchoc_ligne = 1 if c == "MX3" 
 		}
 	if ("`p'"=="CHN") {
-		replace grchoc_ligne = 1 if c == "CHNDOM" 
-		replace grchoc_ligne = 1 if c == "CHNNPR" 
-		replace grchoc_ligne = 1 if c == "CHNPRO" 
+		replace grchoc_ligne = 1 if c == "CN1" 
+		replace grchoc_ligne = 1 if c == "CN2" 
+		replace grchoc_ligne = 1 if c == "CN3" 
+		replace grchoc_ligne = 1 if c == "CN4" 
 		}
 	if ("`p'"=="EUR") {
 		replace grchoc_ligne = 1 if strpos("$eurozone", c)!=0
@@ -243,13 +249,15 @@ foreach var of varlist arg_c01t05agr-zaf_c95pvh {
 		replace grchoc2 = 1 if pays_origine == "`p'" 
 
 		if ("`p'"=="MEX") {
-			replace grchoc2 = 1 if pays_origine == "MEXGMF" 
-			replace grchoc2 = 1 if pays_origine == "MEXNGM" 
+			replace grchoc2 = 1 if pays_origine == "MX1" 
+			replace grchoc2 = 1 if pays_origine == "MX2" 
+			replace grchoc2 = 1 if pays_origine == "MX3" 
 		}
 		if ("`p'"=="CHN") {
-			replace grchoc2 = 1 if pays_origine == "CHNDOM" 
-			replace grchoc2 = 1 if pays_origine == "CHNNPR" 
-			replace grchoc2 = 1 if pays_origine == "CHNPRO" 
+			replace grchoc2 = 1 if pays_origine == "CN1" 
+			replace grchoc2 = 1 if pays_origine == "CN2" 
+			replace grchoc2 = 1 if pays_origine == "CN3" 
+			replace grchoc2 = 1 if pays_origine == "CN4" 
 		}
 		if ("`p'"=="EUR") {
 		replace grchoc2 = 1 if strpos("$eurozone", pays_origine)!=0
@@ -299,13 +307,15 @@ foreach p of local groupeduchoc {
 	
 	
 	if ("`p'"=="MEX") {
-			replace p_shock = `shk' if c == "MEXGMF" 
-			replace p_shock = `shk' if c == "MEXNGM" 
+			replace p_shock = `shk' if c == "MX1" 
+			replace p_shock = `shk' if c == "MX2" 
+			replace p_shock = `shk' if c == "MX3" 
 		}
 	if ("`p'"=="CHN") {
-			replace p_shock = `shk' if c == "CHNDOM" 
-			replace p_shock = `shk' if c == "CHNNPR" 
-			replace p_shock = `shk' if c == "CHNPRO" 
+			replace p_shock = `shk' if c == "CN1" 
+			replace p_shock = `shk' if c == "CN2" 
+			replace p_shock = `shk' if c == "CN3" 
+			replace p_shock = `shk' if c == "CN4" 
 		}	
 		
 	if ("`p'"=="EUR") {
@@ -335,13 +345,15 @@ foreach p of local groupeduchoc {
 	replace p_shock2 = 0 if c == "`p'"
 	
 	if ("`p'"=="MEX") {
-			replace p_shock2 = 0 if c == "MEXGMF" 
-			replace p_shock2 = 0 if c == "MEXNGM" 
+			replace p_shock2 = 0 if c == "MX1" 
+			replace p_shock2 = 0 if c == "MX2" 
+			replace p_shock2 = 0 if c == "MX3" 
 	}
 	if ("`p'"=="CHN") {
-			replace p_shock2 = 0 if c == "CHNDOM" 
-			replace p_shock2 = 0 if c == "CHNNPR" 
-			replace p_shock2 = 0 if c == "CHNPRO" 
+			replace p_shock2 = 0 if c == "CN1" 
+			replace p_shock2 = 0 if c == "CN2" 
+			replace p_shock2 = 0 if c == "CN3" 
+			replace p_shock2 = 0 if c == "CN4" 
 	}	
 	if ("`p'"=="EUR") {
 		replace p_shock2 = 0 if strpos("$eurozone", c)!=0
@@ -491,7 +503,7 @@ generate sector_shock = Bt/tot_`wgt'
 bys c : egen shock`cty' = total(sector_shock)
 
 set more off
-local country2 "ARG AUS AUT BEL BGR BRA BRN CAN CHE CHL COL CRI CYP CZE DEU DNK ESP EST FIN FRA GBR GRC HKG HRV HUN IDN IND IRL ISL ISR ITA JPN KHM KOR LTU LUX LVA MLT MYS NLD NOR NZL PHL POL PRT ROU ROW RUS SAU SGP SVK SVN SWE THA TUN TUR TWN USA VNM ZAF"
+local country2 "ARG AUS AUT BEL BGR BRA BRN CAN CHE CHL CHN COL CRI CYP CZE DEU DNK ESP EST FIN FRA GBR GRC HKG HRV HUN IDN IND IRL ISL ISR ITA JPN KHM KOR LTU LUX LVA MLT MYS NLD NOR NZL PHL POL PRT ROU ROW RUS SAU SGP SVK SVN SWE THA TUN TUR TWN USA VNM ZAF"
 local sector6 "C10T14 C15T16 C17T19 C20 C21T22 C23 C24 C25 C26 C27 C28 C29 C30T33X C31 C34 C35 C36T37 C40T41 C45 C50T52 C55 C60T63 C64 C65T67 C70 C71 C72 C73T74 C75 C80 C85 C90T93 C95"
 foreach i of local country2 {
 	foreach j of local sector6 {
@@ -499,7 +511,7 @@ foreach i of local country2 {
 	}
 }
 
-local sector7 "C45 C50T52 C55 C60T63 C64 C65T67 C70 C71 C72 C73T74 C75 C80 C85 C90T93 C95"
+/*local sector7 "C45 C50T52 C55 C60T63 C64 C65T67 C70 C71 C72 C73T74 C75 C80 C85 C90T93 C95"
 foreach j of local sector7 {
 	drop if (c == "CHN" & s == "`j'")
 }
@@ -531,7 +543,7 @@ foreach i of local country4 {
 	drop if (c == "`i'" & s == "`j'")
 	}
 }
-
+*/
 mkmat tot_`wgt'
 mkmat shock`cty'
 

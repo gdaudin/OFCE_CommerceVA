@@ -3,7 +3,7 @@ clear
 
 
 if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/OFCE Commerce VA/2017 Bdf"
-else global "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
+else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
 
 
 

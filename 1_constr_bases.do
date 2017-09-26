@@ -109,7 +109,7 @@ if "`source'"=="TIVA" {
 	keep if v1 == "OUT"
 	drop v1
 	drop dirp_arg-nps_zaf
-	save "$dir/Bases/TIVA_ICIO_`yrs'_OUT.dta", replace
+	save "$dir/Bases/TIVA_`yrs'_OUT.dta", replace
 	
 	*From the ICIO database I keep only the table for inter-industry inter-country trade
 	clear
@@ -117,7 +117,7 @@ if "`source'"=="TIVA" {
 	drop dirp_arg-nps_zaf
 	drop if v1 == "VA.TAXSUB" | v1 == "OUT"
 	drop v1
-	save "$dir/Bases/TIVA_ICIO_`yrs'_Z.dta", replace
+	save "$dir/Bases/TIVA_`yrs'_Z.dta", replace
 	
 	*From the ICIO database I keep only the table for final demand
 	clear
@@ -133,14 +133,14 @@ if "`source'"=="WIOD" {
 	use "$dir/Bases/WIOD_ICIO_`yrs'.dta"
 	keep if IndustryCode == "GO"
 	drop IndustryCode-TOT
-	save "$dir/Bases/WIOD_ICIO_`yrs'_OUT.dta", replace
+	save "$dir/Bases/WIOD_`yrs'_OUT.dta", replace
 	
 * Only the I/O table itself
 	clear
 	use "$dir/Bases/WIOD_ICIO_`yrs'.dta"
 	drop if RNr >=65
 	drop IndustryCode-TOT
-	save "$dir/Bases/WIOD_ICIO_`yrs'_Z.dta", replace
+	save "$dir/Bases/WIOD_`yrs'_Z.dta", replace
 	
 *Only final demand
 	*** Je laisse tomber car c'est compliqué et pas sûr que cela soit utile
@@ -305,12 +305,15 @@ foreach i of global sector {
 
 gen v1=0
 
-if "`source'"=="TIVA" {
-
 
 /*
 ****This is obsolete in the 2016 version
 *I withdraw the industries for different types of CHN and MEX that are not in the dataset from v1
+
+
+if "`source'"=="TIVA" {
+
+
 
 *CHINA
 global sector2 "C01T05 C10T14 C15T16 C17T19 C20 C21T22 C23 C24 C25 C26 C27 C28 C29 C30T33X C31 C34 C35 C36T37"

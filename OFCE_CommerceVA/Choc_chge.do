@@ -69,8 +69,8 @@ clear
 svmat A_`yrs', names(col)
 save "$dir/Bases/A_`yrs'.dta", replace
 
-
-*Create identity matrix at the size we want
+local nbr_pays = wordcount($country)
+*Create identity matrix at the size we want. 
 mat I=I(2159)
 
 *I-A

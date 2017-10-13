@@ -99,12 +99,14 @@ matrix A_`yrs'=Z*Yd1
 
 clear
 svmat A_`yrs', names(col)
-save "$dir/Bases/A_`yrs'.dta", replace
+save "$dir/Bases/A_`source'_`yrs'.dta", replace
 
-local nbr_pays = wordcount($country)
+local nbr_pays = wordcount("$country")
+local nbr_secteurs = wordcount("$sector")
+local dim_matrice = `nbr_pays'*`nbr_secteurs'
 
 *Create identity matrix at the size we want. 
-mat I=I(2159)
+mat I=I(`dim_matrice')
 
 *I-A
 matrix L=(I-A_`yrs')

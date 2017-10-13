@@ -115,14 +115,14 @@ if "`source'"=="TIVA" {
 	clear
 	use "$dir/Bases/TIVA_ICIO_`yrs'.dta"
 	drop dirp_arg-nps_zaf
-	drop if v1 == "VA.TAXSUB" | v1 == "OUT"
+	drop if v1 == "VA+TAXSUB" | v1 == "OUT"
 	drop v1
 	save "$dir/Bases/TIVA_`yrs'_Z.dta", replace
-	
+	   
 	*From the ICIO database I keep only the table for final demand
 	clear
 	use "$dir/Bases/TIVA_ICIO_`yrs'.dta"
-	drop if v1 == "VA.TAXSUB" | v1 == "OUT"
+	drop if v1 == "VA+TAXSUB" | v1 == "OUT"
 	keep dirp_arg-nps_zaf
 	save "$dir/Bases/`source’_`year’_finaldemand.dta", replace
 }
@@ -544,14 +544,14 @@ save_data WIOD
 
 save_data TIVA
 
-
+*/
 foreach i of numlist 1995(1)2011 {
 	clear
 	prepare_database `i' TIVA
 }
 
 
-
+/*
 
 
 foreach i of numlist 2000(1)2014 {
@@ -571,7 +571,7 @@ foreach i of numlist 1995 2000 2005 {
 
 */
 
-
+/*
 
 database_csv TIVA
 database_csv WIOD
@@ -589,11 +589,12 @@ append_X TIVA
 
 
 
-append_y WIOD
+*append_y WIOD
 
 /*
 append_X WIOD
 
 */
+
 
 

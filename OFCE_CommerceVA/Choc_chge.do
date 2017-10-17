@@ -1,7 +1,7 @@
 *****Mettre global test =1 provoquera la sauvegarde de plein de matrices / vecteurs à vérifier
 
 clear  
-
+set more off
 if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/OFCE Commerce VA/2017 Bdf"
 else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
 
@@ -76,7 +76,7 @@ local nbr_sect=wordcount("$sector")
 *-------------------------------------------------------------------------------
 *COMPUTING LEONTIEF INVERSE MATRIX  : matrix L1
 *-------------------------------------------------------------------------------
-clear
+
 set more off
 *set matsize 7000
 capture program drop compute_leontief
@@ -87,7 +87,7 @@ Definition_pays_secteur `source'
 	
 *Create vector Y of output from troncated database
 clear
-use "$dir/Bases/`source'_`yrs'_OUT.dta"
+use "$dir/Bases/`source'_`yrs'_OUT.dta", clear
 mkmat $var_entree_sortie, matrix(Y)
 
 *Create matrix Z of inter-industry inter-country trade
@@ -106,7 +106,7 @@ matrix Yd1=invsym(Yd)
 *Then multiply Yd1 by Z 
 matrix A_`yrs'=Z*Yd1
 
-clear
+clear matrix
 svmat A_`yrs', names(col)
 save "$dir/Bases/A_`source'_`yrs'.dta", replace
 
@@ -121,7 +121,7 @@ matrix L=(I-A_`yrs')
 *Leontief inverse
 matrix L1_`yrs'=inv(L)
 
-clear
+clear matrix
 svmat L1_`yrs', names(col)
 save "$dir/Bases/`source'_L1_`yrs'.dta", replace
 
@@ -135,7 +135,7 @@ end
 *-------------------------------------------------------------------------------
 
 
-clear
+
 set more off
 *set matsize 7000
 capture program drop compute_leontief_chocnom
@@ -143,7 +143,7 @@ program compute_leontief_chocnom
 	args yrs groupeduchoc source
 *ex : compute_leontief_chocnom 2005 ARG	
 *Create vector Y of output from troncated database
-clear
+
 
 
 *use "H:\Agents\Cochard\Papier_chocCVA/Bases/OECD_`yrs'_OUT.dta"
@@ -231,7 +231,7 @@ mkmat $var_entree_sortie, matrix (B)
 order pays_choqué s
 if $test==1 save "$dir/Bases/`source'_B_`yrs'_`groupeduchoc'.dta", replace
 ***----  On construit la matrice B2 avec des 0 partout sauf pour les CI étrangères du pays choqué ------*
-clear
+
 use "$dir/Bases/A_`source'_`yrs'.dta", clear
 
 merge 1:1 _n using "$dir/Bases/csv_`source'.dta"
@@ -316,10 +316,10 @@ capture program drop vector_shock_exch
 program vector_shock_exch
 		args shk groupeduchoc source
 		***exepl : vector_shock_exch 1 ARG TIVA
-clear
+
 *set matsize 7000
 set more off
-clear
+
 use "$dir/Bases/csv_`source'.dta", clear
 
 * On construit le vecteur c, avec le choc c pour le pays choqué, 0 sinon
@@ -401,12 +401,10 @@ program shock_exch
 	args yrs groupeduchoc source
 	****expl : shock_exch 2005 ARG TIVA
 	
-clear	
-global nbr_pays = wordcount("$country")
-global nbr_secteurs = wordcount("$sector")
-global dim_matrice = $nbr_pays*$nbr_secteurs
+	
 
-use "$dir/Bases/`source'_L1_`yrs'.dta"
+
+use "$dir/Bases/`source'_L1_`yrs'.dta", clear
 mkmat r1-r$dim_matrice, matrix (L1)
 
 
@@ -601,7 +599,7 @@ if ("`wgt'" == "X")  {
 
 	
 *global ori_choc "EUR EAS ARG AUS AUT BEL BGR BRA BRN CAN CHE CHL CHN COL CRI CYP CZE DEU DNK ESP EST FIN FRA GBR GRC HKG HRV HUN IDN IND IRL ISL ISR ITA JPN KHM KOR LTU LUX LVA MEX MLT MYS NLD NOR NZL PHL POL PRT ROU ROW RUS SAU SGP SVK SVN SWE THA TUN TUR TWN USA VNM ZAF"
-global ori_choc "AUT"
+global ori_choc "EUR"
 
 foreach i of global ori_choc {
 	compute_leontief_chocnom `yrs' `i' `source'
@@ -688,7 +686,7 @@ clear
 set more off
 
 
-
+Definition_pays_secteur TIVA
 
 // Fabrication des fichiers d'effets moyens des chocs de change
 

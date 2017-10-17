@@ -545,13 +545,14 @@ save_data WIOD
 save_data TIVA
 
 */
+/*
 foreach i of numlist 1995(1)2011 {
 	clear
 	prepare_database `i' TIVA
 }
 
 
-/*
+
 
 
 foreach i of numlist 2000(1)2014 {
@@ -570,12 +571,14 @@ foreach i of numlist 1995 2000 2005 {
 }
 
 */
+*/
 
-/*
+
+
 
 database_csv TIVA
 database_csv WIOD
-
+/*
 set more off
 
 

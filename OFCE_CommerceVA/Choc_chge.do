@@ -26,6 +26,12 @@ global country "ARG AUS AUT BEL BGR BRA BRN CAN CHE CHL"
 	global country "$country  LTU LUX LVA MAR MEX MLT MX1 MX2 MX3 MYS NLD NOR NZL PER PHL POL PRT"
 	global country "$country  ROU ROW RUS SAU SGP SVK SVN SWE THA TUN TUR TWN USA VNM ZAF"
 	
+global country_hc "ARG AUS AUT BEL BGR BRA BRN CAN CHE CHL"
+	global country_hc "$country_hc  CHN          COL CRI CYP CZE DEU DNK ESP EST FIN"
+	global country_hc "$country_hc  FRA GBR GRC HKG HRV HUN IDN IND IRL ISL ISR ITA JPN KHM KOR"
+	global country_hc "$country_hc  LTU LUX LVA MAR MEX MLT      MYS NLD NOR NZL PER PHL POL PRT"
+	global country_hc "$country_hc  ROU ROW RUS SAU SGP SVK SVN SWE THA TUN TUR TWN USA VNM ZAF"
+	
 	
 	global sector "C01T05 C10T14 C15T16 C17T19 C20 C21T22"
 	global sector "$sector C23 C24 C25 C26 C27 C28 C29 C30T33X C31 C34 C35 C36T37 C40T41 C45"
@@ -46,6 +52,7 @@ if "`source'"=="WIOD" {
 	global country "$country LTU LUX LVA MEX              MLT     NLD NOR        POL PRT"
 	global country "$country ROU ROW RUS       SVK SVN SWE       TUR TWN USA        "
 	
+	global country_hc $country
 	
 	global sector "A01 A02 A03 B C10-C12 C13-C15 C16 C17 C18 C19 C20 C21 C22"
 	global sector "$sector C23 C24 C25 C26 C27 C28 C29 C31_C32 C33 C35 E35 E36 E37-E39"
@@ -419,7 +426,7 @@ keep C`groupeduchoc't1
 
 
 if $test==1 save "$dir/Bases/`source'_C_`yrs'_`groupeduchoc'.dta", replace
-blouk
+
 end
 
 
@@ -494,9 +501,25 @@ mkmat $var_entree_sortie, matrix(VA)
 matrix VAt = VA'
 end
 
+capture program drop compute_HC
+program  compute_HC
+	args yrs source 
+	
+	use "$dir/Bases/HC_`source'.dta", clear
+	keep if year == `yrs'
+	foreach pays_conso of global country_hc {
+		preserve
+		keep if pays_conso==strlower("`pays_conso'")
+		mkmat conso, matrix(HC_`pays_conso')
+		restore
+	}
+	
+end
+*===============================================================
+
 capture program drop compute_mean    // matrix shock`cty'
 program compute_mean
-	args cty wgt
+	args cty wgt source 
 clear
 *set matsize 7000
 set more off
@@ -506,14 +529,36 @@ use "$dir/Bases/csv_`source'.dta"
 if ("`wgt'" == "Yt")  {
 	matrix Yt = Y'
 	svmat Yt 
-	}
+	
+
+}
 if ("`wgt'" == "X")  {
 	svmat X
-	}
+}
+if ("`wgt'" == "X") | ("`wgt'" == "Yt") {
+	matrix C`cty't= C`cty''
+	svmat C`cty't
+	generate Bt = C`cty't1* `wgt'
+	bys c : egen tot_`wgt' = total(`wgt')
+	generate sector_shock = Bt/tot_`wgt'
+	bys c : egen shock`cty' = total(sector_shock)
+
+}
+
+
 	
-	if ("`wgt'" == "HC")  {
-	svmat HC
+if ("`wgt'" == "HC")  {
+	foreach pays_conso of global country_hc {
+	svmat HC_`pays_conso'
+	matrix C`cty't= C`cty''
+	svmat C`cty't
+	generate Bt = C`cty't1* `wgt'
+	egen tot_`wgt' = total(`wgt')
+	generate sector_shock = Bt/tot_`wgt'
+	egen shock`cty' = total(sector_shock)
+	blouk
 	}
+}
 //svmat VAt
 
 *I decide whether I use the production or export or value-added vector as weight modifying the argument "wgt" : Yt or X or VAt
@@ -695,15 +740,16 @@ foreach i of numlist 1995  /*2005 2009 2010 2011*/ {
 	clear
 	set more off
 	*compute_leontief `i' TIVA
-	*compute_X `i'
+	* compute_X `i' TIVA
 	*create_y `i'
 	*compute_VA `i'
+	compute_HC `i' TIVA
 	
 }
 
 foreach i of numlist 1995 /*2000 2005 2009 2010 2011 */{
 *foreach j in Yt X 
-		foreach j in HC{
+		foreach j in HC {
 		table_mean `i' `j' 1 TIVA
 	}
 }

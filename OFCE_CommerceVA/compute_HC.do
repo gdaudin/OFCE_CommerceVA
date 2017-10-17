@@ -22,6 +22,7 @@ if "`source'"=="TIVA" {
 
 	use "$dir/Bases/`source'_ICIO_`yrs'.dta", clear
 	keep v1 hfce*
+	drop if v1=="OUT" | "VA+TAXSUB"
 	reshape long hfce_, i(v1) j(pays_conso) string
 
 	generate pays = strlower(substr(v1,1,strpos(v1,"_")-1))
@@ -74,7 +75,7 @@ sort year , stable
 save "$dir/Bases/HC_`source'.dta", replace
  
 end
-*append_HC TIVA
-append_HC WIOD
+append_HC TIVA
+*append_HC WIOD
 
 

@@ -61,6 +61,10 @@ if "`source'"=="WIOD" {
 	global var_entree_sortie vAUS01-vUSA61
 }
 
+global nbr_pays = wordcount("$country")
+global nbr_secteurs = wordcount("$sector")
+global dim_matrice = $nbr_pays*$nbr_secteurs
+
 *agrégats couverts identiquement par les 2 sources
 global eurozone "AUT BEL CYP DEU ESP EST FIN FRA GRC IRL ITA LTU LUX LVA MLT NLD PRT SVK SVN"
 global eastern "BGR CZE HRV HUN POL ROU"
@@ -106,12 +110,10 @@ clear
 svmat A_`yrs', names(col)
 save "$dir/Bases/A_`source'_`yrs'.dta", replace
 
-local nbr_pays = wordcount("$country")
-local nbr_secteurs = wordcount("$sector")
-local dim_matrice = `nbr_pays'*`nbr_secteurs'
+
 
 *Create identity matrix at the size we want. 
-mat I=I(`dim_matrice')
+mat I=I($dim_matrice)
 
 *I-A
 matrix L=(I-A_`yrs')
@@ -312,8 +314,8 @@ end
 *---------------------------------------------------------------------------------------------
 capture program drop vector_shock_exch
 program vector_shock_exch
-		args shk groupeduchoc 
-		***exepl : vector_shock_exch 1 ARG
+		args shk groupeduchoc source
+		***exepl : vector_shock_exch 1 ARG TIVA
 clear
 *set matsize 7000
 set more off
@@ -328,15 +330,12 @@ foreach p of local groupeduchoc {
 	
 	
 	if ("`p'"=="MEX") {
-			replace p_shock = `shk' if c == "MX1" 
-			replace p_shock = `shk' if c == "MX2" 
-			replace p_shock = `shk' if c == "MX3" 
+			replace p_shock = `shk' if strpos("$mexique", c)!=0
+
 		}
 	if ("`p'"=="CHN") {
-			replace p_shock = `shk' if c == "CN1" 
-			replace p_shock = `shk' if c == "CN2" 
-			replace p_shock = `shk' if c == "CN3" 
-			replace p_shock = `shk' if c == "CN4" 
+			replace p_shock = `shk' if strpos("$chine", c)!=0
+
 		}	
 		
 	if ("`p'"=="EUR") {
@@ -366,15 +365,12 @@ foreach p of local groupeduchoc {
 	replace p_shock2 = 0 if c == "`p'"
 	
 	if ("`p'"=="MEX") {
-			replace p_shock2 = 0 if c == "MX1" 
-			replace p_shock2 = 0 if c == "MX2" 
-			replace p_shock2 = 0 if c == "MX3" 
+			replace p_shock2 = 0 if strpos("$mexique", c)!=0
+	
 	}
 	if ("`p'"=="CHN") {
-			replace p_shock2 = 0 if c == "CN1" 
-			replace p_shock2 = 0 if c == "CN2" 
-			replace p_shock2 = 0 if c == "CN3" 
-			replace p_shock2 = 0 if c == "CN4" 
+			replace p_shock2 = 0 if strpos("$chine", c)!=0
+
 	}	
 	if ("`p'"=="EUR") {
 		replace p_shock2 = 0 if strpos("$eurozone", c)!=0
@@ -402,12 +398,16 @@ end
 
 capture program drop shock_exch
 program shock_exch
-	args yrs groupeduchoc 
-	****expl : shock_exch 2005 ARG
+	args yrs groupeduchoc source
+	****expl : shock_exch 2005 ARG TIVA
 	
 clear	
-use "$dir/Bases/L1_`yrs'.dta"
-mkmat r1-r2159, matrix (L1)
+global nbr_pays = wordcount("$country")
+global nbr_secteurs = wordcount("$sector")
+global dim_matrice = $nbr_pays*$nbr_secteurs
+
+use "$dir/Bases/`source'_L1_`yrs'.dta"
+mkmat r1-r$dim_matrice, matrix (L1)
 
 
 *Multiplying the transpose of vector shock `v'_shockt by L1 to get the impact of a shock on the output price vector
@@ -420,8 +420,8 @@ svmat C`groupeduchoc't
 keep C`groupeduchoc't1
 
 
-if $test==1 save "$dir/Bases/C_`yrs'_`groupeduchoc'.dta", replace
-
+if $test==1 save "$dir/Bases/`source'_C_`yrs'_`groupeduchoc'.dta", replace
+blouk
 end
 
 

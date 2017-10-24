@@ -562,12 +562,14 @@ if ("`wgt'" == "HC")  {
 	egen shock`cty'_`pays_conso' = total(sector_shock_`pays_conso')
 *	keep if _n==1
 	mkmat shock`cty'_`pays_conso'
+
 	if `blink'== 0 matrix shock`cty' = shock`cty'_`pays_conso'[1,1]
 	if `blink'!= 0 matrix shock`cty' = shock`cty' \ shock`cty'_`pays_conso'[1,1]
 	local blink=`blink'+1	
 	drop Bt* tot* sector_shock* HC*  shock*
 	}
 }
+
 
 
 //svmat VAt

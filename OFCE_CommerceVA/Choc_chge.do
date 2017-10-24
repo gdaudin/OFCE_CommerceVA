@@ -7,7 +7,7 @@ else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
 
 
 
-capture log using "$dir/$S_DATE $S_TIME.log", replace
+log using "$dir/$S_DATE.log", replace
 set matsize 7000
 *set mem 700m if earlier version of stata (<stata 12)
 set more off
@@ -526,6 +526,9 @@ set more off
 clear
 use "$dir/Bases/csv_`source'.dta"
 
+*I decide whether I use the production or export or value-added vector as weight modifying the argument "wgt" : Yt or X or VAt
+*Compute the vector of mean effects :
+
 if ("`wgt'" == "Yt")  {
 	matrix Yt = Y'
 	svmat Yt 
@@ -546,75 +549,31 @@ if ("`wgt'" == "X") | ("`wgt'" == "Yt") {
 }
 
 
-	
+
+local blink 0
+matrix C`cty't= C`cty''
+svmat C`cty't, name(C`cty')	
 if ("`wgt'" == "HC")  {
 	foreach pays_conso of global country_hc {
-	svmat HC_`pays_conso'
-	matrix C`cty't= C`cty''
-	svmat C`cty't
-	generate Bt = C`cty't1* `wgt'
-	egen tot_`wgt' = total(`wgt')
-	generate sector_shock = Bt/tot_`wgt'
-	egen shock`cty' = total(sector_shock)
-	blouk
+	svmat HC_`pays_conso', name(HC_`pays_conso')
+	generate Bt_`pays_conso' = C`cty'* HC_`pays_conso'
+	egen tot_HC_`pays_conso' = total(HC_`pays_conso')
+	generate sector_shock_`pays_conso' = Bt_`pays_conso'/tot_`wgt'_`pays_conso'
+	egen shock`cty'_`pays_conso' = total(sector_shock_`pays_conso')
+*	keep if _n==1
+	mkmat shock`cty'_`pays_conso'
+	if `blink'== 0 matrix shock`cty' = shock`cty'_`pays_conso'[1,1]
+	if `blink'!= 0 matrix shock`cty' = shock`cty' \ shock`cty'_`pays_conso'[1,1]
+	local blink=`blink'+1	
+	drop Bt* tot* sector_shock* HC*  shock*
 	}
 }
+
+
 //svmat VAt
 
-*I decide whether I use the production or export or value-added vector as weight modifying the argument "wgt" : Yt or X or VAt
-*Compute the vector of mean effects :
-
-matrix C`cty't= C`cty''
-svmat C`cty't
-generate Bt = C`cty't1* `wgt'
-bys c : egen tot_`wgt' = total(`wgt')
-generate sector_shock = Bt/tot_`wgt'
-bys c : egen shock`cty' = total(sector_shock)
-
 set more off
-local country2 "ARG AUS AUT BEL BGR BRA BRN CAN CHE CHL CHN COL CRI CYP CZE DEU DNK ESP EST FIN FRA GBR GRC HKG HRV HUN IDN IND IRL ISL ISR ITA JPN KHM KOR LTU LUX LVA MLT MYS NLD NOR NZL PHL POL PRT ROU ROW RUS SAU SGP SVK SVN SWE THA TUN TUR TWN USA VNM ZAF"
-local sector6 "C10T14 C15T16 C17T19 C20 C21T22 C23 C24 C25 C26 C27 C28 C29 C30T33X C31 C34 C35 C36T37 C40T41 C45 C50T52 C55 C60T63 C64 C65T67 C70 C71 C72 C73T74 C75 C80 C85 C90T93 C95"
-foreach i of local country2 {
-	foreach j of local sector6 {
-		drop if (c == "`i'" & s == "`j'")
-	}
-}
 
-/*local sector7 "C45 C50T52 C55 C60T63 C64 C65T67 C70 C71 C72 C73T74 C75 C80 C85 C90T93 C95"
-foreach j of local sector7 {
-	drop if (c == "CHN" & s == "`j'")
-}
-
-set more off
-local sector8 "C10T14 C15T16 C17T19 C20 C21T22 C23 C24 C25 C26 C27 C28 C29 C30T33X C31 C34 C35 C36T37"
-local country3 "CHNDOM CHNNPR"
-foreach i of local country3 {
-	foreach j of local sector8 {
-		drop if (c == "`i'" & s == "`j'")
-	}
-} 
-
-local sector9 "C15T16 C17T19 C20 C21T22 C23 C24 C25 C26 C27 C28 C29 C30T33X C31 C34 C35 C36T37"
-foreach j of local sector9 {
-	drop if (c == "CHNPRO" & s == "`j'")
-}
-
-local sector10 "C10T14 C40T41 C45 C50T52 C55 C60T63 C64 C65T67 C70 C71 C72 C73T74 C75 C80 C85 C90T93 C95"
-foreach j of local sector10 {
-	drop if (c == "MEX" & s == "`j'")
-}
-
-set more off
-local sector11 "C17T19 C20 C21T22 C23 C24 C25 C26 C27 C28 C29 C30T33X C31 C34 C35 C36T37"
-local country4 "MEXGMF MEXNGM"
-foreach i of local country4 {
-	foreach j of local sector11 {
-	drop if (c == "`i'" & s == "`j'")
-	}
-}
-*/
-mkmat tot_`wgt'
-mkmat shock`cty'
 
 *Vector shock`cty' contains the mean effects of a shock on exchange rate (coming from the country `cty') on overall prices for each country
 
@@ -643,8 +602,19 @@ if ("`wgt'" == "X")  {
 //compute_VA `yrs'
 
 	
-*global ori_choc "EUR EAS ARG AUS AUT BEL BGR BRA BRN CAN CHE CHL CHN COL CRI CYP CZE DEU DNK ESP EST FIN FRA GBR GRC HKG HRV HUN IDN IND IRL ISL ISR ITA JPN KHM KOR LTU LUX LVA MEX MLT MYS NLD NOR NZL PHL POL PRT ROU ROW RUS SAU SGP SVK SVN SWE THA TUN TUR TWN USA VNM ZAF"
-global ori_choc "EUR"
+if "`source'"=="TIVA" {
+	global ori_choc "EUR EAS"
+	global ori_choc "$ori_choc ARG AUS AUT BEL BGR BRA BRN CAN CHE CHL CHN COL CRI CYP CZE DEU DNK ESP EST FIN"
+	global ori_choc "$ori_choc FRA GBR GRC HKG HRV HUN IDN IND IRL ISL ISR ITA JPN KHM KOR LTU LUX LVA MAR MEX MLT MYS NLD NOR NZL PER "
+	global ori_choc "$ori_choc PHL POL PRT ROU ROW RUS SAU SGP SVK SVN SWE THA TUN TUR TWN USA VNM ZAF"
+}
+
+if "`source'"=="WIOD" {
+	global ori_choc "EUR EAS"
+	global ori_choc "$ori_choc AUS AUT BEL BGR BRA     CAN CHE CHN                             CYP CZE DEU DNK ESP EST FIN " 
+	global ori_choc "$ori_choc FRA GBR GRC     HRV HUN IDN IND IRL ISL      ITA JPN     KOR LTU LUX LVA MEX              MLT     NLD NOR        POL PRT"
+	global ori_choc "$ori_choc ROU ROW RUS       SVK SVN SWE       TUR TWN USA        "
+}
 
 foreach i of global ori_choc {
 	compute_leontief_chocnom `yrs' `i' `source'
@@ -654,19 +624,22 @@ foreach i of global ori_choc {
 }
 
 
-use "$dir/Bases/pays_en_ligne.dta", clear
+use "$dir/Bases/pays_en_ligne_`source'.dta", clear
+drop if c=="MX1" | c=="MX2" |  c=="MX3" |  c=="CN1"  |  c=="CN2"  |  c=="CN3" 
 set more off
+
 foreach i of global ori_choc {
-	svmat shock`i' 
+		svmat shock`i'
+		
 }
 
 
 
 * shockARG1 represents the mean effect of a price shock coming from Argentina for each country
-save "$dir/Results/Devaluations/mean_chg_`wgt'_`yrs'.dta", replace
+save "$dir/Results/Devaluations/mean_chg_`source'_`wgt'_`yrs'.dta", replace
 *We obtain a table of mean effect of a price shock from each country to all countries
 
-export excel using "$dir/Results/Devaluations/mean_chg_`wgt'_`yrs'.xls", firstrow(variables) replace
+export excel using "$dir/Results/Devaluations/mean_chg_`source'_`wgt'_`yrs'.xls", firstrow(variables) replace
 
 * set trace off
 set more on
@@ -736,7 +709,7 @@ Definition_pays_secteur TIVA
 // Fabrication des fichiers d'effets moyens des chocs de change
 
  *2005 2009 2010 2011
-foreach i of numlist 1995  /*2005 2009 2010 2011*/ {
+foreach i of numlist 1995(1)2011  /*2005 2009 2010 2011*/ {
 	clear
 	set more off
 	*compute_leontief `i' TIVA
@@ -747,14 +720,14 @@ foreach i of numlist 1995  /*2005 2009 2010 2011*/ {
 	
 }
 
-foreach i of numlist 1995 /*2000 2005 2009 2010 2011 */{
+foreach i of numlist 1995(1)2011 /*2000 2005 2009 2010 2011 */{
 *foreach j in Yt X 
 		foreach j in HC {
 		table_mean `i' `j' 1 TIVA
 	}
 }
 
-shock_deval 2011 1 Yt noneuro   
+* shock_deval 2011 1 Yt noneuro   
 */
 
 

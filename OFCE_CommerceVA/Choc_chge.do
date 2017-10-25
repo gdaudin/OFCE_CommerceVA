@@ -6,7 +6,7 @@ if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/BDF_Co
 else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
 
 
-
+capture log close
 log using "$dir/$S_DATE.log", replace
 set matsize 7000
 *set mem 700m if earlier version of stata (<stata 12)
@@ -113,7 +113,7 @@ matrix Yd1=invsym(Yd)
 *Then multiply Yd1 by Z 
 matrix A_`yrs'=Z*Yd1
 
-clear matrix
+clear
 svmat A_`yrs', names(col)
 save "$dir/Bases/A_`source'_`yrs'.dta", replace
 
@@ -128,7 +128,7 @@ matrix L=(I-A_`yrs')
 *Leontief inverse
 matrix L1_`yrs'=inv(L)
 
-clear matrix
+clear
 svmat L1_`yrs', names(col)
 save "$dir/Bases/`source'_L1_`yrs'.dta", replace
 
@@ -565,6 +565,7 @@ if ("`wgt'" == "HC")  {
 
 	if `blink'== 0 matrix shock`cty' = shock`cty'_`pays_conso'[1,1]
 	if `blink'!= 0 matrix shock`cty' = shock`cty' \ shock`cty'_`pays_conso'[1,1]
+	matrix drop shock`cty'_`pays_conso'
 	local blink=`blink'+1	
 	drop Bt* tot* sector_shock* HC*  shock*
 	}
@@ -714,10 +715,10 @@ Definition_pays_secteur TIVA
 foreach i of numlist 1995(1)2011  /*2005 2009 2010 2011*/ {
 	clear
 	set more off
-	*compute_leontief `i' TIVA
-	* compute_X `i' TIVA
-	*create_y `i'
-	*compute_VA `i'
+	compute_leontief `i' TIVA
+*	compute_X `i' TIVA
+*	create_y `i'
+*	compute_VA `i'
 	compute_HC `i' TIVA
 	
 }

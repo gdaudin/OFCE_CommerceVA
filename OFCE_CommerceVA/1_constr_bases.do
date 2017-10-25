@@ -598,5 +598,6 @@ append_X WIOD
 
 */
 
+log close
 
 

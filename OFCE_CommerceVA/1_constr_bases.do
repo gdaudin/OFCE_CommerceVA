@@ -2,13 +2,13 @@ clear
 
 
 
-if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/OFCE Commerce VA/2017 Bdf"
+if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/BDF_Commerce VA"
 else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
 
 
 
 
-capture log using "$dir/$S_DATE $S_TIME.log", replace
+capture log using "$dir/$S_DATE.log", replace
 set matsize 7000
 *set mem 700m if earlier version of stata (<stata 12)
 set more off
@@ -539,13 +539,12 @@ end
 
 **** Lancement des programmes ****************
 
-/*
+
 save_data WIOD
 
 save_data TIVA
 
-*/
-/*
+
 foreach i of numlist 1995(1)2011 {
 	clear
 	prepare_database `i' TIVA

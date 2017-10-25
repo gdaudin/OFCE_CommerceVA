@@ -6,7 +6,7 @@ if ("`c(username)'"=="guillaumedaudin") global dir "~/Dropbox/commerce en VA"
 if ("`c(username)'"=="L841580") global dir "H:\Agents\Cochard\Papier_chocCVA"
 
 
-capture log using "$dir/$S_DATE $S_TIME.log", replace
+capture log using "$dir/$S_DATE.log", replace
 set matsize 7000
 *set mem 700m if earlier version of stata (<stata 12)
 set more off

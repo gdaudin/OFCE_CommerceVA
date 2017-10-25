@@ -1,9 +1,9 @@
 clear
 *set trace on
 
-if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/OFCE Commerce VA/2017 Bdf"
+if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/BDF_Commerce VA"
 else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
-capture log using "$dir/$S_DATE $S_TIME.log", replace
+capture log using "$dir/$S_DATE.log", replace
 set more off
 ***************************************************************************************************
 *Création des tables  de consommation finale des ménages (HFCE) : on crée le vecteur 1*67 des hfce de chaque pays

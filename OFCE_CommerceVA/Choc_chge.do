@@ -21,7 +21,7 @@ args source
 
 if "`source'"=="TIVA" {
 global country "ARG AUS AUT BEL BGR BRA BRN CAN CHE CHL"
-	global country "$country  CHN CN1 CN2 CN2 CN3 COL CRI CYP CZE DEU DNK ESP EST FIN"
+	global country "$country  CHN CN1 CN2 CN2 CN3 CN4 COL CRI CYP CZE DEU DNK ESP EST FIN"
 	global country "$country  FRA GBR GRC HKG HRV HUN IDN IND IRL ISL ISR ITA JPN KHM KOR"
 	global country "$country  LTU LUX LVA MAR MEX MLT MX1 MX2 MX3 MYS NLD NOR NZL PER PHL POL PRT"
 	global country "$country  ROU ROW RUS SAU SGP SVK SVN SWE THA TUN TUR TWN USA VNM ZAF"
@@ -176,7 +176,7 @@ foreach p of local groupeduchoc {
 		replace grchoc_ligne = 1 if  strpos("$mexique", pays_choqué)!=0
 	}
 	if ("`p'"=="CHN") {
-		replace grchoc_ligne = 1 if  strpos("$chine", pays_choqué)!=0
+		replace grchoc_ligne = 1 if  strpos("$china", pays_choqué)!=0
 	}
 	if ("`p'"=="EUR") {
 		replace grchoc_ligne = 1 if strpos("$eurozone", pays_choqué)!=0
@@ -211,8 +211,9 @@ foreach var of varlist $var_entree_sortie {
 	
 		}
 		if ("`p'"=="CHN") {
-			replace grchoc2 = 1 if  strpos("$chine", pays_choqué)!=0
+			replace grchoc2 = 1 if  strpos("$china", pays_choqué)!=0
 		}
+		
 		if ("`p'"=="EUR") {
 			replace grchoc2 = 1 if strpos("$eurozone", pays_origine)!=0
 		}
@@ -254,7 +255,7 @@ foreach p of local groupeduchoc {
 
 		}
 	if ("`p'"=="CHN") {
-		replace grchoc_ligne = 1 if strpos("$chine", c)!=0
+		replace grchoc_ligne = 1 if strpos("$china", c)!=0
 
 		}
 	if ("`p'"=="EUR") {
@@ -286,7 +287,7 @@ if "`source'"=="WIOD" replace pays_origine = strupper(substr("`var'",2,4))
 
 		}
 		if ("`p'"=="CHN") {
-			replace grchoc2 = 1 if strpos("$chine", pays_origine)!=0
+			replace grchoc2 = 1 if strpos("$china", pays_origine)!=0
 		}
 		if ("`p'"=="EUR") {
 		replace grchoc2 = 1 if strpos("$eurozone", pays_origine)!=0
@@ -341,7 +342,7 @@ foreach p of local groupeduchoc {
 
 		}
 	if ("`p'"=="CHN") {
-			replace p_shock = `shk' if strpos("$chine", c)!=0
+			replace p_shock = `shk' if strpos("$china", c)!=0
 
 		}	
 		
@@ -376,7 +377,7 @@ foreach p of local groupeduchoc {
 	
 	}
 	if ("`p'"=="CHN") {
-			replace p_shock2 = 0 if strpos("$chine", c)!=0
+			replace p_shock2 = 0 if strpos("$china", c)!=0
 
 	}	
 	if ("`p'"=="EUR") {
@@ -606,10 +607,11 @@ if ("`wgt'" == "X")  {
 
 	
 if "`source'"=="TIVA" {
-	global ori_choc "EUR EAS"
-	global ori_choc "$ori_choc ARG AUS AUT BEL BGR BRA BRN CAN CHE CHL CHN COL CRI CYP CZE DEU DNK ESP EST FIN"
-	global ori_choc "$ori_choc FRA GBR GRC HKG HRV HUN IDN IND IRL ISL ISR ITA JPN KHM KOR LTU LUX LVA MAR MEX MLT MYS NLD NOR NZL PER "
-	global ori_choc "$ori_choc PHL POL PRT ROU ROW RUS SAU SGP SVK SVN SWE THA TUN TUR TWN USA VNM ZAF"
+	global ori_choc "CHN"
+*	global ori_choc "EUR EAS"
+*	global ori_choc "$ori_choc ARG AUS AUT BEL BGR BRA BRN CAN CHE CHL CHN COL CRI CYP CZE DEU DNK ESP EST FIN"
+*	global ori_choc "$ori_choc FRA GBR GRC HKG HRV HUN IDN IND IRL ISL ISR ITA JPN KHM KOR LTU LUX LVA MAR MEX MLT MYS NLD NOR NZL PER "
+*	global ori_choc "$ori_choc PHL POL PRT ROU ROW RUS SAU SGP SVK SVN SWE THA TUN TUR TWN USA VNM ZAF"
 }
 
 if "`source'"=="WIOD" {
@@ -628,7 +630,7 @@ foreach i of global ori_choc {
 
 
 use "$dir/Bases/pays_en_ligne_`source'.dta", clear
-drop if c=="MX1" | c=="MX2" |  c=="MX3" |  c=="CN1"  |  c=="CN2"  |  c=="CN3" 
+drop if c=="MX1" | c=="MX2" |  c=="MX3" |  c=="CN1"  |  c=="CN2"  |  c=="CN3"  |  c=="CN4" 
 set more off
 
 foreach i of global ori_choc {
@@ -712,18 +714,18 @@ Definition_pays_secteur TIVA
 // Fabrication des fichiers d'effets moyens des chocs de change
 
  *2005 2009 2010 2011
-foreach i of numlist 1995(1)2011  /*2005 2009 2010 2011*/ {
+foreach i of numlist 1995 /*(1)2011  /*2005 2009 2010 2011*/ */  {
 	clear
 	set more off
-	compute_leontief `i' TIVA
+*	compute_leontief `i' TIVA
 *	compute_X `i' TIVA
 *	create_y `i'
 *	compute_VA `i'
-	compute_HC `i' TIVA
+*	compute_HC `i' TIVA
 	
 }
 
-foreach i of numlist 1995(1)2011 /*2000 2005 2009 2010 2011 */{
+foreach i of numlist 1995 /*(1)2011*/ /*2000 2005 2009 2010 2011 */{
 *foreach j in Yt X 
 		foreach j in HC {
 		table_mean `i' `j' 1 TIVA

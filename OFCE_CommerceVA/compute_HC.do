@@ -43,6 +43,8 @@ rename  Country pays
 rename  IndustryCode sector 
 replace pays_conso=substr(pays_conso,1,3) 
 
+drop if pays=="TOT"
+
 rename v conso		
 rename Year year	
 

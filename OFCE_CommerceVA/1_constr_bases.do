@@ -563,7 +563,7 @@ foreach i of numlist 2000(1)2014 {
 
 
 
-
+/*
 foreach i of numlist 1995 2000 2005 {
 	foreach n in WAGE OUT {
 		clear
@@ -571,7 +571,7 @@ foreach i of numlist 1995 2000 2005 {
 		}
 }
 
-
+*/
 
 
 

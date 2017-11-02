@@ -41,7 +41,8 @@ keep IndustryCode Country Year v*59
 reshape long v, i(IndustryCode Country Year) j(pays_conso) string
 rename  Country pays
 rename  IndustryCode sector 
-replace pays_conso=substr(pays_conso,1,3) 
+replace sector = strlower(sector)
+replace pays_conso=strlower(substr(pays_conso,1,3))
 
 drop if pays=="TOT"
 

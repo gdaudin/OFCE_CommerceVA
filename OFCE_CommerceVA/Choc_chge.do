@@ -65,7 +65,7 @@ if "`source'"=="WIOD" {
 	global china "CHN"
 	global mexique "MEX"
 	
-	global var_entree_sortie vAUS01-vUSA61
+	global var_entree_sortie vAUS01-vUSA56
 }
 
 global nbr_pays = wordcount("$country")
@@ -732,7 +732,7 @@ foreach i of numlist `start_year' /* (1)`end_year'*/  {
 	
 }
 
-foreach i of numlist `start_year's/*(1)`end_year'*/{
+foreach i of numlist `start_year'/*(1)`end_year'*/{
 *foreach j in Yt X 
 		foreach j in HC {
 		table_mean `i' `j' 1 `source'

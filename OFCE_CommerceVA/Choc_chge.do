@@ -151,7 +151,7 @@ program compute_leontief_chocnom
 *ex : compute_leontief_chocnom 2005 ARG	
 *Create vector Y of output from troncated database
 
-
+display "`groupeduchoc'"
 
 *use "H:\Agents\Cochard\Papier_chocCVA/Bases/OECD_`yrs'_OUT.dta"
 *mkmat $var_entree_sortie, matrix(Y)
@@ -207,12 +207,13 @@ foreach var of varlist $var_entree_sortie {
 		
 
 		if ("`p'"=="MEX") {
-			replace grchoc2 = 1 if  strpos("$mexique", pays_choqué)!=0
+			replace grchoc2 = 1 if  strpos("$mexique", pays_origine)!=0
 	
 		}
 		if ("`p'"=="CHN") {
-			replace grchoc2 = 1 if  strpos("$china", pays_choqué)!=0
-		}
+			replace grchoc2 = 1 if  strpos("$china", pays_origine)!=0
+		} 
+	
 		
 		if ("`p'"=="EUR") {
 			replace grchoc2 = 1 if strpos("$eurozone", pays_origine)!=0

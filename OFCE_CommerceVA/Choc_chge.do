@@ -48,7 +48,7 @@ global country_hc "ARG AUS AUT BEL BGR BRA BRN CAN CHE CHL"
 if "`source'"=="WIOD" {
 	global country "   AUS AUT BEL BGR BRA     CAN CHE" 
 	global country "$country CHN                             CYP CZE DEU DNK ESP EST FIN"
-	global country "$country FRA GBR GRC     HRV HUN IDN IND IRL ISL      ITA JPN     KOR"
+	global country "$country FRA GBR GRC     HRV HUN IDN IND IRL        ITA JPN     KOR"
 	global country "$country LTU LUX LVA MEX              MLT     NLD NOR        POL PRT"
 	global country "$country ROU ROW RUS       SVK SVN SWE       TUR TWN USA        "
 	
@@ -61,7 +61,7 @@ if "`source'"=="WIOD" {
 	global sector "$sector M74_M75 N O84 O85 Q R_S T U"
 	
 	
-	global noneuro "BGR BRA CAN CHE CHN CZE DNK  GBR HRV HUN IDN IND ISL JPN KOR MEX NOR  POL ROU ROW RUS SWE TUR TWN USA"    
+	global noneuro "BGR BRA CAN CHE CHN CZE DNK  GBR HRV HUN IDN IND  JPN KOR MEX NOR  POL ROU ROW RUS SWE TUR TWN USA"    
 	global china "CHN"
 	global mexique "MEX"
 	
@@ -617,9 +617,9 @@ if "`source'"=="TIVA" {
 
 if "`source'"=="WIOD" {
 	global ori_choc "EUR EAS"
-	global ori_choc "$ori_choc AUS AUT BEL BGR BRA     CAN CHE CHN                             CYP CZE DEU DNK ESP EST FIN " 
-	global ori_choc "$ori_choc FRA GBR GRC     HRV HUN IDN IND IRL ISL      ITA JPN     KOR LTU LUX LVA MEX              MLT     NLD NOR        POL PRT"
-	global ori_choc "$ori_choc ROU ROW RUS       SVK SVN SWE       TUR TWN USA        "
+	*global ori_choc "$ori_choc AUS AUT BEL BGR BRA     CAN CHE CHN                             CYP CZE DEU DNK ESP EST FIN " 
+	*global ori_choc "$ori_choc FRA GBR GRC     HRV HUN IDN IND IRL       ITA JPN     KOR LTU LUX LVA MEX              MLT     NLD NOR        POL PRT"
+	*global ori_choc "$ori_choc ROU ROW RUS       SVK SVN SWE       TUR TWN USA        "
 }
 
 foreach i of global ori_choc {
@@ -709,27 +709,33 @@ end
 clear
 set more off
 
+foreach source in WIOD /*  TIVA */{ 
 
-Definition_pays_secteur TIVA
+if "`source'"=="WIOD" local start_year 2000
+if "`source'"=="TIVA" local start_year 1995
+
+if "`source'"=="WIOD" local end_year 2014
+if "`source'"=="TIVA" local end_year 2011
+Definition_pays_secteur `source'
 
 // Fabrication des fichiers d'effets moyens des chocs de change
 // pour le choc CPI, faire tourner compute_HC et compute_leontief, les autres ne sont pas indispensables
  *2005 2009 2010 2011
-foreach i of numlist 1995 (1)2011  /*2005 2009 2010 2011*/  {
+foreach i of numlist `start_year' /* (1)`end_year'*/  {
 	clear
 	set more off
-*	compute_leontief `i' TIVA
-*	compute_X `i' TIVA
-*	create_y `i'
-*	compute_VA `i'
-    compute_HC `i' TIVA
+	compute_leontief `i' `source'
+*	compute_X `i' `source'
+*	create_y `i' `source'
+*	compute_VA `i' `source'
+    compute_HC `i' `source'
 	
 }
 
-foreach i of numlist 1995 (1)2011 /*2000 2005 2009 2010 2011 */{
+foreach i of numlist `start_year's/*(1)`end_year'*/{
 *foreach j in Yt X 
 		foreach j in HC {
-		table_mean `i' `j' 1 TIVA
+		table_mean `i' `j' 1 `source'
 	}
 }
 
@@ -749,7 +755,8 @@ compute_leontieff 2011
 
 
 set more on
+*/
 
-
+}
 
 

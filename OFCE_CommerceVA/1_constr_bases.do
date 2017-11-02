@@ -133,6 +133,7 @@ if "`source'"=="WIOD" {
 	use "$dir/Bases/WIOD_ICIO_`yrs'.dta"
 	keep if IndustryCode == "GO"
 	drop IndustryCode-TOT
+	drop *57 *58 *59 *60 *61
 	save "$dir/Bases/WIOD_`yrs'_OUT.dta", replace
 	
 * Only the I/O table itself
@@ -140,6 +141,7 @@ if "`source'"=="WIOD" {
 	use "$dir/Bases/WIOD_ICIO_`yrs'.dta"
 	drop if RNr >=65
 	drop IndustryCode-TOT
+	drop *57 *58 *59 *60 *61
 	save "$dir/Bases/WIOD_`yrs'_Z.dta", replace
 	
 *Only final demand
@@ -186,7 +188,7 @@ if "`source'"=="TIVA" {
 if "`source'"=="WIOD" {
 	global country "   AUS AUT BEL BGR BRA     CAN CHE" 
 	global country "$country CHN                             CYP CZE DEU DNK ESP EST FIN"
-	global country "$country FRA GBR GRC     HRV HUN IDN IND IRL ISL      ITA JPN     KOR"
+	global country "$country FRA GBR GRC     HRV HUN IDN IND IRL       ITA JPN     KOR"
 	global country "$country LTU LUX LVA MEX              MLT     NLD NOR        POL PRT"
 	global country "$country ROU ROW RUS       SVK SVN SWE       TUR TWN USA        "
 	
@@ -282,7 +284,7 @@ if "`source'"=="TIVA" {
 if "`source'"=="WIOD" {
 	global country "   AUS AUT BEL BGR BRA     CAN CHE" 
 	global country "$country CHN                             CYP CZE DEU DNK ESP EST FIN"
-	global country "$country FRA GBR GRC     HRV HUN IDN IND IRL ISL      ITA JPN     KOR"
+	global country "$country FRA GBR GRC     HRV HUN IDN IND IRL        ITA JPN     KOR"
 	global country "$country LTU LUX LVA MEX              MLT     NLD NOR        POL PRT"
 	global country "$country ROU ROW RUS       SVK SVN SWE       TUR TWN USA        "
 	
@@ -419,7 +421,7 @@ program append_y
 args source
 
 if "`source'"=="TIVA" local yr_list 1995(1)2011
-if "`source'"=="WIOD" local yr_list 2000(1)2011
+if "`source'"=="WIOD" local yr_list 2000(1)2014
 
 if "`source'"=="TIVA" local first_yr 1995
 if "`source'"=="WIOD" local first_yr 2000
@@ -457,7 +459,7 @@ if "`source'"=="TIVA" {
 if "`source'"=="WIOD" {
 	global country2 "aus aut bel bgr bra can che" 
 	global country2 "$country2 chn cyp cze deu dnk esp est fin"
-	global country2 "$country2 fra gbr grc hrv hum idn ind irl isl ita jpn kor"
+	global country2 "$country2 fra gbr grc hrv hum idn ind irl   ita jpn kor"
 	global country2 "$country2 ltu lux lva mex mlt nld nor pol prt"
 	global country2 "$country2 rou row rus svk svn swe tur twn usa"
 	
@@ -511,7 +513,7 @@ args source
 
 
 if "`source'"=="TIVA" local yr_list 1995(1)2011
-if "`source'"=="WIOD" local yr_list 2000(1)2011
+if "`source'"=="WIOD" local yr_list 2000(1)2014
 
 if "`source'"=="TIVA" local first_yr 1995
 if "`source'"=="WIOD" local first_yr 2000
@@ -538,7 +540,7 @@ end
 
 
 **** Lancement des programmes ****************
-
+/*
 
 save_data WIOD
 
@@ -559,7 +561,7 @@ foreach i of numlist 2000(1)2014 {
 	prepare_database `i' WIOD
 }
 
-/*
+
 
 
 foreach i of numlist 1995 2000 2005 {
@@ -569,8 +571,7 @@ foreach i of numlist 1995 2000 2005 {
 		}
 }
 
-*/
-*/
+
 
 
 

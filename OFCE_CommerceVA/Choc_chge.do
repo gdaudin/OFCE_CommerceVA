@@ -21,7 +21,7 @@ args source
 
 if "`source'"=="TIVA" {
 global country "ARG AUS AUT BEL BGR BRA BRN CAN CHE CHL"
-	global country "$country  CHN CN1 CN2 CN2 CN3 CN4 COL CRI CYP CZE DEU DNK ESP EST FIN"
+	global country "$country  CHN CN1 CN2 CN3 CN4 COL CRI CYP CZE DEU DNK ESP EST FIN"
 	global country "$country  FRA GBR GRC HKG HRV HUN IDN IND IRL ISL ISR ITA JPN KHM KOR"
 	global country "$country  LTU LUX LVA MAR MEX MLT MX1 MX2 MX3 MYS NLD NOR NZL PER PHL POL PRT"
 	global country "$country  ROU ROW RUS SAU SGP SVK SVN SWE THA TUN TUR TWN USA VNM ZAF"
@@ -608,11 +608,11 @@ if ("`wgt'" == "X")  {
 
 	
 if "`source'"=="TIVA" {
-	global ori_choc "CHN"
-*	global ori_choc "EUR EAS"
-*	global ori_choc "$ori_choc ARG AUS AUT BEL BGR BRA BRN CAN CHE CHL CHN COL CRI CYP CZE DEU DNK ESP EST FIN"
-*	global ori_choc "$ori_choc FRA GBR GRC HKG HRV HUN IDN IND IRL ISL ISR ITA JPN KHM KOR LTU LUX LVA MAR MEX MLT MYS NLD NOR NZL PER "
-*	global ori_choc "$ori_choc PHL POL PRT ROU ROW RUS SAU SGP SVK SVN SWE THA TUN TUR TWN USA VNM ZAF"
+*	global ori_choc "CHN"
+	global ori_choc "EUR EAS"
+	global ori_choc "$ori_choc ARG AUS AUT BEL BGR BRA BRN CAN CHE CHL CHN COL CRI CYP CZE DEU DNK ESP EST FIN"
+	global ori_choc "$ori_choc FRA GBR GRC HKG HRV HUN IDN IND IRL ISL ISR ITA JPN KHM KOR LTU LUX LVA MAR MEX MLT MYS NLD NOR NZL PER "
+	global ori_choc "$ori_choc PHL POL PRT ROU ROW RUS SAU SGP SVK SVN SWE THA TUN TUR TWN USA VNM ZAF"
 }
 
 if "`source'"=="WIOD" {
@@ -713,20 +713,20 @@ set more off
 Definition_pays_secteur TIVA
 
 // Fabrication des fichiers d'effets moyens des chocs de change
-
+// pour le choc CPI, faire tourner compute_HC et compute_leontief, les autres ne sont pas indispensables
  *2005 2009 2010 2011
-foreach i of numlist 1995 /*(1)2011  /*2005 2009 2010 2011*/ */  {
+foreach i of numlist 1995 (1)2011  /*2005 2009 2010 2011*/  {
 	clear
 	set more off
 *	compute_leontief `i' TIVA
 *	compute_X `i' TIVA
 *	create_y `i'
 *	compute_VA `i'
-*	compute_HC `i' TIVA
+    compute_HC `i' TIVA
 	
 }
 
-foreach i of numlist 1995 /*(1)2011*/ /*2000 2005 2009 2010 2011 */{
+foreach i of numlist 1995 (1)2011 /*2000 2005 2009 2010 2011 */{
 *foreach j in Yt X 
 		foreach j in HC {
 		table_mean `i' `j' 1 TIVA

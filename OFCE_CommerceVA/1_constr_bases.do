@@ -2,7 +2,7 @@ clear
 
 
 
-if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/BDF_Commerce VA"
+if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
 else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
 
 
@@ -540,7 +540,7 @@ end
 
 
 **** Lancement des programmes ****************
-/*
+
 
 save_data WIOD
 

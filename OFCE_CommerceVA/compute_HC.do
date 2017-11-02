@@ -1,7 +1,7 @@
 clear
 *set trace on
 
-if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/BDF_Commerce VA"
+if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
 else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
 capture log using "$dir/$S_DATE.log", replace
 set more off

@@ -68,7 +68,7 @@ if "`source'"=="WIOD" {
 	foreach j of numlist 1 (1) 9 {
 		rename ????`j' ????0`j'
 	}
-	order vAUS01-vROW61, alphabetic
+	order vAUS01-vROW61, alphabetic after (TOT)
 	save "$dir/Bases/WIOD_ICIO_`i'.dta", replace
 	}
 

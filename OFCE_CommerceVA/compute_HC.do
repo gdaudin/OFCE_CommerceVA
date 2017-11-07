@@ -38,20 +38,17 @@ use "$dir/Bases/`source'_ICIO_`yrs'.dta", clear
 
 
 keep IndustryCode Country Year v*59
-reshape long v, i(IndustryCode Country Year) j(pays_conso) string
+reshape long v, i(Country IndustryCode Year) j(pays_conso) string
 rename  Country pays
 rename  IndustryCode sector 
 replace sector = strlower(sector)
 replace pays_conso=strlower(substr(pays_conso,1,3))
-
+ 
 drop if pays=="TOT"
 
 rename v conso		
 rename Year year	
-
-
-
-
+sort year pays sector pays_conso
 replace pays = strupper(pays)
 }
 *keep year pays HC

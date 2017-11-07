@@ -171,7 +171,7 @@ gen grchoc_ligne = 0
 
 foreach p of local groupeduchoc {
 	replace grchoc_ligne = 1 if pays_choqué == "`p'" 
-
+	
 	if ("`p'"=="MEX")  {
 		replace grchoc_ligne = 1 if  strpos("$mexique", pays_choqué)!=0
 	}
@@ -200,10 +200,11 @@ foreach var of varlist $var_entree_sortie {
 	
 	
 	if "`source'"=="TIVA" replace pays_origine = strupper(substr("`var'",1,strpos("`var'","_")-1))
-	if "`source'"=="WIOD" replace pays_origine = strupper(substr("`var'",2,4))
+	if "`source'"=="WIOD" replace pays_origine = strupper(substr("`var'",2,3))
 	foreach p of local groupeduchoc {
 	
 		replace grchoc2 = 1 if pays_origine == "`p'" 
+		
 		
 
 		if ("`p'"=="MEX") {
@@ -228,6 +229,7 @@ foreach var of varlist $var_entree_sortie {
 	
 
 	replace `var'=0 if grchoc_ligne==1  & grchoc2==1 
+
 *	if strmatch("`var'","*aut*")==1 blif
 	
 
@@ -275,7 +277,7 @@ gen grchoc2=0
 
 foreach var of varlist $var_entree_sortie {
 if "`source'"=="TIVA" replace pays_origine = strupper(substr("`var'",1,strpos("`var'","_")-1))
-if "`source'"=="WIOD" replace pays_origine = strupper(substr("`var'",2,4))
+if "`source'"=="WIOD" replace pays_origine = strupper(substr("`var'",2,3))
 		
 
 	
@@ -531,6 +533,9 @@ use "$dir/Bases/csv_`source'.dta"
 *I decide whether I use the production or export or value-added vector as weight modifying the argument "wgt" : Yt or X or VAt
 *Compute the vector of mean effects :
 
+
+
+
 if ("`wgt'" == "Yt")  {
 	matrix Yt = Y'
 	svmat Yt 
@@ -540,6 +545,8 @@ if ("`wgt'" == "Yt")  {
 if ("`wgt'" == "X")  {
 	svmat X
 }
+
+
 if ("`wgt'" == "X") | ("`wgt'" == "Yt") {
 	matrix C`cty't= C`cty''
 	svmat C`cty't
@@ -555,6 +562,9 @@ if ("`wgt'" == "X") | ("`wgt'" == "Yt") {
 local blink 0
 matrix C`cty't= C`cty''
 svmat C`cty't, name(C`cty')	
+
+
+
 if ("`wgt'" == "HC")  {
 	foreach pays_conso of global country_hc {
 	svmat HC_`pays_conso', name(HC_`pays_conso')

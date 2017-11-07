@@ -11,7 +11,7 @@ log using "$dir/$S_DATE.log", replace
 set matsize 7000
 *set mem 700m if earlier version of stata (<stata 12)
 set more off
-global test 1
+global test 0
 *Mettre test=1 pour sauver les tableaux un par un et test=0 pour ne pas encombrer le DD.
 
 capture program drop Definition_pays_secteur

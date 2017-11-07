@@ -626,10 +626,10 @@ if "`source'"=="TIVA" {
 }
 
 if "`source'"=="WIOD" {
-	global ori_choc "EUR EAS AUS"
-	*global ori_choc "$ori_choc AUS AUT BEL BGR BRA     CAN CHE CHN                             CYP CZE DEU DNK ESP EST FIN " 
-	*global ori_choc "$ori_choc FRA GBR GRC     HRV HUN IDN IND IRL       ITA JPN     KOR LTU LUX LVA MEX              MLT     NLD NOR        POL PRT"
-	*global ori_choc "$ori_choc ROU ROW RUS       SVK SVN SWE       TUR TWN USA        "
+	global ori_choc "EUR EAS"
+	global ori_choc "$ori_choc AUS AUT BEL BGR BRA     CAN CHE CHN                             CYP CZE DEU DNK ESP EST FIN " 
+	global ori_choc "$ori_choc FRA GBR GRC     HRV HUN IDN IND IRL       ITA JPN     KOR LTU LUX LVA MEX              MLT     NLD NOR        POL PRT"
+	global ori_choc "$ori_choc ROU ROW RUS       SVK SVN SWE       TUR TWN USA        "
 }
 
 foreach i of global ori_choc {
@@ -719,7 +719,7 @@ end
 clear
 set more off
 
-foreach source in WIOD /*  TIVA */{ 
+foreach source in WIOD  TIVA { 
 
 if "`source'"=="WIOD" local start_year 2000
 if "`source'"=="TIVA" local start_year 1995
@@ -742,7 +742,7 @@ foreach i of numlist `start_year' /* (1)`end_year'*/  {
 	
 }
 
-foreach i of numlist `start_year'/*(1)`end_year'*/{
+foreach i of numlist `start_year'(1)`end_year'{
 *foreach j in Yt X 
 		foreach j in HC {
 		table_mean `i' `j' 1 `source'

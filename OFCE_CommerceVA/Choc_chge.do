@@ -731,7 +731,7 @@ Definition_pays_secteur `source'
 // Fabrication des fichiers d'effets moyens des chocs de change
 // pour le choc CPI, faire tourner compute_HC et compute_leontief, les autres ne sont pas indispensables
  *2005 2009 2010 2011
-foreach i of numlist `start_year' /* (1)`end_year'*/  {
+foreach i of numlist `start_year' (1)`end_year'  {
 	clear
 	set more off
 	compute_leontief `i' `source'

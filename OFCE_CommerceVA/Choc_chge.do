@@ -753,7 +753,7 @@ foreach i of numlist `start_year'(1)`end_year'{
 */
 
 
-log close
+capture log close
 /*
 
 // dévaluation de l'euro par rapport à toutes les monnaies

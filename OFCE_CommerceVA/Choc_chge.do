@@ -2,7 +2,7 @@
 
 clear  
 set more off
-if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/BDF_Commerce VA"
+if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
 else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
 
 
@@ -65,7 +65,7 @@ if "`source'"=="WIOD" {
 	global china "CHN"
 	global mexique "MEX"
 	
-	global var_entree_sortie vAUS01-vUSA61
+	global var_entree_sortie vAUS01-vUSA56
 }
 
 global nbr_pays = wordcount("$country")
@@ -171,7 +171,7 @@ gen grchoc_ligne = 0
 
 foreach p of local groupeduchoc {
 	replace grchoc_ligne = 1 if pays_choqué == "`p'" 
-
+	
 	if ("`p'"=="MEX")  {
 		replace grchoc_ligne = 1 if  strpos("$mexique", pays_choqué)!=0
 	}
@@ -200,10 +200,11 @@ foreach var of varlist $var_entree_sortie {
 	
 	
 	if "`source'"=="TIVA" replace pays_origine = strupper(substr("`var'",1,strpos("`var'","_")-1))
-	if "`source'"=="WIOD" replace pays_origine = strupper(substr("`var'",2,4))
+	if "`source'"=="WIOD" replace pays_origine = strupper(substr("`var'",2,3))
 	foreach p of local groupeduchoc {
 	
 		replace grchoc2 = 1 if pays_origine == "`p'" 
+		
 		
 
 		if ("`p'"=="MEX") {
@@ -228,6 +229,7 @@ foreach var of varlist $var_entree_sortie {
 	
 
 	replace `var'=0 if grchoc_ligne==1  & grchoc2==1 
+
 *	if strmatch("`var'","*aut*")==1 blif
 	
 
@@ -275,7 +277,7 @@ gen grchoc2=0
 
 foreach var of varlist $var_entree_sortie {
 if "`source'"=="TIVA" replace pays_origine = strupper(substr("`var'",1,strpos("`var'","_")-1))
-if "`source'"=="WIOD" replace pays_origine = strupper(substr("`var'",2,4))
+if "`source'"=="WIOD" replace pays_origine = strupper(substr("`var'",2,3))
 		
 
 	
@@ -531,6 +533,9 @@ use "$dir/Bases/csv_`source'.dta"
 *I decide whether I use the production or export or value-added vector as weight modifying the argument "wgt" : Yt or X or VAt
 *Compute the vector of mean effects :
 
+
+
+
 if ("`wgt'" == "Yt")  {
 	matrix Yt = Y'
 	svmat Yt 
@@ -540,6 +545,8 @@ if ("`wgt'" == "Yt")  {
 if ("`wgt'" == "X")  {
 	svmat X
 }
+
+
 if ("`wgt'" == "X") | ("`wgt'" == "Yt") {
 	matrix C`cty't= C`cty''
 	svmat C`cty't
@@ -555,6 +562,9 @@ if ("`wgt'" == "X") | ("`wgt'" == "Yt") {
 local blink 0
 matrix C`cty't= C`cty''
 svmat C`cty't, name(C`cty')	
+
+
+
 if ("`wgt'" == "HC")  {
 	foreach pays_conso of global country_hc {
 	svmat HC_`pays_conso', name(HC_`pays_conso')
@@ -617,9 +627,9 @@ if "`source'"=="TIVA" {
 
 if "`source'"=="WIOD" {
 	global ori_choc "EUR EAS"
-	*global ori_choc "$ori_choc AUS AUT BEL BGR BRA     CAN CHE CHN                             CYP CZE DEU DNK ESP EST FIN " 
-	*global ori_choc "$ori_choc FRA GBR GRC     HRV HUN IDN IND IRL       ITA JPN     KOR LTU LUX LVA MEX              MLT     NLD NOR        POL PRT"
-	*global ori_choc "$ori_choc ROU ROW RUS       SVK SVN SWE       TUR TWN USA        "
+	global ori_choc "$ori_choc AUS AUT BEL BGR BRA     CAN CHE CHN                             CYP CZE DEU DNK ESP EST FIN " 
+	global ori_choc "$ori_choc FRA GBR GRC     HRV HUN IDN IND IRL       ITA JPN     KOR LTU LUX LVA MEX              MLT     NLD NOR        POL PRT"
+	global ori_choc "$ori_choc ROU ROW RUS       SVK SVN SWE       TUR TWN USA        "
 }
 
 foreach i of global ori_choc {
@@ -709,33 +719,35 @@ end
 clear
 set more off
 
-foreach source in WIOD /*  TIVA */{ 
+foreach source in   TIVA { 
 
-if "`source'"=="WIOD" local start_year 2000
-if "`source'"=="TIVA" local start_year 1995
+*if "`source'"=="WIOD" local start_year 2000
+*if "`source'"=="TIVA" local start_year 1995
+if "`source'"=="TIVA" local start_year 2006
 
-if "`source'"=="WIOD" local end_year 2014
+*if "`source'"=="WIOD" local end_year 2014
 if "`source'"=="TIVA" local end_year 2011
 Definition_pays_secteur `source'
 
 // Fabrication des fichiers d'effets moyens des chocs de change
 // pour le choc CPI, faire tourner compute_HC et compute_leontief, les autres ne sont pas indispensables
  *2005 2009 2010 2011
-foreach i of numlist `start_year' /* (1)`end_year'*/  {
+foreach i of numlist `start_year' (1)`end_year'  {
 	clear
 	set more off
 	compute_leontief `i' `source'
 *	compute_X `i' `source'
 *	create_y `i' `source'
 *	compute_VA `i' `source'
-    compute_HC `i' `source'
+   compute_HC `i' `source'
 	
 }
 
-foreach i of numlist `start_year's/*(1)`end_year'*/{
+foreach i of numlist `start_year'(1)`end_year'{
 *foreach j in Yt X 
 		foreach j in HC {
 		table_mean `i' `j' 1 `source'
+		
 	}
 }
 

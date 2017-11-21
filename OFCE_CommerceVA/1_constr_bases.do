@@ -2,7 +2,7 @@ clear
 
 
 
-if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/BDF_Commerce VA"
+if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
 else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
 
 
@@ -68,7 +68,7 @@ if "`source'"=="WIOD" {
 	foreach j of numlist 1 (1) 9 {
 		rename ????`j' ????0`j'
 	}
-	order vAUS01-vROW61, alphabetic
+	order vAUS01-vROW61, alphabetic after (TOT)
 	save "$dir/Bases/WIOD_ICIO_`i'.dta", replace
 	}
 
@@ -540,7 +540,7 @@ end
 
 
 **** Lancement des programmes ****************
-/*
+
 
 save_data WIOD
 
@@ -563,7 +563,7 @@ foreach i of numlist 2000(1)2014 {
 
 
 
-
+/*
 foreach i of numlist 1995 2000 2005 {
 	foreach n in WAGE OUT {
 		clear
@@ -571,7 +571,7 @@ foreach i of numlist 1995 2000 2005 {
 		}
 }
 
-
+*/
 
 
 

@@ -1,7 +1,7 @@
 clear
 *set trace on
 
-if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/BDF_Commerce VA"
+if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
 else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
 capture log using "$dir/$S_DATE.log", replace
 set more off
@@ -41,16 +41,14 @@ keep IndustryCode Country Year v*59
 reshape long v, i(Country IndustryCode Year) j(pays_conso) string
 rename  Country pays
 rename  IndustryCode sector 
-replace pays_conso=substr(pays_conso,1,3) 
-
+replace sector = strlower(sector)
+replace pays_conso=strlower(substr(pays_conso,1,3))
+ 
 drop if pays=="TOT"
 
 rename v conso		
 rename Year year	
-
-
-
-
+sort year pays sector pays_conso
 replace pays = strupper(pays)
 }
 *keep year pays HC

@@ -11,7 +11,7 @@ log using "$dir/$S_DATE.log", replace
 set matsize 7000
 *set mem 700m if earlier version of stata (<stata 12)
 set more off
-global test 1
+global test 0
 *Mettre test=1 pour sauver les tableaux un par un et test=0 pour ne pas encombrer le DD.
 
 capture program drop Definition_pays_secteur
@@ -719,13 +719,13 @@ end
 clear
 set more off
 
-foreach source in   TIVA { 
+foreach source in   WIOD TIVA { 
 
-*if "`source'"=="WIOD" local start_year 2000
-*if "`source'"=="TIVA" local start_year 1995
-if "`source'"=="TIVA" local start_year 2006
+if "`source'"=="WIOD" local start_year 2000
+if "`source'"=="TIVA" local start_year 1995
 
-*if "`source'"=="WIOD" local end_year 2014
+
+if "`source'"=="WIOD" local end_year 2014
 if "`source'"=="TIVA" local end_year 2011
 Definition_pays_secteur `source'
 

@@ -134,17 +134,11 @@ keep c shockEUR1
 drop if strpos("$eurozone",c)!=0
 rename shockEUR1 pond_HC
 
-
 save "$dir/Results/Devaluations/Pour_`source'_Graph_4.dta", replace
 
 
 merge 1:1 c using "$dir/Bases/Pays_FR.dta",keep(3)
 drop _merge
-
-
-
-
-
 
 label var pond_HC "Prix de consommation"
 

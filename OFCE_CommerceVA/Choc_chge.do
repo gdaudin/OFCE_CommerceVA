@@ -719,14 +719,14 @@ end
 clear
 set more off
 
-foreach source in   WIOD TIVA { 
+foreach source in   WIOD  TIVA{ 
 
 if "`source'"=="WIOD" local start_year 2000
-if "`source'"=="TIVA" local start_year 1995
+*if "`source'"=="TIVA" local start_year 1995
 
 
 if "`source'"=="WIOD" local end_year 2014
-if "`source'"=="TIVA" local end_year 2011
+*if "`source'"=="TIVA" local end_year 2011
 Definition_pays_secteur `source'
 
 // Fabrication des fichiers d'effets moyens des chocs de change
@@ -736,16 +736,16 @@ foreach i of numlist `start_year' (1)`end_year'  {
 	clear
 	set more off
 	compute_leontief `i' `source'
-*	compute_X `i' `source'
-*	create_y `i' `source'
+	compute_X `i' `source'
+	create_y `i' `source'
 *	compute_VA `i' `source'
-   compute_HC `i' `source'
+   *compute_HC `i' `source'
 	
 }
 
 foreach i of numlist `start_year'(1)`end_year'{
-*foreach j in Yt X 
-		foreach j in HC {
+foreach j in Yt X {
+		*foreach j in HC {
 		table_mean `i' `j' 1 `source'
 		
 	}
@@ -755,7 +755,7 @@ foreach i of numlist `start_year'(1)`end_year'{
 */
 
 
-log close
+capture log close
 /*
 
 // dévaluation de l'euro par rapport à toutes les monnaies

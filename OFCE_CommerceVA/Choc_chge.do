@@ -464,9 +464,11 @@ use "$dir/Bases/`source'_ICIO_`yrs'.dta", clear
 
 *generate pays = strlower(substr(v1,1,strpos(v1,"_")-1))
 *drop if pays==""
-
+if "`source'"=="WIOD" {
 egen utilisations = rowtotal(vAUS01-vUSA61)
 gen utilisations_dom = .
+
+
 
 foreach j of global country {
 	local i = "`j'"
@@ -481,6 +483,27 @@ foreach j of global country {
 	replace utilisations_dom = blouk if Country=="`j'"
 	codebook utilisations_dom if Country=="`j'"
 	drop blouk
+}
+}
+
+if "`source'"=="TIVA" {
+egen utilisations = rowtotal(arg_c01t05agr-nps_zaf)
+gen utilisations_dom = .
+* liste de countrys
+	local i = "`j'"
+	if  ("`j'"=="chn.npr" | "`j'"=="chn.pro" |"`j'"=="chn.dom" ) {
+		local i = "chn" 
+	}
+	if  ("`j'"=="mex.ngm" | "`j'"=="mex.gmf") {
+			local i = "mex"
+	}
+	egen blouk = rowtotal(*`i'*)
+	display "`i'" "`j'"
+	replace utilisations_dom = blouk if Country=="`j'"
+	codebook utilisations_dom if Country=="`j'"
+	drop blouk
+
+
 }
 generate X = utilisations - utilisations_dom
 	

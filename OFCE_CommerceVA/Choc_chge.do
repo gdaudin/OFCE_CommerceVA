@@ -719,7 +719,9 @@ end
 clear
 set more off
 
+
 foreach source in   WIOD  TIVA{ 
+
 
 if "`source'"=="WIOD" local start_year 2000
 *if "`source'"=="TIVA" local start_year 1995
@@ -744,8 +746,10 @@ foreach i of numlist `start_year' (1)`end_year'  {
 }
 
 foreach i of numlist `start_year'(1)`end_year'{
-foreach j in Yt X {
-		*foreach j in HC {
+
+*foreach j in Yt X 
+		foreach j in HC {
+
 		table_mean `i' `j' 1 `source'
 		
 	}

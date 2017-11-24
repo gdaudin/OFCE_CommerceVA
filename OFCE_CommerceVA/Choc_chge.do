@@ -7,7 +7,7 @@ else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
 
 
 capture log close
-log using "$dir/$S_DATE.log", replace
+*log using "$dir/$S_DATE.log", replace
 set matsize 7000
 *set mem 700m if earlier version of stata (<stata 12)
 set more off
@@ -440,10 +440,10 @@ end
 *Creation of the vector Y is required before table_adjst : matrix Yt
 capture program drop create_y
 program create_y
-args yrs
+args yrs source
 clear
 
-use "$dir/Bases/OECD_`yrs'_OUT.dta"
+use "$dir/Bases/`source'_`yrs'_OUT.dta"
 
 
 mkmat $var_entree_sortie, matrix(Y)
@@ -455,20 +455,20 @@ end
 * 2017-10-17 redondant avec le programme 1!!!
 capture program drop compute_X
 program compute_X
-	args yrs
+	args yrs source
 
-use "$dir/Bases/OECD`yrs'.dta", clear
+use "$dir/Bases/`source'_ICIO_`yrs'.dta", clear
 
 
-global country2 "arg aus aut bel bgr bra brn can che chl chn chn.npr chn.pro chn.dom col cri cyp cze deu dnk esp est fin fra gbr grc hkg hrv hun idn ind irl isl isr ita jpn khm kor ltu lux lva mex mex.ngm mex.gmf mlt mys nld nor nzl phl pol prt rou row rus sau sgp svk svn swe tha tun tur twn usa vnm zaf"
+*global country2 "arg aus aut bel bgr bra brn can che chl chn chn.npr chn.pro chn.dom col cri cyp cze deu dnk esp est fin fra gbr grc hkg hrv hun idn ind irl isl isr ita jpn khm kor ltu lux lva mex mex.ngm mex.gmf mlt mys nld nor nzl phl pol prt rou row rus sau sgp svk svn swe tha tun tur twn usa vnm zaf"
 
-generate pays = strlower(substr(v1,1,strpos(v1,"_")-1))
-drop if pays==""
+*generate pays = strlower(substr(v1,1,strpos(v1,"_")-1))
+*drop if pays==""
 
-egen utilisations = rowtotal(arg_c01t05agr-disc)
+egen utilisations = rowtotal(vAUS01-vUSA61)
 gen utilisations_dom = .
 
-foreach j of global country2 {
+foreach j of global country {
 	local i = "`j'"
 	if  ("`j'"=="chn.npr" | "`j'"=="chn.pro" |"`j'"=="chn.dom" ) {
 		local i = "chn" 
@@ -476,21 +476,25 @@ foreach j of global country2 {
 	if  ("`j'"=="mex.ngm" | "`j'"=="mex.gmf") {
 			local i = "mex"
 	}
-	egen blouk = rowtotal(`i'*)
+	egen blouk = rowtotal(*`i'*)
 	display "`i'" "`j'"
-	replace utilisations_dom = blouk if pays=="`j'"
-	codebook utilisations_dom if pays=="`j'"
+	replace utilisations_dom = blouk if Country=="`j'"
+	codebook utilisations_dom if Country=="`j'"
 	drop blouk
 }
 generate X = utilisations - utilisations_dom
 	
-replace pays = strupper(pays)
+replace Country = strupper(Country)
 generate year = `yrs'
 
-keep year pays X
+*keep year Country X
 mkmat X
 
 end
+Definition_pays_secteur WIOD
+compute_X 2010 WIOD
+
+blif
 
 *Creation of the vector of value-added VA : matrices Y, X, VA
 
@@ -498,7 +502,7 @@ capture program drop compute_VA
 program compute_VA
 	args yrs
 clear
-use "$dir/Bases/OECD`yrs'.dta", clear
+use "$dir/Bases/`source'_ICIO_`yrs'.dta", clear
 keep if v1 == "VA.TAXSUB"
 drop v1
 mkmat $var_entree_sortie, matrix(VA)

@@ -19,7 +19,7 @@ global eastern_ZE "EST LTU LVA SVK SVN"
 
 
 *GRAPHIQUE HC 1 TIVA: comparaison évolution dans le temps en devise nationale
-
+* Correspond au Graphique 2 du working paper
 
 use "$dir/Results/Devaluations/mean_chg_TIVA_HC_2000.dta", clear
 
@@ -123,6 +123,41 @@ save "$dir/Results/Devaluations/Pour_WIOD_HC_Graph_1.dta", replace
 export delimited "$dir/Results/Devaluations/Pour_WIOD_HC_Graph_1.csv", replace
 export excel "$dir/Results/Devaluations/Pour_WIOD_HC_Graph_1.xlsx", firstrow(variable)replace
 
+**Graphique 4 du working paper : élasticité des prix en monnaie locale
+* des pays hors zone euro à une appréciation dudit euro
+
+foreach source in TIVA WIOD {
+
+use "$dir/Results/Devaluations/mean_chg_`source'_HC_2011.dta", clear
+
+keep c shockEUR1
+drop if strpos("$eurozone",c)!=0
+rename shockEUR1 pond_HC
+
+
+save "$dir/Results/Devaluations/Pour_`source'_Graph_4.dta", replace
+
+
+merge 1:1 c using "$dir/Bases/Pays_FR.dta",keep(3)
+drop _merge
+
+
+
+
+
+
+label var pond_HC "Prix de consommation"
+
+
+save "$dir/Results/Devaluations/Pour_`source'_Graph_4.dta", replace
+export delimited "$dir/Results/Devaluations/Pour_`source'_Graph_4.csv", replace
+export excel "$dir/Results/Devaluations/Pour_`source'_Graph_4.xlsx", firstrow(variable)replace
+
+graph bar (asis) pond_HC , over(c_full_FR, sort(pond_HC) descending label(angle(vertical) labsize(vsmall))) 
+
+}
+graph export "$dir/Results/Devaluations/`source'_Graph_4.png", replace
+}
 
 *--------------------------TABLEAUX
 

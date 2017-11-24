@@ -751,11 +751,11 @@ foreach source in   WIOD  TIVA{
 
 
 if "`source'"=="WIOD" local start_year 2000
-*if "`source'"=="TIVA" local start_year 1995
+if "`source'"=="TIVA" local start_year 1995
 
 
 if "`source'"=="WIOD" local end_year 2014
-*if "`source'"=="TIVA" local end_year 2011
+if "`source'"=="TIVA" local end_year 2011
 Definition_pays_secteur `source'
 
 // Fabrication des fichiers d'effets moyens des chocs de change

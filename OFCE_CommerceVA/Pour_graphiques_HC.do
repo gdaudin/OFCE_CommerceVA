@@ -117,7 +117,6 @@ graph export "$dir/Results/Devaluations/Pour_WIOD_HC_Graph_1.png", replace
 
 drop if strpos("$eurozone",c)==0
 
-
 graph export "$dir/Results/Devaluations/WIOD_HC_Graph_1.png", replace
 save "$dir/Results/Devaluations/Pour_WIOD_HC_Graph_1.dta", replace
 export delimited "$dir/Results/Devaluations/Pour_WIOD_HC_Graph_1.csv", replace
@@ -128,32 +127,255 @@ export excel "$dir/Results/Devaluations/Pour_WIOD_HC_Graph_1.xlsx", firstrow(var
 
 foreach source in TIVA WIOD {
 
-use "$dir/Results/Devaluations/mean_chg_`source'_HC_2011.dta", clear
-
+use "$dir/Results/Devaluations/mean_chg_`source'_HC_2000.dta", clear
 keep c shockEUR1
 drop if strpos("$eurozone",c)!=0
-rename shockEUR1 pond_HC
-
-
-save "$dir/Results/Devaluations/Pour_`source'_Graph_4.dta", replace
-
-
+rename shockEUR1 pond_HC_2000
+save "$dir/Results/Devaluations/Pour_`source'_HC_Graph_4_old.dta", replace
 merge 1:1 c using "$dir/Bases/Pays_FR.dta",keep(3)
 drop _merge
+save "$dir/Results/Devaluations/Pour_`source'_HC_Graph_4_old.dta", replace
 
+use "$dir/Results/Devaluations/mean_chg_`source'_HC_2011.dta", clear
+keep c shockEUR1
+drop if strpos("$eurozone",c)!=0
+rename shockEUR1 pond_HC_2011
+merge 1:1 c using "$dir/Results/Devaluations/Pour_`source'_HC_Graph_4_old.dta"
+drop _merge
 
-label var pond_HC "Prix de consommation"
+label var pond_HC_2000 "Prix de consommation, 2000"
+label var pond_HC_2011 "Prix de consommation, 2011"
 
+save "$dir/Results/Devaluations/Pour_`source'_HC_Graph_4.dta", replace
+export delimited "$dir/Results/Devaluations/Pour_`source'_HC_Graph_4.csv", replace
+export excel "$dir/Results/Devaluations/Pour_`source'_HC_Graph_4.xlsx", firstrow(variable)replace
 
-save "$dir/Results/Devaluations/Pour_`source'_Graph_4.dta", replace
-export delimited "$dir/Results/Devaluations/Pour_`source'_Graph_4.csv", replace
-export excel "$dir/Results/Devaluations/Pour_`source'_Graph_4.xlsx", firstrow(variable)replace
-
-graph bar (asis) pond_HC , over(c_full_FR, sort(pond_HC) descending label(angle(vertical) labsize(vsmall))) 
-
+graph bar (asis) pond_HC_2000  pond_HC_2011 , over(c_full_FR, sort(c_full_FR)  label(angle(vertical) labsize(vsmall))) 
+graph export "$dir/Results/Devaluations/`source'_HC_Graph_4.png", replace
 }
-graph export "$dir/Results/Devaluations/`source'_Graph_4.png", replace
+
+**Graphique 4b : élasticité des prix 
+* des pays zone euro à une appréciation de la livre
+
+foreach source in TIVA WIOD {
+use "$dir/Results/Devaluations/mean_chg_`source'_HC_2000.dta", clear
+keep c shockGBR1
+keep if strpos("$eurozone",c)!=0
+rename shockGBR1 pond_HC_2000
+save "$dir/Results/Devaluations/Pour_`source'_HC_Graph_4b_old.dta", replace
+merge 1:1 c using "$dir/Bases/Pays_FR.dta",keep(3)
+drop _merge
+save "$dir/Results/Devaluations/Pour_`source'_HC_Graph_4b_old.dta", replace
+
+use "$dir/Results/Devaluations/mean_chg_`source'_HC_2011.dta", clear
+keep c shockGBR1
+keep if strpos("$eurozone",c)!=0
+rename shockGBR1 pond_HC_2011
+merge 1:1 c using "$dir/Results/Devaluations/Pour_`source'_HC_Graph_4b_old.dta"
+drop _merge
+
+label var pond_HC_2000 "Prix de consommation, 2000"
+label var pond_HC_2011 "Prix de consommation, 2011"
+
+save "$dir/Results/Devaluations/Pour_`source'_HC_Graph_4b.dta", replace
+export delimited "$dir/Results/Devaluations/Pour_`source'_HC_Graph_4b.csv", replace
+export excel "$dir/Results/Devaluations/Pour_`source'_HC_Graph_4b.xlsx", firstrow(variable)replace
+
+graph bar (asis) pond_HC_2000  pond_HC_2011 , over(c_full_FR, sort(c_full_FR)  label(angle(vertical) labsize(vsmall))) 
+graph export "$dir/Results/Devaluations/`source'_HC_Graph_4b.png", replace
 }
+
+**Graphique 4bb : élasticité des prix 
+* de tous les pays à une appréciation de la livre
+
+foreach source in TIVA WIOD {
+use "$dir/Results/Devaluations/mean_chg_`source'_HC_2000.dta", clear
+keep c shockGBR1
+drop if strmatch(c,"GBR")==1
+rename shockGBR1 pond_HC_2000
+save "$dir/Results/Devaluations/Pour_`source'_HC_Graph_4bb_old.dta", replace
+merge 1:1 c using "$dir/Bases/Pays_FR.dta",keep(3)
+drop _merge
+save "$dir/Results/Devaluations/Pour_`source'_HC_Graph_4bb_old.dta", replace
+
+use "$dir/Results/Devaluations/mean_chg_`source'_HC_2011.dta", clear
+keep c shockGBR1
+drop if strmatch(c,"GBR")==1
+rename shockGBR1 pond_HC_2011
+merge 1:1 c using "$dir/Results/Devaluations/Pour_`source'_HC_Graph_4bb_old.dta"
+drop _merge
+
+label var pond_HC_2000 "Prix de consommation, 2000"
+label var pond_HC_2011 "Prix de consommation, 2011"
+
+save "$dir/Results/Devaluations/Pour_`source'_HC_Graph_4bb.dta", replace
+export delimited "$dir/Results/Devaluations/Pour_`source'_HC_Graph_4bb.csv", replace
+export excel "$dir/Results/Devaluations/Pour_`source'_HC_Graph_4bb.xlsx", firstrow(variable)replace
+
+graph bar (asis) pond_HC_2000  pond_HC_2011 , over(c_full_FR, sort(c_full_FR)  label(angle(vertical) labsize(vsmall))) 
+graph export "$dir/Results/Devaluations/`source'_HC_Graph_4bb.png", replace
+}
+
+**Graphique 4c : élasticité des prix 
+* des pays zone euro à une appréciation USD
+
+foreach source in TIVA WIOD {
+
+use "$dir/Results/Devaluations/mean_chg_`source'_HC_2000.dta", clear
+keep c shockUSA1
+keep if strpos("$eurozone",c)!=0
+rename shockUSA1 pond_HC_2000
+save "$dir/Results/Devaluations/Pour_`source'_HC_Graph_4c_old.dta", replace
+merge 1:1 c using "$dir/Bases/Pays_FR.dta",keep(3)
+drop _merge
+save "$dir/Results/Devaluations/Pour_`source'_HC_Graph_4c_old.dta", replace
+
+use "$dir/Results/Devaluations/mean_chg_`source'_HC_2011.dta", clear
+keep c shockUSA1
+keep if strpos("$eurozone",c)!=0
+rename shockUSA1 pond_HC_2011
+merge 1:1 c using "$dir/Results/Devaluations/Pour_`source'_HC_Graph_4c_old.dta"
+drop _merge
+
+label var pond_HC_2000 "Prix de consommation, 2000"
+label var pond_HC_2011 "Prix de consommation, 2011"
+
+save "$dir/Results/Devaluations/Pour_`source'_HC_Graph_4c.dta", replace
+export delimited "$dir/Results/Devaluations/Pour_`source'_HC_Graph_4c.csv", replace
+export excel "$dir/Results/Devaluations/Pour_`source'_HC_Graph_4c.xlsx", firstrow(variable)replace
+
+graph bar (asis) pond_HC_2000  pond_HC_2011 , over(c_full_FR, sort(c_full_FR)  label(angle(vertical) labsize(vsmall))) 
+graph export "$dir/Results/Devaluations/`source'_HC_Graph_4c.png", replace
+}
+
+**Graphique 4cb : élasticité des prix 
+* des pays zone euro à une appréciation USD
+
+foreach source in TIVA WIOD {
+
+use "$dir/Results/Devaluations/mean_chg_`source'_HC_2000.dta", clear
+keep c shockUSA1
+drop if strmatch(c,"USA")==1
+rename shockUSA1 pond_HC_2000
+save "$dir/Results/Devaluations/Pour_`source'_HC_Graph_4cb_old.dta", replace
+merge 1:1 c using "$dir/Bases/Pays_FR.dta",keep(3)
+drop _merge
+save "$dir/Results/Devaluations/Pour_`source'_HC_Graph_4cb_old.dta", replace
+
+use "$dir/Results/Devaluations/mean_chg_`source'_HC_2011.dta", clear
+keep c shockUSA1
+drop if strmatch(c,"USA")==1
+rename shockUSA1 pond_HC_2011
+merge 1:1 c using "$dir/Results/Devaluations/Pour_`source'_HC_Graph_4cb_old.dta"
+drop _merge
+
+label var pond_HC_2000 "Prix de consommation, 2000"
+label var pond_HC_2011 "Prix de consommation, 2011"
+
+save "$dir/Results/Devaluations/Pour_`source'_HC_Graph_4c.dta", replace
+export delimited "$dir/Results/Devaluations/Pour_`source'_HC_Graph_4cb.csv", replace
+export excel "$dir/Results/Devaluations/Pour_`source'_HC_Graph_4cb.xlsx", firstrow(variable)replace
+
+graph bar (asis) pond_HC_2000  pond_HC_2011 , over(c_full_FR, sort(c_full_FR)  label(angle(vertical) labsize(vsmall))) 
+graph export "$dir/Results/Devaluations/`source'_HC_Graph_4cb.png", replace
+}
+
+*GRAPHIQUE 7 WP: élasticité des prix de consommation des pays de la ze 
+*à un choc sur l'euro et part des importations dans la conso
+foreach source in TIVA WIOD {
+use "$dir/Results/Devaluations/contenu_impHC_`source'_2011.dta", clear  
+
+gen c=upper(pays)
+drop pays
+
+merge 1:1 c using "$dir/Bases/Pays_FR.dta",keep(3)
+drop _merge 
+label var contenu_impHC "Parts des importations en provenance de pays dans la consommation"
+
+keep if strpos("$eurozone",c)!=0
+save "$dir/Results/Devaluations/Pour_`source'_Graph_imp_deval.dta", replace
+	
+
+use "$dir/Results/Devaluations/mean_chg_`source'_HC_2011.dta", clear	
+keep c shockEUR1
+keep if strpos("$eurozone",c)!=0
+rename shockEUR1 pond_HC
+merge 1:1 c using "$dir/Results/Devaluations/Pour_`source'_Graph_imp_deval.dta"
+drop _merge
+	
+graph twoway (scatter pond_HC contenu_impHC, mlabel(c_full_FR)) (qfit pond_HC contenu_impHC)  , ///
+			xtitle("Parts des importations dans la consommation") ytitle("Elasticité des prix de consommation en euro") ///
+			yscale(range(0.3 1)) xscale(range(0.4 1)) xlabel (0.4(0.1) 1) ylabel(0.3 (0.1) 1)
+		
+graph export "$dir/Results/Devaluations/`source'_Graph_7.png", replace
+export excel "$dir/Results/Devaluations/Pour_`source'_Graph_7.xlsx", firstrow(variable)replace
+}
+
+*GRAPHIQUE 7b WP: élasticité des prix de consommation ZE
+*à un choc sur la livre et part des importations dans la conso
+foreach source in TIVA WIOD {
+use "$dir/Results/Devaluations/contenu_impHC_`source'_2011.dta", clear  
+
+gen c=upper(pays)
+drop pays
+
+merge 1:1 c using "$dir/Bases/Pays_FR.dta",keep(3)
+drop _merge 
+label var contenu_impHC "Parts des importations en provenance de pays dans la consommation"
+
+keep if strpos("$eurozone",c)!=0
+save "$dir/Results/Devaluations/Pour_`source'_Graph_imp_devalb.dta", replace
+	
+
+use "$dir/Results/Devaluations/mean_chg_`source'_HC_2011.dta", clear	
+keep c shockGBR1
+*drop if strmatch(c,"GBR")==1
+keep if strpos("$eurozone",c)!=0
+rename shockGBR1 pond_HC
+merge 1:1 c using "$dir/Results/Devaluations/Pour_`source'_Graph_imp_devalb.dta"
+drop _merge
+	
+graph twoway (scatter pond_HC contenu_impHC, mlabel(c_full_FR)) (qfit pond_HC contenu_impHC)  , ///
+			xtitle("Parts des importations dans la consommation") ytitle("Elasticité des prix de consommation") ///
+			yscale(range(0 0.05)) xscale(range(0.4 1)) xlabel (0.4(0.1) 1) ylabel(0 (0.01) 0.05)
+		
+graph export "$dir/Results/Devaluations/`source'_Graph_7b.png", replace
+export excel "$dir/Results/Devaluations/Pour_`source'_Graph_7b.xlsx", firstrow(variable)replace
+}
+
+*GRAPHIQUE 7b WP: élasticité des prix de consommation ZE
+*à un choc usd et part des importations dans la conso
+foreach source in TIVA WIOD {
+use "$dir/Results/Devaluations/contenu_impHC_`source'_2011.dta", clear  
+
+gen c=upper(pays)
+drop pays
+
+merge 1:1 c using "$dir/Bases/Pays_FR.dta",keep(3)
+drop _merge 
+label var contenu_impHC "Parts des importations en provenance de pays dans la consommation"
+
+keep if strpos("$eurozone",c)!=0
+save "$dir/Results/Devaluations/Pour_`source'_Graph_imp_devalc.dta", replace
+	
+
+use "$dir/Results/Devaluations/mean_chg_`source'_HC_2011.dta", clear	
+keep c shockUSA1
+*drop if strmatch(c,"GBR")==1
+keep if strpos("$eurozone",c)!=0
+rename shockUSA1 pond_HC
+merge 1:1 c using "$dir/Results/Devaluations/Pour_`source'_Graph_imp_devalc.dta"
+drop _merge
+	
+graph twoway (scatter pond_HC contenu_impHC, mlabel(c_full_FR)) (qfit pond_HC contenu_impHC)  , ///
+			xtitle("Parts des importations dans la consommation") ytitle("Elasticité des prix de consommation") ///
+			yscale(range(0 0.05)) xscale(range(0.4 1)) xlabel (0.4(0.1) 1) ylabel(0 (0.01) 0.05)
+		
+graph export "$dir/Results/Devaluations/`source'_Graph_7c.png", replace
+export excel "$dir/Results/Devaluations/Pour_`source'_Graph_7c.xlsx", firstrow(variable)replace
+}
+
+
 
 *--------------------------TABLEAUX
 

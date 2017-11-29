@@ -746,11 +746,11 @@ clear
 set more off
 
 
-foreach source in   WIOD  TIVA{ 
+foreach source in     TIVA{ 
 
 
 if "`source'"=="WIOD" local start_year 2000
-if "`source'"=="TIVA" local start_year 1995
+if "`source'"=="TIVA" local start_year 2007
 
 
 if "`source'"=="WIOD" local end_year 2014

@@ -450,7 +450,7 @@ foreach year in 2000 2001 2002 2003 2004 2005 2006 2007 2008 2009 2010 2011 2012
 	***Tableau 3 WP: élasticité à une appréciation d'une monnaie d'un des pays origin
 
 
-local orig USA CHN JPN GBR EAS RUS 
+*local orig USA CHN JPN GBR EAS RUS 
 foreach source in  WIOD TIVA { 
 foreach year in  2000 2001 2002 2003 2004 2005 2006 2007 2008 2009 2010 2011 {
 use "$dir/Results/Devaluations/mean_chg_`source'_HC_`year'.dta", clear
@@ -473,7 +473,7 @@ export excel "$dir/Results/Devaluations/`source'_Tableau_2_`year'.xlsx", firstro
 }
 
 	***Tableau 3 exhaustif WP: élasticité à une appréciation d'une monnaie d'un des pays origin
-local orig USA CHN JPN GBR EAS RUS AUS BRA CHE CAN DNK IDN IND KOR MEX NOR SWE TUR 
+*local orig USA CHN JPN GBR EAS RUS AUS BRA CHE CAN DNK IDN IND KOR MEX NOR SWE TUR 
 foreach source in  WIOD TIVA { 
 foreach year in  2000 2001 2002 2003 2004 2005 2006 2007 2008 2009 2010 2011 {
 use "$dir/Results/Devaluations/mean_chg_`source'_HC_`year'.dta", clear
@@ -507,8 +507,35 @@ export excel "$dir/Results/Devaluations/`source'_Tableau_2long_`year'.xlsx", fir
 }
 
 
+***Tableau 3 exhaustif WP: élasticité à une appréciation d'une monnaie d'un des pays origin
+* Comparaison de TIVA et WIOD
+
+foreach  orig in  USA CHN JPN GBR EAS RUS AUS BRA CHE CAN DNK IDN IND KOR MEX NOR SWE TUR {
+foreach year in   2000  {
+use "$dir/Results/Devaluations/mean_chg_TIVA_HC_`year'.dta", clear
+drop if strpos("$eurozone",c)==0
+merge 1:1 c using "$dir/Bases/Pays_FR.dta",keep(3)
+drop _merge    
+
+keep c c_full_FR  shock`orig'1 
+rename shock`orig'1 shock`orig'1_TIVA_`year'
+save "$dir/Results/Devaluations/Compa_Tabl2long_TIVA_`year'_`orig'_old.dta", replace
 
 
+use "$dir/Results/Devaluations/mean_chg_WIOD_HC_`year'.dta", clear
+drop if strpos("$eurozone",c)==0
+
+merge 1:1 c using "$dir/Bases/Pays_FR.dta",keep(3)
+drop _merge    
+rename shock`orig'1 shock`orig'1_WIOD_`year'
+merge 1:1 c using "$dir/Results/Devaluations/Compa_Tabl2long_TIVA_`year'_`orig'_old.dta"
+drop _merge	
+}
+
+keep c_full_FR  shock`orig'1*
+order c_full_FR
+export excel "$dir/Results/Devaluations/Compa_Tableau_2long_`year'_`orig'.xlsx", firstrow(variables)   sheetreplace 
+}
 
 ***Tableau 4 WP: récupère la colonne shockEAS1 pour les pays de la ZE 
 

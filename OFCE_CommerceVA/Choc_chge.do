@@ -517,7 +517,6 @@ end
 Definition_pays_secteur WIOD
 compute_X 2010 WIOD
 
-blif
 
 *Creation of the vector of value-added VA : matrices Y, X, VA
 
@@ -747,11 +746,11 @@ clear
 set more off
 
 
-foreach source in   WIOD  TIVA{ 
+foreach source in WIOD{ 
 
 
 if "`source'"=="WIOD" local start_year 2000
-if "`source'"=="TIVA" local start_year 1995
+if "`source'"=="TIVA" local start_year 2010
 
 
 if "`source'"=="WIOD" local end_year 2014
@@ -765,10 +764,10 @@ foreach i of numlist `start_year' (1)`end_year'  {
 	clear
 	set more off
 	compute_leontief `i' `source'
-	compute_X `i' `source'
-	create_y `i' `source'
-*	compute_VA `i' `source'
-   *compute_HC `i' `source'
+	*compute_X `i' `source'
+	*create_y `i' `source'
+	*compute_VA `i' `source'
+   compute_HC `i' `source'
 	
 }
 

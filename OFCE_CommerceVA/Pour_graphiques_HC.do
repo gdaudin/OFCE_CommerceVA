@@ -509,9 +509,9 @@ export excel "$dir/Results/Devaluations/`source'_Tableau_2long_`year'.xlsx", fir
 
 ***Tableau 3 exhaustif WP: élasticité à une appréciation d'une monnaie d'un des pays origin
 * Comparaison de TIVA et WIOD
-
+set more off
 foreach  orig in  USA CHN JPN GBR EAS RUS AUS BRA CHE CAN DNK IDN IND KOR MEX NOR SWE TUR {
-foreach year in   2000  {
+foreach year in   2011  {
 use "$dir/Results/Devaluations/mean_chg_TIVA_HC_`year'.dta", clear
 drop if strpos("$eurozone",c)==0
 merge 1:1 c using "$dir/Bases/Pays_FR.dta",keep(3)
@@ -530,11 +530,12 @@ drop _merge
 rename shock`orig'1 shock`orig'1_WIOD_`year'
 merge 1:1 c using "$dir/Results/Devaluations/Compa_Tabl2long_TIVA_`year'_`orig'_old.dta"
 drop _merge	
-}
+
 
 keep c_full_FR  shock`orig'1*
-order c_full_FR
+order c_full_FR shock`orig'1_WIOD* shock`orig'1_TIVA*
 export excel "$dir/Results/Devaluations/Compa_Tableau_2long_`year'_`orig'.xlsx", firstrow(variables)   sheetreplace 
+}
 }
 
 ***Tableau 4 WP: récupère la colonne shockEAS1 pour les pays de la ZE 

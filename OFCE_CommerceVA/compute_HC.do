@@ -37,7 +37,7 @@ if "`source'"=="WIOD" {
 use "$dir/Bases/`source'_ICIO_`yrs'.dta", clear
 
 
-keep IndustryCode Country Year v*59
+keep IndustryCode Country Year v*57
 reshape long v, i(Country IndustryCode Year) j(pays_conso) string
 rename  Country pays
 rename  IndustryCode sector 

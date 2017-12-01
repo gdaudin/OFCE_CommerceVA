@@ -48,5 +48,5 @@ foreach i of numlist `start_year' (1)`end_year'  {
 end
 
 contenu_imp_HC TIVA
-*contenu_imp_HC WIOD
+contenu_imp_HC WIOD
 

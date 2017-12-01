@@ -1,16 +1,15 @@
 
 clear
 
-if ("`c(username)'"=="guillaumedaudin") global dir "~/Dropbox/commerce en VA"
-
-if ("`c(username)'"=="L841580") global dir "H:/Agents/Cochard/Papier_chocCVA"
-
-cd "$dir"
+set more off
+if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
+else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
 
 
+capture log close
+log using "$dir/$S_DATE.log", replace
 set matsize 7000
 
-set more off
 
 
 
@@ -18,7 +17,12 @@ capture program drop imp_inputs // fournit le total des inputs importés par cha
 
 program imp_inputs
 
-args yrs
+args yrs source
+
+
+
+
+
 
 use "$dir/Bases/OECD`yrs'.dta"
 drop arg_consabr-disc

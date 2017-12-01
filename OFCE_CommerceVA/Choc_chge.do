@@ -750,7 +750,7 @@ foreach source in WIOD{
 
 
 if "`source'"=="WIOD" local start_year 2000
-if "`source'"=="TIVA" local start_year 2010
+if "`source'"=="TIVA" local start_year 1995
 
 
 if "`source'"=="WIOD" local end_year 2014

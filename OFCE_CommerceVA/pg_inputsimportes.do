@@ -83,7 +83,18 @@ args yrs source vector hze
 use "$dir/Bases/`source'_ICIO_`yrs'.dta"
 if "`source'"=="TIVA" {
 	drop if v1 == "VA.TAXSUB" | v1 == "OUT"
-	generate pays = strlower(substr(v1,1,strpos(v1,"_")-1))
+	generate pays_1 = strlower(substr(v1,1,strpos(v1,"_")-1))
+	gen pays = pays_1
+	foreach sector of global sector {
+		local sector=lower("`sector'")
+		replace chn_`sector'=chn_`sector'+cn1_`sector'+cn2_`sector'+cn3_`sector'+cn4_`sector'
+		replace mex_`sector'=mex_`sector'+mx1_`sector'+mx2_`sector'+mx3_`sector'
+	}
+	drop cn* mx*
+	replace pays = "chn" if pays_1=="ch1" | pays_1=="ch2" | pays_1=="ch3" | pays_1=="ch4" 
+	replace pays = "mex" if pays_1=="mx1" | pays_1=="mx2" | pays_1=="mx3"
+	collapse (sum) $var_entree_sortie, by(pays)
+
 }
 
 if "`source'"=="WIOD" {
@@ -143,14 +154,23 @@ use "$dir/Bases/`vector'_`source'.dta"
 replace pays=lower(pays)
 
 keep if year==`yrs'
+if "`vector'"=="HC" local var_interet = "conso"
+collapse (sum) `var_interet', by(pays)
 
 merge 1:1 pays using "$dir/Bases/imp_inputs_`vector'_`source'_`yrs'_`hze'.dta" 
 
-drop _merge
 
-gen input_`vector'=imp_inputs/`vector'
+gen pays_1 = pays
+replace pays = "chn" if pays_1=="cn1" | pays_1=="cn2" | pays_1=="cn3" | pays_1=="cn4" 
+replace pays = "mex" if pays_1=="mx1" | pays_1=="mx2" | pays_1=="mx3"
+collapse (sum) `var_interet' imp_inputs, by(pays)
 
-keep pays input_`vector'
+
+
+gen input_`var_interet'=imp_inputs/`var_interet'
+
+*keep pays input_`var_interet'
+
 
 save "$dir/Bases/imp_inputs_`vector'_`source'_`yrs'_`hze'.dta", replace
 

@@ -467,42 +467,38 @@ use "$dir/Bases/`source'_ICIO_`yrs'.dta", clear
 if "`source'"=="WIOD" {
 egen utilisations = rowtotal(vAUS01-vUSA61)
 gen utilisations_dom = .
+gen pays = subsrt("`i'",1,3)
 
-
-
-foreach j of global country {
-	local i = "`j'"
-	if  ("`j'"=="chn.npr" | "`j'"=="chn.pro" |"`j'"=="chn.dom" ) {
-		local i = "chn" 
+	foreach j of global country {
+		local i = "`j'"
+		egen blouk = rowtotal(*`i'*)
+		display "`i'" "`j'"
+		replace utilisations_dom = blouk if Country=="`j'"
+		codebook utilisations_dom if Country=="`j'"
+		drop blouk
+		
 	}
-	if  ("`j'"=="mex.ngm" | "`j'"=="mex.gmf") {
-			local i = "mex"
-	}
-	egen blouk = rowtotal(*`i'*)
-	display "`i'" "`j'"
-	replace utilisations_dom = blouk if Country=="`j'"
-	codebook utilisations_dom if Country=="`j'"
-	drop blouk
-}
 }
 
 if "`source'"=="TIVA" {
 egen utilisations = rowtotal(arg_c01t05agr-nps_zaf)
 gen utilisations_dom = .
 * liste de countrys
-	local i = "`j'"
-	if  ("`j'"=="chn.npr" | "`j'"=="chn.pro" |"`j'"=="chn.dom" ) {
-		local i = "chn" 
-	}
-	if  ("`j'"=="mex.ngm" | "`j'"=="mex.gmf") {
-			local i = "mex"
-	}
-	egen blouk = rowtotal(*`i'*)
-	display "`i'" "`j'"
-	replace utilisations_dom = blouk if Country=="`j'"
-	codebook utilisations_dom if Country=="`j'"
-	drop blouk
 
+gen Country = substr("v1",1,3)
+ 
+	foreach j of global country {
+		local i = lower("`j'")
+		if  ("`j'"=="cn1" | "`j'"=="cn2" |"`j'"=="cn3"|"`j'"=="cn4" ) local i = "chn" 
+
+		if  ("`j'"=="mx1" | "`j'"=="mx2"| "`j'"=="mx3") local i = "mex"
+		
+		egen blouk = rowtotal(*`i'*)
+		display "`i'" "`j'"
+		replace utilisations_dom = blouk if strpos(v1,"`j'")!=0
+		codebook utilisations_dom if 	strpos(v1,"`j'")!=0
+		drop blouk
+	}
 
 }
 generate X = utilisations - utilisations_dom
@@ -514,8 +510,8 @@ generate year = `yrs'
 mkmat X
 
 end
-Definition_pays_secteur WIOD
-compute_X 2010 WIOD
+Definition_pays_secteur TIVA
+compute_X 2010 TIVA
 
 blif
 

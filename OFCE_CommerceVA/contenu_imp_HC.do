@@ -14,15 +14,17 @@ args source
 
 use "$dir/Bases/HC_`source'.dta", clear
 
-if "`source'"=="WIOD" gen imp=0 if pays==upper(pays_conso)
-if "`source'"=="TIVA" gen imp=0 if pays==pays_conso
+gen imp=0 if pays==upper(pays_conso)|  pays==pays_conso ///
+            |  pays_conso=="chn" & (pays=="cn1" | pays=="cn2" | pays=="cn3" | pays=="cn4") ///
+		    |  pays_conso=="mex" & (pays=="mx1" | pays=="mx2" | pays=="mx3")
+			
 replace imp=1 if imp==. 
 
 collapse (sum) conso, by(imp year pays_conso)
 tab imp
 reshape wide conso, i(pays_conso year) j(imp)
 gen contenu_impHC=conso1/(conso1+conso0)
-blif
+
 
 
 

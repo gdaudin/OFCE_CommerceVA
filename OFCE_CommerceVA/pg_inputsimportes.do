@@ -99,24 +99,31 @@ keep pays $var_entree_sortie
 
 
 foreach var of varlist $var_entree_sortie {
-	if "`source'" == "TIVA" generate pays_conso = substr("`var'",1,3)
-	if "`source'" == "WIOD" generate pays_conso = substr("`var'",2,3)
-	replace `var' = 0 if pays==pays_conso
-	if "`hze'"=="hze_yes" {
-			foreach i of local eurozone {
-			replace `var' = 0 if pays == "`i'" & strpos(pays_conso,$eurozone) !=0
+*	On cherche à enlever les auto-consommations intermédiaires
+	if "`source'" == "TIVA" local pays_colonne = substr("`var'",1,3)
+	if "`source'" == "WIOD" local pays_colonne = substr("`var'",2,3)
+	replace `var' = 0 if pays=="`pays_colonne'"
+	local pays_colonne = upper("`pays_colonne'")
+	
+	if "`hze'"=="hze_yes" & strpos("$eurozone","`pays_colonne'")!=0 {
+		*display "turf"
+	
+	*Et les internes dans la zone euro
+		foreach i of global eurozone {	
+			replace `var' = 0 if pays == lower("`i'")
 		}
 	}
-	drop pays_conso
 }
+
+
 
 collapse (sum) $var_entree_sortie
 display "after collapse"
-blif
+
 
 xpose, clear varname
 
-blif
+
 
 if "`source'" == "TIVA" ///
 		generate pays = substr(_varname,1,3)
@@ -126,25 +133,26 @@ if "`source'" == "WIOD" ///
 drop _varname
 collapse (sum) v1, by (pays)
 
+
 rename v1 imp_inputs
 
-save "$dir/Bases/imp_inputs_`source'_`yrs'_`hze'.dta", replace
+save "$dir/Bases/imp_inputs_`vector'_`source'_`yrs'_`hze'.dta", replace
 
-?????? use "$dir/Bases/`vect'_`source'.dta"
+use "$dir/Bases/`vector'_`source'.dta"
 
 replace pays=lower(pays)
 
 keep if year==`yrs'
 
-merge 1:1 pays using "$dir/Bases/imp_inputs_`source'_`yrs'_`hze'.dta" 
+merge 1:1 pays using "$dir/Bases/imp_inputs_`vector'_`source'_`yrs'_`hze'.dta" 
 
 drop _merge
 
-gen input_`vect'=imp_inputs/`vect'
+gen input_`vector'=imp_inputs/`vector'
 
-keep pays input_`vect'
+keep pays input_`vector'
 
-save "$dir/Bases/imp_inputs_`source'_`yrs'_`hze'.dta", replace
+save "$dir/Bases/imp_inputs_`vector'_`source'_`yrs'_`hze'.dta", replace
 
 end
 
@@ -154,7 +162,7 @@ end
 //   - impact choc euro / part des importations en provenance de pays hors zone euro
 //   - impact chocs pays / 
 
-foreach source in WIOD {
+foreach source in TIVA WIOD {
 
 	if "`source'"=="WIOD" local start_year 2000
 	if "`source'"=="TIVA" local start_year 1995
@@ -162,6 +170,7 @@ foreach source in WIOD {
 
 	if "`source'"=="WIOD" local end_year 2014
 	if "`source'"=="TIVA" local end_year 2011
+	
 	Definition_pays_secteur `source'
 
 
@@ -173,11 +182,6 @@ foreach source in WIOD {
 	}
 
 
-
-
-
-	imp_inputsX  2011
-	loc_inputs 2011
 
 }
 

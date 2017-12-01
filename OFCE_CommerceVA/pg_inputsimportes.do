@@ -75,14 +75,13 @@ end
 
 capture program drop imp_inputs // fournit le total des inputs importés par chaque pays
 program imp_inputs
-args yrs source vector
+args yrs source vector hze
 
-* exemple vector X Y HC
+* exemple vector X Y HC hze_not ou hze_yes
 
 
 use "$dir/Bases/`source'_ICIO_`yrs'.dta"
 if "`source'"=="TIVA" {
-	drop hfce_aus-disc
 	drop if v1 == "VA.TAXSUB" | v1 == "OUT"
 	generate pays = strlower(substr(v1,1,strpos(v1,"_")-1))
 }
@@ -94,192 +93,58 @@ if "`source'"=="WIOD" {
 	 
 }
 
+keep pays $var_entree_sortie
 
 
 
 
-foreach var of varlist arg_c01t05agr-zaf_c95pvh {
-	generate pays2 = substr("`var'",1,strpos("`var'","_")-1)
-	replace `var' = 0 if pays==pays2
-	drop pays2
-}
-
-
-drop v1
-collapse (sum) arg_c01t05agr-zaf_c95pvh
-
-xpose, clear varname
-
-generate pays = strlower(substr(_varname,1,strpos(_varname,"_")-1))
-drop _varname
-collapse (sum) v1, by (pays)
-
-rename v1 imp_inputs
-
-save "$dir/Bases/imp_inputs_`yrs'.dta", replace
-
-use "$dir/Bases/prod.dta"
-
-replace pays=lower(pays)
-
-keep if year==`yrs'
-
-merge 1:1 pays using "$dir/Bases/imp_inputs_`yrs'.dta" 
-
-drop _merge
-
-gen input_prod=imp_inputs/prod
-
-keep pays input_prod
-
-save "$dir/Bases/imp_inputs_`yrs'.dta", replace
-
-end
-
-*************************
-
-capture program drop imp_inputs_hze // fournit le total des inputs importés de pays hors ze par chaque pays
-
-program imp_inputs_hze
-
-args yrs source
-
-
-use "$dir/Bases/`source'_ICIO_`yrs'.dta"
-
-drop arg_consabr-disc
-drop if v1 == "VA.TAXSUB" | v1 == "OUT"
-generate pays = strlower(substr(v1,1,strpos(v1,"_")-1))
-
-local eurozone "AUT BEL CYP DEU ESP EST FIN FRA GRC IRL ITA LTU LUX LVA MLT NLD PRT SVK SVN"
-
-foreach var of varlist arg_c01t05agr-zaf_c95pvh {
-	generate pays2 = substr("`var'",1,strpos("`var'","_")-1)
-	replace `var' = 0 if pays==pays2
-	replace pays=upper(pays)
-	foreach i of local eurozone{
-		replace `var' = 0 if pays == "`i'"
+foreach var of varlist $var_entree_sortie {
+	if "`source'" == "TIVA" generate pays_conso = substr("`var'",1,3)
+	if "`source'" == "WIOD" generate pays_conso = substr("`var'",2,3)
+	replace `var' = 0 if pays==pays_conso
+	if "`hze'"=="hze_yes" {
+			foreach i of local eurozone {
+			replace `var' = 0 if pays == "`i'" & strpos(pays_conso,$eurozone) !=0
 		}
-	drop pays2
-	replace pays=lower(pays)
+	}
+	drop pays_conso
 }
 
-
-drop v1
-collapse (sum) arg_c01t05agr-zaf_c95pvh
+collapse (sum) $var_entree_sortie
+display "after collapse"
+blif
 
 xpose, clear varname
 
-generate pays = strlower(substr(_varname,1,strpos(_varname,"_")-1))
+blif
+
+if "`source'" == "TIVA" ///
+		generate pays = substr(_varname,1,3)
+if "`source'" == "WIOD" ///
+		generate pays = substr(_varname,2,3)
+		
 drop _varname
 collapse (sum) v1, by (pays)
 
 rename v1 imp_inputs
 
-save "$dir/Bases/imp_inputs_hze_`yrs'.dta", replace
+save "$dir/Bases/imp_inputs_`source'_`yrs'_`hze'.dta", replace
 
-use "$dir/Bases/prod.dta"
+?????? use "$dir/Bases/`vect'_`source'.dta"
 
 replace pays=lower(pays)
 
 keep if year==`yrs'
 
-merge 1:1 pays using "$dir/Bases/imp_inputs_hze_`yrs'.dta" 
+merge 1:1 pays using "$dir/Bases/imp_inputs_`source'_`yrs'_`hze'.dta" 
 
 drop _merge
 
-gen input_prod=imp_inputs/prod
+gen input_`vect'=imp_inputs/`vect'
 
-keep pays input_prod
+keep pays input_`vect'
 
-save "$dir/Bases/imp_inputs_hze_`yrs'.dta", replace
-
-
-end
-
-********************
-
-capture program drop loc_inputs // fournit le total des inputs importés par chaque pays
-program loc_inputs
-args yrs source
-
-use "$dir/Bases/`source'_ICIO_`yrs'.dta"
-drop arg_consabr-disc
-drop if v1 == "VA.TAXSUB" | v1 == "OUT"
-
-generate pays = strlower(substr(v1,1,strpos(v1,"_")-1))
-
-foreach var of varlist arg_c01t05agr-zaf_c95pvh {
-	generate pays2 = substr("`var'",1,strpos("`var'","_")-1)
-	replace pays2=lower(pays2)
-	replace `var' = 0 if pays!=pays2
-	drop pays2
-}
-
-drop v1
-collapse (sum) arg_c01t05agr-zaf_c95pvh
-xpose, clear varname
-generate pays = strlower(substr(_varname,1,strpos(_varname,"_")-1))
-drop _varname
-collapse (sum) v1, by (pays)
-rename v1 loc_inputs
-
-save "$dir/Bases/loc_inputs_`yrs'.dta", replace
-
-clear
-use "$dir/Bases/prod.dta"
-keep if year==`yrs'
-replace pays=lower(pays)
-drop year
-
-merge 1:1 pays using "$dir/Bases/loc_inputs_`yrs'.dta"  //,keep(3)
-drop _merge
-replace loc_inputs=loc_inputs/prod
-drop prod
-save "$dir/Bases/loc_inputs_`yrs'.dta", replace
-
-end
-
-************
-/////////////////////////////////////////////////////////
-capture program drop imp_inputsX // fournit le total des inputs importés par chaque pays
-program imp_inputsX
-args yrs source
-
-use "$dir/Bases/`source'_ICIO_`yrs'.dta"
-drop arg_consabr-disc
-drop if v1 == "VA.TAXSUB" | v1 == "OUT"
-
-generate pays = strlower(substr(v1,1,strpos(v1,"_")-1))
-
-foreach var of varlist arg_c01t05agr-zaf_c95pvh {
-	generate pays2 = substr("`var'",1,strpos("`var'","_")-1)
-	replace pays2=lower(pays2)
-	replace `var' = 0 if pays==pays2
-	drop pays2
-}
-
-drop v1
-collapse (sum) arg_c01t05agr-zaf_c95pvh
-xpose, clear varname
-generate pays = strlower(substr(_varname,1,strpos(_varname,"_")-1))
-drop _varname
-collapse (sum) v1, by (pays)
-rename v1 imp_inputs
-
-save "$dir/Bases/imp_inputsX_`yrs'.dta", replace
-
-clear
-use "$dir/Bases/exports.dta"
-keep if year==`yrs'
-replace pays=lower(pays)
-drop year
-
-merge 1:1 pays using "$dir/Bases/imp_inputsX_`yrs'.dta"  //,keep(3)
-drop _merge
-replace imp_inputs=imp_inputs/X
-drop X
-save "$dir/Bases/imp_inputsX_`yrs'.dta", replace
+save "$dir/Bases/imp_inputs_`source'_`yrs'_`hze'.dta", replace
 
 end
 
@@ -303,9 +168,8 @@ foreach source in WIOD {
 
 	foreach i of numlist `start_year' (1)`end_year'  {
 		//clear
-		imp_inputs `i' `source' HC
+		imp_inputs `i' `source' HC hze_not
 		clear
-		imp_inputs_hze `i' `source' Y
 	}
 
 

@@ -406,9 +406,9 @@ generate year = `yrs'
 reshape long prod, i(year) j(pays_sect) string
 
 
-blif
-if `source'=="TIVA" generate pays = strupper(substr(pays_sect,1,strpos(pays_sect,"_")-1))
-if `source'=="WIOD" generate pays = substr(pays_sect,2,3)
+
+if "`source'"=="TIVA" generate pays = strupper(substr(pays_sect,1,strpos(pays_sect,"_")-1))
+if "`source'"=="WIOD" generate pays = substr(pays_sect,2,3)
 
 
 collapse (sum) prod, by(pays year)
@@ -429,9 +429,9 @@ if "`source'"=="WIOD" local first_yr 2000
 foreach y of numlist `yr_list' { 
 	compute_y `source' `y'
 	if `y'!=`first_yr' {
-		append using "$dir/Bases/`source'_prod.dta"
+		append using "$dir/Bases/prod_`source'.dta"
 				}
-	save "$dir/Bases/`source'_prod.dta", replace
+	save "$dir/Bases/prod_`source'.dta", replace
 	}
 sort year , stable
 end
@@ -541,7 +541,7 @@ end
 
 **** Lancement des programmes ****************
 
-
+/*
 save_data WIOD
 
 save_data TIVA
@@ -581,13 +581,13 @@ database_csv WIOD
 /*
 set more off
 
-
-
+*/
+*/
 append_y TIVA
 
 
 append_X TIVA
-*/
+
 
 
 
@@ -599,6 +599,6 @@ append_X WIOD
 
 */
 
-log close
+capture log close
 
 

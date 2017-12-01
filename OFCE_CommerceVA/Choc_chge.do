@@ -467,7 +467,7 @@ use "$dir/Bases/`source'_ICIO_`yrs'.dta", clear
 if "`source'"=="WIOD" {
 egen utilisations = rowtotal(vAUS01-vUSA61)
 gen utilisations_dom = .
-gen pays = subsrt("`i'",1,3)
+gen pays = substr("`i'",1,3)
 
 	foreach j of global country {
 		local i = "`j'"
@@ -510,13 +510,10 @@ generate year = `yrs'
 mkmat X
 
 end
-Definition_pays_secteur TIVA
-compute_X 2010 TIVA
 
-blif
 
 *Creation of the vector of value-added VA : matrices Y, X, VA
-
+/*
 capture program drop compute_VA
 program compute_VA
 	args yrs
@@ -527,7 +524,7 @@ drop v1
 mkmat $var_entree_sortie, matrix(VA)
 matrix VAt = VA'
 end
-
+*/
 capture program drop compute_HC
 program  compute_HC
 	args yrs source 
@@ -632,10 +629,10 @@ set more off
 
 *compute_leontieff `yrs'
 if ("`wgt'" == "Yt")  {
-	create_y `yrs' 
+	create_y `yrs' `source'
 	}
 if ("`wgt'" == "X")  {
-	compute_X `yrs'
+	compute_X `yrs' `source'
 	}
 //compute_VA `yrs'
 
@@ -686,50 +683,6 @@ set more on
 end
 
 
-*-------------------------------------------------------------------------------
-*DEVALUATION OF THE EURO What happens when the euro is devaluated? To know that, we do a shock of 1 on all countries but the eurozone.
-*-------------------------------------------------------------------------------
-
-capture program drop shock_deval
-program shock_deval
-	args yrs shk wgt zone
-*yrs = years,shk = 1, wgt = Yt (output) or X (export) or VAt (value-added), zone = noneuro (for a shock corresponding to a devaluation of the euro), china or eastern
-
-set matsize 7000
-*set trace on
-set more off
-clear
-
-//compute_leontieff `yrs'
-if ("`wgt'" == "Yt")  {
-	create_y `yrs' 
-	}
-if ("`wgt'" == "X")  {
-	compute_X `yrs'
-	}
-
-compute_leontief_chocnom `yrs' `zone' 
-vector_shock_exch `shk' `zone'
-shock_exch `yrs' `zone'
-compute_mean `zone' `wgt'
-
-clear
-svmat shock`zone'
-
-* shockARG1 represents the mean effect of a price shock coming from Argentina for each country
-save "$dir/Results/Devaluations/mean_`zone'_`wgt'_`yrs'.dta", replace
-*We obtain a table of mean effect of a price shock from each country to all countries
-
-export excel using "$dir/Results/Devaluations/mean_`zone'_`wgt'_`yrs'.xls", firstrow(variables)
-
-*set trace off
-*set more on
-
-end
-
-*/
-
-
 
 
 *--------------------------------------------------------------------------------
@@ -743,7 +696,7 @@ clear
 set more off
 
 
-foreach source in   WIOD  TIVA{ 
+foreach source in   WIOD TIVA { 
 
 
 if "`source'"=="WIOD" local start_year 2000
@@ -757,7 +710,7 @@ Definition_pays_secteur `source'
 // Fabrication des fichiers d'effets moyens des chocs de change
 // pour le choc CPI, faire tourner compute_HC et compute_leontief, les autres ne sont pas indispensables
  *2005 2009 2010 2011
-foreach i of numlist `start_year' (1)`end_year'  {
+foreach i of numlist `start_year' (1)`start_year'  {
 	clear
 	set more off
 	compute_leontief `i' `source'
@@ -771,7 +724,7 @@ foreach i of numlist `start_year' (1)`end_year'  {
 foreach i of numlist `start_year'(1)`end_year'{
 
 *foreach j in Yt X 
-		foreach j in HC {
+		foreach j in X Yt {
 
 		table_mean `i' `j' 1 `source'
 		

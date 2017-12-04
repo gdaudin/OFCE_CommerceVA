@@ -305,7 +305,7 @@ drop _merge
 	
 graph twoway (scatter pond_HC contenu_impHC, mlabel(c_full_FR)) (qfit pond_HC contenu_impHC)  , ///
 			xtitle("Parts des importations dans la consommation") ytitle("Elasticité des prix de consommation en euro") ///
-			yscale(range(0.3 1)) xscale(range(0.4 1)) xlabel (0.4(0.1) 1) ylabel(0.3 (0.1) 1)
+			yscale(range(0.5 1)) xscale(range(0.0 0.6)) xlabel (0.0(0.1) 0.6) ylabel(0.5 (0.1) 1)
 		
 graph export "$dir/Results/Devaluations/`source'_Graph_7.png", replace
 export excel "$dir/Results/Devaluations/Pour_`source'_Graph_7.xlsx", firstrow(variable)replace
@@ -337,13 +337,13 @@ drop _merge
 	
 graph twoway (scatter pond_HC contenu_impHC, mlabel(c_full_FR)) (qfit pond_HC contenu_impHC)  , ///
 			xtitle("Parts des importations dans la consommation") ytitle("Elasticité des prix de consommation") ///
-			yscale(range(0 0.05)) xscale(range(0.4 1)) xlabel (0.4(0.1) 1) ylabel(0 (0.01) 0.05)
+			yscale(range(0.0 0.12)) xscale(range(0.0 0.6)) xlabel (0.0(0.1) 0.6) ylabel(0.0 (0.01) 0.12)
 		
 graph export "$dir/Results/Devaluations/`source'_Graph_7b.png", replace
 export excel "$dir/Results/Devaluations/Pour_`source'_Graph_7b.xlsx", firstrow(variable)replace
 }
 
-*GRAPHIQUE 7b WP: élasticité des prix de consommation ZE
+*GRAPHIQUE 7c WP: élasticité des prix de consommation ZE
 *à un choc usd et part des importations dans la conso
 foreach source in TIVA WIOD {
 use "$dir/Results/Devaluations/contenu_impHC_`source'_2011.dta", clear  
@@ -369,7 +369,7 @@ drop _merge
 	
 graph twoway (scatter pond_HC contenu_impHC, mlabel(c_full_FR)) (qfit pond_HC contenu_impHC)  , ///
 			xtitle("Parts des importations dans la consommation") ytitle("Elasticité des prix de consommation") ///
-			yscale(range(0 0.05)) xscale(range(0.4 1)) xlabel (0.4(0.1) 1) ylabel(0 (0.01) 0.05)
+			yscale(range(0.0 0.1)) xscale(range(0.0 0.6)) xlabel (0.0(0.1) 0.6) ylabel(0.0 (0.02) 0.1)
 		
 graph export "$dir/Results/Devaluations/`source'_Graph_7c.png", replace
 export excel "$dir/Results/Devaluations/Pour_`source'_Graph_7c.xlsx", firstrow(variable)replace
@@ -449,7 +449,7 @@ foreach year in 2000 2001 2002 2003 2004 2005 2006 2007 2008 2009 2010 2011 2012
 	
 	***Tableau 3 WP: élasticité à une appréciation d'une monnaie d'un des pays origin
 
-
+/*
 *local orig USA CHN JPN GBR EAS RUS 
 foreach source in  WIOD TIVA { 
 foreach year in  2000 2001 2002 2003 2004 2005 2006 2007 2008 2009 2010 2011 {
@@ -471,6 +471,7 @@ rename shockRUS1 Russie
 export excel "$dir/Results/Devaluations/`source'_Tableau_2_`year'.xlsx", firstrow(variables) sheetmodify
 }
 }
+*/
 
 	***Tableau 3 exhaustif WP: élasticité à une appréciation d'une monnaie d'un des pays origin
 *local orig USA CHN JPN GBR EAS RUS AUS BRA CHE CAN DNK IDN IND KOR MEX NOR SWE TUR 

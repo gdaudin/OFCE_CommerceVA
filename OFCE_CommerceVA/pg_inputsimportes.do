@@ -139,6 +139,7 @@ if "`source'"=="WIOD" {
 	rename c pays
 	rename s sector
 	drop p_shock
+	drop _merge
  
 }
 save "$dir/Bases/imp_inputs_par_sect_`yrs'_`source'_`hze'.dta", replace
@@ -169,127 +170,84 @@ args yrs source vector hze
 
 * exemple vector X Y HC hze_not ou hze_yes
 
-use "$dir/Bases/imp_inputs_par_sect_`yrs'_`source'_`hze'.dta", clear
 
-if "`vector'" == Y { 
+
+if "`vector'" == "Y" { 
+	use "$dir/Bases/imp_inputs_par_sect_`yrs'_`source'_`hze'.dta", clear
 
 	if "`source'"=="TIVA" {
 		gen pays_1 = pays
-		replace pays = "chn" if pays_1=="ch1" | pays_1=="ch2" | pays_1=="ch3" | pays_1=="ch4" 
+		replace pays = "chn" if pays_1=="cn1" | pays_1=="cn2" | pays_1=="cn3" | pays_1=="cn4" 
 		replace pays = "mex" if pays_1=="mx1" | pays_1=="mx2" | pays_1=="mx3"
-		collapse (sum) $var_entree_sortie, by(pays sector)
+		collapse (sum) ci_impt prod, by(pays sector)
 
 	}
-	collapse (sum) v1 v2
-
-
-
-*Ouverture de la base contenant le vecteur ligne de production par pays et secteurs
-
-use "$dir/Bases/`source'_ICIO_`yrs'.dta"
-if "`source'"=="TIVA" {
-	drop if v1 == "VA.TAXSUB" | v1 == "OUT"
-	generate pays_1 = strlower(substr(v1,1,strpos(v1,"_")-1))
-	gen pays = pays_1
-	foreach sector of global sector {
-		local sector=lower("`sector'")
-		replace chn_`sector'=chn_`sector'+cn1_`sector'+cn2_`sector'+cn3_`sector'+cn4_`sector'
-		replace mex_`sector'=mex_`sector'+mx1_`sector'+mx2_`sector'+mx3_`sector'
-	}
-	drop cn* mx*
-	replace pays = "chn" if pays_1=="ch1" | pays_1=="ch2" | pays_1=="ch3" | pays_1=="ch4" 
-	replace pays = "mex" if pays_1=="mx1" | pays_1=="mx2" | pays_1=="mx3"
-	collapse (sum) $var_entree_sortie, by(pays)
-
-}
-
-if "`source'"=="WIOD" {
-	 
-	drop *57 *58 *59 *60 *61
-	rename Country pays
-	 
-}
-
-keep pays $var_entree_sortie
-
-
-
-
-foreach var of varlist $var_entree_sortie {
-*	On cherche à enlever les auto-consommations intermédiaires
-	if "`source'" == "TIVA" local pays_colonne = substr("`var'",1,3)
-	if "`source'" == "WIOD" local pays_colonne = substr("`var'",2,3)
-	replace `var' = 0 if pays=="`pays_colonne'"
-	local pays_colonne = upper("`pays_colonne'")
 	
-	if "`hze'"=="hze_yes" & strpos("$eurozone","`pays_colonne'")!=0 {
-		*display "turf"
-	
-	*Et les internes dans la zone euro
-		foreach i of global eurozone {	
-			replace `var' = 0 if pays == lower("`i'")
-		}
-	}
+	collapse (sum) ci_impt prod, by(pays)
+	generate ratio_ci_impt_Y = ci_impt/prod
+	save "$dir/Bases/imp_inputs_Y_`yrs'_`source'_`hze'.dta", replace
 }
 
 
+if "`vector'" == "HC"  { 
 
-collapse (sum) $var_entree_sortie
-display "after collapse"
+	
+	if "`source'"=="TIVA" {
+		use  "$dir/Bases/imp_inputs_par_sect_`yrs'_`source'_`hze'.dta", replace
+		gen pays_1 = pays
+		replace pays = "chn" if pays_1=="cn1" | pays_1=="cn2" | pays_1=="cn3" | pays_1=="cn4" 
+		replace pays = "mex" if pays_1=="mx1" | pays_1=="mx2" | pays_1=="mx3"
+		collapse (sum) ci_impt prod, by(pays sector)
+		generate ratio_ci_impt_prod=ci_impt / prod
+		save "$dir/Bases/imp_inputs_par_sect_modif.dta", replace
+	}
+	
 
+	use "$dir/Bases/HC_`source'.dta", clear
+	if "`source'"=="TIVA" {
+		replace pays = "chn" if pays=="cn1" | pays=="cn2" | pays=="cn3" | pays=="cn4" 
+		replace pays = "mex" if pays=="mx1" | pays=="mx2" | pays=="mx3"
+		collapse (sum) conso, by(pays pays_conso year sector)
+	}
+	
+	keep if lower(pays)==lower(pays_conso) 
+	keep if year==`yrs'
+	
+	if "`source'"=="WIOD" merge 1:1 pays sector using  "$dir/Bases/imp_inputs_par_sect_`yrs'_`source'_`hze'.dta"
+	if "`source'"=="TIVA" merge 1:1 pays sector using  "$dir/Bases/imp_inputs_par_sect_modif.dta"
+	if "`source'"=="TIVA" erase  "$dir/Bases/imp_inputs_par_sect_modif.dta"
+	drop _merge
+	
+	gen ci_impt_HC = ratio_ci_impt_prod * conso
+	
+	collapse (sum) ci_impt_HC conso, by(pays)
+	generate ratio_ci_impt_HC = ci_impt_HC/conso
+	save "$dir/Bases/imp_inputs_HC_`yrs'_`source'_`hze'.dta", replace
+}
 
-xpose, clear varname
+if "`vector'" == "X"  { 
 
+	
+	
+	
 
+	use "$dir/Bases/export_`source'.dta", clear
 
-if "`source'" == "TIVA" ///
-		generate pays = substr(_varname,1,3)
-if "`source'" == "WIOD" ///
-		generate pays = substr(_varname,2,3)
-
-
-		
-blif		
-		
-drop _varname
-collapse (sum) v1, by (pays)
-
-
-rename v1 imp_inputs
-
-save "$dir/Bases/imp_inputs_`vector'_`source'_`yrs'_`hze'.dta", replace
-
-use "$dir/Bases/`vector'_`source'.dta"
-
-replace pays=lower(pays)
-
-keep if year==`yrs'
-if "`vector'"=="HC" local var_interet = "conso"
-if "`vector'"=="X" local var_interet = "export"
-collapse (sum) `var_interet', by(pays)
-
-merge 1:1 pays using "$dir/Bases/imp_inputs_`vector'_`source'_`yrs'_`hze'.dta" 
-
-
-gen pays_1 = pays
-replace pays = "chn" if pays_1=="cn1" | pays_1=="cn2" | pays_1=="cn3" | pays_1=="cn4" 
-replace pays = "mex" if pays_1=="mx1" | pays_1=="mx2" | pays_1=="mx3"
-collapse (sum) `var_interet' imp_inputs, by(pays)
-
-
-*gen input_`var_interet'=(imp_inputs/Yt)*`var_interet'
-
-gen input_`var_interet'=imp_inputs/`var_interet'
-
-
-*keep pays input_`var_interet'
-
-*Pondération des inputs importés par 
-
-
-
-
-save "$dir/Bases/imp_inputs_`vector'_`source'_`yrs'_`hze'.dta", replace
+	
+	keep if lower(pays)==lower(pays_conso) 
+	keep if year==`yrs'
+	
+	merge 1:1 pays sector using  "$dir/Bases/imp_inputs_par_sect_`yrs'_`source'_`hze'.dta"
+	if "`source'"=="TIVA" merge 1:1 pays sector using  "$dir/Bases/imp_inputs_par_sect_modif.dta"
+	if "`source'"=="TIVA" erase  "$dir/Bases/imp_inputs_par_sect_modif.dta"
+	drop _merge
+	
+	gen ci_impt_HC = ratio_ci_impt_prod * conso
+	
+	collapse (sum) ci_impt_HC conso, by(pays)
+	generate ratio_ci_impt_HC = ci_impt_HC/conso
+	save "$dir/Bases/imp_inputs_HC_`yrs'_`source'_`hze'.dta", replace
+}
 
 end
 
@@ -303,17 +261,17 @@ end
 
 **pOUR TEST
 
-Definition_pays_secteur WIOD
-imp_inputs_par_sect 2011 WIOD hze_not
+*Definition_pays_secteur TIVA
+*imp_inputs_par_sect 2011 TIVA hze_not
+
+imp_inputs 2011 TIVA HC hze_not
+
+
+
+
+
+
 blif
-imp_inputs 2011 WIOD Y hze_not
-
-
-
-
-
-
-
 
 
 

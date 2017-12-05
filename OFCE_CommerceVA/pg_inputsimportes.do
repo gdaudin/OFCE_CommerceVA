@@ -138,6 +138,7 @@ if "`source'"=="WIOD" {
 	merge 1:1 _n using "$dir/Bases/csv_WIOD.dta"
 	rename c pays
 	rename s sector
+	replace pays=lower(pays)
 	drop p_shock
 	drop _merge
  
@@ -226,27 +227,27 @@ if "`vector'" == "HC"  {
 }
 
 if "`vector'" == "X"  { 
-
 	
-	
-	
-
-	use "$dir/Bases/export_`source'.dta", clear
-
-	
-	keep if lower(pays)==lower(pays_conso) 
+	use "$dir/Bases/X_`source'.dta", clear
+ 
 	keep if year==`yrs'
 	
 	merge 1:1 pays sector using  "$dir/Bases/imp_inputs_par_sect_`yrs'_`source'_`hze'.dta"
-	if "`source'"=="TIVA" merge 1:1 pays sector using  "$dir/Bases/imp_inputs_par_sect_modif.dta"
-	if "`source'"=="TIVA" erase  "$dir/Bases/imp_inputs_par_sect_modif.dta"
+	
+	blif
 	drop _merge
 	
-	gen ci_impt_HC = ratio_ci_impt_prod * conso
+	gen ci_impt_X = ratio_ci_impt_prod * X
 	
-	collapse (sum) ci_impt_HC conso, by(pays)
-	generate ratio_ci_impt_HC = ci_impt_HC/conso
-	save "$dir/Bases/imp_inputs_HC_`yrs'_`source'_`hze'.dta", replace
+	if "`source'"=="TIVA" {
+		replace pays = "chn" if pays=="cn1" | pays=="cn2" | pays=="cn3" | pays=="cn4" 
+		replace pays = "mex" if pays=="mx1" | pays=="mx2" | pays=="mx3"
+
+	}
+	
+	collapse (sum) ci_impt_X X, by(pays)
+	generate ratio_ci_impt_X = ci_impt_X/X
+	save "$dir/Bases/imp_inputs_X_`yrs'_`source'_`hze'.dta", replace
 }
 
 end
@@ -261,23 +262,14 @@ end
 
 **pOUR TEST
 
-*Definition_pays_secteur TIVA
-*imp_inputs_par_sect 2011 TIVA hze_not
+Definition_pays_secteur WIOD
+imp_inputs_par_sect 2011 WIOD hze_not
 
-imp_inputs 2011 TIVA HC hze_not
-
-
-
+imp_inputs 2011 WIOD X hze_not
 
 
 
 blif
-
-
-
-
-
-
 
 
 foreach source in TIVA WIOD {

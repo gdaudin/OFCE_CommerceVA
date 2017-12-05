@@ -576,6 +576,7 @@ if ("`wgt'" == "X")  {
 
 if ("`wgt'" == "X") | ("`wgt'" == "Yt") {
 	matrix C`cty't= C`cty''
+	
 	svmat C`cty't
 	generate Bt = C`cty't1* `wgt'
 	bys c : egen tot_`wgt' = total(`wgt')
@@ -646,20 +647,7 @@ if ("`wgt'" == "X")  {
 //compute_VA `yrs'
 
 	
-if "`source'"=="TIVA" {
-*	global ori_choc "CHN"
-	global ori_choc "EUR EAS"
-	global ori_choc "$ori_choc ARG AUS AUT BEL BGR BRA BRN CAN CHE CHL CHN COL CRI CYP CZE DEU DNK ESP EST FIN"
-	global ori_choc "$ori_choc FRA GBR GRC HKG HRV HUN IDN IND IRL ISL ISR ITA JPN KHM KOR LTU LUX LVA MAR MEX MLT MYS NLD NOR NZL PER "
-	global ori_choc "$ori_choc PHL POL PRT ROU ROW RUS SAU SGP SVK SVN SWE THA TUN TUR TWN USA VNM ZAF"
-}
 
-if "`source'"=="WIOD" {
-	global ori_choc "EUR EAS"
-*	global ori_choc "$ori_choc AUS AUT BEL BGR BRA     CAN CHE CHN                             CYP CZE DEU DNK ESP EST FIN " 
-*	global ori_choc "$ori_choc FRA GBR GRC     HRV HUN IDN IND IRL       ITA JPN     KOR LTU LUX LVA MEX              MLT     NLD NOR        POL PRT"
-*	global ori_choc "$ori_choc ROU ROW RUS       SVK SVN SWE       TUR TWN USA        "
-}
 
 foreach i of global ori_choc {
 	compute_leontief_chocnom `yrs' `i' `source'
@@ -705,59 +693,76 @@ clear
 set more off
 
 
+
+***** POUR TEST
+
+*compute_leontief 2011 TIVA
+*compute_X 2011 TIVA
+*create_y 2011 TIVA
+*compute_HC 2011 TIVA
+
+global ori_choc "EUR"
+
+table_mean 2011 Yt 1 TIVA
+
+
+/*
+
+
+
+
+
 foreach source in   WIOD TIVA { 
 
 
-if "`source'"=="WIOD" local start_year 2000
-if "`source'"=="TIVA" local start_year 1995
+	if "`source'"=="WIOD" local start_year 2000
+	if "`source'"=="TIVA" local start_year 1995
 
 
-if "`source'"=="WIOD" local end_year 2014
-if "`source'"=="TIVA" local end_year 2011
-Definition_pays_secteur `source'
+	if "`source'"=="WIOD" local end_year 2014
+	if "`source'"=="TIVA" local end_year 2011
+	Definition_pays_secteur `source'
 
-// Fabrication des fichiers d'effets moyens des chocs de change
-// pour le choc CPI, faire tourner compute_HC et compute_leontief, les autres ne sont pas indispensables
- *2005 2009 2010 2011
-foreach i of numlist `start_year' (1)`start_year'  {
-	clear
-	set more off
-	compute_leontief `i' `source'
-	compute_X `i' `source'
-	create_y `i' `source'
-*	compute_VA `i' `source'
-   *compute_HC `i' `source'
+	// Fabrication des fichiers d'effets moyens des chocs de change
+	// pour le choc CPI, faire tourner compute_HC et compute_leontief, les autres ne sont pas indispensables
+	*2005 2009 2010 2011
+	foreach i of numlist `start_year' (1)`start_year'  {
+		clear
+		set more off
+		compute_leontief `i' `source'
+		compute_X `i' `source'
+		create_y `i' `source'
+		compute_HC `i' `source'
+*		compute_VA `i' `source'
 	
+	}
+
+	if "`source'"=="TIVA" {
+	*	global ori_choc "CHN"
+		global ori_choc "EUR EAS"
+		global ori_choc "$ori_choc ARG AUS AUT BEL BGR BRA BRN CAN CHE CHL CHN COL CRI CYP CZE DEU DNK ESP EST FIN"
+		global ori_choc "$ori_choc FRA GBR GRC HKG HRV HUN IDN IND IRL ISL ISR ITA JPN KHM KOR LTU LUX LVA MAR MEX MLT MYS NLD NOR NZL PER "
+		global ori_choc "$ori_choc PHL POL PRT ROU ROW RUS SAU SGP SVK SVN SWE THA TUN TUR TWN USA VNM ZAF"
+	}
+
+if "`source'"=="WIOD" {
+		global ori_choc "EUR EAS"
+		global ori_choc "$ori_choc AUS AUT BEL BGR BRA     CAN CHE CHN                             CYP CZE DEU DNK ESP EST FIN " 
+		global ori_choc "$ori_choc FRA GBR GRC     HRV HUN IDN IND IRL       ITA JPN     KOR LTU LUX LVA MEX              MLT     NLD NOR        POL PRT"
+		global ori_choc "$ori_choc ROU ROW RUS       SVK SVN SWE       TUR TWN USA        "
 }
-
-foreach i of numlist `start_year'(1) `start_year'{
-
-*foreach j in Yt X 
-		foreach j in X Yt {
-
-		table_mean `i' `j' 1 `source'
-		
+	
+	
+	
+	foreach i of numlist `start_year'(1) `start_year'{
+		foreach j in X Yt HC {
+			table_mean `i' `j' 1 `source'
 	}
 }
 
-* shock_deval 2011 1 Yt noneuro   
-*/
+
 
 
 capture log close
-/*
-
-// dévaluation de l'euro par rapport à toutes les monnaies
-compute_leontieff 2011
- 
-*create_y 2011
-*compute_X 2011
-*compute_mean_deval 2011 noneuro
-
-
-set more on
-*/
-
-}
 
 

@@ -72,12 +72,18 @@ global eastern "BGR CZE HRV HUN POL ROU"
 end
 
 
-
 capture program drop imp_inputs // fournit le total des inputs importés par chaque pays
 program imp_inputs
 args yrs source vector hze
 
 * exemple vector X Y HC hze_not ou hze_yes
+
+*Ouverture de la base contenant le vecteur ligne de production par pays et secteurs
+clear
+use "$dir/Bases/`source'_`yrs'_OUT.dta"
+mkmat $var_entree_sortie, matrix(Y)
+collapse (sum) $var_entree_sortie, by(pays)
+
 
 
 use "$dir/Bases/`source'_ICIO_`yrs'.dta"
@@ -155,6 +161,7 @@ replace pays=lower(pays)
 
 keep if year==`yrs'
 if "`vector'"=="HC" local var_interet = "conso"
+if "`vector'"=="X" local var_interet = "export"
 collapse (sum) `var_interet', by(pays)
 
 merge 1:1 pays using "$dir/Bases/imp_inputs_`vector'_`source'_`yrs'_`hze'.dta" 
@@ -166,10 +173,16 @@ replace pays = "mex" if pays_1=="mx1" | pays_1=="mx2" | pays_1=="mx3"
 collapse (sum) `var_interet' imp_inputs, by(pays)
 
 
+gen input_`var_interet'=(imp_inputs/Yt)*`var_interet'
 
-gen input_`var_interet'=imp_inputs/`var_interet'
+*gen input_`var_interet'=imp_inputs/`var_interet'
+
 
 *keep pays input_`var_interet'
+
+*Pondération des inputs importés par 
+
+
 
 
 save "$dir/Bases/imp_inputs_`vector'_`source'_`yrs'_`hze'.dta", replace
@@ -198,6 +211,9 @@ foreach source in TIVA WIOD {
 	foreach i of numlist `start_year' (1)`end_year'  {
 		//clear
 		imp_inputs `i' `source' HC hze_not
+		imp_inputs `i' `source' HC hze_yes
+		imp_inputs `i' `source' X hze_yes
+	
 		clear
 	}
 

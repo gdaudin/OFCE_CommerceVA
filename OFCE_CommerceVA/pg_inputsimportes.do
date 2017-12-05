@@ -1,3 +1,6 @@
+* Obtention de la part des CI importées dans la production (Y), dans les exportations (X) et dans la consommation des ménages (HC)
+*Distinction, pour la ZE, des inputs importés en provenance des pays ZE et hors ZE
+
 clear
 set more off
 if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
@@ -15,12 +18,13 @@ log using "$dir/$S_DATE.log", replace
 set matsize 7000
 
 
-capture program drop imp_inputs_par_sect // fournit le % dd ci importées/prod par pays*sect
+
+capture program drop imp_inputs_par_sect // fournit le % des ci importées/prod par pays*sect
 program imp_inputs_par_sect
 args yrs source hze
 
 
-* exemple  hze_not ou hze_yes
+* exemple  hze_not ou hze_yes pour pays membres de la ZE et pays hors ZE
 
 *Ouverture de la base contenant le vecteur ligne de production par pays et secteurs
 
@@ -30,6 +34,7 @@ if "`source'"=="TIVA" {
 	generate pays = strlower(substr(v1,1,strpos(v1,"_")-1))
 }
 
+* on conserve uniquement les CI, en éliminants les emplois finals
 if "`source'"=="WIOD" {
 	 
 	drop *57 *58 *59 *60 *61
@@ -64,9 +69,10 @@ foreach var of varlist $var_entree_sortie {
 collapse (sum) $var_entree_sortie
 display "after collapse"
 
-
+*obtention de deux lignes, l'une de CI, l'autre de prod pour chaque secteur
 append using "$dir/Bases/`source'_`yrs'_OUT.dta"
 
+*transpositin en colonne, puis création d'un ratio de CI importées par secteurs 
 xpose, clear varname
 rename v1 ci_impt
 rename v2 prod
@@ -88,7 +94,7 @@ if "`source'"=="WIOD" {
  
 }
 save "$dir/Bases/imp_inputs_par_sect_`yrs'_`source'_`hze'.dta", replace
-
+* enregistrement des ratio de CI importés par secteur
 
 end
 
@@ -115,7 +121,8 @@ args yrs source vector hze
 
 * exemple vector X Y HC hze_not ou hze_yes
 
-
+*Création d'un agrégat national pour Chine et Mexique pour ci importées et production 
+*La part des CI importées est à présent calculée pour l'ensemble de l'économie, et non plus par secteurs
 
 if "`vector'" == "Y" { 
 	use "$dir/Bases/imp_inputs_par_sect_`yrs'_`source'_`hze'.dta", clear
@@ -134,6 +141,8 @@ if "`vector'" == "Y" {
 }
 
 
+*Création d'un agrégat national pour ci importées et production pour Chine et Mexique
+*HC présente en revanche déjà une consommation agrégée au niveau de la Chine et du Mexique entiers
 if "`vector'" == "HC"  { 
 
 	
@@ -154,7 +163,8 @@ if "`vector'" == "HC"  {
 		replace pays = "mex" if pays=="mx1" | pays=="mx2" | pays=="mx3"
 		collapse (sum) conso, by(pays pays_conso year sector)
 	}
-	
+	*HC se présente avec le pays d'origine du bien, puis les pays de consommation 
+	*Manipulation de la base de données HC en vue d'ordonner la consommation du pays_conso pour tous les secteurs
 	keep if lower(pays)==lower(pays_conso) 
 	keep if year==`yrs'
 	
@@ -236,6 +246,7 @@ Definition_pays_secteur `source'
 		imp_inputs `i' `source' HC hze_not
 		imp_inputs `i' `source' HC hze_yes
 		imp_inputs `i' `source' X hze_yes
+		
 	
 		clear
 	}

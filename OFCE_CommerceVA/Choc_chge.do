@@ -405,7 +405,7 @@ mkmat p_shock
 matrix p_shockt=p_shock'
 *The transpose of p_shock will be necessary for further computations
 
-display "vector_shock_exch"
+display "fin de vector_shock_exch"
 
 
 end
@@ -434,6 +434,7 @@ keep C`groupeduchoc't1
 
 
 if $test==1 save "$dir/Bases/`source'_C_`yrs'_`groupeduchoc'.dta", replace
+display "fin de shock_exch"
 
 end
 
@@ -576,15 +577,17 @@ if ("`wgt'" == "X")  {
 
 if ("`wgt'" == "X") | ("`wgt'" == "Yt") {
 	matrix C`cty't= C`cty''
-	
 	svmat C`cty't
 	generate Bt = C`cty't1* `wgt'
-	bys c : egen tot_`wgt' = total(`wgt')
+	gen pays_interet=c
+	replace pays_interet="CHN" if pays_interet=="CN1" | pays_interet=="CN2" | pays_interet=="CN3" | pays_interet=="CN4"
+	replace pays_interet="MEX" if pays_interet=="MX1" | pays_interet=="MX2" | pays_interet=="MX3"
+	bys pays_interet : egen tot_`wgt' = total(`wgt')
 	generate sector_shock = Bt/tot_`wgt'
-	bys c : egen shock`cty' = total(sector_shock)
-	bys c : keep if _n==1
+	bys pays_interet : egen shock`cty' = total(sector_shock)
+	bys pays_interet : keep if _n==1
 	mkmat shock`cty'
-	** C'est cela qui est nouveau
+	
 }
 
 
@@ -618,6 +621,7 @@ if ("`wgt'" == "HC")  {
 //svmat VAt
 
 set more off
+display "fin de compute_mean"
 
 
 *Vector shock`cty' contains the mean effects of a shock on exchange rate (coming from the country `cty') on overall prices for each country
@@ -705,7 +709,7 @@ global ori_choc "EUR"
 
 table_mean 2011 Yt 1 TIVA
 
-
+blink
 /*
 
 

@@ -407,9 +407,8 @@ generate year = `yrs'
 reshape long prod, i(year) j(pays_sect) string
 
 
-blif
-if `source'=="TIVA" generate pays = strupper(substr(pays_sect,1,strpos(pays_sect,"_")-1))
-if `source'=="WIOD" generate pays = substr(pays_sect,2,3)
+if "`source'"=="TIVA" generate pays = strupper(substr(pays_sect,1,strpos(pays_sect,"_")-1))
+if "`source'"=="WIOD" generate pays = substr(pays_sect,2,3)
 
 
 collapse (sum) prod, by(pays year)
@@ -542,7 +541,7 @@ end
 
 **** Lancement des programmes ****************
 
-
+/*
 save_data WIOD
 
 save_data TIVA

@@ -126,32 +126,27 @@ append using "$dir/Bases/`source'_`yrs'_OUT.dta"
 xpose, clear varname
 rename v1 ci_impt
 rename v2 prod
-gen ratio ci_impt_prod=ci_impt/prod
+generate ratio_ci_impt_prod=ci_impt / prod
 
+if "`source'"=="TIVA" {
+	generate pays = strlower(substr(_varname,1,3))
+	generate sector = strlower(substr(_varname,strpos(_varname,"_")+1,.))
+}
+
+
+if "`source'"=="WIOD" {
+	merge 1:1 _n using "$dir/Bases/csv_WIOD.dta"
+	rename c pays
+	rename s sector
+	drop p_shock
+ 
+}
 save "$dir/Bases/imp_inputs_par_sect_`yrs'_`source'_`hze'.dta", replace
-
-
-blif
-
-
-
-if "`source'" == "TIVA" ///
-		generate pays = substr(_varname,1,3)
-if "`source'" == "TIVA" ///
-		generate sector = substr(_varname,5,.)
-if "`source'" == "WIOD" ///
-		generate pays = substr(_varname,2,3)
-if "`source'" == "WIOD" ///
-		generate sector = substr(_varname,6,.)
-		
-gen year=`yrs'
-
-merge  1:1 year pays sector using "$dir/Bases/prod_`source'.dta"
 
 
 end
 
-imp_inputs_par_sect 2011 TIVA hze_not
+
 
 
 
@@ -173,6 +168,21 @@ program imp_inputs
 args yrs source vector hze
 
 * exemple vector X Y HC hze_not ou hze_yes
+
+use "$dir/Bases/imp_inputs_par_sect_`yrs'_`source'_`hze'.dta", clear
+
+if "`vector'" == Y { 
+
+	if "`source'"=="TIVA" {
+		gen pays_1 = pays
+		replace pays = "chn" if pays_1=="ch1" | pays_1=="ch2" | pays_1=="ch3" | pays_1=="ch4" 
+		replace pays = "mex" if pays_1=="mx1" | pays_1=="mx2" | pays_1=="mx3"
+		collapse (sum) $var_entree_sortie, by(pays sector)
+
+	}
+	collapse (sum) v1 v2
+
+
 
 *Ouverture de la base contenant le vecteur ligne de production par pays et secteurs
 
@@ -293,8 +303,10 @@ end
 
 **pOUR TEST
 
-Definition_pays_secteur TIVA
-imp_inputs 2011 TIVA HC hze_not
+Definition_pays_secteur WIOD
+imp_inputs_par_sect 2011 WIOD hze_not
+blif
+imp_inputs 2011 WIOD Y hze_not
 
 
 

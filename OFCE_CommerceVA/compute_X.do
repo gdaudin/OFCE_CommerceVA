@@ -114,6 +114,7 @@ gen pays = substr("`i'",1,3)
 }
 
 if "`source'"=="TIVA" {
+drop if v1=="VA+TAXSUB" | v1=="OUT"
 egen utilisations = rowtotal(arg_c01t05agr-nps_zaf)
 gen utilisations_dom = .
 * liste de countrys

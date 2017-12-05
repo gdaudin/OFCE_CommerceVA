@@ -71,6 +71,102 @@ global eastern "BGR CZE HRV HUN POL ROU"
 
 end
 
+capture program drop imp_inputs_par_sect // fournit le % dd ci importées/prod par pays*sect
+program imp_inputs_par_sect
+args yrs source hze
+
+
+* exemple  hze_not ou hze_yes
+
+*Ouverture de la base contenant le vecteur ligne de production par pays et secteurs
+
+use "$dir/Bases/`source'_ICIO_`yrs'.dta"
+if "`source'"=="TIVA" {
+	drop if v1 == "VA.TAXSUB" | v1 == "OUT"
+	generate pays = strlower(substr(v1,1,strpos(v1,"_")-1))
+}
+
+if "`source'"=="WIOD" {
+	 
+	drop *57 *58 *59 *60 *61
+	rename Country pays
+	 
+}
+
+keep pays $var_entree_sortie
+
+
+
+
+foreach var of varlist $var_entree_sortie {
+*	On cherche à enlever les auto-consommations intermédiaires
+	if "`source'" == "TIVA" local pays_colonne = substr("`var'",1,3)
+	if "`source'" == "WIOD" local pays_colonne = substr("`var'",2,3)
+	replace `var' = 0 if pays=="`pays_colonne'"
+	local pays_colonne = upper("`pays_colonne'")
+	
+	if "`hze'"=="hze_yes" & strpos("$eurozone","`pays_colonne'")!=0 {
+		*display "turf"
+	
+	*Et les internes dans la zone euro
+		foreach i of global eurozone {	
+			replace `var' = 0 if pays == lower("`i'")
+		}
+	}
+}
+
+
+
+collapse (sum) $var_entree_sortie
+display "after collapse"
+
+
+append using "$dir/Bases/`source'_`yrs'_OUT.dta"
+
+xpose, clear varname
+rename v1 ci_impt
+rename v2 prod
+gen ratio ci_impt_prod=ci_impt/prod
+
+save "$dir/Bases/imp_inputs_par_sect_`yrs'_`source'_`hze'.dta", replace
+
+
+blif
+
+
+
+if "`source'" == "TIVA" ///
+		generate pays = substr(_varname,1,3)
+if "`source'" == "TIVA" ///
+		generate sector = substr(_varname,5,.)
+if "`source'" == "WIOD" ///
+		generate pays = substr(_varname,2,3)
+if "`source'" == "WIOD" ///
+		generate sector = substr(_varname,6,.)
+		
+gen year=`yrs'
+
+merge  1:1 year pays sector using "$dir/Bases/prod_`source'.dta"
+
+
+end
+
+imp_inputs_par_sect 2011 TIVA hze_not
+
+
+
+
+
+
+
+
+**************************************
+
+
+
+
+
+
 
 capture program drop imp_inputs // fournit le total des inputs importés par chaque pays
 program imp_inputs
@@ -79,12 +175,6 @@ args yrs source vector hze
 * exemple vector X Y HC hze_not ou hze_yes
 
 *Ouverture de la base contenant le vecteur ligne de production par pays et secteurs
-clear
-use "$dir/Bases/`source'_`yrs'_OUT.dta"
-mkmat $var_entree_sortie, matrix(Y)
-collapse (sum) $var_entree_sortie, by(pays)
-
-
 
 use "$dir/Bases/`source'_ICIO_`yrs'.dta"
 if "`source'"=="TIVA" {
@@ -146,6 +236,10 @@ if "`source'" == "TIVA" ///
 		generate pays = substr(_varname,1,3)
 if "`source'" == "WIOD" ///
 		generate pays = substr(_varname,2,3)
+
+
+		
+blif		
 		
 drop _varname
 collapse (sum) v1, by (pays)
@@ -173,9 +267,9 @@ replace pays = "mex" if pays_1=="mx1" | pays_1=="mx2" | pays_1=="mx3"
 collapse (sum) `var_interet' imp_inputs, by(pays)
 
 
-gen input_`var_interet'=(imp_inputs/Yt)*`var_interet'
+*gen input_`var_interet'=(imp_inputs/Yt)*`var_interet'
 
-*gen input_`var_interet'=imp_inputs/`var_interet'
+gen input_`var_interet'=imp_inputs/`var_interet'
 
 
 *keep pays input_`var_interet'
@@ -195,7 +289,30 @@ end
 //   - impact choc euro / part des importations en provenance de pays hors zone euro
 //   - impact chocs pays / 
 
+
+
+**pOUR TEST
+
+Definition_pays_secteur TIVA
+imp_inputs 2011 TIVA HC hze_not
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 foreach source in TIVA WIOD {
+
+Definition_pays_secteur `source'
 
 	if "`source'"=="WIOD" local start_year 2000
 	if "`source'"=="TIVA" local start_year 1995
@@ -204,7 +321,7 @@ foreach source in TIVA WIOD {
 	if "`source'"=="WIOD" local end_year 2014
 	if "`source'"=="TIVA" local end_year 2011
 	
-	Definition_pays_secteur `source'
+
 
 
 

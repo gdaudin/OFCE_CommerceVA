@@ -305,7 +305,7 @@ drop _merge
 	
 graph twoway (scatter pond_HC contenu_impHC, mlabel(c_full_FR)) (qfit pond_HC contenu_impHC)  , ///
 			xtitle("Parts des importations dans la consommation") ytitle("Elasticité des prix de consommation en euro") ///
-			yscale(range(0.5 1)) xscale(range(0.0 0.6)) xlabel (0.0(0.1) 0.6) ylabel(0.5 (0.1) 1)
+			yscale(range(0.6 0.9)) xscale(range(0.1 0.6)) xlabel (0.1(0.1) 0.6) ylabel(0.6 (0.1) 0.9)
 		
 graph export "$dir/Results/Devaluations/`source'_Graph_7.png", replace
 export excel "$dir/Results/Devaluations/Pour_`source'_Graph_7.xlsx", firstrow(variable)replace
@@ -468,7 +468,7 @@ rename shockEAS1 Pecos_hors_ZE
 rename shockCHN1 Chine
 rename shockRUS1 Russie
 
-export excel "$dir/Results/Devaluations/`source'_Tableau_2_`year'.xlsx", firstrow(variables) sheetmodify
+export excel "$dir/Results/Devaluations/`source'_HC_Tab2_`year'.xlsx", firstrow(variables) sheetmodify
 }
 }
 */
@@ -476,7 +476,7 @@ export excel "$dir/Results/Devaluations/`source'_Tableau_2_`year'.xlsx", firstro
 	***Tableau 3 exhaustif WP: élasticité à une appréciation d'une monnaie d'un des pays origin
 *local orig USA CHN JPN GBR EAS RUS AUS BRA CHE CAN DNK IDN IND KOR MEX NOR SWE TUR 
 foreach source in  WIOD TIVA { 
-foreach year in  2000 2001 2002 2003 2004 2005 2006 2007 2008 2009 2010 2011 {
+foreach year in  2000  2011 {
 use "$dir/Results/Devaluations/mean_chg_`source'_HC_`year'.dta", clear
 drop if strpos("$eurozone",c)==0
 
@@ -503,7 +503,7 @@ rename shockMEX1 Mexique
 rename shockNOR1 Norvège
 rename shockSWE1 Suède
 rename shockTUR1 Turquie
-export excel "$dir/Results/Devaluations/`source'_Tableau_2long_`year'.xlsx", firstrow(variables) sheetmodify
+export excel "$dir/Results/Devaluations/`source'_HC_Tab2long_`year'.xlsx", firstrow(variables) sheetmodify
 }
 }
 

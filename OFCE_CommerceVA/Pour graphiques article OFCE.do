@@ -1,8 +1,11 @@
+clear  
+set more off
+if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
+else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
 
 
-if ("`c(username)'"=="guillaumedaudin") global dir "~/Dropbox/commerce en VA"
-if ("`c(username)'"=="L841580") global dir "H:\Agents\Cochard\Papier_chocCVA"
-
+*capture log close
+*log using "$dir/$S_DATE.log", replace
 
 global eurozone "AUT BEL CYP DEU ESP EST FIN FRA GRC IRL ITA LTU LUX LVA MLT NLD PRT SVK SVN"
 global eastern "BGR CZE HRV HUN POL ROU"
@@ -575,11 +578,14 @@ export excel "$dir/Results/Choc de prod/Tableau_6.xlsx", firstrow(variables) rep
 
 **------------------ Pour graphiques de la fin
 
-clear
 
-if ("`c(username)'"=="guillaumedaudin") global dir "~/Dropbox/commerce en VA"
+clear  
+if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
+else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
 
-if ("`c(username)'"=="L841580") global dir "H:/Agents/Cochard/Papier_chocCVA"
+
+*capture log close
+*log using "$dir/$S_DATE.log", replace
 
 cd "$dir"
 

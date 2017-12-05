@@ -2,16 +2,16 @@
 
 clear  
 set more off
-if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/OFCE Commerce VA/2017 Bdf"
+if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
 else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
 
 
-
-log using "$dir/$S_DATE.log", replace
+capture log close
+*log using "$dir/$S_DATE.log", replace
 set matsize 7000
 *set mem 700m if earlier version of stata (<stata 12)
 set more off
-global test 1
+global test 0
 *Mettre test=1 pour sauver les tableaux un par un et test=0 pour ne pas encombrer le DD.
 
 capture program drop Definition_pays_secteur
@@ -21,7 +21,7 @@ args source
 
 if "`source'"=="TIVA" {
 global country "ARG AUS AUT BEL BGR BRA BRN CAN CHE CHL"
-	global country "$country  CHN CN1 CN2 CN2 CN3 COL CRI CYP CZE DEU DNK ESP EST FIN"
+	global country "$country  CHN CN1 CN2 CN3 CN4 COL CRI CYP CZE DEU DNK ESP EST FIN"
 	global country "$country  FRA GBR GRC HKG HRV HUN IDN IND IRL ISL ISR ITA JPN KHM KOR"
 	global country "$country  LTU LUX LVA MAR MEX MLT MX1 MX2 MX3 MYS NLD NOR NZL PER PHL POL PRT"
 	global country "$country  ROU ROW RUS SAU SGP SVK SVN SWE THA TUN TUR TWN USA VNM ZAF"
@@ -48,7 +48,7 @@ global country_hc "ARG AUS AUT BEL BGR BRA BRN CAN CHE CHL"
 if "`source'"=="WIOD" {
 	global country "   AUS AUT BEL BGR BRA     CAN CHE" 
 	global country "$country CHN                             CYP CZE DEU DNK ESP EST FIN"
-	global country "$country FRA GBR GRC     HRV HUN IDN IND IRL ISL      ITA JPN     KOR"
+	global country "$country FRA GBR GRC     HRV HUN IDN IND IRL        ITA JPN     KOR"
 	global country "$country LTU LUX LVA MEX              MLT     NLD NOR        POL PRT"
 	global country "$country ROU ROW RUS       SVK SVN SWE       TUR TWN USA        "
 	
@@ -61,11 +61,11 @@ if "`source'"=="WIOD" {
 	global sector "$sector M74_M75 N O84 O85 Q R_S T U"
 	
 	
-	global noneuro "BGR BRA CAN CHE CHN CZE DNK  GBR HRV HUN IDN IND ISL JPN KOR MEX NOR  POL ROU ROW RUS SWE TUR TWN USA"    
+	global noneuro "BGR BRA CAN CHE CHN CZE DNK  GBR HRV HUN IDN IND  JPN KOR MEX NOR  POL ROU ROW RUS SWE TUR TWN USA"    
 	global china "CHN"
 	global mexique "MEX"
 	
-	global var_entree_sortie vAUS01-vUSA61
+	global var_entree_sortie vAUS01-vUSA56
 }
 
 global nbr_pays = wordcount("$country")
@@ -113,7 +113,7 @@ matrix Yd1=invsym(Yd)
 *Then multiply Yd1 by Z 
 matrix A_`yrs'=Z*Yd1
 
-clear matrix
+clear
 svmat A_`yrs', names(col)
 save "$dir/Bases/A_`source'_`yrs'.dta", replace
 
@@ -128,7 +128,7 @@ matrix L=(I-A_`yrs')
 *Leontief inverse
 matrix L1_`yrs'=inv(L)
 
-clear matrix
+clear
 svmat L1_`yrs', names(col)
 save "$dir/Bases/`source'_L1_`yrs'.dta", replace
 
@@ -151,7 +151,7 @@ program compute_leontief_chocnom
 *ex : compute_leontief_chocnom 2005 ARG	
 *Create vector Y of output from troncated database
 
-
+display "`groupeduchoc'"
 
 *use "H:\Agents\Cochard\Papier_chocCVA/Bases/OECD_`yrs'_OUT.dta"
 *mkmat $var_entree_sortie, matrix(Y)
@@ -171,12 +171,12 @@ gen grchoc_ligne = 0
 
 foreach p of local groupeduchoc {
 	replace grchoc_ligne = 1 if pays_choqué == "`p'" 
-
+	
 	if ("`p'"=="MEX")  {
 		replace grchoc_ligne = 1 if  strpos("$mexique", pays_choqué)!=0
 	}
 	if ("`p'"=="CHN") {
-		replace grchoc_ligne = 1 if  strpos("$chine", pays_choqué)!=0
+		replace grchoc_ligne = 1 if  strpos("$china", pays_choqué)!=0
 	}
 	if ("`p'"=="EUR") {
 		replace grchoc_ligne = 1 if strpos("$eurozone", pays_choqué)!=0
@@ -200,19 +200,22 @@ foreach var of varlist $var_entree_sortie {
 	
 	
 	if "`source'"=="TIVA" replace pays_origine = strupper(substr("`var'",1,strpos("`var'","_")-1))
-	if "`source'"=="WIOD" replace pays_origine = strupper(substr("`var'",2,4))
+	if "`source'"=="WIOD" replace pays_origine = strupper(substr("`var'",2,3))
 	foreach p of local groupeduchoc {
 	
 		replace grchoc2 = 1 if pays_origine == "`p'" 
 		
+		
 
 		if ("`p'"=="MEX") {
-			replace grchoc2 = 1 if  strpos("$mexique", pays_choqué)!=0
+			replace grchoc2 = 1 if  strpos("$mexique", pays_origine)!=0
 	
 		}
 		if ("`p'"=="CHN") {
-			replace grchoc2 = 1 if  strpos("$chine", pays_choqué)!=0
-		}
+			replace grchoc2 = 1 if  strpos("$china", pays_origine)!=0
+		} 
+	
+		
 		if ("`p'"=="EUR") {
 			replace grchoc2 = 1 if strpos("$eurozone", pays_origine)!=0
 		}
@@ -226,6 +229,7 @@ foreach var of varlist $var_entree_sortie {
 	
 
 	replace `var'=0 if grchoc_ligne==1  & grchoc2==1 
+
 *	if strmatch("`var'","*aut*")==1 blif
 	
 
@@ -254,7 +258,7 @@ foreach p of local groupeduchoc {
 
 		}
 	if ("`p'"=="CHN") {
-		replace grchoc_ligne = 1 if strpos("$chine", c)!=0
+		replace grchoc_ligne = 1 if strpos("$china", c)!=0
 
 		}
 	if ("`p'"=="EUR") {
@@ -273,7 +277,7 @@ gen grchoc2=0
 
 foreach var of varlist $var_entree_sortie {
 if "`source'"=="TIVA" replace pays_origine = strupper(substr("`var'",1,strpos("`var'","_")-1))
-if "`source'"=="WIOD" replace pays_origine = strupper(substr("`var'",2,4))
+if "`source'"=="WIOD" replace pays_origine = strupper(substr("`var'",2,3))
 		
 
 	
@@ -286,7 +290,7 @@ if "`source'"=="WIOD" replace pays_origine = strupper(substr("`var'",2,4))
 
 		}
 		if ("`p'"=="CHN") {
-			replace grchoc2 = 1 if strpos("$chine", pays_origine)!=0
+			replace grchoc2 = 1 if strpos("$china", pays_origine)!=0
 		}
 		if ("`p'"=="EUR") {
 		replace grchoc2 = 1 if strpos("$eurozone", pays_origine)!=0
@@ -312,6 +316,8 @@ display "fin de compute_leontief_chocnom`groupeduchoc'" `yrs'
 order c s 
 
 if $test==1 save "$dir/Bases/`source'_B2_`yrs'_`groupeduchoc'.dta", replace
+
+display "fin compute_leontief_chocnom"
 
 end
 
@@ -341,7 +347,7 @@ foreach p of local groupeduchoc {
 
 		}
 	if ("`p'"=="CHN") {
-			replace p_shock = `shk' if strpos("$chine", c)!=0
+			replace p_shock = `shk' if strpos("$china", c)!=0
 
 		}	
 		
@@ -376,7 +382,7 @@ foreach p of local groupeduchoc {
 	
 	}
 	if ("`p'"=="CHN") {
-			replace p_shock2 = 0 if strpos("$chine", c)!=0
+			replace p_shock2 = 0 if strpos("$china", c)!=0
 
 	}	
 	if ("`p'"=="EUR") {
@@ -398,6 +404,8 @@ matrix p_shock2t=p_shock2'
 mkmat p_shock
 matrix p_shockt=p_shock'
 *The transpose of p_shock will be necessary for further computations
+
+display "vector_shock_exch"
 
 
 end
@@ -436,14 +444,16 @@ end
 *Creation of the vector Y is required before table_adjst : matrix Yt
 capture program drop create_y
 program create_y
-args yrs
+args yrs source
 clear
 
-use "$dir/Bases/OECD_`yrs'_OUT.dta"
+use "$dir/Bases/`source'_`yrs'_OUT.dta"
 
 
 mkmat $var_entree_sortie, matrix(Y)
 matrix Yt = Y'
+
+display "fin compute_y"
 
 end
 
@@ -451,56 +461,77 @@ end
 * 2017-10-17 redondant avec le programme 1!!!
 capture program drop compute_X
 program compute_X
-	args yrs
+	args yrs source
 
-use "$dir/Bases/OECD`yrs'.dta", clear
+use "$dir/Bases/`source'_ICIO_`yrs'.dta", clear
 
 
-global country2 "arg aus aut bel bgr bra brn can che chl chn chn.npr chn.pro chn.dom col cri cyp cze deu dnk esp est fin fra gbr grc hkg hrv hun idn ind irl isl isr ita jpn khm kor ltu lux lva mex mex.ngm mex.gmf mlt mys nld nor nzl phl pol prt rou row rus sau sgp svk svn swe tha tun tur twn usa vnm zaf"
+*global country2 "arg aus aut bel bgr bra brn can che chl chn chn.npr chn.pro chn.dom col cri cyp cze deu dnk esp est fin fra gbr grc hkg hrv hun idn ind irl isl isr ita jpn khm kor ltu lux lva mex mex.ngm mex.gmf mlt mys nld nor nzl phl pol prt rou row rus sau sgp svk svn swe tha tun tur twn usa vnm zaf"
 
-generate pays = strlower(substr(v1,1,strpos(v1,"_")-1))
-drop if pays==""
-
-egen utilisations = rowtotal(arg_c01t05agr-disc)
+*generate pays = strlower(substr(v1,1,strpos(v1,"_")-1))
+*drop if pays==""
+if "`source'"=="WIOD" {
+egen utilisations = rowtotal(vAUS01-vUSA61)
 gen utilisations_dom = .
+gen pays = substr("`i'",1,3)
 
-foreach j of global country2 {
-	local i = "`j'"
-	if  ("`j'"=="chn.npr" | "`j'"=="chn.pro" |"`j'"=="chn.dom" ) {
-		local i = "chn" 
+	foreach j of global country {
+		local i = "`j'"
+		egen blouk = rowtotal(*`i'*)
+		display "`i'" "`j'"
+		replace utilisations_dom = blouk if Country=="`j'"
+		codebook utilisations_dom if Country=="`j'"
+		drop blouk
+		
 	}
-	if  ("`j'"=="mex.ngm" | "`j'"=="mex.gmf") {
-			local i = "mex"
+}
+
+if "`source'"=="TIVA" {
+egen utilisations = rowtotal(arg_c01t05agr-nps_zaf)
+gen utilisations_dom = .
+* liste de countrys
+
+gen Country = substr("v1",1,3)
+ 
+	foreach j of global country {
+		local i = lower("`j'")
+		if  ("`j'"=="cn1" | "`j'"=="cn2" |"`j'"=="cn3"|"`j'"=="cn4" ) local i = "chn" 
+
+		if  ("`j'"=="mx1" | "`j'"=="mx2"| "`j'"=="mx3") local i = "mex"
+		
+		egen blouk = rowtotal(*`i'*)
+		display "`i'" "`j'"
+		replace utilisations_dom = blouk if strpos(v1,"`j'")!=0
+		codebook utilisations_dom if 	strpos(v1,"`j'")!=0
+		drop blouk
 	}
-	egen blouk = rowtotal(`i'*)
-	display "`i'" "`j'"
-	replace utilisations_dom = blouk if pays=="`j'"
-	codebook utilisations_dom if pays=="`j'"
-	drop blouk
+
 }
 generate X = utilisations - utilisations_dom
 	
-replace pays = strupper(pays)
+replace Country = strupper(Country)
 generate year = `yrs'
 
-keep year pays X
+*keep year Country X
 mkmat X
+display "fin compute_X"
 
 end
 
-*Creation of the vector of value-added VA : matrices Y, X, VA
 
+*Creation of the vector of value-added VA : matrices Y, X, VA
+/*
 capture program drop compute_VA
 program compute_VA
 	args yrs
 clear
-use "$dir/Bases/OECD`yrs'.dta", clear
+use "$dir/Bases/`source'_ICIO_`yrs'.dta", clear
 keep if v1 == "VA.TAXSUB"
 drop v1
 mkmat $var_entree_sortie, matrix(VA)
 matrix VAt = VA'
 end
-
+*/
 capture program drop compute_HC
 program  compute_HC
 	args yrs source 
@@ -529,6 +560,9 @@ use "$dir/Bases/csv_`source'.dta"
 *I decide whether I use the production or export or value-added vector as weight modifying the argument "wgt" : Yt or X or VAt
 *Compute the vector of mean effects :
 
+
+
+
 if ("`wgt'" == "Yt")  {
 	matrix Yt = Y'
 	svmat Yt 
@@ -538,6 +572,8 @@ if ("`wgt'" == "Yt")  {
 if ("`wgt'" == "X")  {
 	svmat X
 }
+
+
 if ("`wgt'" == "X") | ("`wgt'" == "Yt") {
 	matrix C`cty't= C`cty''
 	svmat C`cty't
@@ -545,7 +581,9 @@ if ("`wgt'" == "X") | ("`wgt'" == "Yt") {
 	bys c : egen tot_`wgt' = total(`wgt')
 	generate sector_shock = Bt/tot_`wgt'
 	bys c : egen shock`cty' = total(sector_shock)
-
+	bys c : keep if _n==1
+	mkmat shock`cty'
+	** C'est cela qui est nouveau
 }
 
 
@@ -553,6 +591,9 @@ if ("`wgt'" == "X") | ("`wgt'" == "Yt") {
 local blink 0
 matrix C`cty't= C`cty''
 svmat C`cty't, name(C`cty')	
+
+
+
 if ("`wgt'" == "HC")  {
 	foreach pays_conso of global country_hc {
 	svmat HC_`pays_conso', name(HC_`pays_conso')
@@ -565,6 +606,7 @@ if ("`wgt'" == "HC")  {
 
 	if `blink'== 0 matrix shock`cty' = shock`cty'_`pays_conso'[1,1]
 	if `blink'!= 0 matrix shock`cty' = shock`cty' \ shock`cty'_`pays_conso'[1,1]
+	matrix drop shock`cty'_`pays_conso'
 	local blink=`blink'+1	
 	drop Bt* tot* sector_shock* HC*  shock*
 	}
@@ -596,15 +638,16 @@ set more off
 
 *compute_leontieff `yrs'
 if ("`wgt'" == "Yt")  {
-	create_y `yrs' 
+	create_y `yrs' `source'
 	}
 if ("`wgt'" == "X")  {
-	compute_X `yrs'
+	compute_X `yrs' `source'
 	}
 //compute_VA `yrs'
 
 	
 if "`source'"=="TIVA" {
+*	global ori_choc "CHN"
 	global ori_choc "EUR EAS"
 	global ori_choc "$ori_choc ARG AUS AUT BEL BGR BRA BRN CAN CHE CHL CHN COL CRI CYP CZE DEU DNK ESP EST FIN"
 	global ori_choc "$ori_choc FRA GBR GRC HKG HRV HUN IDN IND IRL ISL ISR ITA JPN KHM KOR LTU LUX LVA MAR MEX MLT MYS NLD NOR NZL PER "
@@ -613,9 +656,9 @@ if "`source'"=="TIVA" {
 
 if "`source'"=="WIOD" {
 	global ori_choc "EUR EAS"
-	global ori_choc "$ori_choc AUS AUT BEL BGR BRA     CAN CHE CHN                             CYP CZE DEU DNK ESP EST FIN " 
-	global ori_choc "$ori_choc FRA GBR GRC     HRV HUN IDN IND IRL ISL      ITA JPN     KOR LTU LUX LVA MEX              MLT     NLD NOR        POL PRT"
-	global ori_choc "$ori_choc ROU ROW RUS       SVK SVN SWE       TUR TWN USA        "
+*	global ori_choc "$ori_choc AUS AUT BEL BGR BRA     CAN CHE CHN                             CYP CZE DEU DNK ESP EST FIN " 
+*	global ori_choc "$ori_choc FRA GBR GRC     HRV HUN IDN IND IRL       ITA JPN     KOR LTU LUX LVA MEX              MLT     NLD NOR        POL PRT"
+*	global ori_choc "$ori_choc ROU ROW RUS       SVK SVN SWE       TUR TWN USA        "
 }
 
 foreach i of global ori_choc {
@@ -627,7 +670,7 @@ foreach i of global ori_choc {
 
 
 use "$dir/Bases/pays_en_ligne_`source'.dta", clear
-drop if c=="MX1" | c=="MX2" |  c=="MX3" |  c=="CN1"  |  c=="CN2"  |  c=="CN3" 
+drop if c=="MX1" | c=="MX2" |  c=="MX3" |  c=="CN1"  |  c=="CN2"  |  c=="CN3"  |  c=="CN4" 
 set more off
 
 foreach i of global ori_choc {
@@ -649,50 +692,6 @@ set more on
 end
 
 
-*-------------------------------------------------------------------------------
-*DEVALUATION OF THE EURO What happens when the euro is devaluated? To know that, we do a shock of 1 on all countries but the eurozone.
-*-------------------------------------------------------------------------------
-
-capture program drop shock_deval
-program shock_deval
-	args yrs shk wgt zone
-*yrs = years,shk = 1, wgt = Yt (output) or X (export) or VAt (value-added), zone = noneuro (for a shock corresponding to a devaluation of the euro), china or eastern
-
-set matsize 7000
-*set trace on
-set more off
-clear
-
-//compute_leontieff `yrs'
-if ("`wgt'" == "Yt")  {
-	create_y `yrs' 
-	}
-if ("`wgt'" == "X")  {
-	compute_X `yrs'
-	}
-
-compute_leontief_chocnom `yrs' `zone' 
-vector_shock_exch `shk' `zone'
-shock_exch `yrs' `zone'
-compute_mean `zone' `wgt'
-
-clear
-svmat shock`zone'
-
-* shockARG1 represents the mean effect of a price shock coming from Argentina for each country
-save "$dir/Results/Devaluations/mean_`zone'_`wgt'_`yrs'.dta", replace
-*We obtain a table of mean effect of a price shock from each country to all countries
-
-export excel using "$dir/Results/Devaluations/mean_`zone'_`wgt'_`yrs'.xls", firstrow(variables)
-
-*set trace off
-*set more on
-
-end
-
-*/
-
-
 
 
 *--------------------------------------------------------------------------------
@@ -706,26 +705,38 @@ clear
 set more off
 
 
-Definition_pays_secteur TIVA
+foreach source in   WIOD TIVA { 
+
+
+if "`source'"=="WIOD" local start_year 2000
+if "`source'"=="TIVA" local start_year 1995
+
+
+if "`source'"=="WIOD" local end_year 2014
+if "`source'"=="TIVA" local end_year 2011
+Definition_pays_secteur `source'
 
 // Fabrication des fichiers d'effets moyens des chocs de change
-
+// pour le choc CPI, faire tourner compute_HC et compute_leontief, les autres ne sont pas indispensables
  *2005 2009 2010 2011
-foreach i of numlist 1995(1)2011  /*2005 2009 2010 2011*/ {
+foreach i of numlist `start_year' (1)`start_year'  {
 	clear
 	set more off
-	*compute_leontief `i' TIVA
-	* compute_X `i' TIVA
-	*create_y `i'
-	*compute_VA `i'
-	compute_HC `i' TIVA
+	compute_leontief `i' `source'
+	compute_X `i' `source'
+	create_y `i' `source'
+*	compute_VA `i' `source'
+   *compute_HC `i' `source'
 	
 }
 
-foreach i of numlist 1995(1)2011 /*2000 2005 2009 2010 2011 */{
+foreach i of numlist `start_year'(1) `start_year'{
+
 *foreach j in Yt X 
-		foreach j in HC {
-		table_mean `i' `j' 1 TIVA
+		foreach j in X Yt {
+
+		table_mean `i' `j' 1 `source'
+		
 	}
 }
 
@@ -733,7 +744,7 @@ foreach i of numlist 1995(1)2011 /*2000 2005 2009 2010 2011 */{
 */
 
 
-log close
+capture log close
 /*
 
 // dévaluation de l'euro par rapport à toutes les monnaies
@@ -745,7 +756,8 @@ compute_leontieff 2011
 
 
 set more on
+*/
 
-
+}
 
 

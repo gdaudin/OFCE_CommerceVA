@@ -463,58 +463,19 @@ end
 capture program drop compute_X
 program compute_X
 	args yrs source
-
-use "$dir/Bases/`source'_ICIO_`yrs'.dta", clear
-
-
-*global country2 "arg aus aut bel bgr bra brn can che chl chn chn.npr chn.pro chn.dom col cri cyp cze deu dnk esp est fin fra gbr grc hkg hrv hun idn ind irl isl isr ita jpn khm kor ltu lux lva mex mex.ngm mex.gmf mlt mys nld nor nzl phl pol prt rou row rus sau sgp svk svn swe tha tun tur twn usa vnm zaf"
-
-*generate pays = strlower(substr(v1,1,strpos(v1,"_")-1))
-*drop if pays==""
-if "`source'"=="WIOD" {
-egen utilisations = rowtotal(vAUS01-vUSA61)
-gen utilisations_dom = .
-gen pays = substr("`i'",1,3)
-
-	foreach j of global country {
-		local i = "`j'"
-		egen blouk = rowtotal(*`i'*)
-		display "`i'" "`j'"
-		replace utilisations_dom = blouk if Country=="`j'"
-*		codebook utilisations_dom if Country=="`j'"
-		drop blouk
-		
-	}
-}
-
-if "`source'"=="TIVA" {
-egen utilisations = rowtotal(arg_c01t05agr-nps_zaf)
-gen utilisations_dom = .
-* liste de countrys
-
-gen Country = substr("v1",1,3)
- 
-	foreach j of global country {
-		local i = lower("`j'")
-		if  ("`j'"=="cn1" | "`j'"=="cn2" |"`j'"=="cn3"|"`j'"=="cn4" ) local i = "chn" 
-
-		if  ("`j'"=="mx1" | "`j'"=="mx2"| "`j'"=="mx3") local i = "mex"
-		
-		egen blouk = rowtotal(*`i'*)
-		display "`i'" "`j'"
-		replace utilisations_dom = blouk if strpos(v1,"`j'")!=0
-*		codebook utilisations_dom if 	strpos(v1,"`j'")!=0
-		drop blouk
-	}
-
-}
-generate X = utilisations - utilisations_dom
 	
-replace Country = strupper(Country)
-generate year = `yrs'
+	use "$dir/Bases/X_`source'.dta", clear
+	keep if year == `yrs'
+	foreach pays_conso of global country {
+		preserve
+		keep if pays_conso==strlower("`pays_conso'")
+		mkmat conso, matrix(HC_`pays_conso')
+		restore
+	}
+	
 
 *keep year Country X
-mkmat X
+mkmat X, matrix(X)
 display "fin compute_X"
 
 end
@@ -726,7 +687,7 @@ foreach source in   WIOD TIVA {
 		compute_leontief `i' `source'
 		compute_X `i' `source'
 		create_y `i' `source'
-		compute_HC `i' `source'
+		*compute_HC `i' `source'
 *		compute_VA `i' `source'
 	
 	}

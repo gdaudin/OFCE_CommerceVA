@@ -166,44 +166,16 @@ end
 **Pas mis à jour : nous n'avons pas les salaire WIOD et nous ne trouvons pas les salaire TIVA
 capture program drop base_wage
 program base_wage
-	args yrs n
+	args yrs n source
 *yrs = years, n = onglet WAGE or OUT
 	clear
 	use "$dir/Bases/`n'_`yrs'.dta"
 
+	do "Definition_pays_secteur" `source'
 *List of countries for which there is no data available for wages
 	global restcountry "ISL BRN COL CRI HKG HRV KHM MEX_GMF MEX_NGM MYS PHL ROW SAU SGP THA TUN "
 	global chncountry "CHN_DOM CHN_NPR CHN_PRO"
 
-if "`source'"=="TIVA" {
-	global country "ARG AUS AUT BEL BGR BRA BRN CAN CHE CHL"
-	global country "$country  CHN CN1 CN2 CN3 CN4 COL CRI CYP CZE DEU DNK ESP EST FIN"
-	global country "$country  FRA GBR GRC HKG HRV HUN IDN IND IRL ISL ISR ITA JPN KHM KOR"
-	global country "$country  LTU LUX LVA MAR MEX MLT MX1 MX2 MX3 MYS NLD NOR NZL PER PHL POL PRT"
-	global country "$country  ROU ROW RUS SAU SGP SVK SVN SWE THA TUN TUR TWN USA VNM ZAF"
-	
-	
-	global sector "C01T05 C10T14 C15T16 C17T19 C20 C21T22"
-	global sector "$sector C23 C24 C25 C26 C27 C28 C29 C30T33X C31 C34 C35 C36T37 C40T41 C45"
-	global sector "$sector C50T52 C55 C60T63 C64 C65T67 C70 C71 C72 C73T74 C75 C80 C85 C90T93 C95"
-	
-}
-				
-				
-if "`source'"=="WIOD" {
-	global country "   AUS AUT BEL BGR BRA     CAN CHE" 
-	global country "$country CHN                             CYP CZE DEU DNK ESP EST FIN"
-	global country "$country FRA GBR GRC     HRV HUN IDN IND IRL       ITA JPN     KOR"
-	global country "$country LTU LUX LVA MEX              MLT     NLD NOR        POL PRT"
-	global country "$country ROU ROW RUS       SVK SVN SWE       TUR TWN USA        "
-	
-	
-	global sector "A01 A02 A03 B C10-C12 C13-C15 C16 C17 C18 C19 C20 C21 C22"
-	global sector "$sector C23 C24 C25 C26 C27 C28 C29 C31_C32 C33 C35 E35 E36 E37-E39"
-	global sector "$sector F G45 G46 G47 H49 H50 H51 H52 H53 I J58 J59_J60"
-	global sector "$sector J61 J62_J63 K64 K65 K66 L68 M69_M70 M71 M72 M73"
-	global sector "$sector M74_M75 N O84 O85 Q R_S T U"
-}
 
 
 	foreach i of global chncountry {
@@ -391,6 +363,7 @@ collapse (sum) prod, by(pays year)
 
 end 
 
+*Pour TIVA, la production agrégée CHN est nulle, celle de CN1 CN2 CN3 CN4 ne l'est pas
 capture program drop append_y
 program append_y
 args source
@@ -501,12 +474,7 @@ foreach y of numlist `yr_list' {
 	save "$dir/Bases/exports_`source'.dta", replace
 }	
 
-replace pays = "CHNNPR" if pays == "CHN.NPR"
-replace pays = "CHNPRO" if pays == "CHN.PRO"
-replace pays = "CHNDOM" if pays == "CHN.DOM"
-replace pays = "MEXNGM" if pays == "MEX.NGM"
-replace pays = "MEXGMF" if pays == "MEX.GMF"
- 
+
 sort year , stable
 save "$dir/Bases/exports_`source'.dta", replace
  
@@ -554,26 +522,26 @@ foreach i of numlist 1995 2000 2005 {
 
 database_csv TIVA
 database_csv WIOD
-/*
+
 set more off
 
 
 
-append_y TIVA
+*append_y TIVA
 
 
-append_X TIVA
-*/
+*append_X TIVA
 
 
 
 
-*append_y WIOD
 
-/*
-append_X WIOD
+append_y WIOD
 
-*/
+
+*append_X WIOD
+
+
 
 log close
 

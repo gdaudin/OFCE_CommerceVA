@@ -496,20 +496,20 @@ svmat C`cty't, name(C`cty')
 
 if ("`wgt'" == "HC")  {
 	foreach pays_conso of global country_hc {
-	svmat HC_`pays_conso', name(HC_`pays_conso')
-	generate Bt_`pays_conso' = C`cty'* HC_`pays_conso'
-	egen tot_HC_`pays_conso' = total(HC_`pays_conso')
-	generate sector_shock_`pays_conso' = Bt_`pays_conso'/tot_`wgt'_`pays_conso'
-	egen shock`cty'_`pays_conso' = total(sector_shock_`pays_conso')
-*	keep if _n==1
-	mkmat shock`cty'_`pays_conso'
+        svmat HC_`pays_conso', name(HC_`pays_conso')
+        generate Bt_`pays_conso' = C`cty'* HC_`pays_conso'
+        egen tot_HC_`pays_conso' = total(HC_`pays_conso')
+        generate sector_shock_`pays_conso' = Bt_`pays_conso'/tot_`wgt'_`pays_conso'
+        egen shock`cty'_`pays_conso' = total(sector_shock_`pays_conso')
+    *	keep if _n==1
+        mkmat shock`cty'_`pays_conso'
 
-	if `blink'== 0 matrix shock`cty' = shock`cty'_`pays_conso'[1,1]
-	if `blink'!= 0 matrix shock`cty' = shock`cty' \ shock`cty'_`pays_conso'[1,1]
-	matrix drop shock`cty'_`pays_conso'
-	local blink=`blink'+1	
-	drop Bt* tot* sector_shock* HC*  shock*
-	}
+        if `blink'== 0 matrix shock`cty' = shock`cty'_`pays_conso'[1,1]
+        if `blink'!= 0 matrix shock`cty' = shock`cty' \ shock`cty'_`pays_conso'[1,1]
+        matrix drop shock`cty'_`pays_conso'
+        local blink=`blink'+1	
+        drop Bt* tot* sector_shock* HC*  shock*
+    }
 }
 
 
@@ -622,7 +622,7 @@ foreach source in   WIOD TIVA {
 		compute_leontief `i' `source'
 		compute_X `i' `source'
 		create_y `i' `source'
-		*compute_HC `i' `source'
+		compute_HC `i' `source'
 *		compute_VA `i' `source'
 	
 	}

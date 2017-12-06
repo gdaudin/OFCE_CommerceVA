@@ -22,8 +22,7 @@ gen imp=0 if pays==upper(pays_conso)|  pays==pays_conso ///
 replace imp=1 if imp==. 
 
 
-if "`source'"=="WIOD" gen imp=1 if pays==upper(pays_conso)
-if "`source'"=="TIVA" gen imp=1 if pays==pays_conso
+replace imp=1 if upper(pays)==upper(pays_conso)
 replace imp=0 if imp==. 
 
 collapse (sum) conso, by(imp year pays_conso)

@@ -32,7 +32,7 @@ capture program drop compute_leontief
 program compute_leontief
 args yrs source
 
-Definition_pays_secteur `source'
+	do "$dirgit/Definition_pays_secteur.do" `source' 
 	
 *Create vector Y of output from troncated database
 clear
@@ -406,15 +406,8 @@ capture program drop compute_X
 program compute_X
 	args yrs source
 	
-	use "$dir/Bases/X_`source'.dta", clear
-	keep if year == `yrs'
-	foreach pays_conso of global country {
-		preserve
-		keep if pays_conso==strlower("`pays_conso'")
-		mkmat conso, matrix(HC_`pays_conso')
-		restore
-	}
-	
+use "$dir/Bases/X_`source'.dta", clear
+keep if year == `yrs'
 
 *keep year Country X
 mkmat X, matrix(X)

@@ -216,7 +216,7 @@ end
 
 **pOUR TEST
 
-do "$dirgit/Definition_pays_secteur.do" `source' WIOD
+do "Definition_pays_secteur" `source' WIOD
 imp_inputs_par_sect 2011 WIOD hze_not
 
 imp_inputs 2011 WIOD X hze_not

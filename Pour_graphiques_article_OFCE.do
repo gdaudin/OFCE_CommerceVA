@@ -7,12 +7,15 @@ else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
 *capture log close
 *log using "$dir/$S_DATE.log", replace
 
-global eurozone "AUT BEL CYP DEU ESP EST FIN FRA GRC IRL ITA LTU LUX LVA MLT NLD PRT SVK SVN"
-global eastern "BGR CZE HRV HUN POL ROU"
-global eastern_ZE "EST LTU LVA SVK SVN"
+if ("`c(username)'"=="guillaumedaudin") global dirgit "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation/"
+if ("`c(username)'"=="w817186") global dirgit "X:\Agents\FAUBERT\commerce_VA_inflation\"
+if ("`c(username)'"=="n818881") global dirgit "X:\Agents\LALLIARD\commerce_VA_inflation\"
 
-program pour_graphiques_article_OFCE
-	args source yrs
+do "Definition_pays_secteur.do" TIVA
+do "Definition_pays_secteur.do" WIOD
+
+*program pour_graphiques_article_OFCE
+	*args source yrs
 
 
 *--------------------------
@@ -69,7 +72,7 @@ save "$dir/Results/Devaluations/Pour_Graph_1_TIVA_old.dta", replace
 export delimited "$dir/Results/Devaluations/Pour_Graph_1_TIVA_old.csv", replace
 
 
-graph bar (asis) pond_TIVA_X pond_TIVA_Y , over(c, sort(pond_TIVA_X) label(angle(vertical) labsize(tiny))) 
+graph bar (asis) pond_TIVA_X pond_TIVA_Y , over(c, sort(pond_TIVA_X) label(angle(vertical) labsize(small))) 
 
 graph export "$dir/Results/Devaluations/Graph_1_TIVA_old.png", replace
 
@@ -119,7 +122,6 @@ merge 1:1 c using "$dir/Bases/Pays_FR.dta",keep(3)
 drop _merge
 
 
-
 merge 1:1 c using "$dir/Results/Devaluations/Pour_Graph_1_WIOD.dta"
 
 drop _merge 
@@ -133,13 +135,11 @@ label var pond_WIOD_X "Prix d'exportation"
 save "$dir/Results/Devaluations/Pour_Graph_1_WIOD_old.dta", replace
 export delimited "$dir/Results/Devaluations/Pour_Graph_1_WIOD_old.csv", replace
 
-
-graph bar (asis) pond_WIOD_X pond_WIOD_Y , over(c, sort(pond_WIOD_X) label(angle(vertical) labsize(tiny))) 
+graph bar (asis) pond_WIOD_X pond_WIOD_Y , over(c, sort(pond_WIOD_X) label(angle(vertical) labsize(small))) 
 
 graph export "$dir/Results/Devaluations/Graph_1_WIOD_old.png", replace
 
 drop if strpos("$eurozone",c)==0
-
 
 graph bar (asis) pond_WIOD_X pond_WIOD_Y , over(c_full_FR, sort(pond_WIOD_X) label(angle(vertical) labsize(small)))
 
@@ -150,24 +150,20 @@ export delimited "$dir/Results/Devaluations/Pour_Graph_1_WIOD.csv", replace
 export excel "$dir/Results/Devaluations/Pour_Graph_1_WIOD.xlsx", firstrow(variable)replace
 
 
-
-
-
-
 *Graphique 2
 *TIVA
 
-use "$dir/Results/Devaluations/mean_chg_TIVA_X_1995.dta", clear
+use "$dir/Results/Devaluations/mean_chg_TIVA_X_2000.dta", clear
 
 foreach var of varlist shockEUR1-shockZAF1 {
 	local pays = substr("`var'",6,3)
 	replace `var' = 0 if strmatch(c,"*`pays'*")==0
 }
 
-egen pond_TIVA_X_1995 = rowtotal(shockEUR1-shockZAF1)
-replace pond_TIVA_X_1995 = (pond_TIVA_X_1995 - 1)/2
+egen pond_TIVA_X_2000 = rowtotal(shockEUR1-shockZAF1)
+replace pond_TIVA_X_2000 = (pond_TIVA_X_2000 - 1)/2
 
-keep c pond_TIVA_X_1995
+keep c pond_TIVA_X_2000
 
 merge 1:1 c using "$dir/Results/Devaluations/Pour_Graph_1_TIVA_old.dta"
 drop _merge
@@ -177,7 +173,7 @@ rename pond_TIVA_X pond_TIVA_X_2011
 drop pond_TIVA_Y
 
 
-label var pond_TIVA_X_1995 "Prix d'exportation, 1995"
+label var pond_TIVA_X_2000 "Prix d'exportation, 2000"
 
 label var pond_TIVA_X_2011 "Prix d'exportation, 2011"
 
@@ -185,7 +181,7 @@ save "$dir/Results/Devaluations/Pour_Graph_2_TIVA_old.dta", replace
 export delimited "$dir/Results/Devaluations/Pour_Graph_2_TIVA_old.csv", replace
 
 
-graph bar (asis) pond_TIVA_X_1995 pond_TIVA_X_2011 , over(c, sort(pond_TIVA_X_2011) label(angle(vertical) labsize(tiny))) 
+graph bar (asis) pond_TIVA_X_2000 pond_TIVA_X_2011 , over(c, sort(pond_TIVA_X_2011) label(angle(vertical) labsize(small))) 
 
 graph export "$dir/Results/Devaluations/Graph_2_TIVA_old.png", replace
 
@@ -194,13 +190,11 @@ drop if strpos("$eurozone",c)==0
 merge 1:1 c using "$dir/Bases/Pays_FR.dta",keep(3)
 drop _merge
 
-label var pond_TIVA_X_1995 "1995"
+label var pond_TIVA_X_2000 "2000"
 
 label var pond_TIVA_X_2011 "2011"
 
-
-graph bar (asis) pond_TIVA_X_2011 pond_TIVA_X_1995  , over(c_full_FR, sort(pond_TIVA_X_2011) label(angle(vertical) labsize(small))) 
-
+graph bar (asis) pond_TIVA_X_2011 pond_TIVA_X_2000  , over(c_full_FR, sort(pond_TIVA_X_2011) label(angle(vertical) labsize(small))) 
 
 graph export "$dir/Results/Devaluations/Graph_2_TIVA.png", replace
 save "$dir/Results/Devaluations/Pour_Graph_2_TIVA.dta", replace
@@ -212,17 +206,17 @@ export excel "$dir/Results/Devaluations/Pour_Graph_2_TIVA.xlsx", firstrow(variab
 *Graphique 2
 *WIOD
 
-use "$dir/Results/Devaluations/mean_chg_WIOD_X_1995.dta", clear
+use "$dir/Results/Devaluations/mean_chg_WIOD_X_2000.dta", clear
 
 foreach var of varlist shockEUR1-shockUSA1 {
 	local pays = substr("`var'",6,3)
 	replace `var' = 0 if strmatch(c,"*`pays'*")==0
 }
 
-egen pond_WIOD_X_1995 = rowtotal(shockEUR1-shockUSA1)
-replace pond_WIOD_X_1995 = (pond_WIOD_X_1995 - 1)/2
+egen pond_WIOD_X_2000 = rowtotal(shockEUR1-shockUSA1)
+replace pond_WIOD_X_2000 = (pond_WIOD_X_2000 - 1)/2
 
-keep c pond_WIOD_X_1995
+keep c pond_WIOD_X_2000
 
 merge 1:1 c using "$dir/Results/Devaluations/Pour_Graph_1_WIOD_old.dta"
 drop _merge
@@ -232,7 +226,7 @@ rename pond_WIOD_X pond_WIOD_X_2011
 drop pond_WIOD_Y
 
 
-label var pond_WIOD_X_1995 "Prix d'exportation, 1995"
+label var pond_WIOD_X_2000 "Prix d'exportation, 2000"
 
 label var pond_WIOD_X_2011 "Prix d'exportation, 2011"
 
@@ -240,7 +234,7 @@ save "$dir/Results/Devaluations/Pour_Graph_2_WIOD_old.dta", replace
 export delimited "$dir/Results/Devaluations/Pour_Graph_2_WIOD_old.csv", replace
 
 
-graph bar (asis) pond_WIOD_X_1995 pond_WIOD_X_2011 , over(c, sort(pond_WIOD_X_2011) label(angle(vertical) labsize(tiny))) 
+graph bar (asis) pond_WIOD_X_2000 pond_WIOD_X_2011 , over(c, sort(pond_WIOD_X_2011) label(angle(vertical) labsize(small))) 
 
 graph export "$dir/Results/Devaluations/Graph_2_WIOD_old.png", replace
 
@@ -249,12 +243,11 @@ drop if strpos("$eurozone",c)==0
 merge 1:1 c using "$dir/Bases/Pays_FR.dta",keep(3)
 drop _merge
 
-label var pond_WIOD_X_1995 "1995"
+label var pond_WIOD_X_2000 "2000"
 
 label var pond_WIOD_X_2011 "2011"
 
-
-graph bar (asis) pond_WIOD_X_2011 pond_WIOD_X_1995  , over(c_full_FR, sort(pond_WIOD_X_2011) label(angle(vertical) labsize(small))) 
+graph bar (asis) pond_WIOD_X_2011 pond_WIOD_X_2000  , over(c_full_FR, sort(pond_WIOD_X_2011) label(angle(vertical) labsize(small))) 
 
 
 graph export "$dir/Results/Devaluations/Graph_2_WIOD.png", replace
@@ -264,180 +257,83 @@ export excel "$dir/Results/Devaluations/Pour_Graph_2_WIOD.xlsx", firstrow(variab
 
 
 
-
-
-
-
-
 **Graphique 3
 **TIVA
+foreach source in TIVA WIOD {
 
-
-use "$dir/Results/Devaluations/mean_chg_TIVA_X_2011.dta", clear
+use "$dir/Results/Devaluations/mean_chg_`source'_X_2011.dta", clear
 
 keep c shockEUR1
 drop if strpos("$eurozone",c)==0
-rename shockEUR1 pond_TIVA_X
-replace pond_TIVA_X = (pond_TIVA_X - 1)/2
+rename shockEUR1 pond_`source'_X
+replace pond_`source'_X = (pond_`source'_X - 1)/2
 
-save "$dir/Results/Devaluations/Pour_Graph_3_TIVA.dta", replace
+save "$dir/Results/Devaluations/Pour_Graph_3_`source'.dta", replace
 
 use "$dir/Results/Devaluations/mean_chg_TIVA_Yt_2011.dta", clear
 
 keep c shockEUR1
 drop if strpos("$eurozone",c)==0
 
+rename shockEUR1 pond_`source'_Yt
+replace pond_`source'_Yt = (pond_`source'_Yt - 1)/2
 
-
-rename shockEUR1 pond_TIVA_Yt
-replace pond_TIVA_Yt = (pond_TIVA_Yt - 1)/2
-
-
-
-merge 1:1 c using "$dir/Results/Devaluations/Pour_Graph_3_TIVA.dta"
+merge 1:1 c using "$dir/Results/Devaluations/Pour_Graph_3_`source'.dta"
 drop _merge
 
 merge 1:1 c using "$dir/Bases/Pays_FR.dta",keep(3)
 drop _merge
 
-label var pond_TIVA_Yt "Prix de production"
+label var pond_`source'_Yt "Prix de production"
 
-label var pond_TIVA_X "Prix d'exportation"
+label var pond_`source'_X "Prix d'exportation"
 
-save "$dir/Results/Devaluations/Pour_Graph_3_TIVA.dta", replace
-export delimited "$dir/Results/Devaluations/Pour_Graph_3_TIVA.csv", replace
-export excel "$dir/Results/Devaluations/Pour_Graph_3_TIVA.xlsx", firstrow(variable)replace
+save "$dir/Results/Devaluations/Pour_Graph_3_`source'.dta", replace
+export delimited "$dir/Results/Devaluations/Pour_Graph_3_`source'.csv", replace
+export excel "$dir/Results/Devaluations/Pour_Graph_3_`source'.xlsx", firstrow(variable)replace
 
-graph bar (asis) pond_TIVA_X pond_TIVA_Yt , over(c_full_FR, sort(pond_X) label(angle(vertical) )) 
-
-
-graph export "$dir/Results/Devaluations/Graph_3_TIVA.png", replace
-
-**Graphique 3
-**WIOD
-
-
-use "$dir/Results/Devaluations/mean_chg_WIOD_X_2011.dta", clear
-
-keep c shockEUR1
-drop if strpos("$eurozone",c)==0
-rename shockEUR1 pond_WIOD_X
-replace pond_WIOD_X = (pond_WIOD_X - 1)/2
-
-save "$dir/Results/Devaluations/Pour_Graph_3_WIOD.dta", replace
-
-use "$dir/Results/Devaluations/mean_chg_WIOD_Yt_2011.dta", clear
-
-keep c shockEUR1
-drop if strpos("$eurozone",c)==0
-
-
-
-rename shockEUR1 pond_WIOD_Yt
-replace pond_WIOD_Yt = (pond_WIOD_Yt - 1)/2
-
-
-
-merge 1:1 c using "$dir/Results/Devaluations/Pour_Graph_3_WIOD.dta"
-drop _merge
-
-merge 1:1 c using "$dir/Bases/Pays_FR.dta",keep(3)
-drop _merge
-
-label var pond_WIOD_Yt "Prix de production"
-
-label var pond_WIOD_X "Prix d'exportation"
-
-save "$dir/Results/Devaluations/Pour_Graph_3_WIOD.dta", replace
-export delimited "$dir/Results/Devaluations/Pour_Graph_3_WIOD.csv", replace
-export excel "$dir/Results/Devaluations/Pour_Graph_3_WIOD.xlsx", firstrow(variable)replace
-
-graph bar (asis) pond_WIOD_X pond_WIOD_Yt , over(c_full_FR, sort(pond_X) label(angle(vertical) )) 
-
-
-graph export "$dir/Results/Devaluations/Graph_3_WIOD.png", replace
+graph bar (asis) pond_`source'_X pond_`source'_Yt , over(c_full_FR, sort(pond_`source'_X) label(angle(vertical) )) 
+graph export "$dir/Results/Devaluations/Graph_3_`source'.png", replace
+}
 
 **Graphique 4
-*TIVA
 
-use "$dir/Results/Devaluations/mean_chg_TIVA_X_2011.dta", clear
-
-keep c shockEUR1
-drop if strpos("$eurozone",c)!=0
-rename shockEUR1 pond_TIVA_X
-
-
-save "$dir/Results/Devaluations/Pour_Graph_4_TIVA.dta", replace
-
-use "$dir/Results/Devaluations/mean_chg_TIVA_Yt_2011.dta", clear
+foreach source in TIVA WIOD {
+use "$dir/Results/Devaluations/mean_chg_`source'_X_2011.dta", clear
 
 keep c shockEUR1
 drop if strpos("$eurozone",c)!=0
-rename shockEUR1 pond_TIVA_Yt
+rename shockEUR1 pond_`source'_X
+
+
+save "$dir/Results/Devaluations/Pour_Graph_4_`source'.dta", replace
+
+use "$dir/Results/Devaluations/mean_chg_`source'Yt_2011.dta", clear
+
+keep c shockEUR1
+drop if strpos("$eurozone",c)!=0
+rename shockEUR1 pond_`source'_Yt
 
 merge 1:1 c using "$dir/Bases/Pays_FR.dta",keep(3)
 drop _merge
 
 
-
-
-merge 1:1 c using "$dir/Results/Devaluations/Pour_Graph_4_TIVA.dta"
+merge 1:1 c using "$dir/Results/Devaluations/Pour_Graph_4_`source'.dta"
 drop _merge
 
-label var pond_TIVA_Yt "Prix de production"
+label var pond_`source'_Yt "Prix de production"
 
-label var pond_TIVA_X "Prix d'exportation"
+label var pond_`source'_X "Prix d'exportation"
 
-save "$dir/Results/Devaluations/Pour_Graph_4_TIVA.dta", replace
-export delimited "$dir/Results/Devaluations/Pour_Graph_4_TIVA.csv", replace
-export excel "$dir/Results/Devaluations/Pour_Graph_4_TIVA.xlsx", firstrow(variable)replace
+save "$dir/Results/Devaluations/Pour_Graph_4_`source'.dta", replace
+export delimited "$dir/Results/Devaluations/Pour_Graph_4_`source'.csv", replace
+export excel "$dir/Results/Devaluations/Pour_Graph_4_`source'.xlsx", firstrow(variable)replace
 
-graph bar (asis) pond_TIVA_X pond_TIVA_Yt , over(c_full_FR, sort(pond_TIVA_X) descending label(angle(vertical) labsize(vsmall))) 
+graph bar (asis) pond_`source'_X pond_`source'_Yt , over(c_full_FR, sort(pond_`source'_X) descending label(angle(vertical) labsize(vsmall))) 
 
+graph export "$dir/Results/Devaluations/Graph_4_`source'.png", replace
 
-graph export "$dir/Results/Devaluations/Graph_4_TIVA.png", replace
-
-
-**Graphique 4
-*WIOD
-
-use "$dir/Results/Devaluations/mean_chg_WIOD_X_2011.dta", clear
-
-keep c shockEUR1
-drop if strpos("$eurozone",c)!=0
-rename shockEUR1 pond_WIOD_X
-
-
-save "$dir/Results/Devaluations/Pour_Graph_4_WIOD.dta", replace
-
-use "$dir/Results/Devaluations/mean_chg_WIOD_Yt_2011.dta", clear
-
-keep c shockEUR1
-drop if strpos("$eurozone",c)!=0
-rename shockEUR1 pond_WIOD_Yt
-
-merge 1:1 c using "$dir/Bases/Pays_FR.dta",keep(3)
-drop _merge
-
-
-
-
-merge 1:1 c using "$dir/Results/Devaluations/Pour_Graph_4_WIOD.dta"
-drop _merge
-
-label var pond_WIOD_Yt "Prix de production"
-
-label var pond_WIOD_X "Prix d'exportation"
-
-save "$dir/Results/Devaluations/Pour_Graph_4_WIOD.dta", replace
-export delimited "$dir/Results/Devaluations/Pour_Graph_4_WIOD.csv", replace
-export excel "$dir/Results/Devaluations/Pour_Graph_4_WIOD.xlsx", firstrow(variable)replace
-
-graph bar (asis) pond_WIOD_X pond_WIOD_Yt , over(c_full_FR, sort(pond_WIOD_X) descending label(angle(vertical) labsize(vsmall))) 
-
-
-graph export "$dir/Results/Devaluations/Graph_4_WIOD.png", replace
-
+}
 
 
 
@@ -589,7 +485,7 @@ graph export "$dir/Results/Choc de prod/Graph_5_TIVA.png", replace
 
 
 
-**Tableau 1
+**Tableau 0
 
 
 local i =1 
@@ -625,10 +521,10 @@ foreach source in WIOD TIVA {
 		}
 	}
 }
-***Tableau 2
+***Tableau 1
+**Elasticité des prix d'exportations en euros à une appréciation de l'euro 
 
-
-foreach year in 1995 2000 2005 2009 2010 2011 {
+foreach year in 1995 1996 1997 1998 1999 2000 2001 2002 2003 2004 2005 2006 2007 2008 2009 2010 2011 {
 		use "$dir/Results/Devaluations/mean_chg_TIVA_X_`year'.dta", clear
 		keep if strpos("$eurozone",c)!=0
 		
@@ -636,11 +532,23 @@ foreach year in 1995 2000 2005 2009 2010 2011 {
 		drop _merge 
 		
 		if `year'==1995 local column A
-		if `year'==2000 local column C
-		if `year'==2005 local column D
-		if `year'==2009 local column E
-		if `year'==2010 local column F
-		if `year'==2011 local column G
+		if `year'==1996 local column C
+		if `year'==1997 local column D
+		if `year'==1998 local column E
+		if `year'==1999 local column F
+		if `year'==2000 local column G
+		if `year'==2001 local column H
+		if `year'==2002 local column I
+		if `year'==2003 local column J
+		if `year'==2004 local column K
+		if `year'==2005 local column L
+		if `year'==2006 local column M
+		if `year'==2007 local column N
+		if `year'==2008 local column O
+		if `year'==2009 local column P
+		if `year'==2010 local column Q
+		if `year'==2011 local column R
+
 			
 		keep c_full_FR shockEUR1
 		order c_full_FR
@@ -655,23 +563,33 @@ foreach year in 1995 2000 2005 2009 2010 2011 {
 	
 	
 
-foreach year in 1995 2000 2005 2009 2010 2011 {
+foreach year in 2000 2001 2002 2003 2004 2005 2006 2007 2008 2009 2010 2011 2012 2013 2014 {
 		use "$dir/Results/Devaluations/mean_chg_WIOD_X_`year'.dta", clear
 		keep if strpos("$eurozone",c)!=0
 		
 		merge 1:1 c using "$dir/Bases/Pays_FR.dta",keep(3)
 		drop _merge 
 		
-		if `year'==1995 local column A
-		if `year'==2000 local column C
-		if `year'==2005 local column D
-		if `year'==2009 local column E
-		if `year'==2010 local column F
-		if `year'==2011 local column G
+		if `year'==2000 local column A
+		if `year'==2001 local column C
+		if `year'==2002 local column D
+		if `year'==2003 local column E
+		if `year'==2004 local column F
+		if `year'==2005 local column G
+		if `year'==2006 local column H
+		if `year'==2007 local column I
+		if `year'==2008 local column J
+		if `year'==2009 local column K
+		if `year'==2010 local column L
+		if `year'==2011 local column M
+		if `year'==2012 local column N
+		if `year'==2013 local column O
+		if `year'==2014 local column P
+
 			
 		keep c_full_FR shockEUR1
 		order c_full_FR
-		if `year'!=1995 drop c_full_FR 
+		if `year'!=2000 drop c_full_FR 
 		rename shockEUR1 _`year'
 		replace _`year' = (_`year' - 1)/2
 		
@@ -681,10 +599,11 @@ foreach year in 1995 2000 2005 2009 2010 2011 {
 }
 	
 
-***Tableau 3
+***Tableau 2
+**Elasticité des prix de production en euros des membres de la ZE à une appréciation des pays origin
 
 
-local orig USA CHN JPN GBR EAS RUS SAU
+local orig USA CHN JPN GBR EAS RUS AUS BRA CHE CAN DNK IDN IND KOR MEX NOR SWE TUR 
 
 foreach source in WIOD TIVA {
 	use "$dir/Results/Devaluations/mean_chg_`source'_Yt_2011.dta", clear
@@ -694,16 +613,27 @@ foreach source in WIOD TIVA {
 	drop _merge    
 
 		
-	keep c_full_FR  shockUSA1 shockCHN1 shockJPN1 shockGBR1 shockEAS1 shockRUS1 shockSAU1
-	order c_full_FR shockGBR1 shockUSA1 shockJPN1 shockEAS1 shockCHN1 shockRUS1 shockSAU1 
+	keep c_full_FR  shockUSA1 shockCHN1 shockJPN1 shockGBR1 shockEAS1 shockRUS1  shockAUS1 shockBRA1 shockCHE1 shockCAN1 shockDNK1 shockIDN1 shockIND1 shockKOR1 shockMEX1 shockNOR1 shockSWE1 shockTUR1
+	order c_full_FR shockGBR1 shockUSA1 shockJPN1 shockEAS1 shockCHN1 shockRUS1  shockAUS1 shockBRA1 shockCHE1 shockCAN1 shockDNK1 shockIDN1 shockIND1 shockKOR1 shockMEX1 shockNOR1 shockSWE1 shockTUR1
+	
 	rename shockGBR1 Royaume_Uni
 	rename shockUSA1 États_Unis
 	rename shockJPN1 Japon
 	rename shockEAS1 Pecos_hors_ZE
 	rename shockCHN1 Chine
 	rename shockRUS1 Russie
-	rename shockSAU1 Arabie_Saoudite
-
+	rename shockAUS1 Australie
+	rename shockBRA1 Brésil
+	rename shockCHE1 Suisse
+	rename shockCAN1 Canada
+	rename shockDNK1 Danemark
+	rename shockIDN1 Indonésie
+	rename shockIND1 Inde
+	rename shockKOR1 Corée
+	rename shockMEX1 Mexique
+	rename shockNOR1 Norvège
+	rename shockSWE1 Suède
+	rename shockTUR1 Turquie
 
 
 	export excel "$dir/Results/Devaluations/Tableau_2_`source'.xlsx", firstrow(variables) sheetmodify
@@ -711,10 +641,11 @@ foreach source in WIOD TIVA {
 }
 	
 	
-***Tableau 4
+***Tableau 3
+*** Elasticité des prix d'exportations en euros de la ZE à une appréciation de la monnaie des pays origin
 
+local orig USA CHN JPN GBR EAS RUS AUS BRA CHE CAN DNK IDN IND KOR MEX NOR SWE TUR 
 
-local orig USA CHN JPN GBR EAS RUS SAU
 foreach source in WIOD TIVA {
 	use "$dir/Results/Devaluations/mean_chg_`source'_X_2011.dta", clear
 	drop if strpos("$eurozone",c)==0
@@ -722,40 +653,53 @@ foreach source in WIOD TIVA {
 	merge 1:1 c using "$dir/Bases/Pays_FR.dta",keep(3)
 	drop _merge 
 		
-	keep c_full_FR shockUSA1 shockCHN1 shockJPN1 shockGBR1 shockEAS1 shockRUS1 shockSAU1  
-	order c_full_FR shockGBR1 shockUSA1 shockJPN1 shockEAS1 shockCHN1 shockRUS1 shockSAU1 
+	keep c_full_FR  shockUSA1 shockCHN1 shockJPN1 shockGBR1 shockEAS1 shockRUS1  shockAUS1 shockBRA1 shockCHE1 shockCAN1 shockDNK1 shockIDN1 shockIND1 shockKOR1 shockMEX1 shockNOR1 shockSWE1 shockTUR1
+	order c_full_FR shockGBR1 shockUSA1 shockJPN1 shockEAS1 shockCHN1 shockRUS1  shockAUS1 shockBRA1 shockCHE1 shockCAN1 shockDNK1 shockIDN1 shockIND1 shockKOR1 shockMEX1 shockNOR1 shockSWE1 shockTUR1
+	
 	rename shockGBR1 Royaume_Uni
 	rename shockUSA1 États_Unis
 	rename shockJPN1 Japon
 	rename shockEAS1 Pecos_hors_ZE
 	rename shockCHN1 Chine
 	rename shockRUS1 Russie
-	rename shockSAU1 Arabie_Saoudite
+	rename shockAUS1 Australie
+	rename shockBRA1 Brésil
+	rename shockCHE1 Suisse
+	rename shockCAN1 Canada
+	rename shockDNK1 Danemark
+	rename shockIDN1 Indonésie
+	rename shockIND1 Inde
+	rename shockKOR1 Corée
+	rename shockMEX1 Mexique
+	rename shockNOR1 Norvège
+	rename shockSWE1 Suède
+	rename shockTUR1 Turquie
 
 	export excel "$dir/Results/Devaluations/Tableau_3_`source'.xlsx", firstrow(variables) sheetmodify
 }
 	
 
-***Tableau 5
+***Tableau 4
+*** Elasticité des prix d'exportations en euro de la ZE à une appréciation d'une monnaie des PECO hors ZE 
 
 foreach source in WIOD TIVA {
-	foreach year in 1995 2000 2005 2009 2010 2011 {
+	foreach year in  2000 2005 2009 2010 2011 {
 		use "$dir/Results/Devaluations/mean_`source'_chg_X_`year'.dta", clear
 		keep if strpos("$eurozone",c)!=0
 		
-		if `year'==1995 local column A
-		if `year'==2000 local column C
-		if `year'==2005 local column D
-		if `year'==2009 local column E
-		if `year'==2010 local column F
-		if `year'==2011 local column G
+		if `year'==2000 local column A
+		if `year'==2005 local column C
+		if `year'==2009 local column D
+		if `year'==2010 local column E
+		if `year'==2011 local column F
+
 			
 		merge 1:1 c using "$dir/Bases/Pays_FR.dta",keep(3)
 		drop _merge 
 		
 		keep c_full_FR shockEAS1
 		order c_full_FR
-		if `year'!=1995 drop c_full_FR
+		if `year'!=2000 drop c_full_FR
 		rename shockEAS1 _`year'
 		
 		
@@ -766,10 +710,11 @@ foreach source in WIOD TIVA {
 
 
 
-blouk
 
-***Tableau 6
-	
+
+***Tableau 5
+*** Elasticité des prix de production de la ZE à un choc de productivité négatif domestique
+/*	
 use "$dir/Results/Choc de prod/mean_p_X_2011.dta", clear
 
 
@@ -831,7 +776,8 @@ export excel "$dir/Results/Choc de prod/Tableau_5.xlsx", firstrow(variables) rep
 
 
 
-***Tableau 7
+***Tableau 6
+***Elasticité des prix d'exportations de la ZE à un choc de productivité des pays dans les pays cités
 
 use "$dir/Results/Choc de prod/mean_p_X_2011.dta", clear
 
@@ -886,19 +832,26 @@ order c_full_FR Pecos_hors_ZE  Pecos_ZE  Royaume_Uni  États_Unis Japon Chine
 
 export excel "$dir/Results/Choc de prod/Tableau_6.xlsx", firstrow(variables) replace
 
-
+*/
 
 
 **------------------ Pour graphiques de la fin
 
 
 clear  
+set more off
 if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
 else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
 
 
-*capture log close
-*log using "$dir/$S_DATE.log", replace
+if ("`c(username)'"=="guillaumedaudin") global dirgit "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation/"
+if ("`c(username)'"=="w817186") global dirgit "X:\Agents\FAUBERT\commerce_VA_inflation\"
+if ("`c(username)'"=="n818881") global dirgit "X:\Agents\LALLIARD\commerce_VA_inflation\"
+
+do "Definition_pays_secteur.do" TIVA
+do "Definition_pays_secteur.do" WIOD
+
+
 
 cd "$dir"
 
@@ -907,19 +860,17 @@ set matsize 7000
 
 set more off
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-global eurozone "AUT BEL CYP DEU ESP EST FIN FRA GRC IRL ITA LTU LUX LVA MLT NLD PRT SVK SVN"
-
-
+*** Graphique 6
+***  Elasticité des prix de production des pays de la ZE à un choc sur la monnaie nationale fictive et part des inputs importés dans la produvtion
 use "$dir/Bases/imp_inputs_2011.dta" , clear //,keep(3)
 
 gen c=upper(pays)
 drop pays
 
-merge 1:1 c using "$dir/Results/Devaluations/Pour_Graph_1.dta"
+merge 1:1 c using "$dir/Results/Devaluations/Pour_Graph_1_TIVA.dta"
 
-drop _merge pond_X
+drop _merge pond_TIVA_X 
 
 //replace pond_Y = (pond_Y - 1)/2 
 
@@ -942,10 +893,8 @@ export excel "$dir/Results/Devaluations/Pour_Graph_6.xlsx", firstrow(variable)re
 graph twoway (scatter pond_Y input_prod, mlabel(c_full_FR)) (qfit pond_Y input_prod)  ,    xtitle("Parts des inputs importés dans la production") ytitle("Prix de production")
 graph export "$dir/Results/Devaluations/Graph_1_imp.png", replace   */
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////
-
-global eurozone "AUT BEL CYP DEU ESP EST FIN FRA GRC IRL ITA LTU LUX LVA MLT NLD PRT SVK SVN"
-
+*** Graphique 7
+***Elasticité des prix de production des pays de la ZE à un choc de change de l'euro et part des inputs importés des pays hors ZE dans la production
 
 use "$dir/Bases/imp_inputs_hze_2011.dta", clear  //,keep(3)
 //drop _merge
@@ -982,12 +931,10 @@ graph twoway (scatter pond_Y input_prod, mlabel(c_full_FR)) (qfit pond_Y input_p
 export excel "$dir/Results/Devaluations/Pour_Graph_7.xlsx", firstrow(variable)replace
 
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-
-global eurozone "AUT BEL CYP DEU ESP EST FIN FRA GRC IRL ITA LTU LUX LVA MLT NLD PRT SVK SVN"
-
+*** Graphique 8
+***Elasticité des prix de production des pays de la ZE à un choc de productivité et part des inputs importés des pays hors ZE dans la production
 
 use "$dir/Bases/loc_inputs_2011.dta", clear  //,keep(3)
 //drop _merge
@@ -1024,12 +971,8 @@ graph twoway (scatter pond_Y loc_inputs, mlabel(c_full_FR)) (qfit pond_Y loc_inp
 			graph export "$dir/Results/Choc de prod/Graph_8.png", replace
 export excel "$dir/Results/Choc de prod/Pour_Graph_8.xlsx", firstrow(variable)replace
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-
-global eurozone "AUT BEL CYP DEU ESP EST FIN FRA GRC IRL ITA LTU LUX LVA MLT NLD PRT SVK SVN"
-
+*** Graphique 9 
 
 use "$dir/Bases/imp_inputsX_2011.dta", clear  //,keep(3)
 //drop _merge
@@ -1068,6 +1011,6 @@ graph twoway (scatter pond_X imp_inputs, mlabel(c_full_FR)) (lfit pond_X imp_inp
 export excel "$dir/Results/Devaluations/Pour_Graph_9.xlsx", firstrow(variable)replace
 
 
-end
-pour_graphiques_article_OFCE TIVA 2011
-pour_graphiques_article_OFCE WIOD 2011
+*end
+*pour_graphiques_article_OFCE TIVA 
+*pour_graphiques_article_OFCE WIOD 

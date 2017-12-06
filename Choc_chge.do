@@ -32,7 +32,7 @@ capture program drop compute_leontief
 program compute_leontief
 args yrs source
 
-Definition_pays_secteur `source'
+	do "$dirgit/Definition_pays_secteur.do" `source' 
 	
 *Create vector Y of output from troncated database
 clear

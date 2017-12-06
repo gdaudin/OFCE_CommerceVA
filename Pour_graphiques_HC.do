@@ -8,9 +8,13 @@ else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
 *log using "$dir/$S_DATE.log", replace
 
 
-global eurozone "AUT BEL CYP DEU ESP EST FIN FRA GRC IRL ITA LTU LUX LVA MLT NLD PRT SVK SVN"
-global eastern "BGR CZE HRV HUN POL ROU"
-global eastern_ZE "EST LTU LVA SVK SVN"
+if ("`c(username)'"=="guillaumedaudin") global dirgit "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation/"
+if ("`c(username)'"=="w817186") global dirgit "X:\Agents\FAUBERT\commerce_VA_inflation\"
+if ("`c(username)'"=="n818881") global dirgit "X:\Agents\LALLIARD\commerce_VA_inflation\"
+
+do "Definition_pays_secteur.do" TIVA
+do "Definition_pays_secteur.do" WIOD
+
 
 
 *--------------------------
@@ -70,6 +74,58 @@ graph export "$dir/Results/Devaluations/TIVA_HC_Graph_1.png", replace
 save "$dir/Results/Devaluations/Pour_TIVA_HC_Graph_1.dta", replace
 export delimited "$dir/Results/Devaluations/Pour_TIVA_HC_Graph_1.csv", replace
 export excel "$dir/Results/Devaluations/Pour_TIVA_HC_Graph_1.xlsx", firstrow(variable)replace
+
+
+*GRAPHIQUE HC 1 WIOD: comparaison évolution dans le temps en devise nationale
+
+
+use "$dir/Results/Devaluations/mean_chg_WIOD_HC_2000.dta", clear
+
+foreach var of varlist shockEUR1-shockUSA1 {
+	local pays = substr("`var'",6,3)
+	replace `var' = 0 if strmatch(c,"*`pays'*")==0
+}
+
+egen pond_WIOD_HC_2000 = rowtotal(shockEUR1-shockUSA1)
+replace pond_WIOD_HC_2000 = (pond_WIOD_HC_2000 - 1)/2
+
+keep c pond_WIOD_HC_2000
+save "$dir/Results/Devaluations/Pour_WIOD_HC_Graph_1_old.dta", replace
+
+use "$dir/Results/Devaluations/mean_chg_WIOD_HC_2011.dta", clear
+
+foreach var of varlist shockEUR1-shockUSA1 {
+	local pays = substr("`var'",6,3)
+	replace `var' = 0 if strmatch(c,"*`pays'*")==0
+}
+
+egen pond_WIOD_HC_2011 = rowtotal(shockEUR1-shockUSA1)
+replace pond_WIOD_HC_2011 = (pond_WIOD_HC_2011 - 1)/2
+
+keep c pond_WIOD_HC_2011
+
+merge 1:1 c using "$dir/Results/Devaluations/Pour_WIOD_HC_Graph_1_old.dta"
+drop _merge
+
+
+label var pond_WIOD_HC_2000 "Prix de consommation, 2000 "
+label var pond_WIOD_HC_2011 "Prix de consommation, 2011 "
+
+save "$dir/Results/Devaluations/Pour_WIOD_HC_Graph_1.dta", replace
+export delimited "$dir/Results/Devaluations/Pour_WIOD_HC_Graph_1.csv", replace
+
+
+graph bar (asis) pond_WIOD_HC_2000 pond_WIOD_HC_2011 , over(c, sort(pond_WIOD_HC_2011) label(angle(vertical) labsize(small))) 
+
+graph export "$dir/Results/Devaluations/Pour_WIOD_HC_Graph_1.png", replace
+
+drop if strpos("$eurozone",c)==0
+
+graph export "$dir/Results/Devaluations/WIOD_HC_Graph_1.png", replace
+save "$dir/Results/Devaluations/Pour_WIOD_HC_Graph_1.dta", replace
+export delimited "$dir/Results/Devaluations/Pour_WIOD_HC_Graph_1.csv", replace
+export excel "$dir/Results/Devaluations/Pour_WIOD_HC_Graph_1.xlsx", firstrow(variable)replace
+
 
 
 *GRAPHIQUE HC 1 WIOD: comparaison évolution dans le temps en devise nationale
@@ -510,7 +566,6 @@ export excel "$dir/Results/Devaluations/`source'_HC_Tab2long_`year'.xlsx", first
 
 ***Tableau 3 exhaustif WP: élasticité à une appréciation d'une monnaie d'un des pays origin
 * Comparaison de TIVA et WIOD
-set more off
 foreach  orig in  USA CHN JPN GBR EAS RUS AUS BRA CHE CAN DNK IDN IND KOR MEX NOR SWE TUR {
 foreach year in   2011  {
 use "$dir/Results/Devaluations/mean_chg_TIVA_HC_`year'.dta", clear
@@ -535,7 +590,7 @@ drop _merge
 
 keep c_full_FR  shock`orig'1*
 order c_full_FR shock`orig'1_WIOD* shock`orig'1_TIVA*
-export excel "$dir/Results/Devaluations/Compa_Tableau_2long_`year'_`orig'.xlsx", firstrow(variables)   sheetreplace 
+export excel "$dir/Results/Devaluations/Compa_Tableau_2long_`year'_`orig'.xlsx", firstrow(variables)   replace
 }
 }
 

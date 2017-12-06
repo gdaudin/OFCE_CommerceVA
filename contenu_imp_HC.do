@@ -1,3 +1,5 @@
+*Calcul du contenu en importations de la consommation des ménages (HC)
+
 clear
 *set trace on
 
@@ -10,14 +12,18 @@ capture program drop contenu_imp_HC
 program contenu_imp_HC
 args source
 
-*conso0= conso domestique, conso1= conso importée
 
+*HC_`source' contient la consommation des ménages (HC) du pays consommateur (pays_conso) 
+*en provenance du pays producteur (pays) pour un sector donné pour toutes les années
+* lorsque pays=pays_conso, pays_conso consomme un bien produit sur le marché domestique
 use "$dir/Bases/HC_`source'.dta", clear
 
-
+* Si la consommation est d'origine domestique (pays=pays_conso), imp=0 
+* avec pays_conso le pays consommateur et pays le pays producteur du bien
 gen imp=0 if pays==upper(pays_conso)|  pays==pays_conso ///
             |  pays_conso=="chn" & (pays=="cn1" | pays=="cn2" | pays=="cn3" | pays=="cn4") ///
 		    |  pays_conso=="mex" & (pays=="mx1" | pays=="mx2" | pays=="mx3")
+			
 			
 replace imp=1 if imp==. 
 
@@ -25,6 +31,7 @@ replace imp=1 if imp==.
 replace imp=1 if upper(pays)==upper(pays_conso)
 replace imp=0 if imp==. 
 
+*conso0= conso domestique, conso1= conso importée
 collapse (sum) conso, by(imp year pays_conso)
 tab imp
 reshape wide conso, i(pays_conso year) j(imp)

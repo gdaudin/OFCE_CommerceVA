@@ -385,8 +385,8 @@ end
 *CREATION OF A VECTOR CONTAINING MEAN EFFECTS OF A SHOCK ON EXCHANGE RATE FOR EACH COUNTRY
 *----------------------------------------------------------------------------------
 *Creation of the vector Y is required before table_adjst : matrix Yt
-capture program drop create_y
-program create_y
+capture program drop compute_Yt
+program compute_Yt
 args yrs source
 clear
 
@@ -396,7 +396,7 @@ use "$dir/Bases/`source'_`yrs'_OUT.dta"
 mkmat $var_entree_sortie, matrix(Y)
 matrix Yt = Y'
 
-display "fin compute_y"
+display "fin compute_Yt"
 
 end
 
@@ -496,20 +496,20 @@ svmat C`cty't, name(C`cty')
 
 if ("`wgt'" == "HC")  {
 	foreach pays_conso of global country_hc {
-	svmat HC_`pays_conso', name(HC_`pays_conso')
-	generate Bt_`pays_conso' = C`cty'* HC_`pays_conso'
-	egen tot_HC_`pays_conso' = total(HC_`pays_conso')
-	generate sector_shock_`pays_conso' = Bt_`pays_conso'/tot_`wgt'_`pays_conso'
-	egen shock`cty'_`pays_conso' = total(sector_shock_`pays_conso')
-*	keep if _n==1
-	mkmat shock`cty'_`pays_conso'
+        svmat HC_`pays_conso', name(HC_`pays_conso')
+        generate Bt_`pays_conso' = C`cty'* HC_`pays_conso'
+        egen tot_HC_`pays_conso' = total(HC_`pays_conso')
+        generate sector_shock_`pays_conso' = Bt_`pays_conso'/tot_`wgt'_`pays_conso'
+        egen shock`cty'_`pays_conso' = total(sector_shock_`pays_conso')
+    *	keep if _n==1
+        mkmat shock`cty'_`pays_conso'
 
-	if `blink'== 0 matrix shock`cty' = shock`cty'_`pays_conso'[1,1]
-	if `blink'!= 0 matrix shock`cty' = shock`cty' \ shock`cty'_`pays_conso'[1,1]
-	matrix drop shock`cty'_`pays_conso'
-	local blink=`blink'+1	
-	drop Bt* tot* sector_shock* HC*  shock*
-	}
+        if `blink'== 0 matrix shock`cty' = shock`cty'_`pays_conso'[1,1]
+        if `blink'!= 0 matrix shock`cty' = shock`cty' \ shock`cty'_`pays_conso'[1,1]
+        matrix drop shock`cty'_`pays_conso'
+        local blink=`blink'+1	
+        drop Bt* tot* sector_shock* HC*  shock*
+    }
 }
 
 
@@ -588,7 +588,7 @@ set more off
 Definition_pays_secteur TIVA
 *compute_leontief 2011 TIVA
 compute_X 2011 TIVA
-*create_y 2011 TIVA
+*compute_Yt 2011 TIVA
 *compute_HC 2011 TIVA
 
 global ori_choc "EUR"
@@ -616,16 +616,9 @@ foreach source in    TIVA {
 	// Fabrication des fichiers d'effets moyens des chocs de change
 	// pour le choc CPI, faire tourner compute_HC et compute_leontief, les autres ne sont pas indispensables
 	*2005 2009 2010 2011
-	foreach i of numlist `start_year' (1)`end_year'  {
-		clear
-		set more off
-		compute_leontief `i' `source'
-		compute_X `i' `source'
-		create_y `i' `source'
-		*compute_HC `i' `source'
-*		compute_VA `i' `source'
-	
-	}
+
+
+
 
 	if "`source'"=="TIVA" {
 	*	global ori_choc "CHN"
@@ -635,22 +628,38 @@ foreach source in    TIVA {
 		global ori_choc "$ori_choc PHL POL PRT ROU ROW RUS SAU SGP SVK SVN SWE THA TUN TUR TWN USA VNM ZAF"
 	}
 
-if "`source'"=="WIOD" {
+	if "`source'"=="WIOD" {
 		global ori_choc "EUR EAS"
 		global ori_choc "$ori_choc AUS AUT BEL BGR BRA     CAN CHE CHN                             CYP CZE DEU DNK ESP EST FIN " 
 		global ori_choc "$ori_choc FRA GBR GRC     HRV HUN IDN IND IRL       ITA JPN     KOR LTU LUX LVA MEX              MLT     NLD NOR        POL PRT"
 		global ori_choc "$ori_choc ROU ROW RUS       SVK SVN SWE       TUR TWN USA        "
-}
-	
-	
-	
-	foreach i of numlist `start_year'(1) `end_year'{
-		foreach j in X Yt HC {
-			table_mean `i' `j' 1 `source'
 	}
-}
+	
+	
+
+
+
+
+
+
+	foreach i of numlist `start_year' (1)`end_year'  {
+		clear
+		set more off
+		compute_leontief `i' `source'
+    	* compute_VA `i' `source'	
+    	foreach j in HC X Yt  {	
+
+    	    compute_`j' `i' `source'
+			table_mean `i' `j' 1 `source'
+
+	    }
+
+    }
 
 }
+
+
+
 
 
 capture log close

@@ -243,7 +243,7 @@ args source
 
 clear
 set more off
-do "Definition_pays_secteur" `source'
+do "$dirgit/Definition_pays_secteur" `source'
 
 				
 local nbr_sect=wordcount("$sector")	
@@ -413,7 +413,9 @@ if "`source'"=="WIOD" {
 	
 }
 
+do "$dirgit/Definition_pays_secteur" `source'
 
+global country2 lower("$country")
 	
 generate pays = strlower(substr(v1,1,strpos(v1,"_")-1))
 drop if pays==""

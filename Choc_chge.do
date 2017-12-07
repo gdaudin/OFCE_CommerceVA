@@ -385,8 +385,8 @@ end
 *CREATION OF A VECTOR CONTAINING MEAN EFFECTS OF A SHOCK ON EXCHANGE RATE FOR EACH COUNTRY
 *----------------------------------------------------------------------------------
 *Creation of the vector Y is required before table_adjst : matrix Yt
-capture program drop create_y
-program create_y
+capture program drop compute_Yt
+program compute_Yt
 args yrs source
 clear
 
@@ -396,7 +396,7 @@ use "$dir/Bases/`source'_`yrs'_OUT.dta"
 mkmat $var_entree_sortie, matrix(Y)
 matrix Yt = Y'
 
-display "fin compute_y"
+display "fin compute_Yt"
 
 end
 
@@ -588,7 +588,7 @@ set more off
 Definition_pays_secteur TIVA
 *compute_leontief 2011 TIVA
 compute_X 2011 TIVA
-*create_y 2011 TIVA
+*compute_Yt 2011 TIVA
 *compute_HC 2011 TIVA
 
 global ori_choc "EUR"
@@ -620,11 +620,7 @@ foreach source in   WIOD TIVA {
 		clear
 		set more off
 		compute_leontief `i' `source'
-		compute_X `i' `source'
-		create_y `i' `source'
-		compute_HC `i' `source'
 *		compute_VA `i' `source'
-	
 	}
 
 	if "`source'"=="TIVA" {
@@ -644,8 +640,9 @@ if "`source'"=="WIOD" {
 	
 	
 	
-	foreach i of numlist `start_year'(1) `end_year'{
-		foreach j in X Yt HC {
+	foreach j in X Yt HC {
+		compute_`j'
+		foreach i of numlist `start_year'(1) `end_year'{		
 			table_mean `i' `j' 1 `source'
 	}
 }

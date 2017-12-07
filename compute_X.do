@@ -124,9 +124,9 @@ end
 
 
 
-do "Definition_pays_secteur.do" TIVA
+do "$dirgit/Definition_pays_secteur.do" TIVA
 append_X TIVA
-do "Definition_pays_secteur.do" WIOD
+do "$dirgit/Definition_pays_secteur.do" WIOD
 append_X WIOD
 
 

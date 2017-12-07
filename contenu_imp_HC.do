@@ -24,15 +24,16 @@ gen imp=0 if pays==upper(pays_conso)|  pays==pays_conso ///
             |  pays_conso=="chn" & (pays=="cn1" | pays=="cn2" | pays=="cn3" | pays=="cn4") ///
 		    |  pays_conso=="mex" & (pays=="mx1" | pays=="mx2" | pays=="mx3")
 			
-			
+	
 replace imp=1 if imp==. 
+	
 
-
-replace imp=1 if upper(pays)==upper(pays_conso)
-replace imp=0 if imp==. 
+*replace imp=1 if upper(pays)==upper(pays_conso)	
+*replace imp=0 if imp==. 
 
 *conso0= conso domestique, conso1= conso importée
 collapse (sum) conso, by(imp year pays_conso)
+
 tab imp
 reshape wide conso, i(pays_conso year) j(imp)
 gen contenu_impHC=conso1/(conso1+conso0)
@@ -59,6 +60,6 @@ foreach i of numlist `start_year' (1)`end_year'  {
 
 end
 
-contenu_imp_HC TIVA
+*contenu_imp_HC TIVA
 contenu_imp_HC WIOD
 

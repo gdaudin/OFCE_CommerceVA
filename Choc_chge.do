@@ -32,7 +32,7 @@ capture program drop compute_leontief
 program compute_leontief
 args yrs source
 
-	do "$dirgit/Definition_pays_secteur.do" `source' 
+	do "Definition_pays_secteur.do" `source' 
 	
 *Create vector Y of output from troncated database
 clear
@@ -602,7 +602,7 @@ blink
 
 
 
-foreach source in   WIOD TIVA { 
+foreach source in    TIVA { 
 
 
 	if "`source'"=="WIOD" local start_year 2000
@@ -611,7 +611,7 @@ foreach source in   WIOD TIVA {
 
 	if "`source'"=="WIOD" local end_year 2014
 	if "`source'"=="TIVA" local end_year 2011
-	do "$dirgit/Definition_pays_secteur.do" `source'
+	do "Definition_pays_secteur.do" `source'
 
 	// Fabrication des fichiers d'effets moyens des chocs de change
 	// pour le choc CPI, faire tourner compute_HC et compute_leontief, les autres ne sont pas indispensables

@@ -7,9 +7,9 @@ if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 B
 else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
 
 
-if ("`c(username)'"=="guillaumedaudin") global dirgit "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation/"
-if ("`c(username)'"=="w817186") global dirgit "X:\Agents\FAUBERT\commerce_VA_inflation\"
-if ("`c(username)'"=="n818881") global dirgit "X:\Agents\LALLIARD\commerce_VA_inflation\"
+*if ("`c(username)'"=="guillaumedaudin") global dirgit "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation/"
+*if ("`c(username)'"=="w817186") global dirgit "X:\Agents\FAUBERT\commerce_VA_inflation\"
+*if ("`c(username)'"=="n818881") global dirgit "X:\Agents\LALLIARD\commerce_VA_inflation\"
 
 
 
@@ -216,7 +216,10 @@ end
 
 **pOUR TEST
 
-do "Definition_pays_secteur" `source' WIOD
+*do "Definition_pays_secteur"  WIOD
+if "`c(username)'"=="guillaumedaudin") do  "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation/Definition_pays_secteur.do" WIOD
+if ("`c(username)'"=="w817186") do "X:\Agents\FAUBERT\commerce_VA_inflation\Definition_pays_secteur.do" WIOD
+*if ("`c(username)'"=="w817186") global dirgit "X:\Agents\FAUBERT\commerce_VA_inflation\"
 imp_inputs_par_sect 2011 WIOD hze_not
 
 imp_inputs 2011 WIOD X hze_not

@@ -616,12 +616,9 @@ foreach source in   WIOD TIVA {
 	// Fabrication des fichiers d'effets moyens des chocs de change
 	// pour le choc CPI, faire tourner compute_HC et compute_leontief, les autres ne sont pas indispensables
 	*2005 2009 2010 2011
-	foreach i of numlist `start_year' (1)`end_year'  {
-		clear
-		set more off
-		compute_leontief `i' `source'
-*		compute_VA `i' `source'
-	}
+
+
+
 
 	if "`source'"=="TIVA" {
 	*	global ori_choc "CHN"
@@ -639,15 +636,30 @@ foreach source in   WIOD TIVA {
 	}
 	
 	
-	
-	foreach j in HC X Yt  {
-		compute_`j'
-		foreach i of numlist `start_year'(1) `end_year'{		
+
+
+
+
+
+
+	foreach i of numlist `start_year' (1)`end_year'  {
+		clear
+		set more off
+		compute_leontief `i' `source'
+    	* compute_VA `i' `source'	
+    	foreach j in HC X Yt  {	
+
+    	    compute_`j' `i' '``source'
 			table_mean `i' `j' 1 `source'
-	}
-}
+
+	    }
+
+    }
 
 }
+
+
+
 
 
 capture log close

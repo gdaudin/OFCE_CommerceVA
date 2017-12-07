@@ -7,15 +7,14 @@ else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
 *capture log close
 *log using "$dir/$S_DATE.log", replace
 
-if ("`c(username)'"=="guillaumedaudin") global dirgit "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation/"
-if ("`c(username)'"=="w817186") global dirgit "X:\Agents\FAUBERT\commerce_VA_inflation\"
-if ("`c(username)'"=="n818881") global dirgit "X:\Agents\LALLIARD\commerce_VA_inflation\"
 
-do "Definition_pays_secteur.do" TIVA
-do "Definition_pays_secteur.do" WIOD
+program pour_graphiques_article_OFCE
+args source 
 
-*program pour_graphiques_article_OFCE
-	*args source yrs
+if ("`c(username)'"=="guillaumedaudin") do  "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation/Definition_pays_secteur.do" `source'
+if ("`c(username)'"=="w817186") do "X:\Agents\FAUBERT\commerce_VA_inflation\Definition_pays_secteur.do" `source'
+if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\Definition_pays_secteur.do" `source'
+	
 
 
 *--------------------------
@@ -23,7 +22,7 @@ do "Definition_pays_secteur.do" WIOD
 *--------------------------
 
 
-*GRAPHIQUE 1
+*GRAPHIQUE 1: elasticité des prix de production et d'exportation en monnaie locale à une appréciation de la monnaie locale
 *tiva
 
 
@@ -88,7 +87,7 @@ export delimited "$dir/Results/Devaluations/Pour_Graph_1_TIVA.csv", replace
 export excel "$dir/Results/Devaluations/Pour_Graph_1_TIVA.xlsx", firstrow(variable)replace
 
 
-*GRAPHIQUE 1
+*GRAPHIQUE 1: elasticité des prix de production et d'exportation en monnaie locale à une appréciation de la monnaie locale
 *WIOD
 
 
@@ -150,7 +149,7 @@ export delimited "$dir/Results/Devaluations/Pour_Graph_1_WIOD.csv", replace
 export excel "$dir/Results/Devaluations/Pour_Graph_1_WIOD.xlsx", firstrow(variable)replace
 
 
-*Graphique 2
+*Graphique 2 : elasticité des prix d'exportation en monnaie locale à une appréciation de la monnaie locale
 *TIVA
 
 use "$dir/Results/Devaluations/mean_chg_TIVA_X_2000.dta", clear
@@ -203,7 +202,7 @@ export excel "$dir/Results/Devaluations/Pour_Graph_2_TIVA.xlsx", firstrow(variab
 
 
 
-*Graphique 2
+*Graphique 2 : elasticité des prix d'exportation en monnaie locale à une appréciation de la monnaie locale
 *WIOD
 
 use "$dir/Results/Devaluations/mean_chg_WIOD_X_2000.dta", clear
@@ -257,8 +256,7 @@ export excel "$dir/Results/Devaluations/Pour_Graph_2_WIOD.xlsx", firstrow(variab
 
 
 
-**Graphique 3
-**TIVA
+**Graphique 3: élasticité des prix de prod et d'exportations en euros à une appréciation de l'euro
 foreach source in TIVA WIOD {
 
 use "$dir/Results/Devaluations/mean_chg_`source'_X_2011.dta", clear
@@ -296,7 +294,7 @@ graph bar (asis) pond_`source'_X pond_`source'_Yt , over(c_full_FR, sort(pond_`s
 graph export "$dir/Results/Devaluations/Graph_3_`source'.png", replace
 }
 
-**Graphique 4
+**Graphique 4 : élasticité des prix en monnaie locale des pays hors ze à une appréciation de l'euro
 
 foreach source in TIVA WIOD {
 use "$dir/Results/Devaluations/mean_chg_`source'_X_2011.dta", clear
@@ -339,7 +337,7 @@ graph export "$dir/Results/Devaluations/Graph_4_`source'.png", replace
 
 *GRAPHIQUE 5
 *TIVA
-
+/*
 use "$dir/Results/Choc de prod/mean_TIVA_p_X_2011.dta", clear
 
 merge 1:1 _n using "$dir/Bases/pays_en_ligne.dta
@@ -474,7 +472,7 @@ export delimited "$dir/Results/Choc de prod/Pour_Graph_5_TIVA.csv", replace
 export excel "$dir/Results/Choc de prod/Pour_Graph_5_TIVA.xslx", firstrow(variable)replace
 graph export "$dir/Results/Choc de prod/Graph_5_TIVA.png", replace
 
-
+*/
 
 
 
@@ -1011,6 +1009,6 @@ graph twoway (scatter pond_X imp_inputs, mlabel(c_full_FR)) (lfit pond_X imp_inp
 export excel "$dir/Results/Devaluations/Pour_Graph_9.xlsx", firstrow(variable)replace
 
 
-*end
-*pour_graphiques_article_OFCE TIVA 
-*pour_graphiques_article_OFCE WIOD 
+end
+pour_graphiques_article_OFCE TIVA 
+pour_graphiques_article_OFCE WIOD 

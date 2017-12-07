@@ -5,9 +5,6 @@ clear
 if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
 else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
 
-if ("`c(username)'"=="guillaumedaudin") global dirgit "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation/"
-if ("`c(username)'"=="w817186") global dirgit "X:\Agents\FAUBERT\commerce_VA_inflation\"
-if ("`c(username)'"=="n818881") global dirgit "X:\Agents\LALLIARD\commerce_VA_inflation\"
 
 
 
@@ -171,7 +168,11 @@ program base_wage
 	clear
 	use "$dir/Bases/`n'_`yrs'.dta"
 
-	do "Definition_pays_secteur" `source'
+
+if ("`c(username)'"=="guillaumedaudin") do  "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation/Definition_pays_secteur.do" `source'
+if ("`c(username)'"=="w817186") do "X:\Agents\FAUBERT\commerce_VA_inflation\Definition_pays_secteur.do" `source'
+if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\Definition_pays_secteur.do" `source'
+`source'
 *List of countries for which there is no data available for wages
 	global restcountry "ISL BRN COL CRI HKG HRV KHM MEX_GMF MEX_NGM MYS PHL ROW SAU SGP THA TUN "
 	global chncountry "CHN_DOM CHN_NPR CHN_PRO"
@@ -243,7 +244,11 @@ args source
 
 clear
 set more off
-do "$dirgit/Definition_pays_secteur" `source'
+
+
+if ("`c(username)'"=="guillaumedaudin") do  "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation/Definition_pays_secteur.do" `source'
+if ("`c(username)'"=="w817186") do "X:\Agents\FAUBERT\commerce_VA_inflation\Definition_pays_secteur.do" `source'
+if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\Definition_pays_secteur.do" `source'
 
 				
 local nbr_sect=wordcount("$sector")	
@@ -413,7 +418,12 @@ if "`source'"=="WIOD" {
 	
 }
 
-do "$dirgit/Definition_pays_secteur" `source'
+
+
+if ("`c(username)'"=="guillaumedaudin") do  "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation/Definition_pays_secteur.do" `source'
+if ("`c(username)'"=="w817186") do "X:\Agents\FAUBERT\commerce_VA_inflation\Definition_pays_secteur.do" `source'
+if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\Definition_pays_secteur.do" `source'
+
 
 global country2 lower("$country")
 	
@@ -538,7 +548,7 @@ set more off
 
 
 
-append_y WIOD
+*append_y WIOD
 
 
 *append_X WIOD

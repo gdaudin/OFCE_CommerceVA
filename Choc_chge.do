@@ -631,16 +631,16 @@ foreach source in   WIOD TIVA {
 		global ori_choc "$ori_choc PHL POL PRT ROU ROW RUS SAU SGP SVK SVN SWE THA TUN TUR TWN USA VNM ZAF"
 	}
 
-if "`source'"=="WIOD" {
+	if "`source'"=="WIOD" {
 		global ori_choc "EUR EAS"
 		global ori_choc "$ori_choc AUS AUT BEL BGR BRA     CAN CHE CHN                             CYP CZE DEU DNK ESP EST FIN " 
 		global ori_choc "$ori_choc FRA GBR GRC     HRV HUN IDN IND IRL       ITA JPN     KOR LTU LUX LVA MEX              MLT     NLD NOR        POL PRT"
 		global ori_choc "$ori_choc ROU ROW RUS       SVK SVN SWE       TUR TWN USA        "
-}
+	}
 	
 	
 	
-	foreach j in X Yt HC {
+	foreach j in HC X Yt  {
 		compute_`j'
 		foreach i of numlist `start_year'(1) `end_year'{		
 			table_mean `i' `j' 1 `source'

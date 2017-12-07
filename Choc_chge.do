@@ -649,7 +649,7 @@ foreach source in   WIOD TIVA {
     	* compute_VA `i' `source'	
     	foreach j in HC X Yt  {	
 
-    	    compute_`j' `i' '``source'
+    	    compute_`j' `i' `source'
 			table_mean `i' `j' 1 `source'
 
 	    }

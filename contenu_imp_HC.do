@@ -28,8 +28,7 @@ gen imp=0 if pays==upper(pays_conso)|  pays==pays_conso ///
 replace imp=1 if imp==. 
 	
 
-*replace imp=1 if upper(pays)==upper(pays_conso)	
-*replace imp=0 if imp==. 
+
 
 *conso0= conso domestique, conso1= conso importée
 collapse (sum) conso, by(imp year pays_conso)

@@ -384,7 +384,7 @@ save "$dir/Results/Devaluations/Pour_HC_Graph_4_`source'.dta", replace
 export delimited "$dir/Results/Devaluations/Pour_HC_Graph_4_`source'.csv", replace
 export excel "$dir/Results/Devaluations/Pour_HC_Graph_4_`source'.xlsx", firstrow(variable)replace
 
-graph bar (asis) pond_`source'_X pond_`source'_Yt pond_`source'_HC,  title("Elasticité en monnaie locale à une appréciation de l'EURO") over(c_full_FR, sort(c_full_FR) descending label(angle(vertical) labsize(vsmall))) 
+graph bar (asis) pond_`source'_X pond_`source'_Yt pond_`source'_HC,  title("Elasticité en monnaie locale à une appréciation de l'EURO") over(c_full_FR, sort(c_full_FR) label(angle(vertical) labsize(vsmall))) 
 
 graph export "$dir/Results/Devaluations/HC_Graph_4_`source'.png", replace
 
@@ -559,7 +559,7 @@ drop pays
 
 merge 1:1 c using "$dir/Bases/Pays_FR.dta",keep(3)
 drop _merge 
-label var contenu_impHC "Parts des importations en provenance de ZE dans la consommation"
+label var contenu_impHC "Parts des importations dans la consommation"
 
 keep if strpos("$eurozone",c)!=0
 save "$dir/Results/Devaluations/Pour_HC_Graph_imp_deval_`source'.dta", replace
@@ -585,13 +585,12 @@ export excel "$dir/Results/Devaluations/Pour_HC_`Graph_7_source'.xlsx", firstrow
 *à un choc sur la livre et part des importations dans la conso
 foreach source in TIVA WIOD {
 use "$dir/Results/Devaluations/contenu_impHC_`source'_2011.dta", clear  
-
 gen c=upper(pays)
 drop pays
 
 merge 1:1 c using "$dir/Bases/Pays_FR.dta",keep(3)
 drop _merge 
-label var contenu_impHC "Parts des importations en provenance de UK dans la consommation"
+label var contenu_impHC "Parts des importations dans la consommation"
 
 keep if strpos("$eurozone",c)!=0
 save "$dir/Results/Devaluations/Pour_HC_Graph_imp_devalb_`source'.dta", replace
@@ -624,7 +623,7 @@ drop pays
 
 merge 1:1 c using "$dir/Bases/Pays_FR.dta",keep(3)
 drop _merge 
-label var contenu_impHC "Parts des importations en provenance des US dans la consommation"
+label var contenu_impHC "Parts des importations dans la consommation"
 
 keep if strpos("$eurozone",c)!=0
 save "$dir/Results/Devaluations/Pour_HC_Graph_imp_devalc_`source'.dta", replace

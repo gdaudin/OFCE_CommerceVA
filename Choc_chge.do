@@ -5,7 +5,7 @@ set more off
 if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
 else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
 
-n\"
+
 
 
 capture log close
@@ -608,7 +608,7 @@ foreach source in    TIVA {
 
 
 	if "`source'"=="WIOD" local start_year 2000
-	if "`source'"=="TIVA" local start_year 2000
+	if "`source'"=="TIVA" local start_year 1995
 
 
 	if "`source'"=="WIOD" local end_year 2014
@@ -654,7 +654,7 @@ foreach source in    TIVA {
 		set more off
 		compute_leontief `i' `source'
     	* compute_VA `i' `source'	
-    	foreach j in  X Yt  {	
+    	foreach j in HC X Yt  {	
 
     	    compute_`j' `i' `source'
 			table_mean `i' `j' 1 `source'

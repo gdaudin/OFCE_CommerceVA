@@ -5,9 +5,7 @@ set more off
 if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
 else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
 
-if ("`c(username)'"=="guillaumedaudin") global dirgit "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation/"
-if ("`c(username)'"=="w817186") global dirgit "X:\Agents\FAUBERT\commerce_VA_inflation\"
-if ("`c(username)'"=="n818881") global dirgit "X:\Agents\LALLIARD\commerce_VA_inflation\"
+n\"
 
 
 capture log close
@@ -32,7 +30,11 @@ capture program drop compute_leontief
 program compute_leontief
 args yrs source
 
-	do "Definition_pays_secteur.do" `source' 
+if ("`c(username)'"=="guillaumedaudin") do  "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation/Definition_pays_secteur.do" `source' 
+if ("`c(username)'"=="w817186") do "X:\Agents\FAUBERT\commerce_VA_inflation\Definition_pays_secteur.do" `source' 
+if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\Definition_pays_secteur.do" `source' 
+
+
 	
 *Create vector Y of output from troncated database
 clear
@@ -606,12 +608,17 @@ foreach source in    TIVA {
 
 
 	if "`source'"=="WIOD" local start_year 2000
-	if "`source'"=="TIVA" local start_year 1995
+	if "`source'"=="TIVA" local start_year 2000
 
 
 	if "`source'"=="WIOD" local end_year 2014
 	if "`source'"=="TIVA" local end_year 2011
-	do "Definition_pays_secteur.do" `source'
+
+	
+	if ("`c(username)'"=="guillaumedaudin") do  "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation/Definition_pays_secteur.do" `source' 
+	if ("`c(username)'"=="w817186") do "X:\Agents\FAUBERT\commerce_VA_inflation\Definition_pays_secteur.do" `source' 
+	if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\Definition_pays_secteur.do" `source' 
+	
 
 	// Fabrication des fichiers d'effets moyens des chocs de change
 	// pour le choc CPI, faire tourner compute_HC et compute_leontief, les autres ne sont pas indispensables
@@ -647,7 +654,7 @@ foreach source in    TIVA {
 		set more off
 		compute_leontief `i' `source'
     	* compute_VA `i' `source'	
-    	foreach j in HC X Yt  {	
+    	foreach j in  X Yt  {	
 
     	    compute_`j' `i' `source'
 			table_mean `i' `j' 1 `source'

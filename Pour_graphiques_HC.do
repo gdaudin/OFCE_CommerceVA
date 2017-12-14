@@ -351,13 +351,13 @@ foreach source in TIVA WIOD {
 use "$dir/Results/Devaluations/mean_chg_`source'_X_2011.dta", clear
 
 keep c shockEUR1
-drop if strpos("$eurozone",c)==0
+drop if strpos("$eurozone",c)!=0
 rename shockEUR1 pond_`source'_X
 save "$dir/Results/Devaluations/Pour_HC_Graph_4_`source'_old.dta", replace
 
 use "$dir/Results/Devaluations/mean_chg_`source'_Yt_2011.dta", clear
 keep c shockEUR1
-drop if strpos("$eurozone",c)==0
+drop if strpos("$eurozone",c)!=0
 rename shockEUR1 pond_`source'_Yt
 merge 1:1 c using "$dir/Results/Devaluations/Pour_HC_Graph_4_`source'_old.dta"
 drop _merge
@@ -365,7 +365,7 @@ save "$dir/Results/Devaluations/Pour_HC_Graph_4_`source'_old2.dta", replace
 
 use "$dir/Results/Devaluations/mean_chg_`source'_HC_2011.dta", clear
 keep c shockEUR1
-drop if strpos("$eurozone",c)==0
+drop if strpos("$eurozone",c)!=0
 rename shockEUR1 pond_`source'_HC
 
 merge 1:1 c using "$dir/Results/Devaluations/Pour_HC_Graph_4_`source'_old2.dta"

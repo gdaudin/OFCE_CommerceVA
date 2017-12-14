@@ -268,7 +268,7 @@ replace pond_`source'_X = (pond_`source'_X - 1)/2
 
 save "$dir/Results/Devaluations/Pour_Graph_3_`source'.dta", replace
 
-use "$dir/Results/Devaluations/mean_chg_TIVA_Yt_2011.dta", clear
+use "$dir/Results/Devaluations/mean_chg_`source'_Yt_2011.dta", clear
 
 keep c shockEUR1
 drop if strpos("$eurozone",c)==0

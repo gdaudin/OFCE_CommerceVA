@@ -7,7 +7,7 @@ else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
 *capture log close
 *log using "$dir/$S_DATE.log", replace
 
-
+capture program drop  pour_graphiques_article_OFCE
 program pour_graphiques_article_OFCE
 args source 
 

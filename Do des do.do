@@ -18,13 +18,10 @@ set more off
 do "$dirgit/1_constr_bases.do"
 do "$dirgit/compute_HC.do"
 do "$dirgit/compute_X.do"
+do "$dirgit/contenu_imp_HC.do" 
+
 do "$dirgit/choc_chge.do"
-
-
-
 do "$dirgit/pg_inputsimportes.do"
-
-do "$dirgit/contenu_imp_HC.do"
 
 do "$dirgit/Pour graphiques HC.do"
 do "$dirgit/Pour graphiques articles OFCE.do"

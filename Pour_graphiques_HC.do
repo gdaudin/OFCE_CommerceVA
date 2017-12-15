@@ -91,7 +91,7 @@ graph bar (asis) pond_TIVA_X pond_TIVA_Y  pond_TIVA_HC, title("Elasticité à un
 
 graph export "$dir/Results/Devaluations/HC_Graph_1_TIVA_old3.png", replace
 
-drop if strpos("$eurozone",c)!=0
+drop if strpos("$eurozone",c)==0
 
 
 graph bar (asis) pond_TIVA_X pond_TIVA_Y pond_TIVA_HC, title("Elasticité à une appréciation de la monnaie locale") over(c_full_FR, sort(c_full_FR) label(angle(vertical) labsize(small)))
@@ -253,7 +253,7 @@ graph bar (asis) pond_TIVA_X pond_TIVA_Y  pond_TIVA_HC, title("Elasticité à un
 
 graph export "$dir/Results/Devaluations/HC_Graph_1_TIVA_old3HZE.png", replace
 
-drop if strpos("$eurozone",c)==0
+drop if strpos("$eurozone",c)!=0
 
 
 graph bar (asis) pond_TIVA_X pond_TIVA_Y pond_TIVA_HC, title("Elasticité à une appréciation de la monnaie locale") over(c_full_FR, sort(c_full_FR)  label(angle(vertical) labsize(small)))

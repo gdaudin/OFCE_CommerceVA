@@ -18,7 +18,7 @@ set more off
 do "$dirgit/1_constr_bases.do"
 do "$dirgit/compute_HC.do"
 do "$dirgit/compute_X.do"
-*do "$dirgit/contenu_imp_HC.do" (Pour l'instant - 6/12/2017-, il est buggé)
+do "$dirgit/contenu_imp_HC.do" 
 
 do "$dirgit/choc_chge.do"
 do "$dirgit/pg_inputsimportes.do"

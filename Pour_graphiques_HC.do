@@ -7,6 +7,7 @@ else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
 *capture log close
 *log using "$dir/$S_DATE.log", replace
 
+capture program drop graphiques
 program graphiques
 args source 
 	
@@ -289,51 +290,64 @@ export excel "$dir/Results/Devaluations/Pour_HC_Graph_2_WIOD.xlsx", firstrow(var
 
 **Graphique 3 WP OFCE: élasticité des prix de prod, d'exportations et de consommation en euros à une appréciation de l'euro
 
-foreach source in TIVA WIOD {
 
-use "$dir/Results/Devaluations/mean_chg_`source'_X_2011.dta", clear
+foreach source in WIOD TIVA {
+	local i 1
+	foreach weight in X Yt HC {
 
-keep c shockEUR1
-drop if strpos("$eurozone",c)==0
-rename shockEUR1 pond_`source'_X
-replace pond_`source'_X = (pond_`source'_X - 1)/2
-keep c pond_`source'_X
-save "$dir/Results/Devaluations/Pour_HC_Graph_3_`source'_old.dta", replace
+		use "$dir/Results/Devaluations/mean_chg_`source'_`weight'_2011.dta", clear
 
-use "$dir/Results/Devaluations/mean_chg_`source'_Yt_2011.dta", clear
-keep c shockEUR1
-drop if strpos("$eurozone",c)==0
-rename shockEUR1 pond_`source'_Yt
-replace pond_`source'_Yt = (pond_`source'_Yt - 1)/2
-keep c pond_`source'_Yt 
-merge 1:1 c using "$dir/Results/Devaluations/Pour_HC_Graph_3_`source'_old.dta"
-drop _merge
-save "$dir/Results/Devaluations/Pour_HC_Graph_3_`source'_old2.dta", replace
+		keep c shockEUR1
+		drop if strpos("$eurozone",c)==0
+		rename shockEUR1 pond_`source'_`weight'
+		replace pond_`source'_`weight' = (pond_`source'_`weight' - 1)/2
+		keep c pond_`source'_`weight'
 
-use "$dir/Results/Devaluations/mean_chg_`source'_HC_2011.dta", clear
-keep c shockEUR1
-drop if strpos("$eurozone",c)==0
-rename shockEUR1 pond_`source'_HC
-replace pond_`source'_HC = (pond_`source'_HC - 1)/2
-keep c pond_`source'_HC
-merge 1:1 c using "$dir/Results/Devaluations/Pour_HC_Graph_3_`source'_old2.dta"
-drop _merge
-merge 1:1 c using "$dir/Bases/Pays_FR.dta",keep(3)
-drop _merge
+		if `i' !=1 {
+			merge 1:1 c using "$dir/Results/Devaluations/Pour_HC_Graph_3_`source'_old.dta
+			drop _merge
+		}
+		save "$dir/Results/Devaluations/Pour_HC_Graph_3_`source'_old.dta", replace
+		local i=`i'+1
+	}
 
-label var pond_`source'_Yt "Prix de production"
 
-label var pond_`source'_X "Prix d'exportation"
-
-label var pond_`source'_HC "Prix de consommation"
-
-save "$dir/Results/Devaluations/Pour_HC_Graph_3_`source'.dta", replace
-export delimited "$dir/Results/Devaluations/Pour_HC_Graph_3_`source'.csv", replace
-export excel "$dir/Results/Devaluations/Pour_HC_Graph_3_`source'.xlsx", firstrow(variable)replace
-
-graph bar (asis) pond_`source'_X pond_`source'_Yt pond_`source'_HC,  yscale(range(-0.5 0.0))  ylabel(-0.5 (0.1) 0.0) title("Elasticité à une appréciation de l'euro") over(c_full_FR, sort(c_full_FR) label(angle(vertical) )) 
-graph export "$dir/Results/Devaluations/HC_Graph_3_`source'.png" , replace
+	label var pond_`source'_Yt "`source'_Prix de production"
+	label var pond_`source'_X "`source'_Prix d'exportation"
+	label var pond_`source'_HC "`source'_Prix de consommation"
+	
+	merge 1:1 c using "$dir/Bases/Pays_FR.dta",keep(3)
+	drop _merge
+	
+	
+	save "$dir/Results/Devaluations/Pour_HC_Graph_3_`source'.dta", replace
+	export delimited "$dir/Results/Devaluations/Pour_HC_Graph_3_`source'.csv", replace
+	export excel "$dir/Results/Devaluations/Pour_HC_Graph_3_`source'.xlsx", firstrow(variable)replace
+	
+	graph bar (asis) pond_`source'_X pond_`source'_Yt pond_`source'_HC,  yscale(range(-0.5 0.0))  ylabel(-0.5 (0.1) 0.0) title("Elasticité à une appréciation de l'euro") over(c_full_FR, sort(c_full_FR) label(angle(vertical) )) 
+	graph export "$dir/Results/Devaluations/HC_Graph_3_`source'.png" , replace
 }
+
+use "$dir/Results/Devaluations/Pour_HC_Graph_3_WIOD_old.dta", clear
+merge 1:1 c using "$dir/Results/Devaluations/Pour_HC_Graph_3_TIVA_old.dta"
+
+
+foreach weight in X Yt HC {
+	twoway  (scatter pond_WIOD_`weight' pond_TIVA_`weight', mlabel(c)) ///
+			(line pond_TIVA_HC pond_TIVA_HC, sort) (line pond_WIOD_HC pond_WIOD_HC, sort), ///
+			yscale(range(-0.5 0.0)) xscale(range(-0.5 0.0))  ///
+			ylabel(-0.5(0.25)0.0) xlabel(-0.5(0.25)0.0)  ///
+			title("`weight' elasticity to euro appreciation") ytitle("WIOD") xtitle("TIVA") ///
+			legend(off) ///
+			name(comp_3_`weight', replace) ///
+			nodraw
+
+}
+
+graph combine comp_3_X comp_3_Yt comp_3_HC 
+graph export "$dir/Results/Devaluations/HC_Graph_3.png" , replace
+
+
 
 
 

@@ -25,6 +25,7 @@ if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\De
 *GRAPHIQUE 1: elasticité des prix de production et d'exportation en monnaie locale à une appréciation de la monnaie locale
 *tiva
 
+set more off
 
 use "$dir/Results/Devaluations/mean_chg_TIVA_X_2011.dta", clear
 
@@ -78,7 +79,7 @@ graph export "$dir/Results/Devaluations/Graph_1_TIVA_old.png", replace
 drop if strpos("$eurozone",c)==0
 
 
-graph bar (asis) pond_TIVA_X pond_TIVA_Y , over(c_full_FR, sort(pond_TIVA_X) label(angle(vertical) labsize(small)))
+graph bar (asis) pond_TIVA_X pond_TIVA_Y , yscale(range(-0.5 0.0))  ylabel(-0.5 (0.1) 0.0)  title("Elasticité à une appréciation de la monnaie locale, 2011") over(c_full_FR, sort(c_full_FR) label(angle(vertical) labsize(small)))
 
 
 graph export "$dir/Results/Devaluations/Graph_1_TIVA.png", replace
@@ -125,7 +126,7 @@ merge 1:1 c using "$dir/Results/Devaluations/Pour_Graph_1_WIOD.dta"
 
 drop _merge 
 
-replace pond_Y = (pond_Y - 1)/2 
+replace pond_WIOD_Y = (pond_WIOD_Y - 1)/2 
 
 label var pond_WIOD_Y "Prix de production"
 
@@ -134,13 +135,13 @@ label var pond_WIOD_X "Prix d'exportation"
 save "$dir/Results/Devaluations/Pour_Graph_1_WIOD_old.dta", replace
 export delimited "$dir/Results/Devaluations/Pour_Graph_1_WIOD_old.csv", replace
 
-graph bar (asis) pond_WIOD_X pond_WIOD_Y , over(c, sort(pond_WIOD_X) label(angle(vertical) labsize(small))) 
+graph bar (asis) pond_WIOD_X pond_WIOD_Y , yscale(range(-0.5 0.0))  ylabel(-0.5 (0.1) 0.0) title("Elasticité à une appréciation de la monnaie locale, 2011") over(c, sort(pond_WIOD_X) label(angle(vertical) labsize(small))) 
 
 graph export "$dir/Results/Devaluations/Graph_1_WIOD_old.png", replace
 
 drop if strpos("$eurozone",c)==0
 
-graph bar (asis) pond_WIOD_X pond_WIOD_Y , over(c_full_FR, sort(pond_WIOD_X) label(angle(vertical) labsize(small)))
+graph bar (asis) pond_WIOD_X pond_WIOD_Y , over(c_full_FR, sort(c_full_FR) label(angle(vertical) labsize(small)))
 
 
 graph export "$dir/Results/Devaluations/Graph_1_WIOD.png", replace
@@ -180,7 +181,7 @@ save "$dir/Results/Devaluations/Pour_Graph_2_TIVA_old.dta", replace
 export delimited "$dir/Results/Devaluations/Pour_Graph_2_TIVA_old.csv", replace
 
 
-graph bar (asis) pond_TIVA_X_2000 pond_TIVA_X_2011 , over(c, sort(pond_TIVA_X_2011) label(angle(vertical) labsize(small))) 
+graph bar (asis) pond_TIVA_X_2000 pond_TIVA_X_2011 , yscale(range(-0.5 0.0))  ylabel(-0.5 (0.1) 0.0) title("Elasticité à une appréciation de la monnaie locale")  over(c, sort(c_full_FR) label(angle(vertical) labsize(small))) 
 
 graph export "$dir/Results/Devaluations/Graph_2_TIVA_old.png", replace
 
@@ -193,7 +194,7 @@ label var pond_TIVA_X_2000 "2000"
 
 label var pond_TIVA_X_2011 "2011"
 
-graph bar (asis) pond_TIVA_X_2011 pond_TIVA_X_2000  , over(c_full_FR, sort(pond_TIVA_X_2011) label(angle(vertical) labsize(small))) 
+graph bar (asis) pond_TIVA_X_2011 pond_TIVA_X_2000  , yscale(range(-0.5 0.0))  ylabel(-0.5 (0.1) 0.0) title("Elasticité à une appréciation de la monnaie locale") over(c_full_FR, sort(c_full_FR) label(angle(vertical) labsize(small))) 
 
 graph export "$dir/Results/Devaluations/Graph_2_TIVA.png", replace
 save "$dir/Results/Devaluations/Pour_Graph_2_TIVA.dta", replace
@@ -220,7 +221,10 @@ keep c pond_WIOD_X_2000
 merge 1:1 c using "$dir/Results/Devaluations/Pour_Graph_1_WIOD_old.dta"
 drop _merge
 
+
+
 rename pond_WIOD_X pond_WIOD_X_2011
+
 
 drop pond_WIOD_Y
 
@@ -233,20 +237,20 @@ save "$dir/Results/Devaluations/Pour_Graph_2_WIOD_old.dta", replace
 export delimited "$dir/Results/Devaluations/Pour_Graph_2_WIOD_old.csv", replace
 
 
-graph bar (asis) pond_WIOD_X_2000 pond_WIOD_X_2011 , over(c, sort(pond_WIOD_X_2011) label(angle(vertical) labsize(small))) 
+graph bar (asis) pond_WIOD_X_2000 pond_WIOD_X_2011 ,  yscale(range(-0.5 0.0))  ylabel(-0.5 (0.1) 0.0) title("Elasticité à une appréciation de la monnaie locale")  over(c, sort(c_full_FR) label(angle(vertical) labsize(small))) 
 
 graph export "$dir/Results/Devaluations/Graph_2_WIOD_old.png", replace
 
 drop if strpos("$eurozone",c)==0
 
-merge 1:1 c using "$dir/Bases/Pays_FR.dta",keep(3)
-drop _merge
+*merge 1:1 c using "$dir/Bases/Pays_FR.dta",keep(3)
+*drop _merge
 
 label var pond_WIOD_X_2000 "2000"
 
 label var pond_WIOD_X_2011 "2011"
 
-graph bar (asis) pond_WIOD_X_2011 pond_WIOD_X_2000  , over(c_full_FR, sort(pond_WIOD_X_2011) label(angle(vertical) labsize(small))) 
+graph bar (asis) pond_WIOD_X_2011 pond_WIOD_X_2000  ,  yscale(range(-0.5 0.0))  ylabel(-0.5 (0.1) 0.0) title("Elasticité à une appréciation de la monnaie locale") over(c_full_FR, sort(c_full_FR)  label(angle(vertical) labsize(small))) 
 
 
 graph export "$dir/Results/Devaluations/Graph_2_WIOD.png", replace
@@ -290,7 +294,7 @@ save "$dir/Results/Devaluations/Pour_Graph_3_`source'.dta", replace
 export delimited "$dir/Results/Devaluations/Pour_Graph_3_`source'.csv", replace
 export excel "$dir/Results/Devaluations/Pour_Graph_3_`source'.xlsx", firstrow(variable)replace
 
-graph bar (asis) pond_`source'_X pond_`source'_Yt , over(c_full_FR, sort(pond_`source'_X) label(angle(vertical) )) 
+graph bar (asis) pond_`source'_X pond_`source'_Yt , yscale(range(-0.5 0.0))  ylabel(-0.5 (0.1) 0.0) title("Elasticité à une appréciation de l'euro, 2011")  over(c_full_FR, sort(c_full_FR) label(angle(vertical) )) 
 graph export "$dir/Results/Devaluations/Graph_3_`source'.png", replace
 }
 
@@ -306,7 +310,7 @@ rename shockEUR1 pond_`source'_X
 
 save "$dir/Results/Devaluations/Pour_Graph_4_`source'.dta", replace
 
-use "$dir/Results/Devaluations/mean_chg_`source'Yt_2011.dta", clear
+use "$dir/Results/Devaluations/mean_chg_`source'_Yt_2011.dta", clear
 
 keep c shockEUR1
 drop if strpos("$eurozone",c)!=0
@@ -327,7 +331,7 @@ save "$dir/Results/Devaluations/Pour_Graph_4_`source'.dta", replace
 export delimited "$dir/Results/Devaluations/Pour_Graph_4_`source'.csv", replace
 export excel "$dir/Results/Devaluations/Pour_Graph_4_`source'.xlsx", firstrow(variable)replace
 
-graph bar (asis) pond_`source'_X pond_`source'_Yt , over(c_full_FR, sort(pond_`source'_X) descending label(angle(vertical) labsize(vsmall))) 
+graph bar (asis) pond_`source'_X pond_`source'_Yt , yscale(range(0.0 0.8))  ylabel(0.0 (0.1) 0.8) title("Elasticité à une appréciation de l'euro, 2011")over(c_full_FR, sort(c_full_FR)  label(angle(vertical) labsize(vsmall))) 
 
 graph export "$dir/Results/Devaluations/Graph_4_`source'.png", replace
 
@@ -682,7 +686,7 @@ foreach source in WIOD TIVA {
 
 foreach source in WIOD TIVA {
 	foreach year in  2000 2005 2009 2010 2011 {
-		use "$dir/Results/Devaluations/mean_`source'_chg_X_`year'.dta", clear
+		use "$dir/Results/Devaluations/mean_chg_`source'_X_`year'.dta", clear
 		keep if strpos("$eurozone",c)!=0
 		
 		if `year'==2000 local column A
@@ -836,60 +840,44 @@ export excel "$dir/Results/Choc de prod/Tableau_6.xlsx", firstrow(variables) rep
 **------------------ Pour graphiques de la fin
 
 
-clear  
-set more off
-if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
-else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
 
-
-if ("`c(username)'"=="guillaumedaudin") global dirgit "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation/"
-if ("`c(username)'"=="w817186") global dirgit "X:\Agents\FAUBERT\commerce_VA_inflation\"
-if ("`c(username)'"=="n818881") global dirgit "X:\Agents\LALLIARD\commerce_VA_inflation\"
-
-do "Definition_pays_secteur.do" TIVA
-do "Definition_pays_secteur.do" WIOD
-
-
-
-cd "$dir"
-
-
-set matsize 7000
-
-set more off
-
+/*
 
 *** Graphique 6
 ***  Elasticité des prix de production des pays de la ZE à un choc sur la monnaie nationale fictive et part des inputs importés dans la produvtion
+
+foreach source in TIVA WIOD {
 use "$dir/Bases/imp_inputs_2011.dta" , clear //,keep(3)
 
 gen c=upper(pays)
 drop pays
 
-merge 1:1 c using "$dir/Results/Devaluations/Pour_Graph_1_TIVA.dta"
+merge 1:1 c using "$dir/Results/Devaluations/Pour_Graph_1_`source'.dta"
 
-drop _merge pond_TIVA_X 
+drop _merge pond_`source'_X 
 
 //replace pond_Y = (pond_Y - 1)/2 
 
-label var pond_Y "Prix de production"
+label var pond_`source'_Y "Prix de production"
 
 label var input_prod "Parts des inputs importés dans la production"
 
 drop if strpos("$eurozone",c)==0
 
-save "$dir/Results/Devaluations/Pour_Graph_imp_deval.dta", replace
+save "$dir/Results/Devaluations/Pour_Graph_imp_deval_`source'.dta", replace
 *drop if c_full_FR=="Luxembourg"
-graph twoway (scatter pond_Y input_prod, mlabel(c_full_FR)) (qfit pond_Y input_prod)  , ///
+graph twoway (scatter pond_`source'_Y input_prod, mlabel(c_full_FR)) (qfit pond_Y input_prod)  , ///
 			xtitle("Parts des inputs importés dans la production") ytitle("Elasticité des prix de production en monnaie nationale", size(small)) ///
 			yscale(range(0 -.35) reverse) xscale(range(0 .45)) xlabel (0(0.05) .45) ylabel(0 (0.05) -.35)
 			
 			
-graph export "$dir/Results/Devaluations/Graph_6.png", replace 
-export excel "$dir/Results/Devaluations/Pour_Graph_6.xlsx", firstrow(variable)replace
+graph export "$dir/Results/Devaluations/Graph_6_`source'.png", replace 
+export excel "$dir/Results/Devaluations/Pour_Graph_6_`source'.xlsx", firstrow(variable)replace
  /*
 graph twoway (scatter pond_Y input_prod, mlabel(c_full_FR)) (qfit pond_Y input_prod)  ,    xtitle("Parts des inputs importés dans la production") ytitle("Prix de production")
 graph export "$dir/Results/Devaluations/Graph_1_imp.png", replace   */
+
+}
 
 *** Graphique 7
 ***Elasticité des prix de production des pays de la ZE à un choc de change de l'euro et part des inputs importés des pays hors ZE dans la production
@@ -1008,7 +996,7 @@ graph twoway (scatter pond_X imp_inputs, mlabel(c_full_FR)) (lfit pond_X imp_inp
 			graph export "$dir/Results/Devaluations/Graph_9.png", replace
 export excel "$dir/Results/Devaluations/Pour_Graph_9.xlsx", firstrow(variable)replace
 
-
+*/
 end
 pour_graphiques_article_OFCE TIVA 
 pour_graphiques_article_OFCE WIOD 

@@ -222,7 +222,7 @@ imp_inputs 2011 WIOD X hze_not
 
 
 
-blif
+
 
 
 foreach source in TIVA WIOD {

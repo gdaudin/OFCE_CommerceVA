@@ -23,6 +23,7 @@ if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\De
 *--------------------------
 *Graphique 1: élasticité des prix de production,  d'exportations et de consommation à une appréciation de la monnaie locale
 *TIVA
+*Impact sur ZE
 
 use "$dir/Results/Devaluations/mean_chg_TIVA_X_2011.dta", clear
 
@@ -90,7 +91,7 @@ graph bar (asis) pond_TIVA_X pond_TIVA_Y  pond_TIVA_HC, title("Elasticité à un
 
 graph export "$dir/Results/Devaluations/HC_Graph_1_TIVA_old3.png", replace
 
-drop if strpos("$eurozone",c)==0
+drop if strpos("$eurozone",c)!=0
 
 
 graph bar (asis) pond_TIVA_X pond_TIVA_Y pond_TIVA_HC, title("Elasticité à une appréciation de la monnaie locale") over(c_full_FR, sort(c_full_FR) label(angle(vertical) labsize(small)))
@@ -103,7 +104,7 @@ export excel "$dir/Results/Devaluations/Pour_HC_Graph_1_TIVA.xlsx", firstrow(var
 
 
 
-*Graph 1 WIOD
+*Graph 1 WIOD : impact sur ZE
 
 use "$dir/Results/Devaluations/mean_chg_WIOD_X_2011.dta", clear
 
@@ -167,19 +168,181 @@ label var pond_WIOD_HC "Prix de consommation"
 save "$dir/Results/Devaluations/Pour_HC_Graph_1_WIOD_old3.dta", replace
 export delimited "$dir/Results/Devaluations/Pour_HC_Graph_1_WIOD_old3.csv", replace
 
-graph bar (asis) pond_WIOD_X pond_WIOD_Y  pond_WIOD_HC, title("Elasticité à une appréciation de la monnaie locale") over(c, sort(c_full_FR) label(angle(vertical) labsize(small))) 
+graph bar (asis) pond_WIOD_X pond_WIOD_Y  pond_WIOD_HC, title("Elasticité à une appréciation de la monnaie locale") over(c, sort(c) label(angle(vertical) labsize(small))) 
 
 graph export "$dir/Results/Devaluations/HC_Graph_1_WIOD_old3.png", replace
 
 drop if strpos("$eurozone",c)==0
 
 
-graph bar (asis) pond_WIOD_X pond_WIOD_Y pond_WIOD_HC, title("Elasticité à une appréciation de la monnaie locale") over(c_full_FR, sort(c_full_FR) label(angle(vertical) labsize(small)))
+graph bar (asis) pond_WIOD_X pond_WIOD_Y pond_WIOD_HC, title("Elasticité à une appréciation de la monnaie locale") over(c_full_FR, sort(c_full_FR)  label(angle(vertical) labsize(small)))
 
 graph export "$dir/Results/Devaluations/HC_Graph_1_WIOD.png", replace
 save "$dir/Results/Devaluations/Pour_HC_Graph_1_WIOD.dta", replace
 export delimited "$dir/Results/Devaluations/Pour_HC_Graph_1_WIOD.csv", replace
 export excel "$dir/Results/Devaluations/Pour_HC_Graph_1_WIOD.xlsx", firstrow(variable)replace
+
+
+*Graphique 1: élasticité des prix de production,  d'exportations et de consommation à une appréciation de la monnaie locale
+*TIVA
+*Impact HORS ZE
+
+use "$dir/Results/Devaluations/mean_chg_TIVA_X_2011.dta", clear
+
+foreach var of varlist shockEUR1-shockZAF1 {
+	local pays = substr("`var'",6,3)
+	replace `var' = 0 if strmatch(c,"*`pays'*")==0
+}
+
+egen pond_TIVA_X = rowtotal(shockEUR1-shockZAF1)
+replace pond_TIVA_X = (pond_TIVA_X - 1)/2
+
+keep c pond_TIVA_X
+
+save "$dir/Results/Devaluations/Pour_HC_Graph_1_TIVA_oldHZE.dta", replace
+
+
+use "$dir/Results/Devaluations/mean_chg_TIVA_HC_2011.dta", clear
+
+foreach var of varlist shockEUR1-shockZAF1 {
+	local pays = substr("`var'",6,3)
+	replace `var' = 0 if strmatch(c,"*`pays'*")==0
+}
+
+egen pond_TIVA_HC = rowtotal(shockEUR1-shockZAF1)
+replace pond_TIVA_HC = (pond_TIVA_HC - 1)/2
+
+keep c pond_TIVA_HC
+
+merge 1:1 c using "$dir/Results/Devaluations/Pour_HC_Graph_1_TIVA_oldHZE.dta"
+drop _merge
+
+save "$dir/Results/Devaluations/Pour_HC_Graph_1_TIVA_old2HZE.dta", replace
+
+
+use "$dir/Results/Devaluations/mean_chg_TIVA_Yt_2011.dta", clear
+
+foreach var of varlist shockEUR1-shockZAF1 {
+	local pays = substr("`var'",6,3)
+	replace `var' = 0 if strmatch(c,"*`pays'*")==0
+}
+
+egen pond_TIVA_Y = rowtotal(shockEUR1-shockZAF1)
+
+keep c pond_TIVA_Y
+
+merge 1:1 c using "$dir/Bases/Pays_FR.dta",keep(3)
+drop _merge
+
+
+
+merge 1:1 c using "$dir/Results/Devaluations/Pour_HC_Graph_1_TIVA_old2HZE.dta"
+
+drop _merge 
+
+replace pond_TIVA_Y = (pond_TIVA_Y - 1)/2 
+
+label var pond_TIVA_Y "Prix de production"
+label var pond_TIVA_X "Prix d'exportation"
+label var pond_TIVA_HC "Prix de consommation"
+
+save "$dir/Results/Devaluations/Pour_HC_Graph_1_TIVA_old3HZE.dta", replace
+export delimited "$dir/Results/Devaluations/Pour_HC_Graph_1_TIVA_old3HZE.csv", replace
+
+graph bar (asis) pond_TIVA_X pond_TIVA_Y  pond_TIVA_HC, title("Elasticité à une appréciation de la monnaie locale") over(c, sort(c_full_FR) label(angle(vertical) labsize(small)) ) 
+
+graph export "$dir/Results/Devaluations/HC_Graph_1_TIVA_old3HZE.png", replace
+
+drop if strpos("$eurozone",c)==0
+
+
+graph bar (asis) pond_TIVA_X pond_TIVA_Y pond_TIVA_HC, title("Elasticité à une appréciation de la monnaie locale") over(c_full_FR, sort(c_full_FR)  label(angle(vertical) labsize(small)))
+
+graph export "$dir/Results/Devaluations/HC_Graph_1_TIVAHZE.png", replace
+save "$dir/Results/Devaluations/Pour_HC_Graph_1_TIVAHZE.dta", replace
+export delimited "$dir/Results/Devaluations/Pour_HC_Graph_1_TIVAHZE.csv", replace
+export excel "$dir/Results/Devaluations/Pour_HC_Graph_1_TIVAHZE.xlsx", firstrow(variable)replace
+
+
+
+
+*Graph 1 WIOD : impact HORS ZE
+
+use "$dir/Results/Devaluations/mean_chg_WIOD_X_2011.dta", clear
+
+foreach var of varlist shockEUR1-shockUSA1 {
+	local pays = substr("`var'",6,3)
+	replace `var' = 0 if strmatch(c,"*`pays'*")==0
+}
+
+egen pond_WIOD_X = rowtotal(shockEUR1-shockUSA1)
+replace pond_WIOD_X = (pond_WIOD_X - 1)/2
+
+keep c pond_WIOD_X
+
+save "$dir/Results/Devaluations/Pour_HC_Graph_1_WIOD_oldHZE.dta", replace
+
+
+use "$dir/Results/Devaluations/mean_chg_WIOD_HC_2011.dta", clear
+
+foreach var of varlist shockEUR1-shockUSA1 {
+	local pays = substr("`var'",6,3)
+	replace `var' = 0 if strmatch(c,"*`pays'*")==0
+}
+
+egen pond_WIOD_HC = rowtotal(shockEUR1-shockUSA1)
+replace pond_WIOD_HC = (pond_WIOD_HC - 1)/2
+
+keep c pond_WIOD_HC
+
+merge 1:1 c using "$dir/Results/Devaluations/Pour_HC_Graph_1_WIOD_oldHZE.dta"
+drop _merge
+
+save "$dir/Results/Devaluations/Pour_HC_Graph_1_WIOD_old2HZE.dta", replace
+
+
+use "$dir/Results/Devaluations/mean_chg_WIOD_Yt_2011.dta", clear
+
+foreach var of varlist shockEUR1-shockUSA1 {
+	local pays = substr("`var'",6,3)
+	replace `var' = 0 if strmatch(c,"*`pays'*")==0
+}
+
+egen pond_WIOD_Y = rowtotal(shockEUR1-shockUSA1)
+
+keep c pond_WIOD_Y
+
+merge 1:1 c using "$dir/Bases/Pays_FR.dta",keep(3)
+drop _merge
+
+
+
+merge 1:1 c using "$dir/Results/Devaluations/Pour_HC_Graph_1_WIOD_old2HZE.dta"
+
+drop _merge 
+
+replace pond_WIOD_Y = (pond_WIOD_Y - 1)/2 
+
+label var pond_WIOD_Y "Prix de production"
+label var pond_WIOD_X "Prix d'exportation"
+label var pond_WIOD_HC "Prix de consommation"
+
+save "$dir/Results/Devaluations/Pour_HC_Graph_1_WIOD_old3HZE.dta", replace
+export delimited "$dir/Results/Devaluations/Pour_HC_Graph_1_WIOD_old3HZE.csv", replace
+
+graph bar (asis) pond_WIOD_X pond_WIOD_Y  pond_WIOD_HC, title("Elasticité à une appréciation de la monnaie locale") over(c, sort(c) label(angle(vertical) labsize(small))) 
+
+graph export "$dir/Results/Devaluations/HC_Graph_1_WIOD_old3.png", replace
+
+drop if strpos("$eurozone",c)!=0
+
+
+graph bar (asis) pond_WIOD_X pond_WIOD_Y pond_WIOD_HC, title("Elasticité à une appréciation de la monnaie locale") over(c_full_FR, sort(c_full_FR)  label(angle(vertical) labsize(small)))
+
+graph export "$dir/Results/Devaluations/HC_Graph_1_WIODHZE.png", replace
+save "$dir/Results/Devaluations/Pour_HC_Graph_1_WIODHZE.dta", replace
+export delimited "$dir/Results/Devaluations/Pour_HC_Graph_1_WIODHZE.csv", replace
+export excel "$dir/Results/Devaluations/Pour_HC_Graph_1_WIODHZE.xlsx", firstrow(variable)replace
 
 
 *GRAPHIQUE HC 2 TIVA: comparaison évolution dans le temps en devise nationale
@@ -223,7 +386,7 @@ save "$dir/Results/Devaluations/Pour_TIVA_HC_Graph_2.dta", replace
 export delimited "$dir/Results/Devaluations/Pour_TIVA_HC_Graph_2.csv", replace
 
 
-graph bar (asis) pond_TIVA_HC_2000 pond_TIVA_HC_2011 , title("Elasticité à une appréciation de la monnaie locale") over(c, sort(c_full_FR) label(angle(vertical) labsize(small))) 
+graph bar (asis) pond_TIVA_HC_2000 pond_TIVA_HC_2011 , title("Elasticité à une appréciation de la monnaie locale") over(c_full_FR, sort(c_full_FR)  label(angle(vertical) labsize(small))) 
 
 graph export "$dir/Results/Devaluations/Pour_TIVA_HC_Graph_2.png", replace
 

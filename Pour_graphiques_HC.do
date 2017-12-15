@@ -181,12 +181,6 @@ export delimited "$dir/Results/Devaluations/Pour_HC_Graph_1_WIOD.csv", replace
 export excel "$dir/Results/Devaluations/Pour_HC_Graph_1_WIOD.xlsx", firstrow(variable)replace
 
 
-
-
-
-
-
-
 *GRAPHIQUE HC 2 TIVA: comparaison évolution dans le temps en devise nationale
 * Correspond au Graphique 2 du working paper
 
@@ -337,14 +331,14 @@ save "$dir/Results/Devaluations/Pour_HC_Graph_3_`source'.dta", replace
 export delimited "$dir/Results/Devaluations/Pour_HC_Graph_3_`source'.csv", replace
 export excel "$dir/Results/Devaluations/Pour_HC_Graph_3_`source'.xlsx", firstrow(variable)replace
 
-graph bar (asis) pond_`source'_X pond_`source'_Yt pond_`source'_HC,  title("Elasticité à une appréciation de l'euro") over(c_full_FR, sort(c_full_FR) label(angle(vertical) )) 
+graph bar (asis) pond_`source'_X pond_`source'_Yt pond_`source'_HC,  yscale(range(-0.5 0.0))  ylabel(-0.5 (0.1) 0.0) title("Elasticité à une appréciation de l'euro") over(c_full_FR, sort(c_full_FR) label(angle(vertical) )) 
 graph export "$dir/Results/Devaluations/HC_Graph_3_`source'.png" , replace
 }
 
 
 
 
-**Graphique 4 du working paper : élasticité des prix en monnaie locale
+**Graphique 4 du working paper : élasticité des prix en monnaie locale des pays hors ZE
 *comparaison des effets prix d'exportations, de production et de consommation: comme dans le WP
 
 foreach source in TIVA WIOD {
@@ -419,7 +413,7 @@ save "$dir/Results/Devaluations/Pour_HC_`source'_Graph_4temp.dta", replace
 export delimited "$dir/Results/Devaluations/Pour_HC_`source'_Graph_4temp.csv", replace
 export excel "$dir/Results/Devaluations/Pour_HC_`source'_Graph_4temp.xlsx", firstrow(variable)replace
 
-graph bar (asis) pond_HC_2000  pond_HC_2011 ,  title("Elasticité prix conso. à une appréciation de l'euro") over(c_full_FR, sort(c_full_FR)  label(angle(vertical) labsize(vsmall))) 
+graph bar (asis) pond_HC_2000  pond_HC_2011 ,  yscale(range(0.0 0.3))  ylabel(0.0 (0.05) 0.3) title("Elasticité prix conso. à une appréciation de l'euro") over(c_full_FR, sort(c_full_FR)  label(angle(vertical) labsize(vsmall))) 
 graph export "$dir/Results/Devaluations/HC_Graph_4temp_`source'.png", replace
 }
 
@@ -450,7 +444,7 @@ save "$dir/Results/Devaluations/Pour_HC_`source'_Graph_4tempb.dta", replace
 export delimited "$dir/Results/Devaluations/Pour_HC_`source'_Graph_4tempb.csv", replace
 export excel "$dir/Results/Devaluations/Pour_HC_`source'_Graph_4tempb.xlsx", firstrow(variable)replace
 
-graph bar (asis) pond_HC_2000  pond_HC_2011 ,  title("Elasticité prix conso. ZE à un choc UK")over(c_full_FR, sort(c_full_FR)  label(angle(vertical) labsize(vsmall))) 
+graph bar (asis) pond_HC_2000  pond_HC_2011 ,   yscale(range(0.0 0.12))  ylabel(0.0 (0.02) 0.12)title("Elasticité prix conso. ZE à un choc UK")over(c_full_FR, sort(c_full_FR)  label(angle(vertical) labsize(vsmall))) 
 graph export "$dir/Results/Devaluations/HC_`source'_Graph_4tempb.png", replace
 }
 
@@ -513,7 +507,7 @@ save "$dir/Results/Devaluations/Pour_HC_Graph_4tempc_`source'.dta", replace
 export delimited "$dir/Results/Devaluations/Pour_HC_Graph_4tempc_`source'.csv", replace
 export excel "$dir/Results/Devaluations/Pour_HC_Graph_4tempc_`source'.xlsx", firstrow(variable)replace
 
-graph bar (asis) pond_HC_2000  pond_HC_2011 , title("Elasticité prix conso. ZE à un choc USD") over(c_full_FR, sort(c_full_FR)  label(angle(vertical) labsize(vsmall))) 
+graph bar (asis) pond_HC_2000  pond_HC_2011 ,  yscale(range(0.0 0.12))  ylabel(0.0 (0.02) 0.12) title("Elasticité prix conso. ZE à un choc USD") over(c_full_FR, sort(c_full_FR)  label(angle(vertical) labsize(vsmall))) 
 graph export "$dir/Results/Devaluations/HC_Graph_4tempc_`source'.png", replace
 }
 

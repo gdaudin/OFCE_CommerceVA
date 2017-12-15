@@ -29,6 +29,7 @@ if "`source'"=="TIVA" {
 	generate pays = strlower(substr(v1,1,strpos(v1,"_")-1))
 }
 
+
 * on conserve uniquement les CI, en éliminants les emplois finals
 if "`source'"=="WIOD" {
 	 
@@ -36,6 +37,7 @@ if "`source'"=="WIOD" {
 	rename Country pays
 	 
 }
+
 
 keep pays $var_entree_sortie
 
@@ -61,10 +63,12 @@ foreach var of varlist $var_entree_sortie {
 
 
 
+*somme des CI pour chaque secteur de chaque pays
 collapse (sum) $var_entree_sortie
 display "after collapse"
 
-*obtention de deux lignes, l'une de CI, l'autre de prod pour chaque secteur
+
+*obtention de deux lignes, l'une de CI, l'autre de prod pour chaque secteur, issue de la base  `source'_`yrs'_OUT
 append using "$dir/Bases/`source'_`yrs'_OUT.dta"
 
 *transpositin en colonne, puis création d'un ratio de CI importées par secteurs 
@@ -79,6 +83,7 @@ if "`source'"=="TIVA" {
 }
 
 
+*renomme les pays et secteur à partir de la base csv_WIOD
 if "`source'"=="WIOD" {
 	merge 1:1 _n using "$dir/Bases/csv_WIOD.dta"
 	rename c pays
@@ -183,7 +188,7 @@ if "`vector'" == "X"  {
 	
 	merge 1:1 pays sector using  "$dir/Bases/imp_inputs_par_sect_`yrs'_`source'_`hze'.dta"
 	
-	blif
+
 	drop _merge
 	
 	gen ci_impt_X = ratio_ci_impt_prod * X
@@ -212,6 +217,16 @@ end
 **pOUR TEST
 
 
+if ("`c(username)'"=="guillaumedaudin") do  "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation/Definition_pays_secteur.do" TIVA
+if ("`c(username)'"=="w817186") do "X:\Agents\FAUBERT\commerce_VA_inflation\Definition_pays_secteur.do" TIVA
+if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\Definition_pays_secteur.do" TIVA
+
+imp_inputs_par_sect 2011 TIVA hze_not
+
+imp_inputs 2011 TIVA X hze_not
+
+
+/*
 if ("`c(username)'"=="guillaumedaudin") do  "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation/Definition_pays_secteur.do" WIOD
 if ("`c(username)'"=="w817186") do "X:\Agents\FAUBERT\commerce_VA_inflation\Definition_pays_secteur.do" WIOD
 if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\Definition_pays_secteur.do" WIOD
@@ -220,7 +235,7 @@ imp_inputs_par_sect 2011 WIOD hze_not
 
 imp_inputs 2011 WIOD X hze_not
 
-
+*/
 
 
 

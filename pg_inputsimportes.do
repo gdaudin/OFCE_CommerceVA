@@ -215,32 +215,23 @@ end
 
 
 **pOUR TEST
-
-
-if ("`c(username)'"=="guillaumedaudin") do  "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation/Definition_pays_secteur.do" TIVA
-if ("`c(username)'"=="w817186") do "X:\Agents\FAUBERT\commerce_VA_inflation\Definition_pays_secteur.do" TIVA
-if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\Definition_pays_secteur.do" TIVA
-
-imp_inputs_par_sect 2011 TIVA hze_not
-
-imp_inputs 2011 TIVA X hze_not
-
-
 /*
 if ("`c(username)'"=="guillaumedaudin") do  "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation/Definition_pays_secteur.do" WIOD
 if ("`c(username)'"=="w817186") do "X:\Agents\FAUBERT\commerce_VA_inflation\Definition_pays_secteur.do" WIOD
 if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\Definition_pays_secteur.do" WIOD
 
-imp_inputs_par_sect 2011 WIOD hze_not
+imp_inputs_par_sect 2000 WIOD hze_not
 
-imp_inputs 2011 WIOD X hze_not
+imp_inputs 2000 WIOD X hze_not
+
+imp_inputs_par_sect 2000 WIOD hze_yes
+
+imp_inputs 2000 WIOD X hze_yes
 
 */
 
 
-
-
-foreach source in TIVA WIOD {
+foreach source in  WIOD TIVA {
 
 
 
@@ -256,10 +247,41 @@ foreach source in TIVA WIOD {
 
 
 	foreach i of numlist `start_year' (1)`end_year'  {
-		//clear
+		
+		imp_inputs_par_sect `i' `source' hze_not
+		imp_inputs_par_sect `i' `source' hze_yes
+		
+	
+		clear
+	}
+
+
+
+}
+
+
+
+foreach source in  WIOD TIVA {
+
+
+
+	if "`source'"=="WIOD" local start_year 2000
+	if "`source'"=="TIVA" local start_year 1995
+
+
+	if "`source'"=="WIOD" local end_year 2014
+	if "`source'"=="TIVA" local end_year 2011
+	
+
+
+
+
+	foreach i of numlist `start_year' (1)`end_year'  {
+		
 		imp_inputs `i' `source' HC hze_not
 		imp_inputs `i' `source' HC hze_yes
 		imp_inputs `i' `source' X hze_yes
+		imp_inputs `i' `source' X hze_not
 		
 	
 		clear

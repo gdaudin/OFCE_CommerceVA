@@ -48,23 +48,28 @@ foreach var of varlist $var_entree_sortie {
 *	On cherche à enlever les auto-consommations intermédiaires
 	if "`source'" == "TIVA" local pays_colonne = substr("`var'",1,3)
 	if "`source'" == "WIOD" local pays_colonne = substr("`var'",2,3)
+	
 	replace `var' = 0 if pays=="`pays_colonne'"
+	
 	local pays_colonne = upper("`pays_colonne'")
 	
 	if "`hze'"=="hze_yes" & strpos("$eurozone","`pays_colonne'")!=0 {
+	
 		*display "turf"
 	
 	*Et les internes dans la zone euro
 		foreach i of global eurozone {	
 			replace `var' = 0 if pays == lower("`i'")
+			replace `var' = 0 if pays == "`i'"
 		}
 	}
 }
 
-
+bb
 
 *somme des CI pour chaque secteur de chaque pays
 collapse (sum) $var_entree_sortie
+
 display "after collapse"
 
 
@@ -215,21 +220,21 @@ end
 
 
 **pOUR TEST
-/*
+
 if ("`c(username)'"=="guillaumedaudin") do  "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation/Definition_pays_secteur.do" WIOD
 if ("`c(username)'"=="w817186") do "X:\Agents\FAUBERT\commerce_VA_inflation\Definition_pays_secteur.do" WIOD
 if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\Definition_pays_secteur.do" WIOD
 
-imp_inputs_par_sect 2000 WIOD hze_not
+*imp_inputs_par_sect 2000 WIOD hze_not
 
-imp_inputs 2000 WIOD X hze_not
+*imp_inputs 2000 WIOD X hze_not
 
 imp_inputs_par_sect 2000 WIOD hze_yes
 
-imp_inputs 2000 WIOD X hze_yes
+*imp_inputs 2000 WIOD X hze_yes
 
-*/
 
+/*
 
 foreach source in  WIOD TIVA {
 

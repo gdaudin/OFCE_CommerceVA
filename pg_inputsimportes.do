@@ -178,22 +178,28 @@ if "`vector'" == "HC"  {
 		replace pays = "mex" if pays=="mx1" | pays=="mx2" | pays=="mx3"
 		collapse (sum) conso, by(pays pays_conso year sector)
 	}
+	
 	*HC se présente avec le pays d'origine du bien, puis les pays de consommation 
 	*Manipulation de la base de données HC en vue d'ordonner la consommation du pays_conso pour tous les secteurs
 	keep if lower(pays)==lower(pays_conso) 
+	keep if lower(pays)==(pays_conso) 
 	keep if year==`yrs'
 	
+	if "`source'"=="WIOD" replace pays=lower(pays)
+	if "`source'"=="WIOD" replace sector=upper(sector)
 	if "`source'"=="WIOD" merge 1:1 pays sector using  "$dir/Bases/imp_inputs_par_sect_`yrs'_`source'_`hze'.dta"
+	
 	if "`source'"=="TIVA" merge 1:1 pays sector using  "$dir/Bases/imp_inputs_par_sect_modif.dta"
 	if "`source'"=="TIVA" erase  "$dir/Bases/imp_inputs_par_sect_modif.dta"
 	drop _merge
-	
+		
 	gen ci_impt_HC = ratio_ci_impt_prod * conso
 	
 	collapse (sum) ci_impt_HC conso, by(pays)
 	generate ratio_ci_impt_HC = ci_impt_HC/conso
 	save "$dir/Bases/imp_inputs_HC_`yrs'_`source'_`hze'.dta", replace
 }
+
 
 if "`vector'" == "X"  { 
 	
@@ -230,22 +236,22 @@ end
 
 
 **pOUR TEST
-/*
+
 if ("`c(username)'"=="guillaumedaudin") do  "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation/Definition_pays_secteur.do" WIOD
 if ("`c(username)'"=="w817186") do "X:\Agents\FAUBERT\commerce_VA_inflation\Definition_pays_secteur.do" WIOD
 if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\Definition_pays_secteur.do" WIOD
-
+/*
 *imp_inputs_par_sect 2000 WIOD hze_not
 
 *imp_inputs 2000 WIOD X hze_not
 
-imp_inputs_par_sect 2000 WIOD hze_yes
+*imp_inputs_par_sect 2000 WIOD hze_yes
 
 *imp_inputs 2000 WIOD X hze_yes
 
+*imp_inputs 2000 WIOD HC hze_not
+
 */
-
-
 
 foreach source in   WIOD TIVA {
 
@@ -277,7 +283,7 @@ foreach source in   WIOD TIVA {
 
 
 
-foreach source in  WIOD TIVA {
+foreach source in  WIOD  TIVA {
 
 
 

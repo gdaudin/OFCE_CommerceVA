@@ -18,6 +18,9 @@ capture program drop imp_inputs_par_sect // fournit le % des ci importées/prod 
 program imp_inputs_par_sect
 args yrs source hze
 
+if ("`c(username)'"=="guillaumedaudin") do  "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation/Definition_pays_secteur.do" `source'
+if ("`c(username)'"=="w817186") do "X:\Agents\FAUBERT\commerce_VA_inflation\Definition_pays_secteur.do" `source'
+if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\Definition_pays_secteur.do" `source'
 
 * exemple  hze_not ou hze_yes pour pays membres de la ZE et pays hors ZE
 
@@ -26,7 +29,10 @@ args yrs source hze
 use "$dir/Bases/`source'_ICIO_`yrs'.dta"
 if "`source'"=="TIVA" {
 	drop if v1 == "VA.TAXSUB" | v1 == "OUT"
+	
+	
 	generate pays = strlower(substr(v1,1,strpos(v1,"_")-1))
+
 }
 
 
@@ -35,7 +41,7 @@ if "`source'"=="WIOD" {
 	 
 	drop *57 *58 *59 *60 *61
 	rename Country pays
-	 
+	
 }
 
 
@@ -65,7 +71,7 @@ foreach var of varlist $var_entree_sortie {
 	}
 }
 
-bb
+
 
 *somme des CI pour chaque secteur de chaque pays
 collapse (sum) $var_entree_sortie
@@ -123,6 +129,10 @@ end
 capture program drop imp_inputs // fournit le total des inputs importés par chaque pays
 program imp_inputs
 args yrs source vector hze
+
+if ("`c(username)'"=="guillaumedaudin") do  "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation/Definition_pays_secteur.do" `source'
+if ("`c(username)'"=="w817186") do "X:\Agents\FAUBERT\commerce_VA_inflation\Definition_pays_secteur.do" `source'
+if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\Definition_pays_secteur.do" `source'
 
 * exemple vector X Y HC hze_not ou hze_yes
 
@@ -220,7 +230,7 @@ end
 
 
 **pOUR TEST
-
+/*
 if ("`c(username)'"=="guillaumedaudin") do  "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation/Definition_pays_secteur.do" WIOD
 if ("`c(username)'"=="w817186") do "X:\Agents\FAUBERT\commerce_VA_inflation\Definition_pays_secteur.do" WIOD
 if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\Definition_pays_secteur.do" WIOD
@@ -233,10 +243,11 @@ imp_inputs_par_sect 2000 WIOD hze_yes
 
 *imp_inputs 2000 WIOD X hze_yes
 
+*/
 
-/*
 
-foreach source in  WIOD TIVA {
+
+foreach source in   WIOD TIVA {
 
 
 

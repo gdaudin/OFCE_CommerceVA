@@ -743,7 +743,7 @@ rename shockEUR1 pond_HC
 merge 1:1 c using "$dir/Results/Devaluations/Pour_HC_Graph_imp_deval_`source'.dta"
 drop _merge
 	
-graph twoway (scatter pond_HC contenu_impHC, mlabel(c)) (qfit pond_HC contenu_impHC)  , ///
+graph twoway (scatter pond_HC contenu_impHC, mlabel(c)) (lfit pond_HC contenu_impHC)  , ///
 			title("Elasticité des prix de consommation ZE à un choc Euro") ///
 			xtitle("Parts des importations dans la consommation") ytitle("Elasticité prix de conso. en euro") ///
 			yscale(range(0.6 0.9)) xscale(range(0.1 0.6)) xlabel (0.1(0.1) 0.6) ylabel(0.6 (0.1) 0.9)
@@ -775,7 +775,7 @@ rename shockGBR1 pond_HC
 merge 1:1 c using "$dir/Results/Devaluations/Pour_HC_Graph_imp_devalb_`source'.dta"
 drop _merge
 	
-graph twoway (scatter pond_HC contenu_impHC, mlabel(c)) (qfit pond_HC contenu_impHC)  , ///
+graph twoway (scatter pond_HC contenu_impHC, mlabel(c)) (lfit pond_HC contenu_impHC)  , ///
 			xtitle("Parts des importations dans la consommation") ytitle("Elasticité prix de conso.") ///
 			yscale(range(0.0 0.12)) xscale(range(0.0 0.6)) xlabel (0.0(0.1) 0.6) ylabel(0.0 (0.01) 0.12) ///
 			title("Elasticité des prix de consommation ZE à un choc UK", span)
@@ -808,7 +808,7 @@ rename shockUSA1 pond_HC
 merge 1:1 c using "$dir/Results/Devaluations/Pour_HC_Graph_imp_devalc_`source'.dta"
 drop _merge
 	
-graph twoway (scatter pond_HC contenu_impHC, mlabel(c)) (qfit pond_HC contenu_impHC)  , ///
+graph twoway (scatter pond_HC contenu_impHC, mlabel(c)) (lfit pond_HC contenu_impHC)  , ///
 			title("Elasticité des prix de consommation ZE à un choc USD") ///
 			xtitle("Parts des importations dans la consommation") ytitle("Elasticité prix de conso.") ///
 			yscale(range(0.0 0.1)) xscale(range(0.0 0.6)) xlabel (0.0(0.1) 0.6) ylabel(0.0 (0.02) 0.1)
@@ -843,7 +843,7 @@ rename shockEUR1 pond_HC
 merge 1:1 c using "$dir/Results/Devaluations/Pour_HC_Graph8_`source'.dta"
 drop _merge
 		
-graph twoway (scatter pond_HC ratio_ci_impt_HC, mlabel(c_full_FR)) (qfit pond_HC ratio_ci_impt_HC)  , ///
+graph twoway (scatter pond_HC ratio_ci_impt_HC, mlabel(c_full_FR)) (lfit pond_HC ratio_ci_impt_HC)  , ///
 			title("Elasticité des prix de consommation ZE à un choc Euro") ///
 			xtitle("Parts des CI importées depuis les pays hors ZE dans la consommation") ytitle("Elasticité prix de conso. en euro") ///
 			yscale(range(0.6 0.9)) xscale(range(0.4 0.8)) xlabel (0.4(0.1) 0.8) ylabel(0.6 (0.1) 0.9)
@@ -875,9 +875,9 @@ rename shockEUR1 pond_HC
 merge 1:1 c using "$dir/Results/Devaluations/Pour_HC_Graph8_`source'.dta"
 drop _merge
 		
-graph twoway (scatter pond_HC ratio_ci_impt_HC, mlabel(c_full_FR)) (qfit pond_HC ratio_ci_impt_HC)  , ///
+graph twoway (scatter pond_HC ratio_ci_impt_HC, mlabel(c_full_FR)) (lfit pond_HC ratio_ci_impt_HC)  , ///
 			title("Elasticité des prix de consommation ZE à un choc Euro") ///
-			xtitle("Parts des CI importées depuis les pays hors ZE dans la consommation") ytitle("Elasticité prix de conso. en euro") ///
+			xtitle("Parts des CI importées depuis les pays hors ZE dans la consommation") ytitle("Elasticité prix de conso. en euros") ///
 			yscale(range(0.6 0.9)) xscale(range(2 2.2)) xlabel (2(0.1) 2.2) ylabel(0.6 (0.1) 0.9)
 		
 graph export "$dir/Results/Devaluations/HC_Graph_8_`source'.png", replace

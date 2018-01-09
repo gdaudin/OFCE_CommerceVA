@@ -866,7 +866,7 @@ drop if strpos("$eurozone",c)==0
 
 save "$dir/Results/Devaluations/Pour_Graph_imp_deval_`source'.dta", replace
 *drop if c_full_FR=="Luxembourg"
-graph twoway (scatter pond_`source'_Y input_prod, mlabel(c_full_FR)) (qfit pond_Y input_prod)  , ///
+graph twoway (scatter pond_`source'_Y input_prod, mlabel(c_full_FR)) (lfit pond_Y input_prod)  , ///
 			xtitle("Parts des inputs importés dans la production") ytitle("Elasticité des prix de production en monnaie nationale", size(small)) ///
 			yscale(range(0 -.35) reverse) xscale(range(0 .45)) xlabel (0(0.05) .45) ylabel(0 (0.05) -.35)
 			
@@ -874,7 +874,7 @@ graph twoway (scatter pond_`source'_Y input_prod, mlabel(c_full_FR)) (qfit pond_
 graph export "$dir/Results/Devaluations/Graph_6_`source'.png", replace 
 export excel "$dir/Results/Devaluations/Pour_Graph_6_`source'.xlsx", firstrow(variable)replace
  /*
-graph twoway (scatter pond_Y input_prod, mlabel(c_full_FR)) (qfit pond_Y input_prod)  ,    xtitle("Parts des inputs importés dans la production") ytitle("Prix de production")
+graph twoway (scatter pond_Y input_prod, mlabel(c_full_FR)) (lfit pond_Y input_prod)  ,    xtitle("Parts des inputs importés dans la production") ytitle("Prix de production")
 graph export "$dir/Results/Devaluations/Graph_1_imp.png", replace   */
 
 }
@@ -903,12 +903,12 @@ drop if strpos("$eurozone",c)==0
 save "$dir/Results/Devaluations/Pour_Graph_imp_deval.dta", replace
 //export delimited "$dir/Results/Devaluations/Pour_Graph_1_old.csv", replace
 
-//graph twoway (scatter pond_Y input_prod, mlabel(c_full_FR)) (qfit pond_Y input_prod)  , ///
+//graph twoway (scatter pond_Y input_prod, mlabel(c_full_FR)) (lfit pond_Y input_prod)  , ///
 	//		xtitle("Parts des inputs importés dans la production") ytitle("Elasticité des prix de production en euro") ///
 		//	yscale(range(0 -.2) reverse) xscale(range(0 .3)) xlabel (0(0.05) .3) ylabel(0 (0.05) -.2)
 			
 
-graph twoway (scatter pond_Y input_prod, mlabel(c_full_FR)) (qfit pond_Y input_prod)  , ///
+graph twoway (scatter pond_Y input_prod, mlabel(c_full_FR)) (lfit pond_Y input_prod)  , ///
 			xtitle("Parts des inputs importés en provenance de pays hors zone euro dans la production") ytitle("Elasticité des prix de production en euro") ///
 			yscale(range(0 -.2) reverse) xscale(range(0 .2)) xlabel (0(0.05) .2) ylabel(0 (0.05) -.2)
 
@@ -943,13 +943,13 @@ drop if strpos("$eurozone",c)==0
 save "$dir/Results/Devaluations/Pour_Graph_8.dta", replace
 //export delimited "$dir/Results/Devaluations/Pour_Graph_1_old.csv", replace
 
-//graph twoway (scatter pond_Y input_prod, mlabel(c_full_FR)) (qfit pond_Y input_prod)  , ///
+//graph twoway (scatter pond_Y input_prod, mlabel(c_full_FR)) (lfit pond_Y input_prod)  , ///
 	//		xtitle("Parts des inputs importés dans la production") ytitle("Elasticité des prix de production en euro") ///
 		//	yscale(range(0 -.2) reverse) xscale(range(0 .3)) xlabel (0(0.05) .3) ylabel(0 (0.05) -.2)
 			
 
 
-graph twoway (scatter pond_Y loc_inputs, mlabel(c_full_FR)) (qfit pond_Y loc_inputs)  , ///
+graph twoway (scatter pond_Y loc_inputs, mlabel(c_full_FR)) (lfit pond_Y loc_inputs)  , ///
 			xtitle("Parts des inputs produits localement dans la production") ytitle("Elasticité des prix de production en euro") ///
 			yscale(range(0 1)) xscale(range(0 .5)) xlabel (0(0.1) .5) ylabel(0 (0.1) 1)
 
@@ -981,7 +981,7 @@ drop if strpos("$eurozone",c)==0
 save "$dir/Results/Devaluations/Pour_Graph_9.dta", replace
 //export delimited "$dir/Results/Devaluations/Pour_Graph_1_old.csv", replace
 
-//graph twoway (scatter pond_Y input_prod, mlabel(c_full_FR)) (qfit pond_Y input_prod)  , ///
+//graph twoway (scatter pond_Y input_prod, mlabel(c_full_FR)) (lfit pond_Y input_prod)  , ///
 	//		xtitle("Parts des inputs importés dans la production") ytitle("Elasticité des prix de production en euro") ///
 		//	yscale(range(0 -.2) reverse) xscale(range(0 .3)) xlabel (0(0.05) .3) ylabel(0 (0.05) -.2)
 			

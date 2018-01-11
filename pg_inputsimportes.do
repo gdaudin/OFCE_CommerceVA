@@ -41,7 +41,8 @@ if "`source'"=="WIOD" {
 	 
 	drop *57 *58 *59 *60 *61
 	rename Country pays
-	
+	drop if pays=="TOT"
+	* on supprime les lignes total intermediate conso à GO de la base wiod_icio
 }
 
 
@@ -253,7 +254,7 @@ if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\De
 
 */
 
-foreach source in   WIOD TIVA {
+foreach source in   WIOD  {
 
 
 
@@ -283,7 +284,7 @@ foreach source in   WIOD TIVA {
 
 
 
-foreach source in  WIOD  TIVA {
+foreach source in  WIOD   {
 
 
 

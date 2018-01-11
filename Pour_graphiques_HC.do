@@ -1152,19 +1152,25 @@ foreach year in 1995 1996 1997 1998 1999 2000 2001 2002 2003 2004 2005 2006 2007
 
 **Graphique 9 de comparaison des impacts sur HC obtenus avec TIVA et WIOD
 
-foreach  orig in  USA CHN JPN GBR EAS RUS AUS BRA CHE CAN DNK IDN IND KOR MEX NOR SWE TUR {
+foreach  orig in  USA  {
 foreach year in   2011  {
 use "$dir/Results/Devaluations/Compa_Tabl2long_`year'_`orig'.dta", clear
 
 label var shock`orig'1_WIOD_`year' "WIOD"
 label var shock`orig'1_TIVA_`year' "TIVA"
 
+local countryorig "`orig'"
+*drop if strpos("$countryorig",c)==`countryorig'
 
-*if c==`orig' drop shock`orig'1_WIOD_`year' shock`orig'1_TIVA_`year' 
 graph bar (asis) shock`orig'1_WIOD_`year' shock`orig'1_TIVA_`year'   , title("Elasticité prix conso. à un choc `orig'") over(c_full_FR, sort(c_full_FR)  label(angle(vertical) labsize(vsmall))) 
 graph export "$dir/Results/Devaluations/HC_Graph_9_`orig'.png", replace
 }
 }
+
+
+
+
+
 end
 graphiques `source' 
 

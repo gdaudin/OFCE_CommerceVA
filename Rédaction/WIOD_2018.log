@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2017.10.6)  11 JAN 2018 17:50
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2017.10.6)  11 JAN 2018 18:47
 entering extended mode
 **WIOD_2018.tex
 (X:\Agents\FAUBERT\commerce_VA_inflation\Rédaction\WIOD_2018.tex
@@ -572,20 +572,20 @@ LaTeX Info: Redefining \cite on input line 694.
 \c@NAT@ctr=\count144
 )
 (X:\Agents\FAUBERT\commerce_VA_inflation\Rédaction\WIOD_2018.aux)
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 41.
-LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -661,7 +661,7 @@ Package: fr-longtable 2007/11/28 v0.1b (beta) floatrow: additions for longtable
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 \AtBeginShipoutBox=\box46
-Package hyperref Info: Link coloring ON on input line 41.
+Package hyperref Info: Link coloring ON on input line 42.
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\hyperref\nameref.sty"
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 
@@ -670,43 +670,61 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
 \c@section@level=\count152
 )
-LaTeX Info: Redefining \ref on input line 41.
-LaTeX Info: Redefining \pageref on input line 41.
-LaTeX Info: Redefining \nameref on input line 41.
+LaTeX Info: Redefining \ref on input line 42.
+LaTeX Info: Redefining \pageref on input line 42.
+LaTeX Info: Redefining \nameref on input line 42.
 
 (X:\Agents\FAUBERT\commerce_VA_inflation\Rédaction\WIOD_2018.out)
 (X:\Agents\FAUBERT\commerce_VA_inflation\Rédaction\WIOD_2018.out)
 \@outlinefile=\write4
-LaTeX Info: Redefining \degres on input line 41.
+LaTeX Info: Redefining \degres on input line 42.
 
 
 Package frenchb.ldf Warning: The definition of \@makecaption has been changed,
 (frenchb.ldf)                frenchb will NOT customise it;
-(frenchb.ldf)                reported on input line 41.
+(frenchb.ldf)                reported on input line 42.
 
-LaTeX Info: Redefining \dots on input line 41.
-LaTeX Info: Redefining \up on input line 41.
-LaTeX Font Info:    Try loading font information for U+msa on input line 61.
+LaTeX Info: Redefining \dots on input line 42.
+LaTeX Info: Redefining \up on input line 42.
+LaTeX Font Info:    Try loading font information for U+msa on input line 62.
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 61.
+LaTeX Font Info:    Try loading font information for U+msb on input line 62.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 61.
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 62.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\t1cmtt.fd"
 File: t1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
-Underfull \hbox (badness 10000) in paragraph at lines 73--75
+Underfull \hbox (badness 10000) in paragraph at lines 72--74
 
  []
 
 [1
 
-{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}] [2] [3] [4]
+{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}]
+Underfull \hbox (badness 10000) in paragraph at lines 94--96
+
+ []
+
+[2] [3] [4] [5]
+
+LaTeX Warning: Command \i invalid in math mode on input line 143.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 141--144
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 148--151
+
+ []
+
 
 ! Package amsmath Error: \tilde allowed only in math mode.
 
@@ -714,7 +732,7 @@ See the amsmath package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.149 ...t{n}}{\mathop \sum }}\,{{\text{\tilde{c}}
+l.152 ...t{n}}{\mathop \sum }}\,{{\text{\tilde{c}}
                                                   }_{\text{i}}}\text{*}{{\te...
 
 You're in trouble here.  Try typing  <return>  to proceed.
@@ -727,7 +745,7 @@ See the amsmath package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.149 ...t{n}}{\mathop \sum }}\,{{\text{\tilde{c}}
+l.152 ...t{n}}{\mathop \sum }}\,{{\text{\tilde{c}}
                                                   }_{\text{i}}}\text{*}{{\te...
 
 You're in trouble here.  Try typing  <return>  to proceed.
@@ -740,22 +758,11 @@ See the amsmath package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.149 ...t{n}}{\mathop \sum }}\,{{\text{\tilde{c}}
+l.152 ...t{n}}{\mathop \sum }}\,{{\text{\tilde{c}}
                                                   }_{\text{i}}}\text{*}{{\te...
 
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
-
-! Undefined control sequence.
-<argument> \begin {matrix}k=1\\k\nei 
-                                     \\\end {matrix}
-l.149 ...\overset{\text{k}=\text{p}}{\mathop\sum}}
-                                                  \,\left[\underset{\text{l}...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
 <argument> \begin {matrix}k=1\\k\nei 
@@ -769,13 +776,109 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
+Underfull \hbox (badness 10000) in paragraph at lines 153--155
+
+ []
+
+[6]
+! Undefined control sequence.
+<argument> \begin {matrix}k=1\\k\nei 
+                                     \\\end {matrix}
+l.156 ...\overset{\text{k}=\text{p}}{\mathop\sum}}
+                                                  \,\left[\underset{\text{l}...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.162 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.164 ...text{}...\text{}\!\!~\!\!\text{}0\right)$
+                                                   with $\text{ }\!\!~\!\!\t...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Incomplete \ifcase; all text was ignored after line 165.
+<inserted text> 
+                \fi 
+l.165  \end{eqnarray}
+                     
+A forbidden control sequence occurred in skipped text.
+This kind of error happens when you say `\if...' and forget
+the matching `\fi'. I've inserted a `\fi'; this might work.
+
+! Extra alignment tab has been changed to \cr.
+<recently read> \endtemplate 
+                             
+l.165  \end{eqnarray}
+                     
+You have given more \span or & marks than there were
+in the preamble to the \halign or \valign now in progress.
+So I'll assume that you meant to type \cr instead.
+
+! Extra \or.
+\@@eqncr ... {& & &}\or \def \reserved@a {& &}\or 
+                                                  \def \reserved@a {&}\else ...
+l.165  \end{eqnarray}
+                     
+I'm ignoring this; it doesn't match any \if.
+
+! Extra \else.
+\@@eqncr ...@a {& &}\or \def \reserved@a {&}\else 
+                                                  \let \reserved@a \@empty \...
+l.165  \end{eqnarray}
+                     
+I'm ignoring this; it doesn't match any \if.
+
+
+! LaTeX Error: Too many columns in eqnarray environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.165  \end{eqnarray}
+                     
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+! Extra \fi.
+\@@eqncr ...mns in eqnarray environment}\@ehc \fi 
+                                                  \reserved@a \if@eqnsw \@eq...
+l.165  \end{eqnarray}
+                     
+I'm ignoring this; it doesn't match any \if.
+
+! Missing { inserted.
+<inserted text> 
+                {
+l.165  \end{eqnarray}
+                     
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+
 ! Package amsmath Error: \tilde allowed only in math mode.
 
 See the amsmath package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.163 ...uct of the shock vector $\text{\tilde{c}}
+l.182 ...uct of the shock vector $\text{\tilde{c}}
                                                   $  and a matrix $\text{\ti...
 
 You're in trouble here.  Try typing  <return>  to proceed.
@@ -788,7 +891,7 @@ See the amsmath package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.163 ...ilde{c}}$  and a matrix $\text{\tilde{B}}
+l.182 ...ilde{c}}$  and a matrix $\text{\tilde{B}}
                                                   $. $\widetilde{\text{B }\!...
 
 You're in trouble here.  Try typing  <return>  to proceed.
@@ -801,8 +904,27 @@ See the amsmath package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.163 ...s, to ${{\tilde{c}}_{\$}}\text{\tilde{B}}
-                                                  $,, with:
+l.183 ...s, to ${{\tilde{c}}_{\$}}\text{\tilde{B}}
+                                                  $, with: \\
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 178--184
+
+ []
+
+[7]
+
+! Package amsmath Error: \tilde allowed only in math mode.
+
+See the amsmath package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.186 {{\tilde{c}}_{\$}}\text{\tilde{B}}
+                                        =\left(-{{\text{c}}_{\$i}}\ldots0\ld...
+
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
@@ -813,11 +935,15 @@ See the amsmath package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.164 ${{\tilde{c}}_{\$}}\text{\tilde{B}}
-                                         =\left(-{{\text{c}}_{\$i}}\ldots0\l...
-
+l.191 ...ext{B}+{{\tilde{c}}_{\$}}\text{\tilde{B}}
+                                                  .~$\\
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 190--194
+
+ []
 
 
 ! Package amsmath Error: \tilde allowed only in math mode.
@@ -826,19 +952,7 @@ See the amsmath package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.166 ...ext{B}+{{\tilde{c}}_{\$}}\text{\tilde{B}}
-                                                  .~$
-You're in trouble here.  Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-! Package amsmath Error: \tilde allowed only in math mode.
-
-See the amsmath package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.169 ...t{B}+{{{\tilde{c}}}_{\$}}\text{\tilde{B}}
+l.195 ...t{B}+{{{\tilde{c}}}_{\$}}\text{\tilde{B}}
                                                   \right)+\left({{c}_{\$}}\t...
 
 You're in trouble here.  Try typing  <return>  to proceed.
@@ -851,7 +965,7 @@ See the amsmath package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.169 ...t{B}+{{{\tilde{c}}}_{\$}}\text{\tilde{B}}
+l.195 ...t{B}+{{{\tilde{c}}}_{\$}}\text{\tilde{B}}
                                                   \right)\text{A}+\left({{c}...
 
 You're in trouble here.  Try typing  <return>  to proceed.
@@ -864,7 +978,7 @@ See the amsmath package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.169 ...t{B}+{{{\tilde{c}}}_{\$}}\text{\tilde{B}}
+l.195 ...t{B}+{{{\tilde{c}}}_{\$}}\text{\tilde{B}}
                                                   \right){{\text{A}}^{2}}+\l...
 
 You're in trouble here.  Try typing  <return>  to proceed.
@@ -877,35 +991,108 @@ See the amsmath package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.169 ...t{B}+{{{\tilde{c}}}_{\$}}\text{\tilde{B}}
+l.195 ...t{B}+{{{\tilde{c}}}_{\$}}\text{\tilde{B}}
                                                   \right){{\text{A}}^{\text{...
 
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-[5] [6] [7]
+[8]
+! Missing } inserted.
+<inserted text> 
+                }
+l.204 \overline{s_{i}^{Y}}$
+                           =$~\underset{j=1}{\overset{n}{\mathop \sum }}\,\f...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Incomplete \ifcase; all text was ignored after line 205.
+<inserted text> 
+                \fi 
+l.205  \end{eqnarray}
+                     
+A forbidden control sequence occurred in skipped text.
+This kind of error happens when you say `\if...' and forget
+the matching `\fi'. I've inserted a `\fi'; this might work.
+
+! Extra alignment tab has been changed to \cr.
+<recently read> \endtemplate 
+                             
+l.205  \end{eqnarray}
+                     
+You have given more \span or & marks than there were
+in the preamble to the \halign or \valign now in progress.
+So I'll assume that you meant to type \cr instead.
+
+! Extra \or.
+\@@eqncr ... {& & &}\or \def \reserved@a {& &}\or 
+                                                  \def \reserved@a {&}\else ...
+l.205  \end{eqnarray}
+                     
+I'm ignoring this; it doesn't match any \if.
+
+! Extra \else.
+\@@eqncr ...@a {& &}\or \def \reserved@a {&}\else 
+                                                  \let \reserved@a \@empty \...
+l.205  \end{eqnarray}
+                     
+I'm ignoring this; it doesn't match any \if.
+
+
+! LaTeX Error: Too many columns in eqnarray environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.205  \end{eqnarray}
+                     
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+! Extra \fi.
+\@@eqncr ...mns in eqnarray environment}\@ehc \fi 
+                                                  \reserved@a \if@eqnsw \@eq...
+l.205  \end{eqnarray}
+                     
+I'm ignoring this; it doesn't match any \if.
+
+! Missing { inserted.
+<inserted text> 
+                {
+l.205  \end{eqnarray}
+                     
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 205--211
+
+ []
+
+[9]
 No file WIOD_2018.bbl.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 203.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 203.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 235.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 235.
 (X:\Agents\FAUBERT\commerce_VA_inflation\Rédaction\WIOD_2018.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 203.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 203.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 235.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 235.
 Package rerunfilecheck Info: File `WIOD_2018.out' has not changed.
-(rerunfilecheck)             Checksum: 948FF83EA2AE436CBF709E4CEFB05934;594.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 203.
+(rerunfilecheck)             Checksum: 7C6C24D098603B11179B59518659067D;593.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 235.
  ) 
 Here is how much of TeX's memory you used:
- 10800 strings out of 493921
- 156406 string characters out of 3144825
- 282777 words of memory out of 3000000
- 13874 multiletter control sequences out of 15000+200000
- 27003 words of font info for 78 fonts, out of 3000000 for 9000
+ 10815 strings out of 493921
+ 156581 string characters out of 3144825
+ 272777 words of memory out of 3000000
+ 13875 multiletter control sequences out of 15000+200000
+ 27692 words of font info for 79 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 61i,13n,96p,1654b,372s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 61i,16n,96p,1653b,395s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files (x86)/MiKTeX 2.9/fonts/enc/dvips/cm-super/cm-super-t1.enc}<
 C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:
 /Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/P
@@ -928,10 +1115,11 @@ ic/cm-super/sfrm1095.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/
 cm-super/sfrm1200.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/cm-
 super/sfrm1728.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/cm-sup
 er/sfti1000.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/cm-super/
-sftt0900.pfb>
-Output written on WIOD_2018.pdf (7 pages, 360286 bytes).
+sfti1095.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/cm-super/sft
+t0900.pfb>
+Output written on WIOD_2018.pdf (9 pages, 379584 bytes).
 PDF statistics:
- 167 PDF objects out of 1000 (max. 8388607)
- 16 named destinations out of 1000 (max. 500000)
+ 192 PDF objects out of 1000 (max. 8388607)
+ 29 named destinations out of 1000 (max. 500000)
  65 words of extra memory for PDF output out of 10000 (max. 10000000)
 

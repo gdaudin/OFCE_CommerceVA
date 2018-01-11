@@ -28,7 +28,7 @@ if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\De
 
 use "$dir/Bases/`source'_ICIO_`yrs'.dta"
 if "`source'"=="TIVA" {
-	drop if v1 == "VA.TAXSUB" | v1 == "OUT"
+	drop if v1 == "VA+TAXSUB" | v1 == "OUT"
 	
 	
 	generate pays = strlower(substr(v1,1,strpos(v1,"_")-1))
@@ -254,7 +254,7 @@ if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\De
 
 */
 
-foreach source in   WIOD  {
+foreach source in  WIOD   TIVA {
 
 
 
@@ -284,7 +284,7 @@ foreach source in   WIOD  {
 
 
 
-foreach source in  WIOD   {
+foreach source in WIOD   TIVA {
 
 
 

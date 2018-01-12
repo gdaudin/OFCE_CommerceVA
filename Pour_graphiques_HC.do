@@ -7,11 +7,10 @@ else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
 *capture log close
 *log using "$dir/$S_DATE.log", replace
 
-/*
 capture program drop graphiques
 program graphiques
 args source 
-*/	
+	
 if ("`c(username)'"=="guillaumedaudin") do  "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation/Definition_pays_secteur.do" `source'
 if ("`c(username)'"=="w817186") do "X:\Agents\FAUBERT\commerce_VA_inflation\Definition_pays_secteur.do" `source'
 if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\Definition_pays_secteur.do" `source'
@@ -22,81 +21,6 @@ if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\De
 *--------------------------
 *-----------------Pour graphiques HC
 *--------------------------
-
-
-
-
-*GRAPHIQUE 8: élasticité des prix de consommation des pays de la ze 
-*à un choc sur l'euro et part des CI importées hors ZE dans la conso
-
-foreach source in TIVA  {
-use "$dir/Bases/imp_inputs_HC_2011_`source'_hze_yes.dta", clear  
-gen c=upper(pays)
-drop pays
-
-merge 1:1 c using "$dir/Bases/Pays_FR.dta",keep(3)
-
-drop _merge 
-label var ratio_ci_impt_HC "Parts des CI importées depuis les pays hors ZE dans la consommation"
-
-keep if strpos("$eurozone",c)!=0
-save "$dir/Results/Devaluations/Pour_HC_Graph8_`source'.dta", replace
-
-
-use "$dir/Results/Devaluations/mean_chg_`source'_HC_2011.dta", clear	
-keep c shockEUR1
-
-keep if strpos("$eurozone",c)!=0
-rename shockEUR1 pond_HC
-merge 1:1 c using "$dir/Results/Devaluations/Pour_HC_Graph8_`source'.dta"
-drop _merge
-		
-graph twoway (scatter pond_HC ratio_ci_impt_HC, mlabel(c_full_FR)) (lfit pond_HC ratio_ci_impt_HC)  , ///
-			title("Elasticité des prix de consommation ZE à un choc Euro") ///
-			xtitle("Parts des CI importées depuis les pays hors ZE dans la consommation") ytitle("Elasticité prix de conso. en euro") ///
-			yscale(range(0.6 0.9)) xscale(range(0.4 0.8)) xlabel (0.4(0.1) 0.8) ylabel(0.6 (0.1) 0.9)
-		
-graph export "$dir/Results/Devaluations/HC_Graph_8_`source'.png", replace
-export excel "$dir/Results/Devaluations/Pour_HC_`Graph_8_source'.xlsx", firstrow(variable)replace
-}
-
-
-foreach source in WIOD  {
-use "$dir/Bases/imp_inputs_HC_2011_`source'_hze_yes.dta", clear  
-gen c=upper(pays)
-drop pays
-
-merge 1:1 c using "$dir/Bases/Pays_FR.dta",keep(3)
-
-drop _merge 
-label var ratio_ci_impt_HC "Parts des CI importées depuis les pays hors ZE dans la consommation"
-
-keep if strpos("$eurozone",c)!=0
-save "$dir/Results/Devaluations/Pour_HC_Graph8_`source'.dta", replace
-
-
-use "$dir/Results/Devaluations/mean_chg_`source'_HC_2011.dta", clear	
-keep c shockEUR1
-
-keep if strpos("$eurozone",c)!=0
-rename shockEUR1 pond_HC
-merge 1:1 c using "$dir/Results/Devaluations/Pour_HC_Graph8_`source'.dta"
-drop _merge
-		
-graph twoway (scatter pond_HC ratio_ci_impt_HC, mlabel(c_full_FR)) (lfit pond_HC ratio_ci_impt_HC)  , ///
-			title("Elasticité des prix de consommation ZE à un choc Euro") ///
-			xtitle("Parts des CI importées depuis les pays hors ZE dans la consommation") ytitle("Elasticité prix de conso. en euros") ///
-			yscale(range(0.6 0.9)) xscale(range(2 2.2)) xlabel (2(0.1) 2.2) ylabel(0.6 (0.1) 0.9)
-		
-graph export "$dir/Results/Devaluations/HC_Graph_8_`source'.png", replace
-export excel "$dir/Results/Devaluations/Pour_HC_`Graph_8_source'.xlsx", firstrow(variable)replace
-}
-
-
-/*
-
-
-
 *Graphique 1: élasticité des prix de production,  d'exportations et de consommation à une appréciation de la monnaie locale
 *TIVA
 *Impact sur ZE
@@ -892,6 +816,45 @@ graph twoway (scatter pond_HC contenu_impHC, mlabel(c)) (lfit pond_HC contenu_im
 graph export "$dir/Results/Devaluations/HC_Graph_7c_`source'.png", replace
 export excel "$dir/Results/Devaluations/Pour_HC_Graph_7c8_`source'.xlsx", firstrow(variable)replace
 }
+
+
+*GRAPHIQUE 8: élasticité des prix de consommation des pays de la ze 
+*à un choc sur l'euro et part des CI importées hors ZE dans la conso
+
+foreach source in TIVA  WIOD {
+foreach hze in hze_yes hze_not {
+use "$dir/Bases/imp_inputs_HC_2011_`source'_`hze'.dta", clear  
+gen c=upper(pays)
+drop pays
+
+merge 1:1 c using "$dir/Bases/Pays_FR.dta",keep(3)
+
+drop _merge 
+label var ratio_ci_impt_HC "Parts des CI importées depuis les pays hors ZE dans la consommation"
+
+keep if strpos("$eurozone",c)!=0
+save "$dir/Results/Devaluations/Pour_HC_Graph8_`source'_`hze'.dta", replace
+
+
+use "$dir/Results/Devaluations/mean_chg_`source'_HC_2011.dta", clear	
+keep c shockEUR1
+
+keep if strpos("$eurozone",c)!=0
+rename shockEUR1 pond_HC
+merge 1:1 c using "$dir/Results/Devaluations/Pour_HC_Graph8_`source'_`hze'.dta"
+drop _merge
+		
+graph twoway (scatter pond_HC ratio_ci_impt_HC, mlabel(c_full_FR)) (lfit pond_HC ratio_ci_impt_HC)  , ///
+			title("Elasticité des prix de consommation ZE à un choc Euro") ///
+			xtitle("Parts des CI importées depuis les pays `hze' dans la consommation") ytitle("Elasticité prix de conso. en euro") ///
+			yscale(range(0.6 0.9)) xscale(range(0.0 0.2)) xlabel (0.0(0.02) 0.2) ylabel(0.6 (0.1) 0.9)
+		
+graph export "$dir/Results/Devaluations/HC_Graph_8_`source'_`hze'.png", replace
+export excel "$dir/Results/Devaluations/Pour_HC_`Graph_8_source'_`hze'.xlsx", firstrow(variable)replace
+}
+}
+
+
 
 
 

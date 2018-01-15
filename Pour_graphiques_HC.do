@@ -346,7 +346,7 @@ export excel "$dir/Results/Devaluations/Pour_HC_Graph_1_WIODHZE.xlsx", firstrow(
 
 
 *GRAPHIQUE HC 2 TIVA: comparaison évolution dans le temps en devise nationale
-* Correspond au Graphique 2 du working paper
+* Correspond au Graphique 2 du working paper OFCE
 
 use "$dir/Results/Devaluations/mean_chg_TIVA_HC_2000.dta", clear
 
@@ -451,7 +451,7 @@ export excel "$dir/Results/Devaluations/Pour_HC_Graph_2_WIOD.xlsx", firstrow(var
 
 
 
-**Graphique 3 WP OFCE: élasticité des prix de prod, d'exportations et de consommation en euros à une appréciation de l'euro
+**Graphique 3 WP OFCE: élasticité des prix de prod, d'exportations et de consommation en euros des pays ZE à une appréciation de l'euro
 
 
 foreach source in WIOD TIVA {
@@ -515,7 +515,7 @@ graph export "$dir/Results/Devaluations/HC_Graph_3.png" , replace
 
 
 
-**Graphique 4 du working paper : élasticité des prix en monnaie locale des pays hors ZE
+**Graphique 4 du working paper : élasticité des prix en monnaie locale des pays hors ZE à une appréciation de l'euro
 *comparaison des effets prix d'exportations, de production et de consommation: comme dans le WP
 
 foreach source in TIVA WIOD {
@@ -821,8 +821,9 @@ export excel "$dir/Results/Devaluations/Pour_HC_Graph_7c8_`source'.xlsx", firstr
 *GRAPHIQUE 8: élasticité des prix de consommation des pays de la ze 
 *à un choc sur l'euro et part des CI importées hors ZE dans la conso
 
-foreach source in TIVA  {
-use "$dir/Bases/imp_inputs_HC_2011_`source'_hze_yes.dta", clear  
+foreach source in TIVA  WIOD {
+foreach hze in hze_yes hze_not {
+use "$dir/Bases/imp_inputs_HC_2011_`source'_`hze'.dta", clear  
 gen c=upper(pays)
 drop pays
 
@@ -832,7 +833,7 @@ drop _merge
 label var ratio_ci_impt_HC "Parts des CI importées depuis les pays hors ZE dans la consommation"
 
 keep if strpos("$eurozone",c)!=0
-save "$dir/Results/Devaluations/Pour_HC_Graph8_`source'.dta", replace
+save "$dir/Results/Devaluations/Pour_HC_Graph8_`source'_`hze'.dta", replace
 
 
 use "$dir/Results/Devaluations/mean_chg_`source'_HC_2011.dta", clear	
@@ -840,48 +841,17 @@ keep c shockEUR1
 
 keep if strpos("$eurozone",c)!=0
 rename shockEUR1 pond_HC
-merge 1:1 c using "$dir/Results/Devaluations/Pour_HC_Graph8_`source'.dta"
+merge 1:1 c using "$dir/Results/Devaluations/Pour_HC_Graph8_`source'_`hze'.dta"
 drop _merge
 		
 graph twoway (scatter pond_HC ratio_ci_impt_HC, mlabel(c_full_FR)) (lfit pond_HC ratio_ci_impt_HC)  , ///
 			title("Elasticité des prix de consommation ZE à un choc Euro") ///
-			xtitle("Parts des CI importées depuis les pays hors ZE dans la consommation") ytitle("Elasticité prix de conso. en euro") ///
-			yscale(range(0.6 0.9)) xscale(range(0.4 0.8)) xlabel (0.4(0.1) 0.8) ylabel(0.6 (0.1) 0.9)
+			xtitle("Parts des CI importées depuis les pays `hze' dans la consommation") ytitle("Elasticité prix de conso. en euro") ///
+			yscale(range(0.6 0.9)) xscale(range(0.0 0.2)) xlabel (0.0(0.02) 0.2) ylabel(0.6 (0.1) 0.9)
 		
-graph export "$dir/Results/Devaluations/HC_Graph_8_`source'.png", replace
-export excel "$dir/Results/Devaluations/Pour_HC_`Graph_8_source'.xlsx", firstrow(variable)replace
+graph export "$dir/Results/Devaluations/HC_Graph_8_`source'_`hze'.png", replace
+export excel "$dir/Results/Devaluations/Pour_HC_`Graph_8_source'_`hze'.xlsx", firstrow(variable)replace
 }
-
-
-foreach source in WIOD  {
-use "$dir/Bases/imp_inputs_HC_2011_`source'_hze_yes.dta", clear  
-gen c=upper(pays)
-drop pays
-
-merge 1:1 c using "$dir/Bases/Pays_FR.dta",keep(3)
-
-drop _merge 
-label var ratio_ci_impt_HC "Parts des CI importées depuis les pays hors ZE dans la consommation"
-
-keep if strpos("$eurozone",c)!=0
-save "$dir/Results/Devaluations/Pour_HC_Graph8_`source'.dta", replace
-
-
-use "$dir/Results/Devaluations/mean_chg_`source'_HC_2011.dta", clear	
-keep c shockEUR1
-
-keep if strpos("$eurozone",c)!=0
-rename shockEUR1 pond_HC
-merge 1:1 c using "$dir/Results/Devaluations/Pour_HC_Graph8_`source'.dta"
-drop _merge
-		
-graph twoway (scatter pond_HC ratio_ci_impt_HC, mlabel(c_full_FR)) (lfit pond_HC ratio_ci_impt_HC)  , ///
-			title("Elasticité des prix de consommation ZE à un choc Euro") ///
-			xtitle("Parts des CI importées depuis les pays hors ZE dans la consommation") ytitle("Elasticité prix de conso. en euros") ///
-			yscale(range(0.6 0.9)) xscale(range(2 2.2)) xlabel (2(0.1) 2.2) ylabel(0.6 (0.1) 0.9)
-		
-graph export "$dir/Results/Devaluations/HC_Graph_8_`source'.png", replace
-export excel "$dir/Results/Devaluations/Pour_HC_`Graph_8_source'.xlsx", firstrow(variable)replace
 }
 
 
@@ -985,7 +955,7 @@ export excel "$dir/Results/Devaluations/`source'_HC_Tab2_`year'.xlsx", firstrow(
 }
 */
 
-	***Tableau 3 exhaustif WP: élasticité à une appréciation d'une monnaie d'un des pays origin
+	*** élasticité à une appréciation d'une monnaie d'un des pays origin
 *local orig USA CHN JPN GBR EAS RUS AUS BRA CHE CAN DNK IDN IND KOR MEX NOR SWE TUR 
 foreach source in  WIOD TIVA { 
 foreach year in  2000  2011 {
@@ -1015,12 +985,12 @@ rename shockMEX1 Mexique
 rename shockNOR1 Norvège
 rename shockSWE1 Suède
 rename shockTUR1 Turquie
-export excel "$dir/Results/Devaluations/`source'_HC_Tab2long_`year'.xlsx", firstrow(variables) sheetmodify
+export excel "$dir/Results/Devaluations/`source'_HC_Tabl2long_`year'.xlsx", firstrow(variables) sheetmodify
 }
 }
 
 
-***Tableau 3 exhaustif WP: élasticité à une appréciation d'une monnaie d'un des pays origin
+***élasticité des membres ZE à une appréciation d'une monnaie d'un des pays origin
 * Comparaison de TIVA et WIOD
 foreach  orig in  USA CHN JPN GBR EAS RUS AUS BRA CHE CAN DNK IDN IND KOR MEX NOR SWE TUR {
 foreach year in   2011  {
@@ -1031,7 +1001,7 @@ drop _merge
 
 keep c c_full_FR  shock`orig'1 
 rename shock`orig'1 shock`orig'1_TIVA_`year'
-save "$dir/Results/Devaluations/Compa_Tabl2long_TIVA_`year'_`orig'_old.dta", replace
+save "$dir/Results/Devaluations/Compa_Tabl2longZE_TIVA_`year'_`orig'_old.dta", replace
 
 
 use "$dir/Results/Devaluations/mean_chg_WIOD_HC_`year'.dta", clear
@@ -1040,13 +1010,44 @@ drop if strpos("$eurozone",c)==0
 merge 1:1 c using "$dir/Bases/Pays_FR.dta",keep(3)
 drop _merge    
 rename shock`orig'1 shock`orig'1_WIOD_`year'
-merge 1:1 c using "$dir/Results/Devaluations/Compa_Tabl2long_TIVA_`year'_`orig'_old.dta"
+merge 1:1 c using "$dir/Results/Devaluations/Compa_Tabl2longZE_TIVA_`year'_`orig'_old.dta"
 drop _merge	
 
 
 keep c_full_FR  shock`orig'1*
 order c_full_FR shock`orig'1_WIOD* shock`orig'1_TIVA*
-export excel "$dir/Results/Devaluations/Compa_Tableau_2long_`year'_`orig'.xlsx", firstrow(variables)   replace
+export excel "$dir/Results/Devaluations/Compa_Tabl2longZE_`year'_`orig'.xlsx", firstrow(variables)   replace
+}
+}
+
+***élasticité des membres ZE et des autres pays à une appréciation d'une monnaie d'un des pays origin
+* Comparaison de TIVA et WIOD
+foreach  orig in  USA CHN JPN GBR EAS RUS AUS BRA CHE CAN DNK IDN IND KOR MEX NOR SWE TUR {
+foreach year in   2011  {
+use "$dir/Results/Devaluations/mean_chg_TIVA_HC_`year'.dta", clear
+*drop if strpos("$eurozone",c)==0
+merge 1:1 c using "$dir/Bases/Pays_FR.dta",keep(3)
+drop _merge    
+
+keep c c_full_FR  shock`orig'1 
+rename shock`orig'1 shock`orig'1_TIVA_`year'
+save "$dir/Results/Devaluations/Compa_Tabl2long_TIVA_`year'_`orig'_old.dta", replace
+
+
+use "$dir/Results/Devaluations/mean_chg_WIOD_HC_`year'.dta", clear
+*drop if strpos("$eurozone",c)==0
+
+merge 1:1 c using "$dir/Bases/Pays_FR.dta",keep(3)
+drop _merge    
+rename shock`orig'1 shock`orig'1_WIOD_`year'
+merge 1:1 c using "$dir/Results/Devaluations/Compa_Tabl2long_TIVA_`year'_`orig'_old.dta"
+drop _merge	
+
+
+keep c c_full_FR  shock`orig'1*
+order c c_full_FR shock`orig'1_WIOD* shock`orig'1_TIVA*
+export excel "$dir/Results/Devaluations/Compa_Tabl2long_`year'_`orig'.xlsx", firstrow(variables)   replace
+save "$dir/Results/Devaluations/Compa_Tabl2long_`year'_`orig'.dta", replace
 }
 }
 
@@ -1118,6 +1119,28 @@ foreach year in 1995 1996 1997 1998 1999 2000 2001 2002 2003 2004 2005 2006 2007
 	export excel "$dir/Results/Devaluations/TIVA_Tableau_4.xlsx", firstrow(variables) cell(`column'1) sheetmodify
 	
 }
+
+
+**Graphique 9 de comparaison des impacts sur HC obtenus avec TIVA et WIOD
+
+foreach  orig in  USA  {
+foreach year in   2011  {
+use "$dir/Results/Devaluations/Compa_Tabl2long_`year'_`orig'.dta", clear
+
+label var shock`orig'1_WIOD_`year' "WIOD"
+label var shock`orig'1_TIVA_`year' "TIVA"
+
+local countryorig "`orig'"
+*drop if strpos("$countryorig",c)==`countryorig'
+
+graph bar (asis) shock`orig'1_WIOD_`year' shock`orig'1_TIVA_`year'   , title("Elasticité prix conso. à un choc `orig'") over(c_full_FR, sort(c_full_FR)  label(angle(vertical) labsize(vsmall))) 
+graph export "$dir/Results/Devaluations/HC_Graph_9_`orig'.png", replace
+}
+}
+
+
+
+
 
 end
 graphiques `source' 

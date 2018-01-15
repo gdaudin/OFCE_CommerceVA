@@ -254,7 +254,7 @@ if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\De
 
 */
 
-foreach source in  WIOD   TIVA {
+foreach source in   WIOD  TIVA {
 
 
 
@@ -284,7 +284,7 @@ foreach source in  WIOD   TIVA {
 
 
 
-foreach source in WIOD   TIVA {
+foreach source in  WIOD  TIVA {
 
 
 

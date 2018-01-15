@@ -17,9 +17,10 @@ if ("`c(username)'"=="w817186") do "X:\Agents\FAUBERT\commerce_VA_inflation\Defi
 if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\Definition_pays_secteur.do" `source'
 	
 
-
+/*
 *GRAPHIQUE 8: élasticité des prix de consommation des pays de la ze 
 *à un choc sur l'euro et part des CI importées hors/pas hors ZE dans la conso
+*Présenté en choc final en $ (donc proche de 1
 
 foreach source in TIVA  WIOD {
 	foreach hze in hze_yes hze_not {
@@ -59,33 +60,14 @@ foreach source in TIVA  WIOD {
 
 
 
-/*	
+*/	
 	
 	
 	
 	
 
 
-*--------------------------
-*-----------------Pour graphiques HC
-*--------------------------
-*Graphique 1: élasticité des prix de production,  d'exportations et de consommation à une appréciation de la monnaie locale
-*TIVA
-*Impact sur ZE
-
-use "$dir/Results/Devaluations/mean_chg_TIVA_X_2011.dta", clear
-
-foreach var of varlist shockEUR1-shockZAF1 {
-	local pays = substr("`var'",6,3)
-	replace `var' = 0 if strmatch(c,"*`pays'*")==0
-}
-
-egen pond_TIVA_X = rowtotal(shockEUR1-shockZAF1)
-replace pond_TIVA_X = (pond_TIVA_X - 1)/2
-
-keep c pond_TIVA_X
-
-save "$dir/Results/Devaluations/Pour_HC_Graph_1_TIVA_old.dta", replace
+*Pour avoir des élasticités comparables aux BMEs + calculs divers
 
 
 use "$dir/Results/Devaluations/mean_chg_TIVA_HC_2011.dta", clear
@@ -96,41 +78,26 @@ foreach var of varlist shockEUR1-shockZAF1 {
 }
 
 egen pond_TIVA_HC = rowtotal(shockEUR1-shockZAF1)
-replace pond_TIVA_HC = (pond_TIVA_HC - 1)/2
+replace pond_TIVA_HC = -(pond_TIVA_HC - 1)/2
 
 keep c pond_TIVA_HC
-
-merge 1:1 c using "$dir/Results/Devaluations/Pour_HC_Graph_1_TIVA_old.dta"
-drop _merge
-
-save "$dir/Results/Devaluations/Pour_HC_Graph_1_TIVA_old2.dta", replace
-
-
-use "$dir/Results/Devaluations/mean_chg_TIVA_Yt_2011.dta", clear
-
-foreach var of varlist shockEUR1-shockZAF1 {
-	local pays = substr("`var'",6,3)
-	replace `var' = 0 if strmatch(c,"*`pays'*")==0
-}
-
-egen pond_TIVA_Y = rowtotal(shockEUR1-shockZAF1)
-
-keep c pond_TIVA_Y
-
 merge 1:1 c using "$dir/Bases/Pays_FR.dta",keep(3)
 drop _merge
 
+gen pays=lower(c)
+
+merge 1:1 pays using "$dir/Bases/imp_inputs_HC_2011_TIVA_hze_not.dta"
+drop if c=="CHN"
+
+label var pond_TIVA_HC "Élasticité des prix de consommation en monnaie nationale à un choc de la monnaie nationale"
+
+graph twoway (scatter pond_TIVA_HC ratio_ci_impt_HC, mlabel(c_full_FR)) (lfit pond_TIVA_HC ratio_ci_impt_HC)  , ///
+			title("Elasticité des prix de consommation à une dévaluation") ///
+			xtitle("Parts des CI importées dans la conso dom + part conso importée") ytitle("Elasticité prix de conso. ") ///
+			yscale(range(0.0 0.3)) xscale(range(0.0 0.3)) xlabel (0.0(0.05) 0.3) ylabel(0.0(0.05) 0.3)
 
 
-merge 1:1 c using "$dir/Results/Devaluations/Pour_HC_Graph_1_TIVA_old2.dta"
 
-drop _merge 
-
-replace pond_TIVA_Y = (pond_TIVA_Y - 1)/2 
-
-label var pond_TIVA_Y "Prix de production"
-label var pond_TIVA_X "Prix d'exportation"
-label var pond_TIVA_HC "Prix de consommation"
 
 save "$dir/Results/Devaluations/Pour_HC_Graph_1_TIVA_old3.dta", replace
 export delimited "$dir/Results/Devaluations/Pour_HC_Graph_1_TIVA_old3.csv", replace
@@ -150,7 +117,7 @@ export delimited "$dir/Results/Devaluations/Pour_HC_Graph_1_TIVA.csv", replace
 export excel "$dir/Results/Devaluations/Pour_HC_Graph_1_TIVA.xlsx", firstrow(variable)replace
 
 
-
+/*
 
 *Graph 1 WIOD : impact sur ZE
 
@@ -446,6 +413,13 @@ save "$dir/Results/Devaluations/Pour_HC_Graph_2_TIVA.dta", replace
 export delimited "$dir/Results/Devaluations/Pour_HC_Graph_2_TIVA.csv", replace
 export excel "$dir/Results/Devaluations/Pour_HC_Graph_2_TIVA.xlsx", firstrow(variable)replace
 
+
+
+
+----------------------------------------------------------------------------------
+
+
+/*
 
 *GRAPHIQUE HC 2 WIOD: comparaison évolution dans le temps en devise nationale
 

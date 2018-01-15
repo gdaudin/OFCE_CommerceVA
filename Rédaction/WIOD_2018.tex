@@ -93,28 +93,28 @@ This is an accounting approach to the effect of costs on prices ("cost-push infl
 \label{subsec:ioprice}
 The standard I-O model relies on input-output tables registering transactions of goods and services (domestic or imported) at current prices. I-O tables describe the sale and purchase relationships between producers and consumers within an economy. Each column describes, for each industry $j$, the intermediate consumption of goods and services from the various sectors. Each column indicates the payment of intermediate consumption and the remuneration of production factors. By construction, the I-O tables are balanced: the sum of resources equals the sum of expenditures for the whole economy. The rows of the table contain information on the distribution of the output of industries over use categories.
 Define $Y$ the vector of production of dimension $(1, n)$, $A$ the matrix of input coefficients of dimension $(n, n)$, and $R$ the vector of factor incomes of dimension $(1, n)$.\\
-\begin{eqnarray}
+\begin{eqnarray*}
 	Y=(y_1\ldots y_n)=\left(y_1\ldots y_n\right)\left( \begin{matrix}
    a_{11} & \cdots  & a_{n1}  \\
    \vdots  & a_{ij} & \vdots   \\
    a_{1n} & \cdots  & a_{nn}  \\
-\end{matrix} \right)+(r_1\ldots r_n)=YA+R\\
-\end{eqnarray}
+\end{matrix} \right)+(r_1\ldots r_n)=YA+R
+\end{eqnarray*}
 Assuming that there is no possible substitution between inputs (i.e. that technical coefficients are fixed), we can derive a price equation under the assumption of complete cost pass-through.\\
 Define $y_i=p_i*q_i$, with $p_i$ the price and $q_i$ the quantity of product $i$ and normalize quantity such as $q_i=1$. \\
 Define $A$ the structural matrix of the technical coefficients of dimension $(n, n)$, $P$ the vector of production prices of dimension $(1, n)$ and $V$ the vector of factor income of dimension $(1, n)$. Then $P=PA+V$. \\
 When an exogenous input price shock occurs, firms face a change in their costs, which is passed on directly to production prices. This exogenous shock is assumed not to affect the return on capital and labor. Therefore, there is no adjustment to margins. Under these conditions, for each industry $i$, the shock can be written as the absolute difference between the initial production price and the new production price invoiced following the shock ("shocked price" hereafter).\\
 Define ${{\Delta }^{0}}P$ the shock vector of dimension $(1, n)$ computed as the difference between the original price $P^0$ and the vector $P^1$ of shocked prices. Then:
-\begin{eqnarray}
+\begin{eqnarray*}
 \Delta ^{0}P=P^1-P^0=c, 
-\end{eqnarray}
+\end{eqnarray*}
 with $c$ the shock vector of dimension (1,n), which contains the direct effect of the shock on output prices.\\
 The price increase is passed on to the industries that use shocked products as intermediate consumptions. The higher the reliance on shocked inputs, the higher the increase in production prices.\\
 In a first step, the direct impact of the shock on each industry's output prices amounts to $\Delta^{1}P=cA$.\\
 In a second step, the shock is passed on all industries using these shocked inputs in their production processes. For $n$ production cycles, the increase in production prices amount to $\Delta^n P=cA^n$.\\
 As the technical coefficients are smaller than 1, the effect of the initial shock on input prices eventually wears out. Finally, the overall effect of the shock is equal to the sum of the initial shock and all the increases that occurred during the successive production cycles. The total effect of the shock on prices, S, is equal to: 
-	$\text{S}=\text{c }\!\!~\!\!\text{ }{{\left( \text{I}-\text{A} \right)}^{-1}}$\\
-With $\text{ }\!\!~\!\!\text{ }{{\left( \text{I}-\text{A} \right)}^{-1}}$ the inverse of Leontief's matrix, $S$ is a vector (1, n) composed of the elements ${{\text{s}}_{\text{ij}}}$ measuring the total effect of the shock on the output price of country i's sector j and $C~$ the vector of an exogenous input price shock.\\
+	$S=c \!\!~\!\!\text{ }{{\left( I-A \right)}^{-1}}$\\
+With $\text{ }\!\!~\!\!\text{ }{{\left( I-A \right)}^{-1}}$ the inverse of Leontief's matrix, $S$ is a vector $(1, n)$ composed of the elements $s_{ij}$ measuring the total effect of the shock on the output price of country $i$'s sector $j$ and $C~$ the vector of an exogenous input price shock.\\
 To compute which countries are most affected by a production cost shock through value-added and vertical trade flows in international trade, we need a large structural matrix that integrates input flows between sectors within each country and between countries. This matrix traces the sectoral and geographical origin of inputs produced worldwide. On the diagonal are the country blocks with flows of domestic transactions of intermediate goods and services between industries. The country blocks outside the diagonal represent international flows of intermediate goods and services via bilateral sectoral exports and imports. 
 
 
@@ -139,34 +139,33 @@ We assume that producers have no margin behavior and pass through the exchange r
 The effects of the shock spread over multiple production cycles. At the end of this process, the overall impact of the shock in dollar terms is equal, for the shocked country $A$, to the rise in production prices due to the exchange rate shock, minus direct and indirect decreases (via interindustry linkages in the country), in national currency and then converted back into dollar terms, in the prices of inputs imported from $B$ and disseminated to all branches. The overall impact on production prices in dollar terms in country $A$ is therefore lower than the initial exchange rate shock. For country $B$, the final impact is to the cumulative direct and indirect effects of higher prices of inputs imported from country $A$ and disseminated to all industries.\\
 In a global economy composed of $P$ countries, each with $n$ sectors, the appreciation of a country's currency $i$ against all other currencies translates into a rise in the common currency, the dollar for example, in its relative prices vis-\`a-vis the rest of the world. \\ 
 The production prices of each sector will vary in dollar terms from:
-\begin{eqnarray}
+\begin{eqnarray*}
 c_{\$1}=c_{\$2}=\ldots=c_{\$n}=c_{\$i} 
-  \end{eqnarray}	
+  \end{eqnarray*}	
 in the shock-stricken country$~i$ and 0 in other countries. \\
 Hence, for each sector $j$ in country  :
-\begin{eqnarray}
- {{\Delta }^{0}}{{\text{p}}_{\text{ }\!\!\$\!\!\text{ij}}}=\text{p}_{\text{}\!\!\$\!\!\text{ij}}^{1}-\text{p}_{\text{}\!\!\$\!\!\text{ij}}^{0}={{\text{c}}_{\text{}\!\!\$\!\!\text{ij}}}={{\text{c}}_{\text{}\!\!\$\!\!\text{i}}}\\
-  \end{eqnarray}	
+\begin{eqnarray*}
+ {{\Delta }^{0}}p_{\${ij}}=p_{\${ij}}^{1}-p_{\${ij}}^{0}=c_{\${ij}}=c_{\${i}}
+  \end{eqnarray*}	
 And for any country $k$ different from $i$,
-\begin{eqnarray}
- {{\Delta }^{0}}{{\text{p}}_{\text{ }\!\!\$\!\!\text{kj}}}=\text{p}_{\text{}\!\!\$\!\!\text{ij}}^{1}-\text{p}_{\text{}\!\!\$\!\!\text{kj}}^{0}={{\text{c}}_{\text{}\!\!\$\!\!\text{kj}}}=0  \\
- \end{eqnarray}	
+\begin{eqnarray*}
+ {{\Delta }^{0}}p_{\${kj}}=p_{\${kj}}^{1}-p_{\${kj}}^{0}=c_{\${kj}}=0
+ \end{eqnarray*}	
 To simplify, output prices for each sector are normalized to 1 and exchange rates to 1:1. A 100$\%$ appreciation in the exchange rate of a currency against other currencies therefore corresponds to an absolute shock of +1, with production prices in the shock-stricken country rising from 1 to 2 dollars. The appreciation affects producers through changes in relative prices between countries and, therefore, through changes in input prices traded between the shock-stricken country $i$ and other countries. \\
-Consider first the direct impact (in absolute terms) on other countries of the rise in imported input prices from shocked country $\i$. For any sector l of a country $\text{k}$ ($\text{k}\ne \text{i})$, the increase in the producer price depends directly on the quantity of inputs imported from the shock-stricken country $i$, weighted by the variation in level of the price of inputs in dollars (i. e. the exchange rate shock):\\
-\begin{eqnarray}
-{{\Delta }^{1}}{{\text{p}}_{\text{ }\!\!\$\!\!\text{kl}}}={{\text{c}}_{\text{}\!\!\$\!\!\text{i}}}\text{*}{{\text{a}}_{\text{kl}}}{{\text{a}}_{\text{i}1}}+\ldots+{{\text{c}}_{\text{}\!\!\$\!\!\text{i}}}\text{*}{{\text{a}}_{\text{kl}}}{{\text{a}}_{\text{ij}}}+\ldots\text{}\!\!~\!\!\text{}+{{\text{c}}_{\text{}\!\!\$\!\!\text{i}}}\text{*}{{\text{a}}_{\text{kl}}}{{\text{a}}_{\text{in}}}=\underset{\text{j}=1}{\overset{\text{n}}{\mathop\sum}}\,{{\text{c}}_{\text{}\!\!\$\!\!\text{i}}}\text{*}{{\text{a}}_{\text{kl}}}{{\text{a}}_{\text{ij}}}={{\text{c}}_{\text{}\!\!\$\!\!\text{i}}}*\underset{\text{j}=1}{\overset{\text{n}}{\mathop\sum}}\,{{\text{a}}_{\text{kl}}}{{\text{a}}_{\text{ij}}}   \\
-\end{eqnarray}
-
-With ${{\text{a}}_{\text{kl}}}{{\text{a}}_{\text{ij}}}\text{ }\!\!~\!\!\text{ }$the quantity of inputs from the country's sector needed to develop a production unit for the country's $k$ sector $l$. \\
-For the shocked country, the shock has a disinflationary effect on domestic production prices. In national currency, the production prices of imported inputs fall by $\widetilde{{{\text{c}}_{\text{i}}}}=-\frac{{{\text{c}}_{\text{ }\!\!\$\!\!\text{i}}}}{1+{{\text{c}}_{\text{}\!\!\$\!\!\text{i}}}}$, or by 0.5 with ${{\text{c}}_{\text{ }\!\!\$\!\!\text{i}}}=1$. 
+Consider first the direct impact (in absolute terms) on other countries of the rise in imported input prices from shocked country $i$. For any sector l of a country $k$ ($k\ne i)$, the increase in the producer price depends directly on the quantity of inputs imported from the shock-stricken country $i$, weighted by the variation in level of the price of inputs in dollars (i. e. the exchange rate shock):\\
+\begin{eqnarray*}
+\Delta ^1 p_{\${kl}}=c_{\${i}}*a_{kl}a_{i1}+\ldots+c_{\${i}}*a_{kl}a_{ij}+\ldots+c_{\$i}*a_{kl}a_{in}=\underset{j=1}{\overset{n}{\mathop\sum}}\,{c}_{\$i}*a_{kl}a_{ij}=c_{\$i}*\underset{j=1}{\overset{\text{n}}{\mathop\sum}}\,a_{kl}a_{ij}   
+\end{eqnarray*}
+With $a_{kl}a_{ij}$ the quantity of inputs from the country's sector needed to develop a production unit for the country's $k$ sector $l$. \\
+For the shocked country, the shock has a disinflationary effect on domestic production prices. In national currency, the production prices of imported inputs fall by $\widetilde{c}_i}=-\frac{c_{\$i}}{1+{c_{\$i}}}$, or by 0.5 with $c_{\$i}=1$. \\
 This decline is spread to all sectors during the production cycle. In sector $j$ of the shocked country $i$, this fall amounts in national currency to: \\
-\begin{eqnarray}
-{{\Delta }^{1}}{{\text{p}}_{\text{ij}}}=\underset{\text{l}=1}{\overset{\text{l}=\text{n}}{\mathop \sum }}\,{{\text{\tilde{c}}}_{\text{i}}}\text{*}{{\text{a}}_{\text{ij}}}{{\text{a}}_{1\text{l}}}+\ldots +\underset{\text{l}=1}{\overset{\text{l}=\text{n}}{\mathop \sum }}\,{{\text{\tilde{c}}}_{\text{i}}}\text{*}{{\text{a}}_{\text{ij}}}{{\text{a}}_{\text{kl}}}+\underset{\text{l}=1}{\overset{\text{l}=\text{n}}{\mathop \sum }}\,{{\text{\tilde{c}}}_{\text{i}}}\text{*}{{\text{a}}_{\text{ij}}}{{\text{a}}_{\text{pl}}}=\left( -\frac{{{\text{c}}_{\text{ }\!\!\$\!\!\text{i}}}}{1+{{\text{c}}_{\text{}\!\!\$\!\!\text{i}}}}\right)*\underset{\begin{matrix}k=1\\k\nei\\\end{matrix}}{\overset{\text{k}=\text{p}}{\mathop\sum}}\,\left[\underset{\text{l}=1}{\overset{\text{l}=\text{n}}{\mathop\sum}}\,{{\text{a}}_{\text{ij}}}{{\text{a}}_{\text{kl}}}\right] \\
-\end{eqnarray}
+\begin{eqnarray*}
+ {{\Delta }^{1}}p_{ij}=\underset{l=1}{\overset{l=n}{\mathop \sum }}\,{\tilde{c}_{i}}*a_{ij}a_{1l}}+\ldots +\underset{l=1}{\overset{{l}=n}{\mathop \sum }}\,{{\tilde{c}}_i}*a_{ij}a_{kl}+\underset{l=1}{\overset{l={n}}{\mathop \sum }}\,{{{\tilde{c}}}_{i}}*{{a}_{{ij}}}{{{a}}_{\text{pl}}}=\left( -\frac{{{c}_{\$i}}}{1+c_{\$i}}}\right)*\underset{\begin{matrix}k=1\\k\nei\\\end{matrix}}{\overset{{k}=\text{p}}{\mathop\sum}}\,\left[\underset{l=1}{\overset{l=n}{\mathop\sum}}\,{a_{ij}a_{kl}\right] \\
+\end{eqnarray*}
 This level shock can be converted into dollars: \\
-\begin{eqnarray}
+\begin{eqnarray*}
 {{\Delta }^{1}}{{\text{p}}_{\text{ }\!\!\$\!\!\text{ij}}}=\left(1+{{c}_{\$i}}\right)\text{*}\left(-\frac{{{\text{c}}_{\text{}\!\!\$\!\!\text{i}}}}{1+{{\text{c}}_{\text{}\!\!\$\!\!\text{i}}}}\right)\underset{\begin{matrix}k=1\\k\nei\\\end{matrix}}{\overset{\text{k}=\text{p}}{\mathop\sum}}\,\left[\underset{\text{l}=1}{\overset{\text{l}=\text{n}}{\mathop\sum}}\,{{\text{a}}_{\text{ij}}}{{\text{a}}_{\text{kl}}}\right] (2.2)\\
-\end{eqnarray}
+\end{eqnarray*}
 We therefore know the direct impact of the shock on all input prices of all countries.
 In matrix notation, we create two matrices that build on the large matrix A. These two matrices retain only the direct effects of the exchange rate shock on the price of goods imported by the shocked country $i$ and the direct effects of the exchange rate shock on the price of goods imported by the rest of the world from the shocked country $i$. To formalize the initial impact of the shock on the price of traded goods, we neutralize the impact of an input price shock on the price of domestic inputs as well as on the price of inputs traded between countries that are not shocked.\\
 Let us first look at the shock from the perspective of countries that import inputs from country $i$.\\

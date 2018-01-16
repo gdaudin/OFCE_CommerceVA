@@ -135,6 +135,7 @@ if "`source'"=="WIOD" {
 	use "$dir/Bases/WIOD_ICIO_`yrs'.dta"
 	keep if IndustryCode == "GO"
 	drop IndustryCode-TOT
+	sort Country RNr
 	drop *57 *58 *59 *60 *61
 	save "$dir/Bases/WIOD_`yrs'_OUT.dta", replace
 	
@@ -143,6 +144,7 @@ if "`source'"=="WIOD" {
 	use "$dir/Bases/WIOD_ICIO_`yrs'.dta"
 	drop if RNr >=65
 	drop IndustryCode-TOT
+	sort Country RNr
 	drop *57 *58 *59 *60 *61
 	save "$dir/Bases/WIOD_`yrs'_Z.dta", replace
 	

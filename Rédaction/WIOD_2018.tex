@@ -161,7 +161,7 @@ With $a_{kl}a_{ij}$ the quantity of inputs from the country's sector needed to d
 For the shocked country, the shock has a disinflationary effect on domestic production prices. In national currency, the production prices of imported inputs fall by $\widetilde{c_i}=-\frac{c_{\$i}}{1+{c_{\$i}}}$, or by 0.5 with $c_{\$i}=1$. \\
 This decline is spread to all sectors during the production cycle. In sector $j$ of the shocked country $i$, this fall amounts in national currency to: \\
 \begin{eqnarray*}
- \Delta^1p_{ij}=\underset{l=1}{\overset{l=n}{\mathop \sum }}\,{\tilde{c}_{i}}*a_{ij}a_{1l}}+\ldots +\underset{l=1}{\overset{{l}=n}{\mathop \sum }}\,{{\tilde{c}}_i}*a_{ij}a_{kl}+\underset{l=1}{\overset{l={n}}{\mathop \sum }}\,{{{\tilde{c}}}_{i}}*{{a}_{{ij}}}{{{a}}_{pl}}=\left( -\frac{{{c}_{\$i}}}{1+c_{\$i}}}\right)*\underset{\begin{matrix}k=1\\k\neq i\\\end{matrix}}{\overset{{k}={p}}{\mathop\sum}}\,\left[\underset{l=1}{\overset{l=n}{\mathop\sum}}\,{a_{ij}a_{kl}\right] \\
+\Delta^1p_{ij}=\underset{l=1}{\overset{l=n}{\mathop \sum }}\,{\tilde{c}_{i}}*a_{ij}a_{1l}}+\ldots +\underset{l=1}{\overset{{l}=n}{\mathop \sum }}\,{{\tilde{c}}_i}*a_{ij}a_{kl}+\underset{l=1}{\overset{l={n}}{\mathop \sum }}\,{{{\tilde{c}}}_{i}}*{{a}_{{ij}}}{{{a}}_{pl}}=\left( -\frac{{{c}_{\$i}}}{1+c_{\$i}}}\right)*\underset{\begin{matrix}k=1\\k\neq i\\\end{matrix}}{\overset{{k}={p}}{\mathop\sum}}\,\left[\underset{l=1}{\overset{l=n}{\mathop\sum}}\,{a_{ij}a_{kl}\right] 
 \end{eqnarray*}
 This level shock can be converted into dollars: \\
 \begin{eqnarray}
@@ -174,21 +174,20 @@ Let us first look at the shock from the perspective of countries that import inp
 Let ${{c}_{\$}}$ be the vector of change in production prices in dollars following the 100$\%$ appreciation of the currency of country $i~$ against all other currencies, corresponding to an absolute shock of $+1$ dollar for all sectors in country $i$. \\
 Hence,
 \begin{eqnarray*}
- c_{\$}=\left(0\ldots0\ldots{{c}}_{\${ij}}}\ldots{{{c}}_{\${ik}}} 0\ldots0\right)$ with $c_{\${ij}}=c_{\$ik}}=c_{\$i}}=1
- \end{eqnarray*}
+ c_\$=\left(0\ldots0\ldots c_{\$ij}\ldots c_{\$ik} 0\ldots0\right)
+\end{eqnarray*}
+with $c_{\$ij}=c_{\$ik}=c_{\$i}=1$
 for all sectors $j$ and $k$ in the shocked country $i$.\\
-Building on equation Equation \ref{eq:eq1}, we write the direct impact of the exchange rate shock on the other countries as the product of the shock vector $c_{\$}$ and a matrix $B$. $B$ builds on the large matrix $A$ of technical coefficients, but only keeps the coefficients of each country's sectoral inputs imported from the shocked country $i$. The other coefficients are replaced by 0, including those of the block of country $i$ concerning the domestic inputs of the shocked country $i$. The direct impact of the appreciation of a currency against the dollar on the price of inputs is equal to $c_{\$}B$
- with
- \begin{eqnarray}
-c_{\$}B=\left(0\ldots{{{c}}_{\$i}}\ldots 0\right)\left(\begin{matrix}0&\cdots&0\\{{{a}}_{1l}}}{{\text{a}}_{{ij}}}&0&{{{a}}_{{nl}}}{{{a}}_{{ij}}}\\0&\cdots&0\\\end{matrix}\right) 	
- \label{eq:eq3}
- \end{eqnarray}
+Building on Equation \ref{eq:eq1}, we write the direct impact of the exchange rate shock on the other countries as the product of the shock vector $c_{\$}$ and a matrix $B$. $B$ builds on the large matrix $A$ of technical coefficients, but only keeps the coefficients of each country's sectoral inputs imported from the shocked country $i$. The other coefficients are replaced by 0, including those of the block of country $i$ concerning the domestic inputs of the shocked country $i$. The direct impact of the appreciation of a currency against the dollar on the price of inputs is equal to $c_{\$}B$ with
+\begin{eqnarray}
+c_{\$}B=\left(0\ldotsc_{\$i}\ldots 0\right)\left(\begin{matrix}0&\cdots&0\\a_{1l}a_{ij}&0&a_{nl}a_{ij}\\0&\cdots&0\\\end{matrix}\right) 	
+\label{eq:eq3}
+\end{eqnarray}
 where each ${{{a}}_{{kl}}}{{{a}}_{{ij}}}$ element of the line block represents the technical coefficient related to imports of inputs by sector $l$ in country $k$ (with $k~\ne ~i$) from sector $j$ in country $i$.\\
 Let us now consider the shock from the perspective of the shocked country $i$.\\
 Define ${{\tilde{c}}_{\$}}$ the vector of change in input prices imported by country i, in dollars, $( -c_{\$i}\ldots0\ldots-c_{\$i})$. \\
-From Equation \ref{eq:eq2}, we can write the direct impact for country $i$ of the fall in input prices from the rest of the world. The direct impact corresponds to the product of the shock vector ${\tilde{c}}$  and a matrix ${\tilde{B}}$. $\widetilde{{B }$ builds on the large matrix A of which only the country blocks of the inputs imported by country $i$ from other countries have been retained. The other coefficients are replaced by 0, including those of the block of country $i$ concerning the domestic inputs of the shocked country $i$. \\
+From Equation \ref{eq:eq2}, we can write the direct impact for country $i$ of the fall in input prices from the rest of the world. The direct impact corresponds to the product of the shock vector ${\tilde{c}}$  and a matrix ${\tilde{B}}$. ${\tilde{B}}$ builds on the large matrix A of which only the country blocks of the inputs imported by country $i$ from other countries have been retained. The other coefficients are replaced by 0, including those of the block of country $i$ concerning the domestic inputs of the shocked country $i$. \\
 The direct impact of the appreciation of the shocked country $i$ on the price of its inputs corresponds, in dollars, to ${{\tilde{c}}_{\$}}\text{\tilde{B}}$, with: \\
-
 \begin{eqnarray}
 {{\tilde{c}}_{\$}}{\tilde{B}}=\left(-{{{c}}_{\$i}}\ldots0\ldots-{{{c}}_{\$i}}\right)\left(\begin{matrix}0&\ldots{{{a}}_{{i}1}}{{{a}}_{11}}\ldots&0\\0&0&0\\0&\ldots{{\text{a}}_{\text{il}}}{{{a}}_{{pn}}}\ldots&0\\\end{matrix}\right) 
 \label{eq:eq4}
@@ -198,7 +197,7 @@ The direct effect on the world is therefore the sum of these vectors from equati
 An input price shock then spreads to all sectors in all countries via the global intersectoral exchanges transcribed by the matrix of technical coefficients of the large matrix A. This process will be repeated several times, until the effects are completely exhausted.
 In the end, the total effect of the dollar shock is equal to the shock itself, incremented by changes in input prices due to changes in imported input prices, and by all marginal changes in output prices during the production processes, i. e.:\\
 \begin{eqnarray*}
-	{{S}_{\$}}=\Delta{{P}_{\$}}={{c}_{\$}}+({{c}_{\$}}{B}+{{{\tilde{c}}}_{\$}}{\tilde{B}}\right)+\left({{c}_{\$}}{B}+{{{\tilde{c}}}_{\$}}{\tilde{B}}\right){A}+\left({{c}_{\$}}{B}+{{{\tilde{c}}}_{\$}}{\tilde{B}}\right){{{A}}^{2}}+\ldots+\left({{c}_{\$}}{B}+{{{\tilde{c}}}_{\$}}{\tilde{B}}\right){{{A}}^{{n}}} \\
+	S_\$=\Delta{{P}_{\$}}=c_{\$}+(c_{\$}B+{{{\tilde{c}}}_{\$}}{\tilde{B}})+\left({{c}_{\$}}{B}+{{{\tilde{c}}}_{\$}}{\tilde{B}}\right){A}+\left({{c}_{\$}}{B}+{{{\tilde{c}}}_{\$}}{\tilde{B}}\right){{{A}}^{2}}+\ldots+\left({{c}_{\$}}{B}+{{{\tilde{c}}}_{\$}}{\tilde{B}}\right)A^n \\
  \end{eqnarray*}
  \begin{eqnarray}
 {{S}_{\$}}={{c}_{\$}}+({{c}_{\$}}B+{{\tilde{c}}_{\$}}\tilde{B})*{{(I-A)}^{-1}}	
@@ -218,29 +217,17 @@ The second type of aggregation relies on the sectoral structure of exports. $\ov
  \begin{eqnarray*}
 \overline{s_{i}^{X}}=\underset{j=1}{\overset{n}{\mathop \sum }}\,\frac{{{s}_{ij}}.{{x}_{ij}}}{{{x}_{i}}},
  \end{eqnarray*} 
-with ${{{x}}_{{ij}}}$the exports of industry $j$ in country $i$ and ${{{x}}_{{i}}}$ the total exports of country $i$. \\
+with $x_{ij}$the exports of industry $j$ in country $i$ and $x_{i}$ the total exports of country $i$. \\
 The last type of aggregation relies on the sectoral structure of household consumption. $\overline{s_{i}^{HC}}$ provides the average impact of the shock on the consumer price of country $i$. 
  \begin{eqnarray*}
 \overline{s_{i}^{HC}}=\underset{j=1}{\overset{n}{\mathop \sum }}\,\frac{{{s}_{ij}}.h{{c}_{ij}}}{h{{c}_{i}}}
  \end{eqnarray*} 
-with ${h}{{{c}}_{{ij}}}$ the consumption of industry $j$ in country $i$ and ${h}{{{c}}_{{i}}}$ the total household consumption of country $i$. 
-
+with $hc_{ij}$ the consumption of industry $j$ in country $i$ and ${h}{{{c}}_{{i}}}$ the total household consumption of country $i$. 
 \section{The impact of exchange rates fluctuations on consumer prices}
 \label{sec:prixconso}
-
-
 \section{Conclusion}
 \label{sec:ccl}
-
-
 \newpage
 \bibliography{Papier transmission des chocs en VA}
-
-
-
-
-
-
-
 
 \end{document}

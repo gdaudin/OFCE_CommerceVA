@@ -139,6 +139,10 @@ if "`source'"=="WIOD" {
 	drop *57 *58 *59 *60 *61
 	save "$dir/Bases/WIOD_`yrs'_OUT.dta", replace
 	
+	****À FAIRE : 
+	***** FAIRE EN SORTE QUE LES SORTIES SOIENT LES MÊME POUR WIOD ET TIVA
+	***** GARDER PAYS ET SECTEUR DANS LA MÊME CASSE
+	
 * Only the I/O table itself
 	clear
 	use "$dir/Bases/WIOD_ICIO_`yrs'.dta"

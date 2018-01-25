@@ -39,7 +39,9 @@ foreach pays of global country {
 	capture replace inv_share= inv_`lpays'/tot_use if pays=="`pays'"
 }
 	
-bys pays : gen pour_moy_pond = tot_use*inv_share
-bys pays : egen pays_tot_use = total(tot_use)
-collapse (sum) pour_moy_pond, by(pays pays_tot_use)
-gen pays_inv_share=pour_moy_pond/pays_tot_use
+bys pays : gen pour_moy_pond1  = tot_use*inv_share
+bys pays : egen pays_tot_use   = total(tot_use)
+bys pays : egen pour_moy_pond2 = total(pour_moy_pond1)
+gen pays_inv_share=pour_moy_pond2/pays_tot_use
+
+tab pays if abs(inv_share) > 1 & inv_share!=.

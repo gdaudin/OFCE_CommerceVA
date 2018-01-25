@@ -20,8 +20,8 @@ set more off
 *-------------------------------------------------------------------------------
 capture program drop save_data
 program save_data
-args source
-*ex: save_data TIVA
+args yrs source
+*ex: save_data 2011 TIVA
 
 
 clear
@@ -30,17 +30,17 @@ if "`source'"=="TIVA" {
 
 	*Loop to save data for each year
 	set more off
-	foreach i of numlist 1995 (1) 2011 {
-	insheet using "$dir/Bases_Sources/TIVA/ICIO2016_`i'.csv", clear
+
+	insheet using "$dir/Bases_Sources/TIVA/ICIO2016_`yrs'.csv", clear
 	*I sort the ICIO: 
 	local useful = _N-2
 	sort v1 aus_c01t05agr-disc in 1/`useful'
 	order aus_c01t05agr-cn4_c95pvh, alphabetic after (v1)
 	*order aus_hc-row_consabr, alphabetic after (zaf_c95pvh)
 	order hfce_aus-disc, alphabetic after (zaf_c95pvh)
-	
-	save "$dir/Bases/TIVA_ICIO_`i'.dta", replace
-	}
+	blif
+	save "$dir/Bases/TIVA_ICIO_`yrs'.dta", replace
+
 /*
 	*Same with the database for wages
 	clear
@@ -65,14 +65,14 @@ if "`source'"=="TIVA" {
 if "`source'"=="WIOD" {	 
 	*Loop to save data for each year
 	set more off
-	foreach i of numlist 2000 (1) 2014 {
-	use "$dir/Bases_Sources/`source'/WIOT`i'_October16_ROW.dta", clear
+
+	use "$dir/Bases_Sources/`source'/WIOT`yrs'_October16_ROW.dta", clear
 	foreach j of numlist 1 (1) 9 {
 		rename ????`j' ????0`j'
 	}
 	order vAUS01-vROW61, alphabetic after (TOT)
-	save "$dir/Bases/WIOD_ICIO_`i'.dta", replace
-	}
+	save "$dir/Bases/WIOD_ICIO_`yrs'.dta", replace
+
 
 	/*
 	*Same with the database for wages
@@ -506,14 +506,15 @@ end
 **** Lancement des programmes ****************
 
 /*
-save_data WIOD
 
-save_data TIVA
+
+
 
 */
 /*
 foreach i of numlist 1995(1)2011 {
 	clear
+	save_data `i' TIVA
 	prepare_database `i' TIVA
 }
 
@@ -523,6 +524,7 @@ foreach i of numlist 1995(1)2011 {
 
 foreach i of numlist 2000(1)2014 {
 	clear
+	save_data `i' WIOD
 	prepare_database `i' WIOD
 }
 

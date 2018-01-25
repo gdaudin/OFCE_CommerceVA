@@ -361,6 +361,16 @@ and used for estimation procedures to arrive at a consistent time series of WIOT
   Series                   = {Economic Systems Research}
 }
 
+@Article{ECB2016,
+  Title                    = {Transmission of output shocks–the role of cross-border production chains},
+  Author                   = {ECB},
+  Journal                  = {ECB Economic Bulletin},
+  Year                     = {2016},
+
+  Owner                    = {w817186},
+  Timestamp                = {2018.01.25}
+}
+
 @Article{Folloni1994,
   Title                    = {Hypothesis of price formation in input-output tables},
   Author                   = {Folloni, Giuseppe and Miglierina, Claudio},
@@ -645,6 +655,21 @@ services, are also addressed},
   Language                 = {English}
 }
 
+@Article{Puzzello2012,
+  Title                    = {{A proportionality assumption and measurement biases in the factor content of trade}},
+  Author                   = {Puzzello, Laura},
+  Journal                  = {Journal of International Economics},
+  Year                     = {2012},
+  Number                   = {1},
+  Pages                    = {105-111},
+  Volume                   = {87},
+
+  Abstract                 = {This paper revisits Trefler and Zhu's (2005, 2010) (TZ) empirical examination of the factor content of trade in the presence of international differences in production techniques and trade in inputs. In this framework, knowing the bilateral details of each country's input–output structure is key to the correct calculation of the factor content of trade. Because input–output tables typically lack this detail, TZ impute the relevant input–output coefficients by making a proportionality assumption. This paper uses survey-based input–output coefficients from the Asian Input–output (AIO) tables that do provide bilateral details. Exploiting methodological differences in the compilation of the AIO tables and the data underlying TZ studies, this paper empirically assesses how well the TZ approach fits sourcing patterns of inputs and finds that it understates countries' use and relative use of foreign inputs, especially in those sectors where they are most used. As a result countries' use of domestic factors is overstated. Biases generated on exported and imported factor services cancel each other out. The net effect on the measured factor trade is small.},
+  Doi                      = {10.1016/j.jinteco.2011.11},
+  Keywords                 = {Factor content of trade; Proportionality assumption; International differences in production techniq},
+  Url                      = {https://ideas.repec.org/a/eee/inecon/v87y2012i1p105-111.html}
+}
+
 @Article{Roland-HolstModelingPricesSam1995,
   Title                    = {Modeling {{Prices}} in a {{Sam Structure}}},
   Author                   = {Roland-Holst, David W. and Sancho, Ferran},
@@ -665,7 +690,7 @@ services, are also addressed},
   Urldate                  = {2015-06-25}
 }
 
-@TechReport{SatoGlobalRegionalShock2014,
+@TechReport{Sato2014,
   Title                    = {Global and {{Regional Shock Transmission}} -{{An Asian Perspective}}-},
   Author                   = {Sato, Kiyotaka and Shrestha, Nagendra},
   Institution              = {{Center for Economic and Social Studies in Asia (CESSA), Department of Economics, Yokohama National University}},

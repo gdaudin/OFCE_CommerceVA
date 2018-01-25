@@ -604,7 +604,8 @@ blink
 
 
 
-foreach source in    TIVA { 
+*foreach source in   WIOD TIVA { 
+foreach source in   WIOD { 
 
 
 	if "`source'"=="WIOD" local start_year 2000
@@ -649,7 +650,8 @@ foreach source in    TIVA {
 
 
 
-	foreach i of numlist `start_year' (1)`end_year'  {
+*	foreach i of numlist `start_year' (1)`end_year'  {
+	foreach i of numlist 2011 {
 		clear
 		set more off
 		compute_leontief `i' `source'

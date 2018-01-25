@@ -82,9 +82,33 @@ save "$dir/Results/Étude rapport D+I et Bouclage Mondial/results.dta", replace
 
 
 end 
-etude 2011 TIVA
-etude 2011 WIOD
 
+foreach source in  WIOD  TIVA {
+
+
+
+	if "`source'"=="WIOD" local start_year 2000
+	if "`source'"=="TIVA" local start_year 1995
+
+
+	if "`source'"=="WIOD" local end_year 2014
+	if "`source'"=="TIVA" local end_year 2011
+	
+
+
+
+*	foreach i of numlist 2011  {
+	foreach i of numlist `start_year' (1)`end_year'  {
+		
+		etude `i' `source'
+		
+	
+		clear
+	}
+
+
+
+}
 
 
 

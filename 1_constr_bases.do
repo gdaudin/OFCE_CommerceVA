@@ -71,6 +71,7 @@ if "`source'"=="WIOD" {
 		rename ????`j' ????0`j'
 	}
 	order vAUS01-vROW61, alphabetic after (TOT)
+	sort Country RNr
 	save "$dir/Bases/WIOD_ICIO_`yrs'.dta", replace
 
 

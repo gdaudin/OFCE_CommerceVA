@@ -114,19 +114,20 @@ if "`source'"=="TIVA" {
 	save "$dir/Bases/TIVA_`yrs'_OUT.dta", replace
 	
 	*From the ICIO database I keep only the table for inter-industry inter-country trade
-	clear
-	use "$dir/Bases/TIVA_ICIO_`yrs'.dta"
+	use "$dir/Bases/TIVA_ICIO_`yrs'.dta", clear
 	drop dirp_arg-nps_zaf
 	drop if v1 == "VA+TAXSUB" | v1 == "OUT"
+	gen pays=upper(substr(v1,1,3))
+	gen secteur = upper(substr(v1,5,.))
+	order pays secteur
 	drop v1
 	save "$dir/Bases/TIVA_`yrs'_Z.dta", replace
 	   
 	*From the ICIO database I keep only the table for final demand
-	clear
-	use "$dir/Bases/TIVA_ICIO_`yrs'.dta"
+	use "$dir/Bases/TIVA_ICIO_`yrs'.dta", clear
 	drop if v1 == "VA+TAXSUB" | v1 == "OUT"
 	keep dirp_arg-nps_zaf
-	save "$dir/Bases/`source’_`year’_finaldemand.dta", replace
+	save "$dir/Bases/TIVA_`yrs'_finaldemand.dta", replace
 }
 
 if "`source'"=="WIOD" {	
@@ -135,7 +136,6 @@ if "`source'"=="WIOD" {
 	use "$dir/Bases/WIOD_ICIO_`yrs'.dta"
 	keep if IndustryCode == "GO"
 	drop IndustryCode-TOT
-	sort Country RNr
 	drop *57 *58 *59 *60 *61
 	save "$dir/Bases/WIOD_`yrs'_OUT.dta", replace
 	
@@ -147,8 +147,11 @@ if "`source'"=="WIOD" {
 	clear
 	use "$dir/Bases/WIOD_ICIO_`yrs'.dta"
 	drop if RNr >=65
-	drop IndustryCode-TOT
-	sort Country RNr
+	rename Country pays
+	rename IndustryCode secteur
+	order pays secteur
+	sort pays secteur
+	drop IndustryDescription-TOT
 	drop *57 *58 *59 *60 *61
 	save "$dir/Bases/WIOD_`yrs'_Z.dta", replace
 	
@@ -537,7 +540,7 @@ foreach i of numlist 1995 2000 2005 {
 
 
 
-
+/*
 database_csv TIVA
 database_csv WIOD
 

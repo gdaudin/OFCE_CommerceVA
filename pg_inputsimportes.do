@@ -85,7 +85,6 @@ foreach var of varlist $var_entree_sortie {
 	}
 }
 
-blif
 
 *somme des CI pour chaque secteur de chaque pays
 collapse (sum) $var_entree_sortie
@@ -96,7 +95,7 @@ display "after collapse"
 *obtention de deux lignes, l'une de CI, l'autre de prod pour chaque secteur, issue de la base  `source'_`yrs'_OUT
 append using "$dir/Bases/`source'_`yrs'_OUT.dta"
 
-*transpositin en colonne, puis création d'un ratio de CI importées par secteurs 
+*transpositin en colonne, puis création d'un ratio de CI importées par secteur 
 xpose, clear varname
 rename v1 ci_impt
 rename v2 prod
@@ -267,9 +266,9 @@ if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\De
 
 */
 
-/*
 
-foreach source in   WIOD  TIVA {
+
+foreach source in   /*WIOD*/  TIVA {
 
 
 
@@ -283,8 +282,8 @@ foreach source in   WIOD  TIVA {
 
 
 
-
-	foreach i of numlist `start_year' (1)`end_year'  {
+	foreach i of numlist 2011  {
+*	foreach i of numlist `start_year' (1)`end_year'  {
 		
 		imp_inputs_par_sect `i' `source' hze_not
 		imp_inputs_par_sect `i' `source' hze_yes
@@ -313,8 +312,8 @@ foreach source in  WIOD  TIVA {
 
 
 
-
-	foreach i of numlist `start_year' (1)`end_year'  {
+	foreach i of numlist 2011  {
+*	foreach i of numlist `start_year' (1)`end_year'  {
 		
 		imp_inputs `i' `source' HC hze_not
 		imp_inputs `i' `source' HC hze_yes

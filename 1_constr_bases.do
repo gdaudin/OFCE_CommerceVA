@@ -506,13 +506,13 @@ end
 
 **** Lancement des programmes ****************
 
-/*
+
 
 
 
 
 */
-/*
+
 foreach i of numlist 1995(1)2011 {
 	clear
 	save_data `i' TIVA
@@ -543,7 +543,7 @@ foreach i of numlist 1995 2000 2005 {
 
 
 
-/*
+
 database_csv TIVA
 database_csv WIOD
 

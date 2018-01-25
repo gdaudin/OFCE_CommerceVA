@@ -38,7 +38,6 @@ if "`source'"=="TIVA" {
 	order aus_c01t05agr-cn4_c95pvh, alphabetic after (v1)
 	*order aus_hc-row_consabr, alphabetic after (zaf_c95pvh)
 	order hfce_aus-disc, alphabetic after (zaf_c95pvh)
-	blif
 	save "$dir/Bases/TIVA_ICIO_`yrs'.dta", replace
 
 /*

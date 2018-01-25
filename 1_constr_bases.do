@@ -20,8 +20,8 @@ set more off
 *-------------------------------------------------------------------------------
 capture program drop save_data
 program save_data
-args source
-*ex: save_data TIVA
+args yrs source
+*ex: save_data 2011 TIVA
 
 
 clear
@@ -30,17 +30,16 @@ if "`source'"=="TIVA" {
 
 	*Loop to save data for each year
 	set more off
-	foreach i of numlist 1995 (1) 2011 {
-	insheet using "$dir/Bases_Sources/TIVA/ICIO2016_`i'.csv", clear
+
+	insheet using "$dir/Bases_Sources/TIVA/ICIO2016_`yrs'.csv", clear
 	*I sort the ICIO: 
 	local useful = _N-2
 	sort v1 aus_c01t05agr-disc in 1/`useful'
 	order aus_c01t05agr-cn4_c95pvh, alphabetic after (v1)
 	*order aus_hc-row_consabr, alphabetic after (zaf_c95pvh)
 	order hfce_aus-disc, alphabetic after (zaf_c95pvh)
-	
-	save "$dir/Bases/TIVA_ICIO_`i'.dta", replace
-	}
+	save "$dir/Bases/TIVA_ICIO_`yrs'.dta", replace
+
 /*
 	*Same with the database for wages
 	clear
@@ -65,14 +64,15 @@ if "`source'"=="TIVA" {
 if "`source'"=="WIOD" {	 
 	*Loop to save data for each year
 	set more off
-	foreach i of numlist 2000 (1) 2014 {
-	use "$dir/Bases_Sources/`source'/WIOT`i'_October16_ROW.dta", clear
+
+	use "$dir/Bases_Sources/`source'/WIOT`yrs'_October16_ROW.dta", clear
 	foreach j of numlist 1 (1) 9 {
 		rename ????`j' ????0`j'
 	}
 	order vAUS01-vROW61, alphabetic after (TOT)
-	save "$dir/Bases/WIOD_ICIO_`i'.dta", replace
-	}
+	sort Country RNr
+	save "$dir/Bases/WIOD_ICIO_`yrs'.dta", replace
+
 
 	/*
 	*Same with the database for wages
@@ -114,19 +114,20 @@ if "`source'"=="TIVA" {
 	save "$dir/Bases/TIVA_`yrs'_OUT.dta", replace
 	
 	*From the ICIO database I keep only the table for inter-industry inter-country trade
-	clear
-	use "$dir/Bases/TIVA_ICIO_`yrs'.dta"
+	use "$dir/Bases/TIVA_ICIO_`yrs'.dta", clear
 	drop dirp_arg-nps_zaf
 	drop if v1 == "VA+TAXSUB" | v1 == "OUT"
+	gen pays=upper(substr(v1,1,3))
+	gen secteur = upper(substr(v1,5,.))
+	order pays secteur
 	drop v1
 	save "$dir/Bases/TIVA_`yrs'_Z.dta", replace
 	   
 	*From the ICIO database I keep only the table for final demand
-	clear
-	use "$dir/Bases/TIVA_ICIO_`yrs'.dta"
+	use "$dir/Bases/TIVA_ICIO_`yrs'.dta", clear
 	drop if v1 == "VA+TAXSUB" | v1 == "OUT"
 	keep dirp_arg-nps_zaf
-	save "$dir/Bases/`source’_`year’_finaldemand.dta", replace
+	save "$dir/Bases/TIVA_`yrs'_finaldemand.dta", replace
 }
 
 if "`source'"=="WIOD" {	
@@ -135,16 +136,22 @@ if "`source'"=="WIOD" {
 	use "$dir/Bases/WIOD_ICIO_`yrs'.dta"
 	keep if IndustryCode == "GO"
 	drop IndustryCode-TOT
-	sort Country RNr
 	drop *57 *58 *59 *60 *61
 	save "$dir/Bases/WIOD_`yrs'_OUT.dta", replace
+	
+	****À FAIRE : 
+	***** FAIRE EN SORTE QUE LES SORTIES SOIENT LES MÊME POUR WIOD ET TIVA
+	***** GARDER PAYS ET SECTEUR DANS LA MÊME CASSE
 	
 * Only the I/O table itself
 	clear
 	use "$dir/Bases/WIOD_ICIO_`yrs'.dta"
 	drop if RNr >=65
-	drop IndustryCode-TOT
-	sort Country RNr
+	rename Country pays
+	rename IndustryCode secteur
+	order pays secteur
+	sort pays secteur
+	drop IndustryDescription-TOT
 	drop *57 *58 *59 *60 *61
 	save "$dir/Bases/WIOD_`yrs'_Z.dta", replace
 	
@@ -498,15 +505,16 @@ end
 
 **** Lancement des programmes ****************
 
-/*
-save_data WIOD
 
-save_data TIVA
+
+
+
 
 */
-/*
+
 foreach i of numlist 1995(1)2011 {
 	clear
+	save_data `i' TIVA
 	prepare_database `i' TIVA
 }
 
@@ -516,6 +524,7 @@ foreach i of numlist 1995(1)2011 {
 
 foreach i of numlist 2000(1)2014 {
 	clear
+	save_data `i' WIOD
 	prepare_database `i' WIOD
 }
 

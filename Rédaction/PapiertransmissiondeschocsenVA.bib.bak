@@ -95,6 +95,17 @@ relevance of regional production linkages in Europe, with Germany playing a key 
   Urldate                  = {2015-07-10}
 }
 
+@Article{AntoundeAlmeida2016,
+  Title                    = {Globalization of In
+ation and Input-Output Linkages},
+  Author                   = {Antoun de Almeida, Luiza,},
+  Journal                  = {Mimeo, University of Frankfurt.},
+  Year                     = {May 2016.},
+
+  Owner                    = {w817186},
+  Timestamp                = {2018.01.26}
+}
+
 @TechReport{Antras2018,
   Title                    = {On the {{Measurement}} of {{Upstreamness}} and {{Downstreamness}} in {{Global Value Chains}}},
   Author                   = {Antr{\`a}s, Pol and Chor, Davin},
@@ -369,6 +380,19 @@ and used for estimation procedures to arrive at a consistent time series of WIOT
 
   Owner                    = {w817186},
   Timestamp                = {2018.01.25}
+}
+
+@TechReport{FeenstraOffshoringUS2012,
+  Title                    = {{Evaluating Estimates of Materials Offshoring from U.S. Manufacturing}},
+  Author                   = {Robert C. Feenstra and J. Bradford Jensen},
+  Institution              = {National Bureau of Economic Research, Inc},
+  Year                     = {2012},
+  Month                    = Mar,
+  Number                   = {17916},
+  Type                     = {NBER Working Papers},
+
+  Abstract                 = {When materials offshoring is measured by estimating imported intermediate inputs, a common assumption used is that an industry's imports of each input, relative to its total demand, is the same as the economy-wide imports relative to total demand: this is the so-called \&quot;import comparability\&quot; or \&quot;proportionality\&quot; assumption. A report to the National Research Council identified this assumption as being a significant limitation of current data collection and analysis. In this note we move beyond this assumption to obtain a direct measure of imported materials by industry for the United States in 1997. At the 3-digit I-O industry level, there is a correlation of 0.68 between the offshoring shares made with and without the proportionality assumption, and a higher correlation of 0.87 when the shares are value weighted. While most value-weighted industry have differences below 50 percentage points in the two estimates, there is significant number of cases that differ by 10 percentage points or more.},
+  Url                      = {https://ideas.repec.org/p/nbr/nberwo/17916.html}
 }
 
 @Article{Folloni1994,

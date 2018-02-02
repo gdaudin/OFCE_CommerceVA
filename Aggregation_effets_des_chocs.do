@@ -185,9 +185,6 @@ set more off
 
 
 foreach i of global ori_choc {
-	compute_leontief_chocnom `yrs' `i' `source'
-	vector_shock_exch `shk' `i'  `source'  //
-	shock_exch `yrs' `i'  `source'
 	compute_mean `yrs' `i' `wgt' `source'
 }
 
@@ -226,26 +223,6 @@ end
 
 clear
 set more off
-
-/*
-
-***** POUR TEST
-
-Definition_pays_secteur TIVA
-*compute_leontief 2011 TIVA
-compute_X 2011 TIVA
-*compute_Yt 2011 TIVA
-*compute_HC 2011 TIVA
-
-global ori_choc "EUR"
-
-table_mean 2011 X 1 TIVA
-
-blink
-*/
-
-
-
 
 
 foreach source in   WIOD { 
@@ -296,11 +273,7 @@ foreach source in   WIOD {
    foreach i of numlist 2011 {
 *	foreach i of numlist `start_year' (1)`end_year'  {
 
-		clear
-		set more off
-		compute_leontief `i' `source'
-    	* compute_VA `i' `source'	
-    	foreach j in HC X Yt  {	
+    	foreach j in HC /*X Yt*/  {	
 
     	    compute_`j' `i' `source'
 			table_mean `i' `j' 1 `source'

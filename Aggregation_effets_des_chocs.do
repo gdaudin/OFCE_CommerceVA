@@ -94,7 +94,7 @@ set more off
 clear
 
 
-use "$dir/Bases/`source'_C_`yrs'_`groupeduchoc'_exch.dta"
+use "$dir/Results/Devaluations/`source'_C_`yrs'_`groupeduchoc'_exch.dta"
 mkmat C`groupeduchoc't1, matrix(C`groupeduchoc't)
 
 use "$dir/Bases/csv_`source'.dta", clear

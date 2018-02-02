@@ -15,24 +15,36 @@ if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\De
 
 *GRAPHIQUE d'évolution des R2
 use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results.dta", clear
+
+************graphiques pour WIOD
 drop if source=="TIVA"
 *set scheme economist
 graph bar (asis) R2 ,  title("R2, WIOD") over(year, sort(year) label(angle(vertical) labsize(small))) 
 graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/Graph_R2_Wiod.png", replace
 
-*coefficient de correlation entre Elasticité des prix de consommation à une dévaluation et  Parts des CI importées dans la conso dom + part conso importée
+*coefficient de correlation entre le vecteur Elasticité des prix de consommation à une dévaluation et le vecteur Parts des CI importées dans la conso dom + part conso importée de tous les pays pour une année donnée
 graph bar (asis) corr ,  title("Coefficient de corrélation, WIOD") over(year, sort(year) label(angle(vertical) labsize(small))) 
 graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/Graph_corr_Wiod.png", replace
 
+
+*coeff beta de la régression pond_wiod_hc=b*ratio_ci_impt_HC+constante
+graph bar (asis) b ,  title("Coefficient de correlation de la régression, WIOD") over(year, sort(year) label(angle(vertical) labsize(small))) 
+graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/Graph_beta_tiva.png", replace
+
+
+
+*************graphiques pour TIVA
 use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results.dta", clear
 drop if source=="WIOD"
-
 
 graph bar (asis)  R2,  title("R2, TIVA") over(year, sort(year) label(angle(vertical) labsize(small))) 
 graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/Graph_R2_tiva.png", replace
 
 graph bar (asis) corr ,  title("Coefficient de correlation, TIVA") over(year, sort(year) label(angle(vertical) labsize(small))) 
 graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/Graph_corr_tiva.png", replace
+
+graph bar (asis) b ,  title("Coefficient de correlation de la régression, TIVA") over(year, sort(year) label(angle(vertical) labsize(small))) 
+graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/Graph_beta_tiva.png", replace
 
 *ratio CI importées + biens de conso importés sur HH consumption
 set scheme economist

@@ -21,6 +21,7 @@ do "$dirgit/1_constr_bases.do"
  
 
 do "$dirgit/choc_chge.do"
+do "$dirgit/Aggregation_effets_des_chocs.do"
 do "$dirgit/pg_inputsimportes.do"
 do "$dirgit/Étude rapport D+I et Bouclage Mondial.do"
 

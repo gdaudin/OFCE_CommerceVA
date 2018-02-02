@@ -45,7 +45,7 @@ if  "`yrs'" == "2013" {
 	generate year = 2013
 	drop if BME ==.
 }	
-
+ 
 
 save "\\intra\partages\ua1383_data\Agents\Lalliard\Commerce_VA_inflation\BME_`yrs'.dta
  

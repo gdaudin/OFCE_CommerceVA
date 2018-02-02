@@ -377,7 +377,10 @@ svmat C`groupeduchoc't
 keep C`groupeduchoc't1
 
 
-if $test==1 save "$dir/Bases/`source'_C_`yrs'_`groupeduchoc'_exch.dta", replace
+if $test==1 save "$dir/Results/Devaluations/`source'_C_`yrs'_`groupeduchoc'_exch.dta", replace
+
+
+
 display "fin de shock_exch"
 
 end
@@ -465,10 +468,20 @@ foreach source in   WIOD {
 		clear
 		set more off
 		compute_leontief `i' `source'
+			local pour_gros_fichier 1
 			foreach groupeduchoc of global ori_choc {
 			compute_leontief_chocnom `i' `groupeduchoc' `source'
 			vector_shock_exch 1 `groupeduchoc' `source'
 			shock_exch `i' `groupeduchoc' `source'
+			
+			use "$dir/Results/Devaluations/`source'_C_`i'_`groupeduchoc'_exch.dta"
+			
+			if `pour_gros_fichier'==0 {
+				merge 1:1 _n using "$dir/Results/Devaluations/`source'_C_`i'_exch.dta"
+				drop _merge
+			}
+			save "$dir/Results/Devaluations/`source'_C_`i'_exch.dta", replace
+			local pour_gros_fichier=0
 	    }
 
     }

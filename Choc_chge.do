@@ -475,6 +475,7 @@ foreach source in   WIOD {
 			shock_exch `i' `groupeduchoc' `source'
 			
 			use "$dir/Results/Devaluations/`source'_C_`i'_`groupeduchoc'_exch.dta"
+			rename C*t1 shock*1
 			
 			if `pour_gros_fichier'==0 {
 				merge 1:1 _n using "$dir/Results/Devaluations/`source'_C_`i'_exch.dta"
@@ -483,7 +484,9 @@ foreach source in   WIOD {
 			save "$dir/Results/Devaluations/`source'_C_`i'_exch.dta", replace
 			local pour_gros_fichier=0
 	    }
-
+	order *, alphabetic
+	order shockEUR1 shockEAS1
+	save "$dir/Results/Devaluations/`source'_C_`i'_exch.dta", replace	
     }
 
 }

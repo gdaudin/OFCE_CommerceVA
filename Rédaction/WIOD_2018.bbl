@@ -1,4 +1,4 @@
-\begin{thebibliography}{10}
+\begin{thebibliography}{11}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 \expandafter\ifx\csname url\endcsname\relax
   \def\url#1{\texttt{#1}}\fi
@@ -26,6 +26,12 @@ Feenstra, R.~C., Jensen, J.~B., Mar. 2012. Evaluating {{Estimates}} of
 \bibitem[{Folloni and Miglierina(1994)}]{Folloni1994}
 Folloni, G., Miglierina, C., 1994. Hypothesis of price formation in
   input-output tables. Economic Systems Research.
+
+\bibitem[{Goldberg and Campa(2010)}]{Goldberg2010}
+Goldberg, L.~S., Campa, J.~M., May 2010. {The Sensitivity of the CPI to
+  Exchange Rates: Distribution Margins, Imported Inputs, and Trade Exposure}.
+  The Review of Economics and Statistics 92~(2), 392--407.
+\newline\urlprefix\url{https://ideas.repec.org/a/tpr/restat/v92y2010i2p392-407.html}
 
 \bibitem[{Hummels et~al.(2001)Hummels, Ishii, and
   Yi}]{HummelsVerticalSpecializationWorldTrade2001}

@@ -1,7 +1,7 @@
 capture program drop essai
 
 program essai
-
+ *
 args yrs
 
 clear

@@ -33,7 +33,8 @@
 \usepackage{supertabular}    %na            %  mettre pour les grands tableaux en formant paysage. marche avec \begin{landscape}
 % style de la biblio : necessaire pour utiliser BibTex, necessite le deuxieme fichier exemple.bib
 \usepackage{caption}
-\usepackage[longnamesfirst]{natbib}
+%\usepackage[longnamesfirst]{natbib}
+\usepackage{natbib}
 \bibliographystyle{elsarticle-harv}
 \newcommand{\tqdl}{\textquotedblleft}
 \newcommand{\tqdr}{\textquotedblright}
@@ -62,11 +63,12 @@
 
 \begin{abstract}
 {\small \noindent
-New technologies and lower trade barriers has given rise to increased interaction among sectors across countries. The growth of global value chains (GVCs) reflects the international integration of geographically fragmented global production processes and the creation of global production networks.
-In this paper, we document the role of global input-output linkages in the propagation of productivity and inflationary shocks in the international economy. 
- %à faire.
-More specifically, we study the role of global input-output linkages in transmitting oil prices shocks across economies.
-We build on two sectoral datasets, the World Input Output Database (WIOD) and the OECD- ICIO database. We contribute to the literature by assessing the propagation of inflationary shocks through input linkages and by comparing whether results are consistent across the two databases. We take advantage of the temporal dimension of the dataset to document the extent to which the growth in GVCs has changed inflation dynamics over time. We pay particular attention to the increasing integration of euro area economies since the adoption of the common currency. We analyze to which extent the shortening of global value chains in the years following the Great Recession has changed the propagation of inflationary shocks in the international economy. 
+New technologies and lower trade barriers have given rise to increased interaction among sectors across countries. The growth of global value chains (GVCs) reflects the international integration of geographically fragmented global production processes and the creation of global production networks.
+In this paper, we build on two sectoral datasets, the World Input Output Database (WIOD) and the OECD-ICIO database to assess the role of global input-output linkages in the propagation of inflationary shocks in the international economy. 
+ %à faire: productivity shocks
+%More specifically, we study the role of global input-output linkages in transmitting oil prices shocks across economies.
+We take advantage of the temporal dimension of the dataset to document whether the growth in GVCs has changed inflation dynamics over time. We pay particular attention to the increasing integration of euro area economies since the adoption of the common currency and analyze whether the shortening of global value chains in the years following the Great Recession has changed the propagation of inflationary shocks. We provide evidence that, following an appreciation of the domestic currency, the direct effect of global inflationary shocks, i.e. the share of imported final and intermediate goods in domestic consumption, explains the bulk of the propagation of global shocks to domestic prices. By contrast, we find a limited role for the additional transmission of lower domestic input prices to other sectors of the domestic economy and to other countries occuring during subsequent production cycles. We contribute to the literature on global input-output linkages by assessing whether results are consistent across the two world input output databases (WIOD and ICIO).
+
 }
 
 {\small \bigskip \noindent \emph{JEL Classification}\/: C67, E31, F42, F62\\}
@@ -74,8 +76,20 @@ We build on two sectoral datasets, the World Input Output Database (WIOD) and th
 \end{abstract}
 
 \section{Introduction}
-Firms' participation in global value chains strengthens cross-country linkages via trade in intermediate inputs. In this paper, we use World Input-Output tables to investigate how production linkages give rise to nominal spillovers. We pay particular attention to Euro area countries, which have been increasingly participating in cross-border production chains, partly stimulated by the adoption of the common currency. The Euro area is indeed more involved in global production chains than other large economies, such as the United States and China (ECB, 2017) and has been less affected by global value chains shortening than other countries in the years following the Great Recession. 
+Firms' participation in global value chains strengthens cross-country linkages via trade in intermediate inputs. In this paper, we use World Input-Output tables (WIOT hereafter) to investigate how production linkages give rise to nominal spillovers. We pay particular attention to euro area countries. These countries have been increasingly participating in cross-border production chains following the adoption of the common currency. The euro area is indeed more involved in global production chains than other large economies, such as the United States and China \citep{ECB2016} and has been less affected by global value chains shortening than other countries in the years following the Great Recession. 
+
 \label{sec:intro}
+
+
+\section{Literature review}
+\label{sec:lit}
+%notre contribution à la science 
+A recent literature examines whether input-output linkages play a role in synchronizing inflation across countries.
+\cite{Auer2017} document that the cross-border propagation of cost shocks through input-output
+linkages contributes substantially to synchronizing producer price inflation across countries, combining data on sectoral domestic and international input trade from the World Input Output
+Database (WIOD) and producer price indices. By contrast, exchange rate movements and the degree of pricing-to-market are found to play no role in synchronizing inflation across countries.
+\cite{AntoundeAlmeida2016} examine whether sector pairs trading more intensively with one another display greater inflation synchronization.
+
 
 
 
@@ -84,9 +98,9 @@ Firms' participation in global value chains strengthens cross-country linkages v
 
 \subsection{The Input-Output model applied to a shock on production costs.}
 \label{subsec:io}
-The widely known Leontief's production model (or I-O model) breaks down the impact of a demand shock (Leontief 1951). The trade in value-added analysis reconciles international trade statistics with national I-O tables, which allows Leontief's analysis to be extended to an international context. A number of studies (Hummels, Ishii, and Yi 2001; Daudin et al. 2006; Daudin, Rifflart, and Schweisguth 2011; De Backer and Yamano 2012; Johnson and Noguera 2012; Koopman, Wang, and Wei 2014; Amador, Cappariello, and Stehrer 2015; Los et al. 2016) analyze the value added content of world trade. Some authors focus on Asia (Sato and Shrestha 2014) or on the euro area (Cappariello and Felettigh 2015). Bems and Johnson (2015) focus on competitiveness and compute real effective exchange rates weighted by the value-added trade structure to measure the impact of a change in relative prices on each country's value added.
-Leontief's production model has a dual: the price model. Some studies focus on the consequences of a change in production prices based on an I-O model or a SAM (Social Accounting Matrix) model in developing countries. Leontief's price model is broadly used in multi-sector, single-country macroeconomic models, for example, to measure the effect of a change in energy prices (Bournay and Piriou 2015; Sharify 2013). To the best of our knowledge, the dual production model of Leontief has only been adapted in an international context in Cochard et al. (2016) and Auer (2017). 
-This is an accounting approach to the effect of costs on prices ("cost-push inflation"). Firms' margins are assumed to be fixed. Prices only adjust to absorb cost changes, production techniques are fixed during successive production cycles and inputs substitution (for instance, between countries producing the same goods) is not accounted for, despite variations in relative price. The limitations of this approach are well known (Folloni and Miglierina 1994). In particular, and although the division of global value chains largely takes place within multinational firms, it considers a unique pricing system based on market prices and independent of firm strategies. Still, this method provides a measure of the vulnerability of each sector to price or productivity shocks (Acemoglu et al. 2012; Carvalho 2014). Hence, though unrealistic, it is useful for identifying which countries and sectors are under pressure to adjust their prices when subject to exogenous cost shocks. For instance, it can show which euro area countries benefited most from an appreciation of the euro or whether adopting the euro has increased interdependence between member countries.
+The widely known Leontief's production model (or I-O model) breaks down the impact of a demand shock \citep{LeontiefstructureAmericaneconomy1951}. The trade in value-added analysis reconciles international trade statistics with national I-O tables, which allows Leontief's analysis to be extended to an international context. A number of studies \citep{HummelsVerticalSpecializationWorldTrade2001,Daudincommerceexterieurvaleur2006,DaudinWhoproduceswhom2011, DeBackerInternationalComparativeEvidence2012,JohnsonAccountingintermediatesProduction2012,KoopmanTracingvalueaddeddouble2014, AmadorGlobalvaluechains2015,LosComment2016} analyze the value added content of world trade. Some authors focus on Asia \citep{Sato2014} or on the euro area \citep{CapparielloHowdoesforeign2015}. \cite{BemsDemandValueAdded2015} focus on competitiveness and compute real effective exchange rates weighted by the value-added trade structure to measure the impact of a change in relative prices on each country's value added.
+Leontief's production model has a dual: the price model. Some studies focus on the consequences of a change in production prices based on an I-O model or a SAM (Social Accounting Matrix) model in developing countries. Leontief's price model is broadly used in multi-sector, single-country macroeconomic models, for example, to measure the effect of a change in energy prices \citep{Bournaycomptabilitenationale2015,Sharify2013}. To the best of our knowledge, the dual production model of Leontief has only been adapted in an international context \cite{Cochard2016}. 
+This is an accounting approach to the effect of costs on prices ("cost-push inflation"). Firms' margins are assumed to be fixed. Prices only adjust to absorb cost changes, production techniques are fixed during successive production cycles and inputs substitution (for instance, between countries producing the same goods) is not accounted for, despite variations in relative price. The limitations of this approach are well known \citep{Folloni1994}. In particular, and although the division of global value chains largely takes place within multinational firms, it considers a unique pricing system based on market prices and independent of firm strategies. Still, this method provides a measure of the vulnerability of each sector to price or productivity shocks \citep{AcemogluNetworkOriginsAggregate2012,Carvalhomicromacroproduction2014}. Hence, though unrealistic, it is useful for identifying which countries and sectors are under pressure to adjust their prices when subject to exogenous cost shocks. For instance, it can show which euro area countries benefited most from an appreciation of the euro or whether adopting the euro has increased interdependence between member countries.
 
 
 \subsection{Applying the I-O model to a price model}
@@ -112,9 +126,7 @@ with $c$ the shock vector of dimension (1,n), which contains the direct effect o
 The price increase is passed on to the industries that use shocked products as intermediate consumptions. The higher the reliance on shocked inputs, the higher the increase in production prices.\\
 In a first step, the direct impact of the shock on each industry's output prices amounts to $\Delta^{1}P=cA$.\\
 In a second step, the shock is passed on all industries using these shocked inputs in their production processes. For $n$ production cycles, the increase in production prices amount to $\Delta^n P=cA^n$.\\
-As the technical coefficients are smaller than 1, the effect of the initial shock on input prices eventually wears out. Finally, the overall effect of the shock is equal to the sum of the initial shock and all the increases that occurred during the successive production cycles. The total effect of the shock on prices, S, is equal to: 
-	$S=c \!\!~\!\!\text{ }{{\left( I-A \right)}^{-1}}$\\
-With $\text{ }\!\!~\!\!\text{ }{{\left( I-A \right)}^{-1}}$ the inverse of Leontief's matrix, $S$ is a vector $(1, n)$ composed of the elements $s_{ij}$ measuring the total effect of the shock on the output price of country $i$'s sector $j$ and $C~$ the vector of an exogenous input price shock.\\
+As the technical coefficients are smaller than 1, the effect of the initial shock on input prices eventually wears out. Finally, the overall effect of the shock is equal to the sum of the initial shock and all the increases that occurred during the successive production cycles. The total effect of the shock on prices, S, is equal to $S=c \!\!~\!\!\text{ }{{\left( I-A \right)}^{-1}}$, with $\text{ }\!\!~\!\!\text{ }{{\left( I-A \right)}^{-1}}$ the inverse of Leontief's matrix; $S$ is a vector $(1, n)$ composed of the elements $s_{ij}$ measuring the total effect of the shock on the output price of country $i$'s sector $j$ and $C~$ is the vector of an exogenous input price shock.\\
 To compute which countries are most affected by a production cost shock through value-added and vertical trade flows in international trade, we need a large structural matrix that integrates input flows between sectors within each country and between countries. This matrix traces the sectoral and geographical origin of inputs produced worldwide. On the diagonal are the country blocks with flows of domestic transactions of intermediate goods and services between industries. The country blocks outside the diagonal represent international flows of intermediate goods and services via bilateral sectoral exports and imports. 
 
 
@@ -122,11 +134,11 @@ To compute which countries are most affected by a production cost shock through 
 \label{subsec:data}
 
 We use two sectoral datasets for international intput-output tables: (\textit{i}) the World Input Output Database (WIOD) and (\textit{ii}) the OECD- ICIO database.\\
-The World Input Output Database (WIOD) contains time series of inter-country input-output tables from 2000 to 2014. Input-output tables are designed to measure the interrelationships between the producers of goods and services (including imports) within an economy and the users of these same goods and services (including exports). World Input-Output tables (WIOT) connects national table with international trade flows. WIOD uses supply-use tables (SUT) from individual country’s national accounts as the starting point to integrate with bilateral trade statistics and derive the final symmetric world Input-Output table (WIOT). The WIOTs cover 43 countries, of which a majority belongs to the European Union, as well as the rest of the world, constructed as one economy. 
-These global Input-Output (I-O thereafter) tables cover around 85$\%$ of world GDP. They contain annual information for 56 industries, comprising primary, manufacturing goods and services sectors. Therefore, for each year a full country-sector input-output matrix allows to trace the importance of a supplying industry in one country for an industry in another country. The values in WIOTs are expressed in millions of U.S. dollars; market exchange rates were used for currency conversion (Timmer et al., 2015). All transactions values are in basic prices, reflecting all costs borne by the producer. These tables are accompanied by Socio-Economic Accounts which contain country sector panel data on employment (number of workers, compensation and share of labor in high, medium and low skilled occupations), capital stocks, gross output and value added).\\
+The World Input Output Database (WIOD) contains time series of inter-country input-output tables from 2000 to 2014. Input-output tables are designed to measure the interrelationships between the producers of goods and services (including imports) within an economy and the users of these same goods and services (including exports). World Input-Output tables (WIOT) connects national table with international trade flows. WIOD uses supply-use tables (SUT) from individual country's national accounts as the starting point to integrate with bilateral trade statistics and derive the final symmetric WIOT. The WIOTs cover 43 countries, of which a majority belongs to the European Union, as well as the rest of the world, constructed as one economy. 
+These global Input-Output (I-O thereafter) tables cover around 85$\%$ of world GDP. They contain annual information for 56 industries, comprising primary, manufacturing goods and services sectors. Therefore, for each year a full country-sector input-output matrix allows to trace the importance of a supplying industry in one country for an industry in another country. The values in WIOTs are expressed in millions of U.S. dollars; market exchange rates were used for currency conversion \citep{TimmerIllustratedUserGuide2015}. All transactions values are in basic prices, reflecting all costs borne by the producer. These tables are accompanied by Socio-Economic Accounts which contain country sector panel data on employment (number of workers, compensation and share of labor in high, medium and low skilled occupations), capital stocks, gross output and value added).\\
 The OECD ICIO database comes close to WIOD in terms of coverage. It builds on the OECD harmonized individual country I-O tables to provide matrices of inter-industrial flows of goods and services in current prices (USD million), for 64 economies and 34 industries, covering the years 1995 to 2011. \\
-The WIOT and OECD-ICIO databases have a number of distinguishing characteristics (see Timmer et al. 2015 for details). The difference most relevant for our analysis relates to the treatment of imports by use category. From national input-output statistics one can derive the use of products by industries and final consumers, but the country of origin of these products is unknown. Therefore, one has to breakdown product import statistics by category of use in the construction of WIOTs.\\
-The ICIO database relies on the so-called import proportionality assumption. The domestic I-O tables show transactions between domestic industries. As a complement to these tables, supplementary tables break down total imports by user (industry and the different categories of final demand). Some countries provide these import tables in conjunction with their I-O tables, but in other cases they are derived by the OECD. The main assumption used in creating these import matrices is the proportionality assumption, which assumes that the share of imports in any product consumed directly as intermediate consumption or final demand (except exports) is the same for all end-uses (see http://www.oecd.org/sti/ind/49894138.pdf). Various studies have found that this assumption can be misleading, as import shares vary significantly across end-uses. Feenstra and Jensen (2012) find that shares of imported materials may differ substantially across US industries. Based on Asian I-O tables, Puzzello (2012) finds that the use of the standard proportionality assumption understates the use of foreign intermediate inputs. Hence, the import proportionality assumption is likely to be particularly binding for developing countries, as the import content of exports is usually higher than the import content of products destined for domestic consumption. To address this issue, the WIOD database uses bilateral trade statistics to derive import shares for three end-use categories (intermediate use, final consumption and investment) by mapping detailed six-digit products based on extensive product description (see Dietzenbacher et al. 2013).
+The WIOT and OECD-ICIO databases have a number of distinguishing characteristics (see \cite{TimmerIllustratedUserGuide2015} for details). The difference most relevant for our analysis relates to the treatment of imports by use category. From national input-output statistics one can derive the use of products by industries and final consumers, but the country of origin of these products is unknown. Therefore, one has to breakdown product import statistics by category of use in the construction of WIOTs.\\
+The ICIO database relies on the so-called import proportionality assumption. The domestic I-O tables show transactions between domestic industries. As a complement to these tables, supplementary tables break down total imports by user (industry and the different categories of final demand). Some countries provide these import tables in conjunction with their I-O tables, but in other cases they are derived by the OECD. The main assumption used in creating these import matrices is the proportionality assumption, which assumes that the share of imports in any product consumed directly as intermediate consumption or final demand (except exports) is the same for all end-uses  \footnote{See http://www.oecd.org/sti/ind/49894138.pdf for details.}. Various studies have found that this assumption can be misleading, as import shares vary significantly across end-uses. \cite{FeenstraOffshoringUS2012} find that shares of imported materials may differ substantially across U.S. industries. Based on Asian I-O tables, \cite{Puzzello2012} finds that the use of the standard proportionality assumption understates the use of foreign intermediate inputs. Hence, the import proportionality assumption is likely to be particularly binding for developing countries, as the import content of exports is usually higher than the import content of products destined for domestic consumption. To address this issue, the WIOD database uses bilateral trade statistics to derive import shares for three end-use categories (intermediate use, final consumption and investment) by mapping detailed six-digit products based on extensive product description \citep{ DietzenbacherConstructionWorldInputOutput2013}.
 
 \subsection{Nominal exchange rate shock}
 \label{subsec:chocchange}
@@ -161,7 +173,7 @@ With $a_{kl}a_{ij}$ the quantity of inputs from the country's sector needed to d
 For the shocked country, the shock has a disinflationary effect on domestic production prices. In national currency, the production prices of imported inputs fall by $\widetilde{c_i}=-\frac{c_{\$i}}{1+{c_{\$i}}}$, or by 0.5 with $c_{\$i}=1$. \\
 This decline is spread to all sectors during the production cycle. In sector $j$ of the shocked country $i$, this fall amounts in national currency to: \\
 \begin{eqnarray*}
- \Delta^1p_{ij}=\underset{l=1}{\overset{l=n}{\mathop \sum }}\,{\tilde{c}_{i}}*a_{ij}a_{1l}}+\ldots +\underset{l=1}{\overset{{l}=n}{\mathop \sum }}\,{{\tilde{c}}_i}*a_{ij}a_{kl}+\underset{l=1}{\overset{l={n}}{\mathop \sum }}\,{{{\tilde{c}}}_{i}}*{{a}_{{ij}}}{{{a}}_{pl}}=\left( -\frac{{{c}_{\$i}}}{1+c_{\$i}}}\right)*\underset{\begin{matrix}k=1\\k\neq i\\\end{matrix}}{\overset{{k}={p}}{\mathop\sum}}\,\left[\underset{l=1}{\overset{l=n}{\mathop\sum}}\,{a_{ij}a_{kl}\right] \\
+\Delta^1p_{ij}=\underset{l=1}{\overset{l=n}{\mathop \sum}}\,{\tilde{c}_{i}}*a_{ij}a_{1l}+\ldots +\underset{l=1}{\overset{{l}=n}{\mathop \sum }}\,{{\tilde{c}}_i}*a_{ij}a_{kl}+\underset{l=1}{\overset{l={n}}{\mathop \sum }}\,{{{\tilde{c}}}_{i}}*{{a}_{{ij}}}{{{a}}_{pl}}=\left( -\frac{{{c}_{\$i}}}{1+c_{\$i}}\right)*\underset{\begin{matrix}k=1\\k\neq i\\\end{matrix}}{\overset{{k}={p}}{\mathop\sum}}\,\left[\underset{l=1}{\overset{l=n}{\mathop\sum}}\,a_{ij}a_{kl}\right] 
 \end{eqnarray*}
 This level shock can be converted into dollars: \\
 \begin{eqnarray}
@@ -174,21 +186,20 @@ Let us first look at the shock from the perspective of countries that import inp
 Let ${{c}_{\$}}$ be the vector of change in production prices in dollars following the 100$\%$ appreciation of the currency of country $i~$ against all other currencies, corresponding to an absolute shock of $+1$ dollar for all sectors in country $i$. \\
 Hence,
 \begin{eqnarray*}
- c_{\$}=\left(0\ldots0\ldots{{c}}_{\${ij}}}\ldots{{{c}}_{\${ik}}} 0\ldots0\right)$ with $c_{\${ij}}=c_{\$ik}}=c_{\$i}}=1
- \end{eqnarray*}
+ c_\$=\left(0\ldots0\ldots c_{\$ij}\ldots c_{\$ik} 0\ldots0\right)
+\end{eqnarray*}
+with $c_{\$ij}=c_{\$ik}=c_{\$i}=1$
 for all sectors $j$ and $k$ in the shocked country $i$.\\
-Building on equation Equation \ref{eq:eq1}, we write the direct impact of the exchange rate shock on the other countries as the product of the shock vector $c_{\$}$ and a matrix $B$. $B$ builds on the large matrix $A$ of technical coefficients, but only keeps the coefficients of each country's sectoral inputs imported from the shocked country $i$. The other coefficients are replaced by 0, including those of the block of country $i$ concerning the domestic inputs of the shocked country $i$. The direct impact of the appreciation of a currency against the dollar on the price of inputs is equal to $c_{\$}B$
- with
- \begin{eqnarray}
-c_{\$}B=\left(0\ldots{{{c}}_{\$i}}\ldots 0\right)\left(\begin{matrix}0&\cdots&0\\{{{a}}_{1l}}}{{\text{a}}_{{ij}}}&0&{{{a}}_{{nl}}}{{{a}}_{{ij}}}\\0&\cdots&0\\\end{matrix}\right) 	
- \label{eq:eq3}
- \end{eqnarray}
+Building on Equation \ref{eq:eq1}, we write the direct impact of the exchange rate shock on the other countries as the product of the shock vector $c_{\$}$ and a matrix $B$. $B$ builds on the large matrix $A$ of technical coefficients, but only keeps the coefficients of each country's sectoral inputs imported from the shocked country $i$. The other coefficients are replaced by 0, including those of the block of country $i$ concerning the domestic inputs of the shocked country $i$. The direct impact of the appreciation of a currency against the dollar on the price of inputs is equal to $c_{\$}B$ with
+\begin{eqnarray}
+{c_{\$}}B=\left(0\ldots c_{\$i}\ldots 0\right)\left(\begin{matrix}0&\cdots&0\\a_{1l}a_{ij}&0&a_{nl}a_{ij}\\0&\cdots&0\\\end{matrix}\right) 	
+\label{eq:eq3}
+\end{eqnarray}
 where each ${{{a}}_{{kl}}}{{{a}}_{{ij}}}$ element of the line block represents the technical coefficient related to imports of inputs by sector $l$ in country $k$ (with $k~\ne ~i$) from sector $j$ in country $i$.\\
 Let us now consider the shock from the perspective of the shocked country $i$.\\
 Define ${{\tilde{c}}_{\$}}$ the vector of change in input prices imported by country i, in dollars, $( -c_{\$i}\ldots0\ldots-c_{\$i})$. \\
-From Equation \ref{eq:eq2}, we can write the direct impact for country $i$ of the fall in input prices from the rest of the world. The direct impact corresponds to the product of the shock vector ${\tilde{c}}$  and a matrix ${\tilde{B}}$. $\widetilde{{B }$ builds on the large matrix A of which only the country blocks of the inputs imported by country $i$ from other countries have been retained. The other coefficients are replaced by 0, including those of the block of country $i$ concerning the domestic inputs of the shocked country $i$. \\
-The direct impact of the appreciation of the shocked country $i$ on the price of its inputs corresponds, in dollars, to ${{\tilde{c}}_{\$}}\text{\tilde{B}}$, with: \\
-
+From Equation \ref{eq:eq2}, we can write the direct impact for country $i$ of the fall in input prices from the rest of the world. The direct impact corresponds to the product of the shock vector ${\tilde{c}}$  and a matrix ${\tilde{B}}$. ${\tilde{B}}$ builds on the large matrix A of which only the country blocks of the inputs imported by country $i$ from other countries have been retained. The other coefficients are replaced by 0, including those of the block of country $i$ concerning the domestic inputs of the shocked country $i$. \\
+The direct impact of the appreciation of the shocked country $i$ on the price of its inputs corresponds, in dollars, to ${{\tilde{c}}_{\$}}{\tilde{B}}$ with: 
 \begin{eqnarray}
 {{\tilde{c}}_{\$}}{\tilde{B}}=\left(-{{{c}}_{\$i}}\ldots0\ldots-{{{c}}_{\$i}}\right)\left(\begin{matrix}0&\ldots{{{a}}_{{i}1}}{{{a}}_{11}}\ldots&0\\0&0&0\\0&\ldots{{\text{a}}_{\text{il}}}{{{a}}_{{pn}}}\ldots&0\\\end{matrix}\right) 
 \label{eq:eq4}
@@ -198,7 +209,7 @@ The direct effect on the world is therefore the sum of these vectors from equati
 An input price shock then spreads to all sectors in all countries via the global intersectoral exchanges transcribed by the matrix of technical coefficients of the large matrix A. This process will be repeated several times, until the effects are completely exhausted.
 In the end, the total effect of the dollar shock is equal to the shock itself, incremented by changes in input prices due to changes in imported input prices, and by all marginal changes in output prices during the production processes, i. e.:\\
 \begin{eqnarray*}
-	{{S}_{\$}}=\Delta{{P}_{\$}}={{c}_{\$}}+({{c}_{\$}}{B}+{{{\tilde{c}}}_{\$}}{\tilde{B}}\right)+\left({{c}_{\$}}{B}+{{{\tilde{c}}}_{\$}}{\tilde{B}}\right){A}+\left({{c}_{\$}}{B}+{{{\tilde{c}}}_{\$}}{\tilde{B}}\right){{{A}}^{2}}+\ldots+\left({{c}_{\$}}{B}+{{{\tilde{c}}}_{\$}}{\tilde{B}}\right){{{A}}^{{n}}} \\
+	S_\$=\Delta{{P}_{\$}}=c_{\$}+(c_{\$}B+{{{\tilde{c}}}_{\$}}{\tilde{B}})+\left({{c}_{\$}}{B}+{{{\tilde{c}}}_{\$}}{\tilde{B}}\right){A}+\left({{c}_{\$}}{B}+{{{\tilde{c}}}_{\$}}{\tilde{B}}\right){{{A}}^{2}}+\ldots+\left({{c}_{\$}}{B}+{{{\tilde{c}}}_{\$}}{\tilde{B}}\right)A^n \\
  \end{eqnarray*}
  \begin{eqnarray}
 {{S}_{\$}}={{c}_{\$}}+({{c}_{\$}}B+{{\tilde{c}}_{\$}}\tilde{B})*{{(I-A)}^{-1}}	
@@ -206,7 +217,9 @@ In the end, the total effect of the dollar shock is equal to the shock itself, i
  \end{eqnarray}
 With ${{S}_{\$}}$ the total impact vector composed of the elements ${{{s}}_{\$ij}}$ showing the total impact of the shock on country $i$'s sector $j$. \\
 Equation \ref{eq:eq5} gives the absolute evolution of input prices in international currency. To obtain the absolute evolution of the input prices of the shocked country in national currency, we remove the exchange rate shock and multiply this balance by the scalar of conversion equal to $\frac{1}{1+{{{c}}_{\$i}}}=0.5~$, since according to our hypotheses ${{{c}}_{\$i}}$=1:
-	$\text{S}=\left( \frac{1}{1+{{c}_{\$i}}}\right)*\left({{S}_{\$}}-{{c}_{\$}}\right)$\\
+\begin{eqnarray*}
+	S=\left( \frac{1}{1+{{c}_{\$i}}}\right)*\left({{S}_{\$}}-{{c}_{\$}}\right)
+\end{eqnarray*}
 With $S$ a vector in shocked currency for all countries of the world. $S$ represents the overall impact of a shock on prices in each branch of each country. The average effect of the shock on output prices in each country $\bar{S}$ is computed as a weighted average of the sectoral effects of the shock. For each country, we compute a weighted average of the shock effects, based on three types of aggregation: the sectoral structure of output, the sectoral structure of exports and the sectoral structure of household consumption.\\
 Hence 
 \begin{eqnarray*}
@@ -218,29 +231,39 @@ The second type of aggregation relies on the sectoral structure of exports. $\ov
  \begin{eqnarray*}
 \overline{s_{i}^{X}}=\underset{j=1}{\overset{n}{\mathop \sum }}\,\frac{{{s}_{ij}}.{{x}_{ij}}}{{{x}_{i}}},
  \end{eqnarray*} 
-with ${{{x}}_{{ij}}}$the exports of industry $j$ in country $i$ and ${{{x}}_{{i}}}$ the total exports of country $i$. \\
+with $x_{ij}$the exports of industry $j$ in country $i$ and $x_{i}$ the total exports of country $i$. \\
 The last type of aggregation relies on the sectoral structure of household consumption. $\overline{s_{i}^{HC}}$ provides the average impact of the shock on the consumer price of country $i$. 
  \begin{eqnarray*}
 \overline{s_{i}^{HC}}=\underset{j=1}{\overset{n}{\mathop \sum }}\,\frac{{{s}_{ij}}.h{{c}_{ij}}}{h{{c}_{i}}}
  \end{eqnarray*} 
-with ${h}{{{c}}_{{ij}}}$ the consumption of industry $j$ in country $i$ and ${h}{{{c}}_{{i}}}$ the total household consumption of country $i$. 
+with $hc_{ij}$ the consumption of industry $j$ in country $i$ and ${h}{{{c}}_{{i}}}$ the total household consumption of country $i$. 
 
 \section{The impact of exchange rates fluctuations on consumer prices}
 \label{sec:prixconso}
 
 
+\subsection{The share of imported final and intermediate goods in domestic consumption}
+
+
+
+\begin{figure}[!h]
+\centering
+\caption{\footnotesize{\textbf{Imported intermediate inputs and consumer goods to consumption}}}
+\begin{tabular}{c}
+\includegraphics[width=6.0in, height=5in]{Graph_ratioimp_wiod_2014}\\
+\floatfoot{Source: WIOD}.
+\end{tabular}
+\label{fig:ratioimp}
+\end{figure}
+
+Figure \ref{fig:ratioimp} depicts the imported  ratio, defined as the ratio of imported final and intermediate goods to household domestic consumption.
+Not surprisingly, small countries, such as Malta, Luxembourg and Ireland,  have the highest imported ratio (above 15$\%$), while larger countries, such as Japan, the U.S. and Australia, have a much lower ratio of imported final and intermediate goods.
+The ratio increased over the last decade. 
+
+
 \section{Conclusion}
 \label{sec:ccl}
-
-
 \newpage
-\bibliography{Papier transmission des chocs en VA}
-
-
-
-
-
-
-
+\bibliography{PapiertransmissiondeschocsenVA}
 
 \end{document}

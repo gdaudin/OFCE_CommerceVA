@@ -29,10 +29,9 @@ if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\De
 use "$dir/Bases/`source'_ICIO_`yrs'.dta"
 if "`source'"=="TIVA" {
 	drop if v1 == "VA+TAXSUB" | v1 == "OUT"
-	
-	
-	generate pays = strlower(substr(v1,1,strpos(v1,"_")-1))
-
+	gen pays=upper(substr(v1,1,3))
+	gen secteur = upper(substr(v1,5,.))
+	order pays secteur
 }
 
 
@@ -41,6 +40,9 @@ if "`source'"=="WIOD" {
 	 
 	drop *57 *58 *59 *60 *61
 	rename Country pays
+	rename IndustryCode secteur
+	order pays secteur
+	sort pays secteur
 	drop if pays=="TOT"
 	* on supprime les lignes total intermediate conso à GO de la base wiod_icio
 }
@@ -53,13 +55,24 @@ keep pays $var_entree_sortie
 
 foreach var of varlist $var_entree_sortie {
 *	On cherche à enlever les auto-consommations intermédiaires
-	if "`source'" == "TIVA" local pays_colonne = substr("`var'",1,3)
-	if "`source'" == "WIOD" local pays_colonne = substr("`var'",2,3)
+	if "`source'" == "TIVA" local pays_colonne = upper(substr("`var'",1,3))
+	if "`source'" == "WIOD" local pays_colonne = upper(substr("`var'",2,3))
 	
 	replace `var' = 0 if pays=="`pays_colonne'"
 	
-	local pays_colonne = upper("`pays_colonne'")
+	if strpos("$china","`pays_colonne'")!=0  {
+			foreach i of global china {	
+			replace `var' = 0 if pays == "`i'"
+		}
+	}
 	
+	
+	if strpos("$mexique","`pays_colonne'")!=0 {
+			foreach i of global mexique {	
+			replace `var' = 0 if pays == "`i'"
+		}
+	}
+		
 	if "`hze'"=="hze_yes" & strpos("$eurozone","`pays_colonne'")!=0 {
 	
 		*display "turf"
@@ -73,7 +86,6 @@ foreach var of varlist $var_entree_sortie {
 }
 
 
-
 *somme des CI pour chaque secteur de chaque pays
 collapse (sum) $var_entree_sortie
 
@@ -83,7 +95,7 @@ display "after collapse"
 *obtention de deux lignes, l'une de CI, l'autre de prod pour chaque secteur, issue de la base  `source'_`yrs'_OUT
 append using "$dir/Bases/`source'_`yrs'_OUT.dta"
 
-*transpositin en colonne, puis création d'un ratio de CI importées par secteurs 
+*transpositin en colonne, puis création d'un ratio de CI importées par secteur 
 xpose, clear varname
 rename v1 ci_impt
 rename v2 prod
@@ -254,6 +266,8 @@ if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\De
 
 */
 
+
+
 foreach source in   WIOD  TIVA {
 
 
@@ -268,7 +282,7 @@ foreach source in   WIOD  TIVA {
 
 
 
-
+*	foreach i of numlist 2011  {
 	foreach i of numlist `start_year' (1)`end_year'  {
 		
 		imp_inputs_par_sect `i' `source' hze_not
@@ -298,7 +312,7 @@ foreach source in  WIOD  TIVA {
 
 
 
-
+*	foreach i of numlist 2011  {
 	foreach i of numlist `start_year' (1)`end_year'  {
 		
 		imp_inputs `i' `source' HC hze_not

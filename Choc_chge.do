@@ -486,6 +486,10 @@ foreach source in   WIOD {
 	    }
 	order *, alphabetic
 	order shockEUR1 shockEAS1
+	merge 1:1 _n using "$dir/Bases/csv_`source'"
+	drop _merge
+	drop p_shock
+	order c s
 	save "$dir/Results/Devaluations/`source'_C_`i'_exch.dta", replace	
     }
 

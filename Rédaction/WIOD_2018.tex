@@ -52,10 +52,11 @@
 \maketitle
 \begin{abstract}
 {\small \noindent
-New technologies and lower trade barriers have given rise to increased interaction among sectors across countries. The growth of global value chains (GVCs) reflects the international integration of geographically fragmented global production processes and the creation of global production networks.
-In this paper, we build on two sectoral datasets, the World Input Output Database (WIOD) and the OECD-ICIO database to assess the role of global input-output linkages in the propagation of inflationary shocks in the international economy. 
+Firms' participation in global value chains strengthens cross-country linkages via trade in intermediate inputs. 
+In this paper, we build on two sectoral world input-output datasets  to assess the role of global input-output linkages in the propagation of inflationary shocks in the international economy. 
  %à faire: productivity shocks More specifically, we study the role of global input-output linkages in transmitting oil prices shocks across economies.
-We take advantage of the temporal dimension of the dataset to document whether the growth in GVCs has changed inflation dynamics over time. We pay particular attention to the increasing integration of euro area economies since the adoption of the common currency and analyze whether the shortening of global value chains in the years following the Great Recession has changed the propagation of inflationary shocks. We provide evidence that, following an appreciation of the domestic currency, the direct effect of global inflationary shocks, i.e. the share of imported final and intermediate goods in domestic consumption, explains the bulk of the propagation of global shocks to domestic prices. By contrast, we find a limited role for the additional transmission of lower domestic input prices to other sectors of the domestic economy and other countries occuring during subsequent production cycles. We contribute to the literature on global input-output linkages by assessing whether results are consistent across the different world input output databases available, namely WIOD and OECD-ICIO.
+We examine the increasing integration of the European economies since the adoption of the common currency and investigate whether the shortening of global value chains in the wake of the Great Recession has changed the propagation of global inflationary shocks. We provide evidence that, following an appreciation of the domestic currency, the direct effect of global inflationary shocks, i.e. the share of imported final and intermediate goods in domestic consumption, explains the bulk of the propagation of global shocks to domestic consumer prices. By contrast, we find a limited role for the additional transmission of lower domestic input prices to other sectors of the domestic economy and other countries occuring during subsequent production cycles. Finally, building on sectoral data, we examine which sectors experience higher spillovers from global inflationary shocks.
+%We also contribute to the literature on global input-output linkages by assessing whether results are consistent across the different world input output databases available (WIOD and TiVA).
 }
 
 {\small \bigskip \noindent \emph{JEL Classification}\/: C67, E31, F42, F62\\}
@@ -63,29 +64,32 @@ We take advantage of the temporal dimension of the dataset to document whether t
 \end{abstract}
 
 \section{Introduction}
-Firms' participation in global value chains strengthens cross-country linkages via trade in intermediate inputs. In this paper, we use World Input-Output tables (WIOT hereafter) to investigate how production linkages give rise to nominal spillovers. We pay particular attention to euro area countries. These countries have been increasingly participating in cross-border production chains following the adoption of the common currency. The euro area is indeed more involved in global production chains than other large economies, such as the United States and China \citep{ECB2016} and has been less affected by global value chains shortening than other countries in the years following the Great Recession. \\
+Trade liberalization and lower transportation and communication costs facilitated the fragmentation of production beyond national borders. As a result, firms' participation in global value chains strengthens cross-country linkages via trade in intermediate inputs. 
+In the presence of imported intermediate goods, fluctuations in the prices of imports that are themselves driven by exchange rate movements affect the domestic cost of production and, ultimately, domestic consumer prices. 
+As global value chains contribute to explaining the transmission of macroeconomic shocks across countries, a better understanding of trade spillovers has become paramount.  
+In this paper, we build on the World Input-Output tables (WIOT hereafter) to investigate how production linkages give rise to nominal spillovers. 
+We examine the extent to which domestic consumer prices react to changes in imported intermediate and final goods.
+We pay particular attention to euro area countries, which have been increasingly participating in cross-border production chains following the adoption of the common currency. The euro area is indeed more involved in global production chains than other large economies, such as the United States and China \citep{ECB2016} and has been less affected by global value chains shortening than other countries in the years following the Great Recession. 
+Building on sectoral data from the World InputOutput Database, we examine which sectors experience higher spillovers from global inflationary shocks.\\
+To preview our findings, we find that...\\
 The remainder of the paper is organized as follows. Section \ref{sec:lit} briefly describes the related literature. Section \ref{sec:metho} presents the methodology and the data sources.  Section \ref{sec:prixconso} presents the impact of an exchange rate shock to consumer prices. 
 Section \ref{sec:ccl} provides some concluding remarks and avenues for future research.
 
 \label{sec:intro}
 
 
-\section{Literature review}
+\section{Related literature}
 \label{sec:lit}
-This paper is related to two strands of literature: (\textit{i}) the role of trade in intermediate inputs in inflation comovement accross countries and (\textit{ii}) 
-
-\paragraph{Input-output linkages and inflation comovement accross countries}
 A recent literature examines whether trade in intermediate inputs is an important source of inflation synchronization across countries.
-\cite{Goldberg2010} show that imported intermediate inputs are the dominant channel through wich changes in import prices pass to CPI inflation.
 \cite{Auer2017} document that the cross-border propagation of cost shocks through input-output
 linkages contributes substantially to synchronizing producer price inflation across countries, combining data on sectoral domestic and international input trade from the World Input Output
 Database (WIOD) and producer price indices. By contrast, exchange rate movements and the degree of pricing-to-market are found to play no role in synchronizing inflation across countries.
-\cite{AntoundeAlmeida2016} show that the cross-border sectors pairs which trade more intensively with each other in intermediate inputs display higher PPI inflation correlation, indicating  price spillovers along the global supply chain.
-\paragraph{}
-\paragraph{Our contribution to the literature}
-We improve on the literature on various respects. First, while most of the literature focusses on production prices, we examine the role of inptut-output linkages in propagating shocks to consumer prices. Secondly, we analyze to what extent sectoral inflation reacts to global inflationnary shocks by examining the main components of consumer prices (manufacturing goods, services, food, energy). Thirdly, we assess whether results are robust to the use of different databases (WIOD versus OECD-ICIO). Finally, we provide evidence that, following an appreciation of the domestic currency, the direct effect of global inflationary shocks, i.e. the share of imported final and intermediate goods in domestic consumption, explains the bulk of the propagation of global shocks to domestic prices. By contrast, we find a limited role for the additional transmission of lower domestic input prices to other sectors of the domestic economy and other countries occuring during subsequent production cycles.
-
-
+\cite{AntoundeAlmeida2016} show that the cross-border sectors pairs which trade more intensively with each other in intermediate inputs display higher PPI inflation correlation, indicating  price spillovers along the global supply chain.\\
+Our research is also related to the literature on exchange rate pass-through, in particular in an environment where intermediate inputs account for a large share of imports. For instance,  \cite{Goldberg2010} show that imported intermediate inputs are the dominant channel through wich changes in import prices pass to CPI inflation.\\
+We improve on the literature on various respects. First, while most of the literature focusses on production prices, we examine the role of input-output linkages in propagating shocks to consumer prices. 
+Secondly, we analyze how sectoral inflation reacts to global inflationnary shocks by examining the main components of consumer prices (manufacturing goods, services, food and energy).  We draw on the World InputOutput Database to examine which sectors experience higher spillovers from global inflationary shocks.
+Thirdly, we provide evidence that, following an appreciation of the domestic currency, the direct effect of global inflationary shocks, i.e. the share of imported final and intermediate goods in domestic consumption, explains the bulk of the propagation of global shocks to domestic prices. By contrast, we find a limited role for the additional transmission of lower domestic input prices to other sectors of the domestic economy and other countries occuring during subsequent production cycles.
+% à voir si on le fait: We assess whether results are robust to the use of different databases (WIOD versus OECD-ICIO). 
 
 \section{Methodology }
 \label{sec:metho}
@@ -127,15 +131,73 @@ To compute which countries are most affected by a production cost shock through 
 \subsection{Data and measurement issues}
 \label{subsec:data}
 
-We use two sectoral datasets for international intput-output tables: (\textit{i}) the World Input Output Database (WIOD) and (\textit{ii}) the OECD- ICIO database.\\
-\paragraph{WIOD}
-The World Input Output Database (WIOD) contains time series of inter-country input-output tables from 2000 to 2014. Input-output tables are designed to measure the interrelationships between the producers of goods and services (including imports) within an economy and the users of these same goods and services (including exports). World Input-Output tables (WIOT) connects national table with international trade flows. WIOD uses supply-use tables (SUT) from individual country's national accounts as the starting point to integrate with bilateral trade statistics and derive the final symmetric WIOT. The WIOTs cover 43 countries, of which a majority belongs to the European Union, as well as the rest of the world, constructed as one economy. 
-These global Input-Output (I-O thereafter) tables encompass major advanced and emerging countries and cover around 85$\%$ of world GDP. They contain annual information for 56 industries, comprising primary, manufacturing goods and services sectors. Therefore, for each year a full country-sector input-output matrix allows to trace the importance of a supplying industry in one country for an industry in another country. The values in WIOTs are expressed in millions of U.S. dollars; market exchange rates were used for currency conversion \citep{TimmerIllustratedUserGuide2015}. All transactions values are in basic prices, reflecting all costs borne by the producer. These tables are accompanied by Socio-Economic Accounts which contain country sector panel data on employment (number of workers, compensation and share of labor in high, medium and low skilled occupations), capital stocks, gross output and value added).
-\paragraph{OECD-ICIO}
-The OECD ICIO database comes close to WIOD in terms of coverage. It builds on the OECD harmonized individual country I-O tables to provide matrices of inter-industrial flows of goods and services in current prices (USD million), for 64 economies and 34 industries, covering the years 1995 to 2011. 
-\paragraph{Major differences between the two databases}
-The WIOT and OECD-ICIO databases have a number of distinguishing characteristics (see \cite{TimmerIllustratedUserGuide2015} for details). The difference most relevant for our analysis relates to the treatment of imports by use category. From national input-output statistics one can derive the use of products by industries and final consumers, but the country of origin of these products is unknown. Therefore, one has to breakdown product import statistics by category of use in the construction of WIOTs.\\
-The ICIO database relies on the so-called import proportionality assumption. The domestic I-O tables show transactions between domestic industries. As a complement to these tables, supplementary tables break down total imports by user (industry and the different categories of final demand). Some countries provide these import tables in conjunction with their I-O tables, but in other cases they are derived by the OECD. The main assumption used in creating these import matrices is the proportionality assumption, which assumes that the share of imports in any product consumed directly as intermediate consumption or final demand (except exports) is the same for all end-uses  \footnote{See http://www.oecd.org/sti/ind/49894138.pdf for details.}. Various studies have found that this assumption can be misleading, as import shares vary significantly across end-uses. \cite{FeenstraOffshoringUS2012} find that shares of imported materials may differ substantially across U.S. industries. Based on Asian I-O tables, \cite{Puzzello2012} finds that the use of the standard proportionality assumption understates the use of foreign intermediate inputs. Hence, the import proportionality assumption is likely to be particularly binding for developing countries, as the import content of exports is usually higher than the import content of products destined for domestic consumption. To address this issue, the WIOD database uses bilateral trade statistics to derive import shares for three end-use categories (intermediate use, final consumption and investment) by mapping detailed six-digit products based on extensive product description \citep{ DietzenbacherConstructionWorldInputOutput2013}.
+The world input-output table is an extension of the national input-output tables. Input-output tables measure the relationships between the producers of goods and services (including imports) within an economy and the users of these goods and services (including exports). Hence, the national tables specify, for each industry, the use of the product, being for either intermediate or final use. The latter includes domestic final use (consumption and investment) and exports. The world input-output table shows in which foreign industry a product was produced, and which foreign industry or final user uses the exports of a given country. Hence, world input-output tables enable us to identify how much international trade is associated with the consumption of a particular final product. \\
+The use of national input-output tables as part of a global framework is challenging for two reasons. First, national input-output tables vary widely in terms of detail and scope, and are therefore not fully consistent. Second, the availability of national input-output tables for a is limited, especially for developing economies. 
+Two sectoral datasets for international intput-output tables are available: (\textit{i}) the World Input Output Database (WIOD) and (\textit{ii}) the OECD-ICIO database TiVA.\\
+\paragraph{The World Input Output Database (WIOD)}
+The World Input Output Database (WIOD) contains time series of inter-country input-output tables from 2000 to 2014.  World Input-Output tables (WIOT) connect national tables with international trade flows. WIOD uses supply-use tables (SUT) from individual country's national accounts as the starting point to integrate with bilateral trade statistics and derive the final symmetric WIOT. The WIOD covers 43 countries, of which a majority belongs to the European Union, as well as the rest of the world, constructed as one economy. 
+These global Input-Output (I-O thereafter) tables encompass major advanced and emerging countries and cover around 85$\%$ of world GDP. They contain annual information for 56 industries, comprising primary, manufacturing goods and services sectors. Therefore, for each year a full country-sector input-output matrix traces the importance of a supplying industry in one country for an industry in another country. The values in WIOTs are expressed in millions of U.S. dollars; market exchange rates were used for currency conversion \citep{TimmerIllustratedUserGuide2015}. % All transactions values are in basic prices, reflecting all costs borne by the producer. These tables are accompanied by Socio-Economic Accounts which contain country sector panel data on employment (number of workers, compensation and share of labor in high, medium and low skilled occupations), capital stocks, gross output and value added).
+Table \ref{tab:wiod} shows the economies included in the WIOD.
+ 
+ 
+\begin{table}[!h]
+\begin{threeparttable}
+\centering
+\centering
+\caption{\small{\textbf{Economies included in the World Input-Output Database}}}
+\small
+\begin{tabular}{ll}
+\hline\hline
+Europe & Austria, Belgium, Bulgaria, Croatia, Cyprus, Czech Republic, Denmark,\\
+& Estonia, Finland, France, Germany, Greece, Hungary, Ireland, Italy,\\
+& Latvia, Lithuania, Luxembourg, Malta, Netherlands, Norway, Poland,\\
+&Portugal, Romania, Slovakia, Slovenia, Spain, Sweden, Switzerland,\\
+& United Kingdom\\
+North  America& Canada, United States\\
+Latin America & Brazil, Mexico \\
+Asia-Pacific & Australia, China, India, Indonesia, Japan, Korea, Taiwan\\
+Other & Russia, Turkey\\
+\hline\hline
+\end{tabular} 
+\label{tab:wiod}
+\end{threeparttable}
+\end{table} 
+
+\paragraph{The Statistics on Trade in Value Added (TiVA) database}
+The TiVA database is compiled by the OECD and the WTO. It builds on the OECD harmonized individual country I-O tables to provide matrices of inter-industrial flows of goods and services in current prices (USD million), for 64 economies (i.e. 35 OECD Countries, 28 non-OECD economies and the Rest of the world) and 34 industries, covering the years 1995 to 2011. 
+Table \ref{tab:tiva} shows the economies included in the TiVA database.
+
+\begin{table}[!h]
+\begin{threeparttable}
+\centering
+\centering
+\caption{\small{\textbf{Economies included in the TiVA Database}}}
+\small
+\begin{tabular}{ll}
+\hline\hline
+Europe & Austria, Belgium, Bulgaria, Croatia, Cyprus, Czech Republic, Denmark,\\
+& Estonia, Finland, France, Germany, Greece, Hungary, Iceland, Ireland, Italy,\\
+& Latvia, Lithuania, Luxembourg, Malta, Netherlands, Norway, Poland,\\
+&Portugal, Romania, Slovakia, Slovenia, Spain, Sweden, Switzerland,\\
+& United Kingdom\\
+North  America& Canada, United States\\
+Latin America & Argentina, Brazil, Chile, Colombia, Costa Rica, Mexico, Peru\\
+Asia-Pacific & Australia, Cambodia, China, Hong Kong SAR, India, Indonesia, Japan, Korea,\\ &Malaysia, New Zealand, Philippines, Singapore, Taiwan, Thailand, Viet Nam\\
+Other & Brunei, Israel, Morocco, Russia, Saudi Arabia, South Africa, Tunisia, Turkey\\
+\hline\hline
+\end{tabular} 
+\label{tab:tiva}
+\end{threeparttable}
+\end{table} 
+
+
+\paragraph{Major differences between the WIOD and TiVA databases}
+The WIOD and TiVA databases have a number of distinguishing characteristics (see \cite{TimmerIllustratedUserGuide2015} for details). The difference most relevant for our analysis relates to the treatment of imports by use category. From national input-output statistics one can derive the use of products by industries and final consumers, but the country of origin of these products is unknown. Therefore, one has to breakdown product import statistics by category of use in the construction of WIOTs.\\
+The TiVA database relies on the so-called import proportionality assumption. The domestic I-O tables show transactions between domestic industries. As a complement to these tables, supplementary tables break down total imports by user (industry and the different categories of final demand). Some countries provide these import tables in conjunction with their I-O tables, but in other cases they are derived by the OECD. The main assumption used in creating these import matrices is the proportionality assumption, which assumes that the share of imports in any product consumed directly as intermediate consumption or final demand (except exports) is the same for all end-uses  \footnote{See http://www.oecd.org/sti/ind/49894138.pdf for details.}.\\
+Various studies have found that this assumption can be misleading, as import shares vary significantly across end-uses. \cite{FeenstraOffshoringUS2012} find that shares of imported materials may differ substantially across U.S. industries. Based on Asian I-O tables, \cite{Puzzello2012} finds that the use of the standard proportionality assumption understates the use of foreign intermediate inputs. Hence, the import proportionality assumption is likely to be particularly binding for developing countries, as the import content of exports is usually higher than the import content of products destined for domestic consumption.\\
+To address this issue, the WIOD database uses bilateral trade statistics to derive import shares for three end-use categories (intermediate use, final consumption and investment) by mapping detailed six-digit products based on extensive product description \citep{ DietzenbacherConstructionWorldInputOutput2013}.\\
+To sum up, the WIOD includes information on bilateral industry-specific input use, whereas such information exists only in imputed form in TiVA. Therefore, we focus on the WIOD database in our analysis \footnote{Results obtained with the TiVA database are available on request.}. 
+
 
 \subsection{Nominal exchange rate shock}
 \label{subsec:chocchange}
@@ -239,24 +301,29 @@ with $hc_{ij}$ the consumption of industry $j$ in country $i$ and ${h}{{{c}}_{{i
 \label{sec:prixconso}
 
 
-\subsection{The share of imported final and intermediate goods in domestic consumption}
+\subsection{The intensity of import in domestic consumption}
 \begin{figure}[!h]
 \centering
-\caption{\footnotesize{\textbf{Ratio of imported intermediate inputs and consumer goods to consumption (WIOD, 2014)}}}
+\caption{\footnotesize{\textbf{The share of imported intermediate and consumer goods in private consumption (WIOD, 2014)}}}
 \begin{tabular}{c}
 \includegraphics[width=5.0in, height=3.5in]{Graph_ratioimp_wiod_2014}\\
 \floatfoot{Source: WIOD, 2014}.
 \end{tabular}
 \label{fig:ratioimp}
 \end{figure}
-
-Figure \ref{fig:ratioimp} depicts the imported  ratio, defined as the ratio of imported final and intermediate goods to household domestic consumption for the last year available (2014).
-Not surprisingly, small countries, such as Malta, Luxembourg and Ireland,  have the highest imported ratio (above 15$\%$), while larger countries, such as Japan, the U.S. and Australia, have a much lower ratio of imported final and intermediate goods.
-In the euro area, Figure \ref{fig:ratioimptemp_ze} shows that the imported ratio increased in most member states over the last decade. Following the adoption of the euro, the imported ratio increased between 2000 and 2007 in all countries, except in the southern economies (Spain, Portugal, Greece). The imported ratio keep expanding in the major economies of the area (Germany, France), but receeded in countries striken by the sovereign-debt crisis (Spain, Italy, Portugal and Greece).
-Outside of the euro area, Figure \ref{fig:ratioimptemp} shows that the imported ratio has expanded over the last fifteen years, with the exception of China and Russia, where it declined somewhat following the 2008-2009 crisis. 
+Differences in the import intensity across sectors and countries are crucial to our analysis on global nominal spillovers.
+In this section, we present some stylised facts about the import intensity in domestic consumption.
+Using data from the WIOD, we define the import intensity of private consumption as the share of  imported intermediate and final goods in total consumption. \\
+Figure \ref{fig:ratioimp} depicts the import intensity  of  household consumption in 2014.
+Not surprisingly, small countries, such as Malta, Luxembourg and Ireland, have the highest import intensity (above 15$\%$), while larger countries, such as Japan, the U.S. and Australia, display a much lower ratio of import intensity.\\
+How has the import intensity of private consumption changed over time? 
+In the Euro area, Figure \ref{fig:ratioimptemp_ze} shows that the import intensity of consumption increased in most member states over the last decade. Following the adoption of the euro, the intensity of import increased between 2000 and 2007 in all countries except the southern economies (Spain, Portugal and Greece). In the years following the Great Recession, the import intensity of consumption kept expanding in the major economies of the area (Germany, France), but receeded in the countries striken by the sovereign-debt crisis (Spain, Italy, Portugal and Greece).\\
+Outside of the euro area, Figure \ref{fig:ratioimptemp} shows that the import intensity of consumption has broadly expanded since 2000. 
+In all economies, except China, Croatia,  Indonesia and Russia, the import intensity was higher in 2014 than in 2000.
+In China, it declined somewhat following the 2008-2009 crisis, reflecting global value chains shortening. In Russia, the intensity of import has been decreasing since 2000. 
 \begin{figure}[!h]
 \centering
-\caption{\footnotesize{\textbf{Evolution of the ratio of imported intermediate inputs and consumer goods to consumption in the euro area (WIOD)}}}
+\caption{\footnotesize{\textbf{Evolution of the intensity of import in household consumption in the euro area (WIOD)}}}
 \begin{tabular}{c}
 \includegraphics[width=5.0in, height=3.5in]{Graph_ratioimp_WIOD_2000_2014_ze}\\
 \floatfoot{Source: WIOD}.
@@ -267,7 +334,7 @@ Outside of the euro area, Figure \ref{fig:ratioimptemp} shows that the imported 
 
 \begin{figure}[!h]
 \centering
-\caption{\footnotesize{\textbf{Evolution of the ratio of imported intermediate inputs and consumer goods to consumption (WIOD)}}}
+\caption{\footnotesize{\textbf{Evolution of the intensity of import in household consumption  (WIOD)}}}
 \begin{tabular}{c}
 \includegraphics[width=5.0in, height=3.5in]{Graph_ratioimp_WIOD_2000_2014}\\
 \floatfoot{Source: WIOD}.
@@ -276,8 +343,13 @@ Outside of the euro area, Figure \ref{fig:ratioimptemp} shows that the imported 
 \end{figure}
 
 
+\subsection{Domestic consumer prices reactions to changes in import prices}
+
+In this section, we evaluate the extent to which domestic consumer prices react to changes in prices of imported intermediate and final goods, the latters being caused by exchange rate fluctuations. 
+
 \section{Conclusion}
 \label{sec:ccl}
+Real integration through the supply chain matters for domestic price dynamics in the euro area.
 
 \newpage
 \bibliography{PapiertransmissiondeschocsenVA}

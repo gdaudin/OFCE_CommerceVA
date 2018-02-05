@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2017.10.6)  2 FEB 2018 18:35
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2017.10.6)  5 FEB 2018 18:49
 entering extended mode
 **WIOD_2018.tex
 (X:\Agents\FAUBERT\commerce_VA_inflation\Rédaction\WIOD_2018.tex
@@ -700,7 +700,7 @@ LaTeX Font Info:    Try loading font information for T1+cmtt on input line 53.
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\t1cmtt.fd"
 File: t1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
-Underfull \hbox (badness 10000) in paragraph at lines 61--63
+Underfull \hbox (badness 10000) in paragraph at lines 62--64
 
  []
 
@@ -709,159 +709,161 @@ Underfull \hbox (badness 10000) in paragraph at lines 61--63
 {C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}]
 
 Package natbib Warning: Citation `Auer2017' on page 2 undefined on input line 8
-0.
+4.
 
 [2]
 
 Package natbib Warning: Citation `LeontiefstructureAmericaneconomy1951' on page
- 3 undefined on input line 95.
+ 3 undefined on input line 99.
 
 
 Package natbib Warning: Citation `Daudincommerceexterieurvaleur2006' on page 3 
-undefined on input line 95.
+undefined on input line 99.
 
 
 Package natbib Warning: Citation `DaudinWhoproduceswhom2011' on page 3 undefine
-d on input line 95.
+d on input line 99.
 
 
 Package natbib Warning: Citation `DeBackerInternationalComparativeEvidence2012'
- on page 3 undefined on input line 95.
+ on page 3 undefined on input line 99.
 
 
 Package natbib Warning: Citation `JohnsonAccountingintermediatesProduction2012'
- on page 3 undefined on input line 95.
+ on page 3 undefined on input line 99.
 
 
 Package natbib Warning: Citation `AmadorGlobalvaluechains2015' on page 3 undefi
-ned on input line 95.
+ned on input line 99.
 
 
 Package natbib Warning: Citation `Sato2014' on page 3 undefined on input line 9
-5.
+9.
 
 
 Package natbib Warning: Citation `CapparielloHowdoesforeign2015' on page 3 unde
-fined on input line 95.
+fined on input line 99.
 
 
 Package natbib Warning: Citation `BemsDemandValueAdded2015' on page 3 undefined
- on input line 95.
+ on input line 99.
 
 
 Package natbib Warning: Citation `Bournaycomptabilitenationale2015' on page 3 u
-ndefined on input line 96.
+ndefined on input line 100.
 
 
 Package natbib Warning: Citation `AcemogluNetworkOriginsAggregate2012' on page 
-3 undefined on input line 97.
+3 undefined on input line 101.
 
 
 Package natbib Warning: Citation `Carvalhomicromacroproduction2014' on page 3 u
-ndefined on input line 97.
+ndefined on input line 101.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 102--104
+Underfull \hbox (badness 10000) in paragraph at lines 106--108
 
  []
 
 [3] [4]
-Underfull \hbox (badness 10000) in paragraph at lines 130--131
+Underfull \hbox (badness 10000) in paragraph at lines 134--137
 
  []
 
 
 Package natbib Warning: Citation `TimmerIllustratedUserGuide2015' on page 5 und
-efined on input line 133.
+efined on input line 139.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 Package natbib Warning: Citation `TimmerIllustratedUserGuide2015' on page 5 und
-efined on input line 137.
+efined on input line 195.
 
 
 Package natbib Warning: Citation `DietzenbacherConstructionWorldInputOutput2013
-' on page 5 undefined on input line 138.
+' on page 5 undefined on input line 198.
 
-[5] [6]
-Underfull \hbox (badness 10000) in paragraph at lines 162--165
+[5] [6] [7]
+Underfull \hbox (badness 10000) in paragraph at lines 224--227
 
  []
 
 
-Overfull \hbox (5.03291pt too wide) in alignment at lines 165--168
+Overfull \hbox (5.03291pt too wide) in alignment at lines 227--230
  [][][] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 168--172
+Underfull \hbox (badness 10000) in paragraph at lines 230--234
 
  []
 
 
-Overfull \hbox (18.79729pt too wide) in alignment at lines 172--174
+Overfull \hbox (18.79729pt too wide) in alignment at lines 234--236
  [][][] []
  []
 
-[7]
-Underfull \hbox (badness 10000) in paragraph at lines 174--176
+
+Underfull \hbox (badness 10000) in paragraph at lines 236--238
 
  []
 
-[8]
-Underfull \hbox (badness 10000) in paragraph at lines 203--208
+[8] [9]
+Underfull \hbox (badness 10000) in paragraph at lines 265--270
 
  []
 
 
-Overfull \hbox (6.33919pt too wide) in alignment at lines 208--210
+Overfull \hbox (6.33919pt too wide) in alignment at lines 270--272
  [][][] []
  []
 
-[9]
-Underfull \hbox (badness 10000) in paragraph at lines 224--228
+
+Underfull \hbox (badness 10000) in paragraph at lines 286--290
 
  []
 
-<Graph_ratioimp_wiod_2014.png, id=166, 456.70625pt x 456.70625pt>
+[10] <Graph_ratioimp_wiod_2014.png, id=179, 456.70625pt x 456.70625pt>
 File: Graph_ratioimp_wiod_2014.png Graphic file (type png)
 
 <use Graph_ratioimp_wiod_2014.png>
-Package pdftex.def Info: Graph_ratioimp_wiod_2014.png used on input line 247.
+Package pdftex.def Info: Graph_ratioimp_wiod_2014.png used on input line 309.
 (pdftex.def)             Requested size: 361.35844pt x 252.94533pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<Graph_ratioimp_WIOD_2000_2014_ze.png, id=170, 456.70625pt x 456.70625pt>
+<Graph_ratioimp_WIOD_2000_2014_ze.png, id=183, 456.70625pt x 456.70625pt>
 File: Graph_ratioimp_WIOD_2000_2014_ze.png Graphic file (type png)
 
 <use Graph_ratioimp_WIOD_2000_2014_ze.png>
 Package pdftex.def Info: Graph_ratioimp_WIOD_2000_2014_ze.png used on input lin
-e 261.
+e 328.
 (pdftex.def)             Requested size: 361.35844pt x 252.94533pt.
- [10]
+
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<Graph_ratioimp_WIOD_2000_2014.png, id=177, 456.70625pt x 456.70625pt>
+<Graph_ratioimp_WIOD_2000_2014.png, id=184, 456.70625pt x 456.70625pt>
 File: Graph_ratioimp_WIOD_2000_2014.png Graphic file (type png)
 
 <use Graph_ratioimp_WIOD_2000_2014.png>
-Package pdftex.def Info: Graph_ratioimp_WIOD_2000_2014.png used on input line 2
-72.
+Package pdftex.def Info: Graph_ratioimp_WIOD_2000_2014.png used on input line 3
+39.
 (pdftex.def)             Requested size: 361.35844pt x 252.94533pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[11 <X:/Agents/FAUBERT/commerce_VA_inflation/Rédaction/Graph_ratioimp_wiod_201
-4.png (PNG copy)>]
-
-LaTeX Warning: Text page 12 contains only floats.
-
-[12 <X:/Agents/FAUBERT/commerce_VA_inflation/Rédaction/Graph_ratioimp_WIOD_200
-0_2014_ze.png (PNG copy)> <X:/Agents/FAUBERT/commerce_VA_inflation/Rédaction/G
-raph_ratioimp_WIOD_2000_2014.png (PNG copy)>]
+[11] [12 <X:/Agents/FAUBERT/commerce_VA_inflation/Rédaction/Graph_ratioimp_wio
+d_2014.png (PNG copy)> <X:/Agents/FAUBERT/commerce_VA_inflation/Rédaction/Grap
+h_ratioimp_WIOD_2000_2014_ze.png (PNG copy)>] [13 <X:/Agents/FAUBERT/commerce_V
+A_inflation/Rédaction/Graph_ratioimp_WIOD_2000_2014.png (PNG copy)>]
 (X:\Agents\FAUBERT\commerce_VA_inflation\Rédaction\WIOD_2018.bbl
 ! Undefined control sequence.
 l.58 Sharify, N., 2013. {{Input}}\dbend
@@ -876,24 +878,24 @@ and I'll forget about whatever was undefined.
 
 Package natbib Warning: There were undefined citations.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 285.
-[13]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 285.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 357.
+[14]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 357.
  (X:\Agents\FAUBERT\commerce_VA_inflation\Rédaction\WIOD_2018.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 285.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 285.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 357.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 357.
 Package rerunfilecheck Info: File `WIOD_2018.out' has not changed.
-(rerunfilecheck)             Checksum: E7858CF37C2CFD2D89C182B4D4083449;771.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 285.
+(rerunfilecheck)             Checksum: 4068E5076993B7659F015D3285EB39CC;858.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 357.
  ) 
 Here is how much of TeX's memory you used:
- 10924 strings out of 493921
- 159239 string characters out of 3144825
- 269623 words of memory out of 3000000
- 13953 multiletter control sequences out of 15000+200000
- 29565 words of font info for 82 fonts, out of 3000000 for 9000
+ 10952 strings out of 493921
+ 159621 string characters out of 3144825
+ 272623 words of memory out of 3000000
+ 13974 multiletter control sequences out of 15000+200000
+ 32460 words of font info for 93 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 61i,16n,96p,1757b,514s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 61i,16n,96p,1247b,605s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files (x86)/MiKTeX 2.9/fonts/enc/dvips/cm-super/cm-super-t1.enc}<
 C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:
 /Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/P
@@ -921,9 +923,9 @@ i1000.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/cm-super/sfti10
 95.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/cm-super/sftt0900.
 pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/cm-super/sftt1095.pfb
 >
-Output written on WIOD_2018.pdf (13 pages, 665210 bytes).
+Output written on WIOD_2018.pdf (14 pages, 674917 bytes).
 PDF statistics:
- 291 PDF objects out of 1000 (max. 8388607)
- 51 named destinations out of 1000 (max. 500000)
- 96 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 305 PDF objects out of 1000 (max. 8388607)
+ 55 named destinations out of 1000 (max. 500000)
+ 104 words of extra memory for PDF output out of 10000 (max. 10000000)
 

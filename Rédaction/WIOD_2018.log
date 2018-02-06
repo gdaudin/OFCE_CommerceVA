@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2017.10.6)  5 FEB 2018 18:49
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2017.10.6)  6 FEB 2018 14:41
 entering extended mode
 **WIOD_2018.tex
 (X:\Agents\FAUBERT\commerce_VA_inflation\Rédaction\WIOD_2018.tex
@@ -828,33 +828,33 @@ Underfull \hbox (badness 10000) in paragraph at lines 286--290
 
  []
 
-[10] <Graph_ratioimp_wiod_2014.png, id=179, 456.70625pt x 456.70625pt>
+[10] <Graph_ratioimp_wiod_2014.png, id=184, 456.70625pt x 456.70625pt>
 File: Graph_ratioimp_wiod_2014.png Graphic file (type png)
 
 <use Graph_ratioimp_wiod_2014.png>
-Package pdftex.def Info: Graph_ratioimp_wiod_2014.png used on input line 309.
+Package pdftex.def Info: Graph_ratioimp_wiod_2014.png used on input line 310.
 (pdftex.def)             Requested size: 361.35844pt x 252.94533pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<Graph_ratioimp_WIOD_2000_2014_ze.png, id=183, 456.70625pt x 456.70625pt>
+<Graph_ratioimp_WIOD_2000_2014_ze.png, id=188, 456.70625pt x 456.70625pt>
 File: Graph_ratioimp_WIOD_2000_2014_ze.png Graphic file (type png)
 
 <use Graph_ratioimp_WIOD_2000_2014_ze.png>
 Package pdftex.def Info: Graph_ratioimp_WIOD_2000_2014_ze.png used on input lin
-e 328.
+e 329.
 (pdftex.def)             Requested size: 361.35844pt x 252.94533pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<Graph_ratioimp_WIOD_2000_2014.png, id=184, 456.70625pt x 456.70625pt>
+<Graph_ratioimp_WIOD_2000_2014.png, id=189, 456.70625pt x 456.70625pt>
 File: Graph_ratioimp_WIOD_2000_2014.png Graphic file (type png)
 
 <use Graph_ratioimp_WIOD_2000_2014.png>
 Package pdftex.def Info: Graph_ratioimp_WIOD_2000_2014.png used on input line 3
-39.
+40.
 (pdftex.def)             Requested size: 361.35844pt x 252.94533pt.
 
 
@@ -862,8 +862,20 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [11] [12 <X:/Agents/FAUBERT/commerce_VA_inflation/Rédaction/Graph_ratioimp_wio
 d_2014.png (PNG copy)> <X:/Agents/FAUBERT/commerce_VA_inflation/Rédaction/Grap
-h_ratioimp_WIOD_2000_2014_ze.png (PNG copy)>] [13 <X:/Agents/FAUBERT/commerce_V
-A_inflation/Rédaction/Graph_ratioimp_WIOD_2000_2014.png (PNG copy)>]
+h_ratioimp_WIOD_2000_2014_ze.png (PNG copy)>]
+<Graph_ratiodir_WIOD_2014.png, id=205, 456.70625pt x 456.70625pt>
+File: Graph_ratiodir_WIOD_2014.png Graphic file (type png)
+
+<use Graph_ratiodir_WIOD_2014.png>
+Package pdftex.def Info: Graph_ratiodir_WIOD_2014.png used on input line 359.
+(pdftex.def)             Requested size: 361.35844pt x 252.94533pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[13 <X:/Agents/FAUBERT/commerce_VA_inflation/Rédaction/Graph_ratioimp_WIOD_200
+0_2014.png (PNG copy)>] [14 <X:/Agents/FAUBERT/commerce_VA_inflation/Rédaction
+/Graph_ratiodir_WIOD_2014.png (PNG copy)>]
 (X:\Agents\FAUBERT\commerce_VA_inflation\Rédaction\WIOD_2018.bbl
 ! Undefined control sequence.
 l.58 Sharify, N., 2013. {{Input}}\dbend
@@ -878,21 +890,21 @@ and I'll forget about whatever was undefined.
 
 Package natbib Warning: There were undefined citations.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 357.
-[14]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 357.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 383.
+[15]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 383.
  (X:\Agents\FAUBERT\commerce_VA_inflation\Rédaction\WIOD_2018.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 357.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 357.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 383.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 383.
 Package rerunfilecheck Info: File `WIOD_2018.out' has not changed.
-(rerunfilecheck)             Checksum: 4068E5076993B7659F015D3285EB39CC;858.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 357.
+(rerunfilecheck)             Checksum: 038DB5160CA850A521DC45FC9AB58485;976.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 383.
  ) 
 Here is how much of TeX's memory you used:
- 10952 strings out of 493921
- 159621 string characters out of 3144825
+ 10966 strings out of 493921
+ 159900 string characters out of 3144825
  272623 words of memory out of 3000000
- 13974 multiletter control sequences out of 15000+200000
+ 13982 multiletter control sequences out of 15000+200000
  32460 words of font info for 93 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
  61i,16n,96p,1247b,605s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -923,9 +935,9 @@ i1000.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/cm-super/sfti10
 95.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/cm-super/sftt0900.
 pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/cm-super/sftt1095.pfb
 >
-Output written on WIOD_2018.pdf (14 pages, 674917 bytes).
+Output written on WIOD_2018.pdf (15 pages, 791244 bytes).
 PDF statistics:
- 305 PDF objects out of 1000 (max. 8388607)
- 55 named destinations out of 1000 (max. 500000)
- 104 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 321 PDF objects out of 1000 (max. 8388607)
+ 60 named destinations out of 1000 (max. 500000)
+ 117 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -227,3 +227,21 @@ graph bar (asis) ratio_ci_impt_HC_2000 ratio_ci_impt_HC_2007 ratio_ci_impt_HC_20
 *title("Imported intermediate inputs and consumer goods to consumption") 
 graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/Graph_ratioimp_WIOD_2000_2014.png", replace
 
+
+***********************Comparaison de l'effet expliqué par ratio_ci_impt_HC sur le total
+
+*calcul du ratio direct/total, on sait que ce ratio est exceptionnellement >1 en Irlande en 2011 avec TiVA
+/*
+foreach source in   WIOD  TIVA {
+	if "`source'"=="WIOD" local start_year 2000
+	if "`source'"=="TIVA" local start_year 1995
+	if "`source'"=="WIOD" local end_year 2014
+	if "`source'"=="TIVA" local end_year 2011
+
+	foreach i of numlist `start_year' (1)`end_year'  {
+	use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`i'_`source'.dta", clear	
+ gen ratio_direct_total=ratio_ci_impt_HC/pond_`source'_HC
+ save "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`i'_`source'.dta", replace		
+	}
+}
+*/

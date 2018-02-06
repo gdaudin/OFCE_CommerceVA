@@ -72,7 +72,7 @@ We examine the extent to which domestic consumer prices react to changes in impo
 We pay particular attention to euro area countries, which have been increasingly participating in cross-border production chains following the adoption of the common currency. The euro area is indeed more involved in global production chains than other large economies, such as the United States and China \citep{ECB2016} and has been less affected by global value chains shortening than other countries in the years following the Great Recession. 
 Building on sectoral data from the World InputOutput Database, we examine which sectors experience higher spillovers from global inflationary shocks.\\
 To preview our findings, we find that...\\
-The remainder of the paper is organized as follows. Section \ref{sec:lit} briefly describes the related literature. Section \ref{sec:metho} presents the methodology and the data sources.  Section \ref{sec:prixconso} presents the impact of an exchange rate shock to consumer prices. 
+The remainder of the paper is organized as follows. Section \ref{sec:lit} briefly describes the related literature. Section \ref{sec:metho} presents the methodology and the data sources.  Section \ref{sec:prixconso} presents the impact of an exchange rate shock on consumer prices.  Section \ref{sec:prixconsosecteur} examines which of the subcomponents of consumer prices experience higher spillovers from global inflationary shocks.
 Section \ref{sec:ccl} provides some concluding remarks and avenues for future research.
 
 \label{sec:intro}
@@ -87,7 +87,7 @@ Database (WIOD) and producer price indices. By contrast, exchange rate movements
 \cite{AntoundeAlmeida2016} show that the cross-border sectors pairs which trade more intensively with each other in intermediate inputs display higher PPI inflation correlation, indicating  price spillovers along the global supply chain.\\
 Our research is also related to the literature on exchange rate pass-through, in particular in an environment where intermediate inputs account for a large share of imports. For instance,  \cite{Goldberg2010} show that imported intermediate inputs are the dominant channel through wich changes in import prices pass to CPI inflation.\\
 We improve on the literature on various respects. First, while most of the literature focusses on production prices, we examine the role of input-output linkages in propagating shocks to consumer prices. 
-Secondly, we analyze how sectoral inflation reacts to global inflationnary shocks by examining the main components of consumer prices (manufacturing goods, services, food and energy).  We draw on the World InputOutput Database to examine which sectors experience higher spillovers from global inflationary shocks.
+Secondly, we analyze how sectoral inflation reacts to global inflationnary shocks by examining the main components of consumer prices (manufacturing goods, services, food and energy).  We draw on the World Input-Output Database to examine which sectors experience higher spillovers from global inflationary shocks.
 Thirdly, we provide evidence that, following an appreciation of the domestic currency, the direct effect of global inflationary shocks, i.e. the share of imported final and intermediate goods in domestic consumption, explains the bulk of the propagation of global shocks to domestic prices. By contrast, we find a limited role for the additional transmission of lower domestic input prices to other sectors of the domestic economy and other countries occuring during subsequent production cycles.
 % à voir si on le fait: We assess whether results are robust to the use of different databases (WIOD versus OECD-ICIO). 
 
@@ -302,9 +302,10 @@ with $hc_{ij}$ the consumption of industry $j$ in country $i$ and ${h}{{{c}}_{{i
 
 
 \subsection{The intensity of import in domestic consumption}
+\label{subsec:intensity}
 \begin{figure}[!h]
 \centering
-\caption{\footnotesize{\textbf{The share of imported intermediate and consumer goods in private consumption (WIOD, 2014)}}}
+\caption{\footnotesize{\textbf{The share of imported intermediate and consumer goods in private consumption }}}
 \begin{tabular}{c}
 \includegraphics[width=5.0in, height=3.5in]{Graph_ratioimp_wiod_2014}\\
 \floatfoot{Source: WIOD, 2014}.
@@ -319,11 +320,11 @@ Not surprisingly, small countries, such as Malta, Luxembourg and Ireland, have t
 How has the import intensity of private consumption changed over time? 
 In the Euro area, Figure \ref{fig:ratioimptemp_ze} shows that the import intensity of consumption increased in most member states over the last decade. Following the adoption of the euro, the intensity of import increased between 2000 and 2007 in all countries except the southern economies (Spain, Portugal and Greece). In the years following the Great Recession, the import intensity of consumption kept expanding in the major economies of the area (Germany, France), but receeded in the countries striken by the sovereign-debt crisis (Spain, Italy, Portugal and Greece).\\
 Outside of the euro area, Figure \ref{fig:ratioimptemp} shows that the import intensity of consumption has broadly expanded since 2000. 
-In all economies, except China, Croatia,  Indonesia and Russia, the import intensity was higher in 2014 than in 2000.
-In China, it declined somewhat following the 2008-2009 crisis, reflecting global value chains shortening. In Russia, the intensity of import has been decreasing since 2000. 
+In all countries, except China, Croatia, Indonesia and Russia, the import intensity was higher in 2014 than in 2000.
+In China, it declined somewhat following the 2008-2009 crisis, reflecting global value chains shortening. In Russia, the intensity of import has been decreasing over the last two decades. 
 \begin{figure}[!h]
 \centering
-\caption{\footnotesize{\textbf{Evolution of the intensity of import in household consumption in the euro area (WIOD)}}}
+\caption{\footnotesize{\textbf{Evolution of the intensity of import in household consumption in the euro area}}}
 \begin{tabular}{c}
 \includegraphics[width=5.0in, height=3.5in]{Graph_ratioimp_WIOD_2000_2014_ze}\\
 \floatfoot{Source: WIOD}.
@@ -334,7 +335,7 @@ In China, it declined somewhat following the 2008-2009 crisis, reflecting global
 
 \begin{figure}[!h]
 \centering
-\caption{\footnotesize{\textbf{Evolution of the intensity of import in household consumption  (WIOD)}}}
+\caption{\footnotesize{\textbf{Evolution of the intensity of import in household consumption}}}
 \begin{tabular}{c}
 \includegraphics[width=5.0in, height=3.5in]{Graph_ratioimp_WIOD_2000_2014}\\
 \floatfoot{Source: WIOD}.
@@ -344,8 +345,32 @@ In China, it declined somewhat following the 2008-2009 crisis, reflecting global
 
 
 \subsection{Domestic consumer prices reactions to changes in import prices}
+In this section, we evaluate how domestic consumer prices react to changes in prices of imported intermediate and final goods, the latters being caused by exchange rate fluctuations. 
+We are interested in (\textit{i}) the direct effect of global inflationary shocks, defined as the share of imported final and intermediate goods in domestic consumption (i.e. the import intensity in domestic consumption defined in Section \ref{subsec:intensity}) and (\textit{ii}) the total effect. The latter depends both on the direct effect and on the additional transmission of lower domestic input prices to other sectors of the domestic economy and to other countries which occurs during subsequent production cycles. 
+\paragraph{How much of domestic consumer prices' reactions to changes in import prices is explained by the direct effect?}
 
-In this section, we evaluate the extent to which domestic consumer prices react to changes in prices of imported intermediate and final goods, the latters being caused by exchange rate fluctuations. 
+Figure \ref{fig:ratiodir} depicts how much of the total impact of a change in import prices is explained by the import intensity of household consumption. In other words, Figure \ref{fig:ratiodir} represents the ratio of the direct effect to the total effect.
+In all countries except Australia, Canada, China and Russia, the direct effect accounts for more than half of the total impact in 2014. In five economies (India, Indonesia, Luxembourg, Mexico and Turkey), the direct effect explains more than 80$\%$ of the reaction of domestic consumer prices to changes in import prices, which suggests that these countries do not provide much intermediate goods to their partners.
+
+\begin{figure}[!h]
+\centering
+\caption{\footnotesize{\textbf{Ratio of the direct to the total impact of domestic consumer prices reactions to changes in import prices}}}
+\begin{tabular}{c}
+\includegraphics[width=5.0in, height=3.5in]{Graph_ratiodir_WIOD_2014}\\
+\floatfoot{Source: WIOD, 2014}.
+\end{tabular}
+\label{fig:ratiodir}
+\end{figure}
+
+
+\paragraph{Is the import intensity of consumption a good predictor of domestic consumer prices reactions to changes in import price?}
+
+
+
+
+\section{The impact of exchange rates fluctuations on the subcomponents of consumer prices}
+\label{sec:prixconsosecteur}
+
 
 \section{Conclusion}
 \label{sec:ccl}

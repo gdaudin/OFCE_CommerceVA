@@ -133,7 +133,7 @@ To compute which countries are most affected by a production cost shock through 
 
 The world input-output table is an extension of the national input-output tables. Input-output tables measure the relationships between the producers of goods and services (including imports) within an economy and the users of these goods and services (including exports). Hence, the national tables specify, for each industry, the use of the product, being for either intermediate or final use. The latter includes domestic final use (consumption and investment) and exports. The world input-output table shows in which foreign industry a product was produced, and which foreign industry or final user uses the exports of a given country. Hence, world input-output tables enable us to identify how much international trade is associated with the consumption of a particular final product. \\
 The use of national input-output tables as part of a global framework is challenging for two reasons. First, national input-output tables vary widely in terms of detail and scope, and are therefore not fully consistent. Second, the availability of national input-output tables for a is limited, especially for developing economies. 
-Two sectoral datasets for international intput-output tables are available: (\textit{i}) the World Input Output Database (WIOD) and (\textit{ii}) the OECD-ICIO database TiVA.\\
+Two sectoral datasets for international intput-output tables are available: (\textit{i}) the World Input Output Database (WIOD) and (\textit{ii}) the OECD-ICIO database TiVA.
 \paragraph{The World Input Output Database (WIOD)}
 The World Input Output Database (WIOD) contains time series of inter-country input-output tables from 2000 to 2014.  World Input-Output tables (WIOT) connect national tables with international trade flows. WIOD uses supply-use tables (SUT) from individual country's national accounts as the starting point to integrate with bilateral trade statistics and derive the final symmetric WIOT. The WIOD covers 43 countries, of which a majority belongs to the European Union, as well as the rest of the world, constructed as one economy. 
 These global Input-Output (I-O thereafter) tables encompass major advanced and emerging countries and cover around 85$\%$ of world GDP. They contain annual information for 56 industries, comprising primary, manufacturing goods and services sectors. Therefore, for each year a full country-sector input-output matrix traces the importance of a supplying industry in one country for an industry in another country. The values in WIOTs are expressed in millions of U.S. dollars; market exchange rates were used for currency conversion \citep{TimmerIllustratedUserGuide2015}. % All transactions values are in basic prices, reflecting all costs borne by the producer. These tables are accompanied by Socio-Economic Accounts which contain country sector panel data on employment (number of workers, compensation and share of labor in high, medium and low skilled occupations), capital stocks, gross output and value added).
@@ -291,10 +291,11 @@ The second type of aggregation relies on the sectoral structure of exports. $\ov
 \overline{s_{i}^{X}}=\underset{j=1}{\overset{n}{\mathop \sum }}\,\frac{{{s}_{ij}}.{{x}_{ij}}}{{{x}_{i}}},
  \end{eqnarray*} 
 with $x_{ij}$the exports of industry $j$ in country $i$ and $x_{i}$ the total exports of country $i$. \\
-The last type of aggregation relies on the sectoral structure of household consumption. $\overline{s_{i}^{HC}}$ provides the average impact of the shock on the consumer price of country $i$. 
- \begin{eqnarray*}
+The last type of aggregation relies on the sectoral structure of household consumption. Hence, $\overline{s_{i}^{HC}}$ provides the average impact of the shock on the consumer price of country $i$. 
+ \begin{eqnarray}
 \overline{s_{i}^{HC}}=\underset{j=1}{\overset{n}{\mathop \sum }}\,\frac{{{s}_{ij}}.h{{c}_{ij}}}{h{{c}_{i}}}
- \end{eqnarray*} 
+\label{eq:eq6}
+ \end{eqnarray} 
 with $hc_{ij}$ the consumption of industry $j$ in country $i$ and ${h}{{{c}}_{{i}}}$ the total household consumption of country $i$. 
 
 \section{The impact of exchange rates fluctuations on consumer prices}
@@ -318,7 +319,7 @@ Using data from the WIOD, we define the import intensity of private consumption 
 Figure \ref{fig:ratioimp} depicts the import intensity  of  household consumption in 2014.
 Not surprisingly, small countries, such as Malta, Luxembourg and Ireland, have the highest import intensity (above 15$\%$), while larger countries, such as Japan, the U.S. and Australia, display a much lower ratio of import intensity.\\
 How has the import intensity of private consumption changed over time? 
-In the Euro area, Figure \ref{fig:ratioimptemp_ze} shows that the import intensity of consumption increased in most member states over the last decade. Following the adoption of the euro, the intensity of import increased between 2000 and 2007 in all countries except the southern economies (Spain, Portugal and Greece). In the years following the Great Recession, the import intensity of consumption kept expanding in the major economies of the area (Germany, France), but receeded in the countries striken by the sovereign-debt crisis (Spain, Italy, Portugal and Greece).\\
+In the Euro area, Figure \ref{fig:ratioimptemp_ze} shows that the import intensity of consumption increased in most member states over the last decade. Following the adoption of the euro, the intensity of import increased between 2000 and 2007 in all countries except the southern economies (Spain, Portugal and Greece). In the years following the Great Recession, the import intensity of consumption kept expanding in the major economies of the area (Germany, France), but receded in the countries stricken by the sovereign-debt crisis (Spain, Italy, Portugal and Greece).\\
 Outside of the euro area, Figure \ref{fig:ratioimptemp} shows that the import intensity of consumption has broadly expanded since 2000. 
 In all countries, except China, Croatia, Indonesia and Russia, the import intensity was higher in 2014 than in 2000.
 In China, it declined somewhat following the 2008-2009 crisis, reflecting global value chains shortening. In Russia, the intensity of import has been decreasing over the last two decades. 
@@ -350,11 +351,11 @@ We are interested in (\textit{i}) the direct effect of global inflationary shock
 \paragraph{How much of domestic consumer prices' reactions to changes in import prices is explained by the direct effect?}
 
 Figure \ref{fig:ratiodir} depicts how much of the total impact of a change in import prices is explained by the import intensity of household consumption. In other words, Figure \ref{fig:ratiodir} represents the ratio of the direct effect to the total effect.
-In all countries except Australia, Canada, China and Russia, the direct effect accounts for more than half of the total impact in 2014. In five economies (India, Indonesia, Luxembourg, Mexico and Turkey), the direct effect explains more than 80$\%$ of the reaction of domestic consumer prices to changes in import prices, which suggests that these countries do not provide much intermediate goods to their partners.
+In all countries except Australia, Canada, China and Russia, the direct effect accounts for more than half of the total impact in 2014. In five economies (India, Indonesia, Luxembourg, Mexico and Turkey), the direct effect explains more than 80$\%$ of the reaction of domestic consumer prices to changes in import prices, which suggests that these countries do not provide much intermediate goods to their partners. For the whole cross-section, the coefficient of correlation between the total and the direct effect is close to 95$\%$ in 2014.
 
 \begin{figure}[!h]
 \centering
-\caption{\footnotesize{\textbf{Ratio of the direct to the total impact of domestic consumer prices reactions to changes in import prices}}}
+\caption{\footnotesize{\textbf{Ratio of direct to total effect of domestic consumer prices reactions to changes in import prices}}}
 \begin{tabular}{c}
 \includegraphics[width=5.0in, height=3.5in]{Graph_ratiodir_WIOD_2014}\\
 \floatfoot{Source: WIOD, 2014}.
@@ -364,11 +365,29 @@ In all countries except Australia, Canada, China and Russia, the direct effect a
 
 
 \paragraph{Is the import intensity of consumption a good predictor of domestic consumer prices reactions to changes in import price?}
+To investigate whether the import intensity of consumption is a good predictor of domestic consumer prices reactions to changes in import price, we run the cross-section following regression (Equation \ref{eq:eq7}). 
 
+ \begin{eqnarray}
+{S^{HC}}=\beta  I + c +\varepsilon
+\label{eq:eq7}
+ \end{eqnarray}
+ with ${S^{HC}}$ the vector of average impact of the devaluation shock on consumer prices ($\overline{s_{i}^{HC}}$), for each country $i$, defined in Equation \ref{eq:eq6} and $I$ the vector of country-specific import intensity of consumption.
+ 
+Figure \ref{fig:ratiodir} depicts the relationship between the elasticity of consumer prices to an exchange rate shock and the import intensity of consumption.
 
+ \begin{figure}[!h]
+\centering
+\caption{\footnotesize{\textbf{Consumer prices elasticity to an exchange rate shock}}}
+\begin{tabular}{c}
+\includegraphics[width=5.0in, height=3.5in]{graph_2014_WIOD}\\
+\floatfoot{Source: WIOD, 2014}.
+\end{tabular}
+\label{fig:ratiodir}
+\end{figure}
 
+ 
 
-\section{The impact of exchange rates fluctuations on the subcomponents of consumer prices}
+\section{The impact of exchange rates fluctuations on the main components of consumer prices}
 \label{sec:prixconsosecteur}
 
 

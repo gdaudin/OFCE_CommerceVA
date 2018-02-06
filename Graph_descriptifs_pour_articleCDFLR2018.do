@@ -245,3 +245,18 @@ foreach source in   WIOD  TIVA {
 	}
 }
 */
+
+use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_2014_WIOD.dta", clear
+*keep if strpos("$eurozone",c)!=0
+drop if c=="ROW"
+graph bar (asis) ratio_direct_total, over(c, sort(ratio_direct_total)  label(angle(vertical) labsize(vsmall))) 
+*title("Imported intermediate inputs and consumer goods to consumption") 
+graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/Graph_ratiodir_WIOD_2014.png", replace
+
+
+
+*traduction en anglais du graph pente de la courbe
+
+
+
+

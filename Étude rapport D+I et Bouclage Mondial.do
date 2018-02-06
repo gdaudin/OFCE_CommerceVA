@@ -47,8 +47,16 @@ gen pays=lower(c)
 merge 1:1 pays using "$dir/Bases/imp_inputs_HC_`year'_`source'_hze_not.dta"
 *drop if c=="CHN"
 
-label var pond_`source'_HC "Élasticité des prix de consommation en monnaie nationale à un choc de la monnaie nationale"
+*label var pond_`source'_HC "Élasticité des prix de consommation en monnaie nationale à un choc de la monnaie nationale"
+label var pond_`source'_HC "Consumer prices elasticity"
 
+graph twoway (scatter pond_`source'_HC ratio_ci_impt_HC, mlabel(c, size(tiny)) (lfit pond_`source'_HC ratio_ci_impt_HC)  , ///
+			xtitle("Import intensity of consumption") ytitle("Consumer prices elasticity") ///
+			yscale(range(0.0 0.3)) xscale(range(0.0 0.3)) xlabel (0.0(0.05) 0.3) ylabel(0.0(0.05) 0.3) 
+			
+graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/graph_`year'_`source'.pdf", replace
+graph close
+/*
 graph twoway (scatter pond_`source'_HC ratio_ci_impt_HC, mlabel(c_full_FR)) (lfit pond_`source'_HC ratio_ci_impt_HC)  , ///
 			title("Elasticité des prix de consommation à une dévaluation") ///
 			xtitle("Parts des CI importées dans la conso dom + part conso importée") ytitle("Elasticité prix de conso. ") ///
@@ -56,7 +64,7 @@ graph twoway (scatter pond_`source'_HC ratio_ci_impt_HC, mlabel(c_full_FR)) (lfi
 			
 graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/graph_`year'_`source'.pdf", replace
 graph close
-
+*/
 			
 reg pond_`source'_HC ratio_ci_impt_HC	
 gen R2=e(r2)

@@ -78,7 +78,7 @@ generate year = `yrs'
 
 if "`source'"=="TIVA" {
 	generate pays = strlower(substr(v1,1,3))
-	generate sector = strlower(substr(v1,strpos(v1,"_")+1,.))
+	generate sector = strlower(substr(v1,strpos(v1,"_")+1,strlen(v1)-3-strpos(v1,"_")))
 }
 
 

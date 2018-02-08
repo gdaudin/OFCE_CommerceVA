@@ -101,6 +101,8 @@ rename v1 ci_impt
 rename v2 prod
 generate ratio_ci_impt_prod=ci_impt / prod
 
+
+/*
 if "`source'"=="TIVA" {
 	generate pays = strlower(substr(_varname,1,3))
 	generate sector = strlower(substr(_varname,strpos(_varname,"_")+1,.))
@@ -109,14 +111,17 @@ if "`source'"=="TIVA" {
 
 *renomme les pays et secteur à partir de la base csv_WIOD
 if "`source'"=="WIOD" {
-	merge 1:1 _n using "$dir/Bases/csv_WIOD.dta"
-	rename c pays
-	rename s sector
-	replace pays=lower(pays)
-	drop p_shock
-	drop _merge
+*/
+
+
+merge 1:1 _n using "$dir/Bases/csv_`source'.dta"
+rename c pays
+rename s sector
+replace pays=lower(pays)
+drop p_shock
+drop _merge
  
-}
+*}
 save "$dir/Bases/imp_inputs_par_sect_`yrs'_`source'_`hze'.dta", replace
 * enregistrement des ratio de CI importés par secteur
 

@@ -26,10 +26,9 @@ if "`source'"=="TIVA" {
 	reshape long hfce_, i(v1) j(pays_conso) string
 
 	generate pays = strlower(substr(v1,1,strpos(v1,"_")-1))
-	generate sector = strlower(substr(v1,strpos(v1,"_")+1,.))
+	generate sector = strlower(substr(v1,strpos(v1,"_")+1,strlen(v1)-3-strpos(v1,"_")))
 	rename hfce_ conso
 	generate year = `yrs'
-
 }
 
 

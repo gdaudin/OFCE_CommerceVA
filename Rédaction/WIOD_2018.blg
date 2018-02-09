@@ -1,19 +1,7 @@
 This is BibTeX, Version 0.99dThe top-level auxiliary file: WIOD_2018.aux
 The style file: elsarticle-harv.bst
 Database file #1: PapiertransmissiondeschocsenVA.bib
-Warning--I didn't find a database entry for "Auer2017"
-Warning--I didn't find a database entry for "LeontiefstructureAmericaneconomy1951"
-Warning--I didn't find a database entry for "Daudincommerceexterieurvaleur2006"
-Warning--I didn't find a database entry for "DaudinWhoproduceswhom2011"
-Warning--I didn't find a database entry for "DeBackerInternationalComparativeEvidence2012"
-Warning--I didn't find a database entry for "JohnsonAccountingintermediatesProduction2012"
-Warning--I didn't find a database entry for "AmadorGlobalvaluechains2015"
-Warning--I didn't find a database entry for "Sato2014"
-Warning--I didn't find a database entry for "CapparielloHowdoesforeign2015"
-Warning--I didn't find a database entry for "BemsDemandValueAdded2015"
-Warning--I didn't find a database entry for "Bournaycomptabilitenationale2015"
-Warning--I didn't find a database entry for "AcemogluNetworkOriginsAggregate2012"
-Warning--I didn't find a database entry for "Carvalhomicromacroproduction2014"
 Warning--I didn't find a database entry for "TimmerIllustratedUserGuide2015"
-Warning--I didn't find a database entry for "DietzenbacherConstructionWorldInputOutput2013"
-(There were 15 warnings)
+Warning--there's a number but no volume in Daudin2006
+Warning--empty institution in Leontief1951
+(There were 3 warnings)

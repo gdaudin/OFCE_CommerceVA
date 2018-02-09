@@ -12,7 +12,7 @@ if ("`c(username)'"=="guillaumedaudin") do  "~/Documents/Recherche/2017 BDF_Comm
 if ("`c(username)'"=="w817186") do "X:\Agents\FAUBERT\commerce_VA_inflation\Definition_pays_secteur.do" `source'
 if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\Definition_pays_secteur.do" `source'
 	
-capture erase "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`type'.dta"
+
 	
 
 capture program drop etude
@@ -119,7 +119,9 @@ foreach source in  WIOD  TIVA {
 *	foreach i of numlist 2011  {
 	foreach i of numlist `start_year' (1)`end_year'  {
 		
+		capture erase "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_HC.dta"
 		etude `i' `source' HC
+		capture erase "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_par_sect.dta"
 		etude `i' `source' par_sect
 		
 	

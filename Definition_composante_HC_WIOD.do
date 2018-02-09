@@ -11,8 +11,8 @@ else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
 
 
 use "$dir/Bases/csv_WIOD.dta", clear
-
+generate agregat_secteur
 replace agregat_secteur="alimentaire" if s=="a01" || s=="a02" ||  s=="a03"
-replace agregat_secteur="manuf" if s=="a01" || s=="a02" ||  s=="a03"
+replace agregat_secteur="manuf" if s=="c01" || 
 
 save "$dir/Bases/csv_WIOD.dta", replace

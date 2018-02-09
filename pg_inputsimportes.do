@@ -290,8 +290,8 @@ foreach source in   WIOD  TIVA {
 
 
 
-	foreach i of numlist 2011  {
-*	foreach i of numlist `start_year' (1)`end_year'  {
+*	foreach i of numlist 2011  {
+	foreach i of numlist `start_year' (1)`end_year'  {
 		
 		imp_inputs_par_sect `i' `source' hze_not
 		imp_inputs_par_sect `i' `source' hze_yes

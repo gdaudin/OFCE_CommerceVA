@@ -98,7 +98,6 @@ append using "$dir/Bases/`source'_`yrs'_OUT.dta"
 
 *transpositin en colonne, puis création d'un ratio de CI importées par secteur 
 xpose, clear varname
-blink
 rename v1 ci_impt
 rename v2 prod
 generate ratio_ci_impt_prod=ci_impt / prod

@@ -12,7 +12,7 @@ if ("`c(username)'"=="guillaumedaudin") do  "~/Documents/Recherche/2017 BDF_Comm
 if ("`c(username)'"=="w817186") do "X:\Agents\FAUBERT\commerce_VA_inflation\Definition_pays_secteur.do" `source'
 if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\Definition_pays_secteur.do" `source'
 	
-
+capture erase "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`type'.dta"
 global eurozone "AUT BEL CYP DEU ESP EST FIN FRA GRC IRL ITA LTU LUX LVA MLT NLD PRT SVK SVN"
 
 capture program drop etude
@@ -27,20 +27,24 @@ args year source type
 if "`source'"=="TIVA" local liste_chocs shockEUR1-shockZAF1
 if "`source'"=="WIOD" local liste_chocs shockEUR1-shockUSA1
 
-
-
 if "`type'"=="HC" use "$dir/Results/Devaluations/mean_chg_`source'_HC_`year'.dta", clear
 if "`type'"=="par_sect" use "$dir/Results/Devaluations/`source'_C_`year'_exch.dta", clear
 
 
-***Calcul de l'effet des auto-chocs
 
 foreach var of varlist `liste_chocs' {
 	local pays = substr("`var'",6,3)
-	replace `var' = 0 if strmatch(c,"*`pays'*")==0
+	replace `var' = 0 if strmatch(c,"*`pays'*")==0 ///
+	& strpos("$china",c)==0 & strpos("$mexique",c)==0
+	replace `var' = 0 if "`var'"!="shockCHN1" & strpos("$china",c)!=0
+	replace `var' = 0 if "`var'"!="shockMEX1" & strpos("$mexique",c)!=0
 }
 
-egen s_pond_`source'_`type' = rowtotal(`liste_chocs')
+
+
+egen pond_`source'_`type' = rowtotal(`liste_chocs')
+
+
 drop shock*
 
 *** Calcul pour les pays de la ZE
@@ -68,8 +72,12 @@ rename s_ pond_`source'_`type'
 replace pond_`source'_`type' = -(pond_`source'_`type' - 1)/2
 
 *replace c =c+"_EUR" if source_shock=="EUR" 
+
+
+
 merge m:1 c using "$dir/Bases/Pays_FR.dta",keep(3)
 drop _merge
+
 
 gen pays=lower(c)
 if "`type'"=="par_sect" rename s sector
@@ -121,8 +129,8 @@ save "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`type'.dta", 
 
 end 
 
-*foreach source in  WIOD  {
-foreach source in  WIOD  TIVA {
+foreach source in  TIVA  {
+*foreach source in  WIOD  TIVA {
 
 
 
@@ -136,14 +144,13 @@ foreach source in  WIOD  TIVA {
 
 
 
-*	foreach i of numlist 2011  {
-	foreach i of numlist `start_year' (1)`end_year'  {
+	foreach i of numlist 2011  {
+*	foreach i of numlist `start_year' (1)`end_year'  {
 		
 		capture erase "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_HC.dta"
 		etude `i' `source' HC
 		capture erase "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_par_sect.dta"
 		etude `i' `source' par_sect
-		
 	
 		clear
 	}
@@ -153,3 +160,7 @@ foreach source in  WIOD  TIVA {
 }
 
 
+
+*************************
+**Pour traiter la zone euro
+******************************

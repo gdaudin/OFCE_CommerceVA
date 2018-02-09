@@ -12,8 +12,8 @@ if ("`c(username)'"=="guillaumedaudin") do  "~/Documents/Recherche/2017 BDF_Comm
 if ("`c(username)'"=="w817186") do "X:\Agents\FAUBERT\commerce_VA_inflation\Definition_pays_secteur.do" `source'
 if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\Definition_pays_secteur.do" `source'
 	
-capture erase "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`type'.dta"
-	
+
+global eurozone "AUT BEL CYP DEU ESP EST FIN FRA GRC IRL ITA LTU LUX LVA MLT NLD PRT SVK SVN"
 
 capture program drop etude
 program etude
@@ -27,26 +27,53 @@ args year source type
 if "`source'"=="TIVA" local liste_chocs shockEUR1-shockZAF1
 if "`source'"=="WIOD" local liste_chocs shockEUR1-shockUSA1
 
+
+
 if "`type'"=="HC" use "$dir/Results/Devaluations/mean_chg_`source'_HC_`year'.dta", clear
 if "`type'"=="par_sect" use "$dir/Results/Devaluations/`source'_C_`year'_exch.dta", clear
 
 
+***Calcul de l'effet des auto-chocs
 
 foreach var of varlist `liste_chocs' {
 	local pays = substr("`var'",6,3)
 	replace `var' = 0 if strmatch(c,"*`pays'*")==0
 }
 
-egen pond_`source'_`type' = rowtotal(`liste_chocs')
-replace pond_`source'_`type' = -(pond_`source'_`type' - 1)/2
-
+egen s_pond_`source'_`type' = rowtotal(`liste_chocs')
 drop shock*
 
+*** Calcul pour les pays de la ZE
+if "`type'"=="HC" {
+	merge 1:1 c using "$dir/Results/Devaluations/mean_chg_`source'_HC_`year'.dta"
+	keep c s_pond_`source'_`type' shockEUR
+}
+if "`type'"=="par_sect" {
+	merge 1:1 using "$dir/Results/Devaluations/`source'_C_`year'_exch.dta", clear
+	keep c s s_pond_`source'_`type' shockEUR
+}
+
+rename shockEUR1 s_EUR
+
+if "`type'"=="HC" reshape long s_, i(c) j(source_shock) string
+if "`type'"=="par_sect"  reshape long s_, i(c s) j(source_shock) string
+
+
+
+drop if strpos("$eurozone",c)==0 & source_shock=="EUR" 
+
+
+rename s_ pond_`source'_`type'
+
+replace pond_`source'_`type' = -(pond_`source'_`type' - 1)/2
+
+*replace c =c+"_EUR" if source_shock=="EUR" 
 merge m:1 c using "$dir/Bases/Pays_FR.dta",keep(3)
 drop _merge
 
 gen pays=lower(c)
 if "`type'"=="par_sect" rename s sector
+if "`type'"=="par_sect" replace sector=lower(sector)
 
 if "`type'"=="HC" merge 1:1 pays using "$dir/Bases/imp_inputs_HC_`year'_`source'_hze_not.dta"
 if "`type'"=="par_sect" {
@@ -112,7 +139,9 @@ foreach source in  WIOD  TIVA {
 *	foreach i of numlist 2011  {
 	foreach i of numlist `start_year' (1)`end_year'  {
 		
+		capture erase "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_HC.dta"
 		etude `i' `source' HC
+		capture erase "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_par_sect.dta"
 		etude `i' `source' par_sect
 		
 	
@@ -124,7 +153,3 @@ foreach source in  WIOD  TIVA {
 }
 
 
-
-*************************
-**Pour traiter la zone euro
-******************************

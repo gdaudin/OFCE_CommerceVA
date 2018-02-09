@@ -55,25 +55,26 @@ keep pays $var_entree_sortie
 
 foreach var of varlist $var_entree_sortie {
 *	On cherche à enlever les auto-consommations intermédiaires
-	if "`source'" == "TIVA" local pays_colonne = upper(substr("`var'",1,3))
-	if "`source'" == "WIOD" local pays_colonne = upper(substr("`var'",2,3))
+	if "`source'" == "TIVA" local pays_colonne = substr("`var'",1,3)
+	if "`source'" == "WIOD" local pays_colonne = substr("`var'",2,3)
 	
 	replace `var' = 0 if pays=="`pays_colonne'"
 	
-	if strpos("$china","`pays_colonne'")!=0  {
+	
+	if strpos(lower("$china"),"`pays_colonne'")!=0  {
 			foreach i of global china {	
-			replace `var' = 0 if pays == "`i'"
+			replace `var' = 0 if pays == lower("`i'")
 		}
 	}
 	
 	
-	if strpos("$mexique","`pays_colonne'")!=0 {
+	if strpos(lower("$mexique"),"`pays_colonne'")!=0 {
 			foreach i of global mexique {	
-			replace `var' = 0 if pays == "`i'"
+			replace `var' = 0 if pays == lower("`i'")
 		}
 	}
 		
-	if "`hze'"=="hze_yes" & strpos("$eurozone","`pays_colonne'")!=0 {
+	if "`hze'"=="hze_yes" & strpos(lower("$eurozone"),"`pays_colonne'")!=0 {
 	
 		*display "turf"
 	
@@ -97,9 +98,12 @@ append using "$dir/Bases/`source'_`yrs'_OUT.dta"
 
 *transpositin en colonne, puis création d'un ratio de CI importées par secteur 
 xpose, clear varname
+blink
 rename v1 ci_impt
 rename v2 prod
 generate ratio_ci_impt_prod=ci_impt / prod
+
+
 
 
 /*
@@ -182,9 +186,8 @@ if "`vector'" == "HC"  {
 	
 	if "`source'"=="TIVA" {
 		use  "$dir/Bases/imp_inputs_par_sect_`yrs'_`source'_`hze'.dta", replace
-		gen pays_1 = pays
-		replace pays = "chn" if pays_1=="cn1" | pays_1=="cn2" | pays_1=="cn3" | pays_1=="cn4" 
-		replace pays = "mex" if pays_1=="mx1" | pays_1=="mx2" | pays_1=="mx3"
+		replace pays = "chn" if pays=="cn1" | pays=="cn2" | pays=="cn3" | pays=="cn4" 
+		replace pays = "mex" if pays=="mx1" | pays=="mx2" | pays=="mx3"
 		collapse (sum) ci_impt prod, by(pays sector)
 		generate ratio_ci_impt_prod=ci_impt / prod
 		save "$dir/Bases/imp_inputs_par_sect_modif.dta", replace
@@ -192,6 +195,7 @@ if "`vector'" == "HC"  {
 	
 
 	use "$dir/Bases/HC_`source'.dta", clear
+	replace pays=lower(pays)
 	if "`source'"=="TIVA" {
 		replace pays = "chn" if pays=="cn1" | pays=="cn2" | pays=="cn3" | pays=="cn4" 
 		replace pays = "mex" if pays=="mx1" | pays=="mx2" | pays=="mx3"
@@ -201,7 +205,6 @@ if "`vector'" == "HC"  {
 	*HC se présente avec le pays d'origine du bien, puis les pays de consommation 
 	*Manipulation de la base de données HC en vue d'ordonner la consommation du pays_conso pour tous les secteurs
 	keep if lower(pays)==lower(pays_conso) 
-	keep if lower(pays)==(pays_conso) 
 	keep if year==`yrs'
 	
 	if "`source'"=="WIOD" replace pays=lower(pays)
@@ -273,7 +276,7 @@ if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\De
 */
 
 
-
+*foreach source in TIVA {
 foreach source in   WIOD  TIVA {
 
 
@@ -288,8 +291,8 @@ foreach source in   WIOD  TIVA {
 
 
 
-*	foreach i of numlist 2011  {
-	foreach i of numlist `start_year' (1)`end_year'  {
+	foreach i of numlist 2011  {
+*	foreach i of numlist `start_year' (1)`end_year'  {
 		
 		imp_inputs_par_sect `i' `source' hze_not
 		imp_inputs_par_sect `i' `source' hze_yes

@@ -15,13 +15,13 @@ capture log using "$dir/$S_DATE.log", replace
 set more off
 
 
-do "$dirgit/1_constr_bases.do"
+*do "$dirgit/1_constr_bases.do"
 *do "$dirgit/compute_HC.do"
 *do "$dirgit/compute_X.do"
  
 
-do "$dirgit/choc_chge.do"
-do "$dirgit/Aggregation_effets_des_chocs.do"
+*do "$dirgit/choc_chge.do"
+*do "$dirgit/Aggregation_effets_des_chocs.do"
 do "$dirgit/pg_inputsimportes.do"
 do "$dirgit/Étude rapport D+I et Bouclage Mondial.do"
 

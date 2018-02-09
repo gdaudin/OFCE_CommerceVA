@@ -34,8 +34,13 @@ if "`type'"=="par_sect" use "$dir/Results/Devaluations/`source'_C_`year'_exch.dt
 
 foreach var of varlist `liste_chocs' {
 	local pays = substr("`var'",6,3)
-	replace `var' = 0 if strmatch(c,"*`pays'*")==0
+	replace `var' = 0 if strmatch(c,"*`pays'*")==0 ///
+	& strpos("$china",c)==0 & strpos("$mexique",c)==0
+	replace `var' = 0 if "`var'"!="shockCHN1" & strpos("$china",c)!=0
+	replace `var' = 0 if "`var'"!="shockMEX1" & strpos("$mexique",c)!=0
 }
+
+
 
 egen pond_`source'_`type' = rowtotal(`liste_chocs')
 replace pond_`source'_`type' = -(pond_`source'_`type' - 1)/2
@@ -45,8 +50,10 @@ drop shock*
 merge m:1 c using "$dir/Bases/Pays_FR.dta",keep(3)
 drop _merge
 
+
 gen pays=lower(c)
 if "`type'"=="par_sect" rename s sector
+if "`type'"=="par_sect" replace sector=lower(sector)
 
 if "`type'"=="HC" merge 1:1 pays using "$dir/Bases/imp_inputs_HC_`year'_`source'_hze_not.dta"
 if "`type'"=="par_sect" {
@@ -94,7 +101,7 @@ save "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`type'.dta", 
 
 end 
 
-*foreach source in  WIOD  {
+*foreach source in  TIVA  {
 foreach source in  WIOD  TIVA {
 
 

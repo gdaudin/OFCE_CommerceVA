@@ -29,8 +29,8 @@ if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\De
 use "$dir/Bases/`source'_ICIO_`yrs'.dta"
 if "`source'"=="TIVA" {
 	drop if v1 == "VA+TAXSUB" | v1 == "OUT"
-	gen pays=upper(substr(v1,1,3))
-	gen secteur = upper(substr(v1,5,.))
+	gen pays=lower(substr(v1,1,3))
+	gen secteur = lower(substr(v1,5,.))
 	order pays secteur
 }
 
@@ -117,6 +117,7 @@ if "`source'"=="WIOD" {
 merge 1:1 _n using "$dir/Bases/csv_`source'.dta"
 rename c pays
 rename s sector
+replace sector = lower(sector)
 replace pays=lower(pays)
 drop p_shock
 drop _merge
@@ -204,14 +205,14 @@ if "`vector'" == "HC"  {
 	keep if year==`yrs'
 	
 	if "`source'"=="WIOD" replace pays=lower(pays)
-	if "`source'"=="WIOD" replace sector=upper(sector)
+	if "`source'"=="WIOD" replace sector=lower(sector)
 	if "`source'"=="WIOD" merge 1:1 pays sector using  "$dir/Bases/imp_inputs_par_sect_`yrs'_`source'_`hze'.dta"
-	
-	if "`source'"=="TIVA" merge 1:1 pays sector using  "$dir/Bases/imp_inputs_par_sect_modif.dta"
+	if "`source'"=="TIVA" merge 1:1 pays sector using  "$dir/Bases/imp_inputs_par_sect_modif.dta" 
 	if "`source'"=="TIVA" erase  "$dir/Bases/imp_inputs_par_sect_modif.dta"
 	drop _merge
 		
 	gen ci_impt_HC = ratio_ci_impt_prod * conso
+	
 	
 	collapse (sum) ci_impt_HC conso, by(pays)
 	generate ratio_ci_impt_HC = ci_impt_HC/conso
@@ -301,8 +302,9 @@ foreach source in   WIOD  TIVA {
 
 }
 
+*/
 
-
+*foreach source in  TIVA {
 foreach source in  WIOD  TIVA {
 
 

@@ -12,61 +12,71 @@ if ("`c(username)'"=="guillaumedaudin") do  "~/Documents/Recherche/2017 BDF_Comm
 if ("`c(username)'"=="w817186") do "X:\Agents\FAUBERT\commerce_VA_inflation\Definition_pays_secteur.do" `source'
 if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\Definition_pays_secteur.do" `source'
 	
-capture erase "$dir/Results/Étude rapport D+I et Bouclage Mondial/results.dta"
+
 	
 
 capture program drop etude
 program etude
-args year source
+args year source type
 
-**Exemple : etude 2011 WIOD
+**Exemple : etude 2011 WIOD HC
+**Exemple : etude 2011 WIOD par_sect
 	
 
 
 if "`source'"=="TIVA" local liste_chocs shockEUR1-shockZAF1
 if "`source'"=="WIOD" local liste_chocs shockEUR1-shockUSA1
 
-use "$dir/Results/Devaluations/mean_chg_`source'_HC_`year'.dta", clear
+if "`type'"=="HC" use "$dir/Results/Devaluations/mean_chg_`source'_HC_`year'.dta", clear
+if "`type'"=="par_sect" use "$dir/Results/Devaluations/`source'_C_`year'_exch.dta", clear
 
 
 
 foreach var of varlist `liste_chocs' {
 	local pays = substr("`var'",6,3)
-	replace `var' = 0 if strmatch(c,"*`pays'*")==0
+	replace `var' = 0 if strmatch(c,"*`pays'*")==0 ///
+	& strpos("$china",c)==0 & strpos("$mexique",c)==0
+	replace `var' = 0 if "`var'"!="shockCHN1" & strpos("$china",c)!=0
+	replace `var' = 0 if "`var'"!="shockMEX1" & strpos("$mexique",c)!=0
 }
 
-egen pond_`source'_HC = rowtotal(`liste_chocs')
-replace pond_`source'_HC = -(pond_`source'_HC - 1)/2
 
-keep c pond_`source'_HC
-merge 1:1 c using "$dir/Bases/Pays_FR.dta",keep(3)
+
+egen pond_`source'_`type' = rowtotal(`liste_chocs')
+replace pond_`source'_`type' = -(pond_`source'_`type' - 1)/2
+
+drop shock*
+
+merge m:1 c using "$dir/Bases/Pays_FR.dta",keep(3)
 drop _merge
 
+
 gen pays=lower(c)
+if "`type'"=="par_sect" rename s sector
+if "`type'"=="par_sect" replace sector=lower(sector)
 
-merge 1:1 pays using "$dir/Bases/imp_inputs_HC_`year'_`source'_hze_not.dta"
+if "`type'"=="HC" merge 1:1 pays using "$dir/Bases/imp_inputs_HC_`year'_`source'_hze_not.dta"
+if "`type'"=="par_sect" {
+	merge 1:1 pays sector using "$dir/Bases/imp_inputs_par_sect_`year'_`source'_hze_not.dta"
+	rename ratio_ci_impt_prod ratio_ci_impt_`type'
+}
 *drop if c=="CHN"
+*hze_not : on considère les autres pays de la ZE comme étranger (contraire de hze_yes)
 
-*label var pond_`source'_HC "Élasticité des prix de consommation en monnaie nationale à un choc de la monnaie nationale"
-label var pond_`source'_HC "Consumer prices elasticity"
+label var pond_`source'_`type' "Élasticité des prix (`type') en monnaie nationale à un choc de la monnaie nationale"
 
-graph twoway (scatter pond_`source'_HC ratio_ci_impt_HC, ms(0) mlabel(c) ) (lfit pond_`source'_HC ratio_ci_impt_HC)  , ///
-			xtitle("Import intensity of consumption") ytitle("Consumer prices elasticity") ///
+graph twoway (scatter pond_`source'_`type' ratio_ci_impt_`type', mlabel(c_full_FR)) (lfit pond_`source'_`type' ratio_ci_impt_`type')  , ///
+			title("Elasticité des prix (`type') à une dévaluation") ///
+			xtitle("Parts de l'étranger (`type')") ytitle("Elasticité prix (`type'). ") ///
 			yscale(range(0.0 0.3)) xscale(range(0.0 0.3)) xlabel (0.0(0.05) 0.3) ylabel(0.0(0.05) 0.3) 
+*dans le cas HC, xtitle pourrait se finir par «importées dans la conso dom + part conso importée»			
 			
-graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/graph_`year'_`source'.pdf", replace
+			
+graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/graph_`year'_`source'_`type'.pdf", replace
 graph close
-/*
-graph twoway (scatter pond_`source'_HC ratio_ci_impt_HC, mlabel(c_full_FR)) (lfit pond_`source'_HC ratio_ci_impt_HC)  , ///
-			title("Elasticité des prix de consommation à une dévaluation") ///
-			xtitle("Parts des CI importées dans la conso dom + part conso importée") ytitle("Elasticité prix de conso. ") ///
-			yscale(range(0.0 0.3)) xscale(range(0.0 0.3)) xlabel (0.0(0.05) 0.3) ylabel(0.0(0.05) 0.3) 
+
 			
-graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/graph_`year'_`source'.pdf", replace
-graph close
-*/
-			
-reg pond_`source'_HC ratio_ci_impt_HC	
+reg pond_`source'_`type' ratio_ci_impt_`type'	
 gen R2=e(r2)
 matrix COEF = e(b)
 gen cst=COEF[1,2]
@@ -74,23 +84,24 @@ gen b=COEF[1,1]
 gen year=`year'
 gen source="`source'"
 predict predict
-valuesof pays if abs(ln(predict/pond_`source'_HC)) > 0.35
-gen predict_hors_0_1 = "`r(values)'"
-valuesof pays if ratio_ci_impt_HC >= pond_`source'_HC
+valuesof pays if abs(ln(predict/pond_`source'_`type')) > 0.35
+gen predict_hors_0_0_35 = "`r(values)'"
+valuesof pays if ratio_ci_impt_`type' >= pond_`source'_`type'
 gen D_I_trop_grand = "`r(values)'"
-corr pond_`source'_HC ratio_ci_impt_HC
+corr pond_`source'_`type' ratio_ci_impt_`type'
 gen corr = r(rho)
 
-save "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`year'_`source'.dta", replace 
+save "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`year'_`source'_`type'.dta", replace 
 keep if _n==1
 keep R2-corr
-capture append using "$dir/Results/Étude rapport D+I et Bouclage Mondial/results.dta"
-save "$dir/Results/Étude rapport D+I et Bouclage Mondial/results.dta", replace
+capture append using "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`type'.dta"
+save "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`type'.dta", replace
 
 
 
 end 
 
+*foreach source in  TIVA  {
 foreach source in  WIOD  TIVA {
 
 
@@ -108,7 +119,10 @@ foreach source in  WIOD  TIVA {
 *	foreach i of numlist 2011  {
 	foreach i of numlist `start_year' (1)`end_year'  {
 		
-		etude `i' `source'
+		capture erase "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_HC.dta"
+		etude `i' `source' HC
+		capture erase "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_par_sect.dta"
+		etude `i' `source' par_sect
 		
 	
 		clear
@@ -122,107 +136,4 @@ foreach source in  WIOD  TIVA {
 
 *************************
 **Pour traiter la zone euro
-**On enlève les CI importées de l'intra ZE par les membres de la ZE
 ******************************
-
-
-capture erase "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_hze_yes.dta"
-capture program drop etude_hze_yes
-program etude_hze_yes
-args year source
-
-if "`source'"=="TIVA" local liste_chocs shockEUR1-shockZAF1
-if "`source'"=="WIOD" local liste_chocs shockEUR1-shockUSA1
-
-use "$dir/Results/Devaluations/mean_chg_`source'_HC_`year'.dta", clear
-
-
-
-foreach var of varlist `liste_chocs' {
-	local pays = substr("`var'",6,3)
-	replace `var' = 0 if strmatch(c,"*`pays'*")==0
-}
-
-egen pond_`source'_HC = rowtotal(`liste_chocs')
-replace pond_`source'_HC = -(pond_`source'_HC - 1)/2
-
-keep c pond_`source'_HC
-merge 1:1 c using "$dir/Bases/Pays_FR.dta",keep(3)
-drop _merge
-
-gen pays=lower(c)
-
-merge 1:1 pays using "$dir/Bases/imp_inputs_HC_`year'_`source'_hze_yes.dta"
-*drop if c=="CHN"
-
-*label var pond_`source'_HC "Élasticité des prix de consommation en monnaie nationale à un choc de la monnaie nationale"
-label var pond_`source'_HC "Consumer prices elasticity"
-
-graph twoway (scatter pond_`source'_HC ratio_ci_impt_HC, ms(0) mlabel(c) ) (lfit pond_`source'_HC ratio_ci_impt_HC)  , ///
-			xtitle("Import intensity of consumption") ytitle("Consumer prices elasticity") ///
-			yscale(range(0.0 0.3)) xscale(range(0.0 0.3)) xlabel (0.0(0.05) 0.3) ylabel(0.0(0.05) 0.3) 
-			
-graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/graph_`year'_`source'_hze_yes.pdf", replace
-graph close
-/*
-graph twoway (scatter pond_`source'_HC ratio_ci_impt_HC, mlabel(c_full_FR)) (lfit pond_`source'_HC ratio_ci_impt_HC)  , ///
-			title("Elasticité des prix de consommation à une dévaluation") ///
-			xtitle("Parts des CI importées dans la conso dom + part conso importée") ytitle("Elasticité prix de conso. ") ///
-			yscale(range(0.0 0.3)) xscale(range(0.0 0.3)) xlabel (0.0(0.05) 0.3) ylabel(0.0(0.05) 0.3) 
-			
-graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/graph_`year'_`source'.pdf", replace
-graph close
-*/
-			
-reg pond_`source'_HC ratio_ci_impt_HC	
-gen R2=e(r2)
-matrix COEF = e(b)
-gen cst=COEF[1,2]
-gen b=COEF[1,1]
-gen year=`year'
-gen source="`source'"
-predict predict
-valuesof pays if abs(ln(predict/pond_`source'_HC)) > 0.35
-gen predict_hors_0_1 = "`r(values)'"
-valuesof pays if ratio_ci_impt_HC >= pond_`source'_HC
-gen D_I_trop_grand = "`r(values)'"
-corr pond_`source'_HC ratio_ci_impt_HC
-gen corr = r(rho)
-
-save "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`year'_`source'_hze_yes.dta", replace 
-keep if _n==1
-keep R2-corr
-capture append using "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_hze_yes.dta"
-save "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_hze_yes.dta", replace
-
-
-
-end 
-
-foreach source in  WIOD  TIVA {
-
-
-
-	if "`source'"=="WIOD" local start_year 2000
-	if "`source'"=="TIVA" local start_year 1995
-
-
-	if "`source'"=="WIOD" local end_year 2014
-	if "`source'"=="TIVA" local end_year 2011
-	
-
-
-
-*	foreach i of numlist 2011  {
-	foreach i of numlist `start_year' (1)`end_year'  {
-		
-		etude_hze_yes `i' `source'
-		
-	
-		clear
-	}
-
-
-
-}
-

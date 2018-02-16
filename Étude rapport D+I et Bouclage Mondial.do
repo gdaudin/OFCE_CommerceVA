@@ -54,22 +54,27 @@ drop shock*
 *** Calcul pour les pays de la ZE
 if "`type'"=="HC" {
 	merge 1:1 c using "$dir/Results/Devaluations/mean_chg_`source'_HC_`year'.dta"
-	keep c s_pond_`source'_`type' shockEUR
+	keep c pond_`source'_`type' shockEUR
 }
 if "`type'"=="par_sect" {
 	merge 1:1 using "$dir/Results/Devaluations/`source'_C_`year'_exch.dta", clear
-	keep c s s_pond_`source'_`type' shockEUR
+	keep c s pond_`source'_`type' shockEUR
 }
 
 rename shockEUR1 s_EUR
+rename pond_`source'_`type' s_auto
+
+
 
 if "`type'"=="HC" reshape long s_, i(c) j(source_shock) string
 if "`type'"=="par_sect"  reshape long s_, i(c s) j(source_shock) string
 
 
-
 drop if strpos("$eurozone",c)==0 & source_shock=="EUR" 
 
+rename c=c+"_EUR" if source_shock=="EUR" 
+
+drop source_shock
 
 rename s_ pond_`source'_`type'
 

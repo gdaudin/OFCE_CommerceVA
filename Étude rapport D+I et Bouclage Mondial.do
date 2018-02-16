@@ -63,6 +63,13 @@ if "`type'"=="par_sect" {
 *drop if c=="CHN"
 *hze_not : on considère les autres pays de la ZE comme étranger (contraire de hze_yes)
 
+*effet direct repondéré par le choc: le choc correspond à une appréciation de 100% 
+*=>on double l'impact pour comparer le ratio de CI importées (comptable) à l'effet direct choqué
+gen choc_dplusi_`type'=ratio_ci_impt_`type'/2
+
+
+
+
 label var pond_`source'_`type' "Élasticité des prix (`type') en monnaie nationale à un choc de la monnaie nationale"
 
 graph twoway (scatter pond_`source'_`type' ratio_ci_impt_`type', mlabel(c_full_FR)) (lfit pond_`source'_`type' ratio_ci_impt_`type')  , ///
@@ -75,8 +82,10 @@ graph twoway (scatter pond_`source'_`type' ratio_ci_impt_`type', mlabel(c_full_F
 graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/graph_`year'_`source'_`type'.pdf", replace
 graph close
 
+	
+
 			
-reg pond_`source'_`type' ratio_ci_impt_`type'	
+reg pond_`source'_`type' choc_dplusi_`type'	
 gen R2=e(r2)
 matrix COEF = e(b)
 gen cst=COEF[1,2]
@@ -86,9 +95,9 @@ gen source="`source'"
 predict predict
 valuesof pays if abs(ln(predict/pond_`source'_`type')) > 0.35
 gen predict_hors_0_0_35 = "`r(values)'"
-valuesof pays if ratio_ci_impt_`type' >= pond_`source'_`type'
+valuesof pays if choc_dplusi_`type'>= pond_`source'_`type'
 gen D_I_trop_grand = "`r(values)'"
-corr pond_`source'_`type' ratio_ci_impt_`type'
+corr pond_`source'_`type' choc_dplusi_`type'	
 gen corr = r(rho)
 
 save "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`year'_`source'_`type'.dta", replace 

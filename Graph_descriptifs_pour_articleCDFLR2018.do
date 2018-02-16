@@ -255,7 +255,24 @@ graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/Graph_ratiodi
 
 
 
-*traduction en anglais du graph pente de la courbe
+*graphique des ci par secteur
+
+ foreach i in c10-c12 c13-c15 c16 c17 c18 c19 c20 c21 c22 c23 c24 c25 c26 c27 c28 c29 c30 c31_c32 c33 {
+use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_2014_WIOD_par_sect.dta", clear
+keep c   sector ratio_ci_impt_par_sect year
+keep if sector=="`i'"
+rename ratio_ci_impt_par_sect  ratio_ci_impt_par_sect_2014
+label var ratio_ci_impt_par_sect_2014 "CI importées"
+save "$dir/Results/Étude rapport D+I et Bouclage Mondial/Pour_Graph_WIOD_2014_ci.dta", replace
+use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_2000_WIOD_par_sect.dta", clear
+keep c   sector ratio_ci_impt_par_sect year
+keep if sector=="`i'"
+rename ratio_ci_impt_par_sect  ratio_ci_impt_par_sect_2000
+merge 1:1 c using "$dir/Results/Étude rapport D+I et Bouclage Mondial/Pour_Graph_WIOD_2014_ci.dta"
+drop _merge 
+graph bar (asis) ratio_ci_impt_par_sect_2000 ratio_ci_impt_par_sect_2014,  title(" `i'") over(c, sort(year)  label(angle(vertical) labsize(vsmall))) 
+graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/Graph_WIOD_2014_ci_`i'.png", replace
+}
 
 
 

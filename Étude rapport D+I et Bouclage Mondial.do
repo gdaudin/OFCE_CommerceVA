@@ -51,13 +51,13 @@ egen pond_`source'_`type' = rowtotal(`liste_chocs')
 
 drop shock*
 
-*** Calcul pour les pays de la ZE
+*** Pour aller chercher les chocs de la ZE
 if "`type'"=="HC" {
 	merge 1:1 c using "$dir/Results/Devaluations/mean_chg_`source'_HC_`year'.dta"
 	keep c pond_`source'_`type' shockEUR
 }
 if "`type'"=="par_sect" {
-	merge 1:1 using "$dir/Results/Devaluations/`source'_C_`year'_exch.dta", clear
+	merge 1:1 c s using "$dir/Results/Devaluations/`source'_C_`year'_exch.dta"
 	keep c s pond_`source'_`type' shockEUR
 }
 
@@ -72,37 +72,55 @@ if "`type'"=="par_sect"  reshape long s_, i(c s) j(source_shock) string
 
 drop if strpos("$eurozone",c)==0 & source_shock=="EUR" 
 
-rename c=c+"_EUR" if source_shock=="EUR" 
+replace c=c+"_EUR" if source_shock=="EUR" 
 
 drop source_shock
 
 rename s_ pond_`source'_`type'
+
 
 replace pond_`source'_`type' = -(pond_`source'_`type' - 1)/2
 
 *replace c =c+"_EUR" if source_shock=="EUR" 
 
 
-
-merge m:1 c using "$dir/Bases/Pays_FR.dta",keep(3)
-drop _merge
-
-
 gen pays=lower(c)
 if "`type'"=="par_sect" rename s sector
 if "`type'"=="par_sect" replace sector=lower(sector)
 
-if "`type'"=="HC" merge 1:1 pays using "$dir/Bases/imp_inputs_HC_`year'_`source'_hze_not.dta"
+if "`type'"=="HC" {
+	merge 1:1 pays using "$dir/Bases/imp_inputs_HC_`year'_`source'_hze_not.dta"
+	drop _merge
+	replace pays =pays+"_AUTO"
+	replace pays = substr(pays,1,3) if strmatch(pays,"*_eur_AUTO")==1
+	merge 1:1 pays using "$dir/Bases/imp_inputs_HC_`year'_`source'_hze_yes.dta", update
+	drop _merge
+	replace pays = pays+"_eur" if strlen(pays)==3
+	replace pays =substr(pays,1,3) if strmatch(pays,"*_AUTO")==1
+}
+
+
 if "`type'"=="par_sect" {
 	merge 1:1 pays sector using "$dir/Bases/imp_inputs_par_sect_`year'_`source'_hze_not.dta"
+	drop _merge
+	replace pays =pays+"_AUTO"
+	replace pays = substr(pays,1,3) if strmatch(pays,"*_eur_AUTO")==1
+	
+	merge 1:1 pays sector using "$dir/Bases/imp_inputs_par_sect_`year'_`source'_hze_yes.dta", update
+	drop _merge
+	replace pays = pays+"_eur" if strlen(pays)==3
+	replace pays =substr(pays,1,3) if strmatch(pays,"*_AUTO")==1
+	
 	rename ratio_ci_impt_prod ratio_ci_impt_`type'
 }
+
+
 *drop if c=="CHN"
 *hze_not : on considère les autres pays de la ZE comme étranger (contraire de hze_yes)
 
 label var pond_`source'_`type' "Élasticité des prix (`type') en monnaie nationale à un choc de la monnaie nationale"
 
-graph twoway (scatter pond_`source'_`type' ratio_ci_impt_`type', mlabel(c_full_FR)) (lfit pond_`source'_`type' ratio_ci_impt_`type')  , ///
+graph twoway (scatter pond_`source'_`type' ratio_ci_impt_`type', mlabel(c)) (lfit pond_`source'_`type' ratio_ci_impt_`type')  , ///
 			title("Elasticité des prix (`type') à une dévaluation") ///
 			xtitle("Parts de l'étranger (`type')") ytitle("Elasticité prix (`type'). ") ///
 			yscale(range(0.0 0.3)) xscale(range(0.0 0.3)) xlabel (0.0(0.05) 0.3) ylabel(0.0(0.05) 0.3) 
@@ -138,8 +156,8 @@ save "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`type'.dta", 
 
 end 
 
-foreach source in  TIVA  {
-*foreach source in  WIOD  TIVA {
+*foreach source in  TIVA  {
+foreach source in  WIOD  TIVA {
 
 
 
@@ -153,8 +171,8 @@ foreach source in  TIVA  {
 
 
 
-	foreach i of numlist 2011  {
-*	foreach i of numlist `start_year' (1)`end_year'  {
+*	foreach i of numlist 2011  {
+    foreach i of numlist `start_year' (1)`end_year'  {
 		
 		capture erase "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_HC.dta"
 		etude `i' `source' HC

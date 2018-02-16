@@ -38,22 +38,22 @@ valuesof pays if ratio_ci_impt_par_sect >= pond_WIOD_par_sect
 gen D_I_trop_grand = "`r(values)'"
 corr pond_WIOD_par_sect ratio_ci_impt_par_sect
 gen corr = r(rho)
-  
+
 save "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`year'_WIOD_`i'.dta", replace 
-capture append using "$dir/Results/Étude rapport D+I et Bouclage Mondial/results`_`year'_WIOD_reg_sec.dta"
-save "$dir/Results/Étude rapport D+I et Bouclage Mondial/results`_`year'_WIOD_reg_sec.dta", replace
- 
+capture append using "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`year'_WIOD_reg_sec.dta"
+save "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`year'_WIOD_reg_sec.dta", replace
 }
 }
 
 
- *création d'une base de données avec tous les sectures        
-capture erase "$dir/Results/Étude rapport D+I et Bouclage Mondial/results`_`year'_WIOD_reg_sec.dta"
-foreach i in $sec {
+ *création d'une base de données avec tous les secteurs        
  foreach year in 2014 {
- use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`year'_WIOD_`i'.dta", clear 
-*keep c b sector pays ratio_ci_impt_par_sect  pond_WIOD_par_sectcapture append using "$dir/Results/Étude rapport D+I et Bouclage Mondial/results`_`year'_WIOD_reg_sec.dta"
-  sort c b
- save "$dir/Results/Étude rapport D+I et Bouclage Mondial/results`_`year'_WIOD_reg_sec.dta", replace
-  }
+ capture erase "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`year'_WIOD_reg_sec.dta"
+ foreach i in  $sec {
+ use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`year'_WIOD_`i'.dta", clear
+ keep c b sector  ratio_ci_impt_par_sect  pond_WIOD_par_sect R2 cst year source
+capture append using "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`year'_WIOD_reg_sec.dta"
+sort  b sector
+save "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`year'_WIOD_reg_sec.dta", replace
+ }
    }

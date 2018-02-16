@@ -118,7 +118,7 @@ if "`type'"=="par_sect" {
 	rename ratio_ci_impt_prod ratio_ci_impt_`type'
 }
 
-gen choc_D+I_`type' = ratio_ci_impt_`type'
+gen choc_DplusI_`type' = ratio_ci_impt_`type'
 
 *drop if c=="CHN"
 *hze_not : on considère les autres pays de la ZE comme étranger (contraire de hze_yes)
@@ -146,6 +146,7 @@ graph close
 
 			
 reg pond_`source'_`type' choc_dplusi_`type'	
+blif
 gen R2=e(r2)
 matrix COEF = e(b)
 gen cst=COEF[1,2]

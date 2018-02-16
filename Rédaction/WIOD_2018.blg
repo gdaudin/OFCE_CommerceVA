@@ -1,7 +1,18 @@
 This is BibTeX, Version 0.99dThe top-level auxiliary file: WIOD_2018.aux
 The style file: elsarticle-harv.bst
 Database file #1: PapiertransmissiondeschocsenVA.bib
-Warning--I didn't find a database entry for "TimmerIllustratedUserGuide2015"
-Warning--there's a number but no volume in Daudin2006
-Warning--empty institution in Leontief1951
-(There were 3 warnings)
+Repeated entry---line 847 of file PapiertransmissiondeschocsenVA.bib
+ : @article{Timmerillustrateduserguide2015
+ :                                        ,
+I'm skipping whatever remains of this entry
+Name 1 in "Antoun de Almeida, Luiza," has a comma at the end for entry AntoundeAlmeida2016
+while executing---line 1438 of file elsarticle-harv.bst
+Name 1 in "Antoun de Almeida, Luiza," has a comma at the end for entry AntoundeAlmeida2016
+while executing---line 1438 of file elsarticle-harv.bst
+Name 1 in "Antoun de Almeida, Luiza," has a comma at the end for entry AntoundeAlmeida2016
+while executing---line 1527 of file elsarticle-harv.bst
+Name 1 in "Antoun de Almeida, Luiza," has a comma at the end for entry AntoundeAlmeida2016
+while executing---line 1527 of file elsarticle-harv.bst
+Warning--there's a number but no volume in Daudincommerceexterieurvaleur2006
+Warning--empty institution in LeontiefstructureAmericaneconomy1951
+(There were 5 error messages)

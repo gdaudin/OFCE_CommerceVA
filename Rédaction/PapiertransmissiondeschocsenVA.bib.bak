@@ -2,7 +2,7 @@
 % Encoding: Cp1252
 
 
-@TechReport{Acemoglu2015,
+@TechReport{AcemogluNetworksMacroeconomyEmpirical2015,
   Title                    = {Networks and the {{Macroeconomy}}: {{An Empirical Exploration}}},
   Author                   = {Acemoglu, Daron and Akcigit, Ufuk and Kerr, William},
   Institution              = {{National Bureau of Economic Research}},
@@ -17,7 +17,7 @@
   Urldate                  = {2015-07-13}
 }
 
-@Article{Acemoglu2012,
+@Article{AcemogluNetworkOriginsAggregate2012,
   Title                    = {The {{Network Origins}} of {{Aggregate Fluctuations}}},
   Author                   = {Acemoglu, Daron and Carvalho, Vasco M. and Ozdaglar, Asuman and Tahbaz-Salehi, Alireza},
   Journal                  = {Econometrica},
@@ -37,7 +37,7 @@
   Urldate                  = {2015-09-17}
 }
 
-@Article{Akkemik2011,
+@Article{AkkemikPotentialimpactselectricity2011,
   Title                    = {Potential Impacts of Electricity Price Changes on Price Formation in the Economy: A Social Accounting Matrix Price Modeling Analysis for {{Turkey}}},
   Author                   = {Akkemik, K. Ali},
   Journal                  = {Energy Policy},
@@ -52,13 +52,13 @@
   Doi                      = {10.1016/j.enpol.2010.11.005},
   File                     = {/Users/guillaumedaudin/Documents/Recherche/Articles ScanneÌ?s/Zotero/storage/8JD5FHFM/Akkemik - 2011 - Potential impacts of electricity price changes on .pdf;/Users/guillaumedaudin/Documents/Recherche/Articles ScanneÌ?s/Zotero/storage/MV8KNABP/S0301421510008116.html},
   ISSN                     = {0301-4215},
-  Keywords                 = {Choc offre,Inputâ€“output tables},
+  Keywords                 = {Inputâ€“output tables,Choc offre},
   Series                   = {Special Section on Offshore wind power planning, economics and environment},
   Shorttitle               = {Potential Impacts of Electricity Price Changes on Price Formation in the Economy},
   Urldate                  = {2015-06-25}
 }
 
-@TechReport{Amador2015,
+@TechReport{AmadorGlobalvaluechains2015,
   Title                    = {Global Value Chains: A View from the Euro Area},
   Author                   = {Amador, Joao and Cappariello, Rita and Stehrer, Robert},
   Institution              = {{ECB}},
@@ -78,7 +78,7 @@ Input-Output Database (WIOD). The paper finds that GVCs are important for the eu
 as whole and they have rebounded after the great trade collapse. Moreover, there is a strong
 relevance of regional production linkages in Europe, with Germany playing a key role.},
   File                     = {/Users/guillaumedaudin/Documents/Recherche/Articles ScanneÌ?s/Zotero/storage/R4NS6N57/Amador et al. - 2015 - Global value chains a view from the euro area.pdf},
-  Keywords                 = {Chocs de demande,Domestic content,Europe,Inputâ€“output tables,Value added,WIOD},
+  Keywords                 = {Europe,Inputâ€“output tables,Domestic content,WIOD,Value added,Chocs de demande},
   Language                 = {English},
   Pages                    = {24}
 }
@@ -96,15 +96,16 @@ relevance of regional production linkages in Europe, with Germany playing a key 
 }
 
 @Article{AntoundeAlmeida2016,
-  Title                    = {Globalization of {{Inflationation}} and {{Input}}-{{Output Linkages}}},
-  Author                   = {{Antoun de Almeida}, Luiza},
+  Title                    = {Globalization of Inflationation and Input-Output Linkages},
+  Author                   = {Antoun de Almeida, Luiza,},
   Journal                  = {Mimeo, University of Frankfurt.},
-  Year                     = {2016},
+  Year                     = {May 2016.},
 
-  Owner                    = {w817186}
+  Owner                    = {w817186},
+  Timestamp                = {2018.01.26}
 }
 
-@TechReport{Antras2018a,
+@TechReport{Antras2018,
   Title                    = {On the {{Measurement}} of {{Upstreamness}} and {{Downstreamness}} in {{Global Value Chains}}},
   Author                   = {Antr{\`a}s, Pol and Chor, Davin},
   Institution              = {{National Bureau of Economic Research}},
@@ -125,10 +126,10 @@ relevance of regional production linkages in Europe, with Germany playing a key 
   Institution              = {{National Bureau of Economic Research}},
   Year                     = {2017},
 
-  File                     = {/Users/guillaumedaudin/Documents/Recherche/Articles ScanneÌ?s/Zotero/storage/QL2XRN5H/w23246.html;/Users/guillaumedaudin/Documents/Recherche/Articles ScanneÌ?s/Zotero/storage/XNFEJ3VK/Auer et al. - 2017 - International inflation spillovers through input l.pdf}
+  File                     = {/Users/guillaumedaudin/Documents/Recherche/Articles ScanneÌ?s/Zotero/storage/XNFEJ3VK/Auer et al. - 2017 - International inflation spillovers through input l.pdf;/Users/guillaumedaudin/Documents/Recherche/Articles ScanneÌ?s/Zotero/storage/QL2XRN5H/w23246.html}
 }
 
-@TechReport{Bems2015,
+@TechReport{BemsDemandValueAdded2015,
   Title                    = {Demand for {{Value Added}} and {{Value}}-{{Added Exchange Rates}}},
   Author                   = {Bems, Rudolfs and Johnson, Robert C.},
   Institution              = {{National Bureau of Economic Research}},
@@ -139,11 +140,11 @@ relevance of regional production linkages in Europe, with Germany playing a key 
 
   Abstract                 = {We examine the role of cross-border input linkages in governing how international relative price changes influence demand for domestic value added. We define a novel value-added real effective exchange rate (REER), which aggregates bilateral value-added price changes, and link this REER to demand for value added. Input linkages enable countries to gain competitiveness following depreciations by supply chain partners, and hence counterbalance beggar-thy-neighbor effects. Cross-country differences in input linkages also imply that the elasticity of demand for value added is country specific. Using global input-output data, we demonstrate these conceptual insights are quantitatively important and compute historical value-added REERs.},
   File                     = {/Users/guillaumedaudin/Documents/Recherche/Articles ScanneÌ?s/Zotero/storage/CNX6JANU/Bems et Johnson - 2015 - Demand for Value Added and Value-Added Exchange Ra.pdf},
-  Keywords                 = {Choc taux de change,Domestic content,Inputâ€“output tables,Production sharing,Value added,Vertical specialization},
+  Keywords                 = {Choc taux de change,Production sharing,Inputâ€“output tables,Domestic content,Vertical specialization,Value added},
   Urldate                  = {2015-04-30}
 }
 
-@TechReport{Benkovskis2015,
+@TechReport{BenkovskisMadeChinaHow2015,
   Title                    = {Made in {{China How Does}} It {{Affect Our Understanding}} of {{Global Market Shares}} ?},
   Author                   = {Benkovskis, Konstantins and W{\"o}rz, Julia},
   Institution              = {{European Central Bank}},
@@ -154,12 +155,12 @@ relevance of regional production linkages in Europe, with Germany playing a key 
 
   Abstract                 = {We propose a comprehensive decomposition of changes in a country's global market shares that accounts for the value added content of trade. We perform the analysis by combining two datasets \textendash{} highly disaggregated trade data from UN Comtrade with internationally integrated Supply and Use Tables from the WIOD database. The inclusion of international fragmentation alters the underlying story behind changes in market shares between 1995 and 2011. The ongoing global outsourcing affects market shares directly by shifting production from G7 to BRIC countries. Moreover, accounting for real providers of the value added alters the balance between price and non-price drivers of global market shares. Changes in relative quality of countries' exports are mainly due to intermediate inputs, not due to domestic production. For instance, the seemingly improved or unchanged relative quality of BRIC export goods largely arose from outsourcing rather than from improvements in the quality of domestic production. In most cases, the dynamics of the value-added market shares is dominated by price and cost factors.},
   File                     = {/Users/guillaumedaudin/Documents/Recherche/Articles ScanneÌ?s/Zotero/storage/3KRBS8QA/Made in China (revised, clean).pdf},
-  Keywords                 = {Asie,Domestic content,Value added,WIOD},
+  Keywords                 = {Asie,Domestic content,WIOD,Value added},
   Language                 = {English},
   Pages                    = {39}
 }
 
-@Article{Blochl2011,
+@Article{BlochlVertexCentralitiesInputOutput2011,
   Title                    = {Vertex {{Centralities}} in {{Input}}-{{Output Networks Reveal}} the {{Structure}} of {{Modern Economies}}},
   Author                   = {Bl{\"o}chl, Florian and J.Theis, Fabian and Vega-Redondo, Fernando and O'N.Fisher, Eric},
   Journal                  = {Physical Review},
@@ -177,17 +178,17 @@ Vertex centralities in input-output networks reveal the structure of modern econ
   Language                 = {English}
 }
 
-@Article{Boehm,
+@Article{Boehmroleglobalsupply,
   Title                    = {The Role of Global Supply Chains in the Transmission of Shocks: {{Firm}}-Level Evidence from the 2011 {{Tohoku}} Earthquake},
   Author                   = {Boehm, Christoph E. and Flaaen, Aaron and Nayar, Nitya Pandalai},
 
   File                     = {/Users/guillaumedaudin/Documents/Recherche/Articles ScanneÌ?s/Zotero/storage/9658R8WT/global-supply-chains-and-transmission-shocks.html},
-  Keywords                 = {Choc offre,micro data},
+  Keywords                 = {micro data,Choc offre},
   Shorttitle               = {The Role of Global Supply Chains in the Transmission of Shocks},
   Urldate                  = {2015-04-23}
 }
 
-@Book{Bournay2015,
+@Book{Bournaycomptabilitenationale2015,
   Title                    = {{La comptabilit{\'e} nationale}},
   Author                   = {Bournay, Jacques and Piriou, Jean-Paul},
   Publisher                = {{La D{\'e}couverte}},
@@ -212,7 +213,7 @@ Vertex centralities in input-output networks reveal the structure of modern econ
   Keywords                 = {Analyse de rÃ©seau}
 }
 
-@TechReport{Cappariello2015,
+@TechReport{CapparielloHowdoesforeign2015,
   Title                    = {How Does Foreign Demand Activate Domestic Value Added? {{A}} Comparison among the Major Euro-Area Economies},
   Author                   = {Cappariello, Rita and Felettigh, Alberto},
   Institution              = {{Bank of Italy, Economic Research and International Relations Area}},
@@ -221,7 +222,7 @@ Vertex centralities in input-output networks reveal the structure of modern econ
   Type                     = {Banca d'Italia Temi di Discussione}
 }
 
-@Article{Carvalho2014,
+@Article{Carvalhomicromacroproduction2014,
   Title                    = {From Micro to Macro via Production Networks},
   Author                   = {Carvalho, Vasco M.},
   Journal                  = {The Journal of Economic Perspectives},
@@ -229,11 +230,11 @@ Vertex centralities in input-output networks reveal the structure of modern econ
   Pages                    = {23--47},
 
   File                     = {/Users/guillaumedaudin/Documents/Recherche/Articles ScanneÌ?s/Zotero/storage/4DBQ6VTW/From Micro to Macro.pdf},
-  Keywords                 = {Analyse de rÃ©seau,Choc offre,Inputâ€“output tables},
+  Keywords                 = {Analyse de rÃ©seau,Inputâ€“output tables,Choc offre},
   Urldate                  = {2015-04-23}
 }
 
-@Book{Cherven2015,
+@Book{ChervenMasteringGephiNetwork2015,
   Title                    = {Mastering {{Gephi Network Visualization}}},
   Author                   = {Cherven, Ken},
   Publisher                = {{Packt Publishing Ltd}},
@@ -242,24 +243,25 @@ Vertex centralities in input-output networks reveal the structure of modern econ
 
   Abstract                 = {This book is intended for anyone interested in advanced network analysis. If you wish to master the skills of analyzing and presenting network graphs effectively, then this is the book for you. No coding experience is required to use this book, although some familiarity with the Gephi user interface will be helpful.},
   ISBN                     = {978-1-78398-735-1},
-  Keywords                 = {Analyse de rÃ©seau,Computers / Programming / Open Source,Computers / Data Modeling \& Design,Computers / Networking / General,Computers / Data Modeling \\\& Design},
+  Keywords                 = {Analyse de rÃ©seau,Computers / Programming / Open Source,Computers / Data Modeling \& Design,Computers / Networking / General},
   Language                 = {en}
 }
 
 @TechReport{Cochard2016,
-  Title                    = {Commerce Vertical et Propagation Des Chocs de Prix: {{Le}} Cas de La Zone Euro},
-  Author                   = {Cochard, Marion and Daudin, Guillaume and Fronteau, Sandra and Rifflart, Christine},
-  Institution              = {{Sciences Po}},
+  Title                    = {{Commerce vertical et propagation des chocs de prix: Le cas de la zone euro}},
+  Author                   = {Marion Cochard and Guillaume Daudin and Sandra Fronteau and Christine Rifflart},
+  Institution              = {Sciences Po},
   Year                     = {2016},
-  Month                    = feb,
+  Month                    = Feb,
   Number                   = {info:hdl:2441/lr26q984g9u},
   Type                     = {Sciences Po publications},
 
-  Abstract                 = {La d\dbend{}composition des cha\dbend{}nes de valeur internationales est un aspect important de la mondialisation. Partant d\dbend{}une hypoth\dbend{}se d\dbend{}inflation par les co\dbend{}ts, nous examinons la propagation des chocs d\dbend{}offre sur les prix \dbend{} partir des tableaux Input-Output mondiaux. Le mod\dbend{}le de Leontief adapt\dbend{} dans le cadre d'une \dbend{}conomie monde nous permet d'analyser empiriquement l\dbend{}impact de chocs de change et de productivit\dbend{} sur la zone euro et sur le reste du monde lorsque ces chocs \dbend{}manent de la zone euro. Nous montrons que la diffusion des chocs op\dbend{}re principalement au premier tour et d\dbend{}pend de la part des inputs import\dbend{}s dans la production ou les exportations. En outre, les chocs de change sont en partie compens\dbend{}s par une modification des prix des inputs ce qui, en cas d'appr\dbend{}ciation, limite la perte de comp\dbend{}titivit\dbend. L'ampleur de cette compensation n'est pas n\dbend{}gligeable et elle est d\dbend{}autant plus \dbend{}lev\dbend{}e que les pays de la zone euro sont ouverts. Elle est ainsi plus forte pour l\dbend{}Allemagne (avec une \dbend{}lasticit\dbend{} des prix d\dbend{}exportation \dbend{} un choc de l\dbend{}euro de -9 \%) que pour la France (-8 \%). L\dbend{}impact des chocs de productivit\dbend{} est plus important que celui des chocs de change en raison d\dbend{}un effet de r\dbend{}sonance domestique avant leur diffusion internationale. Parmi les grands pays, l\dbend{}Allemagne est celui qui b\dbend{}n\dbend{}ficie le plus des chocs positifs de productivit\dbend{} \dbend{}manant des PECO hors zone euro : dans ce cas, l\dbend\dbend{}lasticit\dbend{} de ses prix d\dbend{}exportation est de 6 \% contre 2,5 \% pour la France.},
-  Keywords                 = {Commerce en valeur ajoutï¿½e,Inflation par les coï¿½ts,Modï¿½le de Leontieff,Zone euro}
+  Abstract                 = {La décomposition des chaînes de valeur internationales est un aspect important de la mondialisation. Partant d’une hypothèse d’inflation par les coûts, nous examinons la propagation des chocs d’offre sur les prix à partir des tableaux Input-Output mondiaux. Le modèle de Leontief adapté dans le cadre d'une économie monde nous permet d'analyser empiriquement l’impact de chocs de change et de productivité sur la zone euro et sur le reste du monde lorsque ces chocs émanent de la zone euro. Nous montrons que la diffusion des chocs opère principalement au premier tour et dépend de la part des inputs importés dans la production ou les exportations. En outre, les chocs de change sont en partie compensés par une modification des prix des inputs ce qui, en cas d'appréciation, limite la perte de compétitivité. L'ampleur de cette compensation n'est pas négligeable et elle est d’autant plus élevée que les pays de la zone euro sont ouverts. Elle est ainsi plus forte pour l’Allemagne (avec une élasticité des prix d’exportation à un choc de l’euro de -9 \%) que pour la France (-8 \%). L’impact des chocs de productivité est plus important que celui des chocs de change en raison d’un effet de résonance domestique avant leur diffusion internationale. Parmi les grands pays, l’Allemagne est celui qui bénéficie le plus des chocs positifs de productivité émanant des PECO hors zone euro : dans ce cas, l’élasticité de ses prix d’exportation est de 6 \% contre 2,5 \% pour la France.},
+  Keywords                 = {Commerce en valeur ajoutée; Zone euro; Modèle de Leontieff; Inflation par les coûts},
+  Url                      = {https://ideas.repec.org/p/spo/wpmain/infohdl2441-lr26q984g9ugrdd32sak3evpm.html}
 }
 
-@Article{Daudin2006,
+@Article{Daudincommerceexterieurvaleur2006,
   Title                    = {Le Commerce Ext{\'e}rieur En Valeur Ajout{\'e}e},
   Author                   = {Daudin, Guillaume and Monperrus-Veroni, Paola and Rifflart, Christine and Schweisguth, Danielle},
   Journal                  = {Revue de l'OFCE},
@@ -271,7 +273,7 @@ Vertex centralities in input-output networks reveal the structure of modern econ
   Urldate                  = {2015-11-10}
 }
 
-@Article{Daudin2011,
+@Article{DaudinWhoproduceswhom2011,
   Title                    = {Who Produces for Whom in the World Economy?},
   Author                   = {Daudin, Guillaume and Rifflart, Christine and Schweisguth, Danielle},
   Journal                  = {Canadian Journal of Economics/Revue canadienne d'{\'e}conomie},
@@ -284,19 +286,13 @@ Vertex centralities in input-output networks reveal the structure of modern econ
 
 ~
 
-~
-
-formidable
-
-~
-
 ~},
   File                     = {/Users/guillaumedaudin/Documents/Recherche/Articles ScanneÌ?s/Zotero/storage/UA8KM27U/Daudin et al. - 2011 - Who produces for whom in the world economy.pdf;/Users/guillaumedaudin/Documents/Recherche/Articles ScanneÌ?s/Zotero/storage/Q2RQC6NN/full.html},
-  Keywords                 = {Chocs de demande,Domestic content,Inputâ€“output tables,Production sharing,Value added,Vertical specialization},
+  Keywords                 = {Production sharing,Inputâ€“output tables,Domestic content,Vertical specialization,Value added,Chocs de demande},
   Urldate                  = {2015-04-23}
 }
 
-@TechReport{DeBacker2012,
+@TechReport{DeBackerInternationalComparativeEvidence2012,
   Title                    = {International {{Comparative Evidence}} on {{Global Value Chains}}},
   Author                   = {De Backer, Koen and Yamano, Norihiko},
   Institution              = {{OECD}},
@@ -332,12 +328,12 @@ evidence studying the emergence of GVCs based on international trade data and In
 addition, the OECD is currently cooperating with other international agencies and academic experts to
 develop new metrics for GVCs, for example data on trade in value added.},
   File                     = {/Users/guillaumedaudin/Documents/Recherche/Articles ScanneÌ?s/Zotero/storage/J6USMSSK/De Backer et Yamano - 2012 - International Comparative Evidence on Global Value.pdf},
-  Keywords                 = {Domestic content,Inputâ€“output tables,Value added,Vertical specialization},
+  Keywords                 = {Inputâ€“output tables,Domestic content,Vertical specialization,Value added},
   Language                 = {English},
   Pages                    = {30}
 }
 
-@TechReport{diMauro2013,
+@TechReport{diMauroGlobalValueChains2013,
   Title                    = {Global {{Value Chains}}: {{A Case}} for {{Europe}} to {{Cheer}} Up},
   Author                   = {{di Mauro}, Filippo and Plamper, Hedwig and Stehrer, Robert},
   Institution              = {{ECB}},
@@ -349,12 +345,12 @@ develop new metrics for GVCs, for example data on trade in value added.},
   Type                     = {Compnet Policy Brief},
 
   File                     = {/Users/guillaumedaudin/Documents/Recherche/Articles ScanneÌ?s/Zotero/storage/3N7APKFG/di Mauro et al. - 2013 - Global Value Chains A Case for Europe to Cheer up.pdf},
-  Keywords                 = {Europe,Inputâ€“output tables,Production sharing,Value added,Vertical specialization,WIOD},
+  Keywords                 = {Europe,Production sharing,Inputâ€“output tables,Vertical specialization,WIOD,Value added},
   Language                 = {English},
   Pages                    = {13}
 }
 
-@Article{Dietzenbacher2013,
+@Article{DietzenbacherConstructionWorldInputOutput2013,
   Title                    = {The {{Construction}} of {{World Input}}-{{Output Tables}} in the {{WIOD Project}}},
   Author                   = {Dietzenbacher, Erik and Los, Bart and Stehrer, Robert and Timmer, Marcel and {de Vries}, Gaaitzen J.},
   Journal                  = {Routledge},
@@ -376,36 +372,39 @@ and used for estimation procedures to arrive at a consistent time series of WIOT
 }
 
 @Article{ECB2016,
-  Title                    = {Transmission of Output Shocks: the Role of Cross-Border Production Chains},
-  Author                   = {{ECB}},
+  Title                    = {Transmission of output shocks–the role of cross-border production chains},
+  Author                   = {ECB},
   Journal                  = {ECB Economic Bulletin},
   Year                     = {2016},
 
-  Owner                    = {w817186}
+  Owner                    = {w817186},
+  Timestamp                = {2018.01.25}
 }
 
-@TechReport{Feenstra2012,
-  Title                    = {Evaluating {{Estimates}} of {{Materials Offshoring}} from {{U}}.{{S}}. {{Manufacturing}}},
-  Author                   = {Feenstra, Robert C. and Jensen, J. Bradford},
-  Institution              = {{National Bureau of Economic Research, Inc}},
+@TechReport{FeenstraOffshoringUS2012,
+  Title                    = {{Evaluating Estimates of Materials Offshoring from U.S. Manufacturing}},
+  Author                   = {Robert C. Feenstra and J. Bradford Jensen},
+  Institution              = {National Bureau of Economic Research, Inc},
   Year                     = {2012},
-  Month                    = mar,
+  Month                    = Mar,
   Number                   = {17916},
   Type                     = {NBER Working Papers},
 
-  Abstract                 = {When materials offshoring is measured by estimating imported intermediate inputs, a common assumption used is that an industry's imports of each input, relative to its total demand, is the same as the economy-wide imports relative to total demand: this is the so-called \&quot;import comparability\&quot; or \&quot;proportionality\&quot; assumption. A report to the National Research Council identified this assumption as being a significant limitation of current data collection and analysis. In this note we move beyond this assumption to obtain a direct measure of imported materials by industry for the United States in 1997. At the 3-digit I-O industry level, there is a correlation of 0.68 between the offshoring shares made with and without the proportionality assumption, and a higher correlation of 0.87 when the shares are value weighted. While most value-weighted industry have differences below 50 percentage points in the two estimates, there is significant number of cases that differ by 10 percentage points or more.}
+  Abstract                 = {When materials offshoring is measured by estimating imported intermediate inputs, a common assumption used is that an industry's imports of each input, relative to its total demand, is the same as the economy-wide imports relative to total demand: this is the so-called \&quot;import comparability\&quot; or \&quot;proportionality\&quot; assumption. A report to the National Research Council identified this assumption as being a significant limitation of current data collection and analysis. In this note we move beyond this assumption to obtain a direct measure of imported materials by industry for the United States in 1997. At the 3-digit I-O industry level, there is a correlation of 0.68 between the offshoring shares made with and without the proportionality assumption, and a higher correlation of 0.87 when the shares are value weighted. While most value-weighted industry have differences below 50 percentage points in the two estimates, there is significant number of cases that differ by 10 percentage points or more.},
+  Url                      = {https://ideas.repec.org/p/nbr/nberwo/17916.html}
 }
 
 @Article{Folloni1994,
-  Title                    = {Hypothesis of Price Formation in Input-Output Tables},
+  Title                    = {Hypothesis of price formation in input-output tables},
   Author                   = {Folloni, Giuseppe and Miglierina, Claudio},
   Journal                  = {Economic Systems Research},
   Year                     = {1994},
 
-  Owner                    = {w817186}
+  Owner                    = {w817186},
+  Timestamp                = {2018.01.25}
 }
 
-@TechReport{Frohm2017a,
+@TechReport{Frohm2017,
   Title                    = {Sectoral Interlinkages in Global Value Chains: Spillovers and Network Effects},
   Author                   = {Frohm, Erik and Gunnella, Vanessa},
   Year                     = {2017},
@@ -414,7 +413,7 @@ and used for estimation procedures to arrive at a consistent time series of WIOT
   Shorttitle               = {Sectoral Interlinkages in Global Value Chains}
 }
 
-@Article{G.AlatristeContreras2014,
+@Article{G.AlatristeContrerasPropagationeconomicshocks2014,
   Title                    = {Propagation of Economic Shocks in Input-Output Networks: {{A}} Cross-Country Analysis},
   Author                   = {G. Alatriste Contreras, Martha and Fagiolo, Giorgio},
   Journal                  = {Physical Review},
@@ -431,22 +430,7 @@ and used for estimation procedures to arrive at a consistent time series of WIOT
   Language                 = {English}
 }
 
-@Article{Goldberg2010,
-  Title                    = {{The Sensitivity of the CPI to Exchange Rates: Distribution Margins, Imported Inputs, and Trade Exposure}},
-  Author                   = {Linda S. Goldberg and José Manuel Campa},
-  Journal                  = {The Review of Economics and Statistics},
-  Year                     = {2010},
-
-  Month                    = {May},
-  Number                   = {2},
-  Pages                    = {392-407},
-  Volume                   = {92},
-
-  Abstract                 = { This paper quantifies the relative importance of the different channels of CPI responsiveness to exchange rates and import prices across 21 industrialized economies. The paper provides new and rich cross-country and cross-industry details on the sensitivity to exchange rates of distribution margins; the extent of imported inputs use in different categories of consumption goods; and on their role in consumption of nontradables, home-produced tradables, and imported goods. The dominant channel for CPI sensitivity is through the costs arising from imported input use in goods production. This channel is more important than changes in prices of imported goods directly consumed. © 2010 The President and Fellows of Harvard College and the Massachusetts Institute of Technology.},
-  Url                      = {https://ideas.repec.org/a/tpr/restat/v92y2010i2p392-407.html}
-}
-
-@TechReport{Gouma2014,
+@TechReport{GoumaEmploymentCompensationWIOD2014,
   Title                    = {Employment and {{Compensation}} in the {{WIOD Socio}}-{{Economic Accounts}} ({{SEA}}): {{Revisions}} for 2008/2009 and New Data for 2010/2011},
   Author                   = {Gouma, Reitze and Timmer, Marcel and {de Vries}, Gaaitzen J.},
   Institution              = {{European Commission}},
@@ -454,12 +438,12 @@ and used for estimation procedures to arrive at a consistent time series of WIOT
   Month                    = jun,
 
   File                     = {/Users/guillaumedaudin/Documents/Recherche/Articles ScanneÌ?s/Zotero/storage/VKNCDMIR/Gouma et al. - 2014 - Employment and Compensation in the WIOD Socio-Econ.pdf},
-  Keywords                 = {Domestic content,Inputâ€“output tables,MÃ©thodo,Value added,WIOD},
+  Keywords                 = {MÃ©thodo,Inputâ€“output tables,Domestic content,WIOD,Value added},
   Language                 = {English},
   Pages                    = {8}
 }
 
-@Article{Gualdi2015,
+@Article{Gualdiemergencescalefreeproduction2015,
   Title                    = {On the Emergence of Scale-Free Production Networks},
   Author                   = {Gualdi, Stanislao and Mandel, Antoine},
   Year                     = {2015},
@@ -473,7 +457,7 @@ and used for estimation procedures to arrive at a consistent time series of WIOT
   Urldate                  = {2015-09-17}
 }
 
-@TechReport{Guo2009,
+@TechReport{GuoHarmonisedBilateralTrade2009,
   Title                    = {Towards {{Harmonised Bilateral Trade Data}} for {{Inter}}-{{Country Input}}-Utput {{Analyses}}: {{Statistical Issues}}},
   Author                   = {Guo, Dong and Webb, Colin and Yamano, Norihiko},
   Institution              = {{OCDE}},
@@ -500,12 +484,12 @@ statistical agencies; and the additional problems encountered when converting pr
 industry-based classifications. Issues concerning Balance of Payments data, the main source for trade in 
 services, are also addressed},
   File                     = {/Users/guillaumedaudin/Documents/Recherche/Articles ScanneÌ?s/Zotero/storage/936886N5/Guo et al. - 2009 - Towards Harmonised Bilateral Trade Data for Inter-.pdf},
-  Keywords                 = {Inputâ€“output tables,MÃ©thodo,STAN},
+  Keywords                 = {STAN,MÃ©thodo,Inputâ€“output tables},
   Language                 = {English},
   Pages                    = {36}
 }
 
-@Article{Han2004,
+@Article{Hanrolefourelectric2004,
   Title                    = {The Role of the Four Electric Power Sectors in the {{Korean}} National Economy: An Input\textendash{}output Analysis},
   Author                   = {Han, Sang-Yong and Yoo, Seung-Hoon and Kwak, Seung-Jun},
   Journal                  = {Energy Policy},
@@ -520,12 +504,12 @@ services, are also addressed},
   Doi                      = {10.1016/S0301-4215(03)00125-3},
   File                     = {/Users/guillaumedaudin/Documents/Recherche/Articles ScanneÌ?s/Zotero/storage/E4GTC9D9/Han et al. - 2004 - The role of the four electric power sectors in the.pdf;/Users/guillaumedaudin/Documents/Recherche/Articles ScanneÌ?s/Zotero/storage/ED3VNSXI/S0301421503001253.html},
   ISSN                     = {0301-4215},
-  Keywords                 = {Choc offre,Inputâ€“output tables},
+  Keywords                 = {Inputâ€“output tables,Choc offre},
   Shorttitle               = {The Role of the Four Electric Power Sectors in the {{Korean}} National Economy},
   Urldate                  = {2015-06-25}
 }
 
-@TechReport{Hu,
+@TechReport{HuEfficientHighQuality,
   Title                    = {Efficient and {{High Quality Force}}-{{Directed Graph Drawing}}},
   Author                   = {Hu, Yifan},
   Institution              = {{Wolfram Research Inc.}},
@@ -536,22 +520,22 @@ services, are also addressed},
   Pages                    = {37}
 }
 
-@Article{Hummels2001,
-  Title                    = {The Nature and Growth of Vertical Specialization in World Trade},
+@Article{HummelsVerticalSpecializationWorldTrade2001,
+  Title                    = {{The nature and growth of vertical specialization in world trade}},
   Author                   = {Hummels, David and Ishii, Jun and Yi, Kei-Mu},
   Journal                  = {Journal of International Economics},
   Year                     = {2001},
 
-  Month                    = jun,
+  Month                    = {June},
   Number                   = {1},
-  Pages                    = {75--96},
+  Pages                    = {75-96},
   Volume                   = {54},
 
-  Abstract                 = {Dramatic changes are occurring in the nature of international trade. Production processes increasingly involve a sequential, vertical trading chain stretching across many countries, with each country specializing in particular stages of a good's production sequence. We document a key aspect of these vertical linkages--the use of imported inputs in producing goods that are exported -- which we call vertical specialization. Using input-output tables from the OECD and emerging market countries we estimate that vertical specialization accounts for up to 30 percent of world exports, and has grown as much as 40 percent in the last twenty-five years. The key insight about why vertical specialization has grown so much lies with the fact that trade barriers (tariffs and transportation costs) are incurred repeatedly as goods-in-process cross multiple borders. Hence, even small reductions in tariffs and transport costs can lead to extensive vertical specialization, large trade growth, and large gains from trade. We formally illustrate these points by developing an extension of the Dornbusch-Fischer-Samuelson ricardian trade model.\\
-(This abstract was borrowed from another version of this item.)$<$/small$>$}
+  Abstract                 = {Dramatic changes are occurring in the nature of international trade. Production processes increasingly involve a sequential, vertical trading chain stretching across many countries, with each country specializing in particular stages of a good's production sequence. We document a key aspect of these vertical linkages--the use of imported inputs in producing goods that are exported -- which we call vertical specialization. Using input-output tables from the OECD and emerging market countries we estimate that vertical specialization accounts for up to 30 percent of world exports, and has grown as much as 40 percent in the last twenty-five years. The key insight about why vertical specialization has grown so much lies with the fact that trade barriers (tariffs and transportation costs) are incurred repeatedly as goods-in-process cross multiple borders. Hence, even small reductions in tariffs and transport costs can lead to extensive vertical specialization, large trade growth, and large gains from trade. We formally illustrate these points by developing an extension of the Dornbusch-Fischer-Samuelson ricardian trade model.<br><small>(This abstract was borrowed from another version of this item.)</small>},
+  Url                      = {https://ideas.repec.org/a/eee/inecon/v54y2001i1p75-96.html}
 }
 
-@Article{Johnson2012,
+@Article{JohnsonAccountingintermediatesProduction2012,
   Title                    = {Accounting for Intermediates: {{Production}} Sharing and Trade in Value Added},
   Author                   = {Johnson, Robert C. and Noguera, Guillermo},
   Journal                  = {Journal of International Economics},
@@ -566,20 +550,9 @@ services, are also addressed},
   Doi                      = {10.1016/j.jinteco.2011.10.003},
   File                     = {/Users/guillaumedaudin/Documents/Recherche/Articles ScanneÌ?s/Zotero/storage/43H9WWCJ/Johnson et Noguera - 2012 - Accounting for intermediates Production sharing a.pdf;/Users/guillaumedaudin/Documents/Recherche/Articles ScanneÌ?s/Zotero/storage/NBID2AJS/S002219961100122X.html},
   ISSN                     = {0022-1996},
-  Keywords                 = {Chocs de demande,Domestic content,Inputâ€“output tables,Production sharing,Value added,Vertical specialization},
+  Keywords                 = {Production sharing,Inputâ€“output tables,Domestic content,Vertical specialization,Value added,Chocs de demande},
   Shorttitle               = {Accounting for Intermediates},
   Urldate                  = {2015-04-30}
-}
-
-@Article{KummritzTradevalueadded,
-  Title                    = {Trade in {{Value Added Indicators}}: {{What They Are}}, {{What They Aren}}'t, and {{Where They}}'re {{Headed}}},
-  Author                   = {K{\"u}mmritz, Victor},
-  Journal                  = {VoxEU.org},
-
-  Abstract                 = {With global value chains that fragment production across the world, national statistics fail to capture the growing interconnectedness of economies. This column describes the international input-output tables that allow researchers to estimate the share of a country's export value derived from imported inputs. However, while these tools offer promising uses, at the moment statistics on trade in value added should be treated with great caution.},
-  Keywords                 = {MÃ©thodo,Inputâ€“output tables},
-  Shorttitle               = {Trade in {{Value Added Indicators}}},
-  Urldate                  = {2015-05-22}
 }
 
 @Misc{KummritzTradevalueadded,
@@ -595,32 +568,22 @@ services, are also addressed},
   Urldate                  = {2015-05-22}
 }
 
-@Article{Koopman2014,
-  Title                    = {Tracing {{Value}}-{{Added}} and {{Double Counting}} in {{Gross Exports}}},
-  Author                   = {Koopman, Robert and Wang, Zhi and Wei, Shang-Jin},
+@Article{KoopmanTracingvalueaddeddouble2014,
+  Title                    = {{Tracing Value-Added and Double Counting in Gross Exports}},
+  Author                   = {Robert Koopman and Zhi Wang and Shang-Jin Wei},
   Journal                  = {American Economic Review},
   Year                     = {2014},
 
-  Month                    = feb,
+  Month                    = {February},
   Number                   = {2},
-  Pages                    = {459--494},
+  Pages                    = {459-494},
   Volume                   = {104},
 
-  Abstract                 = {This paper proposes an accounting framework that breaks up a country's gross exports into various value-added components by source and additional double-counted terms. Our parsimonious framework bridges a gap between official trade statistics (in gross value terms) and national accounts (in value-added terms), and integrates all previous measures of vertical specialization and value-added trade in the literature into a unified framework. To illustrate the potential of such a method, we present a number of applications including re-computing revealed comparative advantages and the magnifying impact of multi-stage production on trade costs.}
+  Abstract                 = {This paper proposes an accounting framework that breaks up a country's gross exports into various value-added components by source and additional double-counted terms. Our parsimonious framework bridges a gap between official trade statistics (in gross value terms) and national accounts (in value-added terms), and integrates all previous measures of vertical specialization and value-added trade in the literature into a unified framework. To illustrate the potential of such a method, we present a number of applications including re-computing revealed comparative advantages and the magnifying impact of multi-stage production on trade costs.},
+  Url                      = {https://ideas.repec.org/a/aea/aecrev/v104y2014i2p459-94.html}
 }
 
-@TechReport{KoopmanTracingvalueaddeddouble2012,
-  Title                    = {Tracing Value-Added and Double Counting in Gross Exports},
-  Author                   = {Koopman, Robert and Wang, Zhi and Wei, Shang-Jin},
-  Institution              = {{National Bureau of Economic Research}},
-  Year                     = {2012},
-
-  File                     = {/Users/guillaumedaudin/Documents/Recherche/Articles ScanneÌ?s/Zotero/storage/E5F78HUX/Koopman et al. - 2012 - Tracing value-added and double counting in gross e.pdf;/Users/guillaumedaudin/Documents/Recherche/Articles ScanneÌ?s/Zotero/storage/7KZEMPJT/w18579.html},
-  Keywords                 = {MÃ©thodo,Inputâ€“output tables,Vertical specialization,Value added},
-  Urldate                  = {2015-05-01}
-}
-
-@Article{LeMoigne,
+@Article{LeMoigneFranceAllemagnehistoire,
   Title                    = {France et {{Allemagne}} :~Une Histoire Du D{\'e}sajustement {{Europ{\'e}en}}},
   Author                   = {Le Moigne, Mathilde and Ragot, Xavier},
   Journal                  = {Documents de travail OFCE},
@@ -630,7 +593,7 @@ services, are also addressed},
   File                     = {/Users/guillaumedaudin/Documents/Recherche/Articles ScanneÌ?s/Zotero/storage/XV8FI592/WP2015-17.pdf}
 }
 
-@TechReport{Leontief1951,
+@TechReport{LeontiefstructureAmericaneconomy1951,
   Title                    = {The Structure of {{American}} Economy, 1919-1939: An Empirical Application of Equilibrium Analysis.},
   Author                   = {Leontief, Wassily W.},
   Year                     = {1951},
@@ -640,21 +603,22 @@ services, are also addressed},
   Urldate                  = {2016-12-08}
 }
 
-@Article{Los2016,
-  Title                    = {Tracing {{Value}}-{{Added}} and {{Double Counting}} in {{Gross Exports}}: {{Comment}}},
-  Author                   = {Los, Bart and Timmer, Marcel P. and {de Vries}, Gaaitzen J.},
+@Article{LosComment2016,
+  Title                    = {{Tracing Value-Added and Double Counting in Gross Exports: Comment}},
+  Author                   = {Bart Los and Marcel P. Timmer and Gaaitzen J. de Vries},
   Journal                  = {American Economic Review},
   Year                     = {2016},
 
-  Month                    = jul,
+  Month                    = {July},
   Number                   = {7},
-  Pages                    = {1958--1966},
+  Pages                    = {1958-1966},
   Volume                   = {106},
 
-  Abstract                 = {In a recent contribution to the AER, Koopman, Wang, and Wei (2014) proposed a decomposition of a country's gross exports into value-added components and double-counted terms. It is motivated by complex manipulation of basic accounting identities. In this comment we provide an alternative framework based on \&quot;hypothetical extraction.\&quot; This parsimonious approach provides a clear definition of domestic value added in exports and has a natural extension into decompositions of bilateral export flows.}
+  Abstract                 = {In a recent contribution to the AER, Koopman, Wang, and Wei (2014) proposed a decomposition of a country's gross exports into value-added components and double-counted terms. It is motivated by complex manipulation of basic accounting identities. In this comment we provide an alternative framework based on \&quot;hypothetical extraction.\&quot; This parsimonious approach provides a clear definition of domestic value added in exports and has a natural extension into decompositions of bilateral export flows.},
+  Url                      = {https://ideas.repec.org/a/aea/aecrev/v106y2016i7p1958-66.html}
 }
 
-@Article{MarcelP.Timmer,
+@Article{MarcelP.TimmerIllustratedUserGuide,
   Title                    = {An {{Illustrated User Guide}} to the {{World Input}}\textendash{}{{Output Database}}: The {{Case}} of {{Global Automotive Production}} - {{Timmer}} - 2015 - {{Review}} of {{International Economics}} - {{Wiley Online Library}}},
   Author                   = {{Marcel P. Timmer,} and {Erik Dietzenbacher,} and {Bart Los,} and {Robert Stehrer,} and {Gaaitzen J. de Vries}},
   Journal                  = {Review of International Economics},
@@ -663,7 +627,7 @@ services, are also addressed},
   Urldate                  = {2017-09-11}
 }
 
-@TechReport{McNerney2009,
+@TechReport{McNerneyNetworkPropertiesEconomic2009,
   Title                    = {Network {{Properties}} of {{Economic Input}}-{{Output Networks}}},
   Author                   = {McNerney, James},
   Institution              = {{International Institute for Applied Systems Analysis}},
@@ -681,7 +645,7 @@ services, are also addressed},
   Pages                    = {88}
 }
 
-@Book{Milberg2013,
+@Book{MilbergOutsourcingeconomicsglobal2013,
   Title                    = {Outsourcing Economics: Global Value Chains in Capitalist Development},
   Author                   = {Milberg, William and Winkler, Deborah},
   Publisher                = {{Cambridge University Press}},
@@ -691,7 +655,7 @@ services, are also addressed},
   Urldate                  = {2016-12-08}
 }
 
-@Article{Moses1955,
+@Article{Mosesstabilityinterregionaltrading1955,
   Title                    = {The Stability of Interregional Trading Patterns and Input-Output Analysis},
   Author                   = {Moses, Leon N.},
   Journal                  = {The American Economic Review},
@@ -699,11 +663,11 @@ services, are also addressed},
   Pages                    = {803--826},
 
   File                     = {/Users/guillaumedaudin/Documents/Recherche/Articles ScanneÌ?s/Zotero/storage/IQ93KHUI/AER_Moses.pdf;/Users/guillaumedaudin/Documents/Recherche/Articles ScanneÌ?s/Zotero/storage/RRDFHNXI/1821380.html},
-  Keywords                 = {Domestic content,Inputâ€“output tables},
+  Keywords                 = {Inputâ€“output tables,Domestic content},
   Urldate                  = {2015-05-01}
 }
 
-@Book{O.Jackson2008,
+@Book{O.JacksonSocialEconomicNetworks2008,
   Title                    = {Social and {{Economic Networks}}},
   Author                   = {O. Jackson, Matthew},
   Publisher                = {{Princeton University Press}},
@@ -715,20 +679,21 @@ services, are also addressed},
 }
 
 @Article{Puzzello2012,
-  Title                    = {A Proportionality Assumption and Measurement Biases in the Factor Content of Trade},
+  Title                    = {{A proportionality assumption and measurement biases in the factor content of trade}},
   Author                   = {Puzzello, Laura},
   Journal                  = {Journal of International Economics},
   Year                     = {2012},
   Number                   = {1},
-  Pages                    = {105--111},
+  Pages                    = {105-111},
   Volume                   = {87},
 
-  Abstract                 = {This paper revisits Trefler and Zhu's (2005, 2010) (TZ) empirical examination of the factor content of trade in the presence of international differences in production techniques and trade in inputs. In this framework, knowing the bilateral details of each country's input\dbend{}output structure is key to the correct calculation of the factor content of trade. Because input\dbend{}output tables typically lack this detail, TZ impute the relevant input\dbend{}output coefficients by making a proportionality assumption. This paper uses survey-based input\dbend{}output coefficients from the Asian Input\dbend{}output (AIO) tables that do provide bilateral details. Exploiting methodological differences in the compilation of the AIO tables and the data underlying TZ studies, this paper empirically assesses how well the TZ approach fits sourcing patterns of inputs and finds that it understates countries' use and relative use of foreign inputs, especially in those sectors where they are most used. As a result countries' use of domestic factors is overstated. Biases generated on exported and imported factor services cancel each other out. The net effect on the measured factor trade is small.},
+  Abstract                 = {This paper revisits Trefler and Zhu's (2005, 2010) (TZ) empirical examination of the factor content of trade in the presence of international differences in production techniques and trade in inputs. In this framework, knowing the bilateral details of each country's input–output structure is key to the correct calculation of the factor content of trade. Because input–output tables typically lack this detail, TZ impute the relevant input–output coefficients by making a proportionality assumption. This paper uses survey-based input–output coefficients from the Asian Input–output (AIO) tables that do provide bilateral details. Exploiting methodological differences in the compilation of the AIO tables and the data underlying TZ studies, this paper empirically assesses how well the TZ approach fits sourcing patterns of inputs and finds that it understates countries' use and relative use of foreign inputs, especially in those sectors where they are most used. As a result countries' use of domestic factors is overstated. Biases generated on exported and imported factor services cancel each other out. The net effect on the measured factor trade is small.},
   Doi                      = {10.1016/j.jinteco.2011.11},
-  Keywords                 = {Factor content of trade,International differences in production techniq,Proportionality assumption}
+  Keywords                 = {Factor content of trade; Proportionality assumption; International differences in production techniq},
+  Url                      = {https://ideas.repec.org/a/eee/inecon/v87y2012i1p105-111.html}
 }
 
-@Article{Roland-Holst1995,
+@Article{Roland-HolstModelingPricesSam1995,
   Title                    = {Modeling {{Prices}} in a {{Sam Structure}}},
   Author                   = {Roland-Holst, David W. and Sancho, Ferran},
   Journal                  = {The Review of Economics and Statistics},
@@ -744,7 +709,7 @@ services, are also addressed},
   Doi                      = {10.2307/2109871},
   File                     = {/Users/guillaumedaudin/Documents/Recherche/Articles ScanneÌ?s/Zotero/storage/4FZDFFXT/Roland-Holst et Sancho - 1995 - Modeling Prices in a Sam Structure.pdf},
   ISSN                     = {0034-6535},
-  Keywords                 = {Choc offre,Inputâ€“output tables},
+  Keywords                 = {Inputâ€“output tables,Choc offre},
   Urldate                  = {2015-06-25}
 }
 
@@ -785,23 +750,24 @@ much more affected by the global financial cr
 isis in 2008-09 than ot
 her regional countries.},
   File                     = {/Users/guillaumedaudin/Documents/Recherche/Articles ScanneÌ?s/Zotero/storage/M79WBJIV/CESSA WP 2014-04.pdf},
-  Keywords                 = {Asie,Chocs de demande,Inputâ€“output tables,Value added,YNU-GIO},
+  Keywords                 = {Asie,YNU-GIO,Inputâ€“output tables,Value added,Chocs de demande},
   Language                 = {English},
   Pages                    = {34}
 }
 
 @Article{Sharify2013,
-  Title                    = {{{Input}}\dbend{}output Modelling of the Effect of Implicit Subsidies on General Prices},
+  Title                    = {{Input–output modelling of the effect of implicit subsidies on general prices}},
   Author                   = {Sharify, Nooraddin},
   Journal                  = {Economic Modelling},
   Year                     = {2013},
   Number                   = {C},
-  Pages                    = {913--917},
+  Pages                    = {913-917},
   Volume                   = {33},
 
   Abstract                 = {Implicit subsidies are implemented for different reasons in many countries. These subsidies generally emerge through selling public resources such as gas, oil, and water at a lower price to one or more sectors. They are not considered in government payments and national accounts. Hence, it is expected that any change in the size of these subsidies influences the price of the relative sectors through the intermediate expenditures. This paper aims at developing the Table Adjusting Price (TAP) and Standard Leontief Price (SLP) models to measure the effect of an exogenous change in the size of implicit subsidy on the price indices of all sectors. The proposed models allowed the researcher to analyse a change in the level of implicit subsidy in different cases. In addition, an empirical example illustrates the result of the implementation of these models.},
   Doi                      = {10.1016/j.econmod.2013.06},
-  Keywords                 = {Changes in implicit subsidy,Standard Leontief price model,Table adjusting price model,Inputï¿½outpu}
+  Keywords                 = {Changes in implicit subsidy; Table adjusting price model; Standard Leontief price model; Input–outpu},
+  Url                      = {https://ideas.repec.org/a/eee/ecmode/v33y2013icp913-917.html}
 }
 
 @Misc{StehrerIntroductionIOWIOD2012,
@@ -817,7 +783,7 @@ her regional countries.},
   Language                 = {English}
 }
 
-@Article{Steinback2004,
+@Article{SteinbackUsingReadyMadeRegional2004,
   Title                    = {Using {{Ready}}-{{Made Regional Input}}-{{Output Models}} to {{Estimate Backward}}-{{Linkage Effects}} of {{Exogenous Output Shocks}}},
   Author                   = {Steinback, Scott R.},
   Journal                  = {The Review of Regional Studies},
@@ -832,7 +798,7 @@ her regional countries.},
   Copyright                = {The Review of Regional Studies is an open journal, and uses the standard Creative Commons license: Copyright We want authors to retain the maximum control over their work consistent with the first goal. For this reason, authors who publish in The Review of Regional Studies will release their articles under the Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License . This license allows anyone to copy and distribute the article for non-commercial purposes provided that appropriate attribution is given to The Review of Regional Studies and the authors. Upon submission, the authors agree that the following three items are true: 1) The manuscript named above: a) represents valid work and neither it nor any other that I have written with substantially similar content has been published before in any form except as a preprint, b) is not concurrently submitted to another publication, and c) does not infringe anyone's copyright. The Author(s) holds the Southern Regional Science Association, The Review of Regional Studies, and the Editors of The Review of Regional Studies harmless against all copyright claims. d) I have, or a coauthor has, had sufficient access to the data to verify the manuscript's scientific integrity. 2) If asked, I will provide or fully cooperate in providing the data on which the manuscript is based so the editors or their assignees can examine it (where possible) 3) For papers with more than one author, I as the submitter have the permission of the coauthors to submit this work, and all authors agree that the the corresponding author will be the main correspondent with the editorial office, and review the edited manuscript and proof. If there is only one author, I will be the corresponding author and agree to handle these responsibilities.},
   File                     = {/Users/guillaumedaudin/Documents/Recherche/Articles ScanneÌ?s/Zotero/storage/EM46JNJG/Steinback - 2004 - Using Ready-Made Regional Input-Output Models to E.pdf;/Users/guillaumedaudin/Documents/Recherche/Articles ScanneÌ?s/Zotero/storage/CPPA8UDI/78.html},
   ISSN                     = {0048-749X},
-  Keywords                 = {Choc offre,Inputâ€“output tables},
+  Keywords                 = {Inputâ€“output tables,Choc offre},
   Urldate                  = {2015-06-26}
 }
 
@@ -844,7 +810,7 @@ her regional countries.},
   Abstract                 = {Global value chains are transforming world trade patterns. This column argues that the standard gravity formulation cannot be applied to trade flows where parts and components are important. This is because GDPs in origin and destination countries are poor proxies for supply and demand for parts and components. It shows that the standard model performs poorly on such flows and suggests an alternative specification}
 }
 
-@Article{Timmer2015,
+@Article{TimmerIllustratedUserGuide2015,
   Title                    = {An {{Illustrated User Guide}} to the {{World Input}}-{{Output Database}}: The {{Case}} of {{Global Automotive Production}}},
   Author                   = {Timmer, Marcel and Dietzenbacher, Erik and Los, Bart and Stehrer, Robert and {de Vries}, Gaaitzen J.},
   Journal                  = {John Wiley and Sons Ltd},
@@ -860,12 +826,12 @@ increasing fragmentation, both within and across regions. Possible improvements 
 are discussed},
   Doi                      = {DOI:10.1111/roie.12178},
   File                     = {/Users/guillaumedaudin/Documents/Recherche/Articles ScanneÌ?s/Zotero/storage/DCTTNRTD/Timmer et al. - 2015 - An Illustrated User Guide to the World Input-Outpu.pdf},
-  Keywords                 = {Domestic content,Inputâ€“output tables,Production sharing,Value added,WIOD},
+  Keywords                 = {Production sharing,Inputâ€“output tables,Domestic content,WIOD,Value added},
   Language                 = {English},
   Series                   = {Review of International Economics}
 }
 
-@TechReport{Timmer2013,
+@TechReport{TimmerUpdatesrevisionsnational2013,
   Title                    = {Updates and Revisions of National {{SUTs}} for the {{November}} 2013 Release of the {{WIOD}}},
   Author                   = {Timmer, Marcel and Erumban, Abdul Azeez and Gouma, Reitze and {de Vries}, Gaaitzen J.},
   Institution              = {{European Commission}},
@@ -873,12 +839,12 @@ are discussed},
   Month                    = nov,
 
   File                     = {/Users/guillaumedaudin/Documents/Recherche/Articles ScanneÌ?s/Zotero/storage/T4GR3A69/Updates_November2013.pdf},
-  Keywords                 = {Inputâ€“output tables,MÃ©thodo,WIOD},
+  Keywords                 = {MÃ©thodo,Inputâ€“output tables,WIOD},
   Language                 = {English},
   Pages                    = {5}
 }
 
-@Article{Timmer2015a,
+@Article{Timmerillustrateduserguide2015,
   Title                    = {An Illustrated User Guide to the World Input\textendash{}output Database: The Case of Global Automotive Production},
   Author                   = {Timmer, Marcel P. and Dietzenbacher, Erik and Los, Bart and Stehrer, Robert and Vries, Gaaitzen J.},
   Journal                  = {Review of International Economics},
@@ -892,7 +858,7 @@ are discussed},
   Urldate                  = {2016-08-31}
 }
 
-@Article{Timmer2014,
+@Article{TimmerSlicingglobalvalue2014,
   Title                    = {Slicing up Global Value Chains},
   Author                   = {Timmer, Marcel P. and Erumban, Abdul Azeez and Los, Bart and Stehrer, Robert and {de Vries}, Gaaitzen J.},
   Journal                  = {The Journal of Economic Perspectives},
@@ -900,11 +866,11 @@ are discussed},
   Pages                    = {99--118},
 
   File                     = {/Users/guillaumedaudin/Documents/Recherche/Articles ScanneÌ?s/Zotero/storage/85KTTB27/23723486.html},
-  Keywords                 = {Domestic content,Inputâ€“output tables,MÃ©thodo,Value added},
+  Keywords                 = {MÃ©thodo,Inputâ€“output tables,Domestic content,Value added},
   Urldate                  = {2015-05-01}
 }
 
-@Article{Trefler2010,
+@Article{Treflerstructurefactorcontent2010,
   Title                    = {The Structure of Factor Content Predictions},
   Author                   = {Trefler, Daniel and Zhu, Susan Chun},
   Journal                  = {Journal of International Economics},
@@ -917,7 +883,7 @@ are discussed},
   Urldate                  = {2015-05-01}
 }
 
-@Article{Valadkhani2002,
+@Article{ValadkhaniAssessingImpactChanges2002,
   Title                    = {Assessing the {{Impact}} of {{Changes}} in {{Petroleum Prices}} on {{Inflation}} and {{Household Expenditures}} in {{Australia}}},
   Author                   = {Valadkhani, Abbas and Mitchell, William F.},
   Journal                  = {Australian Economic Review},
@@ -933,12 +899,12 @@ are discussed},
   Doi                      = {10.1111/1467-8462.00230},
   File                     = {/Users/guillaumedaudin/Documents/Recherche/Articles ScanneÌ?s/Zotero/storage/JVPDWAHS/Valadkhani et Mitchell - 2002 - Assessing the Impact of Changes in Petroleum Price.pdf;/Users/guillaumedaudin/Documents/Recherche/Articles ScanneÌ?s/Zotero/storage/82BKCWPX/full.html},
   ISSN                     = {1467-8462},
-  Keywords                 = {Choc offre,Inputâ€“output tables},
+  Keywords                 = {Inputâ€“output tables,Choc offre},
   Language                 = {en},
   Urldate                  = {2015-06-25}
 }
 
-@TechReport{Vicard2014,
+@TechReport{Vicardcoutstravailservices2014,
   Title                    = {{Les co{\^u}ts du travail des services domestiques incorpor{\'e}s aux exportations p{\`e}sent-ils sur la comp{\'e}titivit{\'e}-co{\^u}t ?}},
   Author                   = {Vicard, Vincent and Le Saux, Laura},
   Institution              = {{Banque de France}},
@@ -953,7 +919,7 @@ are discussed},
   Language                 = {Fran{\c c}ais}
 }
 
-@TechReport{Wang2017,
+@TechReport{WangCharacterizingGlobalValue2017,
   Title                    = {Characterizing {{Global Value Chains}}: {{Production Length}} and {{Upstreamness}}},
   Author                   = {Wang, Zhi and Wei, Shang-Jin and Yu, Xinding and Zhu, Kunfu},
   Institution              = {{National Bureau of Economic Research}},
@@ -970,7 +936,7 @@ are discussed},
   Urldate                  = {2017-03-22}
 }
 
-@TechReport{Wixted2006,
+@TechReport{WixtedInputOutputAnalysisIncreasingly2006,
   Title                    = {Input-{{Output Analysis}} in an {{Increasingly Globalised World}}},
   Author                   = {Wixted, Brian and Yamano, Norihiko and Webb, Colin},
   Institution              = {{OCDE}},
@@ -1010,12 +976,12 @@ sed input-output tables are constructed, and in
 particular how the closely related supply-use tables are converted into symmetric input-output tables, are 
 not covered here {\~n} they are described in a related paper (Yamano and Ahmad, 2006).},
   File                     = {/Users/guillaumedaudin/Documents/Recherche/Articles ScanneÌ?s/Zotero/storage/MNM64AV7/Wixted et al. - 2006 - Input-Output Analysis in an Increasingly Globalise.pdf},
-  Keywords                 = {Domestic content,Inputâ€“output tables,MÃ©thodo,Production sharing,Value added,Vertical specialization},
+  Keywords                 = {Production sharing,MÃ©thodo,Inputâ€“output tables,Domestic content,Vertical specialization,Value added},
   Language                 = {English},
   Pages                    = {46}
 }
 
-@TechReport{Wodon2008,
+@TechReport{WodonComparingimpactfood2008,
   Title                    = {Comparing the Impact of Food and Energy Price Shocks on Consumers : A Social Accounting Matrix Analysis for {{Ghana}}},
   Author                   = {Wodon, Quentin and Parra, Juan Carlos},
   Institution              = {{The World Bank}},
@@ -1025,7 +991,7 @@ not covered here {\~n} they are described in a related paper (Yamano and Ahmad, 
 
   Abstract                 = {Many countries have been affected by food and oil price shocks. Rising energy costs have manifested themselves through higher prices of gas at the pump and through price increases for many other goods such as kerosene and transport. But in some countries there has also been some degree of protection for consumers for example when authorities have chosen to try to keep electricity tariffs affordable through implicit subsidies (which are unfortunately often poorly targeted). For food prices, the effect on consumers has often been more rapid than for oil-related products, as the increase in import prices have been typically fully passed on to consumers and has often been accompanied by increases in the prices of domestically produced foods. Recent attention has therefore rightly been focused on food prices, but the issue of oil prices is important as well. While food prices tend to have a larger direct impact on consumers due to the larger share of food in total household consumption, oil prices may have larger multiplier effects than food prices because oil-related products are used as intermediary products in many productive sectors. It therefore remains an open question as to whether the medium-term impact of food or oil prices is likely to be larger in any given country. It also remains open to question as to whether urban as opposed to rural households are most likely to be affected. While urban households are likely to rely on consumption of imported goods more than rural households, the weight of food and possibly oil-related products may well be larger in the consumption patterns of rural than urban households. Answering these questions may be useful to guide discussions on compensatory measures that governments can take to respond to the twin crisis of higher food and oil prices. In this context the objective of this paper is to provide a comparative analysis of the multiplier impact of both types of price shocks using a recent Social Accounting Matrix for Ghana. The paper finds that both the direct impacts of food prices and the indirect impacts of oil prices are potentially large, so that both should be dealt with by authorities when considering compensatory measures to protect households from higher consumer prices.},
   File                     = {/Users/guillaumedaudin/Documents/Recherche/Articles ScanneÌ?s/Zotero/storage/EH84IMKP/Wodon et Parra - 2008 - Comparing the impact of food and energy price shoc.pdf;/Users/guillaumedaudin/Documents/Recherche/Articles ScanneÌ?s/Zotero/storage/HCPANPDE/comparing-impact-food-energy-price-shocks-consumers-social-accounting-matrix-analysis-ghana.html},
-  Keywords                 = {Choc offre,Inputâ€“output tables,SAM},
+  Keywords                 = {Inputâ€“output tables,Choc offre,SAM},
   Language                 = {en},
   Pages                    = {1--25},
   Shorttitle               = {Comparing the Impact of Food and Energy Price Shocks on Consumers},
@@ -1044,18 +1010,18 @@ not covered here {\~n} they are described in a related paper (Yamano and Ahmad, 
   Language                 = {English}
 }
 
-@TechReport{Yamano2006,
+@TechReport{YamanoOECDInputOutputDatabase2006,
   Title                    = {The {{OECD Input}}-{{Output Database}}},
   Author                   = {Yamano, Norihiko and Ahmad, Nadim},
   Year                     = {2006},
 
   Abstract                 = {"Sources and Method"},
   File                     = {/Users/guillaumedaudin/Documents/Recherche/Articles ScanneÌ?s/Zotero/storage/UMZPQTW3/Norihiko et Nadim - 2006 - The OECD Input-Output Database.pdf},
-  Keywords                 = {Inputâ€“output tables,MÃ©thodo},
+  Keywords                 = {MÃ©thodo,Inputâ€“output tables},
   Pages                    = {24}
 }
 
-@TechReport{Yamano2006a,
+@TechReport{YamanoOECDInputOutputDatabase2006a,
   Title                    = {The {{OECD Input}}-{{Output Database}}: 2006 {{Edition}}},
   Author                   = {Yamano, Norihiko and Ahmad, Nadim},
   Institution              = {{OCDE}},
@@ -1082,7 +1048,7 @@ provide them with a better understanding of the inform
 ation needed by the OECD to compile these tables 
 in order to meet the demands of users},
   File                     = {/Users/guillaumedaudin/Documents/Recherche/Articles ScanneÌ?s/Zotero/storage/PATAD4PZ/Norihiko et Nadim - 2006 - The OECD Input-Output Database 2006 Edition.pdf},
-  Keywords                 = {Inputâ€“output tables,MÃ©thodo},
+  Keywords                 = {MÃ©thodo,Inputâ€“output tables},
   Language                 = {English},
   Pages                    = {60}
 }
@@ -1116,11 +1082,12 @@ in order to meet the demands of users},
   Urldate                  = {2015-05-01}
 }
 
-@Article{zotero-18678,
-  Owner                    = {w817186}
+@Article{,
+  Owner                    = {w817186},
+  Timestamp                = {2018.01.25}
 }
 
-@TechReport{2015,
+@TechReport{OECDBilateralTrade2015,
   Title                    = {{{OECD Bilateral Trade Database}} by {{Industry}} and {{End}}-Use {{Category}} ({{BTDIxE}})},
   Institution              = {{OECD}},
   Year                     = {2015},
@@ -1128,7 +1095,7 @@ in order to meet the demands of users},
   Address                  = {Paris},
 
   File                     = {/Users/guillaumedaudin/Documents/Recherche/Articles ScanneÌ?s/Zotero/storage/7Q6S6U8V/2015 - OECD Bilateral Trade Database by Industry and End-.pdf},
-  Keywords                 = {Inputâ€“output tables,MÃ©thodo,STAN},
+  Keywords                 = {STAN,MÃ©thodo,Inputâ€“output tables},
   Language                 = {English},
   Pages                    = {43}
 }

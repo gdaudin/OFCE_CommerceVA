@@ -118,7 +118,6 @@ if "`type'"=="par_sect" {
 	rename ratio_ci_impt_prod ratio_ci_impt_`type'
 }
 
-gen choc_DplusI_`type' = ratio_ci_impt_`type'
 
 *drop if c=="CHN"
 *hze_not : on considère les autres pays de la ZE comme étranger (contraire de hze_yes)
@@ -132,7 +131,7 @@ gen choc_dplusi_`type'=ratio_ci_impt_`type'/2
 
 label var pond_`source'_`type' "Élasticité des prix (`type') en monnaie nationale à un choc de la monnaie nationale"
 
-graph twoway (scatter pond_`source'_`type' ratio_ci_impt_`type', mlabel(c)) (lfit pond_`source'_`type' ratio_ci_impt_`type')  , ///
+graph twoway (scatter pond_`source'_`type' choc_dplusi_`type', mlabel(c)) (lfit pond_`source'_`type' choc_dplusi_`type')  , ///
 			title("Elasticité des prix (`type') à une dévaluation") ///
 			xtitle("Parts de l'étranger (`type')") ytitle("Elasticité prix (`type'). ") ///
 			yscale(range(0.0 0.3)) xscale(range(0.0 0.3)) xlabel (0.0(0.05) 0.3) ylabel(0.0(0.05) 0.3) 

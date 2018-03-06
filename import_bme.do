@@ -47,7 +47,7 @@ if  "`yrs'" == "2013" {
 }	
  
 
-save "\\intra\partages\ua1383_data\Agents\Lalliard\Commerce_VA_inflation\BME_`yrs'.dta
+save "\\intra\partages\ua1383_data\Agents\Lalliard\Commerce_VA_inflation\BME_`yrs'.dta", replace
  
 
 end
@@ -57,9 +57,13 @@ essai "`yrs'"
 
 }
 
-save \\intra\partages\ua1383_data\Agents\Lalliard\Commerce_VA_inflation\BME.dta
+use \\intra\partages\ua1383_data\Agents\Lalliard\Commerce_VA_inflation\BME_2017.dta, clear
 
 foreach yrs of numlist 2013 2015 2016 {
 append using \\intra\partages\ua1383_data\Agents\Lalliard\Commerce_VA_inflation\BME_`yrs'.dta
+	erase \\intra\partages\ua1383_data\Agents\Lalliard\Commerce_VA_inflation\BME_`yrs'.dta
 }
+	erase \\intra\partages\ua1383_data\Agents\Lalliard\Commerce_VA_inflation\BME_2017.dta
 sort year , stable
+
+save \\intra\partages\ua1383_data\Agents\Lalliard\Commerce_VA_inflation\BME.dta, replace

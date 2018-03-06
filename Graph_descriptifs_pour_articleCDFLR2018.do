@@ -88,9 +88,9 @@ graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/Graph_ratioim
 *title("Imported intermediate inputs and consumer goods to consumption")
 
 
-*Evolution temporelle du ratio CI importées + biens de conso importés sur HH consumption
+*Evolution temporelle du ratio CI importées + biens de conso importés sur HH consumption en ze
 use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_2000_WIOD.dta", clear
-keep c  ratio_ci_impt_HC
+keep c  ratio_ci_impt_HC year
 keep if strpos("$eurozone",c)!=0
 rename ratio_ci_impt_HC ratio_ci_impt_HC_2000
 save "$dir/Results/Étude rapport D+I et Bouclage Mondial/Pour_graph_ratioimp_WIOD_2000_2014.dta", replace
@@ -154,5 +154,109 @@ label var ratio_ci_impt_HC_2014 "2014"
 
 graph bar (asis) ratio_ci_impt_HC_2000 ratio_ci_impt_HC_2007 ratio_ci_impt_HC_2014, over(c, sort(year)  label(angle(vertical) labsize(vsmall))) 
 *title("Imported intermediate inputs and consumer goods to consumption") 
+graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/Graph_ratioimp_WIOD_2000_2014_ze.png", replace
+
+
+
+*Evolution temporelle du ratio CI importées + biens de conso importés sur HH consumption hors ze
+use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_2000_WIOD.dta", clear
+keep c  ratio_ci_impt_HC year
+keep if strpos("$eurozone",c)==0
+rename ratio_ci_impt_HC ratio_ci_impt_HC_2000
+save "$dir/Results/Étude rapport D+I et Bouclage Mondial/Pour_graph_ratioimp_WIOD_2000_2014.dta", replace
+
+use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_2005_WIOD.dta", clear
+keep c  ratio_ci_impt_HC year
+keep if strpos("$eurozone",c)==0
+rename ratio_ci_impt_HC ratio_ci_impt_HC_2005
+save "$dir/Results/Étude rapport D+I et Bouclage Mondial/Pour_graph_ratioimp_WIOD_2005_2014.dta", replace
+
+
+use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_2007_WIOD.dta", clear
+keep c  ratio_ci_impt_HC year
+keep if strpos("$eurozone",c)==0
+rename ratio_ci_impt_HC ratio_ci_impt_HC_2007
+save "$dir/Results/Étude rapport D+I et Bouclage Mondial/Pour_graph_ratioimp_WIOD_2007_2014.dta", replace
+
+use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_2008_WIOD.dta", clear
+keep c  ratio_ci_impt_HC year
+keep if strpos("$eurozone",c)==0
+rename ratio_ci_impt_HC ratio_ci_impt_HC_2008
+save "$dir/Results/Étude rapport D+I et Bouclage Mondial/Pour_graph_ratioimp_WIOD_2008_2014.dta", replace
+
+use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_2009_WIOD.dta", clear
+keep c  ratio_ci_impt_HC year
+keep if strpos("$eurozone",c)==0
+rename ratio_ci_impt_HC ratio_ci_impt_HC_2009
+save "$dir/Results/Étude rapport D+I et Bouclage Mondial/Pour_graph_ratioimp_WIOD_2009_2014.dta", replace
+
+use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_2012_WIOD.dta", clear
+keep c  ratio_ci_impt_HC year
+keep if strpos("$eurozone",c)==0
+rename ratio_ci_impt_HC ratio_ci_impt_HC_2012
+save "$dir/Results/Étude rapport D+I et Bouclage Mondial/Pour_graph_ratioimp_WIOD_2012_2014.dta", replace
+
+
+use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_2014_WIOD.dta", clear
+rename ratio_ci_impt_HC ratio_ci_impt_HC_2014
+keep if strpos("$eurozone",c)==0
+drop _merge 
+merge 1:1 c using "$dir/Results/Étude rapport D+I et Bouclage Mondial/Pour_graph_ratioimp_WIOD_2000_2014.dta"
+drop _merge  
+merge 1:1 c using "$dir/Results/Étude rapport D+I et Bouclage Mondial/Pour_graph_ratioimp_WIOD_2005_2014.dta"
+drop _merge 
+merge 1:1 c using "$dir/Results/Étude rapport D+I et Bouclage Mondial/Pour_graph_ratioimp_WIOD_2007_2014.dta"
+drop _merge 
+merge 1:1 c using "$dir/Results/Étude rapport D+I et Bouclage Mondial/Pour_graph_ratioimp_WIOD_2008_2014.dta"
+drop _merge 
+merge 1:1 c using "$dir/Results/Étude rapport D+I et Bouclage Mondial/Pour_graph_ratioimp_WIOD_2009_2014.dta"
+drop _merge 
+merge 1:1 c using "$dir/Results/Étude rapport D+I et Bouclage Mondial/Pour_graph_ratioimp_WIOD_2012_2014.dta"
+drop _merge 
+drop if c=="ROW"
+
+label var ratio_ci_impt_HC_2000 "2000"
+label var ratio_ci_impt_HC_2005 "2005"
+label var ratio_ci_impt_HC_2007 "2007"
+label var ratio_ci_impt_HC_2008 "2008"
+label var ratio_ci_impt_HC_2009 "2009"
+label var ratio_ci_impt_HC_2012 "2012"
+label var ratio_ci_impt_HC_2014 "2014"
+
+graph bar (asis) ratio_ci_impt_HC_2000 ratio_ci_impt_HC_2007 ratio_ci_impt_HC_2014, over(c, sort(year)  label(angle(vertical) labsize(vsmall))) 
+*title("Imported intermediate inputs and consumer goods to consumption") 
 graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/Graph_ratioimp_WIOD_2000_2014.png", replace
+
+
+***********************Comparaison de l'effet expliqué par ratio_ci_impt_HC sur le total
+
+*calcul du ratio direct/total, on sait que ce ratio est exceptionnellement >1 en Irlande en 2011 avec TiVA
+/*
+foreach source in   WIOD  TIVA {
+	if "`source'"=="WIOD" local start_year 2000
+	if "`source'"=="TIVA" local start_year 1995
+	if "`source'"=="WIOD" local end_year 2014
+	if "`source'"=="TIVA" local end_year 2011
+
+	foreach i of numlist `start_year' (1)`end_year'  {
+	use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`i'_`source'.dta", clear	
+ gen ratio_direct_total=ratio_ci_impt_HC/pond_`source'_HC
+ save "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`i'_`source'.dta", replace		
+	}
+}
+*/
+
+use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_2014_WIOD.dta", clear
+*keep if strpos("$eurozone",c)!=0
+drop if c=="ROW"
+graph bar (asis) ratio_direct_total, over(c, sort(ratio_direct_total)  label(angle(vertical) labsize(vsmall))) 
+*title("Imported intermediate inputs and consumer goods to consumption") 
+graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/Graph_ratiodir_WIOD_2014.png", replace
+
+
+
+*traduction en anglais du graph pente de la courbe
+
+
+
 

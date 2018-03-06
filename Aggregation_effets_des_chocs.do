@@ -1,4 +1,3 @@
-*****Mettre global test =1 provoquera la sauvegarde de plein de matrices / vecteurs à vérifier
 
 clear  
 set more off
@@ -13,8 +12,7 @@ capture log close
 set matsize 7000
 *set mem 700m if earlier version of stata (<stata 12)
 set more off
-global test 1
-*Mettre test=1 pour sauver les tableaux un par un et test=0 pour ne pas encombrer le DD.
+
 
 
 
@@ -135,7 +133,6 @@ if ("`wgt'" == "X") | ("`wgt'" == "Yt") {
 
 
 local blink 0
-matrix C`groupeduchoc't= C`groupeduchoc''
 svmat C`groupeduchoc't, name(C`groupeduchoc')	
 
 
@@ -163,7 +160,7 @@ if ("`wgt'" == "HC")  {
 //svmat VAt
 
 set more off
-display "fin de compute_mean"
+display "fin de compute_mean `yrs' `groupeduchoc' `wgt' `source'"
 
 
 *Vector shock`cty' contains the mean effects of a shock on exchange rate (coming from the country `cty') on overall prices for each country
@@ -225,7 +222,7 @@ clear
 set more off
 
 
-*foreach source in   WIOD { 
+*foreach source in   TIVA { 
 foreach source in   WIOD TIVA { 
 
 
@@ -270,7 +267,7 @@ foreach source in   WIOD TIVA {
 
 
 
-*   foreach i of numlist 2011 {
+*  foreach i of numlist 2011 {
 	foreach i of numlist `start_year' (1)`end_year'  {
 
     	foreach j in HC /*X Yt*/  {	

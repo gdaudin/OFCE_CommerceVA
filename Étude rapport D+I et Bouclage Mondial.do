@@ -141,11 +141,12 @@ graph twoway (scatter pond_`source'_`type' choc_dplusi_`type', mlabel(c)) (lfit 
 graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/graph_`year'_`source'_`type'.pdf", replace
 graph close
 
-	
-
 			
 reg pond_`source'_`type' choc_dplusi_`type'	
-blif
+
+save "$dir/Results/Étude rapport D+I et Bouclage Mondial/Elast_par_pays_`year'_`source'_`type'.dta", replace
+
+
 gen R2=e(r2)
 matrix COEF = e(b)
 gen cst=COEF[1,2]

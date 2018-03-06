@@ -127,9 +127,10 @@ if "`type'"=="par_sect" {
 gen choc_dplusi_`type'=ratio_ci_impt_`type'/2
 
 
-
-
 label var pond_`source'_`type' "Élasticité des prix (`type') en monnaie nationale à un choc de la monnaie nationale"
+
+save "$dir/Results/Étude rapport D+I et Bouclage Mondial/Elast_par_pays_`year'_`source'_`type'.dta", replace
+
 
 graph twoway (scatter pond_`source'_`type' choc_dplusi_`type', mlabel(c)) (lfit pond_`source'_`type' choc_dplusi_`type')  , ///
 			title("Elasticité des prix (`type') à une dévaluation") ///
@@ -144,7 +145,6 @@ graph close
 			
 reg pond_`source'_`type' choc_dplusi_`type'	
 
-save "$dir/Results/Étude rapport D+I et Bouclage Mondial/Elast_par_pays_`year'_`source'_`type'.dta", replace
 
 
 gen R2=e(r2)

@@ -66,4 +66,19 @@ append using \\intra\partages\ua1383_data\Agents\Lalliard\Commerce_VA_inflation\
 	erase \\intra\partages\ua1383_data\Agents\Lalliard\Commerce_VA_inflation\BME_2017.dta
 sort year , stable
 
+rename pays c_full_EN
+
+merge m:m c_full_EN using "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA\Bases\pays_FR.dta"
+keep if _merge == 3
+drop _merge
+
+replace BME = -0.2*BME
+   /* le choc BME est un choc de 5%. 
+      20 fois le choc BME pour avoir le choc de 100% du modèle WIOD
+	  0.2 = 20/100 pour correspondre au format d'affichage de la source WIOD*/
+   
+   
+label variable BME "BME pour le même choc que le modèle I-O"
+drop c_full_EN
+drop c_full_FR
 save \\intra\partages\ua1383_data\Agents\Lalliard\Commerce_VA_inflation\BME.dta, replace

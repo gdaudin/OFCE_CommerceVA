@@ -148,7 +148,8 @@ graph twoway (scatter pond_`source'_`type' choc_dplusi_`type', mlabel(c)) (lfit 
 graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/graph_`year'_`source'_`type'.pdf", replace
 graph close
 
-			
+*assert 			pond_`source'_`type' >= choc_dplusi_`type'
+*RQ : WIOD 2000 ce n'est pas vérifié pour Luxembourg et Malte (pour en gros un point de pourcentage sur 30). Je laisse couler...
 reg pond_`source'_`type' choc_dplusi_`type'	
 
 gen R2=e(r2)

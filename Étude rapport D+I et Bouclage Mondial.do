@@ -100,6 +100,13 @@ if "`type'"=="HC" {
 	drop _merge
 	replace pays = pays+"_eur" if strlen(pays)==3
 	replace pays =substr(pays,1,3) if strmatch(pays,"*_AUTO")==1
+	
+	merge 1:1 pays using "$dir/Bases/contenu_impHC_`source'_`year'.dta"
+	drop if _merge ==1
+	drop _merge year
+	
+	replace ratio_ci_impt_HC = ratio_ci_impt_HC + contenu_impHC
+	
 }
 
 
@@ -120,7 +127,7 @@ if "`type'"=="par_sect" {
 
 
 *drop if c=="CHN"
-*hze_not : on considère les autres pays de la ZE comme étranger (contraire de hze_yes)
+*hze_not : on considère les autres pays de la ZE comme étrangers (contraire de hze_yes)
 
 *effet direct repondéré par le choc: le choc correspond à une appréciation de 100% 
 *=>on double l'impact pour comparer le ratio de CI importées (comptable) à l'effet direct choqué
@@ -131,21 +138,18 @@ label var pond_`source'_`type' "Élasticité des prix (`type') en monnaie nation
 
 save "$dir/Results/Étude rapport D+I et Bouclage Mondial/Elast_par_pays_`year'_`source'_`type'.dta", replace
 
-/*
+
 graph twoway (scatter pond_`source'_`type' choc_dplusi_`type', mlabel(c)) (lfit pond_`source'_`type' choc_dplusi_`type')  , ///
 			title("Elasticité des prix (`type') à une dévaluation") ///
 			xtitle("Parts de l'étranger (`type')") ytitle("Elasticité prix (`type'). ") ///
-			yscale(range(0.0 0.3)) xscale(range(0.0 0.3)) xlabel (0.0(0.05) 0.3) ylabel(0.0(0.05) 0.3) ///
-			nodraw
+			yscale(range(0.0 0.3)) xscale(range(0.0 0.3)) xlabel (0.0(0.05) 0.3) ylabel(0.0(0.05) 0.3)
 *dans le cas HC, xtitle pourrait se finir par «importées dans la conso dom + part conso importée»			
 						
 graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/graph_`year'_`source'_`type'.pdf", replace
 graph close
-*/
+
 			
 reg pond_`source'_`type' choc_dplusi_`type'	
-
-
 
 gen R2=e(r2)
 matrix COEF = e(b)

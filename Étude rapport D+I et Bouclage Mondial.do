@@ -131,17 +131,17 @@ label var pond_`source'_`type' "Élasticité des prix (`type') en monnaie nation
 
 save "$dir/Results/Étude rapport D+I et Bouclage Mondial/Elast_par_pays_`year'_`source'_`type'.dta", replace
 
-
+/*
 graph twoway (scatter pond_`source'_`type' choc_dplusi_`type', mlabel(c)) (lfit pond_`source'_`type' choc_dplusi_`type')  , ///
 			title("Elasticité des prix (`type') à une dévaluation") ///
 			xtitle("Parts de l'étranger (`type')") ytitle("Elasticité prix (`type'). ") ///
-			yscale(range(0.0 0.3)) xscale(range(0.0 0.3)) xlabel (0.0(0.05) 0.3) ylabel(0.0(0.05) 0.3) 
+			yscale(range(0.0 0.3)) xscale(range(0.0 0.3)) xlabel (0.0(0.05) 0.3) ylabel(0.0(0.05) 0.3) ///
+			nodraw
 *dans le cas HC, xtitle pourrait se finir par «importées dans la conso dom + part conso importée»			
-			
-			
+						
 graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/graph_`year'_`source'_`type'.pdf", replace
 graph close
-
+*/
 			
 reg pond_`source'_`type' choc_dplusi_`type'	
 
@@ -164,8 +164,12 @@ gen corr = r(rho)
 save "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`year'_`source'_`type'.dta", replace 
 keep if _n==1
 keep R2-corr
-capture append using "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`type'.dta"
-save "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`type'.dta", replace
+if `year'!=$start_year {
+	append using "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`source'_`type'.dta"
+}
+
+save "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`source'_`type'.dta", replace
+
 
 
 
@@ -176,30 +180,28 @@ foreach source in  WIOD  TIVA {
 
 
 
-	if "`source'"=="WIOD" local start_year 2000
-	if "`source'"=="TIVA" local start_year 1995
+	if "`source'"=="WIOD" global start_year 2000
+	if "`source'"=="TIVA" global start_year 1995
 
 
-	if "`source'"=="WIOD" local end_year 2014
-	if "`source'"=="TIVA" local end_year 2011
+	if "`source'"=="WIOD" global end_year 2014
+	if "`source'"=="TIVA" global end_year 2011
 	
 
 
 
 *	foreach i of numlist 2011  {
-    foreach i of numlist `start_year' (1)`end_year'  {
-		
-		capture erase "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_HC.dta"
-		etude `i' `source' HC
-		capture erase "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_par_sect.dta"
-		etude `i' `source' par_sect
-	
-		clear
+    
+	foreach type in HC par_sect {
+		capture erase "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`source'_`type'.dta"
+		foreach i of numlist $start_year (1) $end_year  {
+		etude `i' `source' `type'		
+		}
+	clear
 	}
 
-
-
 }
+
 
 
 

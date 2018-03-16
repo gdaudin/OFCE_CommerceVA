@@ -72,8 +72,8 @@ if "`source'"=="TIVA" local end_year 2011
 foreach i of numlist `start_year' (1)`end_year'  {
 	preserve
 	keep if year==`i'
-	save "$dir/Results/Devaluations/contenu_impHC_`source'_`i'.dta", replace
-	export excel using "$dir/Results/Devaluations/contenu_impHC_`source'_`i'.xls", firstrow(variables) replace
+	save "$dir/Bases/contenu_impHC_`source'_`i'.dta", replace
+	export excel using "$dir/Bases/contenu_impHC_`source'_`i'.xls", firstrow(variables) replace
 	restore
 }
 

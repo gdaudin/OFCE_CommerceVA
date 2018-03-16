@@ -61,29 +61,29 @@ foreach var of varlist $var_entree_sortie {
 	replace `var' = 0 if pays=="`pays_colonne'"
 	
 	
-	if strpos(lower("$china"),"`pays_colonne'")!=0  {
+	if strpos(lower("$china"),lower("`pays_colonne'"))!=0  {
 			foreach i of global china {	
-			replace `var' = 0 if pays == lower("`i'")
+			replace `var' = 0 if lower(pays) == lower("`i'")
 		}
 	}
 	
 	
-	if strpos(lower("$mexique"),"`pays_colonne'")!=0 {
+	if strpos(lower("$mexique"),lower("`pays_colonne'"))!=0 {
 			foreach i of global mexique {	
-			replace `var' = 0 if pays == lower("`i'")
+			replace `var' = 0 if lower(pays) == lower("`i'")
 		}
 	}
 		
-	if "`hze'"=="hze_yes" & strpos(lower("$eurozone"),"`pays_colonne'")!=0 {
+	if "`hze'"=="hze_yes" & strpos(lower("$eurozone"),lower("`pays_colonne'"))!=0 {
 	
 		*display "turf"
 	
 	*Et les internes dans la zone euro
 		foreach i of global eurozone {	
-			replace `var' = 0 if pays == lower("`i'")
-			replace `var' = 0 if pays == "`i'"
+			replace `var' = 0 if lower(pays) == lower("`i'")		
 		}
 	}
+	display "`hze' -- `pays_colonne'" 
 }
 
 
@@ -275,7 +275,7 @@ if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\De
 */
 
 
-*foreach source in TIVA {
+*foreach source in WIOD {
 foreach source in   WIOD  TIVA {
 
 
@@ -290,13 +290,12 @@ foreach source in   WIOD  TIVA {
 
 
 
-*	foreach i of numlist 2011  {
+*	foreach i of numlist 2010  {
 	foreach i of numlist `start_year' (1)`end_year'  {
 		
 		imp_inputs_par_sect `i' `source' hze_not
 		imp_inputs_par_sect `i' `source' hze_yes
 		
-	
 		clear
 	}
 
@@ -306,7 +305,7 @@ foreach source in   WIOD  TIVA {
 
 */
 
-*foreach source in  TIVA {
+*foreach source in  WIOD {
 foreach source in  WIOD  TIVA {
 
 
@@ -321,7 +320,7 @@ foreach source in  WIOD  TIVA {
 
 
 
-*	foreach i of numlist 2011  {
+*	foreach i of numlist 2000  {
 	foreach i of numlist `start_year' (1)`end_year'  {
 		
 		imp_inputs `i' `source' HC hze_not

@@ -105,7 +105,7 @@ if "`type'"=="HC" {
 	drop if _merge ==1
 	drop _merge year
 	
-	replace ratio_ci_impt_HC = ratio_ci_impt_HC + contenu_impHC
+	replace ratio_ci_impt_HC = ratio_ci_impt_HC*(1-contenu_impHC) + contenu_impHC
 	
 }
 

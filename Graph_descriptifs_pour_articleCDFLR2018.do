@@ -18,10 +18,10 @@ if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\De
 
 ************************************************************
 *GRAPHIQUE RESULTATS DES REGRESSIONS  pond_hc=b*ratio_ci_impt_HC+constante
-use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results.dta", clear
+*use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results.dta", clear
 
 ************graphiques pour WIOD
-drop if source=="TIVA"
+use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_WIOD_HC.dta", clear
 *set scheme economist
 graph bar (asis) R2 ,  title("R2, WIOD") over(year, sort(year) label(angle(vertical) labsize(small))) 
 graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/Graph_R2_Wiod.png", replace
@@ -37,10 +37,10 @@ graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/Graph_beta_Wi
 
 *constante de la régression
 graph bar (asis) cst ,  title("Constante de la régression, WIOD") over(year, sort(year) label(angle(vertical) labsize(small))) 
-graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/Graph_beta_Wiod.png", replace
+graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/Graph_cst_Wiod.png", replace
 
 *************graphiques pour TIVA
-use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results.dta", clear
+use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_TIVA_HC.dta", clear
 drop if source=="WIOD"
 
 graph bar (asis)  R2,  title("R2, TIVA") over(year, sort(year) label(angle(vertical) labsize(small))) 
@@ -53,7 +53,7 @@ graph bar (asis) b ,  title("Coefficient de correlation de la régression, TIVA"
 graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/Graph_beta_tiva.png", replace
 
 graph bar (asis) cst ,  title("Constante de la régression, TIVA") over(year, sort(year) label(angle(vertical) labsize(small))) 
-graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/Graph_beta_Tiva.png", replace
+graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/Graph_cst_Tiva.png", replace
 
 
 ************************************************************

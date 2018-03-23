@@ -138,15 +138,16 @@ label var pond_`source'_`type' "Élasticité des prix (`type') en monnaie nation
 
 save "$dir/Results/Étude rapport D+I et Bouclage Mondial/Elast_par_pays_`year'_`source'_`type'.dta", replace
 
-
-graph twoway (scatter pond_`source'_`type' choc_dplusi_`type', mlabel(c)) (lfit pond_`source'_`type' choc_dplusi_`type')  , ///
+if "`type'"=="HC" {
+	graph twoway (scatter pond_`source'_`type' choc_dplusi_`type', mlabel(c)) (lfit pond_`source'_`type' choc_dplusi_`type')  , ///
 			title("Elasticité des prix (`type') à une dévaluation") ///
 			xtitle("Parts de l'étranger (`type')") ytitle("Elasticité prix (`type'). ") ///
 			yscale(range(0.0 0.3)) xscale(range(0.0 0.3)) xlabel (0.0(0.05) 0.3) ylabel(0.0(0.05) 0.3)
-*dans le cas HC, xtitle pourrait se finir par «importées dans la conso dom + part conso importée»			
+	*dans le cas HC, xtitle pourrait se finir par «importées dans la conso dom + part conso importée»			
 						
-graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/graph_`year'_`source'_`type'.pdf", replace
-graph close
+	graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/graph_`year'_`source'_`type'.pdf", replace
+	graph close
+}
 
 *assert 			pond_`source'_`type' >= choc_dplusi_`type'
 *RQ : WIOD 2000 ce n'est pas vérifié pour Luxembourg et Malte (pour en gros un point de pourcentage sur 30). Je laisse couler...

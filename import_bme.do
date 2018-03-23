@@ -81,4 +81,4 @@ replace BME = -0.2*BME
 label variable BME "BME pour le même choc que le modèle I-O"
 drop c_full_EN
 drop c_full_FR
-save \\intra\partages\ua1383_data\Agents\Lalliard\Commerce_VA_inflation\BME.dta, replace
+save \\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA\BME.dta, replace

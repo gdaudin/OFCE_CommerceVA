@@ -5,7 +5,7 @@ else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
 if ("`c(username)'"=="guillaumedaudin") global dirgit "~/Documents/Recherche/2017 BDF_Commerce VA"
 else global dirgit "X:\Agents\LALLIARD\commerce_VA_inflation\"
 
-use $dirgit/BME.dta, clear
+use $dir/BME.dta, clear
 
 generate pays = lower(c)+"_eur"
 
@@ -26,3 +26,4 @@ twoway (scatter BME pond_WIOD_HC if year == `yrs', mlabel(c)) (lfit BME pond_WIO
 
 graph combine BME_vs_WIOD_2013 BME_vs_WIOD_2015 BME_vs_WIOD_2016 BME_vs_WIOD_2017
 graph save "$dir/Graphiques/BME_vs_WIOD.gph",  replace 
+

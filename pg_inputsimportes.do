@@ -214,10 +214,12 @@ if "`vector'" == "HC"  {
 	drop _merge
 		
 	gen ci_impt_HC = ratio_ci_impt_prod * conso
+	label var ci_impt_HC "Les CI importées dans la consommation de secteurs domestiques"
 	
 	
 	collapse (sum) ci_impt_HC conso, by(pays)
 	generate ratio_ci_impt_HC = ci_impt_HC/conso
+	label var ratio_ci_impt_HC "Part des CI dans la conso domestique"
 	save "$dir/Bases/imp_inputs_HC_`yrs'_`source'_`hze'.dta", replace
 }
 

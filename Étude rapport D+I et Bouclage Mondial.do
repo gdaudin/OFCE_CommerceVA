@@ -139,14 +139,28 @@ label var pond_`source'_`type' "Élasticité des prix (`type') en monnaie nation
 save "$dir/Results/Étude rapport D+I et Bouclage Mondial/Elast_par_pays_`year'_`source'_`type'.dta", replace
 
 if "`type'"=="HC" {
-	graph twoway (scatter pond_`source'_`type' choc_dplusi_`type', mlabel(c)) (lfit pond_`source'_`type' choc_dplusi_`type')  , ///
-			title("Elasticité des prix (`type') à une dévaluation") ///
-			xtitle("Parts de l'étranger (`type')") ytitle("Elasticité prix (`type'). ") ///
-			yscale(range(0.0 0.3)) xscale(range(0.0 0.3)) xlabel (0.0(0.05) 0.3) ylabel(0.0(0.05) 0.3)
+
+	local blif = _N + 1
+	set obs  `blif'
+	replace pond_`source'_`type'=0 in `blif'
+	replace c="" /*if c!="FRA_EUR" & c!="DEU_EUR" & c!="LUX_EUR" & c!="FRA" & c!="DEU" & c!="LUX" ///
+					& c!="CAN" & c!="JPN" & c!="USA" & c!="CHN" */
+	graph twoway (scatter pond_`source'_`type' choc_dplusi_`type', mlabel(c) mlabsize(medium)) ///
+			(lfit pond_`source'_`type' choc_dplusi_`type') ///
+			(line pond_`source'_`type' pond_`source'_`type',lwidth(vthin) color(black)) , ///
+			title("Comparing direct and modelled effects") ///
+			xtitle("Share of imported consumption + imported IC in domestic consumption") ytitle("Price elasticity") ///
+			yscale(range(0.0 0.3)) xscale(range(0.0 0.3)) xlabel (0.0(0.05) 0.3) ylabel(0.0(0.05) 0.3) ///
+			legend(off)
 	*dans le cas HC, xtitle pourrait se finir par «importées dans la conso dom + part conso importée»			
 						
+	
 	graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/graph_`year'_`source'_`type'.pdf", replace
+	
 	graph close
+
+	
+	
 }
 
 *assert 			pond_`source'_`type' >= choc_dplusi_`type'
@@ -181,7 +195,7 @@ save "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`source'_`typ
 
 end 
 
-*foreach source in  TIVA  {
+*foreach source in  WIOD  {
 foreach source in  WIOD  TIVA {
 
 
@@ -196,12 +210,14 @@ foreach source in  WIOD  TIVA {
 
 
 
-*	foreach i of numlist 2011  {
+	
     
 	foreach type in HC par_sect {
 		capture erase "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`source'_`type'.dta"
+
+*		foreach i of numlist 2014  {
 		foreach i of numlist $start_year (1) $end_year  {
-		etude `i' `source' `type'		
+			etude `i' `source' `type'		
 		}
 	clear
 	}
@@ -209,8 +225,3 @@ foreach source in  WIOD  TIVA {
 }
 
 
-
-
-*************************
-**Pour traiter la zone euro
-******************************

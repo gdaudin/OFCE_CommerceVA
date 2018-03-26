@@ -144,7 +144,7 @@ if strpos("`wgt'","HC")!=0  {
         egen tot_HC_`pays_conso' = total(HC_`pays_conso')
         generate sector_shock_`pays_conso' = Bt_`pays_conso'/tot_HC_`pays_conso'
 		if "`wgt'"=="HC_alimentaire"	replace sector_shock_`pays_conso'= 0 if agregat_secteur!="alimentaire"
-		if "`wgt'"=="HC_neige" 			replace sector_shock_`pays_conso'= 0 if agregat_secteur!="neige"
+		if "`wgt'"=="HC_neig" 			replace sector_shock_`pays_conso'= 0 if agregat_secteur!="neig"
 		if "`wgt'"=="HC_energie" 		replace sector_shock_`pays_conso'= 0 if agregat_secteur!="energie"
 		if "`wgt'"=="HC_services" 		replace sector_shock_`pays_conso'= 0 if agregat_secteur!="services"
         egen shock`groupeduchoc'_`pays_conso' = total(sector_shock_`pays_conso')
@@ -226,8 +226,8 @@ clear
 set more off
 
 
-foreach source in   TIVA { 
-*foreach source in   WIOD TIVA { 
+*foreach source in   TIVA { 
+foreach source in   WIOD TIVA { 
 
 
 	if "`source'"=="WIOD" local start_year 2000
@@ -274,7 +274,7 @@ foreach source in   TIVA {
   foreach i of numlist 2011 {
 *	foreach i of numlist `start_year' (1)`end_year'  {
 
-    	foreach j in  HC_neige HC_alimentaire HC_energie HC_services HC /*X Yt*/  {	
+    	foreach j in  HC_neig HC_alimentaire HC_energie HC_services HC /*X Yt*/  {	
 
     	    if strpos("`j'","HC")!=0 compute_HC `i' `source'
 			else compute_`j' `i' `source'
@@ -286,11 +286,11 @@ foreach source in   TIVA {
 
 }
 
-*secteurs HC : alimentaire neige services energie
+*secteurs HC : alimentaire neig services energie
 
 *on va le mettre dans weight.
 
-HC_alimentaire HC_neige HC_services HC_energie
+*HC_alimentaire HC_neig HC_services HC_energie
 
 
 

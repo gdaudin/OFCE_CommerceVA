@@ -119,6 +119,7 @@ foreach year of num 2000(1)2013 {
 replace pays = upper(pays)
 preserve
 keep if strpos("$eurozone",upper(pays))!=0 | strpos(pays,"_eur")!=0
+label var ratio_ci_impt_HC_2014 "2014"
 graph bar (asis) ratio_ci_impt_HC_2000 ratio_ci_impt_HC_2007 ratio_ci_impt_HC_2014, over(pays, sort(year)  label(angle(vertical) labsize(vsmall))) 
 *title("Imported intermediate inputs and consumer goods to consumption") 
 graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/Graph_ratioimp_WIOD_2000_2014_ze.png", replace

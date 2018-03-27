@@ -148,7 +148,6 @@ if strpos("`wgt'","HC")!=0  {
 		}
 		if strpos("`wgt'","imp")!=0 replace  sector_shock_`pays_conso'= 0 if lower("`pays_conso'")==c
 		if strpos("`wgt'","dom")!=0 replace  sector_shock_`pays_conso'= 0 if lower("`pays_conso'")!=c
-		blif
         egen shock`groupeduchoc'_`pays_conso' = total(sector_shock_`pays_conso')
     *	keep if _n==1
         mkmat shock`groupeduchoc'_`pays_conso'

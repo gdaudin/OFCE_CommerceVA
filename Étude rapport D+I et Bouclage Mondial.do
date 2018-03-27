@@ -100,6 +100,13 @@ if "`type'"=="HC" {
 	drop _merge
 	replace pays = pays+"_eur" if strlen(pays)==3
 	replace pays =substr(pays,1,3) if strmatch(pays,"*_AUTO")==1
+	
+	merge 1:1 pays using "$dir/Bases/contenu_impHC_`source'_`year'.dta"
+	drop if _merge ==1
+	drop _merge year
+	
+	replace ratio_ci_impt_HC = ratio_ci_impt_HC*(1-contenu_impHC) + contenu_impHC
+	
 }
 
 
@@ -120,32 +127,45 @@ if "`type'"=="par_sect" {
 
 
 *drop if c=="CHN"
-*hze_not : on considère les autres pays de la ZE comme étranger (contraire de hze_yes)
+*hze_not : on considère les autres pays de la ZE comme étrangers (contraire de hze_yes)
 
 *effet direct repondéré par le choc: le choc correspond à une appréciation de 100% 
 *=>on double l'impact pour comparer le ratio de CI importées (comptable) à l'effet direct choqué
 gen choc_dplusi_`type'=ratio_ci_impt_`type'/2
 
 
-
-
 label var pond_`source'_`type' "Élasticité des prix (`type') en monnaie nationale à un choc de la monnaie nationale"
-
-graph twoway (scatter pond_`source'_`type' choc_dplusi_`type', mlabel(c)) (lfit pond_`source'_`type' choc_dplusi_`type')  , ///
-			title("Elasticité des prix (`type') à une dévaluation") ///
-			xtitle("Parts de l'étranger (`type')") ytitle("Elasticité prix (`type'). ") ///
-			yscale(range(0.0 0.3)) xscale(range(0.0 0.3)) xlabel (0.0(0.05) 0.3) ylabel(0.0(0.05) 0.3) 
-*dans le cas HC, xtitle pourrait se finir par «importées dans la conso dom + part conso importée»			
-			
-			
-graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/graph_`year'_`source'_`type'.pdf", replace
-graph close
-
-			
-reg pond_`source'_`type' choc_dplusi_`type'	
 
 save "$dir/Results/Étude rapport D+I et Bouclage Mondial/Elast_par_pays_`year'_`source'_`type'.dta", replace
 
+if "`type'"=="HC" {
+
+	local blif = _N + 1
+	set obs  `blif'
+	replace pond_`source'_`type'=0 in `blif'
+	replace c="" /*if c!="FRA_EUR" & c!="DEU_EUR" & c!="LUX_EUR" & c!="FRA" & c!="DEU" & c!="LUX" ///
+					& c!="CAN" & c!="JPN" & c!="USA" & c!="CHN" */
+	graph twoway (scatter pond_`source'_`type' choc_dplusi_`type', mlabel(c) mlabsize(medium)) ///
+			(lfit pond_`source'_`type' choc_dplusi_`type') ///
+			(line pond_`source'_`type' pond_`source'_`type',lwidth(vthin) color(black)) , ///
+			title("Comparing direct and modelled effects") ///
+			xtitle("Share of imported consumption + imported IC in domestic consumption") ytitle("Price elasticity") ///
+			yscale(range(0.0 0.3)) xscale(range(0.0 0.3)) xlabel (0.0(0.05) 0.3) ylabel(0.0(0.05) 0.3) ///
+			legend(off)
+	*dans le cas HC, xtitle pourrait se finir par «importées dans la conso dom + part conso importée»			
+						
+	
+	graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/graph_`year'_`source'_`type'.pdf", replace
+	
+	graph close
+
+	
+	
+}
+
+*assert 			pond_`source'_`type' >= choc_dplusi_`type'
+*RQ : WIOD 2000 ce n'est pas vérifié pour Luxembourg et Malte (pour en gros un point de pourcentage sur 30). Je laisse couler...
+reg pond_`source'_`type' choc_dplusi_`type'	
 
 gen R2=e(r2)
 matrix COEF = e(b)
@@ -164,45 +184,44 @@ gen corr = r(rho)
 save "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`year'_`source'_`type'.dta", replace 
 keep if _n==1
 keep R2-corr
-capture append using "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`type'.dta"
-save "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`type'.dta", replace
+if `year'!=$start_year {
+	append using "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`source'_`type'.dta"
+}
+
+save "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`source'_`type'.dta", replace
+
 
 
 
 end 
 
-*foreach source in  TIVA  {
+*foreach source in  WIOD  {
 foreach source in  WIOD  TIVA {
 
 
 
-	if "`source'"=="WIOD" local start_year 2000
-	if "`source'"=="TIVA" local start_year 1995
+	if "`source'"=="WIOD" global start_year 2000
+	if "`source'"=="TIVA" global start_year 1995
 
 
-	if "`source'"=="WIOD" local end_year 2014
-	if "`source'"=="TIVA" local end_year 2011
+	if "`source'"=="WIOD" global end_year 2014
+	if "`source'"=="TIVA" global end_year 2011
 	
 
 
 
-*	foreach i of numlist 2011  {
-    foreach i of numlist `start_year' (1)`end_year'  {
-		
-		capture erase "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_HC.dta"
-		etude `i' `source' HC
-		capture erase "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_par_sect.dta"
-		etude `i' `source' par_sect
 	
-		clear
+    
+	foreach type in HC par_sect {
+		capture erase "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`source'_`type'.dta"
+
+*		foreach i of numlist 2014  {
+		foreach i of numlist $start_year (1) $end_year  {
+			etude `i' `source' `type'		
+		}
+	clear
 	}
-
-
 
 }
 
 
-
-*************************
-**Pour traiter la zone euro
-******************************

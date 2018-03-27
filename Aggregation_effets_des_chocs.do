@@ -137,12 +137,17 @@ svmat C`groupeduchoc't, name(C`groupeduchoc')
 
 
 
-if ("`wgt'" == "HC")  {
+if strpos("`wgt'","HC")!=0  {
 	foreach pays_conso of global country_hc {
         svmat HC_`pays_conso', name(HC_`pays_conso')
         generate Bt_`pays_conso' = C`groupeduchoc'* HC_`pays_conso'
         egen tot_HC_`pays_conso' = total(HC_`pays_conso')
-        generate sector_shock_`pays_conso' = Bt_`pays_conso'/tot_`wgt'_`pays_conso'
+        generate sector_shock_`pays_conso' = Bt_`pays_conso'/tot_HC_`pays_conso'
+		foreach sector in alimentaire neig energie services {
+			if strpos("`wgt'","`sector'")!=0	replace sector_shock_`pays_conso'= 0 if agregat_secteur!="`sector'"
+		}
+		if strpos("`wgt'","imp")!=0 replace  sector_shock_`pays_conso'= 0 if lower("`pays_conso'")==c
+		if strpos("`wgt'","dom")!=0 replace  sector_shock_`pays_conso'= 0 if lower("`pays_conso'")!=c
         egen shock`groupeduchoc'_`pays_conso' = total(sector_shock_`pays_conso')
     *	keep if _n==1
         mkmat shock`groupeduchoc'_`pays_conso'
@@ -267,12 +272,18 @@ foreach source in   WIOD TIVA {
 
 
 
-*  foreach i of numlist 2011 {
-	foreach i of numlist `start_year' (1)`end_year'  {
+  foreach i of numlist 2011 {
+*	foreach i of numlist `start_year' (1)`end_year'  {
+		
+		local HC_fait 0
+    	foreach j in  HC_neig_dom HC_alimentaire_dom HC_energie_dom HC_services_dom HC_dom ///
+					HC_neig_impt HC_alimentaire_impt HC_energie_impt HC_services_impt HC_impt /*X Yt*/  {	
 
-    	foreach j in HC /*X Yt*/  {	
-
-    	    compute_`j' `i' `source'
+    	    if strpos("`j'","HC")!=0 & `HC_fait'==0 {
+				compute_HC `i' `source'
+				local HC_fait 1
+			}
+			else compute_`j' `i' `source'
 			table_mean `i' `j' 1 `source'
 
 	    }
@@ -280,6 +291,14 @@ foreach source in   WIOD TIVA {
     }
 
 }
+
+*secteurs HC : alimentaire neig services energie
+
+*on va le mettre dans weight.
+
+*HC_alimentaire HC_neig HC_services HC_energie
+
+
 
 
 

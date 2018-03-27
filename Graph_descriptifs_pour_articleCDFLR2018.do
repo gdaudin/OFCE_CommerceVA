@@ -18,10 +18,10 @@ if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\De
 
 ************************************************************
 *GRAPHIQUE RESULTATS DES REGRESSIONS  pond_hc=b*ratio_ci_impt_HC+constante
-use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results.dta", clear
+*use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results.dta", clear
 
 ************graphiques pour WIOD
-drop if source=="TIVA"
+use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_WIOD_HC.dta", clear
 *set scheme economist
 graph bar (asis) R2 ,  title("R2, WIOD") over(year, sort(year) label(angle(vertical) labsize(small))) 
 graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/Graph_R2_Wiod.png", replace
@@ -37,10 +37,10 @@ graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/Graph_beta_Wi
 
 *constante de la régression
 graph bar (asis) cst ,  title("Constante de la régression, WIOD") over(year, sort(year) label(angle(vertical) labsize(small))) 
-graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/Graph_beta_Wiod.png", replace
+graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/Graph_cst_Wiod.png", replace
 
 *************graphiques pour TIVA
-use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results.dta", clear
+use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_TIVA_HC.dta", clear
 drop if source=="WIOD"
 
 graph bar (asis)  R2,  title("R2, TIVA") over(year, sort(year) label(angle(vertical) labsize(small))) 
@@ -53,177 +53,80 @@ graph bar (asis) b ,  title("Coefficient de correlation de la régression, TIVA"
 graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/Graph_beta_tiva.png", replace
 
 graph bar (asis) cst ,  title("Constante de la régression, TIVA") over(year, sort(year) label(angle(vertical) labsize(small))) 
-graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/Graph_beta_Tiva.png", replace
+graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/Graph_cst_Tiva.png", replace
 
 
 ************************************************************
 *ratio CI importées + biens de conso importés sur HH consumption
 
 foreach source in  WIOD TIVA{
-use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_2000_`source'.dta", clear
-keep c  ratio_ci_impt_HC
+use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_2000_`source'_HC.dta", clear
+keep pays  ratio_ci_impt_HC
 rename ratio_ci_impt_HC ratio_ci_impt_HC_2000
 save "$dir/Results/Étude rapport D+I et Bouclage Mondial/Pour_graph_ratioimp_`source'.dta", replace
 
-use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_2011_`source'.dta", clear
+use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_2011_`source'_HC.dta", clear
 rename ratio_ci_impt_HC ratio_ci_impt_HC_2011
-drop _merge 
-merge 1:1 c using "$dir/Results/Étude rapport D+I et Bouclage Mondial/Pour_graph_ratioimp_`source'.dta"
+capture drop _merge 
+merge 1:1 pays using "$dir/Results/Étude rapport D+I et Bouclage Mondial/Pour_graph_ratioimp_`source'.dta"
 drop _merge 
 
 label var ratio_ci_impt_HC_2000 "2000"
 
 label var ratio_ci_impt_HC_2011 "2011"
 
-graph bar (asis) ratio_ci_impt_HC_2000 ratio_ci_impt_HC_2011, over(c, sort(ratio_ci_impt_HC_2000)  label(angle(vertical) labsize(vsmall))) 
+replace pays = upper(pays)
+graph bar (asis) ratio_ci_impt_HC_2000 ratio_ci_impt_HC_2011, over(pays, sort(ratio_ci_impt_HC_2000)  label(angle(vertical) labsize(vsmall))) 
 *title("Imported intermediate inputs and consumer goods to consumption") 
 graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/Graph_ratioimp_`source'.png", replace
 }
 
 
 *WIOD 2014
-use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_2014_WIOD.dta", clear
-graph bar (asis) ratio_ci_impt_HC,  over(c, sort(ratio_ci_impt_HC)  label(angle(vertical) labsize(vsmall))) 
+use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_2014_WIOD_HC.dta", clear
+replace pays = upper(pays)
+graph bar (asis) ratio_ci_impt_Hpays,  over(pays, sort(ratio_ci_impt_Hpays)  label(angle(vertical) labsize(vsmall))) 
 graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/Graph_ratioimp_wiod_2014.png", replace
 *title("Imported intermediate inputs and consumer goods to consumption")
 
 
 *Evolution temporelle du ratio CI importées + biens de conso importés sur HH consumption en ze
-use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_2000_WIOD.dta", clear
-keep c  ratio_ci_impt_HC year
-keep if strpos("$eurozone",c)!=0
-rename ratio_ci_impt_HC ratio_ci_impt_HC_2000
-save "$dir/Results/Étude rapport D+I et Bouclage Mondial/Pour_graph_ratioimp_WIOD_2000_2014.dta", replace
 
-use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_2005_WIOD.dta", clear
-keep c  ratio_ci_impt_HC year
-keep if strpos("$eurozone",c)!=0
-rename ratio_ci_impt_HC ratio_ci_impt_HC_2005
-save "$dir/Results/Étude rapport D+I et Bouclage Mondial/Pour_graph_ratioimp_WIOD_2005_2014.dta", replace
+foreach year of num 2000(1)2013 {
+
+	use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`year'_WIOD_HC.dta", clear
+	keep pays  ratio_ci_impt_HC year
+	replace pays=upper(pays)
+	rename ratio_ci_impt_HC ratio_ci_impt_HC_`year'
+	save "$dir/Results/Étude rapport D+I et Bouclage Mondial/Pour_graph_ratioimp_WIOD_`year'_2014.dta", replace
+}
 
 
-use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_2007_WIOD.dta", clear
-keep c  ratio_ci_impt_HC year
-keep if strpos("$eurozone",c)!=0
-rename ratio_ci_impt_HC ratio_ci_impt_HC_2007
-save "$dir/Results/Étude rapport D+I et Bouclage Mondial/Pour_graph_ratioimp_WIOD_2007_2014.dta", replace
-
-use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_2008_WIOD.dta", clear
-keep c  ratio_ci_impt_HC year
-keep if strpos("$eurozone",c)!=0
-rename ratio_ci_impt_HC ratio_ci_impt_HC_2008
-save "$dir/Results/Étude rapport D+I et Bouclage Mondial/Pour_graph_ratioimp_WIOD_2008_2014.dta", replace
-
-use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_2009_WIOD.dta", clear
-keep c  ratio_ci_impt_HC year
-keep if strpos("$eurozone",c)!=0
-rename ratio_ci_impt_HC ratio_ci_impt_HC_2009
-save "$dir/Results/Étude rapport D+I et Bouclage Mondial/Pour_graph_ratioimp_WIOD_2009_2014.dta", replace
-
-use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_2012_WIOD.dta", clear
-keep c  ratio_ci_impt_HC year
-keep if strpos("$eurozone",c)!=0
-rename ratio_ci_impt_HC ratio_ci_impt_HC_2012
-save "$dir/Results/Étude rapport D+I et Bouclage Mondial/Pour_graph_ratioimp_WIOD_2012_2014.dta", replace
-
-
-use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_2014_WIOD.dta", clear
+use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_2014_WIOD_HC.dta", clear
 rename ratio_ci_impt_HC ratio_ci_impt_HC_2014
-keep if strpos("$eurozone",c)!=0
-drop _merge 
-merge 1:1 c using "$dir/Results/Étude rapport D+I et Bouclage Mondial/Pour_graph_ratioimp_WIOD_2000_2014.dta"
-drop _merge 
-merge 1:1 c using "$dir/Results/Étude rapport D+I et Bouclage Mondial/Pour_graph_ratioimp_WIOD_2005_2014.dta"
-drop _merge 
-merge 1:1 c using "$dir/Results/Étude rapport D+I et Bouclage Mondial/Pour_graph_ratioimp_WIOD_2007_2014.dta"
-drop _merge 
-merge 1:1 c using "$dir/Results/Étude rapport D+I et Bouclage Mondial/Pour_graph_ratioimp_WIOD_2008_2014.dta"
-drop _merge 
-merge 1:1 c using "$dir/Results/Étude rapport D+I et Bouclage Mondial/Pour_graph_ratioimp_WIOD_2009_2014.dta"
-drop _merge 
-merge 1:1 c using "$dir/Results/Étude rapport D+I et Bouclage Mondial/Pour_graph_ratioimp_WIOD_2012_2014.dta"
-drop _merge 
+replace pays=upper(pays)
+keep if strpos("$eurozone",upper(pays))!=0 | strpos(pays,"_eur")!=0
+capture drop _merge 
 
-label var ratio_ci_impt_HC_2000 "2000"
-label var ratio_ci_impt_HC_2005 "2005"
-label var ratio_ci_impt_HC_2007 "2007"
-label var ratio_ci_impt_HC_2008 "2008"
-label var ratio_ci_impt_HC_2009 "2009"
-label var ratio_ci_impt_HC_2012 "2012"
-label var ratio_ci_impt_HC_2014 "2014"
+foreach year of num 2000(1)2013 {
 
-graph bar (asis) ratio_ci_impt_HC_2000 ratio_ci_impt_HC_2007 ratio_ci_impt_HC_2014, over(c, sort(year)  label(angle(vertical) labsize(vsmall))) 
+	merge 1:1 pays using "$dir/Results/Étude rapport D+I et Bouclage Mondial/Pour_graph_ratioimp_WIOD_`year'_2014.dta"
+	drop _merge 
+	label var ratio_ci_impt_HC_`year' "`year'"
+}
+
+
+replace pays = upper(pays)
+preserve
+keep if strpos("$eurozone",upper(pays))!=0 | strpos(pays,"_eur")!=0
+graph bar (asis) ratio_ci_impt_HC_2000 ratio_ci_impt_HC_2007 ratio_ci_impt_HC_2014, over(pays, sort(year)  label(angle(vertical) labsize(vsmall))) 
 *title("Imported intermediate inputs and consumer goods to consumption") 
 graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/Graph_ratioimp_WIOD_2000_2014_ze.png", replace
+restore
 
 
-
-*Evolution temporelle du ratio CI importées + biens de conso importés sur HH consumption hors ze
-use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_2000_WIOD.dta", clear
-keep c  ratio_ci_impt_HC year
-keep if strpos("$eurozone",c)==0
-rename ratio_ci_impt_HC ratio_ci_impt_HC_2000
-save "$dir/Results/Étude rapport D+I et Bouclage Mondial/Pour_graph_ratioimp_WIOD_2000_2014.dta", replace
-
-use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_2005_WIOD.dta", clear
-keep c  ratio_ci_impt_HC year
-keep if strpos("$eurozone",c)==0
-rename ratio_ci_impt_HC ratio_ci_impt_HC_2005
-save "$dir/Results/Étude rapport D+I et Bouclage Mondial/Pour_graph_ratioimp_WIOD_2005_2014.dta", replace
-
-
-use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_2007_WIOD.dta", clear
-keep c  ratio_ci_impt_HC year
-keep if strpos("$eurozone",c)==0
-rename ratio_ci_impt_HC ratio_ci_impt_HC_2007
-save "$dir/Results/Étude rapport D+I et Bouclage Mondial/Pour_graph_ratioimp_WIOD_2007_2014.dta", replace
-
-use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_2008_WIOD.dta", clear
-keep c  ratio_ci_impt_HC year
-keep if strpos("$eurozone",c)==0
-rename ratio_ci_impt_HC ratio_ci_impt_HC_2008
-save "$dir/Results/Étude rapport D+I et Bouclage Mondial/Pour_graph_ratioimp_WIOD_2008_2014.dta", replace
-
-use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_2009_WIOD.dta", clear
-keep c  ratio_ci_impt_HC year
-keep if strpos("$eurozone",c)==0
-rename ratio_ci_impt_HC ratio_ci_impt_HC_2009
-save "$dir/Results/Étude rapport D+I et Bouclage Mondial/Pour_graph_ratioimp_WIOD_2009_2014.dta", replace
-
-use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_2012_WIOD.dta", clear
-keep c  ratio_ci_impt_HC year
-keep if strpos("$eurozone",c)==0
-rename ratio_ci_impt_HC ratio_ci_impt_HC_2012
-save "$dir/Results/Étude rapport D+I et Bouclage Mondial/Pour_graph_ratioimp_WIOD_2012_2014.dta", replace
-
-
-use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_2014_WIOD.dta", clear
-rename ratio_ci_impt_HC ratio_ci_impt_HC_2014
-keep if strpos("$eurozone",c)==0
-drop _merge 
-merge 1:1 c using "$dir/Results/Étude rapport D+I et Bouclage Mondial/Pour_graph_ratioimp_WIOD_2000_2014.dta"
-drop _merge  
-merge 1:1 c using "$dir/Results/Étude rapport D+I et Bouclage Mondial/Pour_graph_ratioimp_WIOD_2005_2014.dta"
-drop _merge 
-merge 1:1 c using "$dir/Results/Étude rapport D+I et Bouclage Mondial/Pour_graph_ratioimp_WIOD_2007_2014.dta"
-drop _merge 
-merge 1:1 c using "$dir/Results/Étude rapport D+I et Bouclage Mondial/Pour_graph_ratioimp_WIOD_2008_2014.dta"
-drop _merge 
-merge 1:1 c using "$dir/Results/Étude rapport D+I et Bouclage Mondial/Pour_graph_ratioimp_WIOD_2009_2014.dta"
-drop _merge 
-merge 1:1 c using "$dir/Results/Étude rapport D+I et Bouclage Mondial/Pour_graph_ratioimp_WIOD_2012_2014.dta"
-drop _merge 
-drop if c=="ROW"
-
-label var ratio_ci_impt_HC_2000 "2000"
-label var ratio_ci_impt_HC_2005 "2005"
-label var ratio_ci_impt_HC_2007 "2007"
-label var ratio_ci_impt_HC_2008 "2008"
-label var ratio_ci_impt_HC_2009 "2009"
-label var ratio_ci_impt_HC_2012 "2012"
-label var ratio_ci_impt_HC_2014 "2014"
-
-graph bar (asis) ratio_ci_impt_HC_2000 ratio_ci_impt_HC_2007 ratio_ci_impt_HC_2014, over(c, sort(year)  label(angle(vertical) labsize(vsmall))) 
+drop if strpos("$eurozone",upper(pays))!=0 | strpos(pays,"_eur")!=0
+graph bar (asis) ratio_ci_impt_HC_2000 ratio_ci_impt_HC_2007 ratio_ci_impt_HC_2014, over(pays, sort(year)  label(angle(vertical) labsize(vsmall))) 
 *title("Imported intermediate inputs and consumer goods to consumption") 
 graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/Graph_ratioimp_WIOD_2000_2014.png", replace
 
@@ -239,17 +142,19 @@ foreach source in   WIOD  TIVA {
 	if "`source'"=="TIVA" local end_year 2011
 
 	foreach i of numlist `start_year' (1)`end_year'  {
-	use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`i'_`source'.dta", clear	
+	use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`i'_`source'_HC.dta", clear	
  gen ratio_direct_total=ratio_ci_impt_HC/pond_`source'_HC
- save "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`i'_`source'.dta", replace		
+ save "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`i'_`source'_HC.dta", replace		
 	}
 }
 */
 
-use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_2014_WIOD.dta", clear
-*keep if strpos("$eurozone",c)!=0
+use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_2014_WIOD_HC.dta", clear
+*keep if strpos("$eurozone",pays)!=0
 drop if c=="ROW"
-graph bar (asis) ratio_direct_total, over(c, sort(ratio_direct_total)  label(angle(vertical) labsize(vsmall))) 
+gen ratio_direct_total=choc_dplusi_HC/pond_WIOD_HC
+replace pays = upper(pays)
+graph bar (asis) ratio_direct_total, over(pays, sort(ratio_direct_total)  label(angle(vertical) labsize(vsmall))) 
 *title("Imported intermediate inputs and consumer goods to consumption") 
 graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/Graph_ratiodir_WIOD_2014.png", replace
 

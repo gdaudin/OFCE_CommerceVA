@@ -49,7 +49,7 @@ if  "`yrs'" == "2013" {
 
 save "\\intra\partages\ua1383_data\Agents\Lalliard\Commerce_VA_inflation\BME_`yrs'.dta", replace
  
-
+ 
 end
 
 foreach yrs of numlist 2013 2015 2016 2017 {

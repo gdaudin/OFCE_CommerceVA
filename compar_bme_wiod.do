@@ -6,7 +6,7 @@ if ("`c(username)'"=="guillaumedaudin") global dirgit "~/Documents/Recherche/201
 else global dirgit "X:\Agents\LALLIARD\commerce_VA_inflation\"
 
 use $dir/BME.dta, clear
-
+ 
 generate pays = lower(c)+"_eur"
 
 merge m:1 pays using "Y:\DiagConj\Commun\CommerceVA\Results\Étude rapport D+I et Bouclage Mondial\Elast_par_pays_2014_WIOD_HC.dta"

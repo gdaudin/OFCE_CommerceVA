@@ -49,7 +49,7 @@ if  "`yrs'" == "2013" {
 
 save "\\intra\partages\ua1383_data\Agents\Lalliard\Commerce_VA_inflation\BME_`yrs'.dta", replace
  
-
+ 
 end
 
 foreach yrs of numlist 2013 2015 2016 2017 {
@@ -81,4 +81,4 @@ replace BME = -0.2*BME
 label variable BME "BME pour le même choc que le modèle I-O"
 drop c_full_EN
 drop c_full_FR
-save \\intra\partages\ua1383_data\Agents\Lalliard\Commerce_VA_inflation\BME.dta, replace
+save \\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA\BME.dta, replace

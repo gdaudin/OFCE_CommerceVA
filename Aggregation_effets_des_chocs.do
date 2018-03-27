@@ -283,7 +283,7 @@ foreach source in   WIOD TIVA {
 				compute_HC `i' `source'
 				local HC_fait 1
 			}
-			else compute_`j' `i' `source'
+			if strpos("`j'","HC")==0 compute_`j' `i' `source'
 			table_mean `i' `j' 1 `source'
 
 	    }

@@ -143,10 +143,12 @@ if strpos("`wgt'","HC")!=0  {
         generate Bt_`pays_conso' = C`groupeduchoc'* HC_`pays_conso'
         egen tot_HC_`pays_conso' = total(HC_`pays_conso')
         generate sector_shock_`pays_conso' = Bt_`pays_conso'/tot_HC_`pays_conso'
-		if "`wgt'"=="HC_alimentaire"	replace sector_shock_`pays_conso'= 0 if agregat_secteur!="alimentaire"
-		if "`wgt'"=="HC_neig" 			replace sector_shock_`pays_conso'= 0 if agregat_secteur!="neig"
-		if "`wgt'"=="HC_energie" 		replace sector_shock_`pays_conso'= 0 if agregat_secteur!="energie"
-		if "`wgt'"=="HC_services" 		replace sector_shock_`pays_conso'= 0 if agregat_secteur!="services"
+		foreach sector in alimentaire neig energie services {
+			if strpos("`wgt'","`sector'")!=0	replace sector_shock_`pays_conso'= 0 if agregat_secteur!="`sector'"
+		}
+		if strpos("`wgt'","imp")!=0 replace  sector_shock_`pays_conso'= 0 if lower("`pays_conso'")==c
+		if strpos("`wgt'","dom")!=0 replace  sector_shock_`pays_conso'= 0 if lower("`pays_conso'")!=c
+		blif
         egen shock`groupeduchoc'_`pays_conso' = total(sector_shock_`pays_conso')
     *	keep if _n==1
         mkmat shock`groupeduchoc'_`pays_conso'
@@ -273,10 +275,15 @@ foreach source in   WIOD TIVA {
 
   foreach i of numlist 2011 {
 *	foreach i of numlist `start_year' (1)`end_year'  {
+		
+		local HC_fait 0
+    	foreach j in  HC_neig_dom HC_alimentaire_dom HC_energie_dom HC_services_dom HC_dom ///
+					HC_neig_impt HC_alimentaire_impt HC_energie_impt HC_services_impt HC_impt /*X Yt*/  {	
 
-    	foreach j in  HC_neig HC_alimentaire HC_energie HC_services HC /*X Yt*/  {	
-
-    	    if strpos("`j'","HC")!=0 compute_HC `i' `source'
+    	    if strpos("`j'","HC")!=0 & `HC_fait'==0 {
+				compute_HC `i' `source'
+				local HC_fait 1
+			}
 			else compute_`j' `i' `source'
 			table_mean `i' `j' 1 `source'
 

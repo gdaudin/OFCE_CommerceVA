@@ -93,7 +93,7 @@ graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/Graph_ratioim
 
 *Evolution temporelle du ratio CI importées + biens de conso importés sur HH consumption en ze
 
-foreach year of num 2000(1)2013 {
+foreach year of num 2000(1)2014 {
 
 	use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`year'_WIOD_HC.dta", clear
 	keep pays  ratio_ci_impt_HC year
@@ -106,10 +106,10 @@ foreach year of num 2000(1)2013 {
 use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_2014_WIOD_HC.dta", clear
 rename ratio_ci_impt_HC ratio_ci_impt_HC_2014
 replace pays=upper(pays)
-keep if strpos("$eurozone",upper(pays))!=0 | strpos(pays,"_eur")!=0
+*keep if strpos("$eurozone",upper(pays))!=0 | strpos(pays,"_eur")!=0
 capture drop _merge 
 
-foreach year of num 2000(1)2013 {
+foreach year of num 2000(1)2014 {
 
 	merge 1:1 pays using "$dir/Results/Étude rapport D+I et Bouclage Mondial/Pour_graph_ratioimp_WIOD_`year'_2014.dta"
 	drop _merge 

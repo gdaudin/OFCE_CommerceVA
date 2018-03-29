@@ -1,7 +1,8 @@
 clear  
 set more off
 if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
-else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
+if ("`c(username)'"=="n818881") global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
+else global dir "H:\My Documents\OFCE_CommerceVA-develop\OFCE_CommerceVA-develop"
 
 *capture log close
 *log using "$dir/$S_DATE.log", replace
@@ -9,8 +10,8 @@ else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
 
 
 if ("`c(username)'"=="guillaumedaudin") do  "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation/Definition_pays_secteur.do" `source'
-if ("`c(username)'"=="w817186") do "X:\Agents\FAUBERT\commerce_VA_inflation\Definition_pays_secteur.do" `source'
 if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\Definition_pays_secteur.do" `source'
+if ("`c(username)'"=="FAUBERT VIOLAINE") do "H:\My Documents\OFCE_CommerceVA-develop\OFCE_CommerceVA-develop\Definition_pays_secteur.do" `source'
 
 
 *set scheme economist
@@ -92,7 +93,7 @@ graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/Graph_ratioim
 
 *Evolution temporelle du ratio CI importées + biens de conso importés sur HH consumption en ze
 
-foreach year of num 2000(1)2013 {
+foreach year of num 2000(1)2014 {
 
 	use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`year'_WIOD_HC.dta", clear
 	keep pays  ratio_ci_impt_HC year
@@ -105,10 +106,10 @@ foreach year of num 2000(1)2013 {
 use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_2014_WIOD_HC.dta", clear
 rename ratio_ci_impt_HC ratio_ci_impt_HC_2014
 replace pays=upper(pays)
-keep if strpos("$eurozone",upper(pays))!=0 | strpos(pays,"_eur")!=0
+*keep if strpos("$eurozone",upper(pays))!=0 | strpos(pays,"_eur")!=0
 capture drop _merge 
 
-foreach year of num 2000(1)2013 {
+foreach year of num 2000(1)2014 {
 
 	merge 1:1 pays using "$dir/Results/Étude rapport D+I et Bouclage Mondial/Pour_graph_ratioimp_WIOD_`year'_2014.dta"
 	drop _merge 
@@ -119,6 +120,7 @@ foreach year of num 2000(1)2013 {
 replace pays = upper(pays)
 preserve
 keep if strpos("$eurozone",upper(pays))!=0 | strpos(pays,"_eur")!=0
+label var ratio_ci_impt_HC_2014 "2014"
 graph bar (asis) ratio_ci_impt_HC_2000 ratio_ci_impt_HC_2007 ratio_ci_impt_HC_2014, over(pays, sort(year)  label(angle(vertical) labsize(vsmall))) 
 *title("Imported intermediate inputs and consumer goods to consumption") 
 graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/Graph_ratioimp_WIOD_2000_2014_ze.png", replace
@@ -126,6 +128,7 @@ restore
 
 
 drop if strpos("$eurozone",upper(pays))!=0 | strpos(pays,"_eur")!=0
+label var ratio_ci_impt_HC_2014 "2014"
 graph bar (asis) ratio_ci_impt_HC_2000 ratio_ci_impt_HC_2007 ratio_ci_impt_HC_2014, over(pays, sort(year)  label(angle(vertical) labsize(vsmall))) 
 *title("Imported intermediate inputs and consumer goods to consumption") 
 graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/Graph_ratioimp_WIOD_2000_2014.png", replace

@@ -13,14 +13,16 @@ merge m:1 pays using "Y:\DiagConj\Commun\CommerceVA\Results\Étude rapport D+I 
  format %14.2f pond_WIOD_HC
 drop _merge
 drop if BME == .
+replace pond_WIOD_HC = -5*pond_WIOD_HC
 
 foreach yrs of numlist 2013 2015 2016 2017 {
-/*regress BME pond_WIOD_HC if year == `yrs'*/
-/*twoway (scatter BME pond_WIOD_HC if year == `yrs', mlabel(c)) (lfit BME pond_WIOD_HC) if year == `yrs', name(BME_vs_WIOD_`yrs', replace)
-graph save "$dir/Graphiques/BME_vs_WIOD_`yrs'.gph",  replace
-*/
-twoway (scatter BME pond_WIOD_HC if year == `yrs', mlabel(c)) (lfit BME pond_WIOD_HC, range(0 0.2)) if year == `yrs', ytitle(élasticité BMEs) yscale(range(0 0.15)) ylabel(0(0.05)0.15, grid) xtitle(élasticité modèle WIOD 2014) xscale(range(0 0.2)) xlabel(0(0.05)0.2, grid) title(BMEs `yrs', size(medsmall) ring(0)) legend(off) name(BME_vs_WIOD_`yrs', replace)
-
+	/*regress BME pond_WIOD_HC if year == `yrs'*/
+	/*twoway (scatter BME pond_WIOD_HC if year == `yrs', mlabel(c)) (lfit BME pond_WIOD_HC) if year == `yrs', name(BME_vs_WIOD_`yrs', replace)
+	graph save "$dir/Graphiques/BME_vs_WIOD_`yrs'.gph",  replace
+	*/
+	twoway (scatter BME pond_WIOD_HC if year == `yrs', mlabel(c)) (lfit BME pond_WIOD_HC, range(-1 0)) (lfit pond_WIOD_HC pond_WIOD_HC, range(-1 0)) if year == `yrs', ///
+		ytitle(élasticité BMEs `yrs') yscale(range(-1 0)) ylabel(-1(0.2)0, grid) /// 
+		xtitle(élasticité modèle PIWIM 2014) xscale(range(-1 0)) xlabel(-1(0.2)0, grid) legend(off) name(BME_vs_WIOD_`yrs', replace)
 }
 
 

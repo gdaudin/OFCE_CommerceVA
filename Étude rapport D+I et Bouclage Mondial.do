@@ -140,14 +140,12 @@ save "$dir/Results/Étude rapport D+I et Bouclage Mondial/Elast_par_pays_`year'
 
 if "`type'"=="HC" {
 
-	local blif = _N + 1
-	set obs  `blif'
-	replace pond_`source'_`type'=0 in `blif'
+
 	replace c="" /*if c!="FRA_EUR" & c!="DEU_EUR" & c!="LUX_EUR" & c!="FRA" & c!="DEU" & c!="LUX" ///
 					& c!="CAN" & c!="JPN" & c!="USA" & c!="CHN" */
 	graph twoway (scatter pond_`source'_`type' choc_dplusi_`type', mlabel(c) mlabsize(medium)) ///
 			(lfit pond_`source'_`type' choc_dplusi_`type') ///
-			(line pond_`source'_`type' pond_`source'_`type',lwidth(vthin) color(black)) , ///
+			(lfit pond_`source'_`type' pond_`source'_`type',lwidth(vthin) color(black)) , ///
 			title("Comparing direct and modelled effects") ///
 			xtitle("Share of imported consumption + imported IC in domestic consumption") ytitle("Price elasticity") ///
 			yscale(range(0.0 0.3)) xscale(range(0.0 0.3)) xlabel (0.0(0.05) 0.3) ylabel(0.0(0.05) 0.3) ///

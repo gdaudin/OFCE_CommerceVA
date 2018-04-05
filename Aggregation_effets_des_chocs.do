@@ -272,8 +272,8 @@ foreach source in   WIOD TIVA {
 
 
 
-  foreach i of numlist 2011 {
-*	foreach i of numlist `start_year' (1)`end_year'  {
+*  foreach i of numlist 2011 {
+	foreach i of numlist `start_year' (1)`end_year'  {
 		
 		local HC_fait 0
     	foreach j in  HC_neig_dom HC_alimentaire_dom HC_energie_dom HC_services_dom HC_dom ///

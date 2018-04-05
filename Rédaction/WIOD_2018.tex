@@ -407,13 +407,15 @@ In China, it declined somewhat following the 2008-2009 crisis, reflecting global
 \end{figure}
 
 
-\subsection{Domestic consumer prices reactions to changes in import prices}
+\subsection{The reaction of domestic consumer prices to changes in import prices}
 In this section, we evaluate how domestic consumer prices react to changes in prices of imported intermediate and final goods, the latters being caused by exchange rate fluctuations. 
-We are interested in (\textit{i}) the direct effect of global inflationary shocks, defined as the share of imported final and intermediate goods in domestic consumption (i.e. the import intensity in domestic consumption defined in Section \ref{subsec:intensity}) and (\textit{ii}) the total effect. The latter depends both on the direct effect and on the additional transmission of lower domestic input prices to other sectors of the domestic economy and to other countries which occurs during subsequent production cycles. 
+We are interested in (\textit{i}) the direct effect of global inflationary shocks, defined as the share of imported final and intermediate goods in domestic consumption (i.e. the import intensity in domestic consumption defined in Section \ref{subsec:intensity}) and (\textit{ii}) the total effect. The latter depends both on the direct effect and on the additional transmission of lower domestic input prices to other sectors of the domestic economy as well as to other countries which occurs during subsequent production cycles. 
 \paragraph{How much of domestic consumer prices' reactions to changes in import prices is explained by the direct effect?}
 
 Figure \ref{fig:ratiodir} depicts how much of the total impact of a change in import prices is explained by the import intensity of household consumption. In other words, Figure \ref{fig:ratiodir} represents the ratio of the direct effect to the total effect.
-In all countries except Australia, Canada, China and Russia, the direct effect accounts for more than half of the total impact in 2014. In five economies (India, Indonesia, Luxembourg, Mexico and Turkey), the direct effect explains more than 80$\%$ of the reaction of domestic consumer prices to changes in import prices, which suggests that these countries do not provide much intermediate goods to their partners. For the whole cross-section, the coefficient of correlation between the total and the direct effect is close to 95$\%$ in 2014.
+In all countries, the direct effect accounts for more than 60$\%$ of the total impact in 2014. 
+%In five economies (India, Indonesia, Luxembourg, Mexico and Turkey), the direct effect explains more than 80$\%$ of the reaction of domestic consumer prices to changes in import prices, which suggests that these countries do not provide much intermediate goods to their partners. 
+For the whole cross-section, the coefficient of correlation between the total and the direct effect is close to unity in 2014.
 
 \begin{figure}[!h]
 \centering
@@ -427,7 +429,9 @@ In all countries except Australia, Canada, China and Russia, the direct effect a
 
 
 \paragraph{Is the import intensity of consumption a good predictor of domestic consumer prices reactions to changes in import price?}
-To investigate whether the import intensity of consumption is a good predictor of domestic consumer prices reactions to changes in import price, we run the following cross-section regression (Equation \ref{eq:eq7}). 
+
+To investigate whether the import intensity of consumption is a good predictor of the reaction of domestic consumer prices to changes in import prices, we run the cross-section regression (Equation \ref{eq:eq7}). 
+
 
  \begin{eqnarray}
 {S^{HC}}=\beta  I + c +\varepsilon
@@ -443,7 +447,7 @@ Figure \ref{fig:ratiodir} depicts the relationship between the import intensity 
 \begin{tabular}{c}
 \includegraphics[width=5.0in, height=3.5in]{graph_2014_WIOD_HC}\\
 \floatfoot{Source: WIOD, 2014. \\
-The estimate corresponds to ${S^{HC}}=1.15 I + 0.04$ for 2014. Coefficients are significant at 1$\%$. Adjusted R2=0.89 A VÉRIFIER}
+The estimate corresponds to ${S^{HC}}=1.06 I + 0.02 $ for 2014. Coefficients are significant at 1$\%$. Adjusted $R2=0.98$ A VÉRIFIER}
 \end{tabular}
 \label{fig:ratiodir}
 \end{figure}
@@ -452,6 +456,16 @@ The estimate corresponds to ${S^{HC}}=1.15 I + 0.04$ for 2014. Coefficients are 
 
 \section{The impact of exchange rates fluctuations on the main components of consumer prices}
 \label{sec:prixconsosecteur}
+\paragraph{Differences in the intensity of import use across sectors} 
+In this section, we investigate the import intensity of consumption at the sectoral level. We run the following sectoral regressions (Equation \ref{eq:eq8}) for each sector $j$. 
+
+ \begin{eqnarray}
+{S^{HC}_j}=\beta_j  I + c_j +\varepsilon
+\label{eq:eq8}
+ \end{eqnarray}
+ with ${S^{HC}}$ the impact of the devaluation shock on consumer prices, for each country $i$, and $I$ the vector of country-specific and sector-specific import intensity of consumption.
+ 
+
 
 
 \section{Conclusion}
@@ -460,5 +474,71 @@ Real integration through the supply chain matters for domestic price dynamics in
 
 \newpage
 \bibliography{PapiertransmissiondeschocsenVA}
-
+\newpage
+\appendix{Appendix}
+\begin{table}[!h]
+ \centering
+ \caption{\footnotesize{\textbf{Industries in WIOD}}}
+ \footnotesize
+ \begin{tabular}{ll}
+  \hline \\
+\textbf{A01} &{Crop and animal production, hunting and related service activities}\\
+\textbf{A02} &{Forestry and logging}\\
+\textbf{A03} &{Fishing and aquaculture}\\
+\textbf{B} &{Mining and quarrying}\\
+\textbf{C10-C12} &{Manufacture of food products, beverages and tobacco products}\\
+\textbf{C13-C15} &{Manufacture of textiles, wearing apparel and leather products}\\
+\textbf{C16} &{Manufacture of wood and of products of wood and cork, except furniture; articles of straw and plaiting materials}\\
+\textbf{C17} &{Manufacture of paper and paper products}\\
+\textbf{C18} &{Printing and reproduction of recorded media}\\
+\textbf{C19} &{Manufacture of coke and refined petroleum products}\\
+\textbf{C20} &{Manufacture of chemicals and chemical products}\\
+\textbf{C21} &{Manufacture of basic pharmaceutical products and pharmaceutical preparations}\\
+\textbf{C22} &{Manufacture of rubber and plastic products}\\
+\textbf{C23} &{Manufacture of other non-metallic mineral products}\\
+\textbf{C24} &{Manufacture of basic metals}\\
+\textbf{C25} &{Manufacture of fabricated metal products, except machinery and equipment}\\
+\textbf{C26} &{Manufacture of computer, electronic and optical products}\\
+\textbf{C27} &{Manufacture of electrical equipment}\\
+\textbf{C28} &{Manufacture of machinery and equipment n.e.c.}\\
+\textbf{C29} &{Manufacture of motor vehicles, trailers and semi-trailers}\\
+\textbf{C30} &{Manufacture of other transport equipment}\\
+\textbf{C31-C32} &{Manufacture of furniture; other manufacturing}\\
+\textbf{C33} &{Repair and installation of machinery and equipment}\\
+\textbf{D35} &{Electricity, gas, steam and air conditioning supply}\\
+\textbf{E36} &{Water collection, treatment and supply}\\
+\textbf{E37-E39} &{Sewerage and other waste management services}\\
+\textbf{F} &{Construction}\\
+\textbf{G45} &{Wholesale and retail trade and repair of motor vehicles and motorcycles}\\
+\textbf{G46} &{Wholesale trade, except of motor vehicles and motorcycles}\\
+\textbf{G47} &{Retail trade, except of motor vehicles and motorcycles}\\
+\textbf{H49} &{Land transport and transport via pipelines}\\
+\textbf{H50} &{Water transport}\\
+\textbf{H51} &{Air transport}\\
+\textbf{H52} &{Warehousing and support activities for transportation}\\
+\textbf{H53} &{Postal and courier activities}\\
+\textbf{I} &{Accommodation and food service activities}\\
+\textbf{J58} &{Publishing activities}\\
+\textbf{J59-J60} &{Motion picture, video and television programme production; programming and broadcasting activities}\\
+\textbf{J61} &{Telecommunications}\\
+\textbf{J62-J63} &{Computer programming, consultancy; information service activities}\\
+\textbf{K64} &{Financial service activities, except insurance and pension funding}\\
+\textbf{K65} &{Insurance, reinsurance and pension funding, except compulsory social security}\\
+\textbf{K66} &{Activities auxiliary to financial services and insurance activities}\\
+\textbf{L68} &{Real estate activities}\\
+\textbf{M69-M70} &{Legal and accounting activities}\\
+\textbf{M71} &{Architectural and engineering activities; technical testing and analysis}\\
+\textbf{M72} &{Scientific research and development}\\
+\textbf{M73} &{Advertising and market research}\\
+\textbf{M74-M75} &{Other professional, scientific and technical activities; veterinary activities}\\
+\textbf{N} &{Administrative and support service activities}\\
+\textbf{O84} &{Public administration and defence; compulsory social security}\\
+\textbf{P85} &{Education}\\
+\textbf{Q} &{Human health and social work activities}\\
+\textbf{R-S} &{Other service activities}\\
+\textbf{T} &{Activities of households as employers; producing activities of households for own use}\\
+\textbf{U} &{Activities of extraterritorial organizations and bodies}\\
+  	\end{tabular}
+\label{tab:wiodindustries}
+\end{table}
 \end{document}

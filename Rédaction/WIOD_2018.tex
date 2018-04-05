@@ -330,35 +330,39 @@ The direct effect on the world is therefore the sum of these vectors from equati
 An input price shock then spreads to all sectors in all countries via the global intersectoral exchanges transcribed by the matrix of technical coefficients of the large matrix A. This process will be repeated several times, until the effects are completely exhausted.
 In the end, the total effect of the dollar shock is equal to the shock itself, incremented by changes in input prices due to changes in imported input prices, and by all marginal changes in output prices during the production processes, i. e.:\\
 \begin{eqnarray*}
-	S_\$=\Delta{{P}_{\$}}=c_{\$}+(c_{\$}B+{{{\tilde{c}}}_{\$}}{\tilde{B}})+\left({{c}_{\$}}{B}+{{{\tilde{c}}}_{\$}}{\tilde{B}}\right){A}+\left({{c}_{\$}}{B}+{{{\tilde{c}}}_{\$}}{\tilde{B}}\right){{{A}}^{2}}+\ldots+\left({{c}_{\$}}{B}+{{{\tilde{c}}}_{\$}}{\tilde{B}}\right)A^n \\
- \end{eqnarray*}
+S_\$=\Delta{{P}_{\$}}=c_{\$}+(c_{\$}B+{{{\tilde{c}}}_{\$}}{\tilde{B}})+\left({{c}_{\$}}{B}+{{{\tilde{c}}}_{\$}}{\tilde{B}}\right){A}+\left({{c}_{\$}}{B}+{{{\tilde{c}}}_{\$}}{\tilde{B}}\right){{{A}}^{2}}+\ldots+\left({{c}_{\$}}{B}+{{{\tilde{c}}}_{\$}}{\tilde{B}}\right)A^n +\ldots \\
+\end{eqnarray*}
+ 
  \begin{eqnarray}
 {{S}_{\$}}={{c}_{\$}}+({{c}_{\$}}B+{{\tilde{c}}_{\$}}\tilde{B})*{{(I-A)}^{-1}}	
 \label{eq:eq5}
  \end{eqnarray}
 With ${{S}_{\$}}$ the total impact vector composed of the elements ${{{s}}_{\$ij}}$ showing the total impact of the shock on country $i$'s sector $j$. \\
-Equation \ref{eq:eq5} gives the absolute evolution of input prices in international currency. To obtain the absolute evolution of the input prices of the shocked country in national currency, we remove the exchange rate shock and multiply this balance by the scalar of conversion equal to $\frac{1}{1+{{{c}}_{\$i}}}=0.5~$, since according to our hypotheses ${{{c}}_{\$i}}$=1:
+Equation \ref{eq:eq5} gives the absolute evolution of input prices in international currency. To obtain the absolute evolution of the input prices of the shocked country in national currency, we remove the exchange rate shock and multiply this balance by the scalar of conversion equal to $\frac{1}{1+c_i}$.
+%=0.5~$, since according to our hypotheses ${{{c}}_{\$i}}$=1:
 \begin{eqnarray*}
 	S=\left( \frac{1}{1+{{c}_{\$i}}}\right)*\left({{S}_{\$}}-{{c}_{\$}}\right)
 \end{eqnarray*}
-With $S$ a vector in shocked currency for all countries of the world. $S$ represents the overall impact of a shock on prices in each branch of each country. The average effect of the shock on output prices in each country $\bar{S}$ is computed as a weighted average of the sectoral effects of the shock. For each country, we compute a weighted average of the shock effects, based on three types of aggregation: the sectoral structure of output, the sectoral structure of exports and the sectoral structure of household consumption.\\
-Hence 
-\begin{eqnarray*}
-\overline{s_{i}^{Y}}=\underset{j=1}{\overset{n}{\mathop \sum }}\,\frac{{{s}_{ij}}.{{y}_{ij}}}{{{y}_{i}}}
- \end{eqnarray*}
-represents the average effect of the shock on output prices in country$~i$, with ${{{s}}_{{ij}}}$ the impact of the shock on the output prices of industry $j$ for country $i$, ${{{y}}_{{ij}}}$ the output of industry $j~$in country $i$ and ${{{y}}_{{i}}}$ the total output of country $i$. \\
-This weighting scheme provides the impact of the shock on each country's production costs ("production prices" hereafter).\\
-The second type of aggregation relies on the sectoral structure of exports. $\overline{s_{i}^{X}}$ provides the average impact of the shock on the export price competitiveness of country $i$. This export price indicator will be referred to as "export price" hereafter. \\
- \begin{eqnarray*}
-\overline{s_{i}^{X}}=\underset{j=1}{\overset{n}{\mathop \sum }}\,\frac{{{s}_{ij}}.{{x}_{ij}}}{{{x}_{i}}},
- \end{eqnarray*} 
-with $x_{ij}$the exports of industry $j$ in country $i$ and $x_{i}$ the total exports of country $i$. \\
-The last type of aggregation relies on the sectoral structure of household consumption. Hence, $\overline{s_{i}^{HC}}$ provides the average impact of the shock on the consumer price of country $i$. 
+$S$ represents the overall impact of a shock on prices in each sector of each country expressed in the shocked currency. To transform this number in a price index, $\bar{S}$, we need to compute a weighted average of the sectoral effects of the shock. This paper focuses of the consumption price index.
+%For each country, we compute a weighted average of the shock effects, based on three types of aggregation: the sectoral structure of output, the sectoral structure of exports and the sectoral structure of household consumption.\\
+%Hence 
+%\begin{eqnarray*}
+%\overline{s_{i}^{Y}}=\underset{j=1}{\overset{n}{\mathop \sum }}\,\frac{{{s}_{ij}}.{{y}_{ij}}}{{{y}_{i}}}
+ %\end{eqnarray*}
+%represents the average effect of the shock on output prices in country$~i$, with ${{{s}}_{{ij}}}$ the impact of the shock on the output prices of industry $j$ for country $i$, ${{{y}}_{{ij}}}$ the output of industry $j~$in country $i$ and ${{{y}}_{{i}}}$ the total output of country $i$. \\
+%This weighting scheme provides the impact of the shock on each country's production costs ("production prices" hereafter).\\
+%The second type of aggregation relies on the sectoral structure of exports. $\overline{s_{i}^{X}}$ provides the average impact of the shock on the export price competitiveness of country $i$. This export price indicator will be referred to as "export price" hereafter. \\
+% \begin{eqnarray*}
+%\overline{s_{i}^{X}}=\underset{j=1}{\overset{n}{\mathop \sum }}\,\frac{{{s}_{ij}}.{{x}_{ij}}}{{{x}_{i}}},
+% \end{eqnarray*} 
+%with $x_{ij}$the exports of industry $j$ in country $i$ and $x_{i}$ the total exports of country $i$. \\
+%The last type of aggregation relies on the sectoral structure of household consumption.
+$\overline{s_{i}^{HC}}$ provides the average impact of the shock on the consumer price of country $i$. 
  \begin{eqnarray}
-\overline{s_{i}^{HC}}=\underset{j=1}{\overset{n}{\mathop \sum }}\,\frac{{{s}_{ij}}.h{{c}_{ij}}}{h{{c}_{i}}}
+\overline{s_{i}^{HC}}=\underset{\begin{subarray}{c}j=1\dots J \\ k=1 \dots K \end{subarray}}{\mathop \sum}\,\frac{{{s}_{kj}^i}.{hc}_{kj}^i}{hc^i}
 \label{eq:eq6}
  \end{eqnarray} 
-with $hc_{ij}$ the consumption of industry $j$ in country $i$ and ${h}{{{c}}_{{i}}}$ the total household consumption of country $i$. 
+with ${s}_{kj}^i$ is a coefficient of $S$ for country $i$, ${hc}_{kj}^i$ the consumption of industry $j$ from country $k$ in country $i$ and $hc^i$ the total household consumption of country $i$. 
 
 \section{The impact of exchange rates fluctuations on consumer prices}
 \label{sec:prixconso}

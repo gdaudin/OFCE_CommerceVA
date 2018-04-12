@@ -78,12 +78,17 @@ insobs 1
 
 replace pond_TIVA_=0 in 84
 
-graph twoway (scatter pond_WIOD_ pond_TIVA_) (lfit pond_WIOD_ pond_TIVA_, clpattern(dash)) (lfit pond_TIVA_ pond_TIVA_), ///
+regress pond_WIOD_ pond_TIVA_
+predict predict
+gen error=abs(predict-pond_WIOD_)/pond_WIOD_
+gen mylabel= c if /*error >.25 |*/ pond_WIOD_>=0.22 | c=="FRA"
+
+graph twoway (scatter pond_WIOD_ pond_TIVA_, mlabel(mylabel)) (lfit pond_WIOD_ pond_TIVA_, clpattern(dash)) (lfit pond_TIVA_ pond_TIVA_), ///
 			yscale(range(0 0.4)) xscale(range(0 0.4)) ylabel(0 (0.1) 0.4) ///
 			ytitle("WIOD elasticites `year'") xtitle("TIVA elasticites `year'") ///
 			legend(order (2 3)  label(2 "Linear fit") label(3 "45° line") )
 			
-			
+graph export "$dir/commerce_VA_inflation/Rédaction/Comparaison_WIOD_TIVA_`year'.png", replace		
 
 
 end

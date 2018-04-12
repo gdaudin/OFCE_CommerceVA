@@ -5,7 +5,8 @@ if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 B
 else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
 
 
-****RQ : ne marche pas pour TIVA car il faudrait régler la Chine et le Mexique
+****RQ : ne marche pas pour TIVA car il faudrait traiter la Chine et le Mexique
+***Ce n'est pas trop compliqué, mais c'est vraiment du travail inutile pour l'instant.
 
 
 capture log close

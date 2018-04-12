@@ -114,6 +114,9 @@ foreach origine in dom impt {
 
 
 
+
+
+
 **Passage en prix domestiques (et en négatif)
 
 foreach origine in dom impt {
@@ -123,6 +126,8 @@ foreach origine in dom impt {
 	}
 }
 
+
+save "$dir/Results/Devaluations/decomp_`source'_HC_`yrs'.dta", replace
 
 end
 

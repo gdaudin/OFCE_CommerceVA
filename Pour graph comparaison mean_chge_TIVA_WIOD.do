@@ -80,12 +80,12 @@ replace pond_TIVA_=0 in 84
 
 graph twoway (scatter pond_WIOD_ pond_TIVA_) (lfit pond_WIOD_ pond_TIVA_, clpattern(dash)) (lfit pond_TIVA_ pond_TIVA_), ///
 			yscale(range(0 0.4)) xscale(range(0 0.4)) ylabel(0 (0.1) 0.4) ///
-			ytitle("WIOD elasticites") xtitle("TIVA elasticites") ///
-			legend(order (2 3)  label(2 "linear fit") label(3 "45° line") )
+			ytitle("WIOD elasticites `year'") xtitle("TIVA elasticites `year'") ///
+			legend(order (2 3)  label(2 "Linear fit") label(3 "45° line") )
 			
 			
 
 
 end
 
-etude 2010
+etude 2011

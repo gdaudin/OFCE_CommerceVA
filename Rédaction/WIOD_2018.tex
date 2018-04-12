@@ -371,17 +371,68 @@ We use the model presented in \ref{subsec:chocchange} to study the absolute valu
 
 Additionaly, for Euro zone members, we differenciate between the effect of the appreciation of the euro and the effect of the appreciation of a notional national currency. We distinguish for Euro area members the effect of an appreciation of the euro and the effect of à notional national currency. For example, in the case of France, using WIOD in 2011, a 100\% appreciation of the euro would lead to a reduction of domestic prices of 7.6\%. A 100\% appreciation of the notional national currency would lead a reduction of domestic prices of 12.2\%. 
 
-As shown by Figure \ref{fig:comp_WIOD_TIVA}, despite their differences, using WIOD or TIVA yields very comparable results. 
+Figure \ref{fig:comp_WIOD_TIVA}, shows that, despite their differences, using WIOD or TIVA yields very comparable results.
+
 \begin{figure}[!h]
 \centering
 \caption{\footnotesize{\textbf{Comparing WIOD and TIVA, 2011}}}
 \begin{tabular}{c}
-\includegraphics[width=5.0in, height=3.5in]{Comparaison_WIOD_TIVA_2011.png}\\
+\includegraphics[width=6.0in, height=4.2in]{Comparaison_WIOD_TIVA_2011.png}\\
 \floatfoot{Source: WIOD and TIVA}.
 \end{tabular}
 \label{fig:comp_WIOD_TIVA}
 \end{figure}
 
+
+To go further, we can decompose $\overline{s_{i}^{HC}}$ between sources of consumption or sectors. E.g., we can define 
+\begin{eqnarray}
+\overline{s_{i}^{HC}}=\overline{s_{i}^{HC}}_{imported} + \overline{s_{i}^{HC}}_{domestic} \\
+\overline{s_{i}^{HC}}_{imported} = \underset{\begin{subarray}{c}j\neq i \\ k=1 \dots K \end{subarray}}{\mathop \sum}\,\frac{{{s}_{kj}^i}.{hc}_{kj}^i}{hc^i}
+ \end{eqnarray}
+
+Imported final consumption plays the largest role in explaining the reaction of inflation as measured by $\frac{\overline{s_{i}^{HC}}_{imported}}{\overline{s_{i}^{HC}}}$ (see Figure \ref{fig:share_impt}). Among the sectors, this is the case for services and industrial consumption (see Figure \ref{fig:share_sector}). The price of imported final consumption reacts much more than the price of domestic final consumption (see Figure \ref{fig:intensity_dom} and Figure \ref{fig:intensity_impt} ).
+
+
+
+\begin{figure}[!h]
+\centering
+\caption{\footnotesize{\textbf{Share of imported final consumption in the impact of a nominal exchange rate shock}}}
+\begin{tabular}{c}
+\includegraphics[width=5.0in, height=3.5in]{Share_impt_HC_WIOD_2014.png}\\
+\end{tabular}
+\label{fig:share_impt}
+\end{figure}
+
+
+
+\begin{figure}[!h]
+\centering
+\caption{\footnotesize{\textbf{Share of sector-specific final consumption in the impact of a nominal exchange rate shock}}}
+\begin{tabular}{c}
+\includegraphics[width=6.0in, height=4.2in]{Share_sector_HC_WIOD_2014.png}\\
+\end{tabular}
+\label{fig:share_sector}
+\end{figure}
+
+\begin{figure}[!h]
+\centering
+\caption{\footnotesize{\textbf{Intensity for domestic final consumptions}}}
+\begin{tabular}{c}
+\includegraphics[width=6.0in, height=4.2in]{Int_HC_WIOD_2014_dom.png}\\
+\floatfoot{Intensity is measured as the explained share of inflation change divided by the share in final consumption}
+\end{tabular}
+\label{fig:intensity_dom}
+\end{figure}
+
+\begin{figure}[!h]
+\centering
+\caption{\footnotesize{\textbf{Intensity for imported final consumptions}}}
+\begin{tabular}{c}
+\includegraphics[width=6.0in, height=4.2in]{Int_HC_WIOD_2014_dom.png}\\
+\floatfoot{Intensity is measured as the explained share of inflation change divided by the share in final consumption}
+\end{tabular}
+\label{fig:intensity_impt}
+\end{figure}
 
 
 \subsection{The intensity of import in domestic consumption}

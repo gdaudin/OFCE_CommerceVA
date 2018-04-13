@@ -39,7 +39,8 @@ foreach sector in energy neig services food {
 		frequency /*legend(size(small))*/
 }
 
-graph combine neig services energy  food, xcommon ycommon title("Inflation origin (share)") note("`source', `year'")
+graph combine neig services energy  food, xcommon ycommon ///
+	title("Sectoral shares of the impact of a nominal exchange rate shock") note("`source', `year'")
 graph export "$dir/commerce_VA_inflation/Rédaction/Share_sector_HC_`source'_`year'.png", replace
 
 
@@ -55,7 +56,7 @@ foreach origin in dom impt {
 	
 	local liste_graph_`origin' `origin'
 	
-	foreach sector in energy neig services food {
+	foreach sector in energy neig food services {
 		gen int_`sector'_`origin'=`sector'_`origin'/(HC_impt+HC_dom)/s_`sector'_`origin'
 		histogram int_`sector'_`origin', name(`sector'_`origin', replace) kdensity ///
 			start(0) width(`width_`origin'') frequency /*legend(size(small))*/

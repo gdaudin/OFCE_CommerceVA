@@ -13,8 +13,8 @@ if ("`c(username)'"=="w817186") do "X:\Agents\FAUBERT\commerce_VA_inflation\Defi
 if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\Definition_pays_secteur.do" `source'
 	
 
-capture program drop etude
-program etude
+capture program drop etude_pour_papier
+program etude_pour_papier
 args year source
 
 use "$dir/Results/Devaluations/decomp_WIOD_HC_2014.dta", clear
@@ -71,4 +71,59 @@ foreach origin in dom impt {
 
 end
 
-etude 2014 WIOD
+
+
+capture program drop etude_pour_note
+program etude_pour_note
+args year source
+
+use "$dir/Results/Devaluations/decomp_WIOD_HC_2014.dta", clear
+
+
+rename *energie* *energy*
+rename *alimentaire* *food*
+
+foreach var of varlist HC_impt-energy_dom {
+	replace `var' =`var'/5
+}
+
+gen HC_tot=HC_impt+HC_dom
+label var HC_dom "Expliqué par l'évolution des prix des biens finaux de consommation domestiques"
+label var HC_impt "Expliqué par l'évolution des prix des biens finaux de consommation importés"
+
+
+keep if c=="FRA_EUR" | c=="DEU_EUR" | c=="ESP_EUR" | c=="ITA_EUR" | c=="NLD_EUR" 
+replace c=subinstr(c,"_EUR"e,"",.)
+gsort- HC_tot
+graph bar (asis) HC_dom HC_impt , over(c,sort(HC_tot) descending) stack ///
+		legend(rows(2) size(small)) ///
+		title("Impact d'une appréciation de 5% de l'euro sur les prix à la consommation", span size(med)) ///
+		note("Source: WIOD, 2014")
+graph export "$dir/commerce_VA_inflation/Rédaction_Note/Decomp_dom_impt.png", replace
+
+
+foreach sector in neig services food energy {
+	gen `sector'=`sector'_impt + `sector'_dom
+}
+
+rename food alimentaire
+rename energy energie
+
+
+graph bar (asis) services neig energie alimentaire , over(c,sort(HC_tot) descending) stack ///
+		legend(rows(2) size(small)) ///
+		title("Impact d'une appréciation de 5% de l'euro sur les prix à la consommation par secteur", span size(med)) ///
+		note("Source: WIOD, 2014")
+graph export "$dir/commerce_VA_inflation/Rédaction_Note/Decomp_sect.png", replace
+	
+
+
+
+
+
+
+end
+
+
+*etude_pour_papier 2014 WIOD
+etude_pour_note 2014 WIOD

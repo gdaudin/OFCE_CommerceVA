@@ -12,38 +12,61 @@ else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
 
 *local year = `yrs'-1
 if "`yrs'" == "2017" {
-	import excel using \\intra\partages\au_dcpm\DiagConj\BMEs\BME_2017\Direct_Impact-EEN-11_Oct_2016.xlsx, sheet("CTRY") cellrange(C9:I30) firstrow clear
+	import excel using \\intra\partages\au_dcpm\DiagConj\BMEs\BME_2017\Direct_Impact-EEN-11_Oct_2016.xlsx, sheet("CTRY") cellrange(C9:K30) firstrow clear
 	rename C pays 
-	rename I BME
-	drop D E F G H  
+	rename I BME_1
+	rename J BME_gr_2
+	rename K BME_gr_3
+	generate BME_3 = ((1+(BME_1/100))*(1+(BME_gr_2/100))*(1+(BME_gr_3/100))-1)*100
+	drop D E F G H   
+	drop BME_gr_2
+	drop BME_gr_3
 	generate year = 2017
-	drop if BME ==.
+	drop if BME_1 ==.
 
 }
 if  "`yrs'" == "2016" {
-	import excel using \\intra\partages\au_dcpm\DiagConj\BMEs\BME_2016\Direct_Impact-EEN-08_Jan_2016.xlsx, sheet("Overview") cellrange(B12:D33) firstrow clear
-	drop C
+	import excel using \\intra\partages\au_dcpm\DiagConj\BMEs\BME_2016\Direct_Impact-EEN-08_Jan_2016.xlsx, sheet("Overview") cellrange(B12:F33) firstrow clear
+	drop C 
 	rename B pays 
-	rename D BME
+	rename D BME_1
+	rename E BME_gr_2
+	rename F BME_gr_3
+	generate BME_3 = ((1+(BME_1/100))*(1+(BME_gr_2/100))*(1+(BME_gr_3/100))-1)*100
+
 	generate year = 2016
-	drop if BME ==.
+	drop BME_gr_2
+	drop BME_gr_3
+	drop if BME_1 ==.
 }	
 if  "`yrs'" == "2015" {
-	import excel using \\intra\partages\au_dcpm\DiagConj\BMEs\BME_2015\Direct_Impact-EEN-19_Jan_2015.xlsx, sheet("Overview") cellrange(B12:D33) firstrow clear
-	drop C
+	import excel using \\intra\partages\au_dcpm\DiagConj\BMEs\BME_2015\Direct_Impact-EEN-19_Jan_2015.xlsx, sheet("Overview") cellrange(B12:F33) firstrow clear
+	drop C 
 	rename B pays 
-	rename D BME
+	rename D BME_1
+	rename E BME_gr_2
+	rename F BME_gr_3
+	generate BME_3 = ((1+(BME_1/100))*(1+(BME_gr_2/100))*(1+(BME_gr_3/100))-1)*100
+
 	generate year = 2015
-	drop if BME ==.
+	drop BME_gr_2
+	drop BME_gr_3
+	drop if BME_1 ==.
 }	
 
 if  "`yrs'" == "2013" {
-	import excel using \\intra\partages\au_dcpm\DiagConj\BMEs\BME_2013\Direct_Impact-EEN-20_Sep_2013.xlsx, sheet("Overview") cellrange(B12:D33) firstrow clear
-	drop C
+	import excel using \\intra\partages\au_dcpm\DiagConj\BMEs\BME_2013\Direct_Impact-EEN-20_Sep_2013.xlsx, sheet("Overview") cellrange(B12:F33) firstrow clear
+	drop C 
 	rename B pays 
-	rename D BME
+	rename D BME_1
+	rename E BME_gr_2
+	rename F BME_gr_3
+	generate BME_3 = ((1+(BME_1/100))*(1+(BME_gr_2/100))*(1+(BME_gr_3/100))-1)*100
+
 	generate year = 2013
-	drop if BME ==.
+	drop BME_gr_2
+	drop BME_gr_3
+	drop if BME_1 ==.
 }	
  
 
@@ -71,7 +94,7 @@ rename pays c_full_EN
 merge m:m c_full_EN using "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA\Bases\pays_FR.dta"
 
 keep if _merge == 3
-
+ 
 drop _merge
 
 /*replace BME = -0.2*BME
@@ -80,9 +103,10 @@ drop _merge
 	  0.2 = 20/100 pour correspondre au format d'affichage de la source WIOD*/
    
   */ 
-label variable BME "BME pour le même choc que le modèle I-O"
+label variable BME_1 "BME pour le même choc que le modèle I-O - 1ere année"
+label variable BME_3 "BME pour le même choc que le modèle I-O - 3e année"
 
 drop c_full_EN
-blif
+
 drop c_full_FR
 save \\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA\BME.dta, replace

@@ -32,7 +32,7 @@ args year source type
 if "`source'"=="TIVA" local liste_chocs shockEUR1-shockZAF1
 if "`source'"=="WIOD" local liste_chocs shockEUR1-shockUSA1
 
-if "`type'"=="HC" use "$dir/Results/Devaluations/mean_chg_`source'_HC_`year'.dta", clear
+if "`type'"=="HC" | "`type'" =="HC_note" use "$dir/Results/Devaluations/mean_chg_`source'_HC_`year'.dta", clear
 if "`type'"=="par_sect" use "$dir/Results/Devaluations/`source'_C_`year'_exch.dta", clear
 
 
@@ -53,7 +53,7 @@ egen pond_`source'_`type' = rowtotal(`liste_chocs')
 drop shock*
 
 *** Pour aller chercher les chocs de la ZE
-if "`type'"=="HC" {
+if "`type'"=="HC" | "`type'" =="HC_note" {
 	merge 1:1 c using "$dir/Results/Devaluations/mean_chg_`source'_HC_`year'.dta"
 	keep c pond_`source'_`type' shockEUR
 }
@@ -67,7 +67,7 @@ rename pond_`source'_`type' s_auto
 
 
 
-if "`type'"=="HC" reshape long s_, i(c) j(source_shock) string
+if "`type'"=="HC" | "`type'" =="HC_note" reshape long s_, i(c) j(source_shock) string
 if "`type'"=="par_sect"  reshape long s_, i(c s) j(source_shock) string
 
 
@@ -91,7 +91,7 @@ if "`type'"=="par_sect" rename s sector
 if "`type'"=="par_sect" replace sector=lower(sector)
 
 
-if "`type'"=="HC" {
+if "`type'"=="HC" | "`type'" =="HC_note" {
 	merge 1:1 pays using "$dir/Bases/imp_inputs_HC_`year'_`source'_hze_not.dta"
 	drop _merge
 	replace pays =pays+"_AUTO"
@@ -131,7 +131,8 @@ if "`type'"=="par_sect" {
 
 *effet direct repondéré par le choc: le choc correspond à une appréciation de 100% 
 *=>on double l'impact pour comparer le ratio de CI importées (comptable) à l'effet direct choqué
-gen choc_dplusi_`type'=ratio_ci_impt_`type'/2
+if "`type'"=="HC" | "`type'" =="HC_note" gen choc_dplusi_HC=ratio_ci_impt_HC/2
+else gen choc_dplusi_`type'=ratio_ci_impt_`type'/2
 
 
 label var pond_`source'_`type' "Élasticité des prix (`type') en monnaie nationale à un choc de la monnaie nationale"
@@ -156,6 +157,41 @@ if "`type'"=="HC" {
 	graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/graph_`year'_`source'_`type'.pdf", replace
 	
 	graph close
+
+	
+	
+}
+
+
+
+if "`type'"=="HC_note" {
+
+	keep if strpos(c,"_EUR")!=0
+	replace c=subinstr(c,"_EUR"e,"",.)
+	replace pond_`source'_HC=-pond_`source'_HC/5
+	replace choc_dplusi_HC = -choc_dplusi_HC/5
+	gen sample = 0
+	replace sample=1 if c=="FRA" | c=="DEU" | c=="NLD" | c=="ESP" | c=="ITA"
+	replace c="" if c!="FRA" & c!="DEU" & c!="NLD"  & c!="IRL"
+	graph twoway  ///
+			(scatter pond_`source'_HC choc_dplusi_HC if sample==0, mlabel(c) mlabsize(medium) mlabcolor(sky) mcolor(sky)) ///
+			(scatter pond_`source'_HC choc_dplusi_HC if sample==1, mlabel(c) mlabsize(medium) mcolor(black) mlabcolor(black) ) ///
+			(lfit pond_`source'_HC choc_dplusi_HC) ///
+			(lfit pond_`source'_HC pond_`source'_HC,lwidth(vthin) color(black)) , ///
+			xtitle("D+I", /*size(vsmall) */) ///
+			ytitle("PIWIM") ///
+			yscale(range(-0.04 -0.01)) xscale(range(-0.04 -0.01)) xlabel(-0.04(0.005)-0.01) ylabel(-0.04(0.005)-0.01) ///
+			legend(off) ///
+			note("PIWIM (WIOD, 2014)")
+	*dans le cas HC, xtitle pourrait se finir par «importées dans la conso dom + part conso importée»			
+	
+	
+	
+	graph export "$dir/Commerce_VA_inflation/Rédaction_Note/Rapport_D+I_bouclé.png", replace
+	
+	graph close
+	
+	blif
 
 	
 	
@@ -192,7 +228,7 @@ save "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`source'_`typ
 
 
 end 
-
+/*
 *foreach source in  WIOD  {
 foreach source in  WIOD  TIVA {
 
@@ -221,5 +257,5 @@ foreach source in  WIOD  TIVA {
 	}
 
 }
-
-
+*/
+etude 2014 WIOD HC_note

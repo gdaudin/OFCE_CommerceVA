@@ -94,12 +94,15 @@ label var HC_impt "Expliqué par l'évolution des prix des biens finaux de conso
 
 keep if c=="FRA_EUR" | c=="DEU_EUR" | c=="ESP_EUR" | c=="ITA_EUR" | c=="NLD_EUR" 
 replace c=subinstr(c,"_EUR"e,"",.)
-gsort- HC_tot
+gsort HC_tot
 graph bar (asis) HC_dom HC_impt , over(c,sort(HC_tot) descending) stack ///
 		legend(rows(2) size(small)) ///
-		title("Impact d'une appréciation de 5% de l'euro sur les prix à la consommation", span size(med)) ///
-		note("Source: WIOD, 2014")
-graph export "$dir/commerce_VA_inflation/Rédaction_Note/Decomp_dom_impt.png", replace
+		note("Source: PIWIM (WIOD, 2014)") ///
+		scheme(s2mono)
+		
+/*		title("Impact d'une appréciation de 5% de l'euro sur les prix à la consommation", span size(medium)) /// */
+		
+graph export "$dir/commerce_VA_inflation/Rédaction_Note/Decomp_origine.png", replace
 
 
 foreach sector in neig services food energy {
@@ -110,11 +113,34 @@ rename food alimentaire
 rename energy energie
 
 
-graph bar (asis) services neig energie alimentaire , over(c,sort(HC_tot) descending) stack ///
+graph bar (asis) neig services energie alimentaire , over(c,sort(HC_tot) descending) stack ///
 		legend(rows(2) size(small)) ///
-		title("Impact d'une appréciation de 5% de l'euro sur les prix à la consommation par secteur", span size(med)) ///
-		note("Source: WIOD, 2014")
+		note("Source: PIWIM (WIOD, 2014)") /// 
+		scheme(s2mono)
+		
+/*		title("Impact d'une appréciation de 5% de l'euro sur les prix à la consommation par secteur", span size(medsmall)) /// */
 graph export "$dir/commerce_VA_inflation/Rédaction_Note/Decomp_sect.png", replace
+
+gen ss_jacente_impt= services_impt+neig_impt
+label var ss_jacente_imp "Inflation sous-jacente importée"
+
+gen ss_jacente_dom= services_dom+neig_dom
+label var ss_jacente_dom "Inflation sous-jacente domestique"
+
+gen volatile_impt= energy_impt+food_impt
+label var volatile_impt "Inflation alimentaire et énergie importée"
+
+gen volatile_dom= energy_dom+food_dom
+label var volatile_dom "Inflation alimentaire et énergie domestique"
+
+graph bar (asis) ss_jacente_impt ss_jacente_dom volatile_impt volatile_dom , over(c,sort(HC_tot) descending) stack ///
+		legend(rows(2) size(vsmall)) ///
+		note("Source: PIWIM (WIOD, 2014)") /// 
+		scheme(s2mono)
+		
+/*		title("Impact d'une appréciation de 5% de l'euro sur les prix à la consommation par secteur et origine", span size(small)) /// */		
+graph export "$dir/commerce_VA_inflation/Rédaction_Note/Decomp_sectxorigin.png", replace
+
 	
 
 

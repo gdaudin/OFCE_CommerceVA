@@ -374,9 +374,9 @@ $S^i$ represents the overall impact of a shock on prices in each sector of each 
 % \end{eqnarray*} 
 %with $x_{ij}$the exports of industry $j$ in country $i$ and $x_{i}$ the total exports of country $i$. \\
 %The last type of aggregation relies on the sectoral structure of household consumption.
-$\overline{s_{i}^{i,HC}}$ provides the average impact of the shock on the consumer price of country $i$. 
+$\overline{s_{i}}^{i,HC}$ provides the average impact of the shock on the consumer price of country $i$. 
  \begin{eqnarray}
-\overline{s_{i}^{i,HC}}=\underset{\begin{subarray}{c}j=1\dots J \\ k=1 \dots I \end{subarray}}{\mathop \sum}\,{{s}_{kj}^i}.\frac{{hc}_{kj}^i}{hc^i}
+\overline{s}_{i}^{i,HC}=\underset{\begin{subarray}{c}j=1\dots J \\ k=1 \dots I \end{subarray}}{\mathop \sum}\,{{s}_{kj}^i}.\frac{{hc}_{kj}^i}{hc^i}
 \label{eq:eq6}
  \end{eqnarray} 
 with ${s}_{kj}^i$ is a coefficient of $S^i$ for country $i$, ${hc}_{kj}^i$ the consumption of industry $j$ from country $k$ in country $i$ and $hc^i$ the total household consumption of country $i$. 
@@ -384,7 +384,7 @@ with ${s}_{kj}^i$ is a coefficient of $S^i$ for country $i$, ${hc}_{kj}^i$ the c
 \section{The impact of exchange rates fluctuations on consumer prices}
 \label{sec:prixconso}
 \subsection{Results}
-We use the model presented in \ref{subsec:chocchange} to study the absolute value of $\overline{s_{i}^{HC}}$ following a 100\% appreciation shock of the domestic currency versus all the other currencies. When the domestic currency appreciates, domestic prices expressed in domestic currency decrease because imported inputs and imported consumption goods are less expensive. As our model is linear, the exact value of the shock does not matter : choosing 100\% allows us to interpret  $\overline{s_{i}^{HC}}$ as an elasticity. For illustration, using the WIOD database, we find that $\overline{s_{i}^{HC}}$ is equal to $-0.055$ for the USA in 2011, meaning that a 100\% appreciation of the dollar would reduce consumer prices by 5.5\%. We report this number in figures as $0.055$.
+We use the model presented in \ref{subsec:chocchange} to study the absolute value of $\overline{s_{i}}^{i,HC}$ following a 100\% appreciation shock of the domestic currency versus all the other currencies. When the domestic currency appreciates, domestic prices expressed in domestic currency decrease because imported inputs and imported consumption goods are less expensive. As our model is linear, the exact value of the shock does not matter : choosing 100\% allows us to interpret  $\overline{s_{i}}^{i,HC}$ as an elasticity. For illustration, using the WIOD database, we find that $\overline{s_{i}}^{i,HC}$ is equal to $-0.055$ for the USA in 2011, meaning that a 100\% appreciation of the dollar would reduce consumer prices by 5.5\%. We report this number in figures as $0.055$.
 
 Additionaly, for Euro zone members, we differenciate between the effect of the appreciation of the euro and the effect of the appreciation of a hypothetical national currency. We distinguish for Euro area members the effect of an appreciation of the euro and the effect of à hypothetical national currency. For example, in the case of France, using WIOD in 2011, a 100\% appreciation of the euro would lead to a reduction of domestic prices of 7.6\%. A 100\% appreciation of the hypothetical national currency would lead a reduction of domestic prices of 12.2\%. 
 
@@ -392,7 +392,7 @@ Figure \ref{fig:comp_WIOD_TIVA}, shows that, despite their differences, using WI
 
 \begin{figure}[!h]
 \centering
-\caption{\footnotesize{\textbf{Comparing $\overline{s_{i}^{HC}}$ for WIOD and TIVA, 2011}}}
+\caption{\footnotesize{\textbf{Comparing $\overline{s_{i}}^{i,HC}$ for WIOD and TIVA, 2011}}}
 \begin{tabular}{c}
 \includegraphics[width=6.0in, height=4.2in]{Comparaison_WIOD_TIVA_2011.png}\\
 \floatfoot{Source: WIOD and TIVA}.
@@ -401,14 +401,14 @@ Figure \ref{fig:comp_WIOD_TIVA}, shows that, despite their differences, using WI
 \end{figure}
 
 
-To go further, we can decompose $\overline{s_{i}^{HC}}$ between final sources of consumption : imported final consumption goods on the one hand and domestic final consumption goods on the other hand. The price of domestic goods is affected because of imported inputs. E.g., we can define 
+To go further, we can decompose $\overline{s_{i}}^{i,HC}$ between final sources of consumption : imported final consumption goods on the one hand and domestic final consumption goods on the other hand. The price of domestic goods is affected because of imported inputs. E.g., we can define 
 \begin{eqnarray}
-\overline{s_{i}^{HC}}=\overline{s_{i}^{HC}}_{imported} + \overline{s_{i}^{HC}}_{domestic} \\
-\overline{s_{i}^{HC}}_{imported} = \underset{\begin{subarray}{c}j=1 \dots J   \\ k=1 \dots I \\ k \neq i \end{subarray}}{\mathop \sum}\,{{s}_{kj}^i}.\frac{{hc}_{kj}^i}{hc^i}
+\overline{s}_i^{i,HC}=\overline{s}_{i,imported}^{i,HC} + \overline{s}_{i,domestic}^{i,HC} \\
+\overline{s}_{i,imported}^{i,HC} = \underset{\begin{subarray}{c}j=1 \dots J   \\ k=1 \dots I \\ k \neq i \end{subarray}}{\mathop \sum}\,{{s}_{kj}^i}.\frac{{hc}_{kj}^i}{hc^i}
 \label{equ:share_of_imported}
  \end{eqnarray}
 
-Imported final consumption plays the largest role in explaining the reaction of inflation as measured by $\frac{\overline{s_{i}^{HC}}_{imported}}{\overline{s_{i}^{HC}}}$ (see Figure \ref{fig:share_impt}). Among the sectors, services and "neig" ("non-energy industrial goods") play the largest role.
+Imported final consumption plays the largest role in explaining the reaction of inflation as measured by $\frac{\overline{s}_{i,imported}^{i,HC}}{\overline{s}_{i}^{i,HC}}$ (see Figure \ref{fig:share_impt}). Among the sectors, services and "neig" ("non-energy industrial goods") play the largest role.
 
 
 \begin{figure}[!h]

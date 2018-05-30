@@ -1,0 +1,128 @@
+\documentclass[A4]{article}
+
+\usepackage{amsmath}
+\renewcommand{\vec}{\boldsymbol}
+\usepackage{setspace}
+\doublespacing
+
+\title{Proxy for the import contents}
+\author{Yannick Kalantzis}
+
+
+\begin{document}
+
+\maketitle 
+
+2 countries: Home and Foreign. Foreign variables are starred.
+
+Vectors of production: $Q, Q^*$.
+Denote $\cal Q = \left[
+  \begin{array}{l}
+    Q \\ Q^*
+  \end{array}
+\right]$ the vector of production in both countries.
+
+Direct domestic requirement matrices are $A, A^*$. Import requirement
+matrices are $B, B^*$. The world input-output table is $\cal A = \left(
+  \begin{array}{ll}
+    A & B^* \\ B & A^*
+  \end{array}
+\right)$.
+
+Sectoral vectors of domestic consumption are $C$ for
+domestically produced consumption and $C^*$ for imported consumption,
+with total consumption normalized to 1. Denote $\cal C = \left[
+  \begin{array}{l}
+    C \\ C^*
+  \end{array}
+\right]$.
+
+We have $\cal Q = \cal A \cal Q + \cal C$ so $\cal Q = \cal L\cal C$,
+with ${\cal L} = (I-{\cal A})^{-1}$ the world Leontiev inverse ($I$ is
+the identity matrix).
+
+Denote the submatrices of $\cal L$ as:
+$\cal L = \left(
+  \begin{array}{ll}
+    L & M^* \\ M & L^*
+  \end{array}
+\right)$.
+
+Then we have
+$ \left[
+  \begin{array}{l}
+    Q \\ Q^*
+  \end{array}
+\right] = \left(
+  \begin{array}{ll}
+    L & M^* \\ M & L^*
+  \end{array}
+\right)\left[
+  \begin{array}{l}
+    C \\ C^*
+  \end{array}
+\right]$.
+Sectoral domestic production associated to a unit of domestic consumption is given by $Q =
+LC+M^*C^*$. 
+
+If I get it right, the vector of import content of domestic
+consumption should be 
+\begin{equation*}
+  \underbrace{C^*}_\text{direct} +
+  B\Bigl (\underbrace{LC}_\text{\shortstack{indirect due to\\ domestic
+      production}}+\underbrace{M^*C^*}_\text{\shortstack{indirect due
+      to\\ domestic production of \\ inputs for Foreign}}\Bigr).
+\end{equation*}
+
+The import content itself is the scalar product of $\vec 1$ (a vector
+of ones) and the vector of import content: $\vec 1\cdot C^*+\vec
+1\cdot B(LC+M^*C^*)$.
+
+Next, denote $\tilde L = (I-A)^{-1}$ the inverse Leontiev of domestic
+production alone (ignoring the world input-output linkages). This is
+what we would use with traditional matrices from one country only. We
+can decompose the import content in the following way:
+
+\begin{equation}
+\label{eq1}
+  \underbrace{\vec 1 \cdot C^*}_\text{direct} +
+  \vec 1 \cdot B\Bigl (\underbrace{\tilde L C}_\text{\shortstack{indirect due
+      to\\ domestic I/O linkages}} + \underbrace{(L-\tilde L)
+    C}_\text{\shortstack{global value chain \\ of domestic
+      production}}+\underbrace{M^*C^*}_\text{\shortstack{indirect due
+      to\\ domestic production of \\ inputs for Foreign}} 
+  \Bigr).
+\end{equation}
+The first two terms can be computed with I/O matrices from 1 country
+only. The last two terms require the full world I/O matrix and reflect
+global value chains. I think this expression generalizes easily to the
+case of many countries (the square matrices $B$ and $M^*$ should simply become rectangular).
+
+Can we make a crude approximation of this formula using only simple
+ratios?
+Denote $\delta = \vec 1\cdot C^*$ the share of direct imports in
+consumption, $\beta = \vec 1 \cdot B$ the share of imported inputs in
+total domestic production. Let $\alpha$ the share of domestic inputs in total
+domestic production and $\mu$ the total share of inputs in total
+production: we have $\alpha+\beta=\mu$ and $\mu$ is typically $\approx
+1/2$. Finally, define $\tilde \beta = \beta/(1-\mu)$ the share of
+imports in total inputs used by the domestic economy.
+
+Assuming homogeneous sectors, we get a very crude approximation of the
+second term:\footnote{The matrix $B$ becomes $\beta$, $\tilde L$
+  becomes $1/(1-\alpha)$, $C$ becomes $1-\delta$.}
+$\beta(1-\delta)/(1-\alpha)=\beta(1-\delta)/(1-\mu+\beta)\approx\beta(1-\delta)/(1-\mu)\approx\tilde\beta(1-\delta)$
+to the first order in $\beta$. My
+guess is that the total import content should be highly correlated
+with
+\begin{equation*}
+  \delta + (1-\delta)\tilde{\beta}.
+\end{equation*}
+
+If you run a regression of the import content on $\delta$ and
+$(1-\delta)\tilde\beta$, you should get a decent fit. The coefficient
+of $\delta$ should be slightly higher than 1, the difference with 1
+potentially reflecting global value chain effect captured by the last
+term of (\ref{eq1}). The coefficient of $(1-\delta)\tilde\beta$ might
+also be different from 1, perhaps capturing the third term of (\ref{eq1}).
+\end{document}

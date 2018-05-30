@@ -129,20 +129,20 @@ By extension, a "world" I-O table describe the sale and purchase relationships b
 The world I-O table has, on its diagonal, the country blocks with flows of domestic transactions of intermediate goods and services between industries.
 The country blocks outside the diagonal represent international flows of intermediate goods and services via bilateral sectoral exports and imports. \\
 %The rows of the table contain information on the distribution of the output of industries over use categories.
-Define $Y$ the output vector of dimension $(1, N)$, $A$ the matrix of technical input coefficient of dimension $(N, N)$, and $R$ the vector of factor incomes of dimension $(1, N)$. $N$ is equal to the product of the number of countries ($I$) and the number of sectors ($J$). \\
+Define $Y$ the output vector of dimension $(1, N)$, $\cal A$ the matrix of technical input coefficient of dimension $(N, N)$, and $R$ the vector of factor incomes of dimension $(1, N)$. $N$ is equal to the product of the number of countries ($I$) and the number of sectors ($J$). \\
 Output is equal to the sum of factor incomes and intermediary consumption. Thus: 
 \begin{eqnarray*}
 	Y=(y_1\ldots y_N)=\left(y_1\ldots y_N\right)\left( \begin{matrix}
    a_{11} & \cdots  & a_{N1}  \\
    \vdots  & a_{n,n'} & \vdots   \\
    a_{1N} & \cdots  & a_{NN}  \\
-\end{matrix} \right)+(r_1\ldots r_N)=YA+R
+\end{matrix} \right)+(r_1\ldots r_N)=Y {\cal A} +  R
 \end{eqnarray*}
 Assuming that there is no possible substitution between inputs between industries or countries (i.e. that technical coefficients are fixed), we can derive a price equation under the assumption of complete cost pass-through.\\
 
 %\textcolor{red} {GD CE QUI SUIT ME SEMBLE TRÈS BIZARRE -- Je refais un essai} \\
 Define $y_n=p_n*q_n$, with $p_n$ the price and $q_n$ the quantity of product from country $n$ and normalize quantity such as $q_n=1$. \\
-Define $P$ the vector of production prices of dimension $(1, N)$ and $V$ the vector of factor income of dimension $(1, N)$ needed to produce one unit of good in each sector. Then $P=PA+V$. \\
+Define $P$ the vector of production prices of dimension $(1, N)$ and $V$ the vector of factor income of dimension $(1, N)$ needed to produce one unit of good in each sector. Then $P=P{\cal A}+V$. \\
 
 %\textcolor{red} {Ici} \\
  % Define $y_i=p_i*q_i$, with $p_i$ the price and $q_i$ the quantity of product $i$ and normalize quantities such as $p_i=1$. \\
@@ -160,11 +160,11 @@ with $C$ the shock vector of dimension (1,N) that contains the direct effect of 
 \\
 %Under these conditions, for each industry $i$, the shock can be written as the absolute difference between the initial production price and the new production price invoiced following the shock ("shocked price" hereafter).\\
 The price increase is passed on to the country-specific industries that use shocked products as intermediate consumptions. The higher the reliance on shocked inputs, the higher the increase in production prices.\\
-In a first step, the direct impact of the shock on each country-specific industry's output prices amounts to $\Delta^{1}P=CA$.\\
-In a second step, the shock is passed on all country-specific industries using these shocked inputs in their production processes. For $k$ production cycles, the increase in production prices amounts to $\Delta^k P=CA^k$.\\
+In a first step, the direct impact of the shock on each country-specific industry's output prices amounts to $\Delta^{1}P=C{\cal A}$.\\
+In a second step, the shock is passed on all country-specific industries using these shocked inputs in their production processes. For $k$ production cycles, the increase in production prices amounts to $\Delta^k P=C{\cal A}^k$.\\
 As the technical coefficients are smaller than 1, the effect of the initial shock on input prices eventually wears out.
 The overall effect of the shock is equal to the sum of the initial shock and all the increases that occurred during the successive production cycles.
-The total effect of the shock on prices, S, is equal to $S=C {\left( I+A+A^2+...+A^k+...\right)} =C {\left( I-A \right)}^{-1}$, with ${\left( I-A \right)}^{-1}$ the inverse of Leontief's matrix; $S$ is a vector $(1, N)$ composed of the elements $s_{ij}$ measuring the total effect of the shock on the output price of sector $j$ in country $i$ .
+The total effect of the shock on prices, S, is equal to $S=C {\left( I+{\cal A}+{\cal A}^2+...+{\cal A}^k+...\right)} =C {\left( I-{\cal A} \right)}^{-1}$, with ${\left( I-{\cal A} \right)}^{-1}$ the inverse of Leontief's matrix; $S$ is a vector $(1, N)$ composed of the elements $s_{ij}$ measuring the total effect of the shock on the output price of sector $j$ in country $i$ .
 
 \subsection{The choice of WIOD}
 \label{subsec:data}
@@ -295,9 +295,9 @@ with $c_{\$ij}=c_{\$ik}=c_\$^i
 %=1
 $
 for all sectors $j$ and $k$ in the shocked country $i$.\\
-Building on Equation \ref{eq:eq1}, we write the direct impact of the exchange rate shock on the other countries as the product of the shock vector $C_\$^i$ and a matrix $B$. $B$ builds on the large matrix $A$ of technical coefficients, but only keeps the coefficients of each country's sectoral inputs imported from the shocked country $i$. The other coefficients are replaced by 0, including those of the block of country $i$ concerning the domestic inputs of the shocked country $i$. The direct impact of the appreciation of a currency against the dollar on the price of inputs in countries that are not shocked is equal to $C_\$^iB$ with
+Building on Equation \ref{eq:eq1}, we write the direct impact of the exchange rate shock on the other countries as the product of the shock vector $C_\$^i$ and a matrix ${\cal B}$. ${\cal B}$ builds on the large matrix ${\cal A}$ of technical coefficients, but only keeps the coefficients of each country's sectoral inputs imported from the shocked country $i$. The other coefficients are replaced by 0, including those of the block of country $i$ concerning the domestic inputs of the shocked country $i$. The direct impact of the appreciation of a currency against the dollar on the price of inputs in countries that are not shocked is equal to $C_\$^i{\cal B}$ with
 \begin{eqnarray}
-C_\$^iB=\left(0\ldots c_\$^i \ldots 0\right)\left(\begin{matrix}0&\cdots&0\\a_{11,ij}&0&a_{IJ,ij}\\0&\cdots&0\\\end{matrix}\right) 	
+C_\$^i{\cal B}=\left(0\ldots c_\$^i \ldots 0\right)\left(\begin{matrix}0&\cdots&0\\a_{11,ij}&0&a_{IJ,ij}\\0&\cdots&0\\\end{matrix}\right) 	
 \label{eq:eq3}
 \end{eqnarray}
 where each $a_{kl,ij}$ element of the line block represents the technical coefficient related to imports of inputs by sector $l$ in country $k$ (with $k\ne i$) from sector $j$ of country $i$.\\
@@ -318,20 +318,20 @@ Let us now consider the shock from the perspective of the shocked country $i$.\\
 %
 %\textcolor {blue}{GD Je suis dans la perplexité. Proposition de changement}
 
-Define $C^i$ the vector of change in input prices imported by country i, in national currency, 
+Define $C^i$ the vector of change in goods imported by country i, in national currency, 
 $\left(-\frac{c_\$^i}{1+c_\$^i},\ldots0\ldots,-\frac{c_\$^i}{1+c_\$^i} \right)$. \\
 
-From Equation \ref{eq:eq2}, we can write the direct impact for country $i$ of the fall in input prices from the rest of the world. The direct impact corresponds to the product of the shock vector $C^i$  and a matrix ${\tilde{B}}$. ${\tilde{B}}$ builds on the large matrix A of which only the country blocks of the inputs imported by country $i$ from other countries have been retained. The other coefficients are replaced by 0, including those of the block of country $i$ concerning the domestic inputs of the shocked country $i$. \\
+From Equation \ref{eq:eq2}, we can write the direct impact for country $i$ of the fall in input prices from the rest of the world. The direct impact corresponds to the product of the shock vector $C^i$  and a matrix ${\tilde{{\cal B}}}$. ${\tilde{{\cal B}}}$ builds on the large matrix ${\cal A}$ of which only the country blocks of the inputs imported by country $i$ from other countries have been retained. The other coefficients are replaced by 0, including those of the block of country $i$ concerning the domestic inputs of the shocked country $i$. \\
 
-The direct impact of the appreciation of the shocked country $i$ on the price of its inputs corresponds, in national currency, to $C^i{\tilde{B}}$ with: 
+The direct impact of the appreciation of the shocked country $i$ on the price of its inputs corresponds, in national currency, to $C^i{\tilde{{\cal B}}}$ with: 
 \begin{eqnarray}
-C^i{\tilde{B}}=\left(-\frac{c_\$^i}{1+c_\$^i},\ldots0\ldots,-\frac{c_\$^i}{1+c_\$^i} \right)\left(\begin{matrix}0&\ldots{{{a}}_{ij,11}}\ldots&0\\0&0&0\\0&\ldots{{a}_{{ij,IJ}}}\ldots&0\\\end{matrix}\right) 
+C^i{\tilde{{\cal B}}}=\left(-\frac{c_\$^i}{1+c_\$^i},\ldots0\ldots,-\frac{c_\$^i}{1+c_\$^i} \right)\left(\begin{matrix}0&\ldots{{{a}}_{ij,11}}\ldots&0\\0&0&0\\0&\ldots{{a}_{{ij,IJ}}}\ldots&0\\\end{matrix}\right) 
 \label{eq:eq4}
  \end{eqnarray}
 where each ${{{a}}_{{ij,kl}}}$ element in the column block represents imports of inputs by sector $j$ in country $i~$from sector$~l$ of country $k$.
-We can then convert this direct impact in dollars, by multiplying it by the new value of the national currency in dollars, $\left(1+c_\$^i\right)$. The direct impact of the appreciation of the shocked country $i$ on the price of its inputs corresponds, in dollars, to ${\tilde{C}_\$^i}{\tilde{B}}$ with: 
+We can then convert this direct impact in dollars, by multiplying it by the new value of the national currency in dollars, $\left(1+c_\$^i\right)$. The direct impact of the appreciation of the shocked country $i$ on the price of its inputs corresponds, in dollars, to ${\tilde{C}_\$^i}{\tilde{{\cal B}}}$ with: 
 \begin{eqnarray}
-{\tilde{C}_\$^i}{\tilde{B}}=\left(1+c_\$^i\right).C^i{\tilde{B}}=
+{\tilde{C}_\$^i}{\tilde{{\cal B}}}=\left(1+c_\$^i\right).C^i{\tilde{{\cal B}}}=
 \left(-c_\$^i\ldots0\ldots-c_\$^i\right)\left(\begin{matrix}0&\ldots{{{a}}_{ij,11}}\ldots&0\\0&0&0\\0&\ldots{{a}_{{ij,IJ}}}\ldots&0\\\end{matrix}\right) 
 \label{eq:eq4}
  \end{eqnarray}
@@ -343,24 +343,45 @@ We can then convert this direct impact in dollars, by multiplying it by the new 
 
 
 
-The direct effect on the world is therefore the sum of these vectors from equations  \ref{eq:eq3} and \ref{eq:eq4}, i. e. $C_\$^i.B+{\tilde{C}_\$^i}{\tilde{B}}.~$\\
-An input price shock then spreads to all sectors in all countries via the global intersectoral exchanges transcribed by the matrix of technical coefficients of the large matrix A. This process will be repeated several times, until the effects are completely exhausted.
-In the end, the total effect of the dollar shock is equal to the shock itself, incremented by changes in input prices due to changes in imported input prices, and by all marginal changes in output prices during the production processes, i. e.:\\
+The direct effect on the world is therefore the sum of these vectors from equations  \ref{eq:eq3} and \ref{eq:eq4}, i. e. $C_\$^i.{\cal B}+{\tilde{C}_\$^i}{\tilde{{\cal B}}}.~$\\
+An input price shock then spreads to all sectors in all countries via the global intersectoral exchanges transcribed by the matrix of technical coefficients of the large matrix {\cal A}. This process will be repeated several times, until the effects are completely exhausted.
+In the end, the total sectoral effect of the dollar shock is equal to the sectoral shock itself, incremented by changes in input prices due to changes in imported input prices, and by all marginal changes in output prices during the production processes, i. e.:\\
 \begin{eqnarray*}
-S_\$^i=\Delta{{P}_{\$}^i}=C_\$^i+\left(C_\$^i.B+{\tilde{C}_\$^i}{\tilde{B}}\right){A}+\left(C_\$^i.B+{\tilde{C}_\$^i}{\tilde{B}}\right){{{A}}^{2}}+\ldots+\left(C_\$^i.B+{\tilde{C}_\$^i}{\tilde{B}}\right)A^k +\ldots \\
+S_\$^i=\Delta{{P}_{\$}^i}=C_\$^i+ \left(C_\$^i.{\cal B}+{\tilde{C}_\$^i}{\tilde{{\cal B}}}\right)+ \left(C_\$^i.{\cal B}+{\tilde{C}_\$^i}{\tilde{{\cal B}}}\right){{\cal A}}+\left(C_\$^i.{\cal B}+{\tilde{C}_\$^i}{\tilde{{\cal B}}}\right){{\cal A}^{2}}+\ldots+\left(C_\$^i.{\cal B}+{\tilde{C}_\$^i}{\tilde{{\cal B}}}\right){\cal A}^k +\ldots \\
 \end{eqnarray*}
+
+GD J'AI MODIFIÉ À PARTIR D'ICI
  
  \begin{eqnarray}
-S_\$^i=C_\$^i+\left(C_\$^i.B+{\tilde{C}_\$^i}{\tilde{B}}\right)*{{(I-A)}^{-1}}	
-\label{eq:eq5}
+S_\$^i=C_\$^i+\left(C_\$^i.{\cal B}+{\tilde{C}_\$^i}{\tilde{{\cal B}}}\right)*{{(I-{\cal A})}^{-1}}	
+\label{eq:eqinternationalcurrency}
  \end{eqnarray}
 With $S_\$^i$ the total impact vector composed of the elements ${{{s}}_{\$ij}}$ showing the total impact of the shock on country $i$'s sector $j$. \\
-Equation \ref{eq:eq5} gives the absolute evolution of input prices in international currency. To obtain the absolute evolution of the input prices of the shocked country in national currency, we remove the exchange rate shock and multiply this balance by the scalar of conversion equal to $\frac{1}{1+c_\$^i}$.
+
+Equation \ref{eq:eqinternationalcurrency} gives the absolute evolution of sectoral prices in international currency. To obtain the absolute evolution of the sectoral prices of the shocked country in national currency, we remove the exchange rate shock in international currency, multiply the balance by the scalar of conversion equal to $\frac{1}{1+c_\$^i}$ and add the initial exchange rate shock in national currency.
 %=0.5~$, since according to our hypotheses ${{{c}}_{\$i}}$=1:
 \begin{eqnarray*}
-	S^i=\left( \frac{1}{1+{{c}_\$^i}}\right)*\left({S_\$^i}-{{C}_{\$}^i}\right)
+\begin{aligned}
+	S^i&=\left( \frac{1}{1+{{c}_\$^i}}\right)*\left({S_\$^i}-{{C}_{\$}^i}\right)+C^i=\left( \frac{1}{1+{{c}_\$^i}}\right)*\left(C_\$^i.{\cal B}+{\tilde{C}_\$^i}{\tilde{{\cal B}}}\right)*{{(I-{\cal A})}^{-1}}+C^i 	\\
+	S^i&=C^i	+ \left(\tilde{C}^i.{\cal B}+{C^i}{\tilde{{\cal B}}}\right)*{{(I-{\cal A})}^{-1}}	
+\label{eq:eqdomcurrency}
+\end{aligned}
 \end{eqnarray*}
-$S^i$ represents the overall impact of a shock on prices in each sector of each country expressed in the shocked currency. To transform this number in an average price index, $\bar{s}^i$, we need to compute a weighted average of the sectoral effects of the shock. This paper focuses of the household consumption price index.
+Where $\tilde{C}^i=\left(0 \ldots \frac{c_\$^i}{1+c_\$^i},\ldots 0 \right)$ is the increase in dollar prices of goods from country $i$ used as inputs in all other countries.\\ 
+$S^i$ represents the overall impact of a shock on prices in each sector of each country expressed in the shocked currency. To transform this number in an average price index, $\bar{s}^i$, we need to compute a weighted average of the sectoral effects of the shock. This paper focuses of the household consumption price index. Let $HC^i$ be the vector of sectoral shares in country $i$'s consumption :
+\begin{eqnarray*}
+HC^i=\left( 
+	\begin{array}{c}
+	\frac{{hc}_{11}^i}{hc^i} \\
+	...\\
+	\frac{{hc}_{kj}^i}{hc^i}\\
+	...\\
+	\frac{{hc}_{IJ}^i}{hc^i}
+	 \end{array}
+	 \right)
+\end{eqnarray*}
+
+Where ${hc}_{kj}^i$ the consumption of industry $j$ from country $k$ in country $i$ and $hc^i$ the total household consumption of country $i$. \\
 %For each country, we compute a weighted average of the shock effects, based on three types of aggregation: the sectoral structure of output, the sectoral structure of exports and the sectoral structure of household consumption.\\
 %Hence 
 %\begin{eqnarray*}
@@ -376,10 +397,10 @@ $S^i$ represents the overall impact of a shock on prices in each sector of each 
 %The last type of aggregation relies on the sectoral structure of household consumption.
 $\overline{s_{i}}^{i,HC}$ provides the average impact of the shock on the consumer price of country $i$. 
  \begin{eqnarray}
-\overline{s}_{i}^{i,HC}=\underset{\begin{subarray}{c}j=1\dots J \\ k=1 \dots I \end{subarray}}{\mathop \sum}\,{{s}_{kj}^i}.\frac{{hc}_{kj}^i}{hc^i}
+\overline{s}_{i}^{i,HC}=S^i.HC^i=\underset{\begin{subarray}{c}j=1\dots J \\ k=1 \dots I \end{subarray}}{\mathop \sum}\,{{s}_{kj}^i}.\frac{{hc}_{kj}^i}{hc^i}
 \label{eq:eq6}
  \end{eqnarray} 
-with ${s}_{kj}^i$ is a coefficient of $S^i$ for country $i$, ${hc}_{kj}^i$ the consumption of industry $j$ from country $k$ in country $i$ and $hc^i$ the total household consumption of country $i$. 
+with ${s}_{kj}^i$ is a coefficient of $S^i$ for country $i$. 
 
 \section{The impact of exchange rates fluctuations on consumer prices}
 \label{sec:prixconso}

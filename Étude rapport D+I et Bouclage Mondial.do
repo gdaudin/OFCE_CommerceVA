@@ -2,7 +2,7 @@ clear
 set more off
 if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
 else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
-
+global dirgit "X:\Agents\LALLIARD"
 
 *capture log close
 *log using "$dir/$S_DATE.log", replace
@@ -185,22 +185,34 @@ if "`type'"=="HC_note" {
 			note("PIWIM (WIOD, 2014)")
 	*dans le cas HC, xtitle pourrait se finir par «importées dans la conso dom + part conso importée»			
 	
+
 	
-	
-	graph export "$dir/Commerce_VA_inflation/Rédaction_Note/Rapport_D+I_bouclé.png", replace
+	graph export "$dirgit\Commerce_VA_inflation\Rédaction_Note\Rapport_D+I_bouclé.png", replace
 	
 	graph close
 	
-	blif
+	
 
 	
 	
 }
 
+
+if "`type'" == "HC" /*| "`type'" == "HC_note" */{
+
+	generate contenu_ci_importes_HC_dom=ratio_ci_impt_HC*(1-contenu_impHC)
+
+	reg pond_`source'_HC contenu_impHC contenu_ci_importes_HC_dom 
+	reg pond_`source'_HC choc_dplusi_HC	
+
+
+}
+blatouf
+
 *assert 			pond_`source'_`type' >= choc_dplusi_`type'
 *RQ : WIOD 2000 ce n'est pas vérifié pour Luxembourg et Malte (pour en gros un point de pourcentage sur 30). Je laisse couler...
 reg pond_`source'_`type' choc_dplusi_`type'	
-
+blif
 gen R2=e(r2)
 matrix COEF = e(b)
 gen cst=COEF[1,2]
@@ -258,4 +270,4 @@ foreach source in  WIOD  TIVA {
 
 }
 */
-etude 2014 WIOD HC_note
+etude 2014 WIOD HC

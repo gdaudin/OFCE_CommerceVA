@@ -357,7 +357,7 @@ GD J'AI MODIFIÉ À PARTIR D'ICI
 S_\$^i=C_\$^i+\left(C_\$^i.{\cal B}+{\tilde{C}_\$^i}{\tilde{{\cal B}}}\right)*{{(I-{\cal A})}^{-1}}	
 \label{eq:eqinternationalcurrency}
  \end{eqnarray}
-With $S_\$^i$ the total impact vector composed of the elements ${{{s}}^i_{\$kj}}$ showing the total impact of the shock in the exchange rate of country $i$ on country $k$'s sector $j$. Equation \ref{eq:eqinternationalcurrency} gives the absolute evolution of sectoral prices in international currency. The study of this vector is the main objet of PAPIER OFCE. //
+With $S_\$^i$ the total impact vector composed of the elements ${{{s}}^i_{\$kj}}$ showing the total impact of the shock in the exchange rate of country $i$ on country $k$'s sector $j$. Equation \ref{eq:eqinternationalcurrency} gives the absolute evolution of sectoral prices in international currency. The study of this vector is the main objet of \cite{Cochard2016}. //
 
 In contrast, this paper focuses on the internal effect of an exchange rate shock. To obtain the absolute evolution of the sectoral prices of the shocked country in national currency, we remove the exchange rate shock in international currency, multiply the balance by the scalar of conversion equal to $\frac{1}{1+c_\$^i}$ and add the initial exchange rate shock in national currency.
 
@@ -365,11 +365,11 @@ In contrast, this paper focuses on the internal effect of an exchange rate shock
 \begin{aligned}
 	S^i&=C^i  + \left( \frac{1}{1+{{c}_\$^i}}\right)*\left({S_\$^i}-{{C}_{\$}^i}\right)\\
 	&=C^i + \left( \frac{1}{1+{{c}_\$^i}}\right)*\left(C_\$^i.{\cal B}+{\tilde{C}_\$^i}{\tilde{{\cal B}}}\right)*{{(I-{\cal A})}^{-1}} 	\\
-	&=C^i	+ \left(\tilde{C}^i.{\cal B}+{C^i}{\tilde{{\cal B}}}\right)*{{(I-{\cal A})}^{-1}}	
+	&=C^i	+ \left(\hat{C}^i_\$.{\cal B}+{C^i}{\tilde{{\cal B}}}\right)*{{(I-{\cal A})}^{-1}}	
 \label{eq:eqdomcurrency}
 \end{aligned}
 \end{equation}
-Where $\tilde{C}^i=\left(0 \ldots \frac{c_\$^i}{1+c_\$^i},\ldots 0 \right)$ is the increase in dollar prices of goods from country $i$ used as inputs in all other countries.\\ 
+Where $\hat{C}^i_\$=\left(0 \ldots \frac{c_\$^i}{1+c_\$^i},\ldots 0 \right)$ is the increase in dollar prices of goods from country $i$ used as inputs in all other countries.\\ 
 $S^i$ represents the overall impact of a shock on prices in each sector of each country expressed in the shocked currency. To transform this number in an average price index, $\bar{s}^i$, we need to compute a weighted average of the sectoral effects of the shock. This paper focuses of the household consumption price index. Let $HC^i$ be the vector of sectoral shares in country $i$'s consumption :
 \begin{eqnarray*}
 HC^i=\left( 
@@ -432,9 +432,8 @@ To go further, we can decompose $\overline{s_{i}}^{i,HC}$ between sources of fin
 Where:
 \begin{equation}
 \begin{array}{ccccc}
-HC^i&=&HC^{i,dom} & + &  HC^{i,imp} \\ &=&
-\left( 	\begin{array}{c} \frac{{hc}_{11}^i}{hc^i} \\	...\\0\\...\\\frac{{hc}_{IJ}^i}{hc^i}\end{array}\right) 
-&+& \left( \begin{array}{c}
+HC^i&=&HC^{i,dom} & + &  HC^{i,imp} \\ 
+&=&  \left( \begin{array}{c}
 	0 \\
 	...\\
 	\frac{{hc}_{ij}^i}{hc^i}\\
@@ -442,6 +441,8 @@ HC^i&=&HC^{i,dom} & + &  HC^{i,imp} \\ &=&
 	0
 	 \end{array}
 	 \right)
+&+&
+\left( 	\begin{array}{c} \frac{{hc}_{11}^i}{hc^i} \\	...\\0\\...\\\frac{{hc}_{IJ}^i}{hc^i}\end{array}\right) 
 \end{array}
 \end{equation}
 
@@ -451,13 +452,14 @@ For example,
 \label{equ:share_of_imported}
  \end{equation}
 
-We can then define the contribution of imported consumption in an exchange rate shock as $\nicefrac{\overline{s}_{i,imp}^{i,HC}}{\overline{s}_{i}^{i,HC}} = \nicefrac{S^i.HC^{i,imp}}{S^i.HC^{i}}$. We can also define the sensitivity of imported consumption as $ \frac{\nicefrac{S^i.HC^{i,imp}}{S^i.HC^{i}}}{\vec{1}.HC^i,imp}$ where $\vec 1$ is a horizontal vector of ones.
+We can then define the contribution of imported consumption goods in an exchange rate shock as $\nicefrac{\overline{s}_{i,imp}^{i,HC}}{\overline{s}_{i}^{i,HC}} = \nicefrac{S^i.HC^{i,imp}}{S^i.HC^{i}}$. We can also define the sensitivity of imported consumption prices as $ \frac{\nicefrac{S^i.HC^{i,imp}}{S^i.HC^{i}}}{\vec{1}.HC^i,imp}$ where $\vec 1$ is a horizontal vector of ones.
+For example, if an appreciation exchange rate reduce household consumption prices by 20\%, that household consumption is 50\% imported and that imported consumption goods prices evolution cause in a reduction of household consumption prices of 15\%, then the contribution of imported consumption goods will be 0.75 (=.15/.20)and their sensitivity of 1.5 (=0.75/0.5).
 
 GD : PEUT-ÊTRE Y A-T-IL UNE MANIÈRE DE SIMPLIFIER L'EXPRESSION DE LA SENSITIVITÉ, MAIS JE NE VOIS PAS COMMENT FAIRE...
 
-Figure \ref{fig:share_impt} shows, for example, that the contribution of imported consumption is higher than 0.5 in most countries. While imported consumption has a smaller share in total consumption, this is over-compensated by the sensitivity of its prices to exchange rate shocks, as show by the comparison of \ref{fig:intensity_dom} and \ref{fig:intensity_impt}.
+Figure \ref{fig:share_impt} shows, for example, that the contribution of imported consumption goods is higher than 0.5 in most countries. While imported consumption has a smaller share in total consumption, this is over-compensated by the sensitivity of its prices to exchange rate shocks, as show by the comparison of \ref{fig:intensity_dom} and \ref{fig:intensity_impt}.
 
-Similar decompositions of the matrix $HC^i$ can be done to analyse the contribution of different sectors. decompose the effect between sectors. That allows the identification of the contribution of different sectors to the inflation shocks in different countries.
+Similar decompositions of the matrix $HC^i$ can be done to analyse the contribution of different sectors. That allows the identification of the contribution of different sectors to the inflation shocks in different countries.
 Figure \ref{fig:share_sector} shows that non-energy industrial goods and services have the highest contribution. Energy is very sensitive to exchange rate shocks (see \ref{fig:intensity_dom} and \ref{fig:intensity_impt}), but its share in consumption is too small for its contribution to the final reaction to be large.
 
 
@@ -502,18 +504,18 @@ Figure \ref{fig:share_sector} shows that non-energy industrial goods and service
 \end{figure}
 
 \subsection{What do we gain?}
-One might wonder whether using world input-ouput matrices provided by WIOD or TIVA is is worth the wait (the latest version of WIOD covers 2014) and the additional complexity. To answer this question, we  decompose  $\overline{s_{i}}^{i,HC}$ into different elements classified by ease of use and computation. Let us start from equation \ref{eq:eqdomcurrency}.
+One might wonder whether using world input-ouput matrices provided by WIOD or TIVA to compute the effect of exchange rate shocks on household consumption prices is is worth the wait (the latest version of WIOD covers 2014) and the additional complexity. To answer this question, we  decompose  $\overline{s_{i}}^{i,HC}$ into different elements classified by ease of use and computation. Let us start from equation \ref{eq:eqdomcurrency}.
 
 \begin{equation}
 \begin{array}{lccl}
-	S^ i&=&C^i	&+ \left(\tilde{C}^i.{\cal B}+{C^i}{\tilde{{\cal B}}}\right)*{{(I-{\cal A})}^{-1}} \\
-	S^i &=&\underbrace{C^i}_{\substack{\text{(E1) direct effect on} \\ \text{ imported consumption}}}&+ \underbrace{\tilde{C}^i.{\cal B}}_{\substack{\text{(E2) direct effect on} \\ \text{ domestic consumption} \\ \text{ produced with  imported inputs}}}  + \underbrace{{C^i}{\tilde{{\cal B}}}}_{\substack{\text{(E3) indirect effect on} \\ \text{imported consuption} \\ \text{produced with domestic inputs}}} \\ &&+\underbrace {\left( \tilde{C}^i.{\cal B} + {C^i}{\tilde{{\cal B}}}\right)*{{(I-{\cal A})}^{-1}}*{\cal A}^{-1}}_{\text{(E4) residual}} \\
+	S^ i&=&C^i	&+ \left(\hat{C}^i_\$.{\cal B}+{C^i}{\tilde{{\cal B}}}\right)*{{(I-{\cal A})}^{-1}} \\
+	S^i &=&\underbrace{C^i}_{\substack{\text{(E1) initial effect on} \\ \text{ imported consumption}}}&+ \underbrace{{C^i}{\tilde{{\cal B}}}}_{\substack{\text{(E2) direct effect on} \\ \text{ domestic consumption} \\ \text{ produced with  imported inputs}}}  + \underbrace{\hat{C}^i_\$.{\cal B}}_{\substack{\text{(E3) indirect effect on} \\ \text{imported consuption} \\ \text{produced with domestic inputs}}} \\ &&+\underbrace {\left( \hat{C}^i_\$.{\cal B} + {C^i}{\tilde{{\cal B}}}\right)*{{(I-{\cal A})}^{-1}}*{\cal A}^{-1}}_{\text{(E4) residual}} \\
 \end{array}
 \end{equation}
 
-When the shock is an appreciation of the domestic currency, $E1$ and $E2$ reduce domestic prices and $E3$ increases domestic prices. Notice that $E1$ and $E2$ are easy to compute with national input-output matrices, whereas computing $E3$ and $E4$ require the use that world input-output matrices.
+When the shock is an appreciation of the domestic currency, $E1$ and $E2$ reduce country $i$'s household consumption prices and $E3$ increases country $i$'s household consumption prices. Notice that $E1$ and $E2$ are easy to compute with national input-output matrices, whereas computing $E3$ and $E4$ require the use that world input-output matrices.
 
-$C^i$ and $\tilde{C}^i$ have a large number of zeros. So, we have :
+$C^i$ and $\hat{C}^i_\$$ have a large number of zeros. So, we have :
 
 \begin{equation}
 \begin{array}{lccl}

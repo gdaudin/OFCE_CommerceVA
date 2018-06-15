@@ -319,7 +319,7 @@ Let us now consider the shock from the perspective of the shocked country $i$.\\
 %
 %\textcolor {blue}{GD Je suis dans la perplexité. Proposition de changement}
 
-Define $C^i$ the vector of change in goods imported by country i, in national currency, 
+Define $C^i$ the vector of change in production prices everywhere expressed in country $i$'s currency, 
 $\left(-\frac{c_\$^i}{1+c_\$^i},\ldots0\ldots,-\frac{c_\$^i}{1+c_\$^i} \right)$. \\
 
 From Equation \ref{eq:eq2}, we can write the direct impact for country $i$ of the fall in input prices from the rest of the world. The direct impact corresponds to the product of the shock vector $C^i$  and a matrix ${\tilde{{\cal B}}}$. ${\tilde{{\cal B}}}$ builds on the large matrix ${\cal A}$ of which only the country blocks of the inputs imported by country $i$ from other countries have been retained. The other coefficients are replaced by 0, including those of the block of country $i$ concerning the domestic inputs of the shocked country $i$. \\
@@ -357,10 +357,10 @@ GD J'AI MODIFIÉ À PARTIR D'ICI
 S_\$^i=C_\$^i+\left(C_\$^i.{\cal B}+{\tilde{C}_\$^i}{\tilde{{\cal B}}}\right)*{{(I-{\cal A})}^{-1}}	
 \label{eq:eqinternationalcurrency}
  \end{eqnarray}
-With $S_\$^i$ the total impact vector composed of the elements ${{{s}}_{\$ij}}$ showing the total impact of the shock on country $i$'s sector $j$. \\
+With $S_\$^i$ the total impact vector composed of the elements ${{{s}}^i_{\$kj}}$ showing the total impact of the shock in the exchange rate of country $i$ on country $k$'s sector $j$. Equation \ref{eq:eqinternationalcurrency} gives the absolute evolution of sectoral prices in international currency. The study of this vector is the main objet of PAPIER OFCE. //
 
-Equation \ref{eq:eqinternationalcurrency} gives the absolute evolution of sectoral prices in international currency. To obtain the absolute evolution of the sectoral prices of the shocked country in national currency, we remove the exchange rate shock in international currency, multiply the balance by the scalar of conversion equal to $\frac{1}{1+c_\$^i}$ and add the initial exchange rate shock in national currency.
-%=0.5~$, since according to our hypotheses ${{{c}}_{\$i}}$=1:
+In contrast, this paper focuses on the internal effect of an exchange rate shock. To obtain the absolute evolution of the sectoral prices of the shocked country in national currency, we remove the exchange rate shock in international currency, multiply the balance by the scalar of conversion equal to $\frac{1}{1+c_\$^i}$ and add the initial exchange rate shock in national currency.
+
 \begin{equation}
 \begin{aligned}
 	S^i&=C^i  + \left( \frac{1}{1+{{c}_\$^i}}\right)*\left({S_\$^i}-{{C}_{\$}^i}\right)\\
@@ -383,7 +383,7 @@ HC^i=\left(
 	 \right)
 \end{eqnarray*}
 
-Where ${hc}_{kj}^i$ the consumption of industry $j$ from country $k$ in country $i$ and $hc^i$ the total household consumption of country $i$. \\
+Where ${hc}_{kj}^i$ the household consumption in country $i$ of goods produced by sector $j$ from country $k$ and $hc^i$ the total household consumption of country $i$. \\
 %For each country, we compute a weighted average of the shock effects, based on three types of aggregation: the sectoral structure of output, the sectoral structure of exports and the sectoral structure of household consumption.\\
 %Hence 
 %\begin{eqnarray*}
@@ -409,7 +409,7 @@ with ${s}_{kj}^i$ is a coefficient of $S^i$ for country $i$.
 \subsection{Baseline results}
 We use the model presented in \ref{subsec:chocchange} to study the absolute value of $\overline{s_{i}}^{i,HC}$ following a 100\% appreciation shock of the domestic currency versus all the other currencies. When the domestic currency appreciates, domestic prices expressed in domestic currency decrease because imported inputs and imported consumption goods are less expensive. As our model is linear, the exact value of the shock does not matter : choosing 100\% allows us to interpret  $\overline{s_{i}}^{i,HC}$ as an elasticity. For illustration, using the WIOD database, we find that $\overline{s_{i}}^{i,HC}$ is equal to $-0.055$ for the USA in 2011, meaning that a 100\% appreciation of the dollar would reduce consumer prices by 5.5\%. The following figures report the absolute value of this number ($0.055$).
 
-Additionaly, for Euro zone members, we differenciate between the effect of the appreciation of the euro and the effect of the appreciation of a hypothetical national currency. We distinguish for Euro area members the effect of an appreciation of the euro and the effect of à hypothetical national currency. For example, in the case of France, using WIOD in 2011, a 100\% appreciation of the euro would lead to a reduction of domestic prices of 7.6\%. A 100\% appreciation of the hypothetical national currency would lead a reduction of domestic prices of 12.2\%. 
+Additionaly, for Euro zone members, we differenciate between the effect of the appreciation of the euro and the effect of the appreciation of a hypothetical national currency. We distinguish for Euro area members the effect of an appreciation of the euro and the effect of a hypothetical national currency. For example, in the case of France, using WIOD in 2011, a 100\% appreciation of the euro would lead to a reduction of domestic prices of 7.6\%. A 100\% appreciation of the hypothetical national currency would lead a reduction of domestic prices of 12.2\%. 
 
 Figure \ref{fig:comp_WIOD_TIVA}, shows that, despite their differences, using WIOD or TIVA yields very similar results.
 
@@ -424,7 +424,7 @@ Figure \ref{fig:comp_WIOD_TIVA}, shows that, despite their differences, using WI
 \end{figure}
 
 
-To go further, we can decompose $\overline{s_{i}}^{i,HC}$ between final sources of consumption : imported final consumption goods on the one hand and domestic final consumption goods on the other hand. The price of domestic goods is affected because of imported inputs. E.g., we can define 
+To go further, we can decompose $\overline{s_{i}}^{i,HC}$ between sources of final consumption : imported final consumption goods on the one hand and domestic final consumption goods on the other hand. The price of domestic goods is affected because of imported inputs. E.g., we can define 
 \begin{eqnarray}
 \overline{s}_i^{i,HC}=\overline{s}_{i,imp}^{i,HC} + \overline{s}_{i,dom}^{i,HC} = S^i.HC^{i,dom}+ S^i.HC^{i,imp}\\
 \end{eqnarray}

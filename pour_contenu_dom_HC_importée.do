@@ -51,17 +51,6 @@ keep pays $var_entree_sortie
 
 ** Ici, on fait Y.Btilde
 
-local positionh=1
-local positionv=1
-
-
-foreach country of global pays_HC {
-	mkmat *`country'*, in `position'/`position'+`nbr_secteur'
-}
-
-
-
-
 
 
 foreach var of varlist $var_entree_sortie {

@@ -1,5 +1,4 @@
-* Obtention de la part des CI importées dans la production (Y), dans les exportations (X) et dans la consommation des ménages (HC)
-*Distinction, pour la ZE, des inputs importés en provenance des pays ZE et hors ZE
+*Pour le calcul des consommations intermédiaires domestique dans la HC importée
 
 clear
 set more off
@@ -14,15 +13,12 @@ set matsize 7000
 
 
 
-capture program drop imp_inputs_par_sect // fournit le % des ci importées/prod par pays*sect
-program imp_inputs_par_sect
-args yrs source hze
+capture program drop contenu_dom_HC_impt // fournit le % des ci dom dans la HC impt
+program  contenu_dom_HC_impt
+args yrs source hze pays_int
+*Année, source, hze_not ou hze_yes pour pays membres de la ZE et pays hors ZE, pays_int celui auquel on s'intéresse
 
-if ("`c(username)'"=="guillaumedaudin") do  "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation/Definition_pays_secteur.do" `source'
-if ("`c(username)'"=="w817186") do "X:\Agents\FAUBERT\commerce_VA_inflation\Definition_pays_secteur.do" `source'
-if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\Definition_pays_secteur.do" `source'
-
-* exemple  hze_not ou hze_yes pour pays membres de la ZE et pays hors ZE
+* exemple  
 
 *Ouverture de la base contenant le vecteur ligne de production par pays et secteurs
 
@@ -53,38 +49,48 @@ keep pays $var_entree_sortie
 
 
 
+** Ici, on fait Y.Btilde
+
+local positionh=1
+local positionv=1
+
+
+foreach country of global pays_HC {
+	mkmat *`country'*, in `position'/`position'+`nbr_secteur'
+}
+
+
+
+
+
+
 foreach var of varlist $var_entree_sortie {
 *	On cherche à enlever les auto-consommations intermédiaires
 	if "`source'" == "TIVA" local pays_colonne = substr("`var'",1,3)
 	if "`source'" == "WIOD" local pays_colonne = substr("`var'",2,3)
 	
-	replace `var' = 0 if pays=="`pays_colonne'"
-	
-	
+	replace `var' = 0 if pays=="`pays_colonne'"	
 	if strpos(lower("$china"),lower("`pays_colonne'"))!=0  {
 			foreach i of global china {	
 			replace `var' = 0 if lower(pays) == lower("`i'")
 		}
 	}
-	
-	
 	if strpos(lower("$mexique"),lower("`pays_colonne'"))!=0 {
 			foreach i of global mexique {	
 			replace `var' = 0 if lower(pays) == lower("`i'")
 		}
 	}
 		
-	if "`hze'"=="hze_yes" & strpos(lower("$eurozone"),lower("`pays_colonne'"))!=0 {
+
+	*** Puis on enlève les CI qui ne viennent pas du pays d'intérêt
 	
-		*display "turf"
-	
-	*Et les internes dans la zone euro
-		foreach i of global eurozone {	
-			replace `var' = 0 if lower(pays) == lower("`i'")		
-		}
-	}
+	replace `var' = 0 if lower(pays)!=lower("`pays_int'") 
+		
 	display "`hze' -- `pays_colonne'" 
+	
 }
+
+
 
 
 *somme des CI pour chaque secteur de chaque pays
@@ -98,9 +104,9 @@ append using "$dir/Bases/`source'_`yrs'_OUT.dta"
 
 *transpositin en colonne, puis création d'un ratio de CI importées par secteur 
 xpose, clear varname
-rename v1 ci_impt
-rename v2 prod
-generate ratio_ci_impt_prod=ci_impt / prod
+rename v1 ci_dom
+rename v2 prod_etranger
+generate ratio_ci_dom_prod_etranger=ci_dom / prod_etranger
 
 
 
@@ -121,164 +127,61 @@ merge 1:1 _n using "$dir/Bases/csv_`source'.dta"
 rename c pays
 rename s sector
 replace sector = lower(sector)
-replace pays=lower(pays)
+replace pays=upper(pays)
 drop p_shock
 drop _merge
- 
-*}
-save "$dir/Bases/imp_inputs_par_sect_`yrs'_`source'_`hze'.dta", replace
-* enregistrement des ratio de CI importés par secteur
+
+
+
+
+generate pays_conso = lower("`pays_int'")
+generate year= `yrs'
+if "`source'"=="TIVA" replace pays =lower(pays)
+
+
+merge 1:1 pays sector year pays_conso using "$dir/Bases/HC_`source'.dta", keep (1 3)
+
+assert _merge==3
+drop _merge
+
+
+gen contenu_dom_HC_etranger=conso*ratio_ci_dom_prod_etranger
+collapse (sum) contenu_dom_HC_etranger conso, by(pays_conso year)
+replace contenu_dom_HC_etranger = contenu_dom_HC_etranger/conso
+rename pays_conso pays
+replace pays =upper(pays)
+
+capture append using "$dir/Bases/contenu_dom_HC_impt_`yrs'_`source'_`hze'.dta"
+sort pays
+
+save "$dir/Bases/contenu_dom_HC_impt_`yrs'_`source'_`hze'.dta", replace
+* enregistrement des ratio de CI dom par secteur par pays d'interet
+
+
+
+
+
+
+
+
 
 end
 
 
-
-
-
-
-
-
-
-
-**************************************
-
-
-
-
-
-
-
-capture program drop imp_inputs // fournit le total des inputs importés par chaque pays
-program imp_inputs
-args yrs source vector hze
-
-if ("`c(username)'"=="guillaumedaudin") do  "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation/Definition_pays_secteur.do" `source'
-if ("`c(username)'"=="w817186") do "X:\Agents\FAUBERT\commerce_VA_inflation\Definition_pays_secteur.do" `source'
-if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\Definition_pays_secteur.do" `source'
-
-* exemple vector X Y HC hze_not ou hze_yes
-
-*Création d'un agrégat national pour Chine et Mexique pour ci importées et production 
-*La part des CI importées est à présent calculée pour l'ensemble de l'économie, et non plus par secteurs
-
-if "`vector'" == "Y" { 
-	use "$dir/Bases/imp_inputs_par_sect_`yrs'_`source'_`hze'.dta", clear
-
-	if "`source'"=="TIVA" {
-		gen pays_1 = pays
-		replace pays = "chn" if pays_1=="cn1" | pays_1=="cn2" | pays_1=="cn3" | pays_1=="cn4" 
-		replace pays = "mex" if pays_1=="mx1" | pays_1=="mx2" | pays_1=="mx3"
-		collapse (sum) ci_impt prod, by(pays sector)
-
-	}
-	
-	collapse (sum) ci_impt prod, by(pays)
-	generate ratio_ci_impt_Y = ci_impt/prod
-	save "$dir/Bases/imp_inputs_Y_`yrs'_`source'_`hze'.dta", replace
-}
-
-
-*Création d'un agrégat national pour ci importées et production pour Chine et Mexique
-*HC présente en revanche déjà une consommation agrégée au niveau de la Chine et du Mexique entiers
-if "`vector'" == "HC"  { 
-
-	
-	if "`source'"=="TIVA" {
-		use  "$dir/Bases/imp_inputs_par_sect_`yrs'_`source'_`hze'.dta", replace
-		replace pays = "chn" if pays=="cn1" | pays=="cn2" | pays=="cn3" | pays=="cn4" 
-		replace pays = "mex" if pays=="mx1" | pays=="mx2" | pays=="mx3"
-		collapse (sum) ci_impt prod, by(pays sector)
-		generate ratio_ci_impt_prod=ci_impt / prod
-		save "$dir/Bases/imp_inputs_par_sect_modif.dta", replace
-	}
-	
-
-	use "$dir/Bases/HC_`source'.dta", clear
-	replace pays=lower(pays)
-	if "`source'"=="TIVA" {
-		replace pays = "chn" if pays=="cn1" | pays=="cn2" | pays=="cn3" | pays=="cn4" 
-		replace pays = "mex" if pays=="mx1" | pays=="mx2" | pays=="mx3"
-		collapse (sum) conso, by(pays pays_conso year sector)
-	}
-	
-	*HC se présente avec le pays d'origine du bien, puis les pays de consommation 
-	*Manipulation de la base de données HC en vue d'ordonner la consommation du pays_conso pour tous les secteurs
-	keep if lower(pays)==lower(pays_conso) 
-	keep if year==`yrs'
-	
-	if "`source'"=="WIOD" replace pays=lower(pays)
-	if "`source'"=="WIOD" replace sector=lower(sector)
-	if "`source'"=="WIOD" merge 1:1 pays sector using  "$dir/Bases/imp_inputs_par_sect_`yrs'_`source'_`hze'.dta"
-	if "`source'"=="TIVA" merge 1:1 pays sector using  "$dir/Bases/imp_inputs_par_sect_modif.dta" 
-	if "`source'"=="TIVA" erase  "$dir/Bases/imp_inputs_par_sect_modif.dta"
-	drop _merge
-		
-	gen ci_impt_HC = ratio_ci_impt_prod * conso
-	label var ci_impt_HC "Les CI importées dans la consommation de secteurs domestiques"
-	
-	
-	collapse (sum) ci_impt_HC conso, by(pays)
-	generate ratio_ci_impt_HC = ci_impt_HC/conso
-	label var ratio_ci_impt_HC "Part des CI dans la conso domestique"
-	save "$dir/Bases/imp_inputs_HC_`yrs'_`source'_`hze'.dta", replace
-}
-
-
-if "`vector'" == "X"  { 
-	
-	use "$dir/Bases/X_`source'.dta", clear
- 
-	keep if year==`yrs'
-	
-	merge 1:1 pays sector using  "$dir/Bases/imp_inputs_par_sect_`yrs'_`source'_`hze'.dta"
-	
-
-	drop _merge
-	
-	gen ci_impt_X = ratio_ci_impt_prod * X
-	
-	if "`source'"=="TIVA" {
-		replace pays = "chn" if pays=="cn1" | pays=="cn2" | pays=="cn3" | pays=="cn4" 
-		replace pays = "mex" if pays=="mx1" | pays=="mx2" | pays=="mx3"
-
-	}
-	
-	collapse (sum) ci_impt_X X, by(pays)
-	generate ratio_ci_impt_X = ci_impt_X/X
-	save "$dir/Bases/imp_inputs_X_`yrs'_`source'_`hze'.dta", replace
-}
-
-end
-
-********************************************************************************************
-
-//graphiques avec 
-//   - impact choc euro / part des importations en provenance de pays hors zone euro
-//   - impact chocs pays / 
 
 
 
 **pOUR TEST
 
-if ("`c(username)'"=="guillaumedaudin") do  "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation/Definition_pays_secteur.do" WIOD
-if ("`c(username)'"=="w817186") do "X:\Agents\FAUBERT\commerce_VA_inflation\Definition_pays_secteur.do" WIOD
-if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\Definition_pays_secteur.do" WIOD
-/*
-*imp_inputs_par_sect 2000 WIOD hze_not
-
-*imp_inputs 2000 WIOD X hze_not
-
-*imp_inputs_par_sect 2000 WIOD hze_yes
-
-*imp_inputs 2000 WIOD X hze_yes
-
-*imp_inputs 2000 WIOD HC hze_not
-
-*/
 
 
-*foreach source in WIOD {
-foreach source in   WIOD  TIVA {
+
+
+
+
+
+foreach source in TIVA {
+*foreach source in   WIOD  TIVA {
 
 
 
@@ -288,53 +191,23 @@ foreach source in   WIOD  TIVA {
 
 	if "`source'"=="WIOD" local end_year 2014
 	if "`source'"=="TIVA" local end_year 2011
+	
+	
+	if ("`c(username)'"=="guillaumedaudin") do  "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation/Definition_pays_secteur.do" `source'
+	if ("`c(username)'"=="w817186") do "X:\Agents\FAUBERT\commerce_VA_inflation\Definition_pays_secteur.do" `source'
+	if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\Definition_pays_secteur.do" `source'
+
 	
 
 
 
 *	foreach i of numlist 2010  {
 	foreach i of numlist `start_year' (1)`end_year'  {
-		
-		imp_inputs_par_sect `i' `source' hze_not
-		imp_inputs_par_sect `i' `source' hze_yes
-		
-		clear
+		capture erase "$dir/Bases/contenu_dom_HC_impt_`yrs'_`source'_hze_non.dta.dta"
+		capture erase "$dir/Bases/contenu_dom_HC_impt_`yrs'_`source'_hze_yes.dta.dta"
+		foreach pays of global country_hc {
+			contenu_dom_HC_impt `i' `source' hze_not `pays'
+			contenu_dom_HC_impt `i' `source' hze_yes `pays'
+		}
 	}
-
-
-
 }
-
-*/
-
-*foreach source in  WIOD {
-foreach source in  WIOD  TIVA {
-
-
-
-	if "`source'"=="WIOD" local start_year 2000
-	if "`source'"=="TIVA" local start_year 1995
-
-
-	if "`source'"=="WIOD" local end_year 2014
-	if "`source'"=="TIVA" local end_year 2011
-	
-
-
-
-*	foreach i of numlist 2000  {
-	foreach i of numlist `start_year' (1)`end_year'  {
-		
-		imp_inputs `i' `source' HC hze_not
-		imp_inputs `i' `source' HC hze_yes
-		imp_inputs `i' `source' X hze_yes
-		imp_inputs `i' `source' X hze_not
-		
-	
-		clear
-	}
-
-
-
-}
-

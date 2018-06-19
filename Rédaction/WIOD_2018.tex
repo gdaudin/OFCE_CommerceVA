@@ -407,7 +407,7 @@ with ${s}_{kj}^i$ is a coefficient of $S^i$ for country $i$.
 \section{The impact of exchange rates fluctuations on consumer prices}
 \label{sec:prixconso}
 \subsection{Baseline results}
-We use the model presented in \ref{subsec:chocchange} to study the absolute value of $\overline{s_{i}}^{i,HC}$ following a 100\% appreciation shock of the domestic currency versus all the other currencies. When the domestic currency appreciates, domestic prices expressed in domestic currency decrease because imported inputs and imported consumption goods are less expensive. As our model is linear, the exact value of the shock does not matter: choosing 100\% allows us to interpret  $\overline{s_{i}}^{i,HC}$ as an elasticity. For illustration, using the WIOD database, we find that $\overline{s_{i}}^{i,HC}$ is equal to $-0.055$ for the USA in 2011, meaning that a 100\% appreciation of the dollar would reduce consumer prices by 5.5\%. The following figures report the absolute value of this number ($0.055$).
+We use the model presented in \ref{subsec:chocchange} to study the absolute value of $\overline{s_{i}}^{i,HC}$ following a 100\% appreciation of the domestic currency versus all other currencies. When the domestic currency appreciates, domestic prices expressed in domestic currency decrease, as imported inputs and imported consumer goods are cheaper. As our model is linear, the exact value of the shock does not matter: choosing 100\% allows us to interpret  $\overline{s_{i}}^{i,HC}$ as an elasticity. As an illustration, using the WIOD database, we find that $\overline{s_{i}}^{i,HC}$ is equal to $-0.055$ for the USA in 2011, meaning that a 100\% appreciation of the dollar would reduce consumer prices by 5.5\%. The following figures report the absolute value of this number ($0.055$).
 
 Additionaly, for Euro area members, we distinguish between the effect of the appreciation of the euro and the effect of the appreciation of a hypothetical national currency. For example, in the case of France, using WIOD in 2011, a 100\% appreciation of the euro would lead to a reduction of domestic prices of 7.6\%. A 100\% appreciation of the hypothetical French national currency would lead a reduction of domestic prices of 12.2\%. 
 
@@ -424,7 +424,7 @@ Figure \ref{fig:comp_WIOD_TIVA}, shows that, despite their differences, using WI
 \end{figure}
 
 
-To go further, $\overline{s_{i}}^{i,HC}$ is broken down by origin: imported final consumption goods on the one hand and domestic final consumption goods on the other hand. The price of domestic goods is affected because of imported inputs. E.g., we can define 
+To go further, $\overline{s_{i}}^{i,HC}$ is broken down by origin: imported consumer goods on the one hand and domestic consumer goods on the other hand. The price of domestic goods is affected because of imported inputs. E.g., we can define 
 \begin{eqnarray}
 \overline{s}_i^{i,HC}=\overline{s}_{i,imp}^{i,HC} + \overline{s}_{i,dom}^{i,HC} = S^i.HC^{i,dom}+ S^i.HC^{i,imp}\\
 \end{eqnarray}
@@ -455,27 +455,27 @@ We can then define the contribution of imported consumption to an exchange rate 
 
 GD : PEUT-ÊTRE Y A-T-IL UNE MANIÈRE DE SIMPLIFIER L'EXPRESSION DE LA SENSITIVITÉ, MAIS JE NE VOIS PAS COMMENT FAIRE...
 
-Figure \ref{fig:share_impt} shows, for example, that the contribution of imported consumption is higher than 0.5 in most countries. While imported consumption has a smaller share in total consumption, this is overcompensated by the sensitivity of its prices to exchange rate shocks, as shown by the comparison of \ref{fig:intensity_dom} and \ref{fig:intensity_impt}.
+Figure \ref{fig:share_impt} shows, for example, that the contribution of imported consumption is higher than 0.5 in most countries. While imported consumption has a smaller share than domestic consumption in household consumption, this is overcompensated by the sensitivity of its prices to exchange rate shocks, as shown by the comparison of \ref{fig:intensity_dom} and \ref{fig:intensity_impt}.
 
-Similarly, the matrix $HC^i$ is broken down to analyse the contribution of different sectors to inflation shocks in different countries.
-Figure \ref{fig:share_sector} shows that non-energy industrial goods and services have the highest contribution. Energy is very sensitive to exchange rate shocks (see \ref{fig:intensity_dom} and \ref{fig:intensity_impt}), but its share in consumption is too small for its contribution to the final reaction to be large.
+Similarly, the matrix $HC^i$ is broken down to analyse the contribution of different sectors to inflationary shocks.
+Figure \ref{fig:share_sector} shows that non-energy industrial goods and services have the highest contribution. Energy is highly sensitive to exchange rate shocks (see \ref{fig:intensity_dom} and \ref{fig:intensity_impt}), but its share in consumption is too small for its contribution to the final effect to be large.
 
 
 
 \begin{figure}[p]
 \RawFloats
 \centering
-\caption{\footnotesize{\textbf{Share of imported final consumption in the impact of a nominal exchange rate shock (see eq. \ref{equ:share_of_imported})}}}
+\caption{\footnotesize{\textbf{Contribution of imported final consumption to the impact of a nominal exchange rate shock (see eq. \ref{equ:share_of_imported})}}}
 \begin{tabular}{c}
 \includegraphics[width=5.0in, height=3.5in]{Share_impt_HC_WIOD_2014.png}\\
 \floatfoot{Interpretation note: the contribution of imported final consumption to the impact of a nominal exchange rate shock is between 55\% and 60\% for 16 countries}
 \end{tabular}
 \label{fig:share_impt}
 
-\caption{\footnotesize{\textbf{Share of sector-specific final consumption in the impact of a nominal exchange rate shock}}}
+\caption{\footnotesize{\textbf{Contribution of sector-specific final consumption to the impact of a nominal exchange rate shock}}}
 \begin{tabular}{c}
 \includegraphics[width=5.0in, height=3.5in]{Share_sector_HC_WIOD_2014.png}\\
-\floatfoot{Interpretation note: the contribution of energy final consumption to the impact of a nominal exchange rate shock is lower than 15\% in most countries}
+\floatfoot{Interpretation note: the contribution of final energy consumption to the impact of a nominal exchange rate shock is lower than 15\% in most countries}
 \end{tabular}
 \label{fig:share_sector}
 \end{figure}
@@ -502,7 +502,7 @@ Figure \ref{fig:share_sector} shows that non-energy industrial goods and service
 \end{figure}
 
 \subsection{What do we gain from using world input-output matrices?}
-One might wonder whether using world input-ouput matrices provided by WIOD or TIVA is worth the wait (the latest version of WIOD covers 2014) and the additional complexity. To answer this question, we break down $\overline{s_{i}}^{i,HC}$ into different elements classified by ease of use and computation. Let us start from equation \ref{eq:eqdomcurrency}.
+One might wonder whether using world input-ouput matrices provided by WIOD or TIVA is worth the wait (the latest version of WIOD only covers 2014) and the computational complexity. To answer this question, we break down $\overline{s_{i}}^{i,HC}$ into different elements classified by ease of use and computation. Let us start from equation \ref{eq:eqdomcurrency}.
 
 \begin{equation}
 \begin{array}{lccl}

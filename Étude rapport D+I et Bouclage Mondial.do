@@ -221,16 +221,16 @@ if "`type'" == "HC" | "`type'" == "HC_note" {
 		preserve
 		gen year=`year'
 		gen source="`source'"
-		gen R2=e(r2)
+		gen R2_`reg'=e(r2)
 		gen reg="`reg'"
 	*	matrix COEF = e(b)
 	*	matrix VARCOVAR=e(V)
 		if "`reg'"=="reg_ns" {
 			
 			gen b_ns=_b[E1HC_E2HC_E3HC]
-			gen se_cst=_se[_cons]
 			gen se_ns=_se[E1HC_E2HC_E3HC]
-			gen cst=_b[_cons]
+			gen b_cst_reg_ns=_b[_cons]
+			gen se_cst_reg_ns=_se[_cons]
 		}
 		if "`reg'"=="reg_sep" {
 			
@@ -238,10 +238,11 @@ if "`type'" == "HC" | "`type'" == "HC_note" {
 			gen b_E2HC=_b[E2HC]
 			gen b_E3HC=_b[E3HC]
 			gen se_cst=_se[_cons]
-			gen se_E1HS=_se[E1HC]
-			gen se_E2HS=_se[E2HC]
-			gen se_E3HS=_se[E3HC]
-			gen cst=_b[_cons]
+			gen se_E1HC=_se[E1HC]
+			gen se_E2HC=_se[E2HC]
+			gen se_E3HC=_se[E3HC]
+			gen b_cst_reg_sep=_b[_cons]
+			gen se_cst_reg_sep =_se[_cons] 
 		}
 	
 /*
@@ -254,17 +255,23 @@ corr pond_`source'_`type' choc_dplusi_`type'
 gen corr = r(rho)
 */
 
-
-
-
-		save "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`year'_`source'_`type'.dta", replace 
+		
 		keep if _n==1
-		keep year source R2-cst
-		if `year'!=$start_year | "`reg'"!="reg_ns" {
+		keep year source R2_`reg'-se_cst_`reg'
+		save "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`year'_`source'_`type'_`reg'.dta", replace 
+		if "`reg'"=="reg_sep" {
+			merge 1:1 year source using ///
+			"$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`year'_`source'_`type'_reg_ns.dta"
+			assert _merge==3
+			drop _merge
+			save "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`year'_`source'_`type'.dta", replace 
+		
+			if `year'!=$start_year {
 				append using "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`source'_`type'.dta"
-		}
+			}
 
-		save "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`source'_`type'.dta", replace
+			save "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`source'_`type'.dta", replace
+		}
 		restore
 
 	
@@ -297,8 +304,69 @@ foreach source in  WIOD  {
 		foreach i of numlist $start_year (1) $end_year  {
 			etude `i' `source' `type'		
 		}
+	
 	clear
 	}
 
 }
+
+
+foreach source in  WIOD  {
+	use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`source'_HC.dta", clear
+	foreach var in ns cst_reg_ns E1HC E2HC E3HC cst_reg_sep {
+		gen borne_inf_`var'= b_`var'-1.96*se_`var'
+		gen borne_sup_`var' =b_`var'+1.96*se_`var'
+	}
+	label var b_ns "b_E1HC_E2_HC_E3_HC"
+	
+	graph twoway ///
+		(line b_ns year, lcolor(black) ) (line borne_inf_ns year, lpattern(dash) lwidth(vthin) lcolor(black)) (line borne_sup_ns year,lpattern(dash) lwidth(vthin) lcolor(black) ) ///
+		(line b_E1HC year,  lcolor(turquoise)) (line borne_inf_E1HC year, lpattern(dash) lwidth(vthin) lcolor(turquoise)) (line borne_sup_E1HC year,lpattern(dash) lwidth(vthin) lcolor(turquoise) ) ///
+		(line b_E2HC year, lcolor(red)) (line borne_inf_E2HC year, lpattern(dash) lwidth(vthin) lcolor(red)) (line borne_sup_E2HC year,lpattern(dash) lwidth(vthin) lcolor(red) ) /// 
+		(line b_E3HC year,  lcolor(sienna)) (line borne_inf_E3HC year, lpattern(dash) lwidth(vthin) lcolor(sienna)) (line borne_sup_E3HC year,lpattern(dash) lwidth(vthin) lcolor(sienna) )   /// 
+		,/*yscale(range(1 (0.05) 1.15)) ylabel(1 (0.05) 1.15)*/ legend(order (1 4 7 10 13 16))
+
+	graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/coef_E_`source'_HC.pdf", replace
+	
+	label var b_cst_reg_ns "Constant_equation 1"
+	label var b_cst_reg_sep "Constant_equation 2"
+		graph twoway ///
+		(line b_cst_reg_ns year, lcolor(black) ) (line borne_inf_cst_reg_ns year, lpattern(dash) lwidth(vthin) lcolor(black)) (line borne_sup_cst_reg_ns year,lpattern(dash) lwidth(vthin) lcolor(black) )    ///
+		(connected b_cst_reg_sep year,  lcolor(black) msize(small) mcolor(black)) (line borne_inf_cst_reg_sep year, lpattern(dash) lwidth(vthin) lcolor(black)) (line borne_sup_cst_reg_sep year,lpattern(dash) lwidth(vthin) lcolor(black) )   /// 
+		,/*yscale(range(1 (0.05) 1.15)) ylabel(1 (0.05) 1.15)*/ legend(order (1 4 7 10 13 16))
+
+	graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/coef_cst_`source'_HC.pdf", replace
+
+	
+}
+
+foreach source in  WIOD  {
+	if "`source'"=="WIOD" global start_year 2000
+	if "`source'"=="TIVA" global start_year 1995
+
+
+	if "`source'"=="WIOD" global end_year 2014
+	if "`source'"=="TIVA" global end_year 2011
+	
+	foreach i of numlist 2014  {
+	graph drop _all
+*	foreach i of numlist $start_year (1) $end_year  {
+			use "$dir/Results/Étude rapport D+I et Bouclage Mondial/Elast_par_pays_`i'_`source'_HC.dta", clear 
+			gen E4HC = pond_WIOD_HC - E1HC - E2HC - E3HC
+			foreach var in E1HC E2HC E3HC E4HC {
+				gen share_`var'=`var'/pond_WIOD_HC
+				histogram share_`var', start(-0.2) width(0.1) freq name(`var')  yscale(range(-0.1 (0.1) 0.8))
+			}
+		graph combine 	E1HC E2HC E3HC E4HC
+		graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/hist_components_`source'.pdf", replace
+			
+		}
+	
+	
+	
+}
+
+
+
+
 

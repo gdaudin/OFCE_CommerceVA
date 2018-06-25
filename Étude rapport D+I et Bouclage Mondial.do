@@ -323,8 +323,9 @@ foreach source in  WIOD  {
 		(line b_ns year, lcolor(black) ) (line borne_inf_ns year, lpattern(dash) lwidth(vthin) lcolor(black)) (line borne_sup_ns year,lpattern(dash) lwidth(vthin) lcolor(black) ) ///
 		(line b_E1HC year,  lcolor(turquoise)) (line borne_inf_E1HC year, lpattern(dash) lwidth(vthin) lcolor(turquoise)) (line borne_sup_E1HC year,lpattern(dash) lwidth(vthin) lcolor(turquoise) ) ///
 		(line b_E2HC year, lcolor(red)) (line borne_inf_E2HC year, lpattern(dash) lwidth(vthin) lcolor(red)) (line borne_sup_E2HC year,lpattern(dash) lwidth(vthin) lcolor(red) ) /// 
-		(line b_E3HC year,  lcolor(sienna)) (line borne_inf_E3HC year, lpattern(dash) lwidth(vthin) lcolor(sienna)) (line borne_sup_E3HC year,lpattern(dash) lwidth(vthin) lcolor(sienna) )   /// 
-		,/*yscale(range(1 (0.05) 1.15)) ylabel(1 (0.05) 1.15)*/ legend(order (1 4 7 10 13 16))
+		(line b_E3HC year,  lcolor(sienna)) (line borne_inf_E3HC year, lpattern(dash) lwidth(vthin) lcolor(sienna)) (line borne_sup_E3HC year,lpattern(dash) lwidth(vthin) lcolor(sienna) )   ///
+		(connected R2_reg_sep year,  lcolor(black) msize(small) mcolor(black)) (connected R2_reg_ns year,  lcolor(turquoise) msize(small) mcolor(turquoise))   ///
+		,/*yscale(range(1 (0.05) 1.15)) ylabel(1 (0.05) 1.15)*/ legend(order (1 4 7 10 13 14))
 
 	graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/coef_E_`source'_HC.pdf", replace
 	
@@ -332,7 +333,7 @@ foreach source in  WIOD  {
 	label var b_cst_reg_sep "Constant_equation 2"
 		graph twoway ///
 		(line b_cst_reg_ns year, lcolor(black) ) (line borne_inf_cst_reg_ns year, lpattern(dash) lwidth(vthin) lcolor(black)) (line borne_sup_cst_reg_ns year,lpattern(dash) lwidth(vthin) lcolor(black) )    ///
-		(connected b_cst_reg_sep year,  lcolor(black) msize(small) mcolor(black)) (line borne_inf_cst_reg_sep year, lpattern(dash) lwidth(vthin) lcolor(black)) (line borne_sup_cst_reg_sep year,lpattern(dash) lwidth(vthin) lcolor(black) )   /// 
+		(connected b_cst_reg_sep year,  lcolor(black) msize(small) mcolor(black)) (connected borne_inf_cst_reg_sep year, lpattern(dash) lwidth(vthin) lcolor(black) msize(small) mcolor(black)) (connected borne_sup_cst_reg_sep year,lpattern(dash) lwidth(vthin) lcolor(black) msize(small) mcolor(black) )   /// 
 		,/*yscale(range(1 (0.05) 1.15)) ylabel(1 (0.05) 1.15)*/ legend(order (1 4 7 10 13 16))
 
 	graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/coef_cst_`source'_HC.pdf", replace
@@ -355,7 +356,7 @@ foreach source in  WIOD  {
 			gen E4HC = pond_WIOD_HC - E1HC - E2HC - E3HC
 			foreach var in E1HC E2HC E3HC E4HC {
 				gen share_`var'=`var'/pond_WIOD_HC
-				histogram share_`var', start(-0.2) width(0.1) freq name(`var')  yscale(range(-0.1 (0.1) 0.8))
+				histogram share_`var', start(-0.2) width(0.1) freq name(`var')  xscale(range(-0.1 (0.1) 0.8)) xlabel(-0.1 (0.1) 0.8)
 			}
 		graph combine 	E1HC E2HC E3HC E4HC
 		graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/hist_components_`source'.pdf", replace

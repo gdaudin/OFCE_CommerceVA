@@ -25,7 +25,7 @@ rename *alimentaire* *food*
 
 
 gen part_import = HC_impt / (HC_impt+HC_dom)
-label var part_import  "imported final consumption"
+label var part_import  "all, imported"
 histogram part_import, name(import, replace) kdensity start(0) width(0.05) ///
 			frequency note("`source', `year'")
 graph export "$dir/commerce_VA_inflation/Rédaction/Share_impt_HC_`source'_`year'.png", replace	
@@ -34,13 +34,13 @@ graph export "$dir/commerce_VA_inflation/Rédaction/Share_impt_HC_`source'_`yea
 
 foreach sector in energy neig services food {
 	gen part_`sector' = (`sector'_impt+`sector'_dom)/ (HC_impt+HC_dom)
-	label var part_`sector'  "`sector' final consumption"
+	label var part_`sector'  "`sector'"
 	histogram part_`sector', name(`sector', replace) kdensity start(0) width(0.05) ///
 		frequency /*legend(size(small))*/
 }
 
 graph combine neig services energy  food, xcommon ycommon ///
-	title("Sectoral shares of the impact of a nominal exchange rate shock") note("`source', `year'")
+	/*title("Sectoral shares of the impact of a nominal exchange rate shock")*/ note("`source', `year'")
 graph export "$dir/commerce_VA_inflation/Rédaction/Share_sector_HC_`source'_`year'.png", replace
 
 
@@ -49,25 +49,28 @@ local width_`dom' 0.1
 local width_`impt' 0.5
 
 foreach origin in dom impt {
+	
+	if "`origin'"=="dom" local origine_dev "domestic"
+	if "`origin'"=="impt" local origine_dev "imported"
 	gen int_`origin'=HC_`origin'/(HC_impt+HC_dom)/s_HC_`origin'
+	label var int_`origin' "all, `origine_dev'"
+	
 	
 	histogram int_`origin', name(`origin', replace) kdensity ///
 		start(0) width(`width_`origin'') frequency /*legend(size(small))*/
-	
 	local liste_graph_`origin' `origin'
-	if "`origin'"==dom local origine_dev "domestic"
-	if "`impt'"==dom local origine_dev "imported"
+	
 	
 	foreach sector in energy neig food services {
 		
 		gen int_`sector'_`origin'=`sector'_`origin'/(HC_impt+HC_dom)/s_`sector'_`origin'
-		label var int_`sector'_`origin'  "`sector', `origin_dev'"
+		label var int_`sector'_`origin'  "`sector', `origine_dev'"
 		histogram int_`sector'_`origin', name(`sector'_`origin', replace) kdensity ///
 			start(0) width(`width_`origin'') frequency /*legend(size(small))*/
 		local liste_graph_`origin' `liste_graph_`origin'' `sector'_`origin'
 	}
 	macro dir 
-	graph combine `liste_graph_`origin'', xcommon ycommon title("Intensity, `origin_dev'") note("`source', `year'")
+	graph combine `liste_graph_`origin'', xcommon ycommon /*title("Intensity, `origine_dev'")*/ note("`source', `year'")
 	graph export "$dir/commerce_VA_inflation/Rédaction/Int_HC_`source'_`year'_`origin'.png", replace
 
 }
@@ -155,5 +158,5 @@ graph export "$dir/commerce_VA_inflation/Rédaction_Note/Decomp_sectxorigin.png
 end
 
 
-*etude_pour_papier 2014 WIOD
-etude_pour_note 2014 WIOD
+etude_pour_papier 2014 WIOD
+*etude_pour_note 2014 WIOD

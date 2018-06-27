@@ -25,7 +25,7 @@ rename *alimentaire* *food*
 
 
 gen part_import = HC_impt / (HC_impt+HC_dom)
-label var part_import  "Share of imported final consumption in the impact of a nominal exchange rate shock"
+label var part_import  "imported final consumption"
 histogram part_import, name(import, replace) kdensity start(0) width(0.05) ///
 			frequency note("`source', `year'")
 graph export "$dir/commerce_VA_inflation/Rédaction/Share_impt_HC_`source'_`year'.png", replace	
@@ -55,15 +55,19 @@ foreach origin in dom impt {
 		start(0) width(`width_`origin'') frequency /*legend(size(small))*/
 	
 	local liste_graph_`origin' `origin'
+	if "`origin'"==dom local origine_dev "domestic"
+	if "`impt'"==dom local origine_dev "imported"
 	
 	foreach sector in energy neig food services {
+		
 		gen int_`sector'_`origin'=`sector'_`origin'/(HC_impt+HC_dom)/s_`sector'_`origin'
+		label var int_`sector'_`origin'  "`sector', `origin_dev'"
 		histogram int_`sector'_`origin', name(`sector'_`origin', replace) kdensity ///
 			start(0) width(`width_`origin'') frequency /*legend(size(small))*/
 		local liste_graph_`origin' `liste_graph_`origin'' `sector'_`origin'
 	}
 	macro dir 
-	graph combine `liste_graph_`origin'', xcommon ycommon title("Intensity_`origin'") note("`source', `year'")
+	graph combine `liste_graph_`origin'', xcommon ycommon title("Intensity, `origin_dev'") note("`source', `year'")
 	graph export "$dir/commerce_VA_inflation/Rédaction/Int_HC_`source'_`year'_`origin'.png", replace
 
 }

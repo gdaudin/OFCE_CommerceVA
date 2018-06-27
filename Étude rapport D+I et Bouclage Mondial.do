@@ -146,7 +146,7 @@ gen E2HC = (ratio_ci_impt_HC)*(1-contenu_impHC)/2
 gen E3HC = - contenu_dom_HC_etranger
 }
 
-gen E1HC_E2HC_E3HC=E1HC + E2HC + E3HC
+gen E1HC_E2HC=E1HC + E2HC
 label var pond_`source'_`type' "Élasticité des prix (`type') en monnaie nationale à un choc de la monnaie nationale"
 
 save "$dir/Results/Étude rapport D+I et Bouclage Mondial/Elast_par_pays_`year'_`source'_`type'.dta", replace
@@ -156,11 +156,11 @@ if "`type'"=="HC" {
 
 	replace c="" /*if c!="FRA_EUR" & c!="DEU_EUR" & c!="LUX_EUR" & c!="FRA" & c!="DEU" & c!="LUX" ///
 					& c!="CAN" & c!="JPN" & c!="USA" & c!="CHN" */
-	graph twoway (scatter pond_`source'_`type' E1HC_E2HC_E3HC, mlabel(c) mlabsize(medium)) ///
-			(lfit pond_`source'_`type' E1HC_E2HC_E3HC) ///
+	graph twoway (scatter pond_`source'_`type' E1HC_E2HC, mlabel(c) mlabsize(medium)) ///
+			(lfit pond_`source'_`type' E1HC_E2HC) ///
 			(lfit pond_`source'_`type' pond_`source'_`type',lwidth(vthin) color(black)) , ///
-			title("Comparing direct and modelled effects") ///
-			xtitle("E1HC_E2HC_E3HC") ytitle("Price elasticity") ///
+			/*title("Comparing direct and modelled effects")*/ ///
+			xtitle("E1HC + E2HC") ytitle("WIOD Elasticities `year'") ///
 			yscale(range(0.0 0.3)) xscale(range(0.0 0.3)) xlabel (0.0(0.05) 0.3) ylabel(0.0(0.05) 0.3) ///
 			legend(off)
 	*dans le cas HC, xtitle pourrait se finir par «importées dans la conso dom + part conso importée»			
@@ -186,11 +186,11 @@ if "`type'"=="HC_note" {
 	replace sample=1 if c=="FRA" | c=="DEU" | c=="NLD" | c=="ESP" | c=="ITA"
 	replace c="" if c!="FRA" & c!="DEU" & c!="NLD"  & c!="IRL"
 	graph twoway  ///
-			(scatter pond_`source'_HC E1HC_E2HC_E3HC if sample==0, mlabel(c) mlabsize(medium) mlabcolor(sky) mcolor(sky)) ///
-			(scatter pond_`source'_HC E1HC_E2HC_E3HC if sample==1, mlabel(c) mlabsize(medium) mcolor(black) mlabcolor(black) ) ///
-			(lfit pond_`source'_HC E1HC_E2HC_E3HC) ///
+			(scatter pond_`source'_HC E1HC_E2HC if sample==0, mlabel(c) mlabsize(medium) mlabcolor(sky) mcolor(sky)) ///
+			(scatter pond_`source'_HC E1HC_E2HC if sample==1, mlabel(c) mlabsize(medium) mcolor(black) mlabcolor(black) ) ///
+			(lfit pond_`source'_HC E1HC_E2HC) ///
 			(lfit pond_`source'_HC pond_`source'_HC,lwidth(vthin) color(black)) , ///
-			xtitle("E1HC_E2HC_E3HC", /*size(vsmall) */) ///
+			xtitle("E1HC_E2HC", /*size(vsmall) */) ///
 			ytitle("PIWIM") ///
 			yscale(range(-0.04 -0.01)) xscale(range(-0.04 -0.01)) xlabel(-0.04(0.005)-0.01) ylabel(-0.04(0.005)-0.01) ///
 			legend(off) ///
@@ -216,7 +216,7 @@ if "`type'" == "HC" | "`type'" == "HC_note" {
 	foreach reg in reg_ns reg_sep  {
 
 		if "`reg'"=="reg_sep" reg pond_`source'_HC E1HC E2HC E3HC
-		if "`reg'"=="reg_ns" reg pond_`source'_HC E1HC_E2HC_E3HC
+		if "`reg'"=="reg_ns" reg pond_`source'_HC E1HC_E2HC
 		
 		preserve
 		gen year=`year'
@@ -227,8 +227,8 @@ if "`type'" == "HC" | "`type'" == "HC_note" {
 	*	matrix VARCOVAR=e(V)
 		if "`reg'"=="reg_ns" {
 			
-			gen b_ns=_b[E1HC_E2HC_E3HC]
-			gen se_ns=_se[E1HC_E2HC_E3HC]
+			gen b_ns=_b[E1HC_E2HC]
+			gen se_ns=_se[E1HC_E2HC]
 			gen b_cst_reg_ns=_b[_cons]
 			gen se_cst_reg_ns=_se[_cons]
 		}
@@ -300,7 +300,7 @@ foreach source in  WIOD  {
 	foreach type in HC {
 		capture erase "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`source'_`type'.dta"
 
-*		foreach i of numlist 2000  {
+*		foreach i of numlist 2014  {
 		foreach i of numlist $start_year (1) $end_year  {
 			etude `i' `source' `type'		
 		}
@@ -310,14 +310,14 @@ foreach source in  WIOD  {
 
 }
 
-
+/*
 foreach source in  WIOD  {
 	use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`source'_HC.dta", clear
 	foreach var in ns cst_reg_ns E1HC E2HC E3HC cst_reg_sep {
 		gen borne_inf_`var'= b_`var'-1.96*se_`var'
 		gen borne_sup_`var' =b_`var'+1.96*se_`var'
 	}
-	label var b_ns "b_E1HC_E2_HC_E3_HC"
+	label var b_ns "b_E1HC_E2HC"
 	
 	graph twoway ///
 		(line b_ns year, lcolor(black) ) (line borne_inf_ns year, lpattern(dash) lwidth(vthin) lcolor(black)) (line borne_sup_ns year,lpattern(dash) lwidth(vthin) lcolor(black) ) ///

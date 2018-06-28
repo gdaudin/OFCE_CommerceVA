@@ -337,8 +337,33 @@ foreach source in  WIOD  {
 		,/*yscale(range(1 (0.05) 1.15)) ylabel(1 (0.05) 1.15)*/ legend(order (1 4 7 10 13 16))
 
 	graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/coef_cst_`source'_HC.pdf", replace
+}
+*/
 
+
+
+foreach source in  WIOD  {
+	use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`source'_HC.dta", clear
+	foreach var in ns cst_reg_ns {
+		gen borne_inf_`var'= b_`var'-1.96*se_`var'
+		gen borne_sup_`var' =b_`var'+1.96*se_`var'
+	}
+	label var b_ns "Coefficient of E1HC+E2HC (with 95% confidence intervals)"
+	label var R2_reg_ns "R2"
 	
+	graph twoway ///
+		(line b_ns year, lcolor(black) ) (line borne_inf_ns year, lpattern(dash) lwidth(vthin) lcolor(black)) (line borne_sup_ns year,lpattern(dash) lwidth(vthin) lcolor(black) ) ///
+		(connected R2_reg_ns year,  lcolor(turquoise) msize(small) mcolor(turquoise))   ///
+		,/*yscale(range(1 (0.05) 1.15)) ylabel(1 (0.05) 1.15)*/ legend(order (1 4) rows(2))
+
+	graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/coef_E_`source'_HC.pdf", replace
+	
+	label var b_cst_reg_ns "Constant (with 95% confidence intervals)"
+		graph twoway ///
+		(line b_cst_reg_ns year, lcolor(black) ) (line borne_inf_cst_reg_ns year, lpattern(dash) lwidth(vthin) lcolor(black)) (line borne_sup_cst_reg_ns year,lpattern(dash) lwidth(vthin) lcolor(black) )    ///
+		,/*yscale(range(1 (0.05) 1.15)) ylabel(1 (0.05) 1.15)*/ legend(order (1))
+
+	graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/coef_cst_`source'_HC.pdf", replace
 }
 
 foreach source in  WIOD  {

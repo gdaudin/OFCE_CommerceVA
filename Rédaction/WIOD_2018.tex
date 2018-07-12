@@ -542,7 +542,7 @@ Yet, the relative importance of $E4.HC^i$ might not be too much of an issue if i
 \input{corrtable_1.tex}
 
 $E3.HC^{i,imp}$ does not require inversing a matrix, but it is still quite data-intensive to compute. As a result, we study wether we can deduct $\overline{s}_{i}^{i,HC}$ from $E1.HC^{i,imp}$ and $E2.HC^{i,dom}$.
-Figure \ref{fig:ratiodir} depicts the relationship between $\overline{s}_{i}^{i,HC}$ and $E1.HC^{i,imp}+E2.HC^{i,dom}$. It shows that $E1.HC^{i,imp}+E2.HC^{i,dom}$ is a pretty good predictor of $\overline{s}_{i}^{i,HC}$ (the $R^2$ is over 0.98). Excepting to some extent 2009, this relationship is constant through time (see Figure \ref{fig:evolution_b} and \ref{fig:evolution_cst}).
+Figure \ref{fig:ratiodir_WIOD} depicts the relationship between $\overline{s}_{i}^{i,HC}$ and $E1.HC^{i,imp}+E2.HC^{i,dom}$. It shows that $E1.HC^{i,imp}+E2.HC^{i,dom}$ is a pretty good predictor of $\overline{s}_{i}^{i,HC}$ (the $R^2$ is over 0.98). Excepting to some extent 2009, this relationship is constant through time (see Figure \ref{fig:evolution_b} and \ref{fig:evolution_cst}).
 
  \begin{equation}
 \overline{s}_{i}^{i,HC}=\alpha + \beta  \left(E1.HC^{i,imp}+E2.HC^{i,dom}\right) +\varepsilon_i 
@@ -557,7 +557,7 @@ Figure \ref{fig:ratiodir} depicts the relationship between $\overline{s}_{i}^{i,
 \begin{tabular}{c}
 \includegraphics[width=5.0in, height=3.5in]{graph_2014_WIOD_HC}\\
 \end{tabular}
-\label{fig:ratiodir}
+\label{fig:ratiodir_WIOD}
 \end{figure}
 
 \begin{figure}[!h]
@@ -576,6 +576,36 @@ Figure \ref{fig:ratiodir} depicts the relationship between $\overline{s}_{i}^{i,
 \includegraphics[width=5.0in, height=3.5in]{coef_cst_WIOD_HC}\\
 \end{tabular}
 \label{fig:evolution_cst}
+\end{figure}
+
+
+The same results stand using the TiVA database (see Figures \ref{fig:ratiodir_TiVA}, \ref{fig:evolution_b_TiVA} and \ref{fig:evolution_cst_TiVA}).
+
+\begin{figure}[!h]
+\centering
+\caption{\footnotesize{\textbf{Comparing $\overline{s}_{i}^{i,HC}$ and $E1.HC^{i,imp}+E2.HC^{i,dom}$ (TiVA)}}}
+\begin{tabular}{c}
+\includegraphics[width=5.0in, height=3.5in]{graph_2011_TIVA_HC}\\
+\end{tabular}
+\label{fig:ratiodir_TiVA}
+\end{figure}
+
+\begin{figure}[!h]
+\centering
+\caption{\footnotesize{\textbf{Evolution of $\beta$ and $R2$ through time (TiVA)}}}
+\begin{tabular}{c}
+\includegraphics[width=5.0in, height=3.5in]{coef_E_TIVA_HC}\\
+\end{tabular}
+\label{fig:evolution_b_TiVA}
+\end{figure}
+
+\begin{figure}[!h]
+\centering
+\caption{\footnotesize{\textbf{Evolution of $\alpha$ through time (TiVA)}}}
+\begin{tabular}{c}
+\includegraphics[width=5.0in, height=3.5in]{coef_cst_TIVA_HC}\\
+\end{tabular}
+\label{fig:evolution_cst_TiVA}
 \end{figure}
 
 

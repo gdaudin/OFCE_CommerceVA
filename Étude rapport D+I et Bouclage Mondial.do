@@ -160,7 +160,7 @@ if "`type'"=="HC" {
 			(lfit pond_`source'_`type' E1HC_E2HC) ///
 			(lfit pond_`source'_`type' pond_`source'_`type',lwidth(vthin) color(black)) , ///
 			/*title("Comparing direct and modelled effects")*/ ///
-			xtitle("E1HC + E2HC") ytitle("WIOD Elasticities `year'") ///
+			xtitle("E1HC + E2HC") ytitle("`source' Elasticities `year'") ///
 			yscale(range(0.0 0.3)) xscale(range(0.0 0.3)) xlabel (0.0(0.05) 0.3) ylabel(0.0(0.05) 0.3) ///
 			legend(off)
 	*dans le cas HC, xtitle pourrait se finir par «importées dans la conso dom + part conso importée»			
@@ -290,8 +290,8 @@ end
 
 ****************************************************************************
 
-foreach source in  WIOD  {
-*foreach source in  WIOD  TIVA {
+
+foreach source in  WIOD  TIVA {
 
 
 
@@ -304,7 +304,7 @@ foreach source in  WIOD  {
 	
 	
    capture erase "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`source'_`type'.dta" 
-	foreach type in /*HC*/ HC_note {
+	foreach type in HC /*HC_note*/ {
 		capture erase "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`source'_`type'.dta"
 
 *		foreach i of numlist 2014  {
@@ -353,7 +353,7 @@ foreach source in  WIOD  {
 
 
 
-foreach source in  WIOD  {
+foreach source in  WIOD TIVA {
 	use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`source'_HC.dta", clear
 	foreach var in ns cst_reg_ns {
 		gen borne_inf_`var'= b_`var'-1.96*se_`var'
@@ -377,7 +377,7 @@ foreach source in  WIOD  {
 	graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/coef_cst_`source'_HC.pdf", replace
 }
 
-foreach source in  WIOD  {
+foreach source in  WIOD TIVA {
 	if "`source'"=="WIOD" global start_year 2000
 	if "`source'"=="TIVA" global start_year 1995
 

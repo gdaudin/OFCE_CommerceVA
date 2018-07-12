@@ -91,7 +91,7 @@ rename *energie* *energy*
 rename *alimentaire* *food*
 
 foreach var of varlist HC_impt-energy_dom {
-	replace `var' =`var'/5
+	replace `var' =`var'*.05*100
 }
 
 gen HC_tot=HC_impt+HC_dom
@@ -105,10 +105,12 @@ gsort HC_tot
 graph bar (asis) HC_dom HC_impt , over(c,sort(HC_tot) descending) stack ///
 		legend(rows(2) size(small)) ///
 		note("Source: PIWIM (WIOD, 2014)") ///
-		scheme(s2mono)
+		scheme(s2mono) ///
+		ylabel(,format(%9.2fc)) ///
+		ytitle("%")
 		
 /*		title("Impact d'une appréciation de 5% de l'euro sur les prix à la consommation", span size(medium)) /// */
-		
+	
 graph export "$dir/commerce_VA_inflation/Rédaction_Note/Decomp_origine.png", replace
 
 
@@ -120,10 +122,12 @@ rename food alimentaire
 rename energy energie
 
 
-graph bar (asis) neig services energie alimentaire , over(c,sort(HC_tot) descending) stack ///
+graph bar (asis) services neig energie alimentaire , over(c,sort(HC_tot) descending) stack ///
 		legend(rows(2) size(small)) ///
 		note("Source: PIWIM (WIOD, 2014)") /// 
-		scheme(s2mono)
+		scheme(s2mono) ///
+		ylabel(,format(%9.2fc)) ///
+		ytitle("%")
 		
 /*		title("Impact d'une appréciation de 5% de l'euro sur les prix à la consommation par secteur", span size(medsmall)) /// */
 graph export "$dir/commerce_VA_inflation/Rédaction_Note/Decomp_sect.png", replace
@@ -140,10 +144,12 @@ label var volatile_impt "Inflation alimentaire et énergie importée"
 gen volatile_dom= energy_dom+food_dom
 label var volatile_dom "Inflation alimentaire et énergie domestique"
 
-graph bar (asis) ss_jacente_impt ss_jacente_dom volatile_impt volatile_dom , over(c,sort(HC_tot) descending) stack ///
+graph bar (asis) ss_jacente_dom ss_jacente_impt  volatile_dom volatile_impt  , over(c,sort(HC_tot) descending) stack ///
 		legend(rows(2) size(vsmall)) ///
 		note("Source: PIWIM (WIOD, 2014)") /// 
-		scheme(s2mono)
+		scheme(s2mono) ///
+		ylabel(,format(%9.2fc)) ///
+		ytitle("%")
 		
 /*		title("Impact d'une appréciation de 5% de l'euro sur les prix à la consommation par secteur et origine", span size(small)) /// */		
 graph export "$dir/commerce_VA_inflation/Rédaction_Note/Decomp_sectxorigin.png", replace
@@ -158,5 +164,5 @@ graph export "$dir/commerce_VA_inflation/Rédaction_Note/Decomp_sectxorigin.png
 end
 
 
-etude_pour_papier 2014 WIOD
-*etude_pour_note 2014 WIOD
+*etude_pour_papier 2014 WIOD
+etude_pour_note 2014 WIOD

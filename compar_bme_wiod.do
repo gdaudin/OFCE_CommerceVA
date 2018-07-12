@@ -19,8 +19,8 @@ foreach yrs of numlist 2013 2015 2016 2017 {
 	graph save "$dir/Graphiques/BME_vs_WIOD_`yrs'.gph",  replace
 	*/
 	twoway (scatter BME_1 pond_WIOD_HC if year == `yrs', mlabel(c)) (lfit BME_1 pond_WIOD_HC, range(-1.5 0)) (lfit pond_WIOD_HC pond_WIOD_HC, range(-1.5 0)) if year == `yrs', ///
-		ytitle(élasticité (1ere année) BMEs `yrs') yscale(range(-1.5 0)) ylabel(-1.5(0.25)0, grid) /// 
-		xtitle(élasticité modèle PIWIM 2014) xscale(range(-1.5 0)) xlabel(-1.5(0.25)0, grid) legend(off) name(BME_1_vs_WIOD_`yrs', replace)
+		ytitle(impact en % BMEs `yrs' (1ere année)) yscale(range(-1.5 0)) ylabel(-1.5(0.5)0, grid) /// 
+		xtitle(impact en % PIWIM 2014) xscale(range(-1.5 0)) xlabel(-1.5(0.5)0, grid) legend(off) name(BME_1_vs_WIOD_`yrs', replace)
 }
 
 
@@ -36,8 +36,8 @@ foreach yrs of numlist 2013 2015 2016 2017 {
 	graph save "$dir/Graphiques/BME_vs_WIOD_`yrs'.gph",  replace
 	*/
 	twoway (scatter BME_3 pond_WIOD_HC if year == `yrs', mlabel(c)) (lfit BME_3 pond_WIOD_HC, range(-1.5 0)) (lfit pond_WIOD_HC pond_WIOD_HC, range(-1.5 0)) if year == `yrs', ///
-		ytitle(élasticité (3e année) BMEs `yrs') yscale(range(-1.5 0)) ylabel(-1.5(0.2)0, grid) /// 
-		xtitle(élasticité modèle PIWIM 2014) xscale(range(-1.5 0)) xlabel(-1.5(0.2)0, grid) legend(off) name(BME_3_vs_WIOD_`yrs', replace)
+		ytitle(impact en % BMEs `yrs' (3e année)) yscale(range(-1.5 0)) ylabel(-1.5(0.5)0, grid) /// 
+		xtitle(impact en % PIWIM 2014) xscale(range(-1.5 0)) xlabel(-1.5(0.5)0, grid) legend(off) name(BME_3_vs_WIOD_`yrs', replace)
 }
 
 

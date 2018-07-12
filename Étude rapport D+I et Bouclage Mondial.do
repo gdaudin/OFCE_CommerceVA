@@ -176,12 +176,12 @@ if "`type'"=="HC" {
 
 
 
-if "`type'"=="HC_note" {
+if "`type'"=="HC_note" & `year'==2014 {
 
 	keep if strpos(c,"_EUR")!=0
 	replace c=subinstr(c,"_EUR"e,"",.)
-	replace pond_`source'_HC=-pond_`source'_HC/5
-	replace choc_dplusi_HC = -choc_dplusi_HC/5
+	replace pond_`source'_HC=-pond_`source'_HC/20*100
+	replace E1HC_E2HC = -E1HC_E2HC/20*100
 	gen sample = 0
 	replace sample=1 if c=="FRA" | c=="DEU" | c=="NLD" | c=="ESP" | c=="ITA"
 	replace c="" if c!="FRA" & c!="DEU" & c!="NLD"  & c!="IRL"
@@ -189,19 +189,23 @@ if "`type'"=="HC_note" {
 			(scatter pond_`source'_HC E1HC_E2HC if sample==0, mlabel(c) mlabsize(medium) mlabcolor(sky) mcolor(sky)) ///
 			(scatter pond_`source'_HC E1HC_E2HC if sample==1, mlabel(c) mlabsize(medium) mcolor(black) mlabcolor(black) ) ///
 			(lfit pond_`source'_HC E1HC_E2HC) ///
-			(lfit pond_`source'_HC pond_`source'_HC,lwidth(vthin) color(black)) , ///
-			xtitle("E1HC_E2HC", /*size(vsmall) */) ///
-			ytitle("PIWIM") ///
-			yscale(range(-0.04 -0.01)) xscale(range(-0.04 -0.01)) xlabel(-0.04(0.005)-0.01) ylabel(-0.04(0.005)-0.01) ///
+			(lfit pond_`source'_HC pond_`source'_HC,lwidth(vthin) color(black)) ///
+			(lfit E1HC_E2HC E1HC_E2HC,lwidth(vthin) color(black)) , ///
+			xtitle("Impact D+I, en %", /*size(vsmall) */) ///
+			ytitle("Impact PIWIM, en %") ///
+			yscale(range(-1 -0.25)) xscale(range(-1 -0.25)) xlabel(-1 (0.25) -0.25) ylabel(-1 (0.25) -0.25) ///
 			legend(off) ///
+			ylabel(,format(%9.2fc)) ///
 			note("PIWIM (WIOD, 2014)")
 	*dans le cas HC, xtitle pourrait se finir par «importées dans la conso dom + part conso importée»			
 	
 
 	
-	graph export "$dirgit\Commerce_VA_inflation\Rédaction_Note\Rapport_D+I_bouclé.png", replace
+	graph export "$dirgit/Rédaction_note/Rapport_D+I_bouclé_pour_note.png", replace
 	
 	graph close
+	
+	aiuesnaiusret
 	
 	
 
@@ -211,7 +215,7 @@ if "`type'"=="HC_note" {
 
 
 
-if "`type'" == "HC" | "`type'" == "HC_note" {
+if "`type'" == "HC" {
 
 	foreach reg in reg_ns reg_sep  {
 
@@ -283,6 +287,9 @@ gen corr = r(rho)
 
 end 
 
+
+****************************************************************************
+
 foreach source in  WIOD  {
 *foreach source in  WIOD  TIVA {
 
@@ -297,7 +304,7 @@ foreach source in  WIOD  {
 	
 	
    capture erase "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`source'_`type'.dta" 
-	foreach type in HC {
+	foreach type in /*HC*/ HC_note {
 		capture erase "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`source'_`type'.dta"
 
 *		foreach i of numlist 2014  {
@@ -309,6 +316,10 @@ foreach source in  WIOD  {
 	}
 
 }
+
+
+
+
 
 /*
 foreach source in  WIOD  {

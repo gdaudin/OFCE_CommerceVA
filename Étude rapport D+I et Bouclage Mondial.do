@@ -132,6 +132,9 @@ if "`type'"=="par_sect" {
 	replace pays =substr(pays,1,3) if strmatch(pays,"*_AUTO")==1
 	
 	rename ratio_ci_impt_prod ratio_ci_impt_`type'
+	
+	*Faire le merge avec l'équivalent de contenu_impHC ???*
+	
 }
 
 
@@ -204,12 +207,6 @@ if "`type'"=="HC_note" & `year'==2014 {
 	graph export "$dirgit/Rédaction_note/Rapport_D+I_bouclé_pour_note.png", replace
 	
 	graph close
-	
-	aiuesnaiusret
-	
-	
-
-	
 	
 }
 
@@ -290,8 +287,9 @@ end
 
 ****************************************************************************
 
+foreach source in  WIOD {
+*foreach source in  WIOD  TIVA {
 
-foreach source in  WIOD  TIVA {
 
 
 
@@ -304,11 +302,11 @@ foreach source in  WIOD  TIVA {
 	
 	
    capture erase "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`source'_`type'.dta" 
-	foreach type in HC /*HC_note*/ {
+	foreach type in /*HC HC_note*/ par_sect {
 		capture erase "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`source'_`type'.dta"
 
-*		foreach i of numlist 2014  {
-		foreach i of numlist $start_year (1) $end_year  {
+		foreach i of numlist 2014  {
+*		foreach i of numlist $start_year (1) $end_year  {
 			etude `i' `source' `type'		
 		}
 	

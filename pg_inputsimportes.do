@@ -156,8 +156,6 @@ if ("`c(username)'"=="guillaumedaudin") do  "~/Documents/Recherche/2017 BDF_Comm
 if ("`c(username)'"=="w817186") do "X:\Agents\FAUBERT\commerce_VA_inflation\Definition_pays_secteur.do" `source'
 if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\Definition_pays_secteur.do" `source'
 
-* exemple vector X Y HC hze_not ou hze_yes
-
 *Création d'un agrégat national pour Chine et Mexique pour ci importées et production 
 *La part des CI importées est à présent calculée pour l'ensemble de l'économie, et non plus par secteurs
 

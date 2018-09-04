@@ -238,6 +238,8 @@ if "`vector'" == "X"  {
  
 	keep if year==`yrs'
 	
+	replace sector=lower(sector)
+	
 	merge 1:1 pays sector using  "$dir/Bases/imp_inputs_par_sect_`yrs'_`source'_`hze'.dta"
 	
 
@@ -330,8 +332,8 @@ foreach source in  WIOD  TIVA {
 
 
 
-*	foreach i of numlist 2000  {
-	foreach i of numlist `start_year' (1)`end_year'  {
+	foreach i of numlist 2014  {
+*	foreach i of numlist `start_year' (1)`end_year'  {
 		
 		imp_inputs `i' `source' HC hze_not
 		imp_inputs `i' `source' HC hze_yes

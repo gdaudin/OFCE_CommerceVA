@@ -129,30 +129,14 @@ The standard I-O model relies on input-output tables registering transactions of
 By extension, a "world" I-O table (WIOT hereafter) describe the sale and purchase relationships between producers and consumers in the whole world, differentiating between sectors in different countries.
 The WIOT has, on its diagonal, the country blocks with flows of domestic transactions of intermediate goods and services between industries.
 The country blocks outside of the diagonal represent international flows of intermediate goods and services via bilateral sectoral exports and imports. \\
-%The rows of the table contain information on the distribution of the output of industries over use categories.
-Define $Y$ the output vector of dimension $(1, N)$, $\cal A$ the matrix of technical input coefficient of dimension $(N, N)$, and $R$ the vector of factor incomes of dimension $(1, N)$. $N$ is equal to the product of the number of countries ($I$) and the number of sectors ($J$). \\
-Output is equal to the sum of factor incomes and intermediary consumption. Thus: 
-\begin{eqnarray*}
-	Y=(y_1\ldots y_N)=\left(y_1\ldots y_N\right)\left( \begin{matrix}
-   a_{11} & \cdots  & a_{N1}  \\
-   \vdots  & a_{n,n'} & \vdots   \\
-   a_{1N} & \cdots  & a_{NN}  \\
-\end{matrix} \right)+(r_1\ldots r_N)=Y {\cal A} +  R
-\end{eqnarray*}
 Assuming no inputs substitution between industries or countries (i.e. assuming that technical coefficients are fixed), we can derive a price equation under the assumption of complete cost pass-through.\\
-
-%\textcolor{red} {GD CE QUI SUIT ME SEMBLE TRÈS BIZARRE -- Je refais un essai} \\
+%The rows of the table contain information on the distribution of the output of industries over use categories.
+$N$ is equal to the product of the number of countries ($I$) and the number of sectors ($J$). Define $\cal A$ the matrix of technical input coefficient of dimension $(N, N)$, and $Y$ the output vector of dimension $(1, N)$. $Y=(y_1\ldots y_N)$.  \\
 Define $y_n=p_n*q_n$, with $p_n$ the price and $q_n$ the quantity of product from country $n$ and normalize quantity such as $q_n=1$. \\
-Define $P$ the vector of production prices of dimension $(1, N)$ and $V$ the vector of factor income of dimension $(1, N)$ needed to produce one unit of good in each sector. Then $P=P{\cal A}+V$. \\
-
-%\textcolor{red} {Ici} \\
- % Define $y_i=p_i*q_i$, with $p_i$ the price and $q_i$ the quantity of product $i$ and normalize quantities such as $p_i=1$. \\
-%Define $P$ the vector of production prices of dimension $(1, n)$ and and $V$ the vector of factor income per quantity unit of production of dimension $(1, n)$. The coefficients of structural %matrix of technical coefficients of dimension $(n,n)$ are the same as the coefficients of the structural matrix of input coefficients because $p_i=1$.  We call it $A$ as well. Then $P=PA+V$. \\
-
-%\textcolor{red} {Retour au texte} \\
+Define $P$ the vector of production prices of dimension $(1, N)$ and $V$ the vector of factor income of dimension $(1, N)$ needed to produce one unit of good in each sector. The price of each good is equal to the cost of producing it: $P=P{\cal A}+V$. \\
 
 
-Suppose an exogenous input price shock occurs. Firms face a change in their costs, which they pass on directly to production prices to keep their factor income constant.
+Suppose an exogenous input price shock occurs. Firms face a change in their costs, which - by hypothesis - they pass on directly to production prices to keep factor incomes constant.
 Define ${{\Delta }^{0}}P$ the shock vector of dimension $(1, N)$ computed as the difference between the original price vector $P^0$ and the new vector $P^1$. Then:
 \begin{eqnarray*}
 \Delta ^{0}P=P^1-P^0=C, 
@@ -165,7 +149,7 @@ In a first step, the direct impact of the shock on each country-specific industr
 In a second step, the shock is passed on all country-specific industries using these shocked inputs in their production processes. For $k$ production cycles, the increase in production prices amounts to $\Delta^k P=C{\cal A}^k$.\\
 As the technical coefficients are smaller than 1, the effect of the initial shock on input prices eventually wears out.
 The overall effect of the shock is equal to the sum of the initial shock and all the increases that occurred during the successive production cycles.
-The total effect of the shock on prices, S, is equal to $S=C {\left( I+{\cal A}+{\cal A}^2+...+{\cal A}^k+...\right)} =C {\left( I-{\cal A} \right)}^{-1}$, with ${\left( I-{\cal A} \right)}^{-1}$ the inverse of Leontief's matrix; $S$ is a vector $(1, N)$ composed of the elements $s_{ij}$ measuring the total effect of the shock on the output price of sector $j$ in country $i$ .
+Let us call $S$ the total effect of the shock on prices, a vector $(1, N)$ composed of the elements $s_{ij}$ measuring the total effect of the shock on the output price of sector $j$ in country $i$. We have: $S=C {\left( I+{\cal A}+{\cal A}^2+...+{\cal A}^k+...\right)} =C {\left( I-{\cal A} \right)}^{-1}$, with ${\left( I-{\cal A} \right)}^{-1}$ the inverse of Leontief's matrix.
 
 \subsection{The choice of WIOD}
 \label{subsec:data}

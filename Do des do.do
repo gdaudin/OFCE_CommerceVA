@@ -15,14 +15,19 @@ capture log using "$dir/$S_DATE.log", replace
 set more off
 
 
-do "$dirgit/1_constr_bases.do"
-do "$dirgit/compute_HC.do"
-do "$dirgit/compute_X.do"
-do "$dirgit/contenu_imp_HC.do" 
+*do "$dirgit/1_constr_bases.do"
+*do "$dirgit/compute_HC.do"
+*do "$dirgit/compute_X.do"
+ 
 
-do "$dirgit/choc_chge.do"
+*do "$dirgit/choc_chge.do"
+*do "$dirgit/Aggregation_effets_des_chocs.do"
 do "$dirgit/pg_inputsimportes.do"
+do "$dirgit/Étude rapport D+I et Bouclage Mondial.do"
+do "$dirgit/Étude rapport D+I et Bouclage Mondial_par_sect.do" /* à partir des outputs de Etude D+I bouclage mondial, on effectue des régressions secteur par secteur  */
 
-do "$dirgit/Pour graphiques HC.do"
-do "$dirgit/Pour graphiques articles OFCE.do"
+do "$dirgit/Graph_descriptifs_pour_articleCDFLR2018.do" /* graphiques pour l'article 2018 */
+
+*do "$dirgit/Pour graphiques HC.do"
+*do "$dirgit/Pour graphiques articles OFCE.do"
 *do "Pour graphiques change.do"

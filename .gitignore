@@ -1,1 +1,13 @@
 .DS_Store
+*.gz
+*.gz(busy)
+*.blg
+*.aux
+*.log
+*.out
+WIOD_2018.synctex.gz
+WIOD_2018.synctex.gz(busy)
+WIOD_2018.out
+WIOD_2018.log
+WIOD_2018.aux
+WIOD_2018.bbl

@@ -1,18 +1,4 @@
-clear
 
-
-
-if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
-else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
-
-
-
-
-
-capture log using "$dir/$S_DATE.log", replace
-set matsize 7000
-*set mem 700m if earlier version of stata (<stata 12)
-set more off
 
 
 *-------------------------------------------------------------------------------
@@ -20,8 +6,8 @@ set more off
 *-------------------------------------------------------------------------------
 capture program drop save_data
 program save_data
-args source
-*ex: save_data TIVA
+args yrs source   
+*ex: save_data 2011 TIVA
 
 
 clear
@@ -30,17 +16,15 @@ if "`source'"=="TIVA" {
 
 	*Loop to save data for each year
 	set more off
-	foreach i of numlist 1995 (1) 2011 {
-	insheet using "$dir/Bases_Sources/TIVA/ICIO2016_`i'.csv", clear
+
+	insheet using "$dir/Bases_Sources/TIVA/ICIO2016_`yrs'.csv", clear
 	*I sort the ICIO: 
-	local useful = _N-2
-	sort v1 aus_c01t05agr-disc in 1/`useful'
-	order aus_c01t05agr-cn4_c95pvh, alphabetic after (v1)
-	*order aus_hc-row_consabr, alphabetic after (zaf_c95pvh)
+	local useful = _N-2 /*on exclut les 2 dernières lignes du tri ligne suivante */
+	sort v1 aus_c01t05agr-disc in 1/`useful' /*observations (tout sauf les 2 de useful*/
+	order aus_c01t05agr-cn4_c95pvh, alphabetic after (v1) /*variables V1 = 1ere colonne nom vide non triée*/
 	order hfce_aus-disc, alphabetic after (zaf_c95pvh)
-	
-	save "$dir/Bases/TIVA_ICIO_`i'.dta", replace
-	}
+	save "$dir/Bases/TIVA_ICIO_`yrs'.dta", replace
+
 /*
 	*Same with the database for wages
 	clear
@@ -65,14 +49,15 @@ if "`source'"=="TIVA" {
 if "`source'"=="WIOD" {	 
 	*Loop to save data for each year
 	set more off
-	foreach i of numlist 2000 (1) 2014 {
-	use "$dir/Bases_Sources/`source'/WIOT`i'_October16_ROW.dta", clear
+
+	use "$dir/Bases_Sources/`source'/WIOT`yrs'_October16_ROW.dta", clear
 	foreach j of numlist 1 (1) 9 {
 		rename ????`j' ????0`j'
 	}
 	order vAUS01-vROW61, alphabetic after (TOT)
-	save "$dir/Bases/WIOD_ICIO_`i'.dta", replace
-	}
+	sort Country RNr
+	save "$dir/Bases/WIOD_ICIO_`yrs'.dta", replace
+
 
 	/*
 	*Same with the database for wages
@@ -113,20 +98,17 @@ if "`source'"=="TIVA" {
 	drop dirp_arg-nps_zaf
 	save "$dir/Bases/TIVA_`yrs'_OUT.dta", replace
 	
-	*From the ICIO database I keep only the table for inter-industry inter-country trade
-	clear
-	use "$dir/Bases/TIVA_ICIO_`yrs'.dta"
+	*From the ICIO database I keep only the table for inter-industry inter-country trade (matrice de CI mondiale)
+	use "$dir/Bases/TIVA_ICIO_`yrs'.dta", clear
 	drop dirp_arg-nps_zaf
 	drop if v1 == "VA+TAXSUB" | v1 == "OUT"
+	gen pays=upper(substr(v1,1,3))
+	gen secteur = upper(substr(v1,5,.))
+	order pays secteur
 	drop v1
 	save "$dir/Bases/TIVA_`yrs'_Z.dta", replace
 	   
-	*From the ICIO database I keep only the table for final demand
-	clear
-	use "$dir/Bases/TIVA_ICIO_`yrs'.dta"
-	drop if v1 == "VA+TAXSUB" | v1 == "OUT"
-	keep dirp_arg-nps_zaf
-	save "$dir/Bases/`source’_`year’_finaldemand.dta", replace
+	
 }
 
 if "`source'"=="WIOD" {	
@@ -138,117 +120,34 @@ if "`source'"=="WIOD" {
 	drop *57 *58 *59 *60 *61
 	save "$dir/Bases/WIOD_`yrs'_OUT.dta", replace
 	
-* Only the I/O table itself
+	* Only the I/O table itself
 	clear
 	use "$dir/Bases/WIOD_ICIO_`yrs'.dta"
-	drop if RNr >=65
-	drop IndustryCode-TOT
+	drop if RNr >=65  /* on enlève les totaux */
+	rename Country pays
+	rename IndustryCode secteur
+	order pays secteur
+	sort pays secteur
+	drop IndustryDescription-TOT
 	drop *57 *58 *59 *60 *61
 	save "$dir/Bases/WIOD_`yrs'_Z.dta", replace
 	
-*Only final demand
-	*** Je laisse tomber car c'est compliqué et pas sûr que cela soit utile
 
-	
 }
 
 end
 
 
-
-*-------------------------------------------------------------------------------
-*TRIMMING THE DATABASE FOR WAGES
-*-------------------------------------------------------------------------------
-
-**Pas mis à jour : nous n'avons pas les salaire WIOD et nous ne trouvons pas les salaire TIVA
-capture program drop base_wage
-program base_wage
-	args yrs n source
-*yrs = years, n = onglet WAGE or OUT
-	clear
-	use "$dir/Bases/`n'_`yrs'.dta"
-
-
-if ("`c(username)'"=="guillaumedaudin") do  "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation/Definition_pays_secteur.do" `source'
-if ("`c(username)'"=="w817186") do "X:\Agents\FAUBERT\commerce_VA_inflation\Definition_pays_secteur.do" `source'
-if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\Definition_pays_secteur.do" `source'
-`source'
-*List of countries for which there is no data available for wages
-	global restcountry "ISL BRN COL CRI HKG HRV KHM MEX_GMF MEX_NGM MYS PHL ROW SAU SGP THA TUN "
-	global chncountry "CHN_DOM CHN_NPR CHN_PRO"
-
-
-
-	foreach i of global chncountry {
-			gen `i'=CHN
-									}
-
-	
-	foreach i of global restcountry {
-			gen `i'=0
-									}
-									
-	order AUS-TUN, alphabetic after (A)
-
-*We reshape the database as a column-vector with a variable WAGE for wages and OUT for output
-
-	foreach i of global country {
-			rename `i' country_`i'
-	}	
-
-	reshape long country_, i(A) j(country) string
-	
-	sort country  in 1/2278, stable
-	rename country_ `n'
-	
-*We delete observations for CHN and MEX that do not exist in the ICIO
-
-	foreach i of global sector2 {
-	drop if (country=="CHN" & A=="`i'")
-	}
-
-
-	foreach i of global sector3 {
-		foreach j in CHN_DOM CHN_NPR CHN_PRO {
-			drop if (country=="`j'" & A=="`i'")
-		}
-	}
-	drop if (country=="CHN_PRO" & A=="C01T05")
-
-	*MEXICO 
-  
-	foreach i of global sector4 { 
-	drop if (country == "MEX" & A == "`i'") 
-	} 
-
- 
-	foreach i of global sector5 { 
-		foreach j in MEX_GMF MEX_NGM { 
-			drop if (country == "`j'" & A == "`i'") 
-		} 
-	} 
-	
-save "$dir/Bases/`n'_`yrs'.dta", replace
-	
-end
-
-
 *----------------------------------------------------------------------------------
 *BUILDING A DATABASE WITH VECTORS OF COUNTRIES AND SECTORS AND VECTOR CONTAINING 0
+*On met les coefficients à zéro pour remplir après
 *----------------------------------------------------------------------------------
 capture program drop database_csv
 program database_csv
-args source
-
+args source /* Tiva ou WIOD */
 *Exemple : database_csv TIVA
 
-clear
-set more off
-
-
-if ("`c(username)'"=="guillaumedaudin") do  "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation/Definition_pays_secteur.do" `source'
-if ("`c(username)'"=="w817186") do "X:\Agents\FAUBERT\commerce_VA_inflation\Definition_pays_secteur.do" `source'
-if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\Definition_pays_secteur.do" `source'
+Definition_pays_secteur `source'
 
 				
 local nbr_sect=wordcount("$sector")	
@@ -283,51 +182,6 @@ foreach i of global sector {
 gen v1=0
 
 
-/*
-****This is obsolete in the 2016 version
-*I withdraw the industries for different types of CHN and MEX that are not in the dataset from v1
-
-
-if "`source'"=="TIVA" {
-
-
-
-*CHINA
-global sector2 "C01T05 C10T14 C15T16 C17T19 C20 C21T22 C23 C24 C25 C26 C27 C28 C29 C30T33X C31 C34 C35 C36T37"
-
-foreach i of global sector2 {
-drop if (c == "CHN" & s == "`i'")
-}
-
-global sector3 "C40T41 C45 C50T52 C55 C60T63 C64 C65T67 C70 C71 C72 C73T74 C75 C80 C85 C90T93 C95"
-
-foreach i of global sector3 {
-	foreach j in CHNDOM CHNNPR CHNPRO {
-		drop if (c == "`j'" & s == "`i'")
-	}
-}
-
-drop if (c == "CHNPRO" & s == "C01T05")
-
-*MEXICO
-global sector4 "C15T16 C17T19 C20 C21T22 C23 C24 C25 C26 C27 C28 C29 C30T33X C31 C34 C35 C36T37"
-
-foreach i of global sector4 {
-drop if (c == "MEX" & s == "`i'")
-}
-
-
-global sector5 "C01T05 C10T14 C40T41 C45 C50T52 C55 C60T63 C64 C65T67 C70 C71 C72 C73T74 C75 C80 C85 C90T93 C95"
-
-foreach i of global sector5 {
-	foreach j in MEXGMF MEXNGM {
-		drop if (c == "`j'" & s == "`i'")
-	}
-}
-}
-
-
-*/
 rename v1 p_shock
 
 save "$dir/Bases/csv_`source'.dta", replace
@@ -336,7 +190,7 @@ collapse (sum) p_shock, by(c)
 
 save "$dir/Bases/pays_en_ligne_`source'.dta", replace
 
-
+clear
 end
 
 
@@ -493,68 +347,5 @@ save "$dir/Bases/exports_`source'.dta", replace
 
 end
 
-
-**** Lancement des programmes ****************
-
-/*
-save_data WIOD
-
-save_data TIVA
-
-*/
-/*
-foreach i of numlist 1995(1)2011 {
-	clear
-	prepare_database `i' TIVA
-}
-
-
-
-
-
-foreach i of numlist 2000(1)2014 {
-	clear
-	prepare_database `i' WIOD
-}
-
-*/
-
-/*
-foreach i of numlist 1995 2000 2005 {
-	foreach n in WAGE OUT {
-		clear
-		base_wage  `i'  `n'
-		}
-}
-
-*/
-
-
-
-
-database_csv TIVA
-database_csv WIOD
-
-set more off
-
-
-
-*append_y TIVA
-
-
-*append_X TIVA
-
-
-
-
-
-*append_y WIOD
-
-
-*append_X WIOD
-
-
-
-log close
 
 

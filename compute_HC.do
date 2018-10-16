@@ -1,10 +1,4 @@
-clear
-*set trace on
 
-if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
-else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
-capture log using "$dir/$S_DATE.log", replace
-set more off
 ***************************************************************************************************
 *Création des tables  de consommation finale des ménages (HFCE) : on crée le vecteur 1*67 des hfce de chaque pays
 
@@ -74,7 +68,6 @@ sort year , stable
 save "$dir/Bases/HC_`source'.dta", replace
  
 end
-append_HC TIVA
-append_HC WIOD
+
 
 

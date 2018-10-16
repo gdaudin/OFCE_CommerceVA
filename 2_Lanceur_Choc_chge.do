@@ -28,14 +28,16 @@ do GIT/commerce_va_inflation/Definition_pays_secteur.do
 **local nbr_sect=wordcount("$sector")	
 
 do GIT/commerce_va_inflation/choc_chge.do
-***** POUR TEST***********
+/*
+***** POUR TEST (1 pays, 1 année, 1 source)***********
 global test = 1 
 Definition_pays_secteur TIVA
-*compute_leontief 2005 TIVA
+//compute_leontief 2005 TIVA
 compute_B_B2 2005 ARG	TIVA B
 compute_B_B2 2005 ARG	TIVA B2
 vector_shock_exch 1 ARG TIVA
 shock_exch 2005 ARG TIVA
+blink
 *compute_X 2011 TIVA
 *compute_Yt 2011 TIVA
 *compute_HC 2011 TIVA
@@ -47,8 +49,10 @@ table_mean 2011 X 1 TIVA
 blink 
 **blink = erreur pour plantage
 
+***** FIN  TEST***********
 
-
+*/
+*/
 *foreach source in   WIOD { 
 foreach source in   WIOD TIVA { 
 
@@ -60,19 +64,9 @@ foreach source in   WIOD TIVA {
 	if "`source'"=="WIOD" local end_year 2014
 	if "`source'"=="TIVA" local end_year 2011
 
+	Definition_pays_secteur `source'
+
 	
-	if ("`c(username)'"=="guillaumedaudin") do  "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation/Definition_pays_secteur.do" `source' 
-	if ("`c(username)'"=="w817186") do "X:\Agents\FAUBERT\commerce_VA_inflation\Definition_pays_secteur.do" `source' 
-	if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\Definition_pays_secteur.do" `source' 
-	
-
-	// Fabrication des fichiers d'effets moyens des chocs de change
-	// pour le choc CPI, faire tourner compute_HC et compute_leontief, les autres ne sont pas indispensables
-	*2005 2009 2010 2011
-
-
-
-
 	if "`source'"=="TIVA" {
 	*	global ori_choc "CHN"
 		global ori_choc "EUR EAS"
@@ -90,39 +84,54 @@ foreach source in   WIOD TIVA {
 	
 	
 
-
-
-
-
 *   foreach i of numlist 2011 {
 	foreach i of numlist `start_year' (1)`end_year'  {
 		clear
 		set more off
 		compute_leontief `i' `source'
-			local pour_gros_fichier 1
-			foreach groupeduchoc of global ori_choc {
+		local pour_gros_fichier 1
+		foreach groupeduchoc of global ori_choc {
 			compute_B_B2 `i' `groupeduchoc' `source' B
 			compute_B_B2 `i' `groupeduchoc' `source' B2
 			vector_shock_exch 1 `groupeduchoc' `source'
 			shock_exch `i' `groupeduchoc' `source'
 			
-			use "$dir/Results/Devaluations/`source'_C_`i'_`groupeduchoc'_exch.dta"
-			rename C*t1 shock*1
-			
+			use "$dir/Results/Devaluations/`source'_S_`i'_`groupeduchoc'_exch.dta"
+			rename S*t1 shock*1
 			if `pour_gros_fichier'==0 {
-				merge 1:1 _n using "$dir/Results/Devaluations/`source'_C_`i'_exch.dta"
+				merge 1:1 _n using "$dir/Results/Devaluations/`source'_S_`i'_exch.dta"
 				drop _merge
 			}
-			save "$dir/Results/Devaluations/`source'_C_`i'_exch.dta", replace
+			save "$dir/Results/Devaluations/`source'_S_`i'_exch.dta", replace
+			
+			use "$dir/Results/Devaluations/`source'_Sdollar_`i'_`groupeduchoc'_exch.dta"
+			rename S*t1 shock*1
+			if `pour_gros_fichier'==0 {
+				merge 1:1 _n using "$dir/Results/Devaluations/`source'_Sdollar_`i'_exch.dta"
+				drop _merge
+			}
+			save "$dir/Results/Devaluations/`source'_Sdollar_`i'_exch.dta", replace	
+			
 			local pour_gros_fichier=0
-	    }
+		}
+	use "$dir/Results/Devaluations/`source'_Sdollar_`i'_exch.dta", clear	
+	order *, alphabetic
+	order shockdollarEUR1 shockdollarEAS1
+	merge 1:1 _n using "$dir/Bases/csv_`source'"
+	drop _merge
+	drop p_shock
+	order c s
+	save "$dir/Results/Devaluations/`source'_Sdollar_`i'_exch.dta", replace	
+	
+	
+	use "$dir/Results/Devaluations/`source'_S_`i'_exch.dta", clear	
 	order *, alphabetic
 	order shockEUR1 shockEAS1
 	merge 1:1 _n using "$dir/Bases/csv_`source'"
 	drop _merge
 	drop p_shock
 	order c s
-	save "$dir/Results/Devaluations/`source'_C_`i'_exch.dta", replace	
+	save "$dir/Results/Devaluations/`source'_S_`i'_exch.dta", replace	
     }
 
 }

@@ -137,7 +137,7 @@ foreach var of varlist $var_entree_sortie {
 *drop grchoc grchoc2
 mkmat $var_entree_sortie, matrix (`matrix_obj')
 order pays_choqué s
-drop p_shock grchoc_ligne pays_origine grchoc2
+drop p_shock grchoc_ligne pays_origine grchoc2    /* p shock déjà crée dans csv_source (à zéro)) */
 if $test==1 save "$dir/Bases/`source'_`matrix_obj'_`yrs'_`groupeduchoc'.dta", replace
 ***----  On construit la matrice B2 avec des 0 partout sauf pour les CI étrangères du pays choqué (équation (4) du papier) ------*
 /*
@@ -258,9 +258,10 @@ foreach p of local groupeduchoc {
 }
 
 
-*I extract vector p_shock from database with mkmat
-mkmat p_shock
-matrix p_shockt=p_shock'
+*I extract vector p_shock from database with mkmat (Ci$)
+mkmat p_shock, matrix(cidollart)
+matrix cidollar=cidollart'  /* transposé*/
+matrix list cidollar
 
 
 * On construit le vecteur c tilde$, avec le choc -c pour les pays non choqués, 0 sinon (cf. équation 5)
@@ -288,16 +289,17 @@ foreach p of local groupeduchoc {
 	
 	
 }
-*I extract vector p_shock from database with mkmat
-mkmat p_shock2
-matrix p_shock2t=p_shock2'
+*I extract vector p_shock from database with mkmat (Ci tilde $)
+mkmat p_shock2, matrix(ctildeidollart)
+matrix ctildeidollar=ctildeidollart'
+matrix list ctildeidollar
 
 *Example: p_shock = 0.05 if (c = "ARG" & s == "C01T05")
 
-*I extract vector p_shock from database with mkmat
-mkmat p_shock
-matrix p_shockt=p_shock'
-*The transpose of p_shock will be necessary for further computations
+matrix ci=ctildeidollar*(1/(1+`shk'))
+matrix list ci
+matrix cchapeauidollar=cidollar/(1+`shk')
+matrix list cchapeauidollar
 
 display "fin de vector_shock_exch"
 
@@ -319,8 +321,7 @@ mkmat r1-r$dim_matrice, matrix (L1)
 
 *Multiplying the transpose of vector shock `v'_shockt by L1 to get the impact of a shock on the output price vector 
 *Il s'agit du choc en dollar (équation 6)
-matrix Sdollar`groupeduchoc' = p_shockt+(p_shockt*B+p_shock2t*B2)*L1
-*Result example: using p_shock = 0.05 if c == "ARG" & s == "C01T05": if prices in agriculture increase by 5% in Argentina, output prices in the sector of agriculture in Argentina increase by 5.8%
+matrix Sdollar`groupeduchoc' = cidollar+(cidollar*B+ctildeidollar*B2)*L1
 
 
 matrix Sdollar`groupeduchoc't=Sdollar`groupeduchoc''
@@ -330,6 +331,11 @@ keep Sdollar`groupeduchoc't1
 
 if $test==1 save "$dir/Results/Devaluations/`source'_Sdollar_`yrs'_`groupeduchoc'_exch.dta", replace
 
+matrix S`groupeduchoc' = ci+(cchapeauidollar*B+ci*B2)*L1
+matrix S`groupeduchoc't=S`groupeduchoc''
+svmat S`groupeduchoc't
+keep S`groupeduchoc't1
+if $test==1 save "$dir/Results/Devaluations/`source'_S_`yrs'_`groupeduchoc'_exch.dta", replace
 
 
 display "fin de shock_exch"

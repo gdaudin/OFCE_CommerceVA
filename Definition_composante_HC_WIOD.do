@@ -11,15 +11,15 @@ else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
 
 
 use "$dir/Bases/csv_WIOD.dta", clear
-replace c=lower(c)
-replace s=lower(s)
+replace c=upper(c)
+replace s=upper(s)
 generate agregat_secteur="na" 
-replace agregat_secteur="alimentaire" if s=="a01" || s=="a03"
+replace agregat_secteur="alimentaire" if s=="A01" || s=="A03"
 
 *NEIG: bien manuf hors energie
-replace agregat_secteur="neig" if s=="a02" || s=="c10-c12"|| s=="c13-c15" ||s=="c16" || s=="c17" ||s=="c18"|| s=="c20"|| s=="c21"|| s=="c22"|| s=="c23"||s=="c24"||s=="c25"||s=="c26"||s=="c27"|| s=="c28"||s=="c29" || s=="c30" || s=="c31_c32"|| s=="c33"||s=="f"
+replace agregat_secteur="neig" if s=="A02" || s=="C10-C12"|| s=="C13-C15" ||s=="C16" || s=="C17" ||s=="C18"|| s=="C20"|| s=="C21"|| s=="C22"|| s=="C23"||s=="C24"||s=="C25"||s=="C26"||s=="C27"|| s=="C28"||s=="C29" || s=="C30" || s=="C31_C32"|| s=="C33"||s=="F"
 
-replace agregat_secteur="services" if s=="e36" || s=="e37-39" || s=="h49" || s=="h50" || s=="h51" || s=="h52" || s=="h53" || s=="i"|| s=="j58"|| s=="j59_j60" || s=="j61" || s=="j62_j63" || s=="k64" || s=="k65" || s=="k66" ||  s=="e36" || s=="e37-e39" || s=="l68" || s=="m69_m70"|| s=="m71" || s=="m72" || s=="m73" || s=="m74_m75" || s=="n" || s=="o84" || s=="p85" ||  s=="q" ||  s=="r_s" ||  s=="g45" ||  s=="g46" ||  s=="g47" || s=="t" || s=="u"
+replace agregat_secteur="services" if s=="E36" || s=="E37-39" || s=="H49" || s=="H50" || s=="H51" || s=="H52" || s=="H53" || s=="I"|| s=="J58"|| s=="J59_J60" || s=="J61" || s=="J62_J63" || s=="K64" || s=="K65" || s=="K66" ||  s=="E36" || s=="E37-E39" || s=="L68" || s=="M69_M70"|| s=="M71" || s=="M72" || s=="M73" || s=="M74_M75" || s=="N" || s=="O84" || s=="P85" ||  s=="Q" ||  s=="R_S" ||  s=="G45" ||  s=="G46" ||  s=="G47" || s=="T" || s=="U"
 
-replace agregat_secteur="energie" if s=="d35"  || s=="c19" || s=="b"
+replace agregat_secteur="energie" if s=="D35"  || s=="C19" || s=="B"
  save "$dir/Bases/csv_WIOD.dta", replace

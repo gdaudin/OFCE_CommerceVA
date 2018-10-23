@@ -19,8 +19,8 @@ if "`source'"=="TIVA" {
 	drop if v1=="OUT" | v1=="VA+TAXSUB"
 	reshape long hfce_, i(v1) j(pays_conso) string
 
-	generate pays = strlower(substr(v1,1,strpos(v1,"_")-1))
-	generate sector = strlower(substr(v1,strpos(v1,"_")+1,strlen(v1)-3-strpos(v1,"_")))
+	generate pays = strupper(substr(v1,1,strpos(v1,"_")-1))
+	generate sector = strupper(substr(v1,strpos(v1,"_")+1,strlen(v1)-3-strpos(v1,"_")))
 	rename hfce_ conso
 	generate year = `yrs'
 }
@@ -34,8 +34,8 @@ keep IndustryCode Country Year v*57
 reshape long v, i(Country IndustryCode Year) j(pays_conso) string
 rename  Country pays
 rename  IndustryCode sector 
-replace sector = strlower(sector)
-replace pays_conso=strlower(substr(pays_conso,1,3))
+replace sector = strupper(sector)
+replace pays_conso=strupper(substr(pays_conso,1,3))
  
 drop if pays=="TOT"
 

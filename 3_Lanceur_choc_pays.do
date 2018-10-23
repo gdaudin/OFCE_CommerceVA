@@ -1,3 +1,7 @@
+************************************
+*On agrège les vecteurs de chocs en un scalaire pour les prix d'exports, de conso et de production
+
+
 *****Lanceur du programme de choc par pays 
 
 clear  
@@ -17,16 +21,20 @@ do GIT/commerce_va_inflation/Definition_pays_secteur.do
 do GIT/commerce_va_inflation/Aggregation_effets_des_chocs.do   
 do GIT/commerce_va_inflation/compute_X.do   
 do GIT/commerce_va_inflation/compute_HC.do
+do GIT/commerce_va_inflation/compute_Y.do
+
 
 Definition_pays_secteur TIVA
-append_HC TIVA
+quietly append_HC TIVA 
 append_X TIVA
+append_Y TIVA
 
 Definition_pays_secteur WIOD
 append_HC WIOD
 append_X WIOD
+append_Y WIOD
 
-blink
+
 *--------------------------------------------------------------------------------
 *LIST ALL PROGRAMS AND RUN THEM - agregation effet choc
 *--------------------------------------------------------------------------------

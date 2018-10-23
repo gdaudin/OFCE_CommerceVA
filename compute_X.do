@@ -60,13 +60,13 @@ generate year = `yrs'
 
 
 if "`source'"=="TIVA" {
-	generate pays = strlower(substr(v1,1,3))
-	generate sector = strlower(substr(v1,strpos(v1,"_")+1,strlen(v1)-3-strpos(v1,"_")))
+	generate pays = strupper(substr(v1,1,3))
+	generate sector = strupper(substr(v1,strpos(v1,"_")+1,strlen(v1)-3-strpos(v1,"_")))
 }
 
 
 if "`source'"=="WIOD" {
-	replace pays =lower(Country)
+	replace pays =upper(Country)
 	rename IndustryCode sector
 }
 

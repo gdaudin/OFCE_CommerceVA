@@ -25,7 +25,6 @@ do GIT/commerce_va_inflation/1_constr_bases.do
 
 do GIT/commerce_va_inflation/Definition_pays_secteur.do   
 
-
 ******************** Lancement des programmes ****************
 
 /*
@@ -46,6 +45,10 @@ foreach i of numlist 2000(1)2014 {
 
 database_csv TIVA
 database_csv WIOD
+
+******************** Identifie composantes ****************
+do GIT/commerce_va_inflation/Definition_composante_HC_WIOD.do
+***********************************************************
 
 set more off
 

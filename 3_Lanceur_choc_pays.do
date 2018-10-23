@@ -1,5 +1,8 @@
 ************************************
 *On agrège les vecteurs de chocs en un scalaire pour les prix d'exports, de conso et de production
+*Ligne 49 : source
+*Ligne 82 : années
+*Ligne 86 : Total ou composantes
 
 
 *****Lanceur du programme de choc par pays 
@@ -23,9 +26,9 @@ do GIT/commerce_va_inflation/compute_X.do
 do GIT/commerce_va_inflation/compute_HC.do
 do GIT/commerce_va_inflation/compute_Y.do
 
-
+/*
 Definition_pays_secteur TIVA
-quietly append_HC TIVA 
+append_HC TIVA 
 append_X TIVA
 append_Y TIVA
 
@@ -33,7 +36,7 @@ Definition_pays_secteur WIOD
 append_HC WIOD
 append_X WIOD
 append_Y WIOD
-
+*/
 
 *--------------------------------------------------------------------------------
 *LIST ALL PROGRAMS AND RUN THEM - agregation effet choc
@@ -45,7 +48,7 @@ set more off
 *foreach source in   TIVA { 
 foreach source in   WIOD TIVA { 
 
-
+	Definition_pays_secteur `source'
 	if "`source'"=="WIOD" local start_year 2000
 	if "`source'"=="TIVA" local start_year 1995
 
@@ -54,10 +57,7 @@ foreach source in   WIOD TIVA {
 	if "`source'"=="TIVA" local end_year 2011
 
 	
-	if ("`c(username)'"=="guillaumedaudin") do  "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation/Definition_pays_secteur.do" `source' 
-	if ("`c(username)'"=="w817186") do "X:\Agents\FAUBERT\commerce_VA_inflation\Definition_pays_secteur.do" `source' 
-	if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\Definition_pays_secteur.do" `source' 
-	
+
 
 	// Fabrication des fichiers d'effets moyens des chocs de change
 	// pour le choc CPI, faire tourner compute_HC et compute_leontief, les autres ne sont pas indispensables
@@ -83,13 +83,13 @@ foreach source in   WIOD TIVA {
 		
 		local HC_fait 0
     	foreach j in  HC_neig_dom HC_alimentaire_dom HC_energie_dom HC_services_dom HC_dom ///
-					HC_neig_impt HC_alimentaire_impt HC_energie_impt HC_services_impt HC_impt /*X Yt*/  {	
+					HC_neig_impt HC_alimentaire_impt HC_energie_impt HC_services_impt HC_impt HC X Yt  {	
 
     	    if strpos("`j'","HC")!=0 & `HC_fait'==0 {
-				compute_HC `i' `source'
+				compute_HC_vect `i' `source'
 				local HC_fait 1
 			}
-			if strpos("`j'","HC")==0 compute_`j' `i' `source'
+			if strpos("`j'","HC")==0 compute_`j'_vect `i' `source'
 			table_mean `i' `j' 1 `source'
 
 	    }

@@ -1,28 +1,27 @@
 
 
 *----------------------------------------------------------------------------------
-*CREATION OF A VECTOR CONTAINING MEAN EFFECTS OF A SHOCK ON EXCHANGE RATE FOR EACH COUNTRY
+*CREATION OF A VECTOR CONTAINING (Y,X ou HC) MEAN EFFECTS OF A SHOCK ON EXCHANGE RATE FOR EACH COUNTRY
 *----------------------------------------------------------------------------------
 *Creation of the vector Y is required before table_adjst : matrix Yt
-capture program drop compute_Yt
-program compute_Yt
+capture program drop compute_Y_vect
+program compute_Y_vect
 args yrs source
 clear
 
-use "$dir/Bases/`source'_`yrs'_OUT.dta"
-
+use "$dir/Bases/Y_`source'.dta", clear
+keep if year == `yrs'
 
 mkmat $var_entree_sortie, matrix(Y)
-matrix Yt = Y'
 
-display "fin compute_Yt"
+display "fin compute_Y_vect"
 
 end
 
 *Creation of the vector of export X : matrix X
 * 2017-10-17 redondant avec le programme 1!!!
-capture program drop compute_X
-program compute_X
+capture program drop compute_X_vect
+program compute_X_vect
 	args yrs source
 	
 use "$dir/Bases/X_`source'.dta", clear
@@ -30,7 +29,7 @@ keep if year == `yrs'
 
 *keep year Country X
 mkmat X, matrix(X)
-display "fin compute_X"
+display "fin compute_X_vect"
 
 end
 
@@ -48,15 +47,15 @@ mkmat $var_entree_sortie, matrix(VA)
 matrix VAt = VA'
 end
 */
-capture program drop compute_HC
-program  compute_HC
+capture program drop compute_HC_vect
+program  compute_HC_vect
 	args yrs source 
 	
 	use "$dir/Bases/HC_`source'.dta", clear
 	keep if year == `yrs'
 	foreach pays_conso of global country_hc {
 		preserve
-		keep if pays_conso==strlower("`pays_conso'")
+		keep if pays_conso==strupper("`pays_conso'")
 		mkmat conso, matrix(HC_`pays_conso')
 		restore
 	}
@@ -73,8 +72,8 @@ set more off
 clear
 
 
-use "$dir/Results/Devaluations/`source'_C_`yrs'_`groupeduchoc'_exch.dta"
-mkmat C`groupeduchoc't1, matrix(C`groupeduchoc't)
+use "$dir/Results/Devaluations/`source'_S_`yrs'_`groupeduchoc'_exch.dta"
+mkmat S`groupeduchoc't1, matrix(S`groupeduchoc't)
 
 use "$dir/Bases/csv_`source'.dta", clear
 
@@ -84,10 +83,10 @@ use "$dir/Bases/csv_`source'.dta", clear
 
 
 
-if ("`wgt'" == "Yt")  {
-	matrix Yt = Y'
-	svmat Yt 
-	
+if ("`wgt'" == "Y")  {
+*	matrix Y = Y'
+	svmat Y 
+	*on fait du vecteur une variable
 
 }
 if ("`wgt'" == "X")  {
@@ -95,10 +94,10 @@ if ("`wgt'" == "X")  {
 }
 
 
-if ("`wgt'" == "X") | ("`wgt'" == "Yt") {
+if ("`wgt'" == "X") | ("`wgt'" == "Y") {
 
-	svmat C`groupeduchoc't
-	generate Bt = C`groupeduchoc't1* `wgt'
+	svmat S`groupeduchoc't
+	generate Bt = S`groupeduchoc't1* `wgt'
 	gen pays_interet=c
 	replace pays_interet="CHN" if pays_interet=="CN1" | pays_interet=="CN2" | pays_interet=="CN3" | pays_interet=="CN4"
 	replace pays_interet="MEX" if pays_interet=="MX1" | pays_interet=="MX2" | pays_interet=="MX3"
@@ -114,14 +113,14 @@ if ("`wgt'" == "X") | ("`wgt'" == "Yt") {
 
 
 local blink 0
-svmat C`groupeduchoc't, name(C`groupeduchoc')	
+svmat S`groupeduchoc't, name(S`groupeduchoc')	
 
 
 
 if strpos("`wgt'","HC")!=0  {
 	foreach pays_conso of global country_hc {
         svmat HC_`pays_conso', name(HC_`pays_conso')
-        generate Bt_`pays_conso' = C`groupeduchoc'* HC_`pays_conso'
+        generate Bt_`pays_conso' = S`groupeduchoc'* HC_`pays_conso'
         egen tot_HC_`pays_conso' = total(HC_`pays_conso')
         generate sector_shock_`pays_conso' = Bt_`pays_conso'/tot_HC_`pays_conso'
 		foreach sector in alimentaire neig energie services {

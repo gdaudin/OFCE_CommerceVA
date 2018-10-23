@@ -47,7 +47,7 @@ database_csv TIVA
 database_csv WIOD
 
 ******************** Identifie composantes ****************
-do GIT/commerce_va_inflation/Definition_composante_HC_WIOD.do
+do GIT/commerce_va_inflation/Definition_composante_HC_WIOD_TIVA.do
 ***********************************************************
 
 set more off

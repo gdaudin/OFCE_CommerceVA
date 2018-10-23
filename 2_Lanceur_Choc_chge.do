@@ -1,5 +1,7 @@
-*****Lanceur du programme de change (attention, c'est long)
 
+*****HC, GD, 10/2018----------------------------------------
+*****Lanceur du programme de change (attention, c'est très long)
+*****Ce lanceur lance pour chaque base, chaque année et chaque pays le choc de change 
 *--------------------------------------------------------------------------------
 *LIST ALL PROGRAMS AND RUN THEM
 *--------------------------------------------------------------------------------
@@ -7,7 +9,7 @@
 
 clear
 set more off
-*****Mettre global test =1 provoquera la sauvegarde de plein de matrices / vecteurs à vérifier
+*****Mettre global test =1 provoquera la sauvegarde de plein de matrices / vecteurs 
 
 *******Définition du directory
 if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
@@ -26,7 +28,6 @@ do GIT/commerce_va_inflation/Definition_pays_secteur.do
 
 
 **local nbr_sect=wordcount("$sector")	
-
 do GIT/commerce_va_inflation/choc_chge.do
 /*
 ***** POUR TEST (1 pays, 1 année, 1 source)***********

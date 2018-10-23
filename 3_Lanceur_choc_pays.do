@@ -26,7 +26,7 @@ Definition_pays_secteur WIOD
 append_HC WIOD
 append_X WIOD
 
-
+blink
 *--------------------------------------------------------------------------------
 *LIST ALL PROGRAMS AND RUN THEM - agregation effet choc
 *--------------------------------------------------------------------------------

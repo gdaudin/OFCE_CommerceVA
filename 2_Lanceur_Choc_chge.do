@@ -2,6 +2,8 @@
 *****HC, GD, 10/2018----------------------------------------
 *****Lanceur du programme de change (attention, c'est très long)
 *****Ce lanceur lance pour chaque base, chaque année et chaque pays le choc de change 
+*****Attention, lors de chaque mise à jour des données, il faut changer les dates de début/fin dans 1_constr_bases.do (l 20, 53 , 230-235, 327-331)
+*****Pour changer la taille du choc, changer la ligne 98 (ici choc de +100%)
 *--------------------------------------------------------------------------------
 *LIST ALL PROGRAMS AND RUN THEM
 *--------------------------------------------------------------------------------
@@ -94,7 +96,7 @@ foreach source in   WIOD TIVA {
 		foreach groupeduchoc of global ori_choc {
 			compute_B_B2 `i' `groupeduchoc' `source' B
 			compute_B_B2 `i' `groupeduchoc' `source' B2
-			vector_shock_exch 1 `groupeduchoc' `source'
+			vector_shock_exch 1 `groupeduchoc' `source' 
 			shock_exch `i' `groupeduchoc' `source'
 			
 			use "$dir/Results/Devaluations/`source'_S_`i'_`groupeduchoc'_exch.dta"

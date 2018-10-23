@@ -274,10 +274,8 @@ if "`source'"=="WIOD" {
 
 
 
-if ("`c(username)'"=="guillaumedaudin") do  "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation/Definition_pays_secteur.do" `source'
-if ("`c(username)'"=="w817186") do "X:\Agents\FAUBERT\commerce_VA_inflation\Definition_pays_secteur.do" `source'
-if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\Definition_pays_secteur.do" `source'
-
+do GIT/commerce_va_inflation/Definition_pays_secteur.do   
+Definition_pays_secteur `source' 
 
 global country2 lower("$country")
 	

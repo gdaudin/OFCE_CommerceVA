@@ -57,8 +57,6 @@ foreach source in   WIOD TIVA {
 	if "`source'"=="TIVA" local end_year 2011
 
 	
-
-
 	// Fabrication des fichiers d'effets moyens des chocs de change
 	// pour le choc CPI, faire tourner compute_HC et compute_leontief, les autres ne sont pas indispensables
 	*2005 2009 2010 2011
@@ -82,15 +80,16 @@ foreach source in   WIOD TIVA {
 	foreach i of numlist `start_year' (1)`end_year'  {
 		
 		local HC_fait 0
-    	foreach j in  HC_neig_dom HC_alimentaire_dom HC_energie_dom HC_services_dom HC_dom ///
-					HC_neig_impt HC_alimentaire_impt HC_energie_impt HC_services_impt HC_impt HC X Yt  {	
+    	foreach j in  HC X Y HC_neig_dom HC_alimentaire_dom HC_energie_dom HC_services_dom HC_dom ///
+					HC_neig_impt HC_alimentaire_impt HC_energie_impt HC_services_impt HC_impt   {	
 
     	    if strpos("`j'","HC")!=0 & `HC_fait'==0 {
 				compute_HC_vect `i' `source'
 				local HC_fait 1
 			}
-			if strpos("`j'","HC")==0 compute_`j'_vect `i' `source'
-			table_mean `i' `j' 1 `source'
+			if strpos("`j'","HC")==0 compute_`j'_vect `i' `source' 
+			table_mean `i' `j' 1 `source' Sdollar
+			table_mean `i' `j' 1 `source' S
 
 	    }
 

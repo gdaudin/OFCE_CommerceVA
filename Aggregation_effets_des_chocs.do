@@ -65,15 +65,15 @@ end
 
 capture program drop compute_mean    // matrix shock`cty'
 program compute_mean
-	args yrs groupeduchoc wgt source
+	args yrs groupeduchoc wgt source currency
 clear
 *set matsize 7000
 set more off
 clear
 
 
-use "$dir/Results/Devaluations/`source'_S_`yrs'_`groupeduchoc'_exch.dta"
-mkmat S`groupeduchoc't1, matrix(S`groupeduchoc't)
+use "$dir/Results/Devaluations/`source'_`currency'_`yrs'_`groupeduchoc'_exch.dta"
+mkmat `currency'`groupeduchoc't1, matrix(`currency'`groupeduchoc't)
 
 use "$dir/Bases/csv_`source'.dta", clear
 
@@ -96,8 +96,8 @@ if ("`wgt'" == "X")  {
 
 if ("`wgt'" == "X") | ("`wgt'" == "Y") {
 
-	svmat S`groupeduchoc't
-	generate Bt = S`groupeduchoc't1* `wgt'
+	svmat `currency'`groupeduchoc't
+	generate Bt = `currency'`groupeduchoc't1* `wgt'
 	gen pays_interet=c
 	replace pays_interet="CHN" if pays_interet=="CN1" | pays_interet=="CN2" | pays_interet=="CN3" | pays_interet=="CN4"
 	replace pays_interet="MEX" if pays_interet=="MX1" | pays_interet=="MX2" | pays_interet=="MX3"
@@ -113,14 +113,14 @@ if ("`wgt'" == "X") | ("`wgt'" == "Y") {
 
 
 local blink 0
-svmat S`groupeduchoc't, name(S`groupeduchoc')	
+svmat `currency'`groupeduchoc't, name(`currency'`groupeduchoc')	
 
 
 
 if strpos("`wgt'","HC")!=0  {
 	foreach pays_conso of global country_hc {
         svmat HC_`pays_conso', name(HC_`pays_conso')
-        generate Bt_`pays_conso' = S`groupeduchoc'* HC_`pays_conso'
+        generate Bt_`pays_conso' = `currency'`groupeduchoc'* HC_`pays_conso'
         egen tot_HC_`pays_conso' = total(HC_`pays_conso')
         generate sector_shock_`pays_conso' = Bt_`pays_conso'/tot_HC_`pays_conso'
 		foreach sector in alimentaire neig energie services {
@@ -157,8 +157,8 @@ end
 *CREATION OF THE TABLE CONTAINING THE MEAN EFFECT OF A EXCHANGE RATE SHOCK FROM EACH COUNTRY TO ALL COUNTRIES
 *----------------------------------------------------------------------------------------------------
 capture program drop table_mean
-program table_mean
-	args yrs wgt shk source
+program table_mean 
+	args yrs wgt shk source currency
 *yrs = years, wgt = Yt (output) or X (export) or VAt (value-added) or HC (household consumption)
 clear
 *set matsize 7000
@@ -167,7 +167,7 @@ set more off
 
 
 foreach i of global ori_choc {
-	compute_mean `yrs' `i' `wgt' `source'
+	compute_mean `yrs' `i' `wgt' `source' `currency'
 }
 
 
@@ -183,10 +183,10 @@ foreach i of global ori_choc {
 
 
 * shockARG1 represents the mean effect of a price shock coming from Argentina for each country
-save "$dir/Results/Devaluations/mean_chg_`source'_`wgt'_`yrs'.dta", replace
+save "$dir/Results/Devaluations/mean_chg_`source'_`wgt'_`yrs'_`currency'.dta", replace
 *We obtain a table of mean effect of a price shock from each country to all countries
 
-export excel using "$dir/Results/Devaluations/mean_chg_`source'_`wgt'_`yrs'.xls", firstrow(variables) replace
+export excel using "$dir/Results/Devaluations/mean_chg_`source'_`wgt'_`yrs'_`currency'.xls", firstrow(variables) replace
 
 * set trace off
 set more on

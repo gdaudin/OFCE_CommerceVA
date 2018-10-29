@@ -126,10 +126,11 @@ if strpos("`wgt'","HC")!=0  {
         egen tot_HC_`pays_conso' = total(HC_`pays_conso')
         generate sector_shock_`pays_conso' = Bt_`pays_conso'/tot_HC_`pays_conso'
 		foreach sector in alimentaire neig energie services {
+		
 			if strpos("`wgt'","`sector'")!=0	replace sector_shock_`pays_conso'= 0 if agregat_secteur!="`sector'"
 		}
-		if strpos("`wgt'","imp")!=0 replace  sector_shock_`pays_conso'= 0 if lower("`pays_conso'")==c
-		if strpos("`wgt'","dom")!=0 replace  sector_shock_`pays_conso'= 0 if lower("`pays_conso'")!=c
+		if strpos("`wgt'","imp")!=0 replace  sector_shock_`pays_conso'= 0 if upper("`pays_conso'")==c
+		if strpos("`wgt'","dom")!=0 replace  sector_shock_`pays_conso'= 0 if upper("`pays_conso'")!=c
         egen shock`groupeduchoc'_`pays_conso' = total(sector_shock_`pays_conso')
     *	keep if _n==1
         mkmat shock`groupeduchoc'_`pays_conso'

@@ -11,6 +11,7 @@ clear
 set more off
 
 if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
+if ("`c(hostname)'" == "widv269a") global dir  "D:\home\T822289\CommerceVA" 
 else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
 
 capture log  using "$dir/Temporaire/$S_DATE.log", replace
@@ -80,7 +81,7 @@ foreach source in   WIOD TIVA {
 	foreach i of numlist `start_year' (1)`end_year'  {
 		
 		local HC_fait 0
-    	foreach j in  /*HC X*/ Y HC_neig_dom HC_alimentaire_dom HC_energie_dom HC_services_dom HC_dom ///
+    	foreach j in  HC X Y HC_neig_dom HC_alimentaire_dom HC_energie_dom HC_services_dom HC_dom ///
 					HC_neig_impt HC_alimentaire_impt HC_energie_impt HC_services_impt HC_impt   {	
 
     	    if strpos("`j'","HC")!=0 & `HC_fait'==0 {

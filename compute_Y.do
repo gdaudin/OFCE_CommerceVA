@@ -18,6 +18,7 @@ if "`source'"=="WIOD" {
 	egen utilisations = rowtotal(vAUS01-vUSA61)
 	gen pays =upper(Country)
 	rename IndustryCode sector
+	drop if pays=="TOT"
 }
 
 if "`source'"=="TIVA" {

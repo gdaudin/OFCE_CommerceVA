@@ -17,7 +17,7 @@ use "$dir/Bases/`source'_ICIO_`yrs'.dta", clear
 if "`source'"=="WIOD" {
 egen utilisations = rowtotal(vAUS01-vUSA61)
 gen utilisations_dom = .
-gen pays = substr("`i'",1,3)
+drop if Country=="TOT"
 
 	foreach j of global country {
 		local i = "`j'"
@@ -28,6 +28,7 @@ gen pays = substr("`i'",1,3)
 		drop blouk
 		
 	}
+
 }
 
 if "`source'"=="TIVA" {
@@ -66,7 +67,7 @@ if "`source'"=="TIVA" {
 
 
 if "`source'"=="WIOD" {
-	replace pays =upper(Country)
+	generate pays =upper(Country)
 	rename IndustryCode sector
 }
 

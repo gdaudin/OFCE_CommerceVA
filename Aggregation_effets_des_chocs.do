@@ -12,10 +12,9 @@ clear
 use "$dir/Bases/Y_`source'.dta", clear
 keep if year == `yrs'
 
-mkmat $var_entree_sortie, matrix(Y)
+mkmat Y, matrix(Y)
 
 display "fin compute_Y_vect"
-
 end
 
 *Creation of the vector of export X : matrix X
@@ -75,6 +74,7 @@ clear
 use "$dir/Results/Devaluations/`source'_`currency'_`yrs'_`groupeduchoc'_exch.dta"
 mkmat `currency'`groupeduchoc't1, matrix(`currency'`groupeduchoc't)
 
+
 use "$dir/Bases/csv_`source'.dta", clear
 
 *I decide whether I use the production or export or value-added vector as weight modifying the argument "wgt" : Yt or X or VAt
@@ -104,9 +104,11 @@ if ("`wgt'" == "X") | ("`wgt'" == "Y") {
 	bys pays_interet : egen tot_`wgt' = total(`wgt')
 	generate sector_shock = Bt/tot_`wgt'
 	bys pays_interet : egen shock`groupeduchoc' = total(sector_shock)
+		
 	bys pays_interet : keep if _n==1
 	mkmat shock`groupeduchoc'
 *   pourquoi pas  mkmat shock`groupeduchoc'_`pays_conso' ???
+
 	
 }
 

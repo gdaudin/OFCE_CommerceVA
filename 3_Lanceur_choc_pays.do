@@ -80,7 +80,7 @@ foreach source in   WIOD TIVA {
 	foreach i of numlist `start_year' (1)`end_year'  {
 		
 		local HC_fait 0
-    	foreach j in  HC X Y HC_neig_dom HC_alimentaire_dom HC_energie_dom HC_services_dom HC_dom ///
+    	foreach j in  /*HC X*/ Y HC_neig_dom HC_alimentaire_dom HC_energie_dom HC_services_dom HC_dom ///
 					HC_neig_impt HC_alimentaire_impt HC_energie_impt HC_services_impt HC_impt   {	
 
     	    if strpos("`j'","HC")!=0 & `HC_fait'==0 {

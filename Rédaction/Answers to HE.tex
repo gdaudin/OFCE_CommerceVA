@@ -48,7 +48,7 @@
 }
 \vspace{1cm}
 \date{\today}
-\author{Guillaume Daudin\thanks{PSL, Universit\'e Paris-Dauphine,Sciences Po, OFCE. E-mail: \email{gdaudin@mac.com}}}
+\author{Guillaume Daudin\thanks{PSL, Universit\'e Paris-Dauphine,Sciences Po, OFCE. E-mail: \email{guillaume.daudin@dauphine.psl.eu}}}
 %\vspace*{\fill}
 \maketitle
 
@@ -62,7 +62,8 @@ That would not do because the price of, e.g. French VA does not change for every
 
 Doubt: is that enough an argument ?
 2 sectors, 2 countries
-\begin{eqnarray}
+\subsection{Evolution of VA price}
+\begin{gather*}
 A=\left(\begin{matrix}a_{1,1}&a_{2,1}\\a_{1,2}&a_{2,2}\end{matrix}\right)
 \\
 I-A=\left(\begin{matrix}1-a_{1,1}&-a_{2,1}\\-a_{1,2}&1-a_{2,2}\end{matrix}\right)
@@ -71,19 +72,62 @@ I-A=\left(\begin{matrix}1-a_{1,1}&-a_{2,1}\\-a_{1,2}&1-a_{2,2}\end{matrix}\right
 \\
 \text{French demand shares}=d=\left(\begin{matrix}1-f\\f\end{matrix}\right) \\
 \left(I-A\right)^{-1}d=\left(\begin{matrix}u-uf+vf\\w-wf+xf\end{matrix}\right)
-\end{eqnarray}
+\end{gather*}
 
 Donc, en cas de choc $c$ pour le prix de la va dans le pays étranger (en monnaie française), on peut écrire un vecteur de choc : $C=\left(0,c\right)$.  les prix varient tout d'abord de  $CA$, puis $CA^2$, etc. Donc le vecteur de choc $S$ (en monnaie française) est : 
 
 
-\begin{eqnarray}
+\begin{equation*}
 S=C+CA+CA^2...=C(I-A)^{-1}=\left(\begin{matrix}cw  &   cx\end{matrix}\right)
-\end{eqnarray}
+\end{equation*}
 
 To measure the effect on French consumption prices, we do a weighted sum of thess effects.
 
-\begin{eqnarray}
-c\left[\left(1-f\right)w+xf\right]=c.\frac{\left(1-f\right)a_{1,2}+f\left(1-a_{1,1}\right)}{\left(1-a_{1,1}\right)\left(1-a_{2,2}\right)-a_{1,2}a_{2,1}}
-\end{eqnarray}
+\begin{equation}
+\bar{s}=c.\left[\left(1-f\right)w+xf\right]=c.\frac{\left(1-f\right)a_{1,2}+f\left(1-a_{1,1}\right)}{\left(1-a_{1,1}\right)\left(1-a_{2,2}\right)-a_{1,2}a_{2,1}}
+\end{equation}
+
+If each nation's production only uses national inputs, we have a plausible :
+\begin{equation*}
+\bar{s}=c.\frac{f}{1-a_{2,2}}
+\end{equation*}
+
+\subsection{Exchange rate shock}
+
+Using the notations in the paper...
+
+\begin{gather*}
+\hat{C}_\$=\left(-c,0\right)
+\\
+\cal B = \left(\begin{matrix}0&a_{2,1}\\0&0\end{matrix}\right)
+\\
+\tilde{\cal B} = \left(\begin{matrix}0&0\\a_{1,2}&0\end{matrix}\right)
+\end{gather*}
+
+Hence
+
+\begin{gather*}
+S =\left(0,c\right)+\left[\left(0,-c.a_{2,1}\right)+\left(c.a_{1,2},0\right)\right]*\left(\begin{matrix}u&v\\w&x\end{matrix}\right)
+\\
+=\left(0,c\right)+\left(c.a_{1,2},-c.a_{2,1}\right)*\left(\begin{matrix}u&v\\w&x\end{matrix}\right)
+\\
+=\left(0,c\right)+\left(u.c.a_{1,2}-w.c.a_{2,1},v.c.a_{1,2}-x.c.a_{2,1}\right)
+\\
+=\left(u.c.a_{1,2}-w.c.a_{2,1},c+v.c.a_{1,2}-x.c.a_{2,1}\right)
+\\
+=\frac{c}{\left(1-a_{1,1}\right)\left(1-a_{2,2}\right)-a_{1,2}a_{2,1}}\left(\left(1-a_{2,2}\right).a_{1,2}-a_{2,1}.a_{1,2},1+a_{1,2}.a_{2,1}-a_{2,1}.\left(1-a_{1,1}\right)\right)
+\end{gather*}
+and
+\begin{gather*}
+\bar{s}=\frac{c\left[\left(1-f\right)\left(\left(1-a_{1,1}\right)\left(1-a_{2,2}\right)-a_{1,2}a_{2,1}\right)+f\left(1+a_{1,2}.a_{2,1}-a_{2,1}.\left(1-a_{1,1}\right)\right)\right]}{\left(1-a_{1,1}\right)\left(1-a_{2,2}\right)-a_{1,2}a_{2,1}}
+\bar{s}=\frac{c\left[\left(1-f\right)\left(\left(1-a_{1,1}\right)\left(1-a_{2,2}\right)-a_{1,2}a_{2,1}\right)+f\left(1+a_{1,2}.a_{2,1}-a_{2,1}.\left(1-a_{1,1}\right)\right)\right]}{\left(1-a_{1,1}\right)\left(1-a_{2,2}\right)-a_{1,2}a_{2,1}}
+\end{gather*}
+
+
+If each nation's production only uses national inputs, we have
+
+\begin{gather*}
+\bar{s}=\frac{c\left[\left(1-f\right)\left(1-a_{1,1}\right)\left(1-a_{2,2}\right)+f\right]}{\left(1-a_{1,1}\right)\left(1-a_{2,2}\right)}
+\end{gather*}
 
 \end{document}

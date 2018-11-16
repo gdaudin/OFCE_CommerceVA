@@ -1,20 +1,3 @@
-clear
-*set trace on
-
-if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
-else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
-
-
-capture log using "$dir/$S_DATE.log", replace
-set more off
-
-
-	
-local nbr_sect=wordcount("$sector")
-
-
-
-
 
 
 ***************************************************************************************************
@@ -34,7 +17,7 @@ use "$dir/Bases/`source'_ICIO_`yrs'.dta", clear
 if "`source'"=="WIOD" {
 egen utilisations = rowtotal(vAUS01-vUSA61)
 gen utilisations_dom = .
-gen pays = substr("`i'",1,3)
+drop if Country=="TOT"
 
 	foreach j of global country {
 		local i = "`j'"
@@ -45,6 +28,7 @@ gen pays = substr("`i'",1,3)
 		drop blouk
 		
 	}
+
 }
 
 if "`source'"=="TIVA" {
@@ -77,13 +61,13 @@ generate year = `yrs'
 
 
 if "`source'"=="TIVA" {
-	generate pays = strlower(substr(v1,1,3))
-	generate sector = strlower(substr(v1,strpos(v1,"_")+1,strlen(v1)-3-strpos(v1,"_")))
+	generate pays = strupper(substr(v1,1,3))
+	generate sector = strupper(substr(v1,strpos(v1,"_")+1,strlen(v1)-3-strpos(v1,"_")))
 }
 
 
 if "`source'"=="WIOD" {
-	replace pays =lower(Country)
+	generate pays =upper(Country)
 	rename IndustryCode sector
 }
 
@@ -119,15 +103,7 @@ end
 
 
 
-if ("`c(username)'"=="guillaumedaudin") do  "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation/Definition_pays_secteur.do" TIVA
-if ("`c(username)'"=="w817186") do "X:\Agents\FAUBERT\commerce_VA_inflation\Definition_pays_secteur.do" TIVA
-if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\Definition_pays_secteur.do" TIVA
 
-append_X TIVA
 
-if ("`c(username)'"=="guillaumedaudin") do  "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation/Definition_pays_secteur.do" WIOD
-if ("`c(username)'"=="w817186") do "X:\Agents\FAUBERT\commerce_VA_inflation\Definition_pays_secteur.do" WIOD
-if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\Definition_pays_secteur.do" WIOD
-append_X WIOD
 
 

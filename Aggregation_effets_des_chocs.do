@@ -1,47 +1,26 @@
 
-clear  
-set more off
-if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
-else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
-
-
-
-
-capture log close
-*log using "$dir/$S_DATE.log", replace
-set matsize 7000
-*set mem 700m if earlier version of stata (<stata 12)
-set more off
-
-
-
-
-	
-local nbr_sect=wordcount("$sector")	
 
 *----------------------------------------------------------------------------------
-*CREATION OF A VECTOR CONTAINING MEAN EFFECTS OF A SHOCK ON EXCHANGE RATE FOR EACH COUNTRY
+*CREATION OF A VECTOR CONTAINING (Y,X ou HC) MEAN EFFECTS OF A SHOCK ON EXCHANGE RATE FOR EACH COUNTRY
 *----------------------------------------------------------------------------------
 *Creation of the vector Y is required before table_adjst : matrix Yt
-capture program drop compute_Yt
-program compute_Yt
+capture program drop compute_Y_vect
+program compute_Y_vect
 args yrs source
 clear
 
-use "$dir/Bases/`source'_`yrs'_OUT.dta"
+use "$dir/Bases/Y_`source'.dta", clear
+keep if year == `yrs'
 
+mkmat Y, matrix(Y)
 
-mkmat $var_entree_sortie, matrix(Y)
-matrix Yt = Y'
-
-display "fin compute_Yt"
-
+display "fin compute_Y_vect"
 end
 
 *Creation of the vector of export X : matrix X
 * 2017-10-17 redondant avec le programme 1!!!
-capture program drop compute_X
-program compute_X
+capture program drop compute_X_vect
+program compute_X_vect
 	args yrs source
 	
 use "$dir/Bases/X_`source'.dta", clear
@@ -49,7 +28,7 @@ keep if year == `yrs'
 
 *keep year Country X
 mkmat X, matrix(X)
-display "fin compute_X"
+display "fin compute_X_vect"
 
 end
 
@@ -67,15 +46,16 @@ mkmat $var_entree_sortie, matrix(VA)
 matrix VAt = VA'
 end
 */
-capture program drop compute_HC
-program  compute_HC
+capture program drop compute_HC_vect
+program  compute_HC_vect
 	args yrs source 
 	
 	use "$dir/Bases/HC_`source'.dta", clear
 	keep if year == `yrs'
 	foreach pays_conso of global country_hc {
+		replace pays_conso=strupper(pays_conso)
 		preserve
-		keep if pays_conso==strlower("`pays_conso'")
+		keep if pays_conso==strupper("`pays_conso'")
 		mkmat conso, matrix(HC_`pays_conso')
 		restore
 	}
@@ -85,15 +65,16 @@ end
 
 capture program drop compute_mean    // matrix shock`cty'
 program compute_mean
-	args yrs groupeduchoc wgt source
+	args yrs groupeduchoc wgt source currency
 clear
 *set matsize 7000
 set more off
 clear
 
 
-use "$dir/Results/Devaluations/`source'_C_`yrs'_`groupeduchoc'_exch.dta"
-mkmat C`groupeduchoc't1, matrix(C`groupeduchoc't)
+use "$dir/Results/Devaluations/`source'_`currency'_`yrs'_`groupeduchoc'_exch.dta"
+mkmat `currency'`groupeduchoc't1, matrix(`currency'`groupeduchoc't)
+
 
 use "$dir/Bases/csv_`source'.dta", clear
 
@@ -103,10 +84,10 @@ use "$dir/Bases/csv_`source'.dta", clear
 
 
 
-if ("`wgt'" == "Yt")  {
-	matrix Yt = Y'
-	svmat Yt 
-	
+if ("`wgt'" == "Y")  {
+*	matrix Y = Y'
+	svmat Y 
+	*on fait du vecteur une variable
 
 }
 if ("`wgt'" == "X")  {
@@ -114,40 +95,43 @@ if ("`wgt'" == "X")  {
 }
 
 
-if ("`wgt'" == "X") | ("`wgt'" == "Yt") {
+if ("`wgt'" == "X") | ("`wgt'" == "Y") {
 
-	svmat C`groupeduchoc't
-	generate Bt = C`groupeduchoc't1* `wgt'
+	svmat `currency'`groupeduchoc't
+	generate Bt = `currency'`groupeduchoc't1* `wgt'
 	gen pays_interet=c
 	replace pays_interet="CHN" if pays_interet=="CN1" | pays_interet=="CN2" | pays_interet=="CN3" | pays_interet=="CN4"
 	replace pays_interet="MEX" if pays_interet=="MX1" | pays_interet=="MX2" | pays_interet=="MX3"
 	bys pays_interet : egen tot_`wgt' = total(`wgt')
 	generate sector_shock = Bt/tot_`wgt'
 	bys pays_interet : egen shock`groupeduchoc' = total(sector_shock)
+		
 	bys pays_interet : keep if _n==1
 	mkmat shock`groupeduchoc'
 *   pourquoi pas  mkmat shock`groupeduchoc'_`pays_conso' ???
+
 	
 }
 
 
 
 local blink 0
-svmat C`groupeduchoc't, name(C`groupeduchoc')	
+svmat `currency'`groupeduchoc't, name(`currency'`groupeduchoc')	
 
 
 
 if strpos("`wgt'","HC")!=0  {
 	foreach pays_conso of global country_hc {
         svmat HC_`pays_conso', name(HC_`pays_conso')
-        generate Bt_`pays_conso' = C`groupeduchoc'* HC_`pays_conso'
+        generate Bt_`pays_conso' = `currency'`groupeduchoc'* HC_`pays_conso'
         egen tot_HC_`pays_conso' = total(HC_`pays_conso')
         generate sector_shock_`pays_conso' = Bt_`pays_conso'/tot_HC_`pays_conso'
 		foreach sector in alimentaire neig energie services {
+		
 			if strpos("`wgt'","`sector'")!=0	replace sector_shock_`pays_conso'= 0 if agregat_secteur!="`sector'"
 		}
-		if strpos("`wgt'","imp")!=0 replace  sector_shock_`pays_conso'= 0 if lower("`pays_conso'")==c
-		if strpos("`wgt'","dom")!=0 replace  sector_shock_`pays_conso'= 0 if lower("`pays_conso'")!=c
+		if strpos("`wgt'","imp")!=0 replace  sector_shock_`pays_conso'= 0 if upper("`pays_conso'")==c
+		if strpos("`wgt'","dom")!=0 replace  sector_shock_`pays_conso'= 0 if upper("`pays_conso'")!=c
         egen shock`groupeduchoc'_`pays_conso' = total(sector_shock_`pays_conso')
     *	keep if _n==1
         mkmat shock`groupeduchoc'_`pays_conso'
@@ -177,8 +161,8 @@ end
 *CREATION OF THE TABLE CONTAINING THE MEAN EFFECT OF A EXCHANGE RATE SHOCK FROM EACH COUNTRY TO ALL COUNTRIES
 *----------------------------------------------------------------------------------------------------
 capture program drop table_mean
-program table_mean
-	args yrs wgt shk source
+program table_mean 
+	args yrs wgt shk source currency
 *yrs = years, wgt = Yt (output) or X (export) or VAt (value-added) or HC (household consumption)
 clear
 *set matsize 7000
@@ -187,7 +171,7 @@ set more off
 
 
 foreach i of global ori_choc {
-	compute_mean `yrs' `i' `wgt' `source'
+	compute_mean `yrs' `i' `wgt' `source' `currency'
 }
 
 
@@ -203,107 +187,15 @@ foreach i of global ori_choc {
 
 
 * shockARG1 represents the mean effect of a price shock coming from Argentina for each country
-save "$dir/Results/Devaluations/mean_chg_`source'_`wgt'_`yrs'.dta", replace
+save "$dir/Results/Devaluations/mean_chg_`source'_`wgt'_`yrs'_`currency'.dta", replace
 *We obtain a table of mean effect of a price shock from each country to all countries
 
-export excel using "$dir/Results/Devaluations/mean_chg_`source'_`wgt'_`yrs'.xls", firstrow(variables) replace
+export excel using "$dir/Results/Devaluations/mean_chg_`source'_`wgt'_`yrs'_`currency'.xls", firstrow(variables) replace
 
 * set trace off
 set more on
 
 end
 
-
-
-
-*--------------------------------------------------------------------------------
-*LIST ALL PROGRAMS AND RUN THEM
-*--------------------------------------------------------------------------------
-
-
-
-
-clear
-set more off
-
-
-*foreach source in   TIVA { 
-foreach source in   WIOD TIVA { 
-
-
-	if "`source'"=="WIOD" local start_year 2000
-	if "`source'"=="TIVA" local start_year 1995
-
-
-	if "`source'"=="WIOD" local end_year 2014
-	if "`source'"=="TIVA" local end_year 2011
-
-	
-	if ("`c(username)'"=="guillaumedaudin") do  "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation/Definition_pays_secteur.do" `source' 
-	if ("`c(username)'"=="w817186") do "X:\Agents\FAUBERT\commerce_VA_inflation\Definition_pays_secteur.do" `source' 
-	if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\Definition_pays_secteur.do" `source' 
-	
-
-	// Fabrication des fichiers d'effets moyens des chocs de change
-	// pour le choc CPI, faire tourner compute_HC et compute_leontief, les autres ne sont pas indispensables
-	*2005 2009 2010 2011
-
-
-
-
-	if "`source'"=="TIVA" {
-	*	global ori_choc "CHN"
-		global ori_choc "EUR EAS"
-		global ori_choc "$ori_choc ARG AUS AUT BEL BGR BRA BRN CAN CHE CHL CHN COL CRI CYP CZE DEU DNK ESP EST FIN"
-		global ori_choc "$ori_choc FRA GBR GRC HKG HRV HUN IDN IND IRL ISL ISR ITA JPN KHM KOR LTU LUX LVA MAR MEX MLT MYS NLD NOR NZL PER "
-		global ori_choc "$ori_choc PHL POL PRT ROU ROW RUS SAU SGP SVK SVN SWE THA TUN TUR TWN USA VNM ZAF"
-	}
-
-	if "`source'"=="WIOD" {
-		global ori_choc "EUR EAS"
-		global ori_choc "$ori_choc AUS AUT BEL BGR BRA     CAN CHE CHN                             CYP CZE DEU DNK ESP EST FIN " 
-		global ori_choc "$ori_choc FRA GBR GRC     HRV HUN IDN IND IRL       ITA JPN     KOR LTU LUX LVA MEX              MLT     NLD NOR        POL PRT"
-		global ori_choc "$ori_choc ROU ROW RUS       SVK SVN SWE       TUR TWN USA        "
-	}
-	
-	
-
-
-
-
-
-*  foreach i of numlist 2011 {
-	foreach i of numlist `start_year' (1)`end_year'  {
-		
-		local HC_fait 0
-    	foreach j in  HC_neig_dom HC_alimentaire_dom HC_energie_dom HC_services_dom HC_dom ///
-					HC_neig_impt HC_alimentaire_impt HC_energie_impt HC_services_impt HC_impt /*X Yt*/  {	
-
-    	    if strpos("`j'","HC")!=0 & `HC_fait'==0 {
-				compute_HC `i' `source'
-				local HC_fait 1
-			}
-			if strpos("`j'","HC")==0 compute_`j' `i' `source'
-			table_mean `i' `j' 1 `source'
-
-	    }
-
-    }
-
-}
-
-*secteurs HC : alimentaire neig services energie
-
-*on va le mettre dans weight.
-
-*HC_alimentaire HC_neig HC_services HC_energie
-
-
-
-
-
-
-
-capture log close
 
 

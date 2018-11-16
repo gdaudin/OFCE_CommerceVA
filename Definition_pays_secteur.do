@@ -1,22 +1,10 @@
 clear
 *set trace on
 
-global dir "H:\My Documents\OFCE_CommerceVA-develop\OFCE_CommerceVA-develop"
-if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
-if ("`c(username)'"=="n818881") global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
+capture program drop Definition_pays_secteur
+program Definition_pays_secteur
 
-global dirgit "H:\My Documents\OFCE_CommerceVA-develop\OFCE_CommerceVA-develop\" 
-if ("`c(username)'"=="guillaumedaudin") global dirgit "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation/"
-if ("`c(username)'"=="n818881") global dirgit "X:\Agents\LALLIARD\commerce_VA_inflation\"
-
-
-capture log using "$dir/$S_DATE.log", replace
-set more off
-
-
-
-
-local source `1'
+args source
 *Pour argument dans le programme
 
 
@@ -41,8 +29,8 @@ global country_hc "ARG AUS AUT BEL BGR BRA BRN CAN CHE CHL"
 	global sector "$sector C50T52 C55 C60T63 C64 C65T67 C70 C71 C72 C73T74 C75 C80 C85 C90T93 C95"
 	
 	global noneuro "ARG AUS BGR BRA BRN CAN CHE CHL CHN COL CRI CZE DNK GBR HKG HRV HUN IDN IND ISL ISR JPN KHM KOR MEX MX1 MX2 MX3 MYS NOR NZL PHL POL ROU ROW RUS SAU SGP SWE THA TUN TUR TWN USA VNM ZAF"
-	global china "CHN CN1 CN2 CN3 CN4"
-	global mexique "MEX MX1 MX2 MX3"
+	global china "CHN CN1 CN2 CN3 CN4" /* 5 Chine dans la source --> choquer ce groupe pour choc Chine"*/
+	global mexique "MEX MX1 MX2 MX3" /* 4 Mexique dans la source --> choquer ce groupe pour choc Mexique (y.c Maquiladoas)"*/
 	
 	global var_entree_sortie arg_c01t05agr-zaf_c95pvh
 	
@@ -81,3 +69,4 @@ global eastern "BGR CZE HRV HUN POL ROU"
 
 
 
+end

@@ -1,25 +1,5 @@
-*****Mettre global test =1 provoquera la sauvegarde de plein de matrices / vecteurs à vérifier
-
-clear  
-set more off
-if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
-else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
 
 
-
-
-capture log close
-*log using "$dir/$S_DATE.log", replace
-set matsize 7000
-*set mem 700m if earlier version of stata (<stata 12)
-set more off
-global test 1
-*Mettre test=1 pour sauver les tableaux un par un et test=0 pour ne pas encombrer le DD.
-
-
-
-	
-local nbr_sect=wordcount("$sector")	
 *-------------------------------------------------------------------------------
 *COMPUTING LEONTIEF INVERSE MATRIX  : matrix L1
 *-------------------------------------------------------------------------------
@@ -29,23 +9,16 @@ set more off
 capture program drop compute_leontief
 program compute_leontief
 args yrs source
-
-if ("`c(username)'"=="guillaumedaudin") do  "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation/Definition_pays_secteur.do" `source' 
-if ("`c(username)'"=="w817186") do "X:\Agents\FAUBERT\commerce_VA_inflation\Definition_pays_secteur.do" `source' 
-if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\Definition_pays_secteur.do" `source' 
+Definition_pays_secteur `source' 
 
 
-	
 *Create vector Y of output from troncated database
 clear
 use "$dir/Bases/`source'_`yrs'_OUT.dta", clear
 mkmat $var_entree_sortie, matrix(Y)
 
-*Create matrix Z of inter-industry inter-country trade
+*Create matrix Z of inter-industry inter-country trade (CI)
 use "$dir/Bases/`source'_`yrs'_Z.dta"
-
-
-
 mkmat $var_entree_sortie, matrix (Z)
 
 *From vector Y create a diagonal matrix Yd which contains all elements of vector Y on the diagonal
@@ -56,6 +29,7 @@ matrix Yd1=invsym(Yd)
 
 *Then multiply Yd1 by Z 
 matrix A_`yrs'=Z*Yd1
+*On obtient A la matrice des coefficients techniques
 
 clear
 svmat A_`yrs', names(col)
@@ -77,7 +51,7 @@ svmat L1_`yrs', names(col)
 save "$dir/Bases/`source'_L1_`yrs'.dta", replace
 
 
-display "fin de compute_leontieff" `yrs'
+display "fin de compute_leontief" `yrs'
 
 end
 
@@ -89,18 +63,13 @@ end
 
 set more off
 *set matsize 7000
-capture program drop compute_leontief_chocnom
-program compute_leontief_chocnom
-	args yrs groupeduchoc source
-*ex : compute_leontief_chocnom 2005 ARG	WIOD
-*Create vector Y of output from troncated database
+capture program drop compute_B_B2
+program compute_B_B2
+	args yrs groupeduchoc source matrix_obj
+*ex : compute_leontief_B_B2 2005 ARG WIOD B
+
 
 display "`groupeduchoc'"
-
-*use "H:\Agents\Cochard\Papier_chocCVA/Bases/OECD_`yrs'_OUT.dta"
-*mkmat $var_entree_sortie, matrix(Y)
-
-*Create matrix Z of inter-industry inter-country trade
 
 use "$dir/Bases/A_`source'_`yrs'.dta", clear
 
@@ -109,13 +78,14 @@ merge 1:1 _n using "$dir/Bases/csv_`source'.dta"
 drop _merge
 rename c pays_choqué
 
-***----  On construit la matrice B avec des 0 partout sauf pour les CI étrangères en provenance du pays choqué ------*
+***----  On construit la matrice B avec des 0 partout sauf pour les CI étrangères en provenance du pays choqué (cf. équation (3) du papier) ------*
+***----  On construit la matrice B2 avec des 0 partout sauf pour les CI étrangères du pays choqué (équation (4) du papier) ------*
 
 gen grchoc_ligne = 0
 
 foreach p of local groupeduchoc {
 	replace grchoc_ligne = 1 if pays_choqué == "`p'" 
-	
+	**Cas particuliers d'ensemble de pays
 	if ("`p'"=="MEX")  {
 		replace grchoc_ligne = 1 if  strpos("$mexique", pays_choqué)!=0
 	}
@@ -127,10 +97,7 @@ foreach p of local groupeduchoc {
 	}
 	if ("`p'"=="EAS") {
 		replace grchoc_ligne = 1 if strpos("$eastern", pays_choqué)!=0
-	}
-		
-		
-		
+		}	
 }
  
 
@@ -140,53 +107,40 @@ gen grchoc2=0
 
 
 foreach var of varlist $var_entree_sortie {
-	replace `var'=0 if grchoc_ligne==0
+	if "`matrix_obj'" =="B" replace `var'=0 if grchoc_ligne==0
 	
 	
 	if "`source'"=="TIVA" replace pays_origine = strupper(substr("`var'",1,strpos("`var'","_")-1))
 	if "`source'"=="WIOD" replace pays_origine = strupper(substr("`var'",2,3))
-	foreach p of local groupeduchoc {
-	
+	foreach p of local groupeduchoc {	
 		replace grchoc2 = 1 if pays_origine == "`p'" 
-		
-		
-
+	
 		if ("`p'"=="MEX") {
 			replace grchoc2 = 1 if  strpos("$mexique", pays_origine)!=0
-	
 		}
 		if ("`p'"=="CHN") {
 			replace grchoc2 = 1 if  strpos("$china", pays_origine)!=0
 		} 
-	
-		
 		if ("`p'"=="EUR") {
 			replace grchoc2 = 1 if strpos("$eurozone", pays_origine)!=0
 		}
 		if ("`p'"=="EAS") {
 		replace grchoc2 = 1 if strpos("$eastern", pays_origine)!=0
+		}
 	}
-		
-		
-
-	}
-	
-
-	replace `var'=0 if grchoc_ligne==1  & grchoc2==1 
-
-*	if strmatch("`var'","*aut*")==1 blif
-	
-
-replace grchoc2=0
-
-
+	replace `var'=0 if (grchoc_ligne==1  & grchoc2==1)
+	if "`matrix_obj'" =="B2" replace `var'=0 if grchoc2==0
+	replace grchoc2=0
 }
-*drop grchoc grchoc2
-mkmat $var_entree_sortie, matrix (B)
-order pays_choqué s
-if $test==1 save "$dir/Bases/`source'_B_`yrs'_`groupeduchoc'.dta", replace
-***----  On construit la matrice B2 avec des 0 partout sauf pour les CI étrangères du pays choqué ------*
 
+
+*drop grchoc grchoc2
+mkmat $var_entree_sortie, matrix (`matrix_obj')
+order pays_choqué s
+drop p_shock grchoc_ligne pays_origine grchoc2    /* p shock déjà crée dans csv_source (à zéro)) */
+if $test==1 save "$dir/Bases/`source'_`matrix_obj'_`yrs'_`groupeduchoc'.dta", replace
+***----  On construit la matrice B2 avec des 0 partout sauf pour les CI étrangères du pays choqué (équation (4) du papier) ------*
+/*
 use "$dir/Bases/A_`source'_`yrs'.dta", clear
 
 merge 1:1 _n using "$dir/Bases/csv_`source'.dta"
@@ -219,11 +173,10 @@ foreach p of local groupeduchoc {
 gen pays_origine=""
 gen grchoc2=0
 
+
 foreach var of varlist $var_entree_sortie {
 if "`source'"=="TIVA" replace pays_origine = strupper(substr("`var'",1,strpos("`var'","_")-1))
 if "`source'"=="WIOD" replace pays_origine = strupper(substr("`var'",2,3))
-		
-
 	
 	foreach p of local groupeduchoc {
 	
@@ -256,13 +209,16 @@ replace grchoc2=0
 *drop grchoc_ligne grchoc2 pays
 mkmat $var_entree_sortie, matrix (B2)
 
-display "fin de compute_leontief_chocnom`groupeduchoc'" `yrs'
+display "fin de compute_B_B2`groupeduchoc'" `yrs'
 order c s 
 
-if $test==1 save "$dir/Bases/`source'_B2_`yrs'_`groupeduchoc'.dta", replace
+if $test==1 save "$dir/Bases/B2_`source'_`yrs'_`groupeduchoc'.dta", replace
 
-display "fin compute_leontief_chocnom"
 
+*/
+
+display "fin compute_B_B2" 
+***on affiche les deux matrices de Leontief
 end
 
    
@@ -279,7 +235,7 @@ set more off
 
 use "$dir/Bases/csv_`source'.dta", clear
 
-* On construit le vecteur c, avec le choc c pour le pays choqué, 0 sinon
+* On construit le vecteur c$, avec le choc c$ pour le pays choqué, 0 sinon (cf. équation 3)
 
 foreach p of local groupeduchoc {
 
@@ -288,11 +244,9 @@ foreach p of local groupeduchoc {
 	
 	if ("`p'"=="MEX") {
 			replace p_shock = `shk' if strpos("$mexique", c)!=0
-
 		}
 	if ("`p'"=="CHN") {
 			replace p_shock = `shk' if strpos("$china", c)!=0
-
 		}	
 		
 	if ("`p'"=="EUR") {
@@ -300,20 +254,17 @@ foreach p of local groupeduchoc {
 	}
 	if ("`p'"=="EAS") {
 		replace p_shock = `shk' if strpos("$eastern", c)!=0
-	}
-		
-	
-
-	
+	}	
 }
 
 
-*I extract vector p_shock from database with mkmat
-mkmat p_shock
-matrix p_shockt=p_shock'
+*I extract vector p_shock from database with mkmat (Ci$)
+mkmat p_shock, matrix(cidollart)
+matrix cidollar=cidollart'  /* transposé*/
+matrix list cidollar
 
 
-* On construit le vecteur c tilde, avec le choc -c pour les pays non choqués, 0 sinon
+* On construit le vecteur c tilde$, avec le choc -c pour les pays non choqués, 0 sinon (cf. équation 5)
 
 
 generate p_shock2=-`shk'
@@ -338,16 +289,17 @@ foreach p of local groupeduchoc {
 	
 	
 }
-*I extract vector p_shock from database with mkmat
-mkmat p_shock2
-matrix p_shock2t=p_shock2'
+*I extract vector p_shock from database with mkmat (Ci tilde $)
+mkmat p_shock2, matrix(ctildeidollart)
+matrix ctildeidollar=ctildeidollart'
+matrix list ctildeidollar
 
 *Example: p_shock = 0.05 if (c = "ARG" & s == "C01T05")
 
-*I extract vector p_shock from database with mkmat
-mkmat p_shock
-matrix p_shockt=p_shock'
-*The transpose of p_shock will be necessary for further computations
+matrix ci=ctildeidollar*(1/(1+`shk'))
+matrix list ci
+matrix cchapeauidollar=cidollar/(1+`shk')
+matrix list cchapeauidollar
 
 display "fin de vector_shock_exch"
 
@@ -367,138 +319,27 @@ use "$dir/Bases/`source'_L1_`yrs'.dta", clear
 mkmat r1-r$dim_matrice, matrix (L1)
 
 
-*Multiplying the transpose of vector shock `v'_shockt by L1 to get the impact of a shock on the output price vector
-matrix C`groupeduchoc' = p_shockt+(p_shockt*B+p_shock2t*B2)*L1
-*Result example: using p_shock = 0.05 if c == "ARG" & s == "C01T05": if prices in agriculture increase by 5% in Argentina, output prices in the sector of agriculture in Argentina increase by 5.8%
+*Multiplying the transpose of vector shock `v'_shockt by L1 to get the impact of a shock on the output price vector 
+*Il s'agit du choc en dollar (équation 6)
+matrix Sdollar`groupeduchoc' = cidollar+(cidollar*B+ctildeidollar*B2)*L1
 
 
-matrix C`groupeduchoc't=C`groupeduchoc''
-svmat C`groupeduchoc't
-keep C`groupeduchoc't1
+matrix Sdollar`groupeduchoc't=Sdollar`groupeduchoc''
+svmat Sdollar`groupeduchoc't
+keep Sdollar`groupeduchoc't1
 
 
-if $test==1 save "$dir/Results/Devaluations/`source'_C_`yrs'_`groupeduchoc'_exch.dta", replace
+if $test==1 save "$dir/Results/Devaluations/`source'_Sdollar_`yrs'_`groupeduchoc'_exch.dta", replace
 
+matrix S`groupeduchoc' = ci+(cchapeauidollar*B+ci*B2)*L1
+matrix S`groupeduchoc't=S`groupeduchoc''
+svmat S`groupeduchoc't
+keep S`groupeduchoc't1
+if $test==1 save "$dir/Results/Devaluations/`source'_S_`yrs'_`groupeduchoc'_exch.dta", replace
 
 
 display "fin de shock_exch"
 
 end
-
-
-
-*--------------------------------------------------------------------------------
-*LIST ALL PROGRAMS AND RUN THEM
-*--------------------------------------------------------------------------------
-
-
-
-
-clear
-set more off
-
-/*
-
-***** POUR TEST
-
-Definition_pays_secteur TIVA
-*compute_leontief 2011 TIVA
-compute_X 2011 TIVA
-*compute_Yt 2011 TIVA
-*compute_HC 2011 TIVA
-
-global ori_choc "EUR"
-
-table_mean 2011 X 1 TIVA
-
-blink
-*/
-
-
-
-
-
-*foreach source in   WIOD { 
-foreach source in   WIOD TIVA { 
-
-
-	if "`source'"=="WIOD" local start_year 2000
-	if "`source'"=="TIVA" local start_year 1995
-
-
-	if "`source'"=="WIOD" local end_year 2014
-	if "`source'"=="TIVA" local end_year 2011
-
-	
-	if ("`c(username)'"=="guillaumedaudin") do  "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation/Definition_pays_secteur.do" `source' 
-	if ("`c(username)'"=="w817186") do "X:\Agents\FAUBERT\commerce_VA_inflation\Definition_pays_secteur.do" `source' 
-	if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\Definition_pays_secteur.do" `source' 
-	
-
-	// Fabrication des fichiers d'effets moyens des chocs de change
-	// pour le choc CPI, faire tourner compute_HC et compute_leontief, les autres ne sont pas indispensables
-	*2005 2009 2010 2011
-
-
-
-
-	if "`source'"=="TIVA" {
-	*	global ori_choc "CHN"
-		global ori_choc "EUR EAS"
-		global ori_choc "$ori_choc ARG AUS AUT BEL BGR BRA BRN CAN CHE CHL CHN COL CRI CYP CZE DEU DNK ESP EST FIN"
-		global ori_choc "$ori_choc FRA GBR GRC HKG HRV HUN IDN IND IRL ISL ISR ITA JPN KHM KOR LTU LUX LVA MAR MEX MLT MYS NLD NOR NZL PER "
-		global ori_choc "$ori_choc PHL POL PRT ROU ROW RUS SAU SGP SVK SVN SWE THA TUN TUR TWN USA VNM ZAF"
-	}
-
-	if "`source'"=="WIOD" {
-		global ori_choc "EUR EAS"
-		global ori_choc "$ori_choc AUS AUT BEL BGR BRA     CAN CHE CHN                             CYP CZE DEU DNK ESP EST FIN " 
-		global ori_choc "$ori_choc FRA GBR GRC     HRV HUN IDN IND IRL       ITA JPN     KOR LTU LUX LVA MEX              MLT     NLD NOR        POL PRT"
-		global ori_choc "$ori_choc ROU ROW RUS       SVK SVN SWE       TUR TWN USA        "
-	}
-	
-	
-
-
-
-
-
-*   foreach i of numlist 2011 {
-	foreach i of numlist `start_year' (1)`end_year'  {
-		clear
-		set more off
-		compute_leontief `i' `source'
-			local pour_gros_fichier 1
-			foreach groupeduchoc of global ori_choc {
-			compute_leontief_chocnom `i' `groupeduchoc' `source'
-			vector_shock_exch 1 `groupeduchoc' `source'
-			shock_exch `i' `groupeduchoc' `source'
-			
-			use "$dir/Results/Devaluations/`source'_C_`i'_`groupeduchoc'_exch.dta"
-			rename C*t1 shock*1
-			
-			if `pour_gros_fichier'==0 {
-				merge 1:1 _n using "$dir/Results/Devaluations/`source'_C_`i'_exch.dta"
-				drop _merge
-			}
-			save "$dir/Results/Devaluations/`source'_C_`i'_exch.dta", replace
-			local pour_gros_fichier=0
-	    }
-	order *, alphabetic
-	order shockEUR1 shockEAS1
-	merge 1:1 _n using "$dir/Bases/csv_`source'"
-	drop _merge
-	drop p_shock
-	order c s
-	save "$dir/Results/Devaluations/`source'_C_`i'_exch.dta", replace	
-    }
-
-}
-
-
-
-
-
-capture log close
 
 

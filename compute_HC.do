@@ -18,7 +18,7 @@ if "`source'"=="TIVA" {
 	keep v1 hfce*
 	drop if v1=="OUT" | v1=="VA+TAXSUB"
 	reshape long hfce_, i(v1) j(pays_conso) string
-
+	replace pays_conso=strupper(pays_conso)
 	generate pays = strupper(substr(v1,1,strpos(v1,"_")-1))
 	generate sector = strupper(substr(v1,strpos(v1,"_")+1,strlen(v1)-3-strpos(v1,"_")))
 	rename hfce_ conso

@@ -12,10 +12,14 @@
 clear
 set more off
 *****Mettre global test =1 provoquera la sauvegarde de plein de matrices / vecteurs 
+global test=1
+
 
 *******Définition du directory
 if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
+if ("`c(hostname)'" == "widv269a") global dir  "D:\home\T822289\CommerceVA" 
 else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
+
 
 capture log using "$dir/Temporaire/$S_DATE.log", replace
 set matsize 7000
@@ -60,7 +64,7 @@ blink
 foreach source in   WIOD TIVA { 
 
 
-	if "`source'"=="WIOD" local start_year 2000
+	if "`source'"=="WIOD" local start_year 2011 /*2000*/
 	if "`source'"=="TIVA" local start_year 1995
 
 

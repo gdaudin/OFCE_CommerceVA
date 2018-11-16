@@ -7,8 +7,8 @@
 clear
 
 if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
+if ("`c(hostname)'" == "widv269a") global dir  "D:\home\T822289\CommerceVA" 
 else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
-
 
 capture log using "$dir/Temporaire/$S_DATE.log", replace
 set matsize 7000

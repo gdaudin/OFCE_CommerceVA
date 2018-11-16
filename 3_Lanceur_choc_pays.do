@@ -47,10 +47,10 @@ set more off
 
 
 *foreach source in   TIVA { 
-foreach source in   WIOD TIVA { 
+foreach source in  /* WIOD*/ TIVA { 
 
 	Definition_pays_secteur `source'
-	if "`source'"=="WIOD" local start_year 2000
+	if "`source'"=="WIOD" local start_year 2011
 	if "`source'"=="TIVA" local start_year 1995
 
 

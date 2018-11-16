@@ -53,6 +53,7 @@ program  compute_HC_vect
 	use "$dir/Bases/HC_`source'.dta", clear
 	keep if year == `yrs'
 	foreach pays_conso of global country_hc {
+		replace pays_conso=strupper(pays_conso)
 		preserve
 		keep if pays_conso==strupper("`pays_conso'")
 		mkmat conso, matrix(HC_`pays_conso')

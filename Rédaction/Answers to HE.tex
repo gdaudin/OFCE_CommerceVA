@@ -16,7 +16,6 @@
 \usepackage{longtable}
 %\usepackage[table]{xcolor} % clash with floatrow
 \usepackage{xcolor} 
-\usepackage{floatrow}
 \usepackage{threeparttable}
 %\usepackage[multiple]{footmisc} %na
 \usepackage{bm}
@@ -29,14 +28,17 @@
 \usepackage[colorlinks=true,citecolor=black, urlcolor=black, linkcolor=black]{hyperref}
 \usepackage{url}
 \newcommand{\email}[1]{\href{mailto:#1}{\nolinkurl{#1}}}
+%\usepackage[longnamesfirst]{natbib}
+\usepackage{natbib}
 \usepackage[french, english]{babel}  % Placez ici une liste de langues, la derniere etant la langue principale
+\usepackage{caption}
+\usepackage{floatrow}
 \usepackage{lscape}
 \usepackage{afterpage}
 \usepackage{supertabular}    %na            %  mettre pour les grands tableaux en formant paysage. marche avec \begin{landscape}
 % style de la biblio : necessaire pour utiliser BibTex, necessite le deuxieme fichier exemple.bib
-\usepackage{caption}
-%\usepackage[longnamesfirst]{natbib}
-\usepackage{natbib}
+
+
 \bibliographystyle{elsarticle-harv}
 \newcommand{\tqdl}{\textquotedblleft}
 \newcommand{\tqdr}{\textquotedblright}
@@ -61,14 +63,15 @@ Intuition: \\
 That would not do because the price of, e.g. French VA does not change for everybody.
 
 Doubt: is that enough an argument ?
-2 sectors, 2 countries
+1 sector, 2 countries
 \subsection{Evolution of VA price}
 \begin{gather*}
 A=\left(\begin{matrix}a_{1,1}&a_{2,1}\\a_{1,2}&a_{2,2}\end{matrix}\right)
 \\
 I-A=\left(\begin{matrix}1-a_{1,1}&-a_{2,1}\\-a_{1,2}&1-a_{2,2}\end{matrix}\right)
 \\
-\left(I-A\right)^{-1}=\frac{1}{\left(1-a_{1,1}\right)\left(1-a_{2,2}\right)-a_{1,2}a_{2,1}}\left(\begin{matrix}1-a_{2,2}&a_{2,1}\\a_{1,2}&1-a_{1,1}\end{matrix}\right) =\left(\begin{matrix}u&v\\w&x\end{matrix}\right)
+\left(I-A\right)^{-1}=\frac{1}{\left(1-a_{1,1}\right)\left(1-a_{2,2}\right)-a_{1,2}a_{2,1}}\left(\begin{matrix}1-a_{2,2}&a_{2,1}\\a_{1,2}&1-a_{1,1}\end{matrix}\right) =z.\left(\begin{matrix}1-a_{2,2}&a_{2,1}\\a_{1,2}&1-a_{1,1}\end{matrix}\right) \\ 
+=\left(\begin{matrix}u&v\\w&x\end{matrix}\right)
 \\
 \text{French demand shares}=d=\left(\begin{matrix}1-f\\f\end{matrix}\right) \\
 \left(I-A\right)^{-1}d=\left(\begin{matrix}u-uf+vf\\w-wf+xf\end{matrix}\right)
@@ -152,7 +155,76 @@ c\left[f\left(1+v.a_{1,2}-x.a_{2,1}\right)+\left(1-f\right)\left(u.a_{1,2}-w.a_{
 =c\left[a_{1,2}\left(\left(1-f\right)\left(1+u\right)+vf\right)+a_{2,1}\left(\left(1-f\right)w-x\right)\right]
 \end{gather*}
 
-How can we continue to show that this thing does not depend on the openness/size of the economy? Idea : Hypothesis that $$a_{1,2}=a_{2,1}$$ and $$a_{1,1}=a_{2,2}$$ ?
-And that $$\frac{a_{1,1}}{a_{1,2}}=\frac{a_{2,2}}{a_{2,1}}=\frac{1-f}{f}$$
+Easy : we can normalize the shock $c$ to 1. 
+
+\begin{gather*}
+residual=a_{1,2}\left(\left(1-f\right)\left(1+u\right)+vf\right)+a_{2,1}\left(\left(1-f\right)w-x\right)
+\end{gather*}
+
+How can we continue to show that this thing does not depend on the openness/size of the economy?
+\\
+ Idea : Hypothesis that (but it does not help) $$a_{1,2}=a_{2,1}$$ and (does not help)$$a_{1,1}=a_{2,2}$$ ? 
+More interesting $$\frac{a_{1,1}}{a_{1,2}}=\frac{a_{2,2}}{a_{2,1}}=\frac{1-f}{f}$$ 
+and 
+$$a_{1,1}+a_{1,2}=a$$
+
+So...
+$$a_{1,1}=(1-f)a$$
+$$a_{1,2}=fa$$
+Then 
+
+\begin{gather*}
+residual=fa\left(\left(1-f\right)\left(1+u\right)+vf\right)+a_{2,1}\left(\left(1-f\right)w-x\right) \\
+=z.\left[fa\left(\left(1-f\right)\left(1+(1-a_{2,2})\right)+a_{2,1}f\right)+a_{2,1}\left(\left(1-f\right)af-(1-f)a\right)\right] \\
+= z\left[fa\left(\left(1-f\right)\left(2-a_{2,2})\right)+a_{2,1}f\right)-a_{2,1}a\left(1-f\right)^2\right] \\
+= \frac{fa\left(\left(1-f\right)\left(2-a_{2,2})\right)+a_{2,1}f\right)-a_{2,1}a\left(1-f\right)^2}{\left(1-a_{1,1}\right)\left(1-a_{2,2}\right)-a_{1,2}a_{2,1}} \\
+= \frac{fa\left(\left(1-f\right)\left(2-a_{2,2})\right)+a_{2,1}f\right)-a_{2,1}a\left(1-f\right)^2}{\left(1-a(1-f)\right)\left(1-a_{2,2}\right)-afa_{2,1}}
+\end{gather*}
+
+Pour dériver, je développe: 
+\begin{gather*}
+residual=\frac{f^2a\left(-2+a_{2,2}\right)+fa\left(2-a_{2,2}+2a_{2,1}\right)-aa_{2,1}}{fa\left(1-a_{2,2}-a_{2,1}\right)+1-a+a_{2,2}(1+a)}
+\end{gather*}
+
+Le signe de cette dérivée est celui de : 
+\begin{gather*}
+\left(
+	2fa\left(
+		-2+a_{2,2}\right)
+	+a\left(
+		2-a_{2,2}+2a_{2,1}\right)
+	\right)
+\left(
+	fa\left(
+		1-a_{2,2}-a_{2,1}\right)
++1-a+a_{2,2}(1+a)\right) \\
+-a\left(
+	1-a_{2,2}-a_{2,1}\right)
+\left(
+	f^2a\left(
+		-2+a_{2,2}\right)
+	+fa\left(
+		2-a_{2,2}+2a_{2,1}\right)
+	-aa_{2,1}\right)
+\end{gather*}
+
+Et alors là... Aucune idée du signe de cette expression...
+\begin{gather*}
+\left(
+	fa\left(
+		1-a_{2,2}-a_{2,1}\right)
++1-a+a_{2,2}(1+a)\right) > 0
+\\
+a\left(
+	1-a_{2,2}-a_{2,1}\right) >0
+\\
+\left(
+	2fa\left(
+		-2+a_{2,2}\right)
+	+a\left(
+		2-a_{2,2}+2a_{2,1}\right)
+	\right) = a\left[\left(1-a_{2,2}\right)\left(1-2f\right)\right]+2a{2,1}	>0
+\end{gather*}
+
 
 \end{document}

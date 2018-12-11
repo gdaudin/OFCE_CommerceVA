@@ -66,11 +66,11 @@ Doubt: is that enough an argument ?
 1 sector, 2 countries
 \subsection{Evolution of VA price}
 \begin{gather*}
-A=\left(\begin{matrix}a_{1,1}&a_{2,1}\\a_{1,2}&a_{2,2}\end{matrix}\right)
+A=\left(\begin{matrix}a_{1,1}&a_{1,2}\\a_{2,1}&a_{2,2}\end{matrix}\right)
 \\
-I-A=\left(\begin{matrix}1-a_{1,1}&-a_{2,1}\\-a_{1,2}&1-a_{2,2}\end{matrix}\right)
+I-A=\left(\begin{matrix}1-a_{1,1}&-a_{1,2}\\-a_{2,1}&1-a_{2,2}\end{matrix}\right)
 \\
-\left(I-A\right)^{-1}=\frac{1}{\left(1-a_{1,1}\right)\left(1-a_{2,2}\right)-a_{1,2}a_{2,1}}\left(\begin{matrix}1-a_{2,2}&a_{2,1}\\a_{1,2}&1-a_{1,1}\end{matrix}\right) =z.\left(\begin{matrix}1-a_{2,2}&a_{2,1}\\a_{1,2}&1-a_{1,1}\end{matrix}\right) \\ 
+\left(I-A\right)^{-1}=\frac{1}{\left(1-a_{1,1}\right)\left(1-a_{2,2}\right)-a_{2,1}a_{1,2}}\left(\begin{matrix}1-a_{2,2}&a_{1,2}\\a_{2,1}&1-a_{1,1}\end{matrix}\right) =z.\left(\begin{matrix}1-a_{2,2}&a_{1,2}\\a_{2,1}&1-a_{1,1}\end{matrix}\right) \\ 
 =\left(\begin{matrix}u&v\\w&x\end{matrix}\right)
 \\
 \text{French demand shares}=d=\left(\begin{matrix}1-f\\f\end{matrix}\right) \\
@@ -87,7 +87,7 @@ S=C+CA+CA^2...=C(I-A)^{-1}=\left(\begin{matrix}cw  &   cx\end{matrix}\right)
 To measure the effect on French consumption prices, we do a weighted sum of these effects.
 
 \begin{equation}
-\bar{s}=c.\left[\left(1-f\right)w+xf\right]=c.\frac{\left(1-f\right)a_{1,2}+f\left(1-a_{1,1}\right)}{\left(1-a_{1,1}\right)\left(1-a_{2,2}\right)-a_{1,2}a_{2,1}}
+\bar{s}=c.\left[\left(1-f\right)w+xf\right]=c.\frac{\left(1-f\right)a_{2,1}+f\left(1-a_{1,1}\right)}{\left(1-a_{1,1}\right)\left(1-a_{2,2}\right)-a_{2,1}a_{1,2}}
 \end{equation}
 
 If each nation's production only uses national inputs, we have a plausible :
@@ -102,27 +102,27 @@ Using the notations in the paper...
 \begin{gather*}
 \hat{C}_\$=\left(-c,0\right)
 \\
-\cal B = \left(\begin{matrix}0&a_{2,1}\\0&0\end{matrix}\right)
+\cal B = \left(\begin{matrix}0&a_{1,2}\\0&0\end{matrix}\right)
 \\
-\tilde{\cal B} = \left(\begin{matrix}0&0\\a_{1,2}&0\end{matrix}\right)
+\tilde{\cal B} = \left(\begin{matrix}0&0\\a_{2,1}&0\end{matrix}\right)
 \end{gather*}
 
 Hence
 
 \begin{gather*}
-S =\left(0,c\right)+\left[\left(0,-c.a_{2,1}\right)+\left(c.a_{1,2},0\right)\right]*\left(\begin{matrix}u&v\\w&x\end{matrix}\right)
+S =\left(0,c\right)+\left[\left(0,-c.a_{1,2}\right)+\left(c.a_{2,1},0\right)\right]*\left(\begin{matrix}u&v\\w&x\end{matrix}\right)
 \\
-=\left(0,c\right)+\left(c.a_{1,2},-c.a_{2,1}\right)*\left(\begin{matrix}u&v\\w&x\end{matrix}\right)
+=\left(0,c\right)+\left(c.a_{2,1},-c.a_{1,2}\right)*\left(\begin{matrix}u&v\\w&x\end{matrix}\right)
 \\
-=\left(0,c\right)+\left(u.c.a_{1,2}-w.c.a_{2,1},v.c.a_{1,2}-x.c.a_{2,1}\right)
+=\left(0,c\right)+\left(u.c.a_{2,1}-w.c.a_{1,2},v.c.a_{2,1}-x.c.a_{1,2}\right)
 \\
-=\left(u.c.a_{1,2}-w.c.a_{2,1},c+v.c.a_{1,2}-x.c.a_{2,1}\right)
+=\left(u.c.a_{2,1}-w.c.a_{1,2},c+v.c.a_{2,1}-x.c.a_{1,2}\right)
 \end{gather*}
 and
 \begin{gather*}
-\bar{s}=\left(u.c.a_{1,2}-w.c.a_{2,1},c+v.c.a_{1,2}-x.c.a_{2,1}\right).\left(\begin{matrix}1-f\\f\end{matrix}\right)
+\bar{s}=\left(u.c.a_{2,1}-w.c.a_{1,2},c+v.c.a_{2,1}-x.c.a_{1,2}\right).\left(\begin{matrix}1-f\\f\end{matrix}\right)
 \\
-\bar{s}=c\left[f\left(1+v.a_{1,2}-x.a_{2,1}\right)+\left(1-f\right)\left(u.a_{1,2}-w.a_{2,1}\right)\right]
+\bar{s}=c\left[f\left(1+v.a_{2,1}-x.a_{1,2}\right)+\left(1-f\right)\left(u.a_{2,1}-w.a_{1,2}\right)\right]
 \end{gather*}
 
 
@@ -140,50 +140,50 @@ Starting from 4.2 in the paper
 \begin{gather*}
 E1=C (i.e. C^i)=\left(0,c\right)
 \\
-E2=C.\tilde{\cal B}=\left(0,c\right).\left(\begin{matrix}0&0\\a_{1,2}&0\end{matrix}\right)=\left(c.a_{1,2},0\right)
+E2=C.\tilde{\cal B}=\left(0,c\right).\left(\begin{matrix}0&0\\a_{2,1}&0\end{matrix}\right)=\left(c.a_{2,1},0\right)
 \end{gather*}
 
 \begin{gather*}
 E1.HC = \left(0,c\right).\left(\begin{matrix}1-f\\f\end{matrix}\right)=f.c
 \\
-E2.HC=\left(c.a_{1,2},0\right).\left(\begin{matrix}1-f\\f\end{matrix}\right)=c.a_{1,2}.\left(1-f\right)
+E2.HC=\left(c.a_{2,1},0\right).\left(\begin{matrix}1-f\\f\end{matrix}\right)=c.a_{2,1}.\left(1-f\right)
 \\ 
 \bar{s}-E1.HC-E2.HC=
 \\
-c\left[f\left(1+v.a_{1,2}-x.a_{2,1}\right)+\left(1-f\right)\left(u.a_{1,2}-w.a_{2,1}\right)\right]-c\left(f+a_{1,2}.\left(1-f\right)\right)
+c\left[f\left(1+v.a_{2,1}-x.a_{1,2}\right)+\left(1-f\right)\left(u.a_{2,1}-w.a_{1,2}\right)\right]-c\left(f+a_{2,1}.\left(1-f\right)\right)
 \\
-=c\left[a_{1,2}\left(\left(1-f\right)\left(1+u\right)+vf\right)+a_{2,1}\left(\left(1-f\right)w-x\right)\right]
+=c\left[a_{2,1}\left(\left(1-f\right)\left(1+u\right)+vf\right)+a_{1,2}\left(\left(1-f\right)w-x\right)\right]
 \end{gather*}
 
 Easy : we can normalize the shock $c$ to 1. 
 
 \begin{gather*}
-residual=a_{1,2}\left(\left(1-f\right)\left(1+u\right)+vf\right)+a_{2,1}\left(\left(1-f\right)w-x\right)
+residual=a_{2,1}\left(\left(1-f\right)\left(1+u\right)+vf\right)+a_{1,2}\left(\left(1-f\right)w-x\right)
 \end{gather*}
 
 How can we continue to show that this thing does not depend on the openness/size of the economy?
 \\
- Idea : Hypothesis that (but it does not help) $$a_{1,2}=a_{2,1}$$ and (does not help)$$a_{1,1}=a_{2,2}$$ ? 
-More interesting $$\frac{a_{1,1}}{a_{1,2}}=\frac{a_{2,2}}{a_{2,1}}=\frac{1-f}{f}$$ 
+ Idea : Hypothesis that (but it does not help) $$a_{2,1}=a_{1,2}$$ and (does not help)$$a_{1,1}=a_{2,2}$$ ? 
+More interesting $$\frac{a_{1,1}}{a_{2,1}}=\frac{a_{2,2}}{a_{1,2}}=\frac{1-f}{f}$$ 
 and 
-$$a_{1,1}+a_{1,2}=a$$
+$$a_{1,1}+a_{2,1}=a$$
 
 So...
 $$a_{1,1}=(1-f)a$$
-$$a_{1,2}=fa$$
+$$a_{2,1}=fa$$
 Then 
 
 \begin{gather*}
-residual=fa\left(\left(1-f\right)\left(1+u\right)+vf\right)+a_{2,1}\left(\left(1-f\right)w-x\right) \\
-=z.\left[fa\left(\left(1-f\right)\left(1+(1-a_{2,2})\right)+a_{2,1}f\right)+a_{2,1}\left(\left(1-f\right)af-(1-f)a\right)\right] \\
-= z\left[fa\left(\left(1-f\right)\left(2-a_{2,2})\right)+a_{2,1}f\right)-a_{2,1}a\left(1-f\right)^2\right] \\
-= \frac{fa\left(\left(1-f\right)\left(2-a_{2,2})\right)+a_{2,1}f\right)-a_{2,1}a\left(1-f\right)^2}{\left(1-a_{1,1}\right)\left(1-a_{2,2}\right)-a_{1,2}a_{2,1}} \\
-= \frac{fa\left(\left(1-f\right)\left(2-a_{2,2})\right)+a_{2,1}f\right)-a_{2,1}a\left(1-f\right)^2}{\left(1-a(1-f)\right)\left(1-a_{2,2}\right)-afa_{2,1}}
+residual=fa\left(\left(1-f\right)\left(1+u\right)+vf\right)+a_{1,2}\left(\left(1-f\right)w-x\right) \\
+=z.\left[fa\left(\left(1-f\right)\left(1+(1-a_{2,2})\right)+a_{1,2}f\right)+a_{1,2}\left(\left(1-f\right)af-(1-f)a\right)\right] \\
+= z\left[fa\left(\left(1-f\right)\left(2-a_{2,2})\right)+a_{1,2}f\right)-a_{1,2}a\left(1-f\right)^2\right] \\
+= \frac{fa\left(\left(1-f\right)\left(2-a_{2,2})\right)+a_{1,2}f\right)-a_{1,2}a\left(1-f\right)^2}{\left(1-a_{1,1}\right)\left(1-a_{2,2}\right)-a_{2,1}a_{1,2}} \\
+= \frac{fa\left(\left(1-f\right)\left(2-a_{2,2})\right)+a_{1,2}f\right)-a_{1,2}a\left(1-f\right)^2}{\left(1-a(1-f)\right)\left(1-a_{2,2}\right)-afa_{1,2}}
 \end{gather*}
 
 Pour dériver, je développe: 
 \begin{gather*}
-residual=\frac{f^2a\left(-2+a_{2,2}\right)+fa\left(2-a_{2,2}+2a_{2,1}\right)-aa_{2,1}}{fa\left(1-a_{2,2}-a_{2,1}\right)+1-a+a_{2,2}(1+a)}
+residual=\frac{f^2a\left(-2+a_{2,2}\right)+fa\left(2-a_{2,2}+2a_{1,2}\right)-aa_{1,2}}{fa\left(1-a_{2,2}-a_{1,2}\right)+1-a+a_{2,2}(1+a)}
 \end{gather*}
 
 Le signe de cette dérivée est celui de : 
@@ -192,37 +192,37 @@ Le signe de cette dérivée est celui de :
 	2fa\left(
 		-2+a_{2,2}\right)
 	+a\left(
-		2-a_{2,2}+2a_{2,1}\right)
+		2-a_{2,2}+2a_{1,2}\right)
 	\right)
 \left(
 	fa\left(
-		1-a_{2,2}-a_{2,1}\right)
+		1-a_{2,2}-a_{1,2}\right)
 +1-a+a_{2,2}(1+a)\right) \\
 -a\left(
-	1-a_{2,2}-a_{2,1}\right)
+	1-a_{2,2}-a_{1,2}\right)
 \left(
 	f^2a\left(
 		-2+a_{2,2}\right)
 	+fa\left(
-		2-a_{2,2}+2a_{2,1}\right)
-	-aa_{2,1}\right)
+		2-a_{2,2}+2a_{1,2}\right)
+	-aa_{1,2}\right)
 \end{gather*}
 
 Et alors là... Aucune idée du signe de cette expression...
 \begin{gather*}
 \left(
 	fa\left(
-		1-a_{2,2}-a_{2,1}\right)
+		1-a_{2,2}-a_{1,2}\right)
 +1-a+a_{2,2}(1+a)\right) > 0
 \\
 a\left(
-	1-a_{2,2}-a_{2,1}\right) >0
+	1-a_{2,2}-a_{1,2}\right) >0
 \\
 \left(
 	2fa\left(
 		-2+a_{2,2}\right)
 	+a\left(
-		2-a_{2,2}+2a_{2,1}\right)
+		2-a_{2,2}+2a_{1,2}\right)
 	\right) = a\left[\left(1-a_{2,2}\right)\left(1-2f\right)\right]+2a{2,1}	>0
 \end{gather*}
 

@@ -44,6 +44,22 @@ if "`source'"=="TIVA" {
 	*/	
 }
 
+if "`source'"=="TIVA_REV4" {
+
+	*Loop to save data for each year
+	set more off
+
+	insheet using "$dir/Bases_Sources/TIVA_REV4/ICIO2018_`yrs'.csv", clear case
+	*I sort the ICIO: 
+	local useful = _N-2 /*on exclut les 2 dernières lignes du tri ligne suivante */
+	sort v1 AUS_01T03-TOTAL in 1/`useful' /*observations (tout sauf les 2 de useful*/
+	order AUS_01T03-CN2_97T98, alphabetic after (v1) /*variables V1 = 1ere colonne nom vide non triée*/
+	order AUS_HFCE-TOTAL, alphabetic after (ZAF_97T98)
+	save "$dir/Bases/TIVA_REV4_ICIO_`yrs'.dta", replace
+
+}
+
+
 
 
 if "`source'"=="WIOD" {	 
@@ -79,6 +95,11 @@ if "`source'"=="WIOD" {
 }
 
 
+
+
+
+
+
 end
 
 *-------------------------------------------------------------------------------
@@ -107,6 +128,30 @@ if "`source'"=="TIVA" {
 	order pays secteur
 	drop v1
 	save "$dir/Bases/TIVA_`yrs'_Z.dta", replace
+	   
+	
+}
+
+
+
+if "`source'"=="TIVA_REV4" {	
+		
+	*From the ICIO database I keep only the output vector
+	use "$dir/Bases/TIVA_REV4_ICIO_`yrs'.dta"
+	keep if v1 == "OUTPUT"
+	drop v1
+	drop ARG_GFCF-ZAF_P33
+	save "$dir/Bases/TIVA_REV4_`yrs'_OUT.dta", replace
+	
+	*From the ICIO database I keep only the table for inter-industry inter-country trade (matrice de CI mondiale)
+	use "$dir/Bases/TIVA_REV4_ICIO_`yrs'.dta", clear
+	drop ARG_GFCF-ZAF_P33
+	drop if v1 == "VALU" | strmatch(v1, "*TAXSUB") == 1 | v1 == "OUTPUT"
+	gen pays=upper(substr(v1,1,3))
+	gen secteur = upper(substr(v1,5,.))
+	order pays secteur
+	drop v1
+	save "$dir/Bases/TIVA_REV4_`yrs'_Z.dta", replace
 	   
 	
 }

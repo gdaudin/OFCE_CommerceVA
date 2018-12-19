@@ -100,7 +100,13 @@ If each nation's production only uses national inputs, we have a plausible :
 Using the notations in the paper...
 
 \begin{gather*}
-\hat{C}_\$=\left(-c,0\right)
+C=\left(0,\frac{-c_\$}{1+c_\$}\right)=\left(0,-c\right)
+\\
+C_\$=\left(c_\$,0\right)
+\\
+\tilde{C}_\$=\left(0,-c_\$\right)
+\\
+\hat{C}_\$=\left(\frac{c_\$}{1+c_\$},0\right)=\left(c,0\right)
 \\
 \cal B = \left(\begin{matrix}0&a_{1,2}\\0&0\end{matrix}\right)
 \\
@@ -138,7 +144,7 @@ This seems to confirm that the exchange rate shock is not the same as the VA pri
 
 Starting from 4.2 in the paper
 \begin{gather*}
-E1=C (i.e. C^i)=\left(0,c\right)
+E1=C
 \\
 E2=C.\tilde{\cal B}=\left(0,c\right).\left(\begin{matrix}0&0\\a_{2,1}&0\end{matrix}\right)=\left(c.a_{2,1},0\right)
 \end{gather*}
@@ -152,14 +158,14 @@ E2.HC=\left(c.a_{2,1},0\right).\left(\begin{matrix}1-f\\f\end{matrix}\right)=c.a
 \\
 c\left[f\left(1+v.a_{2,1}-x.a_{1,2}\right)+\left(1-f\right)\left(u.a_{2,1}-w.a_{1,2}\right)\right]-c\left(f+a_{2,1}.\left(1-f\right)\right)
 \\
-=c\left[a_{2,1}\left(\left(1-f\right)\left(1+u\right)+vf\right)+a_{1,2}\left(\left(1-f\right)w-x\right)\right]
+=c\left[a_{2,1}\left(\left(f-1\right)\left(1-u\right)+vf\right)+a_{1,2}\left(\left(1-f\right)w-x\right)\right]
 \end{gather*}
 
 Easy : we can normalize the shock $c$ to 1. 
 
-\begin{gather*}
-residual=a_{2,1}\left(\left(1-f\right)\left(1+u\right)+vf\right)+a_{1,2}\left(\left(1-f\right)w-x\right)
-\end{gather*}
+\begin{gather}
+residual=a_{2,1}\left(\left(f-1\right)\left(1-u\right)+vf\right)+a_{1,2}\left(\left(1-f\right)w-x\right)
+\end{gather}
 
 How can we continue to show that this thing does not depend on the openness/size of the economy?
 \\
@@ -173,13 +179,13 @@ $$a_{1,1}=(1-f)a$$
 $$a_{2,1}=fa$$
 Then 
 
-\begin{gather*}
+\begin{gather}
 residual=fa\left(\left(1-f\right)\left(1+u\right)+vf\right)+a_{1,2}\left(\left(1-f\right)w-x\right) \\
-=z.\left[fa\left(\left(1-f\right)\left(1+(1-a_{2,2})\right)+a_{1,2}f\right)+a_{1,2}\left(\left(1-f\right)af-(1-f)a\right)\right] \\
+FAUX=z.\left[fa\left(\left(1-f\right)\left(1+(1-a_{2,2})\right)+a_{1,2}f\right)+a_{1,2}\left(\left(1-f\right)af-(1-f)a\right)\right] \\
 = z\left[fa\left(\left(1-f\right)\left(2-a_{2,2})\right)+a_{1,2}f\right)-a_{1,2}a\left(1-f\right)^2\right] \\
 = \frac{fa\left(\left(1-f\right)\left(2-a_{2,2})\right)+a_{1,2}f\right)-a_{1,2}a\left(1-f\right)^2}{\left(1-a_{1,1}\right)\left(1-a_{2,2}\right)-a_{2,1}a_{1,2}} \\
 = \frac{fa\left(\left(1-f\right)\left(2-a_{2,2})\right)+a_{1,2}f\right)-a_{1,2}a\left(1-f\right)^2}{\left(1-a(1-f)\right)\left(1-a_{2,2}\right)-afa_{1,2}}
-\end{gather*}
+\end{gather}
 
 Pour dériver, je développe: 
 \begin{gather*}

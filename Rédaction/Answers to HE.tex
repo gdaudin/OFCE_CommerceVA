@@ -140,7 +140,8 @@ If each nation's production only uses national inputs, we have a plausible
 
 This seems to confirm that the exchange rate shock is not the same as the VA price shock.
 
-\subsection{Residual issue}
+\section{Residual issue}
+\subsection{Presenting the issue}
 
 As a reminder from the paper, where $\overline{s}_{i}^{i,HC}$ is the effect of an exchange rate shock on consumption prices :  
 \begin{equation}
@@ -163,7 +164,7 @@ As a reminder from the paper, where $\overline{s}_{i}^{i,HC}$ is the effect of a
 
 When the shock corresponds to an appreciation of the domestic currency, $E1$ and $E2$ reduce country $i$'s household consumption prices and $E3$ increases country $i$'s household consumption prices. Notice that $E1$ and $E2$ are easy to compute with national input-output matrices, whereas world input-output matrices are needed for computing $E3$ and $E4$.
 
-We have the strange result that $E3 + E4$ seems to be constant, whatever the openness rate of the economy : 
+We have the strange result that $E3 + E4$ seems to be constant, whatever the openness rate of the economy (see Figure \ref{fig:ratiodir_WIOD})
 
 \begin{figure}[!h]
 \centering
@@ -177,32 +178,26 @@ We have the strange result that $E3 + E4$ seems to be constant, whatever the ope
 Let us see what happens in a 2 country, 1 sector economy : 
 
 \begin{gather*}
-E1=C
+E1=C=\left(0,-c\right)
 \\
-E2=C.\tilde{\cal B}=\left(0,c\right).\left(\begin{matrix}0&0\\a_{2,1}&0\end{matrix}\right)=\left(c.a_{2,1},0\right)
+E2=C.\tilde{\cal B}=\left(0,-c\right).\left(\begin{matrix}0&0\\a_{2,1}&0\end{matrix}\right)=\left(-c.a_{2,1},0\right)
+\\
+E3=(c,0).\left(\begin{matrix}0&a_{1,2}\\0&0\end{matrix}\right)=\left(0,c.a_{1,2}\right)
 \end{gather*}
 
 \begin{gather*}
-E1.HC = \left(0,c\right).\left(\begin{matrix}1-f\\f\end{matrix}\right)=f.c
+E1.HC = \left(0,-c\right).\left(\begin{matrix}1-f\\f\end{matrix}\right)=-f.c
 \\
-E2.HC=\left(c.a_{2,1},0\right).\left(\begin{matrix}1-f\\f\end{matrix}\right)=c.a_{2,1}.\left(1-f\right)
+E2.HC=\left(-c.a_{2,1},0\right).\left(\begin{matrix}1-f\\f\end{matrix}\right)=-c.a_{2,1}.\left(1-f\right)
 \\ 
-\bar{s}-E1.HC-E2.HC=
-\\
-c\left[f\left(1+v.a_{2,1}-x.a_{1,2}\right)+\left(1-f\right)\left(u.a_{2,1}-w.a_{1,2}\right)\right]-c\left(f+a_{2,1}.\left(1-f\right)\right)
-\\
-=c\left[a_{2,1}\left(\left(f-1\right)\left(1-u\right)+vf\right)+a_{1,2}\left(\left(1-f\right)w-x\right)\right]
+E3.HC=\left(0,c.a_{1,2}\right).\left(\begin{matrix}1-f\\f\end{matrix}\right)=f.c.a_{1,2}
 \end{gather*}
 
 We do not loose any generality by normalizing the shock $c$ to 1. 
 
-\begin{gather}
-residual=a_{2,1}\left(\left(f-1\right)\left(1-u\right)+vf\right)+a_{1,2}\left(\left(1-f\right)w-x\right)
-\end{gather}
-
 And, developped from SAGE :
 \begin{gather}
-residual=\left(\begin{array}{r}
+\bar{s}-E1.HC-E2.HC=\left(\begin{array}{r}
 -\frac{a_{12} a_{21}^{2} - a_{11} a_{21} a_{22} + {\left(a_{11} - a_{12}\right)} a_{21} - {\left(a_{12} a_{21}^{2} - a_{11} a_{21} a_{22} - {\left(a_{11} - 1\right)} a_{12} + {\left(a_{11} - 2 \, a_{12}\right)} a_{21}\right)} f}{a_{12} a_{21} - {\left(a_{11} - 1\right)} a_{22} + a_{11} - 1}
 \end{array}\right)
 \end{gather}
@@ -249,15 +244,25 @@ Back to sage...
 \end{array}\right)
 \end{gather*}
 
-Which yields:
-\begin{figure}[htbp]
+Which yields Figures \ref{fig:resid} and \ref{fig:tous_les_E}.
+\begin{figure}[!h]
 \begin{center}
 \includegraphics{etude_residu.png}
 \caption{Residual as a function of the openness rate}
-\label{default}
+\label{fig:resid}
 \end{center}
 \end{figure}
 
-The zone of interest is between 0.15 and 0.5. In that zone, the relationship between the oppeness rate and the residual is not monotonous, and actually does not vary much.
+The zone of interest is between 0.15 and 0.5. In that zone, the relationship between the openness rate and the residual is not monotonous, and actually does not vary much (see Figure \ref{fig:resid}).
+
+and
+\begin{figure}[!h]
+\begin{center}
+\includegraphics{etude_tous_les_E.png}
+\caption{All the Es plus the residual}
+\label{fig:tous_les_E}
+\end{center}
+\end{figure}
+
 
 \end{document}

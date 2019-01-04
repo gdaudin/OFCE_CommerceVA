@@ -28,14 +28,40 @@ global country_hc "ARG AUS AUT BEL BGR BRA BRN CAN CHE CHL"
 	global sector "$sector C23 C24 C25 C26 C27 C28 C29 C30T33X C31 C34 C35 C36T37 C40T41 C45"
 	global sector "$sector C50T52 C55 C60T63 C64 C65T67 C70 C71 C72 C73T74 C75 C80 C85 C90T93 C95"
 	
-	global noneuro "ARG AUS BGR BRA BRN CAN CHE CHL CHN COL CRI CZE DNK GBR HKG HRV HUN IDN IND ISL ISR JPN KHM KOR MEX MX1 MX2 MX3 MYS NOR NZL PHL POL ROU ROW RUS SAU SGP SWE THA TUN TUR TWN USA VNM ZAF"
+	global noneuro "ARG AUS BGR BRA BRN CAN CHE CHL CHN COL CRI CZE DNK GBR HKG HRV HUN IDN IND ISL ISR JPN KHM KOR MEX MX1 MX2 MX3 MYS NOR NZL PER PHL POL ROU ROW RUS SAU SGP SWE THA TUN TUR TWN USA VNM ZAF"
 	global china "CHN CN1 CN2 CN3 CN4" /* 5 Chine dans la source --> choquer ce groupe pour choc Chine"*/
 	global mexique "MEX MX1 MX2 MX3" /* 4 Mexique dans la source --> choquer ce groupe pour choc Mexique (y.c Maquiladoas)"*/
 	
-	global var_entree_sortie arg_c01t05agr-zaf_c95pvh
+	global var_entree_sortie  arg_c01t05agr-zaf_c95pvh
 	
 	}
 
+	
+	if "`source'"=="TIVA_REV4" {
+global country "ARG AUS AUT BEL BGR BRA BRN CAN CHE CHL"
+	global country "$country  CHN CN1 CN2 COL CRI CYP CZE DEU DNK ESP EST FIN"
+	global country "$country  FRA GBR GRC HKG HRV HUN IDN IND IRL ISL ISR ITA JPN KAZ KHM KOR"
+	global country "$country  LTU LUX LVA MAR MEX MLT MX1 MX2 MYS NLD NOR NZL PER PHL POL PRT"
+	global country "$country  ROU ROW RUS SAU SGP SVK SVN SWE THA TUN TUR TWN USA VNM ZAF"
+	
+global country_hc "ARG AUS AUT BEL BGR BRA BRN CAN CHE CHL"
+	global country_hc "$country_hc  CHN   COL CRI CYP CZE DEU DNK ESP EST FIN"
+	global country_hc "$country_hc  FRA GBR GRC HKG HRV HUN IDN IND IRL ISL ISR ITA JPN KAZ KHM KOR"
+	global country_hc "$country_hc  LTU LUX LVA MAR MEX MLT    MYS NLD NOR NZL PER PHL POL PRT"
+	global country_hc "$country_hc  ROU ROW RUS SAU SGP SVK SVN SWE THA TUN TUR TWN USA VNM ZA"
+
+	global sector "01T03 05T06 07T08 09"
+	global sector "$sector 10T12 13T15 16 17T18 19 20T21 22 23 24 25 26 27 28 29 30 31T33 35T39 41T43 "
+	global sector "$sector 45T47 49T53 55T56 58T60 61 62T63 64T66 68 69T82 84 85 86T88 90T96 97T98"
+	
+	global noneuro "ARG AUS BGR BRA BRN CAN CHE CHL CHN COL CRI CZE DNK GBR HKG HRV HUN IDN IND ISL ISR JPN KAZ KHM KOR MEX MX1 MX2 MYS NOR NZL PER PHL POL ROU ROW RUS SAU SGP SWE THA TUN TUR TWN USA VNM ZAF"
+	global china "CHN CN1 CN2" /* 3 Chine dans la source --> choquer ce groupe pour choc Chine"*/
+	global mexique "MEX MX1 MX2" /* 3 Mexique dans la source --> choquer ce groupe pour choc Mexique (y.c Maquiladoas)"*/
+	
+	global var_entree_sortie arg_01t03agr-zaf_97t98
+	
+	}
+	
 if "`source'"=="WIOD" {
 	global country "   AUS AUT BEL BGR BRA     CAN CHE" 
 	global country "$country CHN                             CYP CZE DEU DNK ESP EST FIN"

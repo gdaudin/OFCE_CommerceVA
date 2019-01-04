@@ -43,21 +43,20 @@ foreach i of numlist 2000(1)2014 {
 
 */
 
-foreach i of numlist 2005(1)2015 {
+foreach i of numlist 2005(1)2006 {
 	clear
 	save_data `i' TIVA_REV4
 	prepare_database `i' TIVA_REV4
 }
 
-sdsd
 
-database_csv TIVA
+*database_csv TIVA
 database_csv TIVA_REV4
-database_csv WIOD
+*database_csv WIOD
 
-******************** Identifie composantes ****************
-do GIT/commerce_va_inflation/Definition_composante_HC_WIOD_TIVA.do
-***********************************************************
+******************** Identifie composantes pour IPC ****************
+do GIT/commerce_va_inflation/Definition_composante_HC.do
+********************************************************************
 
 set more off
 

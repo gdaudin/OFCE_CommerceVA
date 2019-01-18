@@ -153,6 +153,7 @@ gen E1HC_E2HC=E1HC + E2HC
 label var pond_`source'_`type' "Élasticité des prix (`type') en monnaie nationale à un choc de la monnaie nationale"
 
 save "$dir/Results/Étude rapport D+I et Bouclage Mondial/Elast_par_pays_`year'_`source'_`type'.dta", replace
+	
 
 if "`type'"=="HC" {
 
@@ -169,7 +170,7 @@ if "`type'"=="HC" {
 	*dans le cas HC, xtitle pourrait se finir par «importées dans la conso dom + part conso importée»			
 						
 	
-	graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/graph_`year'_`source'_`type'.pdf", replace
+	graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/graph7_`year'_`source'_`type'.pdf", replace
 	
 	graph close
 
@@ -177,6 +178,15 @@ if "`type'"=="HC" {
 	
 }
 
+
+
+
+
+
+
+
+
+blif
 
 
 if "`type'"=="HC_note" & `year'==2014 {
@@ -302,7 +312,7 @@ foreach source in  WIOD {
 	
 	
    capture erase "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`source'_`type'.dta" 
-	foreach type in /*HC HC_note*/ par_sect {
+	foreach type in HC /*HC_note par_sect*/ {
 		capture erase "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`source'_`type'.dta"
 
 		foreach i of numlist 2014  {

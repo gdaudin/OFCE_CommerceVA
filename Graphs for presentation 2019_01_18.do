@@ -2,7 +2,6 @@ clear
 set more off
 if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
 if ("`c(username)'"=="n818881") global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
-else global dir "H:\My Documents\OFCE_CommerceVA-develop\OFCE_CommerceVA-develop"
 
 *capture log close
 *log using "$dir/$S_DATE.log", replace

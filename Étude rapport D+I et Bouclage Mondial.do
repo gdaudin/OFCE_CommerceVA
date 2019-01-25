@@ -29,58 +29,8 @@ args year source type
 	
 
 
-if "`source'"=="TIVA" local liste_chocs shockEUR1-shockZAF1
-if "`source'"=="WIOD" local liste_chocs shockEUR1-shockUSA1
+use "$dir/Results/Devaluations/auto_chocs_`type'_`source'_`year'.dta", clear
 
-if "`type'"=="HC" | "`type'" =="HC_note" use "$dir/Results/Devaluations/mean_chg_`source'_HC_`year'.dta", clear
-if "`type'"=="par_sect" use "$dir/Results/Devaluations/`source'_C_`year'_exch.dta", clear
-
-
-
-foreach var of varlist `liste_chocs' {
-	local pays = substr("`var'",6,3)
-	replace `var' = 0 if strmatch(c,"*`pays'*")==0 ///
-	& strpos("$china",c)==0 & strpos("$mexique",c)==0
-	replace `var' = 0 if "`var'"!="shockCHN1" & strpos("$china",c)!=0
-	replace `var' = 0 if "`var'"!="shockMEX1" & strpos("$mexique",c)!=0
-}
-
-
-
-egen pond_`source'_`type' = rowtotal(`liste_chocs')
-
-
-drop shock*
-
-*** Pour aller chercher les chocs de la ZE
-if "`type'"=="HC" | "`type'" =="HC_note" {
-	merge 1:1 c using "$dir/Results/Devaluations/mean_chg_`source'_HC_`year'.dta"
-	keep c pond_`source'_`type' shockEUR
-}
-if "`type'"=="par_sect" {
-	merge 1:1 c s using "$dir/Results/Devaluations/`source'_C_`year'_exch.dta"
-	keep c s pond_`source'_`type' shockEUR
-}
-
-rename shockEUR1 s_EUR
-rename pond_`source'_`type' s_auto
-
-
-
-if "`type'"=="HC" | "`type'" =="HC_note" reshape long s_, i(c) j(source_shock) string
-if "`type'"=="par_sect"  reshape long s_, i(c s) j(source_shock) string
-
-
-drop if strpos("$eurozone",c)==0 & source_shock=="EUR" 
-
-replace c=c+"_EUR" if source_shock=="EUR" 
-
-drop source_shock
-
-rename s_ pond_`source'_`type'
-
-
-replace pond_`source'_`type' = -(pond_`source'_`type' - 1)/2
 
 *replace c =c+"_EUR" if source_shock=="EUR" 
 
@@ -144,9 +94,9 @@ if "`type'"=="par_sect" {
 *effet direct repondéré par le choc: le choc correspond à une appréciation de 100% 
 *=>on double l'impact pour comparer le ratio de CI importées (comptable) à l'effet direct choqué
 if "`type'"=="HC" | "`type'" =="HC_note" {
-gen E1HC = contenu_impHC/2
-gen E2HC = (ratio_ci_impt_HC)*(1-contenu_impHC)/2
-gen E3HC = - contenu_dom_HC_etranger
+	gen E1HC = contenu_impHC/2
+	gen E2HC = (ratio_ci_impt_HC)*(1-contenu_impHC)/2
+	gen E3HC = - contenu_dom_HC_etranger
 }
 
 gen E1HC_E2HC=E1HC + E2HC
@@ -172,6 +122,7 @@ if "`type'"=="HC" {
 	
 	graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/graph7_`year'_`source'_`type'.pdf", replace
 	
+	
 	graph close
 
 	
@@ -186,7 +137,7 @@ if "`type'"=="HC" {
 
 
 
-blif
+
 
 
 if "`type'"=="HC_note" & `year'==2014 {
@@ -297,8 +248,8 @@ end
 
 ****************************************************************************
 
-foreach source in  WIOD {
-*foreach source in  WIOD  TIVA {
+*foreach source in  WIOD {
+foreach source in  WIOD  TIVA {
 
 
 
@@ -315,8 +266,8 @@ foreach source in  WIOD {
 	foreach type in HC /*HC_note par_sect*/ {
 		capture erase "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`source'_`type'.dta"
 
-		foreach i of numlist 2014  {
-*		foreach i of numlist $start_year (1) $end_year  {
+*		foreach i of numlist 2014  {
+		foreach i of numlist $start_year (1) $end_year  {
 			etude `i' `source' `type'		
 		}
 	

@@ -190,6 +190,7 @@ program database_csv
 args source /* Tiva ou WIOD */
 *Exemple : database_csv TIVA
 
+clear
 Definition_pays_secteur `source'
 
 				

@@ -61,16 +61,16 @@ blink
 */
 */
 *foreach source in   WIOD { 
-foreach source in   WIOD TIVA { 
+foreach source in   /* WIOD TIVA */ TIVA_REV4 { 
 
 
-	if "`source'"=="WIOD" local start_year 2011 /*2000*/
+	if "`source'"=="WIOD" local start_year 2000 /*2000*/
 	if "`source'"=="TIVA" local start_year 1995
-
+	if "`source'"=="TIVA_REV4" local start_year 2005
 
 	if "`source'"=="WIOD" local end_year 2014
 	if "`source'"=="TIVA" local end_year 2011
-
+	if "`source'"=="TIVA_REV4" local end_year 2015
 	Definition_pays_secteur `source'
 
 	
@@ -82,6 +82,15 @@ foreach source in   WIOD TIVA {
 		global ori_choc "$ori_choc PHL POL PRT ROU ROW RUS SAU SGP SVK SVN SWE THA TUN TUR TWN USA VNM ZAF"
 	}
 
+	if "`source'"=="TIVA_REV4" {
+		global ori_choc "EUR EAS"
+		global ori_choc "$ori_choc  ARG AUS AUT BEL BGR BRA BRN CAN CHE CHL"
+		global ori_choc "$ori_choc  CHN   COL CRI CYP CZE DEU DNK ESP EST FIN"
+		global ori_choc "$ori_choc  FRA GBR GRC HKG HRV HUN IDN IND IRL ISL ISR ITA JPN KAZ KHM KOR"
+		global ori_choc "$ori_choc  LTU LUX LVA MAR MEX MLT    MYS NLD NOR NZL PER PHL POL PRT"
+		global ori_choc "$ori_choc  ROU ROW RUS SAU SGP SVK SVN SWE THA TUN TUR TWN USA VNM ZA"
+	}
+	
 	if "`source'"=="WIOD" {
 		global ori_choc "EUR EAS"
 		global ori_choc "$ori_choc AUS AUT BEL BGR BRA     CAN CHE CHN                             CYP CZE DEU DNK ESP EST FIN " 

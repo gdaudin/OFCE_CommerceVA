@@ -58,7 +58,7 @@ global country_hc "ARG AUS AUT BEL BGR BRA BRN CAN CHE CHL"
 	global china "CHN CN1 CN2" /* 3 Chine dans la source --> choquer ce groupe pour choc Chine"*/
 	global mexique "MEX MX1 MX2" /* 3 Mexique dans la source --> choquer ce groupe pour choc Mexique (y.c Maquiladoas)"*/
 	
-	global var_entree_sortie arg_01t03agr-zaf_97t98
+	global var_entree_sortie ARG_01T03-ZAF_97T98
 	
 	}
 	

@@ -8,22 +8,24 @@ clear
 
 if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
 if ("`c(hostname)'" == "widv269a") global dir  "D:\home\T822289\CommerceVA" 
-else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
+
+if ("`c(username)'"=="guillaumedaudin") global dirgit "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation"
+if ("`c(hostname)'" == "widv269a") global dirgit  "D:\home\T822289\CommerceVA\GIT\commerce_va_inflation" 
 
 capture log using "$dir/Temporaire/$S_DATE.log", replace
 set matsize 7000
 *set mem 700m if earlier version of stata (<stata 12)
 set more off
 
-cd $dir 
+cd "$dir"
 
 ******************** Construction des bases TIVA et WIOD ****************
 
-do GIT/commerce_va_inflation/1_constr_bases.do
+do "$dirgit/1_constr_bases.do"
 
 ******Définition des Pays et des secteurs ********************
 
-do GIT/commerce_va_inflation/Definition_pays_secteur.do   
+do "$dirgit/Definition_pays_secteur.do" 
 
 ******************** Lancement des programmes ****************
 

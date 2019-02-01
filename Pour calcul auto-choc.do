@@ -81,10 +81,17 @@ rename s_ pond_`source'_`type'
 
 replace pond_`source'_`type' = -(pond_`source'_`type' - 1)/2
 sort c
+gen year=`year'
 
 save "$dir/Results/Devaluations/auto_chocs_`type'_`source'_`year'.dta", replace
 
 end
+
+
+
+
+
+
 
 
 ***********

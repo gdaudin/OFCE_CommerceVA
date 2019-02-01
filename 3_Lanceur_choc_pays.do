@@ -12,7 +12,7 @@ set more off
 
 if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
 if ("`c(hostname)'" == "widv269a") global dir  "D:\home\T822289\CommerceVA" 
-else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
+* else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
 
 capture log  using "$dir/Temporaire/$S_DATE.log", replace
 *log using "$dir/$S_DATE.log", replace
@@ -47,7 +47,7 @@ set more off
 
 
 *foreach source in   TIVA { 
-foreach source in  /* WIOD*/ TIVA { 
+foreach source in   WIOD TIVA { 
 
 	Definition_pays_secteur `source'
 	if "`source'"=="WIOD" local start_year 2011

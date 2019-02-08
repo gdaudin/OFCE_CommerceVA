@@ -100,7 +100,7 @@ foreach source in  /* WIOD TIVA*/ TIVA_REV4 {
 	}
 	
 	*  foreach i of numlist 2011 {
-	foreach i of numlist `start_year' (1)`end_year'  {
+	foreach i of numlist  `end_year' (-1) `start_year'  {
 		
 		local HC_fait 0
     	foreach j in  HC X Y HC_neig_dom HC_alimentaire_dom HC_energie_dom HC_services_dom HC_dom ///

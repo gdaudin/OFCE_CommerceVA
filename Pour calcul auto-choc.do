@@ -29,7 +29,11 @@ args year source type
 	
 
 
+<<<<<<< Updated upstream
 if "`source'"=="TIVA" local liste_chocs shockEUR1-shockZAF1
+=======
+if "`source'"=="TIVA" |  "`source'"=="TIVA_REV4" local liste_chocs shockEUR1-shockZAF1
+>>>>>>> Stashed changes
 if "`source'"=="WIOD" local liste_chocs shockEUR1-shockUSA1
 
 if "`type'"=="HC" | "`type'" =="HC_note" use "$dir/Results/Devaluations/mean_chg_`source'_HC_`year'.dta", clear
@@ -96,17 +100,31 @@ end
 
 ***********
 *foreach source in  WIOD {
+<<<<<<< Updated upstream
 foreach source in  WIOD  TIVA {
+=======
+foreach source in /* WIOD  TIVA*/ TIVA_REV4 {
+>>>>>>> Stashed changes
 
 
 
 
 	if "`source'"=="WIOD" global start_year 2000
 	if "`source'"=="TIVA" global start_year 1995
+<<<<<<< Updated upstream
+=======
+*	if "`source'"=="TIVA_REV4" global start_year 2005
+	if "`source'"=="TIVA_REV4" global start_year 2015
+
+>>>>>>> Stashed changes
 
 
 	if "`source'"=="WIOD" global end_year 2014
 	if "`source'"=="TIVA" global end_year 2011
+<<<<<<< Updated upstream
+=======
+	if "`source'"=="TIVA_REV4" global start_year 2015
+>>>>>>> Stashed changes
 	
 	
    capture erase "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`source'_`type'.dta" 

@@ -36,7 +36,7 @@ graph twoway (scatter pond_WIOD_HC pond_TIVA_HC, mlabel(mylabel)) ///
 			(lfit pond_TIVA_HC pond_TIVA_HC), ///
 			yscale(range(0 0.4)) xscale(range(0 0.4)) ylabel(0 (0.1) 0.4) ///
 			ytitle("WIOD elasticites `year' (absolute value)") xtitle("TIVA elasticites `year' (absolute value)") ///
-			legend(order (2 3)  label(2 "Linear fit") label(3 "45° line") ) scheme(s1color)
+			legend(order (2 3)  label(2 "Linear fit") label(3 "45° line") ) scheme(s1mono)
 			
 graph export "$dir/commerce_VA_inflation/Rédaction/Comparaison_WIOD_TIVA_`year'.png", replace
 
@@ -62,7 +62,7 @@ twoway histogram pond_WIOD_HC, width(0.05) frequency xscale(range(0.04 0.36)) ||
 	note("* designate the effect of a shock on the (maybe hypothetical) local currency" ///
 	"*_EUR designate the effet of an shock on the Euro" ///
 	"FRA_EUR is in the same position as JPN") ///
-	 scheme(s1color)
+	 scheme(s1mono)
 	
 
 
@@ -78,7 +78,7 @@ twoway histogram pond_WIOD_HC [fweight=Y],  width(0.05) fraction xscale(range(0.
 	note("* designate the effect of a shock on the (maybe hypothetical) local currency" ///
 	"*_EUR designate the effet of an shock on the Euro" ///
 	"FRA_EUR is in the same position as JPN") ///
-	 scheme(s1color)
+	 scheme(s1mono)
 	
 
 
@@ -112,7 +112,7 @@ twoway scatter pond_WIOD_HC E1HC  if mylabel1=="" & mylabel2=="" , msize(small) 
 	ytitle("WIOD elasticites 2014 (absolute value)") ///
 	note("* designate the effect of a shock on the (maybe hypothetical) local currency" ///
 	"*_EUR designate the effet of an shock on the Euro") ///
-	 scheme(s1color)
+	 scheme(s1mono)
 	
 graph export "$dir/commerce_VA_inflation/Rédaction/WIOD_HC_E1HC.png", replace
 

@@ -110,8 +110,8 @@ foreach var of varlist $var_entree_sortie {
 	if "`matrix_obj'" =="B" replace `var'=0 if grchoc_ligne==0
 	
 	
-	if "`source'"=="TIVA" replace pays_origine = strupper(substr("`var'",1,strpos("`var'","_")-1))
-	if "`source'"=="WIOD" replace pays_origine = strupper(substr("`var'",2,3))
+	if "`source'"=="TIVA" |"`source'"=="TIVA_REV4"  replace pays_origine = strupper(substr("`var'",1,strpos("`var'","_")-1))
+		if "`source'"=="WIOD" replace pays_origine = strupper(substr("`var'",2,3))
 	foreach p of local groupeduchoc {	
 		replace grchoc2 = 1 if pays_origine == "`p'" 
 	

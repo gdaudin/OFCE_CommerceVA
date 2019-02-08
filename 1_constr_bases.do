@@ -44,6 +44,22 @@ if "`source'"=="TIVA" {
 	*/	
 }
 
+if "`source'"=="TIVA_REV4" {
+
+	*Loop to save data for each year
+	set more off
+
+	insheet using "$dir/Bases_Sources/TIVA_REV4/ICIO2018_`yrs'.csv", clear case
+	*I sort the ICIO: 
+	local useful = _N-2 /*on exclut les 2 dernières lignes du tri ligne suivante */
+	sort v1 AUS_01T03-TOTAL in 1/`useful' /*observations (tout sauf les 2 de useful*/
+	order AUS_01T03-CN2_97T98, alphabetic after (v1) /*variables V1 = 1ere colonne nom vide non triée*/
+	order AUS_HFCE-TOTAL, alphabetic after (ZAF_97T98)
+	save "$dir/Bases/TIVA_REV4_ICIO_`yrs'.dta", replace
+
+}
+
+
 
 
 if "`source'"=="WIOD" {	 
@@ -79,6 +95,11 @@ if "`source'"=="WIOD" {
 }
 
 
+
+
+
+
+
 end
 
 *-------------------------------------------------------------------------------
@@ -109,6 +130,28 @@ if "`source'"=="TIVA" {
 	save "$dir/Bases/TIVA_`yrs'_Z.dta", replace
 	   
 	
+}
+
+
+if "`source'"=="TIVA_REV4" {	
+		
+	*From the ICIO database I keep only the output vector
+	use "$dir/Bases/TIVA_REV4_ICIO_`yrs'.dta"
+	keep if v1 == "OUTPUT"
+	drop v1
+	drop ARG_GFCF-ZAF_P33
+	save "$dir/Bases/TIVA_REV4_`yrs'_OUT.dta", replace
+	
+	*From the ICIO database I keep only the table for inter-industry inter-country trade (matrice de CI mondiale)
+	use "$dir/Bases/TIVA_REV4_ICIO_`yrs'.dta", clear
+	drop ARG_GFCF-ZAF_P33
+	drop if v1 == "VALU" | strmatch(v1, "*TAXSUB") == 1 | v1 == "OUTPUT"
+	gen pays=upper(substr(v1,1,3))
+	gen secteur = upper(substr(v1,5,.))
+	order pays secteur
+	drop v1
+	save "$dir/Bases/TIVA_REV4_`yrs'_Z.dta", replace
+	   	
 }
 
 if "`source'"=="WIOD" {	
@@ -147,6 +190,7 @@ program database_csv
 args source /* Tiva ou WIOD */
 *Exemple : database_csv TIVA
 
+clear
 Definition_pays_secteur `source'
 
 				
@@ -213,12 +257,10 @@ generate year = `yrs'
 reshape long prod, i(year) j(pays_sect) string
 
 
-if "`source'"=="TIVA" generate pays = strupper(substr(pays_sect,1,strpos(pays_sect,"_")-1))
+if "`source'"=="TIVA" | "`source'"=="TIVA_REV4" generate pays = strupper(substr(pays_sect,1,strpos(pays_sect,"_")-1))
 if "`source'"=="WIOD" generate pays = substr(pays_sect,2,3)
 
-
 collapse (sum) prod, by(pays year)
-
 
 end 
 
@@ -228,9 +270,11 @@ program append_y
 args source
 
 if "`source'"=="TIVA" local yr_list 1995(1)2011
+if "`source'"=="TIVA_REV4" local yr_list 2005(1)2015
 if "`source'"=="WIOD" local yr_list 2000(1)2014
 
 if "`source'"=="TIVA" local first_yr 1995
+if "`source'"=="TIVA_REV4" local first_yr 2005
 if "`source'"=="WIOD" local first_yr 2000
 
 foreach y of numlist `yr_list' { 
@@ -244,7 +288,7 @@ sort year , stable
 end
 
 ***************************************************************************************************
-* 2- Création des tables X d'exportations : on crée le vecteur 1*67 des productions totales de chauqe pays
+* 2- Création des tables X d'exportations : on crée le vecteur 1*67 des productions totales de chaque pays
 ***************************************************************************************************
 
 *Creation of the vector of export X
@@ -261,8 +305,16 @@ if "`source'"=="TIVA" {
 	global country2 "$country2  ltu lux lva mar mex mlt mx1 mx2 mx3 mys nld nor nzl per phl pol prt"
 	global country2 "$country2  rou row rus sau sgp svk svn swe tha tun tur twn usa vnm zaf"	
 }
-				
-				
+
+
+if "`source'"=="TIVA_REV4" {
+	global country2 "arg aus aut bel bgr bra brn can che chl"
+	global country2 "$country2  chn cn1 cn2 col cri cyp cze deu dnk esp est fin"
+	global country2 "$country2  fra gbr grc hkg hrv hun idn ind irl isl isr ita jpn kaz khm kor"
+	global country2 "$country2  ltu lux lva mar mex mlt mx1 mx2 mys nld nor nzl per phl pol prt"
+	global country2 "$country2  rou row rus sau sgp svk svn swe tha tun tur twn usa vnm zaf"	
+}
+							
 if "`source'"=="WIOD" {
 	global country2 "aus aut bel bgr bra can che" 
 	global country2 "$country2 chn cyp cze deu dnk esp est fin"
@@ -283,6 +335,7 @@ generate pays = strlower(substr(v1,1,strpos(v1,"_")-1))
 drop if pays==""
 
 if "`source'"=="TIVA"  egen utilisations = rowtotal(arg_c01t05agr-nps_zaf)
+***Pour les exports
 
 
 gen utilisations_dom = .
@@ -307,6 +360,32 @@ foreach j of global country2 {
 	*** mx = mx1 + mx2 + mx3
 }
 
+if "`source'"=="TIVA_REV4"  egen utilisations = rowtotal(arg_01T03-zaf97T98)
+***Pour les exports
+
+
+gen utilisations_dom = .
+
+foreach j of global country2 {
+	local i = "`j'"
+	if  ("`j'"=="cn1" | "`j'"=="cn2" ) {
+		local i = "cn" 
+	}
+	if  ("`j'"=="mx1" | "`j'"=="mx2" ) {
+			local i = "mx"
+	}
+	egen blouk = rowtotal(*`i'*)
+	display "`i'" "`j'"
+	replace utilisations_dom = blouk if pays=="`j'"
+	codebook utilisations_dom if pays=="`j'"
+	drop blouk
+
+
+	
+	*** cn = cn1 + cn2 
+	*** mx = mx1 + mx2 
+}
+
 generate X = utilisations - utilisations_dom
 	
 replace pays = strupper(pays)
@@ -325,9 +404,11 @@ args source
 
 
 if "`source'"=="TIVA" local yr_list 1995(1)2011
+if "`source'"=="TIVA_REV4" local yr_list 2005(1)2015
 if "`source'"=="WIOD" local yr_list 2000(1)2014
 
 if "`source'"=="TIVA" local first_yr 1995
+if "`source'"=="TIVA_REV4" local yr_list 2005(1)2015
 if "`source'"=="WIOD" local first_yr 2000
 
 foreach y of numlist `yr_list' { 

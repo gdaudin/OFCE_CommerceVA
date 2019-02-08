@@ -12,6 +12,7 @@ set more off
 
 if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
 if ("`c(hostname)'" == "widv269a") global dir  "D:\home\T822289\CommerceVA" 
+
 * else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
 
 capture log  using "$dir/Temporaire/$S_DATE.log", replace
@@ -19,15 +20,15 @@ capture log  using "$dir/Temporaire/$S_DATE.log", replace
 set matsize 7000
 *set mem 700m if earlier version of stata (<stata 12)
 set more off
-cd $dir 
+cd "$dir" 
 
-do GIT/commerce_va_inflation/Definition_pays_secteur.do   
-do GIT/commerce_va_inflation/Aggregation_effets_des_chocs.do   
-do GIT/commerce_va_inflation/compute_X.do   
-do GIT/commerce_va_inflation/compute_HC.do
-do GIT/commerce_va_inflation/compute_Y.do
+do "$dirgit/Definition_pays_secteur.do"   
+do "$dirgit/Aggregation_effets_des_chocs.do"   
+do "$dirgit/compute_X.do"
+do "$dirgit/compute_HC.do"
+do "$dirgit/compute_Y.do"
 
-/*
+/* A faire tourner la 1ere fois
 Definition_pays_secteur TIVA
 append_HC TIVA 
 append_X TIVA
@@ -39,6 +40,13 @@ append_X WIOD
 append_Y WIOD
 */
 
+Definition_pays_secteur TIVA_REV4
+append_HC TIVA_REV4
+append_X TIVA_REV4
+append_Y TIVA_REV4
+
+
+
 *--------------------------------------------------------------------------------
 *LIST ALL PROGRAMS AND RUN THEM - agregation effet choc
 *--------------------------------------------------------------------------------
@@ -47,15 +55,18 @@ set more off
 
 
 *foreach source in   TIVA { 
-foreach source in   WIOD TIVA { 
+foreach source in  /* WIOD TIVA*/ TIVA_REV4 { 
+
 
 	Definition_pays_secteur `source'
-	if "`source'"=="WIOD" local start_year 2011
+	if "`source'"=="WIOD" local start_year 2000
 	if "`source'"=="TIVA" local start_year 1995
+	if "`source'"=="TIVA_REV4" local start_year 2005
 
 
 	if "`source'"=="WIOD" local end_year 2014
 	if "`source'"=="TIVA" local end_year 2011
+	if "`source'"=="TIVA_REV4" local end_year 2015
 
 	
 	// Fabrication des fichiers d'effets moyens des chocs de change
@@ -70,6 +81,15 @@ foreach source in   WIOD TIVA {
 		global ori_choc "$ori_choc PHL POL PRT ROU ROW RUS SAU SGP SVK SVN SWE THA TUN TUR TWN USA VNM ZAF"
 	}
 
+		if "`source'"=="TIVA_REV4" {
+		global ori_choc "EUR EAS"
+		global ori_choc "$ori_choc  ARG AUS AUT BEL BGR BRA BRN CAN CHE CHL"
+		global ori_choc "$ori_choc  CHN   COL CRI CYP CZE DEU DNK ESP EST FIN"
+		global ori_choc "$ori_choc  FRA GBR GRC HKG HRV HUN IDN IND IRL ISL ISR ITA JPN KAZ KHM KOR"
+		global ori_choc "$ori_choc  LTU LUX LVA MAR MEX MLT    MYS NLD NOR NZL PER PHL POL PRT"
+		global ori_choc "$ori_choc  ROU ROW RUS SAU SGP SVK SVN SWE THA TUN TUR TWN USA VNM ZAF"
+	}
+		
 	if "`source'"=="WIOD" {
 		global ori_choc "EUR EAS"
 		global ori_choc "$ori_choc AUS AUT BEL BGR BRA     CAN CHE CHN                             CYP CZE DEU DNK ESP EST FIN " 
@@ -78,7 +98,7 @@ foreach source in   WIOD TIVA {
 	}
 	
 	*  foreach i of numlist 2011 {
-	foreach i of numlist `start_year' (1)`end_year'  {
+	foreach i of numlist  `end_year' (-1) `start_year'  {
 		
 		local HC_fait 0
     	foreach j in  HC X Y HC_neig_dom HC_alimentaire_dom HC_energie_dom HC_services_dom HC_dom ///

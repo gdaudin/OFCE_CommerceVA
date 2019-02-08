@@ -3,8 +3,7 @@
 clear  
 set more off
 if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
-else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
-
+if ("`c(hostname)'" == "widv269a") global dir  "D:\home\T822289\CommerceVA" 
 
 *capture log close
 *log using "$dir/$S_DATE.log", replace
@@ -25,7 +24,7 @@ replace agregat_secteur="energie" if s=="D35"  || s=="C19" || s=="B"
  save "$dir/Bases/csv_WIOD.dta", replace
 
   
- ***********TIVA*************
+ ***********TIVA 2016*************
 use "$dir/Bases/csv_TIVA.dta", clear
 replace c=upper(c)
 replace s=upper(s)
@@ -33,10 +32,29 @@ replace s=upper(s)
 capture generate agregat_secteur="na" 
 replace agregat_secteur="alimentaire" if s=="C01T05" || s=="C15T16"
 
-*NEIG: bien manuf hors energie
-replace agregat_secteur="neig" if s=="C17T19" || s=="C20"|| s=="C13-C15" ||s=="C21T22" || s=="C24" ||s=="C25"|| s=="C26"|| s=="C27"|| s=="C28"|| s=="C29"||s=="C30T33X"||s=="C31"||s=="C34"||s=="C35"|| s=="C36T37"||s=="C45" 
+*NEIG: bien manuf hors energie (y.c. construction)
+replace agregat_secteur="neig" if s=="C17T19" || s=="C20"|| s=="C21T22" || s=="C24" ||s=="C25"|| s=="C26"|| s=="C27"|| s=="C28"|| s=="C29"||s=="C30T33X"||s=="C31"||s=="C34"||s=="C35"|| s=="C36T37"||s=="C45" 
 
 replace agregat_secteur="services" if s=="C50T52" || s=="C55" || s=="C60T63" || s=="C64" || s=="C65T67" || s=="C70" || s=="C71" || s=="C72"|| s=="C73T74"|| s=="C75" || s=="C80" || s=="C85" || s=="C90T93" || s=="C95" 
 
 replace agregat_secteur="energie" if s=="C10T14"  || s=="C40T41" || s=="C23"
  save "$dir/Bases/csv_TIVA.dta", replace
+
+ 
+ 
+  ***********TIVA REV4 2018*************
+use "$dir/Bases/csv_TIVA_REV4.dta", clear
+replace c=upper(c)
+replace s=upper(s)
+
+capture generate agregat_secteur="na" 
+replace agregat_secteur="alimentaire" if s=="01T03" || s=="10T12"
+
+*NEIG: bien manuf hors energie (y.c. construction)
+replace agregat_secteur="neig" if s=="13T15" || s=="16" ||s=="17T18"|| s=="20T21"|| s=="22"|| s=="23"|| s=="24"||s=="25"||s=="26"|| s=="27"||s=="28" ||s=="29" ||s=="30" ||s=="31T33" ||s=="41T43" 
+
+replace agregat_secteur="services" if s=="45T47" || s=="49T53" ||s=="55T56"|| s=="58T60"|| s=="61"|| s=="62T63"|| s=="64T66"||s=="68"||s=="69T82"|| s=="84"||s=="85"||s=="86T88"||s=="90T96"|| s=="97T98"
+
+replace agregat_secteur="energie" if s=="05T06"  || s=="07T08"  || s=="09"  || s=="19T23" || s=="19"  || s=="35T39"
+ save "$dir/Bases/csv_TIVA_REV4.dta", replace
+

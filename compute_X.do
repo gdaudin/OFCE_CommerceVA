@@ -53,6 +53,30 @@ gen Country = substr("v1",1,3)
 	}
 
 }
+
+if "`source'"=="TIVA_REV4" {
+drop if v1 == "VALU" | strmatch(v1, "*TAXSUB") == 1 | v1 == "OUTPUT"
+egen utilisations = rowtotal(ARG_01T03-ZAF_P33)
+gen utilisations_dom = .
+* liste de countrys
+
+gen Country = substr("v1",1,3)
+ 
+	foreach j of global country {
+		local i = upper("`j'")
+		if  ("`j'"=="CN1" | "`j'"=="CN2") local i = "CHN" 
+
+		if  ("`j'"=="MX1" | "`j'"=="MX2") local i = "MEX"
+		
+		egen blouk = rowtotal(*`i'*)
+		display "`i'" "`j'"
+		replace utilisations_dom = blouk if strpos(v1,"`j'")!=0
+*		codebook utilisations_dom if 	strpos(v1,"`j'")!=0
+		drop blouk
+	}
+
+}
+
 generate X = utilisations - utilisations_dom
 	
 replace Country = strupper(Country)
@@ -65,6 +89,11 @@ if "`source'"=="TIVA" {
 	generate sector = strupper(substr(v1,strpos(v1,"_")+1,strlen(v1)-3-strpos(v1,"_")))
 }
 
+
+if "`source'"=="TIVA_REV4" {
+	generate pays = strupper(substr(v1,1,3))
+	generate sector = strupper(substr(v1,strpos(v1,"_")+1,strlen(v1)-3-strpos(v1,"_")))
+}
 
 if "`source'"=="WIOD" {
 	generate pays =upper(Country)
@@ -85,9 +114,12 @@ program append_X
 args source
 *We create a .dta that includes all vectors of HFCE of all years
 if "`source'"=="TIVA" local yr_list 1995(1)2011
+if "`source'"=="TIVA_REV4" local yr_list 2005(1)2015
 if "`source'"=="WIOD" local yr_list 2000(1)2014
 
+
 if "`source'"=="TIVA" local first_yr 1995
+if "`source'"=="TIVA_REV4" local first_yr 2005
 if "`source'"=="WIOD" local first_yr 2000
 foreach y of numlist `yr_list' { 
 	compute_X `source' `y'

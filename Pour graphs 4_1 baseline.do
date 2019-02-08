@@ -51,8 +51,8 @@ keep if year==2014
 
 
 merge 1:1 c using "$dir/Results/Devaluations/auto_chocs_HC_WIOD_2014.dta"
-gen blouf = 0
 
+gen blouf = 0
 gen mylabel= c if strpos("FRA DEU DEU_EUR ITA ITA_EUR GBR CHN USA CAN JPN ",c)!=0
 
 twoway histogram pond_WIOD_HC, width(0.05) frequency xscale(range(0.04 0.36)) || ///
@@ -197,7 +197,8 @@ twoway 	(line WIOD_elast_annual year, lcolor(blue) lpattern(dash)) ///
 		legend(label(1 "WIOD") label(2 "WIOD, output weighted") ///
 		label(3 "TIVA") label(4 "TIVA, output weighted"))  /// 
 		ytitle("elasticity (absolute value)", ) ///
-		note("Computed on a common sample of 43 countries assuming no Eurozone")
+		note("Computed on a common sample of 43 countries assuming no Eurozone") ///
+		scheme(s1mono)
 		
 
 graph export "$dir/commerce_VA_inflation/Rédaction/PIWIM_LONGITUDINAL.png", replace

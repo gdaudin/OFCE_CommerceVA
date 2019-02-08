@@ -37,7 +37,7 @@ gsort HC_tot
 graph bar (asis) HC_dom HC_impt , over(c,sort(HC_tot)) stack ///
 		legend(rows(2) size(small)) ///
 		note("Source: PIWIM (WIOD, 2014)") ///
-		scheme(s1color) ///
+		scheme(s1mono) ///
 		ylabel(,format(%9.2fc)) ///
 		ytitle("elasticity (absolute value)") ///
 		note("For DEU and FRA, this is the elasticity to a shock on the Euro")
@@ -57,7 +57,7 @@ label var neig "non-energy industrial goods"
 graph bar (asis) services neig energy food , over(c,sort(HC_tot)) stack ///
 		legend(rows(2) size(small)) ///
 		note("Source: PIWIM (WIOD, 2014)") /// 
-		scheme(s1color) ///
+		scheme(s1mono) ///
 		ylabel(,format(%9.2fc)) ///
 		ytitle("elasticity (absolute value)") ///
 		note("For DEU and FRA, this is the elasticity to a shock on the Euro")
@@ -80,12 +80,14 @@ label var volatile_impt "Imported food and energy inflation"
 gen volatile_dom= energy_dom+food_dom
 label var volatile_dom "Domestic food and energy inflation"
 
-graph bar (asis) ss_jacente_dom ss_jacente_impt  volatile_dom volatile_impt  , over(c,sort(HC_tot) descending) stack ///
+graph bar (asis) ss_jacente_dom ss_jacente_impt  volatile_dom volatile_impt  , over(c,sort(HC_tot)) stack ///
 		legend(rows(2) size(vsmall)) ///
 		note("Source: PIWIM (WIOD, 2014)") /// 
-		scheme(s1color) ///
+		scheme(s1mono) ///
 		ylabel(,format(%9.2fc)) ///
-		ytitle("elasticity (absolute value)")
+		ytitle("elasticity (absolute value)") ///
+		note("For DEU and FRA, this is the elasticity to a shock on the Euro")
+		
 		
 /*		title("Impact d'une appréciation de 5% de l'euro sur les prix à la consommation par secteur et origine", span size(small)) /// */		
 graph export "$dir/commerce_VA_inflation/Rédaction/decomp_sectxorigin.png", replace

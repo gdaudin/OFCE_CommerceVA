@@ -48,7 +48,7 @@ global country_hc "ARG AUS AUT BEL BGR BRA BRN CAN CHE CHL"
 	global country_hc "$country_hc  CHN   COL CRI CYP CZE DEU DNK ESP EST FIN"
 	global country_hc "$country_hc  FRA GBR GRC HKG HRV HUN IDN IND IRL ISL ISR ITA JPN KAZ KHM KOR"
 	global country_hc "$country_hc  LTU LUX LVA MAR MEX MLT    MYS NLD NOR NZL PER PHL POL PRT"
-	global country_hc "$country_hc  ROU ROW RUS SAU SGP SVK SVN SWE THA TUN TUR TWN USA VNM ZA"
+	global country_hc "$country_hc  ROU ROW RUS SAU SGP SVK SVN SWE THA TUN TUR TWN USA VNM ZAF"
 
 	global sector "01T03 05T06 07T08 09"
 	global sector "$sector 10T12 13T15 16 17T18 19 20T21 22 23 24 25 26 27 28 29 30 31T33 35T39 41T43 "

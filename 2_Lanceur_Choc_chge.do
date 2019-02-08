@@ -18,7 +18,10 @@ global test=1
 *******Définition du directory
 if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
 if ("`c(hostname)'" == "widv269a") global dir  "D:\home\T822289\CommerceVA" 
-else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
+
+if ("`c(username)'"=="guillaumedaudin") global dirgit "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation"
+if ("`c(hostname)'" == "widv269a") global dirgit  "D:\home\T822289\CommerceVA\GIT\commerce_va_inflation" 
+
 
 
 capture log using "$dir/Temporaire/$S_DATE.log", replace
@@ -26,15 +29,15 @@ set matsize 7000
 *set mem 700m if earlier version of stata (<stata 12)
 set more off
 
-cd $dir 
+cd "$dir"
 
 ******Définition des Pays et des secteurs ********************
 **On le lance pour mettre à jour les macros (en mémoire)
-do GIT/commerce_va_inflation/Definition_pays_secteur.do   
+do "$dirgit/Definition_pays_secteur.do"   
 
 
 **local nbr_sect=wordcount("$sector")	
-do GIT/commerce_va_inflation/choc_chge.do
+do "$dirgit/choc_chge.do"
 /*
 ***** POUR TEST (1 pays, 1 année, 1 source)***********
 global test = 1 

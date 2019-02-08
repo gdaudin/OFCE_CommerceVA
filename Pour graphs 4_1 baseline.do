@@ -36,7 +36,7 @@ graph twoway (scatter pond_WIOD_HC pond_TIVA_HC, mlabel(mylabel)) ///
 			(lfit pond_TIVA_HC pond_TIVA_HC), ///
 			yscale(range(0 0.4)) xscale(range(0 0.4)) ylabel(0 (0.1) 0.4) ///
 			ytitle("WIOD elasticites `year' (absolute value)") xtitle("TIVA elasticites `year' (absolute value)") ///
-			legend(order (2 3)  label(2 "Linear fit") label(3 "45° line") )
+			legend(order (2 3)  label(2 "Linear fit") label(3 "45° line") ) scheme(s1color)
 			
 graph export "$dir/commerce_VA_inflation/Rédaction/Comparaison_WIOD_TIVA_`year'.png", replace
 
@@ -61,7 +61,8 @@ twoway histogram pond_WIOD_HC, width(0.05) frequency xscale(range(0.04 0.36)) ||
 	legend(off) ytitle("Number of countries in each bin") xtitle("WIOD elasticites 2014 (absolute value)") ///
 	note("* designate the effect of a shock on the (maybe hypothetical) local currency" ///
 	"*_EUR designate the effet of an shock on the Euro" ///
-	"FRA_EUR is in the same position as JPN")
+	"FRA_EUR is in the same position as JPN") ///
+	 scheme(s1color)
 	
 
 
@@ -76,7 +77,8 @@ twoway histogram pond_WIOD_HC [fweight=Y],  width(0.05) fraction xscale(range(0.
 	legend(off) ytitle("Share of world output in each bin") xtitle("WIOD elasticites 2014 (absolute value)") ///
 	note("* designate the effect of a shock on the (maybe hypothetical) local currency" ///
 	"*_EUR designate the effet of an shock on the Euro" ///
-	"FRA_EUR is in the same position as JPN")
+	"FRA_EUR is in the same position as JPN") ///
+	 scheme(s1color)
 	
 
 
@@ -109,7 +111,8 @@ twoway scatter pond_WIOD_HC E1HC  if mylabel1=="" & mylabel2=="" , msize(small) 
 	legend(off) xtitle("Share of imported goods and services in household consumption") ///
 	ytitle("WIOD elasticites 2014 (absolute value)") ///
 	note("* designate the effect of a shock on the (maybe hypothetical) local currency" ///
-	"*_EUR designate the effet of an shock on the Euro")
+	"*_EUR designate the effet of an shock on the Euro") ///
+	 scheme(s1color)
 	
 graph export "$dir/commerce_VA_inflation/Rédaction/WIOD_HC_E1HC.png", replace
 

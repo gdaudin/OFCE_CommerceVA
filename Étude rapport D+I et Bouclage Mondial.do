@@ -349,12 +349,16 @@ foreach source in  WIOD TIVA {
 *	foreach i of numlist $start_year (1) $end_year  {
 			use "$dir/Results/Étude rapport D+I et Bouclage Mondial/Elast_par_pays_`i'_`source'_HC.dta", clear 
 			gen E4HC = pond_WIOD_HC - E1HC - E2HC - E3HC
+			gen blouf = 0
+			gen mylabel= c if strpos("FRA DEU DEU_EUR ITA ITA_EUR GBR CHN USA CAN JPN ",c)!=0
 			foreach var in E1HC E2HC E3HC E4HC {
 				gen share_`var'=`var'/pond_WIOD_HC
-				histogram share_`var', start(-0.2) width(0.1) freq name(`var')  xscale(range(-0.1 (0.1) 0.8)) xlabel(-0.1 (0.1) 0.8)
+				histogram share_`var', start(-0.2) width(0.1) freq name(`var') ///
+				scatter blouf pond_WIOD_HC if mylabel!="", /// 
+				xscale(range(-0.1 (0.1) 0.8)) xlabel(-0.1 (0.1) 0.8)
 			}
-		graph combine 	E1HC E2HC E3HC E4HC
-		graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/hist_components_`source'.pdf", replace
+		graph combine 	E1HC E2HC E3HC E4HC, name(hist_components_`source'_`i')
+		graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/hist_components_`source'_`i'.png", replace
 			
 		}
 	
@@ -362,7 +366,7 @@ foreach source in  WIOD TIVA {
 	
 }
 
-
-
+graph use hist_components_WIOD_2014
+graph export "$dir/commerce_VA_inflation/Rédaction/hist_components_si.png", replace
 
 

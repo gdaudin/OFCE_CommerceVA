@@ -75,7 +75,7 @@ rename s_ pond_`source'_`type'
 *replace pond_`source'_`type' = -(pond_`source'_`type' - 1)/2
 sort c
 gen year=`year'
-
+rename c pays
 save "$dir\Results\Devaluations\auto_chocs_`type'_`source'_`year'.dta", replace
 
 end
@@ -86,11 +86,11 @@ end
 
 
 
-
+					
 ***********
 *foreach source in  WIOD {
 
-foreach source in /* WIOD  TIVA*/ TIVA_REV4 {
+foreach source in /*  TIVA*/ WIOD  TIVA_REV4 {
 
 
 

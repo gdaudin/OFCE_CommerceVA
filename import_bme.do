@@ -11,17 +11,15 @@ args type2 yrs2
 
 clear
 
-
 if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
-if ("`c(hostname)'" == "widv269a") global dir  "D:\home\T822289\CommerceVA\rédaction\Rédaction 2019" 
-else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
-
+if ("`c(hostname)'" == "widv269a") global dir  "D:\home\T822289\CommerceVA" 
+if ("`c(hostname)'" == "FP1376CD") global dir  "T:\CommerceVA" 
 
 
 *choc de 1% CXD
 
 if "`type2'_`yrs2'" == "CXD_2019" {
-	import excel using D:\home\T822289\CommerceVA\Bases_Sources\BMEs\Direct_Impact-CXD-02_Jan_2019.xlsx, sheet("CTRY") cellrange(C9:N30) firstrow clear
+	import excel using "$dir\Bases_Sources\BMEs\Direct_Impact-CXD-02_Jan_2019.xlsx", sheet("CTRY") cellrange(C9:N30) firstrow clear
 	rename C pays 
 	rename K BME_1
 	rename L BME_gr_2
@@ -36,7 +34,7 @@ if "`type2'_`yrs2'" == "CXD_2019" {
 	drop if BME_1 ==.
 }
 if "`type2'_`yrs2'" == "CXD_2018" {
-	import excel using D:\home\T822289\CommerceVA\Bases_Sources\BMEs\Direct_Impact-CXD-03_Jan_2018.xlsx, sheet("CTRY") cellrange(C9:N30) firstrow clear
+	import excel using "$dir\Bases_Sources\BMEs\Direct_Impact-CXD-03_Jan_2018.xlsx", sheet("CTRY") cellrange(C9:N30) firstrow clear
 	rename C pays 
 	rename K BME_1
 	rename L BME_gr_2
@@ -53,7 +51,7 @@ if "`type2'_`yrs2'" == "CXD_2018" {
 }
 
 if  "`type2'_`yrs2'" == "ERT_2019" {
-	import excel using D:\home\T822289\CommerceVA\Bases_Sources\BMEs\Direct_Impact-ERT-02_Jan_2019.xlsx, sheet("CTRY") cellrange(C9:N30) firstrow clear
+	import excel using "$dir\Bases_Sources\BMEs\Direct_Impact-ERT-02_Jan_2019.xlsx", sheet("CTRY") cellrange(C9:N30) firstrow clear
 	rename C pays 
 	rename K BME_1
 	rename L BME_gr_2
@@ -69,7 +67,7 @@ if  "`type2'_`yrs2'" == "ERT_2019" {
 
 }
 if "`type2'_`yrs2'" == "ERT_2018" {
-	import excel using D:\home\T822289\CommerceVA\Bases_Sources\BMEs\Direct_Impact-ERT-03_Jan_2018.xlsx, sheet("CTRY") cellrange(C9:N30) firstrow clear
+	import excel using "$dir\Bases_Sources\BMEs\Direct_Impact-ERT-03_Jan_2018.xlsx", sheet("CTRY") cellrange(C9:N30) firstrow clear
 	rename C pays 
 	rename K BME_1
 	rename L BME_gr_2
@@ -148,7 +146,7 @@ if  "`yrs'" == "2013" {
 *save "\\intra\partages\ua1383_data\Agents\Lalliard\Commerce_VA_inflation\BME_`yrs'.dta", replace
  *save "D:\home\T822289\CommerceVA\rédaction\Rédaction 2019\BME_`type'_`yrs'.dta", replace
  
- generate year="`yrs2'"
+ generate year=`yrs2'
  generate type="`type2'"
  
 end
@@ -159,8 +157,8 @@ foreach type in ERT CXD  {
 	foreach yrs of numlist 2018 2019 {
 		essai "`type'" "`yrs'"
 		local num_fich=`num_fich'+1
-		if `num_fich' !=1 append using "D:\home\T822289\CommerceVA\rédaction\Rédaction 2019\BME.dta"
-		save "D:\home\T822289\CommerceVA\rédaction\Rédaction 2019\BME.dta", replace
+		if `num_fich' !=1 append using "$dir\Rédaction\Rédaction 2019\BME.dta"
+		save "$dir\Rédaction\Rédaction 2019\BME.dta", replace
 	}
 }
 
@@ -168,7 +166,7 @@ foreach type in ERT CXD  {
 rename pays c_full_EN
 
 *Table de correspondance pays BMEs/WIOD
-merge m:m c_full_EN using "D:\home\T822289\CommerceVA\Bases\pays_FR.dta"
+merge m:m c_full_EN using "$dir\Bases\pays_FR.dta"
 
 keep if _merge == 3
 drop _merge
@@ -186,4 +184,4 @@ label variable BME_3 "BME pour le même choc que le modèle I-O - 3e année"
 drop c_full_EN
 
 drop c_full_FR
-save "D:\home\T822289\CommerceVA\rédaction\Rédaction 2019\BME.dta", replace
+save "$dir\Rédaction\Rédaction 2019\BME.dta", replace

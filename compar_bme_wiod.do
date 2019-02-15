@@ -14,8 +14,8 @@ replace pays = upper(c) if type == "CXD"
 replace BME_1=-BME_1*10/clef_CXD if type == "CXD" 
 replace BME_3=-BME_3*10/clef_CXD if type == "CXD" 
 
-replace BME_1=-BME_1/10 if type == "ERT" 
-replace BME_3=-BME_3/10 if type == "ERT" 
+replace BME_1=BME_1/10 if type == "ERT" 
+replace BME_3=BME_3/10 if type == "ERT" 
 
 replace BME_1=. if type == "CXD" & c=="FIN" & year==2018
 replace BME_3=. if type == "CXD" & c=="FIN" & year==2018

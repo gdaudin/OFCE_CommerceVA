@@ -185,3 +185,12 @@ drop c_full_EN
 
 drop c_full_FR
 save "$dir\Rédaction\Rédaction 2019\BME.dta", replace
+
+*On importe la clé de passage des poids TCE pour le BME cxd (vu de la ZE alors qu'on veut vu du pays)
+
+import excel using "$dir\Rédaction\Rédaction 2019\poids_extra_ze.xlsx", sheet("poids") cellrange(A1:D39) firstrow clear
+merge 1:1 c year type using "$dir\Rédaction\Rédaction 2019\BME.dta"
+drop _merge
+save "$dir\Rédaction\Rédaction 2019\BME.dta", replace
+
+

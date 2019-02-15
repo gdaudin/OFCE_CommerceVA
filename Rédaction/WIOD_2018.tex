@@ -401,7 +401,7 @@ Figure \ref{fig:comp_WIOD_TIVA}, shows that, despite their differences, using WI
 \centering
 \caption{\footnotesize{\textbf{Comparing consumer price elasticity to an exchange rate appreciation for WIOD and TIVA, 2011}}}
 \begin{tabular}{c}
-\includegraphics[width=5.4in, height=3.78in]{Comparaison_WIOD_TIVA_2011.png}\\
+\includegraphics[width=4.5in, height=3in]{Comparaison_WIOD_TIVA_2011.png}\\
 \floatfoot{Source: WIOD and TIVA}.
 \end{tabular}
 \label{fig:comp_WIOD_TIVA}
@@ -414,7 +414,7 @@ The evolution of consumer prices elasticity through time is very similar in both
 	\centering
 	\caption{\footnotesize{\textbf{Comparing mean consumer price elasticity to an exchange rate appreciation for WIOD and TIVA, 1995-2014}}}
 	\begin{tabular}{c}
-		\includegraphics[width=5.4in, height=3.78in]{PIWIM_LONGITUDINAL.png}\\
+		\includegraphics[width=4.5in, height=3in]{PIWIM_LONGITUDINAL.png}\\
 		\floatfoot{Source: WIOD and TIVA}.
 	\end{tabular}
 	\label{fig:PIWIM_LONGITUDINAL}
@@ -430,7 +430,7 @@ Figure \ref{fig:WIOD_HC_E1HC} shows it is closely, but not strictly, related to 
 	\centering
 	\caption{\footnotesize{\textbf{Distribution of consumer price elasticity to an exchange rate appreciation for WIOD 2014}}}
 	\begin{tabular}{c}
-		\includegraphics[width=5.4in, height=3.78in]
+		\includegraphics[width=4.5in, height=3in]
 		{WIOD_HC_elasticities.png}\\
 		\floatfoot{Source: WIOD}.
 	\end{tabular}
@@ -443,7 +443,7 @@ Figure \ref{fig:WIOD_HC_E1HC} shows it is closely, but not strictly, related to 
 	\centering
 	\caption{\footnotesize{\textbf{Consumer price elasticity and share of imported consumption for WIOD 2014}}}
 	\begin{tabular}{c}
-		\includegraphics[width=5.4in, height=3.78in]
+		\includegraphics[width=4.5in, height=3in]
 		{WIOD_HC_E1HC.png}\\
 		\floatfoot{Source: WIOD}.
 	\end{tabular}
@@ -455,7 +455,8 @@ Figure \ref{fig:WIOD_HC_E1HC} shows it is closely, but not strictly, related to 
 
 Looking at the contribution of different types of goods to $\overline{s_{i}}^{i,HC}$ helps understanding the mechanis at work in PIWIM. One possibility is too look at the predicted effect on domestic goods versus imported goods. We can define 
 \begin{eqnarray}
-\overline{s}_i^{i,HC}=\overline{s}_{i,imp}^{i,HC} + \overline{s}_{i,dom}^{i,HC} = S^i.HC^{i,dom}+ S^i.HC^{i,imp}\\
+\overline{s}_i^{i,HC}=\overline{s}_{i,imp}^{i,HC} + \overline{s}_{i,dom}^{i,HC} = S^i.HC^{i,dom}+ S^i.HC^{i,imp}
+\label{equ:decomp_impexp}
 \end{eqnarray}
 
 Where:
@@ -480,6 +481,50 @@ For example,
 \overline{s}_{i,imp}^{i,HC} = \underset{\begin{subarray}{c}j=1 \dots J   \\ k=1 \dots I \\ k \neq i \end{subarray}}{\mathop \sum}\,{{s}_{kj}^i}.\frac{{hc}_{kj}^i}{hc^i}
 \label{equ:share_of_imported}
  \end{equation}
+
+
+Figure \ref{fig:decomp_origine} shows that the prices of imported final consumption have the largest contribution to total effect. Although they account for a smaller share of consumption, they are more susceptible to initial shock. They are also the ones who explain the variations in the magnitude of the eslasticities between more or less open economies.
+
+\begin{figure}[!h]
+	\centering
+	\caption{\footnotesize{\textbf{Contribution to consumer price elasticity of imported and domestic goods}}}
+	\begin{tabular}{c}
+		\includegraphics[width=4.5in, height=3in]
+		{decomp_origine.png}\\
+		\floatfoot{Source: WIOD}.
+	\end{tabular}
+	\label{fig:decomp_origine}
+\end{figure}
+
+
+A major part of the shock comes from lower prices for service consumption (Figure \ref{fig:decomp_sect}). This is paradoxical since, on the one hand, services are not imported a lot and, on the other hand, domestic services do not use many imported inputs. Similarly, domestic core inflation accounts for most of the shock effect for the same reason (Figure \ref{fig:decomp_sectxorigin}). These two phenomena can be explained by the significant weight in the consumption of services on the one hand and domestic services and non-energy industrial goods on the other hand.
+
+
+
+\begin{figure}[!h]
+	\centering
+	\caption{\footnotesize{\textbf{Contribution to consumer price elasticity of different sectors}}}
+	\begin{tabular}{c}
+		\includegraphics[width=4.5in, height=3in]
+		{decomp_sect.png}\\
+		\floatfoot{Source: WIOD}.
+	\end{tabular}
+	\label{fig:decomp_sect}
+\end{figure}
+
+
+
+\begin{figure}[!h]
+	\centering
+	\caption{\footnotesize{\textbf{Contribution to consumer price elasticity of different imported or domestic sectors}}}
+	\begin{tabular}{c}
+		\includegraphics[width=4.5in, height=3in]
+		{decomp_sectxorigin.png}\\
+		\floatfoot{Source: WIOD}.
+	\end{tabular}
+	\label{fig:decomp_sectxorigin}
+\end{figure}
+
 
 
 
@@ -536,7 +581,7 @@ For example,
 %\end{figure}
 
 \section{What do we gain from using world input-output matrices?}
-One might wonder whether using world input-ouput matrices provided by WIOD or TIVA to compute the effect of exchange rate shocks on household consumption prices is worth the wait (the latest year covered by WIOD is 2014) and the computational complexity. To answer this question, we break down $\overline{s_{i}}^{i,HC}$ into different elements classified by ease of use and computation. Let us start from equation \ref{eq:eqdomcurrency}.
+One might wonder whether using world input-ouput matrices provided by WIOD or TIVA to compute the effect of exchange rate shocks on household consumption prices is worth the wait (the latest year covered by WIOD is 2014, and 2015 for TIVA) and the computational complexity. To answer this question, we break down $\overline{s_{i}}^{i,HC}$ into different elements classified by ease of use and computation. Let us start from equation \ref{eq:eqdomcurrency}.
 
 \begin{equation}
 \begin{array}{lccl}
@@ -545,7 +590,6 @@ One might wonder whether using world input-ouput matrices provided by WIOD or TI
 \end{array}
 \end{equation}
 
-When the shock corresponds to an appreciation of the domestic currency, $E1$ and $E2$ reduce country $i$'s household consumption prices and $E3$ increases country $i$'s household consumption prices. Notice that $E1$ and $E2$ are easy to compute with national input-output matrices, whereas world input-output matrices are needed for computing $E3$ and $E4$.
 
 $C^i$ and $\hat{C}^i_\$$ have a large number of zeros. So, we have :
 
@@ -555,9 +599,13 @@ $C^i$ and $\hat{C}^i_\$$ have a large number of zeros. So, we have :
 &=E1.HC^{i,imp}+E2.HC^{i,dom}+E3.HC^{i,imp}+E4.HC^i
  \end{array} 
  \end{equation}
+ 
+When the shock corresponds to an appreciation of the domestic currency, $E1$ and $E2$ reduce country $i$'s household consumption prices and $E3$ increases country $i$'s household consumption prices. Notice that $E1$ and $E2$ are easy to compute with national input-output matrices (and do not even require inversing any matrix), whereas world input-output matrices are needed for computing $E3$ and $E4$.
+ 
+Notice this decomposition is not the same as equation \ref{equ:decomp_impexp}. In that equation, we were interested in the contribution of different types of goods to the computed effect of the initial shock. In this equation, we are interested in the different channel through which the shock has an effect.
 
 
-A first approach to measuring the interest of using WIOD is to compute the share $E1.HC^{i,imp}$, $E2.HC^{i,dom}$, $E3.HC^{i,imp}$ and $E4.HC^i$ in $\overline{s}_{i}^{i,HC}$. Figure \ref{fig:decompositionofs} provides the result. $E3.HC^{i,imp}$ is very small, $E1.HC^{i,imp}$ dominates. But, for most countries, $E4.HC^i$ represent between 10\% and 30\% of $\overline{s}_{i}^{i,HC}$. That suggests that inversing the WIOD matrixes is indeed useful.
+A first appraisal to the value-added by PIWIM is to compute the share $E1.HC^{i,imp}$, $E2.HC^{i,dom}$, $E3.HC^{i,imp}$ and $E4.HC^i$ in $\overline{s}_{i}^{i,HC}$. Figure \ref{fig:decompositionofs} provides the result. $E3.HC^{i,imp}$ is very small, $E1.HC^{i,imp}$ dominates. But, for most countries, $E4.HC^i$ represent between 10\% and 30\% of $\overline{s}_{i}^{i,HC}$.
 
 \begin{figure}[!h]
 \centering

@@ -22,7 +22,80 @@ use "$dir/Results/Devaluations/decomp_WIOD_HC_2014.dta", clear
 rename *energie* *energy*
 rename *alimentaire* *food*
 
+foreach var of varlist HC_impt-energy_dom {
+	replace `var' =-`var'
+}
 
+gen HC_tot=HC_impt+HC_dom
+label var HC_dom  "Explained by the price evolution of domestic goods"
+label var HC_impt "Explained by the price evolution of imported goods"
+
+
+keep if c=="FRA_EUR" | c=="DEU_EUR" | c=="USA" | c=="JPN" | c=="CHN" | c=="GBR" | c=="CAN" 
+replace c=subinstr(c,"_EUR"e,"",.)
+gsort HC_tot
+graph bar (asis) HC_dom HC_impt , over(c,sort(HC_tot)) stack ///
+		legend(rows(2) size(small)) ///
+		note("Source: PIWIM (WIOD, 2014)") ///
+		scheme(s1mono) ///
+		ylabel(,format(%9.2fc)) ///
+		ytitle("elasticity (absolute value)") ///
+		note("For DEU and FRA, this is the elasticity to a shock on the Euro")
+		
+/*		title("Impact d'une appréciation de 5% de l'euro sur les prix à la consommation", span size(medium)) /// */
+	
+graph export "$dir/commerce_VA_inflation/Rédaction/decomp_origine.png", replace
+
+
+
+foreach sector in neig services food energy {
+	gen `sector'=`sector'_impt + `sector'_dom
+}
+
+label var neig "non-energy industrial goods"
+
+graph bar (asis) services neig energy food , over(c,sort(HC_tot)) stack ///
+		legend(rows(2) size(small)) ///
+		note("Source: PIWIM (WIOD, 2014)") /// 
+		scheme(s1mono) ///
+		ylabel(,format(%9.2fc)) ///
+		ytitle("elasticity (absolute value)") ///
+		note("For DEU and FRA, this is the elasticity to a shock on the Euro")
+		
+/*		title("Impact d'une appréciation de 5% de l'euro sur les prix à la consommation par secteur", span size(medsmall)) /// */
+graph export "$dir/commerce_VA_inflation/Rédaction/decomp_sect.png", replace
+
+
+
+
+gen ss_jacente_impt= services_impt+neig_impt
+label var ss_jacente_imp "Imported core inflation"
+
+gen ss_jacente_dom= services_dom+neig_dom
+label var ss_jacente_dom "Domestic core inflation"
+
+gen volatile_impt= energy_impt+food_impt
+label var volatile_impt "Imported food and energy inflation"
+
+gen volatile_dom= energy_dom+food_dom
+label var volatile_dom "Domestic food and energy inflation"
+
+graph bar (asis) ss_jacente_dom ss_jacente_impt  volatile_dom volatile_impt  , over(c,sort(HC_tot)) stack ///
+		legend(rows(2) size(vsmall)) ///
+		note("Source: PIWIM (WIOD, 2014)") /// 
+		scheme(s1mono) ///
+		ylabel(,format(%9.2fc)) ///
+		ytitle("elasticity (absolute value)") ///
+		note("For DEU and FRA, this is the elasticity to a shock on the Euro")
+		
+		
+/*		title("Impact d'une appréciation de 5% de l'euro sur les prix à la consommation par secteur et origine", span size(small)) /// */		
+graph export "$dir/commerce_VA_inflation/Rédaction/decomp_sectxorigin.png", replace
+
+
+
+
+/*
 
 gen part_import = HC_impt / (HC_impt+HC_dom)
 label var part_import  "all, imported"
@@ -75,7 +148,7 @@ foreach origin in dom impt {
 
 }
 
-
+*/
 end
 
 
@@ -164,5 +237,5 @@ graph export "$dir/commerce_VA_inflation/Rédaction_Note/Decomp_sectxorigin.png
 end
 
 
-*etude_pour_papier 2014 WIOD
-etude_pour_note 2014 WIOD
+etude_pour_papier 2014 WIOD
+*etude_pour_note 2014 WIOD

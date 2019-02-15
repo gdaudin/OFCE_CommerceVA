@@ -11,9 +11,13 @@ if ("`c(hostname)'" == "FP1376CD") use  "T:\CommerceVA\Rédaction\Rédaction 201
 generate pays = upper(c)+"_EUR" if type == "ERT"
 replace pays = upper(c) if type == "CXD"
 
+replace BME_1=-BME_1*100 if type == "CXD" 
+replace BME_3=-BME_3*100 if type == "CXD" 
+
+
 capture program drop compar_bme
 program compar_bme
-args year source 
+args year source type
 
 merge m:1 pays using "$dir/Results/Devaluations/auto_chocs_HC_`source'_`year'.dta"
 
@@ -21,23 +25,37 @@ merge m:1 pays using "$dir/Results/Devaluations/auto_chocs_HC_`source'_`year'.dt
  format %14.2f pond_`source'_HC BME_1 /*nombre décimales*/
 drop _merge
 drop if BME_1== .
-replace pond_`source'_HC = 10*pond_`source'_HC
+
+
+if "`type'" == "ERT" replace pond_`source'_HC = 10*pond_`source'_HC 
+if "`type'" == "CXD" replace pond_`source'_HC = pond_`source'_HC /10
+
+if "`type'" == "CXD" local note choc prix des compétiteurs -1% (CXD) 
+if "`type'" == "ERT" local note choc de change 10% (ERT)
+
+if "`type'" == "CXD" local scale1 -0.035 0 
+if "`type'" == "ERT" local scale1  -0.35 0 
+
+if "`type'" == "CXD" local scale2 -0.035(0.005)0 
+if "`type'" == "ERT" local scale2 -0.35(0.05)0
+
 
 foreach yrs of numlist 2018 2019 {
 	/*regress BME pond_WIOD_HC if year == `yrs'*/
 	/*twoway (scatter BME pond_WIOD_HC if year == `yrs', mlabel(c)) (lfit BME pond_WIOD_HC) if year == `yrs', name(BME_vs_WIOD_`yrs', replace)
 	graph save "$dir/Graphiques/BME_vs_WIOD_`yrs'.gph",  replace
 	*/
-	twoway (scatter BME_1 pond_`source'_HC if year == `yrs' & type == "ERT", mlabel(c)) (lfit BME_1 pond_`source'_HC if year == `yrs' & type == "ERT", range(-1.5 0)) ///
-	(lfit pond_`source'_HC pond_`source'_HC, range(-3.5 0)) if year == `yrs', ///
-		ytitle(impact en % BMEs "`yrs'" (1ere année)) yscale(range(-3.5 0)) ylabel(-3.5(0.5)0, grid) /// 
-		xtitle(impact en % PIWIM "`year'") xscale(range(-3 0)) xlabel(-3.5(0.5)0, grid) legend(off) name(BME_1_vs_`source'_`yrs', replace)
+	twoway (scatter BME_1 pond_`source'_HC if year == `yrs' & type == "`type'", mlabel(c)) (lfit BME_1 pond_`source'_HC if year == `yrs' & type == "`type'", range(`scale1')) ///
+	(lfit pond_`source'_HC pond_`source'_HC, range(`scale1')) if year == `yrs', ///
+		ytitle("impact en % BMEs `yrs' (1ere année)") yscale(range(`scale1')) ylabel(`scale2', grid) /// 
+		xtitle("impact en % PIWIM `year' ,`source'") xscale(range(`scale1')) xlabel(`scale2', grid) legend(off) name(BME_1_vs_`yrs', replace) ///
+		note("`note'") 
 }
 
 
-graph combine  BME_1_vs_`source'_2018 BME_1_vs_`source'_2019
-graph save "$dir/Results/BME_1_vs_`source'.gph",  replace 
-graph export "$dir/Results/BME_1_vs_`source'.pdf",  replace 
+graph combine  BME_1_vs_2018 BME_1_vs_2019
+graph save "$dir/Results/BME_1_vs_`source'_`type'.gph",  replace 
+graph export "$dir/Results/BME_1_vs_`source'_`type'.pdf",  replace 
 
 
 format %14.2f pond_`source'_HC BME_3
@@ -46,16 +64,20 @@ foreach yrs of numlist 2018 2019 {
 	/*twoway (scatter BME pond_WIOD_HC if year == `yrs', mlabel(c)) (lfit BME pond_WIOD_HC) if year == `yrs', name(BME_vs_WIOD_`yrs', replace)
 	graph save "$dir/Graphiques/BME_vs_WIOD_`yrs'.gph",  replace
 	*/
-	twoway (scatter BME_3 pond_`source'_HC if year == `yrs' & type == "ERT", mlabel(c)) (lfit BME_3 pond_`source'_HC if year == `yrs' & type == "ERT", range(-1.5 0)) ///
-	(lfit pond_`source'_HC pond_`source'_HC, range(-3.5 0)) if year == `yrs', ///
-		ytitle(impact en % BMEs "`yrs'" (3e année)) yscale(range(-3.5 0)) ylabel(-3.5(0.5)0, grid) /// 
-		xtitle(impact en % PIWIM "`year'") xscale(range(-3.5 0)) xlabel(-3.5(0.5)0, grid) legend(off) name(BME_3_vs_`source'_`yrs', replace)
+	twoway (scatter BME_3 pond_`source'_HC if year == `yrs' & type == "`type'", mlabel(c)) (lfit BME_3 pond_`source'_HC if year == `yrs' & type == "`type'", range(`scale1')) ///
+	(lfit pond_`source'_HC pond_`source'_HC, range(`scale1')) if year == `yrs', ///
+		ytitle("impact en % BMEs `yrs' (3e année)") yscale(range(`scale1')) ylabel(`scale2', grid) /// 
+		xtitle("impact en % PIWIM `year', `source'") xscale(range(`scale1')) xlabel(`scale2', grid) legend(off) name(BME_3_vs_`yrs', replace) ///
+		note("`note'")
+
 }
 
-graph combine  BME_3_vs_`source'_2018 BME_3_vs_`source'_2019 
-graph save "$dir/Results/BME_3_vs_`source'.gph",  replace 
-graph export "$dir/Results/BME_3_vs_`source'.pdf",  replace 
+graph combine  BME_3_vs_2018 BME_3_vs_2019 
+graph save "$dir/Results/BME_3_vs_`source'_`type'.gph",  replace 
+graph export "$dir/Results/BME_3_vs_`source'`type'.pdf",  replace 
 
 end
-compar_bme 2015 TIVA_REV4 
-compar_bme 2014 WIOD 
+*compar_bme 2015 TIVA_REV4 ERT 
+*compar_bme 2014 WIOD ERT
+compar_bme 2015 TIVA_REV4 CXD
+compar_bme 2014 WIOD CXD

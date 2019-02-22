@@ -102,11 +102,13 @@ foreach source in  /* WIOD TIVA*/ TIVA_REV4 {
 	}
 	
 	*  foreach i of numlist 2011 {
+	
+**Faire historique des principales pondérations
 	foreach i of numlist  `end_year' (-1) `start_year'  {
 		
 		local HC_fait 0
-    	foreach j in  HC X Y HC_neig_dom HC_alimentaire_dom HC_energie_dom HC_services_dom HC_dom ///
-					HC_neig_impt HC_alimentaire_impt HC_energie_impt HC_services_impt HC_impt   {	
+    	foreach j in  HC X Y /*HC_neig_dom HC_alimentaire_dom HC_energie_dom HC_services_dom HC_dom ///
+					HC_neig_impt HC_alimentaire_impt HC_energie_impt HC_services_impt HC_impt */  {	
 
     	    if strpos("`j'","HC")!=0 & `HC_fait'==0 {
 				compute_HC_vect `i' `source'
@@ -119,6 +121,27 @@ foreach source in  /* WIOD TIVA*/ TIVA_REV4 {
 	    }
 
     }
+	
+	
+****Faire toutes les variations pour la dernière année
+		
+	local HC_fait 0
+    foreach j in  /*HC X Y*/ HC_neig_dom HC_alimentaire_dom HC_energie_dom HC_services_dom HC_dom ///
+				HC_neig_impt HC_alimentaire_impt HC_energie_impt HC_services_impt HC_impt   {	
+   	    if strpos("`j'","HC")!=0 & `HC_fait'==0 {
+			compute_HC_vect `end_year' `source'
+			local HC_fait 1
+		}
+		if strpos("`j'","HC")==0 compute_`j'_vect `end_year' `source' 
+		table_mean `end_year' `j' 1 `source' Sdollar
+		table_mean `end_year' `j' 1 `source' S
+	   }
+
+    }
+	
+	
+	
+	
 
 }
 

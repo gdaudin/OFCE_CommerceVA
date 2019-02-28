@@ -62,8 +62,6 @@ gen share = conso/conso_tot
 keep c agregat_secteur origine share
 
 
-
-
 replace agregat_secteur = agregat_secteur + "_" + origine
 drop origine
 reshape wide share, i(c) j(agregat_secteur) string
@@ -81,12 +79,17 @@ replace c = c+"_EUR" if strpos("$eurozone",c)!=0 & duplicate==1
 drop duplicate
 save "$dir/Results/Devaluations/decomp_`source'_HC_`yrs'.dta", replace
 
+*****Ici, nous avons les parts sectorielles importées / domestiques calculées pour tous les pays. 
+*****Pour le choc euro, la part ne change importée / domestique ne change pas. Les importées sont alors tous les biens venant d'autres pays.
+
+
 
 foreach origine in dom impt {
 	foreach sector in energie alimentaire neig services {
 		foreach euro in no_ze ze {				
 			local wgt `sector'_`origine'
 			use "$dir/Results/Devaluations/mean_chg_`source'_HC_`wgt'_`yrs'_S.dta", clear
+			*Cela cela donne l'effet sur les prix d'un secteur particulir du choc de change
 			gen `sector'_`origine'=.
 			foreach pays of global country_hc {
 				if "`euro'"=="no_ze" {

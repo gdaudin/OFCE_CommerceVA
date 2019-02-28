@@ -4,7 +4,18 @@ clear
 *set trace on
 
 if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
-else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
+if ("`c(hostname)'" == "widv269a") global dir  "D:\home\T822289\CommerceVA" 
+if ("`c(hostname)'" == "FP1376CD") global dir  "T:\CommerceVA" 
+
+if ("`c(username)'"=="guillaumedaudin") global dirgit "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation"
+if ("`c(hostname)'" == "widv269a") global dirgit  "D:\home\T822289\CommerceVA\GIT\commerce_va_inflation" 
+if ("`c(hostname)'" == "FP1376CD") global dirgit  "T:\CommerceVA\GIT\commerce_va_inflation" 
+
+
+if ("`c(username)'" == "guillaumedaudin") use "$dir/BME.dta", clear
+if ("`c(hostname)'" == "widv269a") use  "D:\home\T822289\CommerceVA\Rédaction\Rédaction 2019\BME.dta" , clear
+if ("`c(hostname)'" == "FP1376CD") use  "T:\CommerceVA\Rédaction\Rédaction 2019\BME.dta" , clear
+
 capture log using "$dir/$S_DATE.log", replace
 set more off
 
@@ -14,10 +25,8 @@ args source
 
 
 
-if ("`c(username)'"=="guillaumedaudin") do  "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation/Definition_pays_secteur.do" `source'
-if ("`c(username)'"=="w817186") do "X:\Agents\FAUBERT\commerce_VA_inflation\Definition_pays_secteur.do" `source'
-if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\Definition_pays_secteur.do" `source'
-
+do "$dirgit/Definition_pays_secteur.do"   
+Definition_pays_secteur `source'
 
 *HC_`source' contient la consommation des ménages (HC) du pays consommateur (pays_conso) 
 *en provenance du pays producteur (pays) pour un sector donné pour toutes les années
@@ -64,7 +73,7 @@ label var contenu_impHC "Part des consommations directement importées"
 
 if "`source'"=="WIOD" local start_year 2000
 if "`source'"=="TIVA" local start_year 1995
-if "`source'"=="TIVA_REV4" local start_year 2005
+if "`source'"=="TIVA_REV4" local start_year 2015
 
 if "`source'"=="WIOD" local end_year 2014
 if "`source'"=="TIVA" local end_year 2011

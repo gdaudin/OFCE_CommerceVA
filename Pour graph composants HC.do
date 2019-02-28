@@ -1,23 +1,26 @@
 clear  
 set more off
+
 if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
-else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
+if ("`c(hostname)'" == "widv269a") global dir  "D:\home\T822289\CommerceVA" 
+if ("`c(hostname)'" == "FP1376CD") global dir  "T:\CommerceVA" 
 
 
-*capture log close
-*log using "$dir/$S_DATE.log", replace
+if ("`c(username)'"=="guillaumedaudin") global dirgit "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation"
+if ("`c(hostname)'" == "widv269a") global dirgit  "D:\home\T822289\CommerceVA\GIT\commerce_va_inflation" 
+if ("`c(hostname)'" == "FP1376CD") global dirgit  "T:\CommerceVA\GIT\commerce_va_inflation" 
 
 
-if ("`c(username)'"=="guillaumedaudin") do  "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation/Definition_pays_secteur.do" `source'
-if ("`c(username)'"=="w817186") do "X:\Agents\FAUBERT\commerce_VA_inflation\Definition_pays_secteur.do" `source'
-if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\Definition_pays_secteur.do" `source'
-	
+if ("`c(username)'" == "guillaumedaudin") use "$dir/BME.dta", clear
+if ("`c(hostname)'" == "widv269a") use  "D:\home\T822289\CommerceVA\Rédaction\Rédaction 2019\BME.dta" , clear
+if ("`c(hostname)'" == "FP1376CD") use  "T:\CommerceVA\Rédaction\Rédaction 2019\BME.dta" , clear
+
 
 capture program drop etude_pour_papier
 program etude_pour_papier
 args year source
 
-use "$dir/Results/Devaluations/decomp_WIOD_HC_2014.dta", clear
+use "$dir/Results/Devaluations/decomp_`source'_HC_`year'.dta", clear
 
 rename *energie* *energy*
 rename *alimentaire* *food*
@@ -36,7 +39,7 @@ replace c=subinstr(c,"_EUR"e,"",.)
 gsort HC_tot
 graph bar (asis) HC_dom HC_impt , over(c,sort(HC_tot)) stack ///
 		legend(rows(2) size(small)) ///
-		note("Source: PIWIM (WIOD, 2014)") ///
+		note("Source: PIWIM (`source',`year')") ///
 		scheme(s1mono) ///
 		ylabel(,format(%9.2fc)) ///
 		ytitle("elasticity (absolute value)") ///
@@ -44,8 +47,7 @@ graph bar (asis) HC_dom HC_impt , over(c,sort(HC_tot)) stack ///
 		
 /*		title("Impact d'une appréciation de 5% de l'euro sur les prix à la consommation", span size(medium)) /// */
 	
-graph export "$dir/commerce_VA_inflation/Rédaction/decomp_origine.png", replace
-
+graph export "$dirgit\Rédaction\decomp_origine_`source'_`year'.png", replace
 
 
 foreach sector in neig services food energy {
@@ -56,14 +58,14 @@ label var neig "non-energy industrial goods"
 
 graph bar (asis) services neig energy food , over(c,sort(HC_tot)) stack ///
 		legend(rows(2) size(small)) ///
-		note("Source: PIWIM (WIOD, 2014)") /// 
+		note("Source: PIWIM (`source',`year')") /// 
 		scheme(s1mono) ///
 		ylabel(,format(%9.2fc)) ///
 		ytitle("elasticity (absolute value)") ///
 		note("For DEU and FRA, this is the elasticity to a shock on the Euro")
 		
 /*		title("Impact d'une appréciation de 5% de l'euro sur les prix à la consommation par secteur", span size(medsmall)) /// */
-graph export "$dir/commerce_VA_inflation/Rédaction/decomp_sect.png", replace
+graph export "$dirgit\Rédaction/decomp_sect_`source'_`year'.png", replace
 
 
 
@@ -82,7 +84,7 @@ label var volatile_dom "Domestic food and energy inflation"
 
 graph bar (asis) ss_jacente_dom ss_jacente_impt  volatile_dom volatile_impt  , over(c,sort(HC_tot)) stack ///
 		legend(rows(2) size(vsmall)) ///
-		note("Source: PIWIM (WIOD, 2014)") /// 
+		note("Source: PIWIM (`source',`year')") /// 
 		scheme(s1mono) ///
 		ylabel(,format(%9.2fc)) ///
 		ytitle("elasticity (absolute value)") ///
@@ -90,7 +92,7 @@ graph bar (asis) ss_jacente_dom ss_jacente_impt  volatile_dom volatile_impt  , o
 		
 		
 /*		title("Impact d'une appréciation de 5% de l'euro sur les prix à la consommation par secteur et origine", span size(small)) /// */		
-graph export "$dir/commerce_VA_inflation/Rédaction/decomp_sectxorigin.png", replace
+graph export "$dirgit\Rédaction/decomp_sectxorigin_`source'_`year'.png", replace
 
 
 
@@ -157,7 +159,7 @@ capture program drop etude_pour_note
 program etude_pour_note
 args year source
 
-use "$dir/Results/Devaluations/decomp_WIOD_HC_2014.dta", clear
+use "$dir/Results/Devaluations/decomp_`source'_HC_`year'.dta", clear
 
 
 rename *energie* *energy*
@@ -177,14 +179,14 @@ replace c=subinstr(c,"_EUR"e,"",.)
 gsort HC_tot
 graph bar (asis) HC_dom HC_impt , over(c,sort(HC_tot) descending) stack ///
 		legend(rows(2) size(small)) ///
-		note("Source: PIWIM (WIOD, 2014)") ///
+		note("Source: PIWIM (`source',`year')") ///
 		scheme(s2mono) ///
 		ylabel(,format(%9.2fc)) ///
 		ytitle("%")
 		
 /*		title("Impact d'une appréciation de 5% de l'euro sur les prix à la consommation", span size(medium)) /// */
 	
-graph export "$dir/commerce_VA_inflation/Rédaction_Note/Decomp_origine.png", replace
+graph export "$dirgit/Rédaction_Note/Decomp_origine_`source'_`year'.png", replace
 
 
 foreach sector in neig services food energy {
@@ -197,13 +199,13 @@ rename energy energie
 
 graph bar (asis) services neig energie alimentaire , over(c,sort(HC_tot) descending) stack ///
 		legend(rows(2) size(small)) ///
-		note("Source: PIWIM (WIOD, 2014)") /// 
+		note("Source: PIWIM (`source',`year')") /// 
 		scheme(s2mono) ///
 		ylabel(,format(%9.2fc)) ///
 		ytitle("%")
 		
 /*		title("Impact d'une appréciation de 5% de l'euro sur les prix à la consommation par secteur", span size(medsmall)) /// */
-graph export "$dir/commerce_VA_inflation/Rédaction_Note/Decomp_sect.png", replace
+graph export "$dirgit/Rédaction_Note/Decomp_sect_`source'_`year'.png", replace
 
 gen ss_jacente_impt= services_impt+neig_impt
 label var ss_jacente_imp "Inflation sous-jacente importée"
@@ -219,13 +221,13 @@ label var volatile_dom "Inflation alimentaire et énergie domestique"
 
 graph bar (asis) ss_jacente_dom ss_jacente_impt  volatile_dom volatile_impt  , over(c,sort(HC_tot) descending) stack ///
 		legend(rows(2) size(vsmall)) ///
-		note("Source: PIWIM (WIOD, 2014)") /// 
+		note("Source: PIWIM (`source',`year')") /// 
 		scheme(s2mono) ///
 		ylabel(,format(%9.2fc)) ///
 		ytitle("%")
 		
 /*		title("Impact d'une appréciation de 5% de l'euro sur les prix à la consommation par secteur et origine", span size(small)) /// */		
-graph export "$dir/commerce_VA_inflation/Rédaction_Note/Decomp_sectxorigin.png", replace
+graph export "$dirgit/Rédaction_Note/Decomp_sectxorigin_`source'_`year'.png", replace
 
 	
 
@@ -237,5 +239,8 @@ graph export "$dir/commerce_VA_inflation/Rédaction_Note/Decomp_sectxorigin.png
 end
 
 
-etude_pour_papier 2014 WIOD
+*etude_pour_papier 2014 WIOD
+*etude_pour_papier 2015 TIVA_REV4
 *etude_pour_note 2014 WIOD
+etude_pour_note 2014 WIOD
+etude_pour_note 2015 TIVA_REV4

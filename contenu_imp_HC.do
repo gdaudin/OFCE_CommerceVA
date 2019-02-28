@@ -64,10 +64,11 @@ label var contenu_impHC "Part des consommations directement importées"
 
 if "`source'"=="WIOD" local start_year 2000
 if "`source'"=="TIVA" local start_year 1995
+if "`source'"=="TIVA_REV4" local start_year 2005
 
 if "`source'"=="WIOD" local end_year 2014
 if "`source'"=="TIVA" local end_year 2011
-
+if "`source'"=="TIVA_REV4" local end_year 2015
 
 foreach i of numlist `start_year' (1)`end_year'  {
 	preserve
@@ -80,6 +81,7 @@ foreach i of numlist `start_year' (1)`end_year'  {
 
 end
 
-contenu_imp_HC TIVA
-contenu_imp_HC WIOD
+*contenu_imp_HC TIVA
+*contenu_imp_HC WIOD
+contenu_imp_HC TIVA_REV4
 

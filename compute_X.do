@@ -92,7 +92,7 @@ if "`source'"=="TIVA" {
 
 if "`source'"=="TIVA_REV4" {
 	generate pays = strupper(substr(v1,1,3))
-	generate sector = strupper(substr(v1,strpos(v1,"_")+1,strlen(v1)-3-strpos(v1,"_")))
+	generate sector = strupper(substr(v1,strpos(v1,"_")+1,.))
 }
 
 if "`source'"=="WIOD" {

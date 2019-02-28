@@ -97,7 +97,7 @@ foreach origine in dom impt {
 	foreach sector in energie alimentaire neig services {
 		foreach euro in no_ze ze {				
 			local wgt `sector'_`origine'
-			use "$dir/Results/Devaluations/mean_chg_`source'_HC_`wgt'_`yrs'_S.dta", clear
+			use "$dir/Results/Devaluations/mean_chg_`source'_HC_`wgt'_`yrs'_Sdollar.dta", clear
 			gen `sector'_`origine'=.
 			foreach pays of global country_hc {
 				if "`euro'"=="no_ze" {
@@ -119,7 +119,7 @@ foreach origine in dom impt {
 
 	
 	foreach euro in no_ze ze {		
-		use "$dir/Results/Devaluations/mean_chg_`source'_HC_`origine'_`yrs'_S.dta", clear
+		use "$dir/Results/Devaluations/mean_chg_`source'_HC_`origine'_`yrs'_Sdollar.dta", clear
 		gen HC_`origine'=.
 		foreach pays of global country_hc {
 			if "`euro'"=="no_ze" {

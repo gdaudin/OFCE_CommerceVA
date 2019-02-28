@@ -1,9 +1,19 @@
 
-clear  
+ 
 set more off
-if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
-else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
 
+if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
+if ("`c(hostname)'" == "widv269a") global dir  "D:\home\T822289\CommerceVA" 
+if ("`c(hostname)'" == "FP1376CD") global dir  "T:\CommerceVA" 
+
+if ("`c(username)'"=="guillaumedaudin") global dirgit "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation"
+if ("`c(hostname)'" == "widv269a") global dirgit  "D:\home\T822289\CommerceVA\GIT\commerce_va_inflation" 
+if ("`c(hostname)'" == "FP1376CD") global dirgit  "T:\CommerceVA\GIT\commerce_va_inflation" 
+
+
+if ("`c(username)'" == "guillaumedaudin") use "$dir/BME.dta", clear
+if ("`c(hostname)'" == "widv269a") use  "D:\home\T822289\CommerceVA\Rédaction\Rédaction 2019\BME.dta" , clear
+if ("`c(hostname)'" == "FP1376CD") use  "T:\CommerceVA\Rédaction\Rédaction 2019\BME.dta" , clear
 
 ****RQ : ne marche pas pour TIVA car il faudrait traiter la Chine et le Mexique
 ***Ce n'est pas trop compliqué, mais c'est vraiment du travail inutile pour l'instant.
@@ -19,10 +29,8 @@ capture program drop composants_HC
 program composants_HC
 args yrs source
 
-if ("`c(username)'"=="guillaumedaudin") do  "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation/Definition_pays_secteur.do" `source'
-if ("`c(username)'"=="w817186") do "X:\Agents\FAUBERT\commerce_VA_inflation\Definition_pays_secteur.do" `source'
-if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\Definition_pays_secteur.do" `source'
 
+do "$dirgit/Definition_pays_secteur.do"   
 
 
 use "$dir/Bases/HC_`source'.dta", clear
@@ -61,6 +69,7 @@ drop if strpos("$eurozone",c)==0 & duplicate==1
 replace c = c+"_EUR" if strpos("$eurozone",c)!=0 & duplicate==1
 drop duplicate
 save "$dir/Results/Devaluations/decomp_`source'_HC_`yrs'.dta", replace
+blif
 
 
 
@@ -68,7 +77,7 @@ foreach origine in dom impt {
 	foreach sector in energie alimentaire neig services {
 		foreach euro in no_ze ze {				
 			local wgt `sector'_`origine'
-			use "$dir/Results/Devaluations/mean_chg_`source'_HC_`wgt'_`yrs'.dta", clear
+			use "$dir/Results/Devaluations/mean_chg_`source'_HC_`wgt'_`yrs'_S.dta", clear
 			gen `sector'_`origine'=.
 			foreach pays of global country {
 				if "`euro'"=="no_ze" {
@@ -92,7 +101,7 @@ foreach origine in dom impt {
 		
 		
 	foreach euro in no_ze ze {		
-		use "$dir/Results/Devaluations/mean_chg_`source'_HC_`origine'_`yrs'.dta", clear
+		use "$dir/Results/Devaluations/mean_chg_`source'_HC_`origine'_`yrs'_S.dta", clear
 		gen HC_`origine'=.
 		foreach pays of global country {
 			if "`euro'"=="no_ze" {
@@ -131,21 +140,21 @@ save "$dir/Results/Devaluations/decomp_`source'_HC_`yrs'.dta", replace
 
 end
 
-foreach source in  WIOD  {
-*foreach source in  WIOD  TIVA {
+foreach source in  TIVA_REV4 WIOD   {
+*foreach source in  WIOD  TIVA TIVA_REV4  {
 
 
 
-	if "`source'"=="WIOD" global start_year 2000
+	if "`source'"=="WIOD" global start_year 2014
 	if "`source'"=="TIVA" global start_year 1995
-
+	if "`source'"=="TIVA_REV4" global start_year 2014
 
 	if "`source'"=="WIOD" global end_year 2014
 	if "`source'"=="TIVA" global end_year 2011
-	
+	if "`source'"=="TIVA_REV4" global end_year 2015
 
 
-*	foreach i of numlist 2014  {
+	*foreach i of numlist 2014  {
 	foreach i of numlist $start_year (1) $end_year  {
 		composants_HC `i' `source'
 	}

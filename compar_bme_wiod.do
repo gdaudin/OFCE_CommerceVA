@@ -37,10 +37,10 @@ replace pond_`source'_HC = pond_`source'_HC
 if "`type'" == "CXD" local note choc prix des compétiteurs -10% (CXD) 
 if "`type'" == "ERT" local note choc de change 10% (ERT)
 
-if "`type'" == "CXD" local scale1 -2.5 0 
+if "`type'" == "CXD" local scale1 -6.5 0 
 if "`type'" == "ERT" local scale1  -0.35 0 
 
-if "`type'" == "CXD" local scale2 -2.5(0.25)0 
+if "`type'" == "CXD" local scale2 -6.5(1.0)0 
 if "`type'" == "ERT" local scale2 -0.35(0.05)0
 
 

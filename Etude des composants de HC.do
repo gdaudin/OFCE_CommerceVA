@@ -1,6 +1,16 @@
 
+<<<<<<< HEAD
  
 set more off
+
+=======
+
+ 
+
+set more off
+
+
+
 
 if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
 if ("`c(hostname)'" == "widv269a") global dir  "D:\home\T822289\CommerceVA" 
@@ -15,26 +25,29 @@ if ("`c(username)'" == "guillaumedaudin") use "$dir/BME.dta", clear
 if ("`c(hostname)'" == "widv269a") use  "D:\home\T822289\CommerceVA\Rédaction\Rédaction 2019\BME.dta" , clear
 if ("`c(hostname)'" == "FP1376CD") use  "T:\CommerceVA\Rédaction\Rédaction 2019\BME.dta" , clear
 
-****RQ : ne marche pas pour TIVA car il faudrait traiter la Chine et le Mexique
-***Ce n'est pas trop compliqué, mais c'est vraiment du travail inutile pour l'instant.
 
 
 capture log close
 *log using "$dir/$S_DATE.log", replace
 set matsize 7000
 *set mem 700m if earlier version of stata (<stata 12)
+
+
 set more off
+
+
+
 
 capture program drop composants_HC
 program composants_HC
 args yrs source
 
 
+
+
+
 do "$dirgit/Definition_pays_secteur.do"   
 Definition_pays_secteur `source'
-
-
-macro list
 
 
 use "$dir/Bases/HC_`source'.dta", clear
@@ -43,11 +56,8 @@ rename pays_conso c
 keep if year==`yrs'
 
 
-merge m:1 s c using "$dir/Bases/csv_`source'.dta", keep(1 3)
 
-** les non-merged de using sont les sous composants du Mexique et de la Chine
-*drop if c!="MEX" & strpos("$mexique",pays)!=0 
-*drop if c!="CHN" & strpos("$china",pays)!=0 
+merge m:1 s c using "$dir/Bases/csv_`source'.dta", keep(1 3)
 drop _merge
 
 
@@ -64,7 +74,6 @@ sort c
 gen share = conso/conso_tot
 keep c agregat_secteur origine share
 
-
 replace agregat_secteur = agregat_secteur + "_" + origine
 drop origine
 reshape wide share, i(c) j(agregat_secteur) string
@@ -75,14 +84,17 @@ replace c = upper(c)
 
 
 
+
  
 
 expand 2, gen(duplicate)
 drop if strpos("$eurozone",c)==0 & duplicate==1
 replace c = c+"_EUR" if strpos("$eurozone",c)!=0 & duplicate==1
 drop duplicate
+
 export excel using "$dir/Results/Devaluations/decomp_`source'_HC_`yrs'.xls", firstrow(variables) replace
 save "$dir/Results/Devaluations/decomp_`source'_HC_`yrs'.dta", replace
+
 
 
 
@@ -90,14 +102,15 @@ save "$dir/Results/Devaluations/decomp_`source'_HC_`yrs'.dta", replace
 *****Pour le choc euro, la part ne change importée / domestique ne change pas. Les importées sont alors tous les biens venant d'autres pays.
 
 
-
 foreach origine in dom impt {
 	foreach sector in energie alimentaire neig services {
 		foreach euro in no_ze ze {				
 			local wgt `sector'_`origine'
 			use "$dir/Results/Devaluations/mean_chg_`source'_HC_`wgt'_`yrs'_Sdollar.dta", clear
+
 			**Cela cela donne l'effet sur les prix d'un secteur particulir du choc de change
 			** on peut donc ensuite le multiplier par l'importance du secteur
+
 			gen `sector'_`origine'=.
 			foreach pays of global country_hc {
 				if "`euro'"=="no_ze" {
@@ -120,6 +133,16 @@ foreach origine in dom impt {
 	
 		
 		
+
+			merge 1:1 c using   "$dir/Results/Devaluations/decomp_`source'_HC_`yrs'.dta
+			drop _merge
+			save "$dir/Results/Devaluations/decomp_`source'_HC_`yrs'.dta", replace	
+		}
+
+	}
+
+	
+
 	foreach euro in no_ze ze {		
 		use "$dir/Results/Devaluations/mean_chg_`source'_HC_`origine'_`yrs'_Sdollar.dta", clear
 		gen HC_`origine'=.
@@ -134,12 +157,13 @@ foreach origine in dom impt {
 		}
 		keep c HC_`origine'
 		if "`euro'"=="ze" keep if strpos(c,"_EUR")!=0
-		
+
 		merge 1:1 c using   "$dir/Results/Devaluations/decomp_`source'_HC_`yrs'.dta
 		drop _merge
 		save "$dir/Results/Devaluations/decomp_`source'_HC_`yrs'.dta", replace
 	}
 }
+
 
 
 
@@ -153,19 +177,18 @@ foreach origine in dom impt {
 	}
 }
 
-
 save "$dir/Results/Devaluations/decomp_`source'_HC_`yrs'.dta", replace
 
 end
 
-foreach source in  TIVA_REV4 {
+foreach source in WIOD  TIVA_REV4 {
+
 *foreach source in  WIOD  TIVA TIVA_REV4  {
-
-
 
 	if "`source'"=="WIOD" global start_year 2014
 	if "`source'"=="TIVA" global start_year 1995
-	if "`source'"=="TIVA_REV4" global start_year 2015
+	if "`source'"=="TIVA_REV4" global start_year 2014
+
 
 	if "`source'"=="WIOD" global end_year 2014
 	if "`source'"=="TIVA" global end_year 2011
@@ -173,6 +196,7 @@ foreach source in  TIVA_REV4 {
 
 
 	*foreach i of numlist 2014  {
+
 	foreach i of numlist $start_year (1) $end_year  {
 		composants_HC `i' `source'
 	}
@@ -181,5 +205,3 @@ foreach source in  TIVA_REV4 {
 
 
 capture log close
-
-

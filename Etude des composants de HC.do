@@ -44,11 +44,17 @@ keep if year==`yrs'
 
 
 merge m:1 s c using "$dir/Bases/csv_`source'.dta"
+
+drop if c!="MEX" & strpos("$mexique",pays)!=0 
+drop if c!="CHN" & strpos("$china",pays)!=0 
 drop _merge
 
 gen origine = "impt" if lower(c)!=lower(pays)
-replace origine = "dom" if lower(c)==lower(pays) | c=="MEX" & strpos("$mexique",pays)!=0 | c=="CHN" & strpos("$chine",pays)!=0
-blif
+replace origine = "dom" if lower(c)==lower(pays) | ///
+		c=="MEX" & strpos("$mexique",pays)!=0 | ///
+		c=="CHN" & strpos("$china",pays)!=0
+
+
 collapse (sum) conso, by(agregat_secteur origine c)
 egen conso_tot = total(conso), by(c)
 sort c
@@ -74,8 +80,6 @@ drop if strpos("$eurozone",c)==0 & duplicate==1
 replace c = c+"_EUR" if strpos("$eurozone",c)!=0 & duplicate==1
 drop duplicate
 save "$dir/Results/Devaluations/decomp_`source'_HC_`yrs'.dta", replace
-blif
-
 
 
 foreach origine in dom impt {
@@ -84,7 +88,7 @@ foreach origine in dom impt {
 			local wgt `sector'_`origine'
 			use "$dir/Results/Devaluations/mean_chg_`source'_HC_`wgt'_`yrs'_S.dta", clear
 			gen `sector'_`origine'=.
-			foreach pays of global country {
+			foreach pays of global country_hc {
 				if "`euro'"=="no_ze" {
 					replace `sector'_`origine' = shock`pays'1 if c=="`pays'"
 				}
@@ -108,7 +112,7 @@ foreach origine in dom impt {
 	foreach euro in no_ze ze {		
 		use "$dir/Results/Devaluations/mean_chg_`source'_HC_`origine'_`yrs'_S.dta", clear
 		gen HC_`origine'=.
-		foreach pays of global country {
+		foreach pays of global country_hc {
 			if "`euro'"=="no_ze" {
 					replace HC_`origine' = shock`pays'1 if c=="`pays'"
 			}

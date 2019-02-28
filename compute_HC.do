@@ -32,10 +32,9 @@ if "`source'"=="TIVA_REV4" {
 	reshape long HFCE_, i(v1) j(pays_conso) string
 	replace pays_conso=strupper(pays_conso)
 	generate pays = strupper(substr(v1,1,strpos(v1,"_")-1))
-	generate sector = strupper(substr(v1,strpos(v1,"_")+1,strlen(v1)-3-strpos(v1,"_")))
+	generate sector = strupper(substr(v1,strpos(v1,"_")+1,.))
 	rename HFCE_ conso
 	generate year = `yrs'
-
 }
 
 

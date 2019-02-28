@@ -43,11 +43,14 @@ rename pays_conso c
 keep if year==`yrs'
 
 
-merge m:1 s c using "$dir/Bases/csv_`source'.dta"
+merge m:1 s c using "$dir/Bases/csv_`source'.dta", keep(1 3)
 
-drop if c!="MEX" & strpos("$mexique",pays)!=0 
-drop if c!="CHN" & strpos("$china",pays)!=0 
+** les non-merged de using sont les sous composants du Mexique et de la Chine
+*drop if c!="MEX" & strpos("$mexique",pays)!=0 
+*drop if c!="CHN" & strpos("$china",pays)!=0 
 drop _merge
+
+
 
 gen origine = "impt" if lower(c)!=lower(pays)
 replace origine = "dom" if lower(c)==lower(pays) | ///
@@ -71,13 +74,17 @@ egen s_HC_dom=rowtotal(s*dom)
 replace c = upper(c)
 
 
+
  
 
 expand 2, gen(duplicate)
 drop if strpos("$eurozone",c)==0 & duplicate==1
 replace c = c+"_EUR" if strpos("$eurozone",c)!=0 & duplicate==1
 drop duplicate
+export excel using "$dir/Results/Devaluations/decomp_`source'_HC_`yrs'.xls", firstrow(variables) replace
 save "$dir/Results/Devaluations/decomp_`source'_HC_`yrs'.dta", replace
+
+
 
 *****Ici, nous avons les parts sectorielles importées / domestiques calculées pour tous les pays. 
 *****Pour le choc euro, la part ne change importée / domestique ne change pas. Les importées sont alors tous les biens venant d'autres pays.
@@ -88,8 +95,9 @@ foreach origine in dom impt {
 	foreach sector in energie alimentaire neig services {
 		foreach euro in no_ze ze {				
 			local wgt `sector'_`origine'
-			use "$dir/Results/Devaluations/mean_chg_`source'_HC_`wgt'_`yrs'_S.dta", clear
-			*Cela cela donne l'effet sur les prix d'un secteur particulir du choc de change
+			use "$dir/Results/Devaluations/mean_chg_`source'_HC_`wgt'_`yrs'_Sdollar.dta", clear
+			**Cela cela donne l'effet sur les prix d'un secteur particulir du choc de change
+			** on peut donc ensuite le multiplier par l'importance du secteur
 			gen `sector'_`origine'=.
 			foreach pays of global country_hc {
 				if "`euro'"=="no_ze" {
@@ -113,7 +121,7 @@ foreach origine in dom impt {
 		
 		
 	foreach euro in no_ze ze {		
-		use "$dir/Results/Devaluations/mean_chg_`source'_HC_`origine'_`yrs'_S.dta", clear
+		use "$dir/Results/Devaluations/mean_chg_`source'_HC_`origine'_`yrs'_Sdollar.dta", clear
 		gen HC_`origine'=.
 		foreach pays of global country_hc {
 			if "`euro'"=="no_ze" {
@@ -132,8 +140,6 @@ foreach origine in dom impt {
 		save "$dir/Results/Devaluations/decomp_`source'_HC_`yrs'.dta", replace
 	}
 }
-
-
 
 
 
@@ -159,7 +165,7 @@ foreach source in  TIVA_REV4 {
 
 	if "`source'"=="WIOD" global start_year 2014
 	if "`source'"=="TIVA" global start_year 1995
-	if "`source'"=="TIVA_REV4" global start_year 2014
+	if "`source'"=="TIVA_REV4" global start_year 2015
 
 	if "`source'"=="WIOD" global end_year 2014
 	if "`source'"=="TIVA" global end_year 2011

@@ -345,12 +345,16 @@ foreach source in  WIOD TIVA TIVA_REV4 {
 }
 
 foreach source in  WIOD TIVA TIVA_REV4 {
-	if "`source'"=="WIOD" global start_year 2000
+
+	if "`source'"=="WIOD" global start_year 2014	
 	if "`source'"=="TIVA" global start_year 1995
+	if "`source'"=="TIVA_REV4" global start_year 2015
+
 
 
 	if "`source'"=="WIOD" global end_year 2014
 	if "`source'"=="TIVA" global end_year 2011
+	if "`source'"=="TIVA_REV4" global end_year 2015
 	
 	foreach i of numlist 2014  {
 	graph drop _all

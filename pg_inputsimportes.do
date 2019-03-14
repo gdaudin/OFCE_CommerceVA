@@ -3,8 +3,19 @@
 
 clear
 set more off
+
 if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
-else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
+if ("`c(hostname)'" == "widv269a") global dir  "D:\home\T822289\CommerceVA" 
+if ("`c(hostname)'" == "FP1376CD") global dir  "T:\CommerceVA" 
+
+if ("`c(username)'"=="guillaumedaudin") global dirgit "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation"
+if ("`c(hostname)'" == "widv269a") global dirgit  "D:\home\T822289\CommerceVA\GIT\commerce_va_inflation" 
+if ("`c(hostname)'" == "FP1376CD") global dirgit  "T:\CommerceVA\GIT\commerce_va_inflation" 
+
+
+if ("`c(username)'" == "guillaumedaudin") use "$dir/BME.dta", clear
+if ("`c(hostname)'" == "widv269a") use  "D:\home\T822289\CommerceVA\Rédaction\Rédaction 2019\BME.dta" , clear
+if ("`c(hostname)'" == "FP1376CD") use  "T:\CommerceVA\Rédaction\Rédaction 2019\BME.dta" , clear
 
 
 
@@ -18,9 +29,8 @@ capture program drop imp_inputs_par_sect // fournit le % des ci importées/prod 
 program imp_inputs_par_sect
 args yrs source hze
 
-if ("`c(username)'"=="guillaumedaudin") do  "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation/Definition_pays_secteur.do" `source'
-if ("`c(username)'"=="w817186") do "X:\Agents\FAUBERT\commerce_VA_inflation\Definition_pays_secteur.do" `source'
-if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\Definition_pays_secteur.do" `source'
+do "$dirgit/Definition_pays_secteur.do"   
+Definition_pays_secteur `source'
 
 * exemple  hze_not ou hze_yes pour pays membres de la ZE et pays hors ZE
 
@@ -31,6 +41,13 @@ if "`source'"=="TIVA" {
 	drop if v1 == "VA+TAXSUB" | v1 == "OUT"
 	gen pays=lower(substr(v1,1,3))
 	gen secteur = lower(substr(v1,5,.))
+	order pays secteur
+}
+
+if "`source'"=="TIVA_REV4" {
+	drop if v1 == "VALU" | strmatch(v1, "*TAXSUB") == 1 | v1 == "OUTPUT"
+	generate pays = strupper(substr(v1,1,strpos(v1,"_")-1))
+	generate secteur = strupper(substr(v1,strpos(v1,"_")+1,.))
 	order pays secteur
 }
 
@@ -55,8 +72,9 @@ keep pays $var_entree_sortie
 
 foreach var of varlist $var_entree_sortie {
 *	On cherche à enlever les auto-consommations intermédiaires
-	if "`source'" == "TIVA" local pays_colonne = substr("`var'",1,3)
+	if "`source'" == "TIVA" | "`source'" == "TIVA_REV4" local pays_colonne = substr("`var'",1,3)
 	if "`source'" == "WIOD" local pays_colonne = substr("`var'",2,3)
+	
 	
 	replace `var' = 0 if pays=="`pays_colonne'"
 	
@@ -288,22 +306,22 @@ if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\De
 
 
 *foreach source in WIOD {
-foreach source in   WIOD  TIVA {
+foreach source in /*  TIVA  WIOD */  TIVA_REV4 {
 
 
 
-	if "`source'"=="WIOD" local start_year 2000
-	if "`source'"=="TIVA" local start_year 1995
+	if "`source'"=="WIOD" global start_year 2014	
+	if "`source'"=="TIVA" global start_year 1995
+	if "`source'"=="TIVA_REV4" global start_year 2015
 
 
-	if "`source'"=="WIOD" local end_year 2014
-	if "`source'"=="TIVA" local end_year 2011
-	
 
-
+	if "`source'"=="WIOD" global end_year 2014
+	if "`source'"=="TIVA" global end_year 2011
+	if "`source'"=="TIVA_REV4" global end_year 2015
 
 *	foreach i of numlist 2010  {
-	foreach i of numlist `start_year' (1)`end_year'  {
+	foreach i of numlist $start_year (1)$end_year  {
 		
 		imp_inputs_par_sect `i' `source' hze_not
 		imp_inputs_par_sect `i' `source' hze_yes
@@ -318,22 +336,23 @@ foreach source in   WIOD  TIVA {
 */
 
 *foreach source in  WIOD {
-foreach source in  WIOD  TIVA {
+foreach source in /*  TIVA  WIOD */  TIVA_REV4 {
 
 
 
-	if "`source'"=="WIOD" local start_year 2000
-	if "`source'"=="TIVA" local start_year 1995
+	if "`source'"=="WIOD" global start_year 2014	
+	if "`source'"=="TIVA" global start_year 1995
+	if "`source'"=="TIVA_REV4" global start_year 2015
 
 
-	if "`source'"=="WIOD" local end_year 2014
-	if "`source'"=="TIVA" local end_year 2011
-	
 
+	if "`source'"=="WIOD" global end_year 2014
+	if "`source'"=="TIVA" global end_year 2011
+	if "`source'"=="TIVA_REV4" global end_year 2015
 
 
 	foreach i of numlist 2014  {
-*	foreach i of numlist `start_year' (1)`end_year'  {
+*	foreach i of numlist $start_year (1) $end_year  {
 		
 		imp_inputs `i' `source' HC hze_not
 		imp_inputs `i' `source' HC hze_yes

@@ -255,7 +255,7 @@ end
 ****************************************************************************
 
 *foreach source in  WIOD {
-foreach source in /*  TIVA */ WIOD  TIVA_REV4 {
+foreach source in /*  TIVA WIOD  */  TIVA_REV4 {
 
 
 

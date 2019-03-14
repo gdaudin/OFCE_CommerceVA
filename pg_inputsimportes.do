@@ -304,6 +304,7 @@ if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\De
 
 */
 
+/* COMMENTE POUR TEST
 
 *foreach source in WIOD {
 foreach source in /*  TIVA  WIOD */  TIVA_REV4 {
@@ -351,7 +352,7 @@ foreach source in /*  TIVA  WIOD */  TIVA_REV4 {
 	if "`source'"=="TIVA_REV4" global end_year 2015
 
 
-	foreach i of numlist 2014  {
+	foreach i of numlist 2015  {
 *	foreach i of numlist $start_year (1) $end_year  {
 		
 		imp_inputs `i' `source' HC hze_not

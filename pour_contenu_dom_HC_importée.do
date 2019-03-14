@@ -143,7 +143,10 @@ drop _merge
 
 generate pays_conso = lower("`pays_int'")
 generate year= `yrs'
-if "`source'"=="TIVA" | "`source'" == "TIVA_REV4"  replace pays =lower(pays)
+if "`source'"=="TIVA"  replace pays =lower(pays)
+if "`source'"=="TIVA_REV4"  replace pays =upper(pays)
+if "`source'"=="TIVA_REV4"  replace sector =upper(sector)
+if "`source'"=="TIVA_REV4"  replace pays_conso =upper(pays_conso)
 
 
 merge 1:1 pays sector year pays_conso using "$dir/Bases/HC_`source'.dta", keep (1 3)

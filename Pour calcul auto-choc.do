@@ -92,7 +92,7 @@ end
 
 foreach source in /*  TIVA*/ WIOD  TIVA_REV4 {
 
-
+			
 
 	if "`source'"=="WIOD" global start_year 2000
 	if "`source'"=="TIVA" global start_year 1995
@@ -106,7 +106,7 @@ foreach source in /*  TIVA*/ WIOD  TIVA_REV4 {
 	
 	
    capture erase "$dir\Results\Étude rapport D+I et Bouclage Mondial\results_`source'_`type'.dta" 
-	foreach type in HC /* HC_note par_sect*/ {
+	foreach type in /* HC */  HC_note /* par_sect*/ {
 		capture erase "$dir\Results\Étude rapport D+I et Bouclage Mondial\results_`source'_`type'.dta"
 
 *		foreach i of numlist 2014  {

@@ -1,10 +1,4 @@
 
-<<<<<<< HEAD
- 
-set more off
-
-=======
-
  
 
 set more off
@@ -139,10 +133,10 @@ foreach origine in dom impt {
 			save "$dir/Results/Devaluations/decomp_`source'_HC_`yrs'.dta", replace	
 		}
 
-	}
+
 
 	
-
+foreach origine in dom impt {
 	foreach euro in no_ze ze {		
 		use "$dir/Results/Devaluations/mean_chg_`source'_HC_`origine'_`yrs'_Sdollar.dta", clear
 		gen HC_`origine'=.
@@ -162,8 +156,8 @@ foreach origine in dom impt {
 		drop _merge
 		save "$dir/Results/Devaluations/decomp_`source'_HC_`yrs'.dta", replace
 	}
-}
 
+}
 
 
 
@@ -187,7 +181,7 @@ foreach source in WIOD  TIVA_REV4 {
 
 	if "`source'"=="WIOD" global start_year 2014
 	if "`source'"=="TIVA" global start_year 1995
-	if "`source'"=="TIVA_REV4" global start_year 2014
+	if "`source'"=="TIVA_REV4" global start_year 2015
 
 
 	if "`source'"=="WIOD" global end_year 2014

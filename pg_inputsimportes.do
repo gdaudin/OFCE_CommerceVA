@@ -232,10 +232,11 @@ if "`vector'" == "HC"  {
 	label var ci_impt_HC "Les CI importées dans la consommation de secteurs domestiques"
 	
 	
-	collapse (sum) ci_impt_HC conso ratio_ci_impt_HC, by(pays sector)
 	
 	generate ratio_ci_impt_HC = ci_impt_HC/conso
 	label var ratio_ci_impt_HC "Part des CI dans la conso domestique"
+
+	collapse (sum) ci_impt_HC conso ratio_ci_impt_HC, by(pays sector)
 
 	
 	save "$dir/Bases/imp_inputs_HC_par_secteur_`yrs'_`source'_`hze'.dta", replace

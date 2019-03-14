@@ -180,12 +180,11 @@ if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\De
 if "`vector'" == "Y" { 
 	use "$dir/Bases/imp_inputs_par_sect_`yrs'_`source'_`hze'.dta", clear
 
-	if "`source'"=="TIVA" {
+	if "`source'"=="TIVA" | "`source'"=="TIVA_REV4" {
 		gen pays_1 = pays
 		replace pays = "chn" if pays_1=="cn1" | pays_1=="cn2" | pays_1=="cn3" | pays_1=="cn4" 
 		replace pays = "mex" if pays_1=="mx1" | pays_1=="mx2" | pays_1=="mx3"
 		collapse (sum) ci_impt prod, by(pays sector)
-
 	}
 	
 	collapse (sum) ci_impt prod, by(pays)
@@ -199,7 +198,7 @@ if "`vector'" == "Y" {
 if "`vector'" == "HC"  { 
 
 	
-	if "`source'"=="TIVA" {
+	if "`source'"=="TIVA" | "`source'"=="TIVA_REV4" {
 		use  "$dir/Bases/imp_inputs_par_sect_`yrs'_`source'_`hze'.dta", replace
 		replace pays = "chn" if pays=="cn1" | pays=="cn2" | pays=="cn3" | pays=="cn4" 
 		replace pays = "mex" if pays=="mx1" | pays=="mx2" | pays=="mx3"
@@ -211,7 +210,7 @@ if "`vector'" == "HC"  {
 
 	use "$dir/Bases/HC_`source'.dta", clear
 	replace pays=lower(pays)
-	if "`source'"=="TIVA" {
+	if "`source'"=="TIVA" | "`source'"=="TIVA_REV4" {
 		replace pays = "chn" if pays=="cn1" | pays=="cn2" | pays=="cn3" | pays=="cn4" 
 		replace pays = "mex" if pays=="mx1" | pays=="mx2" | pays=="mx3"
 		collapse (sum) conso, by(pays pays_conso year sector)
@@ -225,8 +224,8 @@ if "`vector'" == "HC"  {
 	if "`source'"=="WIOD" replace pays=lower(pays)
 	if "`source'"=="WIOD" replace sector=lower(sector)
 	if "`source'"=="WIOD" merge 1:1 pays sector using  "$dir/Bases/imp_inputs_par_sect_`yrs'_`source'_`hze'.dta"
-	if "`source'"=="TIVA" merge 1:1 pays sector using  "$dir/Bases/imp_inputs_par_sect_modif.dta" 
-	if "`source'"=="TIVA" erase  "$dir/Bases/imp_inputs_par_sect_modif.dta"
+	if "`source'"=="TIVA" | "`source'"=="TIVA_REV4" merge 1:1 pays sector using  "$dir/Bases/imp_inputs_par_sect_modif.dta" 
+	if "`source'"=="TIVA" | "`source'"=="TIVA_REV4" erase  "$dir/Bases/imp_inputs_par_sect_modif.dta"
 	drop _merge
 		
 	gen ci_impt_HC = ratio_ci_impt_prod * conso
@@ -265,7 +264,7 @@ if "`vector'" == "X"  {
 	
 	gen ci_impt_X = ratio_ci_impt_prod * X
 	
-	if "`source'"=="TIVA" {
+	if "`source'"=="TIVA" | "`source'"=="TIVA_REV4"{
 		replace pays = "chn" if pays=="cn1" | pays=="cn2" | pays=="cn3" | pays=="cn4" 
 		replace pays = "mex" if pays=="mx1" | pays=="mx2" | pays=="mx3"
 

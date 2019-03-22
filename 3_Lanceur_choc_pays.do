@@ -32,7 +32,7 @@ do "$dirgit/compute_X.do"
 do "$dirgit/compute_HC.do"
 do "$dirgit/compute_Y.do"
 
-/* A faire tourner la 1ere fois
+* A faire tourner la 1ere fois
 Definition_pays_secteur TIVA
 append_HC TIVA 
 append_X TIVA
@@ -42,7 +42,7 @@ Definition_pays_secteur WIOD
 append_HC WIOD
 append_X WIOD
 append_Y WIOD
-*/
+
 
 Definition_pays_secteur TIVA_REV4
 append_HC TIVA_REV4
@@ -59,7 +59,7 @@ set more off
 
 
 *foreach source in   TIVA { 
-foreach source in  /* WIOD TIVA*/ TIVA_REV4 { 
+foreach source in  /* WIOD*/ TIVA /*TIVA_REV4*/ { 
 
 
 	Definition_pays_secteur `source'

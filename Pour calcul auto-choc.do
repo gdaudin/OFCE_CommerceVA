@@ -1,8 +1,8 @@
 clear  
 set more off
 if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
-if ("`c(hostname)'" == "widv269a") global dir  "D:\home\T822289\CommerceVA" 
-if ("`c(hostname)'" == "FP1376CD") global dir  "T:\CommerceVA" 
+if ("`c(hostname)'" == "widv269a") global dir  "D:/home/T822289/CommerceVA" 
+if ("`c(hostname)'" == "FP1376CD") global dir  "T:/CommerceVA" 
 
 *capture log close
 *log using "$dir/$S_DATE.log", replace
@@ -19,15 +19,15 @@ args year source type
 **Exemple : etude 2011 WIOD par_sect
 
 if ("`c(username)'"=="guillaumedaudin") do  "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation/Definition_pays_secteur.do" `source'
-if ("`c(username)'"=="widv269a") do "D:\home\T822289\CommerceVA\GIT\commerce_VA_inflation\Definition_pays_secteur.do" `source'
-if ("`c(username)'"=="FP1376CD") do  "T:\CommerceVA\GIT\commerce_VA_inflation\Definition_pays_secteur.do" `source'	
+if ("`c(username)'"=="widv269a") do "D:/home/T822289/CommerceVA/GIT/commerce_VA_inflation/Definition_pays_secteur.do" `source'
+if ("`c(username)'"=="FP1376CD") do  "T:/CommerceVA/GIT/commerce_VA_inflation/Definition_pays_secteur.do" `source'	
 
 
 if "`source'"=="TIVA" |  "`source'"=="TIVA_REV4" local liste_chocs shockEUR1-shockZAF1
 if "`source'"=="WIOD" local liste_chocs shockEUR1-shockUSA1
 
-if "`type'"=="HC" | "`type'" =="HC_note" use "$dir\Results\Devaluations\mean_chg_`source'_HC_`year'_S.dta", clear
-//if "`type'"=="par_sect" use "$dir\Results\Devaluations\`source'_C_`year'_exch.dta", clear
+if "`type'"=="HC" | "`type'" =="HC_note" use "$dir/Results/Devaluations/mean_chg_`source'_HC_`year'_S.dta", clear
+//if "`type'"=="par_sect" use "$dir/Results/Devaluations/`source'_C_`year'_exch.dta", clear
 
 
 
@@ -46,12 +46,12 @@ drop shock*
 
 *** Pour aller chercher les chocs de la ZE
 if "`type'"=="HC" | "`type'" =="HC_note" {
-	merge 1:1 c using "$dir\Results\Devaluations\mean_chg_`source'_HC_`year'_S.dta"
+	merge 1:1 c using "$dir/Results/Devaluations/mean_chg_`source'_HC_`year'_S.dta"
 	keep c pond_`source'_`type' shockEUR
 }
 /*
 if "`type'"=="par_sect" {
-	merge 1:1 c s using "$dir\Results\Devaluations\`source'_C_`year'_exch.dta"
+	merge 1:1 c s using "$dir/Results/Devaluations/`source'_C_`year'_exch.dta"
 	keep c s pond_`source'_`type' shockEUR
 }
 */
@@ -76,7 +76,7 @@ rename s_ pond_`source'_`type'
 sort c
 gen year=`year'
 rename c pays
-save "$dir\Results\Devaluations\auto_chocs_`type'_`source'_`year'.dta", replace
+save "$dir/Results/Devaluations/auto_chocs_`type'_`source'_`year'.dta", replace
 
 end
 
@@ -90,13 +90,13 @@ end
 ***********
 *foreach source in  WIOD {
 
-foreach source in /*  TIVA*/ WIOD  TIVA_REV4 {
+foreach source in /*  TIVA WIOD*/  TIVA_REV4 {
 
 			
 
 	if "`source'"=="WIOD" global start_year 2000
 	if "`source'"=="TIVA" global start_year 1995
-	if "`source'"=="TIVA_REV4" global start_year 2015
+	if "`source'"=="TIVA_REV4" global start_year 2014
 
 
 
@@ -105,9 +105,9 @@ foreach source in /*  TIVA*/ WIOD  TIVA_REV4 {
 	if "`source'"=="TIVA_REV4" global end_year 2015
 	
 	
-   capture erase "$dir\Results\Étude rapport D+I et Bouclage Mondial\results_`source'_`type'.dta" 
-	foreach type in /* HC */  HC_note /* par_sect*/ {
-		capture erase "$dir\Results\Étude rapport D+I et Bouclage Mondial\results_`source'_`type'.dta"
+   capture erase "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`source'_`type'.dta" 
+	foreach type in  HC /* HC_note par_sect*/ {
+		capture erase "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`source'_`type'.dta"
 
 *		foreach i of numlist 2014  {
 		foreach i of numlist $start_year (1) $end_year  {

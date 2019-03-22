@@ -19,8 +19,8 @@ if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\De
 local year 2011
 	
 use "$dir/Results/Devaluations/auto_chocs_HC_WIOD_`year'.dta", clear
-merge 1:1 c using  "$dir/Results/Devaluations/auto_chocs_HC_TIVA_`year'.dta"
-drop if c=="ROW"
+merge 1:1 pays using  "$dir/Results/Devaluations/auto_chocs_HC_TIVA_`year'.dta"
+drop if pays =="ROW"
 
 insobs 1
 local N_last_obs=_N
@@ -29,7 +29,7 @@ replace pond_TIVA_HC=0 in `N_last_obs'
 regress pond_WIOD_HC pond_TIVA_HC
 predict predict
 gen error=abs(predict-pond_WIOD_HC)/pond_WIOD_HC
-gen mylabel= c if /*error >.25 |*/ pond_WIOD_HC>=0.22 | c=="FRA"
+gen mylabel= pays if /*error >.25 |*/ pond_WIOD_HC>=0.22 | c=="FRA"
 
 graph twoway (scatter pond_WIOD_HC pond_TIVA_HC, mlabel(mylabel)) ///
 (lfit pond_WIOD_HC pond_TIVA_HC, clpattern(dash)) ///
@@ -41,6 +41,35 @@ graph twoway (scatter pond_WIOD_HC pond_TIVA_HC, mlabel(mylabel)) ///
 graph export "$dir/commerce_VA_inflation/Rédaction/Comparaison_WIOD_TIVA_`year'.png", replace
 
 
+	
+********Figure 1bis (Comparing consumer price elasticity to an exchange rate appreciation for WIOD and TIVA_REV4, 2014)	
+	
+local year 2014
+	
+use "$dir/Results/Devaluations/auto_chocs_HC_WIOD_`year'.dta", clear
+merge 1:1 pays using  "$dir/Results/Devaluations/auto_chocs_HC_TIVA_REV4_`year'.dta"
+drop if pays =="ROW"
+
+insobs 1
+local N_last_obs=_N
+replace pond_TIVA_HC=0 in `N_last_obs'
+
+regress pond_WIOD_HC pond_TIVA_REV4_HC
+predict predict
+gen error=abs(predict-pond_WIOD_HC)/pond_WIOD_HC
+gen mylabel= pays if /*error >.25 |*/ pond_WIOD_HC>=0.22 | c=="FRA"
+
+graph twoway (scatter pond_WIOD_HC pond_TIVA_HC, mlabel(mylabel)) ///
+(lfit pond_WIOD_HC pond_TIVA_HC, clpattern(dash)) ///
+			(lfit pond_TIVA_HC pond_TIVA_HC), ///
+			yscale(range(0 0.4)) xscale(range(0 0.4)) ylabel(0 (0.1) 0.4) ///
+			ytitle("WIOD elasticites `year' (absolute value)") xtitle("TIVA_REV4 elasticites `year' (absolute value)") ///
+			legend(order (2 3)  label(2 "Linear fit") label(3 "45° line") ) scheme(s1mono)
+			
+graph export "$dir/commerce_VA_inflation/Rédaction/Comparaison_WIOD_TIVA_REV4_`year'.png", replace
+
+blif
+
 
 *************Figure 2 (presenting results)
 
@@ -50,10 +79,10 @@ rename pays c
 keep if year==2014
 
 
-merge 1:1 c using "$dir/Results/Devaluations/auto_chocs_HC_WIOD_2014.dta"
+merge 1:1 pays using "$dir/Results/Devaluations/auto_chocs_HC_WIOD_2014.dta"
 
 gen blouf = 0
-gen mylabel= c if strpos("FRA DEU DEU_EUR ITA ITA_EUR GBR CHN USA CAN JPN ",c)!=0
+gen mylabel= pays if strpos("FRA DEU DEU_EUR ITA ITA_EUR GBR CHN USA CAN JPN ",c)!=0
 
 twoway histogram pond_WIOD_HC, width(0.05) frequency xscale(range(0.04 0.36)) || ///
 	scatter blouf pond_WIOD_HC if mylabel!="", /// 
@@ -159,10 +188,10 @@ foreach source in TIVA WIOD  {
 
 
 	collapse (sum) Y_`source', by(pays year)
-	rename pays c
+	*rename pays c
 
 	foreach year of numlist $start_year (1) $end_year  {
-		merge 1:1 year c  using "$dir/Results/Devaluations/auto_chocs_HC_`source'_`year'.dta", update
+		merge 1:1 year pays  using "$dir/Results/Devaluations/auto_chocs_HC_`source'_`year'.dta", update
 		drop _merge
 	}
 
@@ -182,7 +211,7 @@ foreach source in TIVA WIOD  {
 }
 
 use temp_WIOD.dta, clear
-merge 1:1 year c using temp_TIVA.dta
+merge 1:1 year pays using temp_TIVA.dta
 sort year
 
 bys year: keep if _n==1

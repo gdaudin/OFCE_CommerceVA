@@ -181,7 +181,8 @@ graph bar (asis) HC_dom HC_impt , over(c,sort(HC_tot) descending) stack ///
 		legend(rows(2) size(small)) ///
 		note("Source: PIWIM (`source',`year')") ///
 		scheme(s2mono) ///
-		ylabel(,format(%9.2fc)) ///
+		ylabel(-0.6(0.2) 0.0,format(%9.2fc)) ///
+		yscale(range(-0.65 0.0))  ///
 		ytitle("%")
 		
 /*		title("Impact d'une appréciation de 5% de l'euro sur les prix à la consommation", span size(medium)) /// */
@@ -201,7 +202,8 @@ graph bar (asis) services neig energie alimentaire , over(c,sort(HC_tot) descend
 		legend(rows(2) size(small)) ///
 		note("Source: PIWIM (`source',`year')") /// 
 		scheme(s2mono) ///
-		ylabel(,format(%9.2fc)) ///
+		ylabel(-0.6(0.2) 0.0,format(%9.2fc)) ///
+		yscale(range(-0.65 0.0))  ///
 		ytitle("%")
 		
 /*		title("Impact d'une appréciation de 5% de l'euro sur les prix à la consommation par secteur", span size(medsmall)) /// */
@@ -223,7 +225,8 @@ graph bar (asis) ss_jacente_dom ss_jacente_impt  volatile_dom volatile_impt  , o
 		legend(rows(2) size(vsmall)) ///
 		note("Source: PIWIM (`source',`year')") /// 
 		scheme(s2mono) ///
-		ylabel(,format(%9.2fc)) ///
+		ylabel(-0.6(0.2) 0.0,format(%9.2fc)) ///
+		yscale(range(-0.65 0.0))  ///
 		ytitle("%")
 		
 /*		title("Impact d'une appréciation de 5% de l'euro sur les prix à la consommation par secteur et origine", span size(small)) /// */		

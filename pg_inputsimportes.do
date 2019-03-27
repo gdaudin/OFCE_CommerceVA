@@ -212,8 +212,8 @@ if "`vector'" == "HC"  {
 	keep if lower(pays)==lower(pays_conso) 
 	keep if year==`yrs'
 	
-	if "`source'"=="WIOD" replace pays=lower(pays)
-	if "`source'"=="WIOD" replace sector=lower(sector)
+	if "`source'"=="WIOD" replace pays=upper(pays)
+	if "`source'"=="WIOD" replace sector=upper(sector)
 	if "`source'"=="WIOD" merge 1:1 pays sector using  "$dir/Bases/imp_inputs_par_sect_`yrs'_`source'_`hze'.dta"
 	if "`source'"=="TIVA" | "`source'"=="TIVA_REV4" merge 1:1 pays sector using  "$dir/Bases/imp_inputs_par_sect_modif.dta" 
 	if "`source'"=="TIVA" | "`source'"=="TIVA_REV4" erase  "$dir/Bases/imp_inputs_par_sect_modif.dta"
@@ -297,7 +297,7 @@ end
 
 
 *foreach source in WIOD {
-foreach source in /*  TIVA  WIOD */  TIVA_REV4 {
+foreach source in /*  TIVA  TIVA_REV4  */WIOD   {
 
 
 
@@ -327,7 +327,7 @@ foreach source in /*  TIVA  WIOD */  TIVA_REV4 {
 */
 
 *foreach source in  WIOD {
-foreach source in /*  TIVA  WIOD */  TIVA_REV4 {
+foreach source in /*  TIVA  TIVA_REV4 */ WIOD  {
 
 
 
@@ -342,8 +342,8 @@ foreach source in /*  TIVA  WIOD */  TIVA_REV4 {
 	if "`source'"=="TIVA_REV4" global end_year 2015
 
 
-	foreach i of numlist 2015  {
-*	foreach i of numlist $start_year (1) $end_year  {
+*	foreach i of numlist 2015  {
+	foreach i of numlist $start_year (1) $end_year  {
 		
 		imp_inputs `i' `source' HC hze_not
 		imp_inputs `i' `source' HC hze_yes

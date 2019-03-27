@@ -37,11 +37,11 @@ use "$dir/Bases/HC_`source'.dta", clear
 * avec pays_conso le pays consommateur et pays le pays producteur du bien
 			
 	
-gen imp="euro" if (strpos(lower("$eurozone"),lower(pays))!=0 & strpos(lower("$eurozone"),lower(pays_conso))!=0)
+gen imp="euro" if (strpos(upper("$eurozone"),upper(pays))!=0 & strpos(upper("$eurozone"),upper(pays_conso))!=0)
 
 replace imp="no" if upper(pays)==upper(pays_conso) ///
-            |  lower(pays_conso)=="chn" & (lower(pays)=="cn1" | lower(pays)=="cn2" | lower(pays)=="cn3" | lower(pays)=="cn4") ///
-		    |  lower(pays_conso)=="mex" & (lower(pays)=="mx1" | lower(pays)=="mx2" | lower(pays)=="mx3")
+            |  upper(pays_conso)=="CHN" & (upper(pays)=="CN1" | upper(pays)=="CN2" | upper(pays)=="CN3" | upper(pays)=="CN4") ///
+		    |  upper(pays_conso)=="MEX" & (upper(pays)=="MX1" | upper(pays)=="MX2" | upper(pays)=="MX3")
 
 	
 	
@@ -56,13 +56,13 @@ reshape wide conso, i(pays_conso year) j(imp) string
 
 replace consoeuro=0 if consoeuro==.
 gen contenu_impHC_0=(consoeuro+consoyes)/(consoeuro+consoyes+consono)
-gen contenu_impHC_eur=(consoyes)/(consoeuro+consoyes+consono)
+gen contenu_impHC_EUR=(consoyes)/(consoeuro+consoyes+consono)
 
  reshape long contenu_impHC_, i(year pays_conso) j(euro) string
 
-drop if strpos(lower("$eurozone"),lower(pays))==0 & euro=="eur" 
+drop if strpos(upper("$eurozone"),upper(pays))==0 & euro=="EUR" 
  
-replace pays_conso = pays_conso+"_"+euro if euro=="eur"
+replace pays_conso = pays_conso+"_"+euro if euro=="EUR"
 rename contenu_impHC_ contenu_impHC
 
 keep year pays_conso contenu_impHC
@@ -91,6 +91,6 @@ foreach i of numlist `start_year' (1)`end_year'  {
 end
 
 *contenu_imp_HC TIVA
-*contenu_imp_HC WIOD
+contenu_imp_HC WIOD
 contenu_imp_HC TIVA_REV4
 

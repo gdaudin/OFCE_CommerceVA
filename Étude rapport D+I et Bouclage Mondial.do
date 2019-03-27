@@ -6,17 +6,14 @@ if ("`c(hostname)'" == "FP1376CD") global dir  "T:\CommerceVA"
 
 
 if ("`c(username)'"=="guillaumedaudin") global dirgit "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation"
-if ("`c(hostname)'" == "widv269a") global dirgit  "D:\home\T822289\CommerceVA\GIT\commerce_va_inflation" 
+if ("`c(hostname)'" == "widv269a") global dirgit  "D:\home\T822289\CommerceVA\GIT\commerce_VA_inflation" 
 if ("`c(hostname)'" == "FP1376CD") global dirgit  "T:\CommerceVA\GIT\commerce_va_inflation" 
 
 *capture log close
 *log using "$dir/$S_DATE.log", replace
 
 
-if ("`c(username)'"=="guillaumedaudin") do  "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation/Definition_pays_secteur.do" `source'
-if ("`c(username)'"=="widv269a") do "D:\home\T822289\CommerceVA\GIT\commerce_VA_inflation\Definition_pays_secteur.do" `source'
-if ("`c(username)'"=="FP1376CD") do  "T:\CommerceVA\GIT\commerce_VA_inflation\Definition_pays_secteur.do" `source'	
-
+do  "$dirgit/Definition_pays_secteur.do" `source'
 
 global eurozone "AUT BEL CYP DEU ESP EST FIN FRA GRC IRL ITA LTU LUX LVA MLT NLD PRT SVK SVN"
 
@@ -41,10 +38,10 @@ use "$dir/Results/Devaluations/auto_chocs_`type'_`source'_`year'.dta", clear
 
 
 
-capture gen pays=lower(c)
-replace pays=lower(pays)
+capture gen pays=upper(c)
+replace pays=upper(pays)
 if "`type'"=="par_sect" rename s sector
-if "`type'"=="par_sect" replace sector=lower(sector)
+if "`type'"=="par_sect" replace sector=upper(sector)
 
 
 if "`type'"=="HC" | "`type'" =="HC_note" {
@@ -53,23 +50,22 @@ if "`type'"=="HC" | "`type'" =="HC_note" {
 	replace pays =upper(pays) 
 	merge 1:1 pays using "$dir/Bases/contenu_dom_HC_impt_`year'_`source'_hze_not.dta"
 	drop _merge
-	replace pays =lower(pays)
+	replace pays =upper(pays)
 
 	replace pays =pays+"_AUTO"
-	replace pays = substr(pays,1,3) if strmatch(pays,"*_eur_AUTO")==1
+	replace pays = substr(pays,1,3) if strmatch(pays,"*_EUR_AUTO")==1
 	merge 1:1 pays using "$dir/Bases/imp_inputs_HC_`year'_`source'_hze_yes.dta", update
 	drop _merge
 	replace pays =upper(pays) 
 	merge 1:1 pays using "$dir/Bases/contenu_dom_HC_impt_`year'_`source'_hze_yes.dta", update 
-	replace pays =lower(pays) 
+	*replace pays =lower(pays) 
 	drop _merge
-	replace pays = pays+"_eur" if strlen(pays)==3
-	replace pays =substr(pays,1,3) if strmatch(pays,"*_auto")==1
+	replace pays = pays+"_EUR" if strlen(pays)==3
+	replace pays =substr(pays,1,3) if strmatch(pays,"*_AUTO")==1
 	
 	merge 1:1 pays using "$dir/Bases/contenu_impHC_`source'_`year'.dta"
 	drop if _merge ==1
 	drop _merge year
-	
 	*replace ratio_ci_impt_HC = ratio_ci_impt_HC*(1-contenu_impHC) + contenu_impHC - contenu_dom_HC_etranger
 	
 }
@@ -80,11 +76,11 @@ if "`type'"=="par_sect" {
 	merge 1:1 pays sector using "$dir/Bases/imp_inputs_par_sect_`year'_`source'_hze_not.dta"
 	drop _merge
 	replace pays =pays+"_AUTO"
-	replace pays = substr(pays,1,3) if strmatch(pays,"*_eur_AUTO")==1
+	replace pays = substr(pays,1,3) if strmatch(pays,"*_EUR_AUTO")==1
 	
 	merge 1:1 pays sector using "$dir/Bases/imp_inputs_par_sect_`year'_`source'_hze_yes.dta", update
 	drop _merge
-	replace pays = pays+"_eur" if strlen(pays)==3
+	replace pays = pays+"_EUR" if strlen(pays)==3
 	replace pays =substr(pays,1,3) if strmatch(pays,"*_AUTO")==1
 	
 	rename ratio_ci_impt_prod ratio_ci_impt_`type'
@@ -146,7 +142,7 @@ if "`type'"=="HC" {
 
 
 
-if "`type'"=="HC_note" & `year'==2014 {
+if "`type'"=="HC_note" & ((`year'==2014 & "`source'"=="WIOD") | (`year'==2015 & "`source'"=="TIVA_REV4")) {
 generate c=upper(pays)
 	keep if strpos(c,"_EUR")!=0
 	replace c=subinstr(c,"_EUR"e,"",.)
@@ -163,13 +159,13 @@ generate c=upper(pays)
 			(lfit E1HC_E2HC E1HC_E2HC,lwidth(vthin) color(black)) , ///
 			xtitle("Impact D+I, en %", /*size(vsmall) */) ///
 			ytitle("Impact PIWIM, en %") ///
-			yscale(range(-1 -0.25)) xscale(range(-1 -0.25)) xlabel(-1 (0.25) -0.25) ylabel(-1 (0.25) -0.25) ///
+			yscale(range(-0.75  -0.25)) xscale(range(-0.75  -0.25)) xlabel(-0.75 (0.25) -0.25) ylabel(-0.75  (0.25) -0.25) ///
 			legend(off) ///
 			ylabel(,format(%9.2fc)) ///
-			note("PIWIM (WIOD, 2014)")
+			note("PIWIM (`source', `year')")
 	*dans le cas HC, xtitle pourrait se finir par «importées dans la conso dom + part conso importée»			
 	
-
+blink
 	
 	graph export "$dirgit/Rédaction_note/Rapport_D+I_bouclé_pour_note.png", replace
 	
@@ -255,7 +251,7 @@ end
 ****************************************************************************
 
 *foreach source in  WIOD {
-foreach source in /*  TIVA WIOD  */  TIVA_REV4 {
+foreach source in /*  TIVA   */  WIOD TIVA_REV4 {
 
 
 

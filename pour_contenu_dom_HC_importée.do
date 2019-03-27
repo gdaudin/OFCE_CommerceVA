@@ -205,8 +205,8 @@ foreach source in  /*WIOD TIVA*/ TIVA_REV4 {
 
 *	foreach i of numlist 2010  {
 	foreach i of numlist $start_year (1)$end_year  {
-		capture erase "$dir/Bases/contenu_dom_HC_impt_`yrs'_`source'_hze_non.dta.dta"
-		capture erase "$dir/Bases/contenu_dom_HC_impt_`yrs'_`source'_hze_yes.dta.dta"
+		capture erase "$dir/Bases/contenu_dom_HC_impt_`yrs'_`source'_hze_non.dta"
+		capture erase "$dir/Bases/contenu_dom_HC_impt_`yrs'_`source'_hze_yes.dta"
 		foreach pays of global country_hc {
 			contenu_dom_HC_impt `i' `source' hze_not `pays'
 			contenu_dom_HC_impt `i' `source' hze_yes `pays'

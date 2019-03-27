@@ -63,8 +63,9 @@
 \maketitle
 \begin{abstract}
 {\small \noindent
+TO UPDATE
 Firms' participation in global value chains strengthens cross-country linkages via trade in intermediate inputs. 
-In this paper, we build on two sectoral world input-output datasets  to assess the role of global input-output linkages in the propagation of price shocks // exchange rate shocks // in the international economy. 
+In this paper, we build on three sectoral world input-output datasets  to assess the role of global input-output linkages in the propagation of exchange rate shocks in the international economy. 
  %à faire: productivity shocks More specifically, we study the role of global input-output linkages in transmitting oil prices shocks across economies.
 We examine the increasing integration of the European economies since the adoption of the common currency and investigate whether the shortening of global value chains in the wake of the Great Recession has changed the propagation of global price shocks. We provide evidence that, following an appreciation of the domestic currency, the direct effect of global price shocks, i.e. the effect resulting from the share of imported final and intermediate goods in domestic consumption, explains the bulk of the propagation of global shocks to domestic consumer prices. By contrast, we find a limited role for the additional transmission of lower domestic input prices to other sectors of the domestic economy and other countries occuring during subsequent production cycles. Finally, building on sectoral data, we examine which sectors experience higher spillovers from global price shocks.
 %We also contribute to the literature on global input-output linkages by assessing whether results are consistent across the different world input output databases available (WIOD and TiVA).
@@ -75,13 +76,14 @@ We examine the increasing integration of the European economies since the adopti
 \end{abstract}
 
 \section{Introduction}
-Trade liberalization and lower transportation and communication costs facilitated the fragmentation of production beyond national borders. As a result, firms' participation in global value chains strengthens cross-country linkages via trade in intermediate inputs. 
+Trade liberalization and lower transportation and communication costs facilitates the fragmentation of production beyond national borders.
+As a result, firms' participation in global value chains strengthens cross-country linkages via trade in intermediate inputs. 
 Because of imported intermediate goods, fluctuations in the prices of imports that are themselves driven by exchange rate movements affect the domestic cost of production and, ultimately, domestic consumer prices. 
 As global value chains contribute to explaining the transmission of macroeconomic shocks across countries, a better understanding of trade spillovers has become paramount.  
-In this paper, we build on the World Input-Output tables (WIOT hereafter) to investigate how production linkages give rise to nominal spillovers. 
+In this paper, we build on World Input-Output tables (WIOT hereafter) to investigate how production linkages give rise to nominal spillovers. 
 We examine the extent to which domestic consumer prices react to changes in imported intermediate and final goods.
-We pay particular attention to euro area countries. The euro area is indeed more involved in global production chains than other large economies, such as the United States and China \citep{ECB2016} and has been less affected by global value chains shortening than other countries in the years following the Great Recession. 
-Building on sectoral data from the World InputOutput Database, we examine which sectors experience higher spillovers from global inflationary shocks.\\
+We pay particular attention to euro area countries, as the euro area is more involved in global production chains than other large economies, such as the United States and China \citep{ECB2016} and has been less affected by global value chains shortening than other countries in the years following the Great Recession. 
+Building on sectoral data from three different World Input-Output tables, we examine which sectors experience higher spillovers from global inflationary shocks.\\
 To preview our findings, we find that...\\
 The remainder of the paper is organized as follows. Section \ref{sec:lit} briefly describes the related literature. Section \ref{sec:metho} presents the methodology and the data sources.  Section \ref{sec:prixconso} presents the impact of an exchange rate shock on consumer prices.  Section \ref{sec:prixconsosecteur} examines which of the subcomponents of consumer prices experience higher spillovers from global inflationary shocks.
 Section \ref{sec:ccl} provides some concluding remarks and avenues for future research.
@@ -127,13 +129,14 @@ Leontief's production model has a dual: the price model. Some studies focus on t
 
 \section{The PIWIM model }
 \label{sec:metho}
-Based on initial work from the OFCE (Observatoire Français des Conjonctures Économiques), we developed a model named «PIWIM» (Push cost Inflation through World Input-output Matrices). This paper makes extensive use of this model.
+Based on initial work from the OFCE (Observatoire Français des Conjonctures Économiques) \cite{Cochard2016}, we developed a model named «PIWIM» (Push cost Inflation through World Input-output Matrices). This paper makes extensive use of this model.
 
 
 
 \subsection{Defining a price shock in a I-O model}
 \label{subsec:ioprice}
-To identify which countries are most affected by a price shock through value-added and vertical trade flows in international trade, we need a large structural matrix that integrates input flows between sectors, both within each country and between countries. This matrix traces the sectoral and geographical origin of inputs. \\
+To identify which countries are most affected by a price shock through value-added and vertical trade flows in international trade, we need a large structural matrix that integrates input flows between sectors, both within each country and between countries.
+This matrix traces the sectoral and geographical origin of inputs. \\
 The standard I-O model relies on input-output tables registering transactions of goods and services (domestic or imported) at current prices. The I-O tables describe the sale and purchase relationships between producers and consumers within an economy. Each column describes, for each industry $j$, the intermediate consumption of goods and services from the various sectors.
 By extension, a "world" I-O table (WIOT hereafter) describe the sale and purchase relationships between producers and consumers in the whole world, differentiating between sectors in different countries.
 The WIOT has, on its diagonal, the country blocks with flows of domestic transactions of intermediate goods and services between industries.
@@ -158,7 +161,15 @@ In a first step, the direct impact of the shock on each country-specific industr
 In a second step, the shock is passed on all country-specific industries using these shocked inputs in their production processes. For $k$ production cycles, the increase in production prices amounts to $\Delta^k P=C{\cal A}^k$.\\
 As the technical coefficients are smaller than 1, the effect of the initial shock on input prices eventually wears out.
 The overall effect of the shock is equal to the sum of the initial shock and all the increases that occurred during the successive production cycles.
-Let us call $S$ the total effect of the shock on prices, a vector $(1, N)$ composed of the elements $s_{ij}$ measuring the total effect of the shock on the output price of sector $j$ in country $i$. We have: $S=C {\left( I+{\cal A}+{\cal A}^2+...+{\cal A}^k+...\right)} =C {\left( I-{\cal A} \right)}^{-1}$, with ${\left( I-{\cal A} \right)}^{-1}$ the inverse of Leontief's matrix.
+Let us call $S$ the total effect of the shock on prices, a vector $(1, N)$ composed of the elements $s_{ij}$ measuring the total effect of the shock on the output price of sector $j$ in country $i$. We have: 
+
+\begin{eqnarray}
+S=C {\left( I+{\cal A}+{\cal A}^2+...+{\cal A}^k+...\right)} =C {\left( I-{\cal A} \right)}^{-1}
+\label{eq:eqchocprix} 
+\end{eqnarray}
+
+
+with ${\left( I-{\cal A} \right)}^{-1}$ the inverse of Leontief's matrix.
 
 \subsection{The choice of WIOD}
 \label{subsec:data}
@@ -168,7 +179,6 @@ Aggregating national input-output tables in world input-output tables is challen
 Two datasets including a time dimension for world intput-output tables are available: (\textit{i}) the World Input Output Database (WIOD) and (\textit{ii}) the OECD-ICIO database TiVA.
 \paragraph{The World Input Output Database (WIOD)}
 The World Input Output Database (WIOD) contains time series of inter-country input-output tables from 2000 to 2014.  It provides "World Input-Output Tables" that reconcile national input-output tables (or supply-use tables) with bilateral trade statistics derive the final symmetric world input-output table. The WIOD covers 43 countries, of which 28 belongs to the European Union and 15 are other major countries that cover, in total, aroud 85$\%$ of world GDP. They contain annual information for 56 industries, comprising primary, manufacturing goods and services sectors. Therefore, for each year a full country-sector input-output matrix traces the importance of a supplying industry in one country for an industry in another country. The values in WIOTs are expressed in millions of U.S. dollars; market exchange rates were used for currency conversion \citep{Timmer2015}. 
-GD CORRIGER LA RÉFÉRENCE
 
 % All transactions values are in basic prices, reflecting all costs borne by the producer. These tables are accompanied by Socio-Economic Accounts which contain country sector panel data on employment (number of workers, compensation and share of labor in high, medium and low skilled occupations), capital stocks, gross output and value added).
 
@@ -199,14 +209,17 @@ Other & Russia, Turkey\\
 \end{table} 
 
 \paragraph{The Statistics on Trade in Value Added (TiVA) database}
-The TiVA database is compiled by the OECD and the WTO. It builds on the OECD harmonized individual country input-output tables to provide matrices of inter-industrial flows of goods and services in current prices (USD million), for 64 economies (i.e. 35 OECD Countries, 28 non-OECD economies and the Rest of the world) and 34 industries, covering the years 1995 to 2011. 
-Table \ref{tab:tiva} shows the economies included in the TiVA database.
+The TiVA database is compiled by the OECD and the WTO. It builds on the OECD harmonized individual country input-output tables to provide matrices of inter-industrial flows of goods and services in current prices (USD million).
+We use two versions of this database. The third revision, from 2016, includes for 64 economies (i.e. 35 OECD Countries, 28 non-OECD economies and the Rest of the world) and 34 industries, and covers the every year between 1995 and 2011.
+The fourth revision, from 2018, includes one more economy (Kazakhstan) and 36 sectors and covers every year between 2005 and 2015.
+Beside coverage, there are extensive differences between both TiVA databases (\cite{OECD2018}).
+Table \ref{tab:tiva} shows the economies included in the TiVA databases.
 
 \begin{table}[!h]
 \begin{threeparttable}
 \centering
 \centering
-\caption{\small{\textbf{Economies included in the TiVA Database}}}
+\caption{\small{\textbf{Economies included in the TiVA databases}}}
 \small
 \begin{tabular}{ll}
 \hline\hline
@@ -217,10 +230,10 @@ Europe & Austria, Belgium, Bulgaria, Croatia, Cyprus, Czech Republic, Denmark,\\
 & United Kingdom\\
 North  America& Canada, United States\\
 Latin America & Argentina, Brazil, Chile, Colombia, Costa Rica, \\ 
-&Mexico (differentiating between "three Mexico"), Peru\\
-Asia-Pacific & Australia, Cambodia, China (differentiating between "four China"), \\
-& Hong Kong SAR, India, Indonesia, Japan, Korea,Malaysia, New Zealand,\\
-& Philippines, Singapore, Taiwan, Thailand, Viet Nam\\
+&Mexico (differentiating between three (Rev3) or two (Rev4) Mexico), Peru\\
+Asia-Pacific & Australia, Cambodia, China (differentiating between four (Rev3) or three (Rev4) China), \\
+& Hong Kong SAR, India, Indonesia, Japan, Khazakhstan (in Rev4), Korea, Malaysia, \\
+& New Zealand, Philippines, Singapore, Taiwan, Thailand, Viet Nam\\
 Other & Brunei, Israel, Morocco, Russia, Saudi Arabia, South Africa, Tunisia, Turkey\\
 \hline\hline
 \end{tabular} 
@@ -231,10 +244,10 @@ Other & Brunei, Israel, Morocco, Russia, Saudi Arabia, South Africa, Tunisia, Tu
 
 \paragraph{Major differences between the WIOD and TiVA databases}
 The WIOD and TiVA databases have a number of distinguishing characteristics (see \cite{Timmer2015} for details). The most relevant difference for our analysis relates to the treatment of imports by use category. National input-output statistics provide the use of products by industries and final consumers, but the country of origin of products is unknown. Therefore, one has to breakdown product import statistics by category of use in the construction of world input-output tables.\\
-The TiVA database relies on the so-called "import proportionality assumption". The domestic input-output tables show transactions between domestic industries. As a complement to these tables, supplementary tables break down total imports by user (industry and the different categories of final demand). Some countries provide these import tables in conjunction with their input-output tables, but in other cases they are derived by the OECD. Mexico and China benefit from a special treatment, but for the other countries the main assumption used is that the share of imports in any product consumed directly as intermediate consumption or final demand (except exports) is the same for all end-uses (the "proportionality assumption") \footnote{See http://www.oecd.org/sti/ind/49894138.pdf for details.}.\\
+The TiVA database relies on the so-called "import proportionality assumption". The domestic input-output tables show transactions between domestic industries. As a complement to these tables, supplementary tables break down total imports by user (industry and the different categories of final demand). Some countries provide these import tables in conjunction with their input-output tables, but in other cases they are derived by the OECD. Mexico and China benefit from a special treatment, but for the other countries the main assumption used is that the share of imports in any product consumed directly as intermediate consumption or final demand (except exports) is the same for all end-uses (the "proportionality assumption") \footnote{See \cite{OECDWTOnd} for details.}.\\
 Various studies have found that this assumption can be misleading, as import shares vary significantly across end-uses. \cite{Feenstra2012} find that shares of imported materials may differ substantially across U.S. industries. Based on Asian input-output tables, \cite{Puzzello2012} finds that the proportionality assumption understates the use of foreign intermediate inputs. It is likely to be particularly binding for developing countries, as the import content of exports is usually higher than the import content of products used for domestic consumption.\\
 To address this issue, the WIOD database uses bilateral trade statistics to derive import shares for three end-use categories (intermediate use, final consumption and investment) by mapping detailed six-digit products international trade statistics based on product descriptions \citep{Dietzenbacher2013}.\\
-To sum up, the WIOD includes information on bilateral industry-specific input use, whereas such information exists only in imputed form in TiVA. Therefore, we focus on the WIOD database in our analysis \footnote{Results obtained with the TiVA database are available on request.}. 
+To sum up, the WIOD includes information on bilateral industry-specific input use, whereas such information exists only in imputed form in TiVA. Therefore, we focus on the WIOD database in our analysis \footnote{Results obtained with the 2016 and 2018 TiVA databases are available upon request.}. 
 
 
 \subsection{Nominal exchange rate shock}
@@ -363,7 +376,10 @@ In contrast, this paper focuses on the internal effect of an exchange rate shock
 \end{aligned}
 \end{equation}
 Where $\hat{C}^i_\$=\left(0 \ldots \frac{c_\$^i}{1+c_\$^i},\ldots 0 \right)$ is the increase in dollar prices of goods from country $i$ used as inputs in all other countries.\\ 
-$S^i$ represents the overall impact of a shock on prices in each sector of each country expressed in the shocked currency. To transform this number in an average price index, $\bar{s}^i$, we need to compute a weighted average of the sectoral effects of the shock. This paper focuses on the price of household consumption. Let $HC^i$ be the vector of sectoral shares in country $i$'s consumption :
+$S^i$ represents the overall impact of a shock on prices in each sector of each country expressed in the shocked currency.
+It is quite different from $S$ defined in eq. \eqref{eq:eqchocprix}, because in the case of $S$, the price shock affects all users, whereas in the case of $S^i$, the price shock affects only users that do not share a currency with country $i$. To illustrate the difference, the two country, one sector case is explored in Appendix 1.
+
+To transform this vector in a price level shock in country $i$, $\bar{s}^i$, we need to compute a weighted average of the sectoral effects of the shock. This paper focuses on the price of household consumption. Let $HC^i$ be the vector of sectoral shares in country $i$'s consumption :
 \begin{eqnarray*}
 HC^i=\left( 
 	\begin{array}{c}
@@ -811,7 +827,7 @@ Real integration through the supply chain matters for domestic price dynamics in
 \newpage
 \bibliography{PapiertransmissiondeschocsenVA}
 \newpage
-\appendix{Appendix}
+\appendix{WIOD Sectors}
 \begin{table}[!h]
  \centering
  \caption{\footnotesize{\textbf{Industries in WIOD}}}
@@ -877,4 +893,84 @@ Real integration through the supply chain matters for domestic price dynamics in
   	\end{tabular}
 \label{tab:wiodindustries}
 \end{table}
+
+\appendix{Contrasting $S$ and $S^i$ in the two-country, one sector case}
+\subsection{Evolution of VA price}
+\begin{gather*}
+\cal {A} = \left(\begin{matrix}a_{1,1}&a_{1,2}\\a_{2,1}&a_{2,2}\end{matrix}\right)
+\\
+I-\cal {A}=\left(\begin{matrix}1-a_{1,1}&-a_{1,2}\\-a_{2,1}&1-a_{2,2}\end{matrix}\right)
+\\
+\left(I-\cal {A}\right)^{-1}=\frac{1}{\left(1-a_{1,1}\right)\left(1-a_{2,2}\right)-a_{2,1}a_{1,2}}\left(\begin{matrix}1-a_{2,2}&a_{1,2}\\a_{2,1}&1-a_{1,1}\end{matrix}\right) =z.\left(\begin{matrix}1-a_{2,2}&a_{1,2}\\a_{2,1}&1-a_{1,1}\end{matrix}\right) \\ 
+=\left(\begin{matrix}u&v\\w&x\end{matrix}\right)
+\\
+\text{French demand shares}=d=\left(\begin{matrix}1-f\\f\end{matrix}\right) \\
+\left(I-\cal {A}\right)^{-1}d=\left(\begin{matrix}u-uf+vf\\w-wf+xf\end{matrix}\right)
+\end{gather*}
+
+Donc, en cas de choc $c$ pour le prix de la va dans le pays étranger (en monnaie française), on peut écrire un vecteur de choc : $C=\left(0,c\right)$.  les prix varient tout d'abord de  $C\cal {A}$, puis $C\cal {A}^2$, etc. Donc le vecteur de choc $S$ (en monnaie française) est : 
+
+
+\begin{equation*}
+S=C+C\cal {A}+C\cal {A}^2...=C(I-\cal {A})^{-1}=\left(\begin{matrix}cw  &   cx\end{matrix}\right)
+\end{equation*}
+
+To measure the effect on French consumption prices, we do a weighted sum of these effects.
+
+\begin{equation}
+\bar{s}=c.\left[\left(1-f\right)w+xf\right]=c.\frac{\left(1-f\right)a_{2,1}+f\left(1-a_{1,1}\right)}{\left(1-a_{1,1}\right)\left(1-a_{2,2}\right)-a_{2,1}a_{1,2}}
+\end{equation}
+
+If each nation's production only uses national inputs, we have a plausible :
+\begin{equation*}
+\bar{s}=c.\frac{f}{1-a_{2,2}}
+\end{equation*}
+
+\subsection{Exchange rate shock}
+
+Using the notations in the paper...
+
+\begin{gather*}
+C=\left(0,\frac{-c_\$}{1+c_\$}\right)=\left(0,-c\right)
+\\
+C_\$=\left(c_\$,0\right)
+\\
+\tilde{C}_\$=\left(0,-c_\$\right)
+\\
+\hat{C}_\$=\left(\frac{c_\$}{1+c_\$},0\right)=\left(c,0\right)
+\\
+\cal B = \left(\begin{matrix}0&a_{1,2}\\0&0\end{matrix}\right)
+\\
+\tilde{\cal B} = \left(\begin{matrix}0&0\\a_{2,1}&0\end{matrix}\right)
+\end{gather*}
+
+Hence
+
+\begin{gather*}
+S =\left(0,c\right)+\left[\left(0,-c.a_{1,2}\right)+\left(c.a_{2,1},0\right)\right]*\left(\begin{matrix}u&v\\w&x\end{matrix}\right)
+\\
+=\left(0,c\right)+\left(c.a_{2,1},-c.a_{1,2}\right)*\left(\begin{matrix}u&v\\w&x\end{matrix}\right)
+\\
+=\left(0,c\right)+\left(u.c.a_{2,1}-w.c.a_{1,2},v.c.a_{2,1}-x.c.a_{1,2}\right)
+\\
+=\left(u.c.a_{2,1}-w.c.a_{1,2},c+v.c.a_{2,1}-x.c.a_{1,2}\right)
+\end{gather*}
+and
+\begin{gather*}
+\bar{s}=\left(u.c.a_{2,1}-w.c.a_{1,2},c+v.c.a_{2,1}-x.c.a_{1,2}\right).\left(\begin{matrix}1-f\\f\end{matrix}\right)
+\\
+\bar{s}=c\left[f\left(1+v.a_{2,1}-x.a_{1,2}\right)+\left(1-f\right)\left(u.a_{2,1}-w.a_{1,2}\right)\right]
+\end{gather*}
+
+
+If each nation's production only uses national inputs, we have a plausible
+
+\begin{gather*}
+\bar{s}=c.f
+\end{gather*}
+
+This seems to confirm that the exchange rate shock is not the same as the VA price shock.
+
+
+
 \end{document}

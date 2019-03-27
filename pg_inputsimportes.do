@@ -9,14 +9,8 @@ if ("`c(hostname)'" == "widv269a") global dir  "D:\home\T822289\CommerceVA"
 if ("`c(hostname)'" == "FP1376CD") global dir  "T:\CommerceVA" 
 
 if ("`c(username)'"=="guillaumedaudin") global dirgit "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation"
-if ("`c(hostname)'" == "widv269a") global dirgit  "D:\home\T822289\CommerceVA\GIT\commerce_va_inflation" 
-if ("`c(hostname)'" == "FP1376CD") global dirgit  "T:\CommerceVA\GIT\commerce_va_inflation" 
-
-
-if ("`c(username)'" == "guillaumedaudin") use "$dir/BME.dta", clear
-if ("`c(hostname)'" == "widv269a") use  "D:\home\T822289\CommerceVA\Rédaction\Rédaction 2019\BME.dta" , clear
-if ("`c(hostname)'" == "FP1376CD") use  "T:\CommerceVA\Rédaction\Rédaction 2019\BME.dta" , clear
-
+if ("`c(hostname)'" == "widv269a") global dirgit  "D:\home\T822289\CommerceVA\GIT\commerce_VA_inflation" 
+if ("`c(hostname)'" == "FP1376CD") global dirgit  "T:\CommerceVA\GIT\commerce_VA_inflation" 
 
 
 capture log close
@@ -39,8 +33,8 @@ Definition_pays_secteur `source'
 use "$dir/Bases/`source'_ICIO_`yrs'.dta"
 if "`source'"=="TIVA" {
 	drop if v1 == "VA+TAXSUB" | v1 == "OUT"
-	gen pays=lower(substr(v1,1,3))
-	gen secteur = lower(substr(v1,5,.))
+	gen pays=upper(substr(v1,1,3))
+	gen secteur = upper(substr(v1,5,.))
 	order pays secteur
 }
 
@@ -79,26 +73,26 @@ foreach var of varlist $var_entree_sortie {
 	replace `var' = 0 if pays=="`pays_colonne'"
 	
 	
-	if strpos(lower("$china"),lower("`pays_colonne'"))!=0  {
+	if strpos(upper("$china"),upper("`pays_colonne'"))!=0  {
 			foreach i of global china {	
-			replace `var' = 0 if lower(pays) == lower("`i'")
+			replace `var' = 0 if upper(pays) == upper("`i'")
 		}
 	}
 	
 	
-	if strpos(lower("$mexique"),lower("`pays_colonne'"))!=0 {
+	if strpos(upper("$mexique"),upper("`pays_colonne'"))!=0 {
 			foreach i of global mexique {	
-			replace `var' = 0 if lower(pays) == lower("`i'")
+			replace `var' = 0 if upper(pays) == upper("`i'")
 		}
 	}
 		
-	if "`hze'"=="hze_yes" & strpos(lower("$eurozone"),lower("`pays_colonne'"))!=0 {
+	if "`hze'"=="hze_yes" & strpos(upper("$eurozone"),upper("`pays_colonne'"))!=0 {
 	
 		*display "turf"
 	
 	*Et les internes dans la zone euro
 		foreach i of global eurozone {	
-			replace `var' = 0 if lower(pays) == lower("`i'")		
+			replace `var' = 0 if upper(pays) == upper("`i'")		
 		}
 	}
 	display "`hze' -- `pays_colonne'" 
@@ -138,15 +132,14 @@ if "`source'"=="WIOD" {
 merge 1:1 _n using "$dir/Bases/csv_`source'.dta"
 rename c pays
 rename s sector
-replace sector = lower(sector)
-replace pays=lower(pays)
+replace sector = upper(sector)
+replace pays=upper(pays)
 drop p_shock
 drop _merge
  
 *}
 save "$dir/Bases/imp_inputs_par_sect_`yrs'_`source'_`hze'.dta", replace
 * enregistrement des ratio de CI importés par secteur
-
 end
 
 
@@ -170,9 +163,7 @@ capture program drop imp_inputs // fournit le total des inputs importés par cha
 program imp_inputs
 args yrs source vector hze
 
-if ("`c(username)'"=="guillaumedaudin") do  "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation/Definition_pays_secteur.do" `source'
-if ("`c(username)'"=="w817186") do "X:\Agents\FAUBERT\commerce_VA_inflation\Definition_pays_secteur.do" `source'
-if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\Definition_pays_secteur.do" `source'
+do  "$dirgit/Definition_pays_secteur.do" `source'
 
 *Création d'un agrégat national pour Chine et Mexique pour ci importées et production 
 *La part des CI importées est à présent calculée pour l'ensemble de l'économie, et non plus par secteurs
@@ -182,8 +173,8 @@ if "`vector'" == "Y" {
 
 	if "`source'"=="TIVA" | "`source'"=="TIVA_REV4" {
 		gen pays_1 = pays
-		replace pays = "chn" if pays_1=="cn1" | pays_1=="cn2" | pays_1=="cn3" | pays_1=="cn4" 
-		replace pays = "mex" if pays_1=="mx1" | pays_1=="mx2" | pays_1=="mx3"
+		replace pays = "CHN" if pays=="CN1" | pays=="CN2" | pays=="CN3" | pays=="CN4" 
+		replace pays = "MEX" if pays=="MX1" | pays=="MX2" | pays=="MX3"
 		collapse (sum) ci_impt prod, by(pays sector)
 	}
 	
@@ -200,8 +191,8 @@ if "`vector'" == "HC"  {
 	
 	if "`source'"=="TIVA" | "`source'"=="TIVA_REV4" {
 		use  "$dir/Bases/imp_inputs_par_sect_`yrs'_`source'_`hze'.dta", replace
-		replace pays = "chn" if pays=="cn1" | pays=="cn2" | pays=="cn3" | pays=="cn4" 
-		replace pays = "mex" if pays=="mx1" | pays=="mx2" | pays=="mx3"
+		replace pays = "CHN" if pays=="CN1" | pays=="CN2" | pays=="CN3" | pays=="CN4" 
+		replace pays = "MEX" if pays=="MX1" | pays=="MX2" | pays=="MX3"
 		collapse (sum) ci_impt prod, by(pays sector)
 		generate ratio_ci_impt_prod=ci_impt / prod
 		save "$dir/Bases/imp_inputs_par_sect_modif.dta", replace
@@ -209,10 +200,10 @@ if "`vector'" == "HC"  {
 	
 
 	use "$dir/Bases/HC_`source'.dta", clear
-	replace pays=lower(pays)
+	replace pays=upper(pays)
 	if "`source'"=="TIVA" | "`source'"=="TIVA_REV4" {
-		replace pays = "chn" if pays=="cn1" | pays=="cn2" | pays=="cn3" | pays=="cn4" 
-		replace pays = "mex" if pays=="mx1" | pays=="mx2" | pays=="mx3"
+		replace pays = "CHN" if pays=="CN1" | pays=="CN2" | pays=="CN3" | pays=="CN4" 
+		replace pays = "MEX" if pays=="MX1" | pays=="MX2" | pays=="MX3"
 		collapse (sum) conso, by(pays pays_conso year sector)
 	}
 	
@@ -256,7 +247,7 @@ if "`vector'" == "X"  {
  
 	keep if year==`yrs'
 	
-	replace sector=lower(sector)
+	replace sector=upper(sector)
 	
 	merge 1:1 pays sector using  "$dir/Bases/imp_inputs_par_sect_`yrs'_`source'_`hze'.dta"
 	
@@ -264,11 +255,12 @@ if "`vector'" == "X"  {
 	drop _merge
 	
 	gen ci_impt_X = ratio_ci_impt_prod * X
+	replace pays=upper(pays)
 	
 	if "`source'"=="TIVA" | "`source'"=="TIVA_REV4"{
-		replace pays = "chn" if pays=="cn1" | pays=="cn2" | pays=="cn3" | pays=="cn4" 
-		replace pays = "mex" if pays=="mx1" | pays=="mx2" | pays=="mx3"
-
+		replace pays = "CHN" if pays=="CN1" | pays=="CN2" | pays=="CN3" | pays=="CN4" 
+		replace pays = "MEX" if pays=="MX1" | pays=="MX2" | pays=="MX3"
+		
 	}
 	
 	collapse (sum) ci_impt_X X, by(pays)
@@ -288,9 +280,7 @@ end
 
 **pOUR TEST
 
-if ("`c(username)'"=="guillaumedaudin") do  "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation/Definition_pays_secteur.do" WIOD
-if ("`c(username)'"=="w817186") do "X:\Agents\FAUBERT\commerce_VA_inflation\Definition_pays_secteur.do" WIOD
-if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\Definition_pays_secteur.do" WIOD
+
 /*
 *imp_inputs_par_sect 2000 WIOD hze_not
 
@@ -304,7 +294,7 @@ if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\De
 
 */
 
-/* COMMENTE POUR TEST
+
 
 *foreach source in WIOD {
 foreach source in /*  TIVA  WIOD */  TIVA_REV4 {

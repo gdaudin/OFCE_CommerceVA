@@ -137,7 +137,7 @@ foreach source in  /* WIOD*/ TIVA /*TIVA_REV4*/ {
 		table_mean `end_year' `j' 1 `source' S
 	   }
 
-    }
+ 
 	
 
 	if "`source'"=="TIVA_REV4"	{

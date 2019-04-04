@@ -1,6 +1,7 @@
 *AL, reprise HC
 *01/2019
 *Importer les données de BMEs cxd/ert
+*Importer BMEs pétrole 30,55,85,115
 ********************************************************************
 
 capture program drop essai
@@ -14,6 +15,86 @@ clear
 if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
 if ("`c(hostname)'" == "widv269a") global dir  "D:\home\T822289\CommerceVA" 
 if ("`c(hostname)'" == "FP1376CD") global dir  "T:\CommerceVA" 
+
+*Choc de 10% pétrole 35
+
+if "`type2'_`yrs2'" == "OE1_2019" {
+	import excel using "$dir\Bases_Sources\BMEs\Direct_Impact-OE1-02_Jan_2019.xlsx", sheet("CTRY") cellrange(C9:N30) firstrow clear
+	rename C pays 
+	rename K BME_1
+	rename L BME_gr_2
+	rename M BME_gr_3
+	rename N BME_gr_4
+	generate BME_3 = ((1+(BME_1/100))*(1+(BME_gr_2/100))*(1+(BME_gr_3/100))-1)*100
+	generate BME_4 = ((1+(BME_1/100))*(1+(BME_gr_2/100))*(1+(BME_gr_3/100))*(1+(BME_gr_4/100))-1)*100
+	drop D E F G H I J  
+	drop BME_gr_2
+	drop BME_gr_3
+	drop BME_gr_4
+	drop if BME_1 ==.
+}
+
+*Choc de 10% pétrole 55
+
+if "`type2'_`yrs2'" == "OE2_2019" {
+	import excel using "$dir\Bases_Sources\BMEs\Direct_Impact-OE2-02_Jan_2019.xlsx", sheet("CTRY") cellrange(C9:N30) firstrow clear
+	rename C pays 
+	rename K BME_1
+	rename L BME_gr_2
+	rename M BME_gr_3
+	rename N BME_gr_4
+	generate BME_3 = ((1+(BME_1/100))*(1+(BME_gr_2/100))*(1+(BME_gr_3/100))-1)*100
+	generate BME_4 = ((1+(BME_1/100))*(1+(BME_gr_2/100))*(1+(BME_gr_3/100))*(1+(BME_gr_4/100))-1)*100
+	drop D E F G H I J  
+	drop BME_gr_2
+	drop BME_gr_3
+	drop BME_gr_4
+	drop if BME_1 ==.
+}
+
+*Choc de 10% pétrole 85
+
+if "`type2'_`yrs2'" == "OE3_2019" {
+	import excel using "$dir\Bases_Sources\BMEs\Direct_Impact-OE3-02_Jan_2019.xlsx", sheet("CTRY") cellrange(C9:N30) firstrow clear
+	rename C pays 
+	rename K BME_1
+	rename L BME_gr_2
+	rename M BME_gr_3
+	rename N BME_gr_4
+	generate BME_3 = ((1+(BME_1/100))*(1+(BME_gr_2/100))*(1+(BME_gr_3/100))-1)*100
+	generate BME_4 = ((1+(BME_1/100))*(1+(BME_gr_2/100))*(1+(BME_gr_3/100))*(1+(BME_gr_4/100))-1)*100
+	drop D E F G H I J  
+	drop BME_gr_2
+	drop BME_gr_3
+	drop BME_gr_4
+	drop if BME_1 ==.
+}
+
+*Choc de 10% pétrole 115
+*NOTE : POUR LA GRECE, on REMPLACE LES NAS PAR DES "."
+
+if "`type2'_`yrs2'" == "OE4_2019" {
+	import excel using "$dir\Bases_Sources\BMEs\Direct_Impact-OE4-02_Jan_2019.xlsx", sheet("CTRY") cellrange(C9:N30) firstrow clear allstring
+	drop D E F G H I J  
+
+	rename C pays 
+	rename K BME_1
+	rename L BME_gr_2
+	rename M BME_gr_3
+	rename N BME_gr_4
+	foreach variable of var BME_* {
+		replace `variable' = "." if `variable' == "NaN"
+		destring `variable' , replace float
+	}
+	generate BME_3 = ((1+(BME_1/100))*(1+(BME_gr_2/100))*(1+(BME_gr_3/100))-1)*100
+	generate BME_4 = ((1+(BME_1/100))*(1+(BME_gr_2/100))*(1+(BME_gr_3/100))*(1+(BME_gr_4/100))-1)*100
+	drop BME_gr_2
+	drop BME_gr_3
+	drop BME_gr_4
+	drop if BME_1 ==.
+}
+
+
 
 
 *choc de 1% CXD
@@ -153,7 +234,7 @@ end
 
 
 local num_fich=0
-foreach type in ERT CXD  {
+foreach type in ERT CXD OE1 OE2 OE3 OE4{
 	foreach yrs of numlist 2018 2019 {
 		essai "`type'" "`yrs'"
 		local num_fich=`num_fich'+1

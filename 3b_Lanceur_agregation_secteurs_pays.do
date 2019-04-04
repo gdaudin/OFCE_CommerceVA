@@ -12,7 +12,14 @@ set more off
 
 if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
 if ("`c(hostname)'" == "widv269a") global dir  "D:\home\T822289\CommerceVA" 
-else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
+if ("`c(hostname)'" == "FP1376CD") global dir  "T:\CommerceVA" 
+
+
+if ("`c(username)'"=="guillaumedaudin") global dirgit "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation"
+if ("`c(hostname)'" == "widv269a") global dirgit  "D:\home\T822289\CommerceVA\GIT\commerce_VA_inflation" 
+if ("`c(hostname)'" == "FP1376CD") global dirgit  "T:\CommerceVA\GIT\commerce_va_inflation" 
+
+
 
 capture log  using "$dir/Temporaire/$S_DATE.log", replace
 *log using "$dir/$S_DATE.log", replace
@@ -21,8 +28,8 @@ set matsize 7000
 set more off
 cd $dir 
 
-do GIT/commerce_va_inflation/Definition_pays_secteur.do   
-do GIT/commerce_va_inflation/Aggregation_effets_des_chocs_secteurs_pays.do   
+do "$dirgit/Definition_pays_secteur.do"  
+do "$dirgit/Aggregation_effets_des_chocs_secteurs_pays.do"   
 
 
 *--------------------------------------------------------------------------------
@@ -33,15 +40,17 @@ set more off
 
 
 *foreach source in   TIVA { 
-foreach source in  WIOD TIVA { 
+foreach source in  /*WIOD TIVA*/ TIVA_REV4 { 
 
 	Definition_pays_secteur `source'
 	if "`source'"=="WIOD" local start_year 2000
 	if "`source'"=="TIVA" local start_year 1995
+	if "`source'"=="TIVA_REV4" local start_year 2005
 
 
 	if "`source'"=="WIOD" local end_year 2014
 	if "`source'"=="TIVA" local end_year 2011
+	if "`source'"=="TIVA_REV4" local end_year 2015
 
 	
 	// Fabrication des fichiers d'effets moyens des chocs de change

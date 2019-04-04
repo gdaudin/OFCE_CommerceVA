@@ -15,35 +15,46 @@ set more off
 *****Mettre global test =1 provoquera la sauvegarde de plein de matrices / vecteurs 
 global test = 1
 *******Définition du directory
+
 if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
-else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
+if ("`c(hostname)'" == "widv269a") global dir  "D:\home\T822289\CommerceVA" 
+if ("`c(hostname)'" == "FP1376CD") global dir  "T:\CommerceVA" 
+
+
+if ("`c(username)'"=="guillaumedaudin") global dirgit "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation"
+if ("`c(hostname)'" == "widv269a") global dirgit  "D:\home\T822289\CommerceVA\GIT\commerce_VA_inflation" 
+if ("`c(hostname)'" == "FP1376CD") global dirgit  "T:\CommerceVA\GIT\commerce_va_inflation" 
+
 
 capture log using "$dir/Temporaire/$S_DATE.log", replace
 set matsize 7000
 *set mem 700m if earlier version of stata (<stata 12)
 set more off
 
-cd $dir 
+cd $dir  
 
 ******Définition des Pays et des secteurs ********************
 **On le lance pour mettre à jour les macros (en mémoire)
-do GIT/commerce_va_inflation/Definition_pays_secteur.do   
+do "$dirgit/Definition_pays_secteur.do"   
 
 
 **local nbr_sect=wordcount("$sector")	
-do GIT/commerce_va_inflation/choc_secteurs_pays.do
+do "$dirgit/choc_secteurs_pays.do"
 
 *foreach source in   WIOD { 
-foreach source in   WIOD TIVA { 
+foreach source in   /* WIOD TIVA */ TIVA_REV4 { 
 
 
 	if "`source'"=="WIOD" local start_year 2000
 	if "`source'"=="TIVA" local start_year 1995
+	if "`source'"=="TIVA_REV4" local start_year 2005
 
 
 	if "`source'"=="WIOD" local end_year 2014
 	if "`source'"=="TIVA" local end_year 2011
+	if "`source'"=="TIVA_REV4" local end_year 2015
 
+	
 	Definition_pays_secteur `source'
 
 *   foreach i of numlist 2011 {

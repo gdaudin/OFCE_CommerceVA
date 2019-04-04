@@ -17,6 +17,8 @@ use "$dir/Bases/csv_`source'.dta", clear
 
 	if "`source'"=="WIOD" replace p_shock = `shk' if s == "B"
 	if "`source'"=="TIVA" replace p_shock = `shk' if s == "C10T14"
+	if "`source'"=="TIVA_REV4" replace p_shock = `shk' if s == "05T06"
+
 	
 	*I extract vector p_shock from database with mkmat (Ci)
 mkmat p_shock, matrix(cit)

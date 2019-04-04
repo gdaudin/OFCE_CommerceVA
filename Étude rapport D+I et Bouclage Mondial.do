@@ -159,15 +159,14 @@ generate c=upper(pays)
 			(lfit E1HC_E2HC E1HC_E2HC,lwidth(vthin) color(black)) , ///
 			xtitle("Impact D+I, en %", /*size(vsmall) */) ///
 			ytitle("Impact PIWIM, en %") ///
-			yscale(range(-0.75  -0.25)) xscale(range(-0.75  -0.25)) xlabel(-0.75 (0.25) -0.25) ylabel(-0.75  (0.25) -0.25) ///
+			yscale(range(-1  -0.25)) xscale(range(-1  -0.25)) xlabel(-1 (0.25) -0.25,format(%9.2fc)) ylabel(-1  (0.25) -0.25,format(%9.2fc)) ///
 			legend(off) ///
-			ylabel(,format(%9.2fc)) ///
 			note("PIWIM (`source', `year')")
 	*dans le cas HC, xtitle pourrait se finir par «importées dans la conso dom + part conso importée»			
 	
-blink
+
 	
-	graph export "$dirgit/Rédaction_note/Rapport_D+I_bouclé_pour_note.png", replace
+	graph export "$dirgit/Rédaction_note/Rapport_D+I_bouclé_pour_note_`source'_`year'.png", replace
 	
 	graph close
 	

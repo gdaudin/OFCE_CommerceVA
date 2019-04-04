@@ -104,7 +104,6 @@ foreach var of varlist $var_entree_sortie {
 	
 	display "`hze' -- `pays_colonne'" 
 }
-blink
 
 
 

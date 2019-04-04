@@ -60,7 +60,7 @@ foreach yrs of numlist 2018 2019 {
 *		(lfit BME_1 pond_`source'_HC if year == `yrs' & type == "`type'", range(`scale1')) ///
 graph combine  BME_1_vs_2018 BME_1_vs_2019
 graph save "$dir/Results/BME_1_vs_`source'_`type'.gph",  replace 
-graph export "$dir/Results/BME_1_vs_`source'_`type'.pdf",  replace 
+graph export "$dir/Results/BME_1_vs_`source'_`type'.png",  replace 
 
 
 format %14.2f pond_`source'_HC BME_3
@@ -81,7 +81,7 @@ foreach yrs of numlist 2018 2019 {
 
 graph combine  BME_3_vs_2018 BME_3_vs_2019 
 graph save "$dir/Results/BME_3_vs_`source'_`type'.gph",  replace 
-graph export "$dir/Results/BME_3_vs_`source'`type'.pdf",  replace 
+graph export "$dir/Results/BME_3_vs_`source'`type'.png",  replace 
 
 end
 compar_bme 2015 TIVA_REV4 ERT 

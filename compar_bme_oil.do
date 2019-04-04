@@ -1,0 +1,92 @@
+
+if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
+if ("`c(hostname)'" == "widv269a") global dir  "D:\home\T822289\CommerceVA" 
+if ("`c(hostname)'" == "FP1376CD") global dir  "T:\CommerceVA" 
+
+
+if ("`c(username)'" == "guillaumedaudin") use "$dir/BME.dta", clear
+if ("`c(hostname)'" == "widv269a") use  "D:\home\T822289\CommerceVA\Rédaction\Rédaction 2019\BME.dta" , clear
+if ("`c(hostname)'" == "FP1376CD") use  "T:\CommerceVA\Rédaction\Rédaction 2019\BME.dta" , clear
+
+drop if type == "ERT" | type == "CXD" 
+drop clef_CXD
+
+
+
+*On ajuste le choc à 10€ pour OE 1 
+replace BME_1 = BME_1*(10/3) if type=="OE1" 
+replace BME_3 = BME_3*(10/3) if type=="OE1" 
+replace BME_4 = BME_4*(10/3) if type=="OE1" 
+
+*On ajuste le choc à 10€ pour OE 2 
+replace BME_1 = BME_1*(10/5.5) if type=="OE2" 
+replace BME_3 = BME_3*(10/5.5) if type=="OE2" 
+replace BME_4 = BME_4*(10/5.5) if type=="OE2" 
+
+*On ajuste le choc à 10€ pour OE 3 
+replace BME_1 = BME_1*(10/8.5) if type=="OE3"
+replace BME_3 = BME_3*(10/8.5) if type=="OE3" 
+replace BME_4 = BME_4*(10/8.5) if type=="OE3" 
+
+*On ajuste le choc à 10€ pour 4  
+replace BME_1 = BME_1*(10/11.5) if type=="OE4" 
+replace BME_3 = BME_3*(10/11.5) if type=="OE4" 
+replace BME_4 = BME_4*(10/11.5) if type=="OE4" 
+
+
+capture program drop compar_bme
+program compar_bme
+args year source 
+
+merge m:1 c using "$dir/Results/secteurs_pays/mean_chg_`source'_HC_`year'.dta"
+
+rename c pays
+
+*on met le choc de change à 10€
+
+if `year' == 2015 replace shock1 = shock1*100*(10/47.22)
+
+blink
+foreach yrs of numlist 2018 2019 {
+	/*regress BME pond_WIOD_HC if year == `yrs'*/
+	/*twoway (scatter BME pond_WIOD_HC if year == `yrs', mlabel(c)) (lfit BME pond_WIOD_HC) if year == `yrs', name(BME_vs_WIOD_`yrs', replace)
+	graph save "$dir/Graphiques/BME_vs_WIOD_`yrs'.gph",  replace
+	*/
+	twoway (scatter BME_1 pond_`source'_HC if year == `yrs' & type == "`type'", mlabel(c)) ///
+		(lfit pond_`source'_HC pond_`source'_HC, range(`scale1')) if year == `yrs', ///
+		ytitle("impact en % BMEs `yrs' (1ere année)") yscale(range(`scale1')) ylabel(`scale2', grid) /// 
+		xtitle("impact en % PIWIM `year' ,`source'") xscale(range(`scale1')) xlabel(`scale2', grid) legend(off) name(BME_1_vs_`yrs', replace) ///
+		note("`note'") 
+}
+
+
+*		(lfit BME_1 pond_`source'_HC if year == `yrs' & type == "`type'", range(`scale1')) ///
+graph combine  BME_1_vs_2018 BME_1_vs_2019
+graph save "$dir/Results/BME_1_vs_`source'_`type'.gph",  replace 
+graph export "$dir/Results/BME_1_vs_`source'_`type'.png",  replace 
+
+
+format %14.2f pond_`source'_HC BME_3
+foreach yrs of numlist 2018 2019 {
+	/*regress BME pond_WIOD_HC if year == `yrs'*/
+	/*twoway (scatter BME pond_WIOD_HC if year == `yrs', mlabel(c)) (lfit BME pond_WIOD_HC) if year == `yrs', name(BME_vs_WIOD_`yrs', replace)
+	graph save "$dir/Graphiques/BME_vs_WIOD_`yrs'.gph",  replace
+	*/
+	twoway (scatter BME_3 pond_`source'_HC if year == `yrs' & type == "`type'", mlabel(c)) ///
+	(lfit pond_`source'_HC pond_`source'_HC, range(`scale1')) if year == `yrs', ///
+		ytitle("impact en % BMEs `yrs' (3e année)") yscale(range(`scale1')) ylabel(`scale2', grid) /// 
+		xtitle("impact en % PIWIM `year', `source'") xscale(range(`scale1')) xlabel(`scale2', grid) legend(off) name(BME_3_vs_`yrs', replace) ///
+		note("`note'")
+
+* 	(lfit BME_3 pond_`source'_HC if year == `yrs' & type == "`type'", range(`scale1')) ///
+
+}
+
+graph combine  BME_3_vs_2018 BME_3_vs_2019 
+graph save "$dir/Results/BME_3_vs_`source'_`type'.gph",  replace 
+graph export "$dir/Results/BME_3_vs_`source'`type'.png",  replace 
+
+end
+compar_bme 2015 TIVA_REV4 
+
+

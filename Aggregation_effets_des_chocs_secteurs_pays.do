@@ -129,6 +129,9 @@ if strpos("`wgt'","HC")!=0  {
 		
 			if strpos("`wgt'","`sector'")!=0	replace sector_shock_`pays_conso'= 0 if agregat_secteur!="`sector'"
 		}
+		foreach sector in $sector {
+			if strpos("`wgt'","`sector'")!=0	replace sector_shock_`pays_conso'= 0 if s!="`sector'"
+		}
 		if strpos("`wgt'","imp")!=0 replace  sector_shock_`pays_conso'= 0 if upper("`pays_conso'")==c
 		if strpos("`wgt'","dom")!=0 replace  sector_shock_`pays_conso'= 0 if upper("`pays_conso'")!=c
         egen shock_`pays_conso' = total(sector_shock_`pays_conso')

@@ -34,9 +34,9 @@ set more off
 
 capture program drop composants_HC
 program composants_HC
-args yrs source nature_choc
+args yrs source nature_choc agregation
 *pour nature_choc, il s'agit du change (chge) ou du pétrole (oil)
-
+*agregation = oui pour 4 secteurs ; non pour avoir l'ensemble des secteurs
 
 
 do "$dirgit/Definition_pays_secteur.do"   
@@ -61,15 +61,22 @@ replace origine = "dom" if lower(c)==lower(pays) | ///
 		c=="CHN" & strpos("$china",pays)!=0
 
 
-collapse (sum) conso, by(agregat_secteur origine c)
+if "`agregation'" == "oui" { 
+	collapse (sum) conso, by(agregat_secteur origine c) 
+	rename agregat_secteur s 
+}
+if "`agregation'" == "non" { 
+	collapse (sum) conso, by(s origine c) 
+}
+
 egen conso_tot = total(conso), by(c)
 sort c
 gen share = conso/conso_tot
-keep c agregat_secteur origine share
+keep c s origine share
 
-replace agregat_secteur = agregat_secteur + "_" + origine
+replace s = s + "_" + origine
 drop origine
-reshape wide share, i(c) j(agregat_secteur) string
+reshape wide share, i(c) j(s) string
 rename share* s_*
 egen s_HC_impt=rowtotal(s*impt)
 egen s_HC_dom=rowtotal(s*dom)
@@ -85,11 +92,11 @@ drop if strpos("$eurozone",c)==0 & duplicate==1
 replace c = c+"_EUR" if strpos("$eurozone",c)!=0 & duplicate==1
 drop duplicate
 
-export excel using "$dir/Results/Devaluations/decomp_`source'_HC_`yrs'.xls", firstrow(variables) replace
-save "$dir/Results/Devaluations/decomp_`source'_HC_`yrs'.dta", replace
+export excel using "$dir/Results/Devaluations/decomp_`source'_HC_`yrs'_agreg_`agregation'.xls", firstrow(variables) replace
+save "$dir/Results/Devaluations/decomp_`source'_HC_`yrs'_agreg_`agregation'.dta", replace
 
-export excel using "$dir/Results/secteurs_pays/decomp_`source'_HC_`yrs'.xls", firstrow(variables) replace
-save "$dir/Results/secteurs_pays/decomp_`source'_HC_`yrs'.dta", replace
+export excel using "$dir/Results/secteurs_pays/decomp_`source'_HC_`yrs'_`agregation'.xls", firstrow(variables) replace
+save "$dir/Results/secteurs_pays/decomp_`source'_HC_`yrs'_agreg_`agregation'.dta", replace
 
 
 
@@ -97,9 +104,11 @@ save "$dir/Results/secteurs_pays/decomp_`source'_HC_`yrs'.dta", replace
 *****Ici, nous avons les parts sectorielles importées / domestiques calculées pour tous les pays. 
 *****Pour le choc euro, la part ne change importée / domestique ne change pas. Les importées sont alors tous les biens venant d'autres pays.
 
+if "`agregation'" == "oui"  local liste_secteurs energie alimentaire neig services
+if "`agregation'" == "non"  local liste_secteurs "$sector"
 
 foreach origine in dom impt {
-	foreach sector in energie alimentaire neig services {
+	foreach sector in `liste_secteurs' {
 		if "`nature_choc'" == "chge" {
 			foreach euro in no_ze ze {				
 				local wgt `sector'_`origine'
@@ -108,40 +117,40 @@ foreach origine in dom impt {
 				**Cela cela donne l'effet sur les prix d'un secteur particulir du choc de change
 				** on peut donc ensuite le multiplier par l'importance du secteur
 
-				gen `sector'_`origine'=.
+				gen sect_`sector'_`origine'=.
 				foreach pays of global country_hc {
 					if "`euro'"=="no_ze" {
-						replace `sector'_`origine' = shock`pays'1 if c=="`pays'"
+						replace sect_`sector'_`origine' = shock`pays'1 if c=="`pays'"
 					}
 					if "`euro'"=="ze" & strmatch("$eurozone","*`pays'*")==1 {
-						replace `sector'_`origine' = shockEUR1 if c=="`pays'"
+						replace sect_`sector'_`origine' = shockEUR1 if c=="`pays'"
 						replace c="`pays'_EUR" if c=="`pays'"
 					}
 				}
 				if "`euro'"=="ze" keep if strpos(c,"_EUR")!=0
-				keep c `sector'_`origine'
+				keep c sect_`sector'_`origine'
 			
-				merge 1:1 c using   "$dir/Results/Devaluations/decomp_`source'_HC_`yrs'.dta
+				merge 1:1 c using   "$dir/Results/Devaluations/decomp_`source'_HC_`yrs'_agreg_`agregation'.dta"
 				drop _merge
-				save "$dir/Results/Devaluations/decomp_`source'_HC_`yrs'.dta", replace
+				save "$dir/Results/Devaluations/decomp_`source'_HC_`yrs'_agreg_`agregation'.dta", replace
 				local folder Devaluations
 			}
 		}
 		if "`nature_choc'" == "oil" {
 			local wgt `sector'_`origine'
 			use "$dir/Results/secteurs_pays/mean_chg_`source'_HC_`wgt'_`yrs'.dta", clear
-			gen `sector'_`origine'=.
-			replace `sector'_`origine' = shock1
-			keep c `sector'_`origine'
-			merge 1:1 c using   "$dir/Results/secteurs_pays/decomp_`source'_HC_`yrs'.dta
+			gen sect_`sector'_`origine'=.
+			replace sect_`sector'_`origine' = shock1
+			keep c sect_`sector'_`origine'
+			merge 1:1 c using   "$dir/Results/secteurs_pays/decomp_`source'_HC_`yrs'_agreg_`agregation'.dta"
 			drop _merge
-			save "$dir/Results/secteurs_pays/decomp_`source'_HC_`yrs'.dta", replace
+			save "$dir/Results/secteurs_pays/decomp_`source'_HC_`yrs'_agreg_`agregation'.dta", replace
 			local folder secteurs_pays
 		}
 	}
-	merge 1:1 c using   "$dir/Results/`folder'/decomp_`source'_HC_`yrs'.dta
+	merge 1:1 c using   "$dir/Results/`folder'/decomp_`source'_HC_`yrs'_agreg_`agregation'.dta"
 	drop _merge
-	save "$dir/Results/`folder'/decomp_`source'_HC_`yrs'.dta", replace	
+	save "$dir/Results/`folder'/decomp_`source'_HC_`yrs'_agreg_`agregation'.dta", replace	
 }
 
 	
@@ -149,34 +158,34 @@ foreach origine in dom impt {
 	if "`nature_choc'" == "chge" {
 		foreach euro in no_ze ze {		
 			use "$dir/Results/Devaluations/mean_chg_`source'_HC_`origine'_`yrs'_Sdollar.dta", clear
-			gen HC_`origine'=.
+			gen sect_HC_`origine'=.
 			foreach pays of global country_hc {
 				if "`euro'"=="no_ze" {
-						replace HC_`origine' = shock`pays'1 if c=="`pays'"
+						replace sect_HC_`origine' = shock`pays'1 if c=="`pays'"
 				}
 				if "`euro'"=="ze" & strmatch("$eurozone","*`pays'*")==1 {
-					replace HC_`origine' = shockEUR1 if c=="`pays'"
+					replace sect_HC_`origine' = shockEUR1 if c=="`pays'"
 					replace c="`pays'_EUR" if c=="`pays'"
 				}	
 			}
-			keep c HC_`origine'
+			keep c sect_HC_`origine'
 			if "`euro'"=="ze" keep if strpos(c,"_EUR")!=0
 
-			merge 1:1 c using   "$dir/Results/Devaluations/decomp_`source'_HC_`yrs'.dta
+			merge 1:1 c using   "$dir/Results/Devaluations/decomp_`source'_HC_`yrs'_agreg_`agregation'.dta"
 			drop _merge
-			save "$dir/Results/Devaluations/decomp_`source'_HC_`yrs'.dta", replace
+			save "$dir/Results/Devaluations/decomp_`source'_HC_`yrs'_agreg_`agregation'.dta", replace
 		}
 	}
 	if "`nature_choc'" == "oil" {
 		use "$dir/Results/secteurs_pays/mean_chg_`source'_HC_`wgt'_`yrs'.dta"
-		gen HC_`origine'=.
+		gen sect_HC_`origine'=.
 			foreach pays of global country_hc {
-				replace HC_`origine' = shock1
+				replace sect_HC_`origine' = shock1
 			}
-			keep c HC_`origine'
-			merge 1:1 c using   "$dir/Results/secteurs_pays/decomp_`source'_HC_`yrs'.dta
+			keep c sect_HC_`origine'
+			merge 1:1 c using   "$dir/Results/secteurs_pays/decomp_`source'_HC_`yrs'_agreg_`agregation'.dta"
 			drop _merge
-			save "$dir/Results/secteurs_pays/decomp_`source'_HC_`yrs'.dta", replace
+			save "$dir/Results/secteurs_pays/decomp_`source'_HC_`yrs'_agreg_`agregation'.dta", replace
 		}
 
 }
@@ -187,14 +196,14 @@ foreach origine in dom impt {
 **Passage en prix domestiques (et en négatif)
 
 foreach origine in dom impt {
-	foreach sector in HC energie alimentaire neig services {
-		replace `sector'_`origine' = -(1-`sector'_`origine'/s_`sector'_`origine')/2*s_`sector'_`origine'
+	foreach sector in HC `liste_secteurs' {
+		replace sect_`sector'_`origine' = -(1-sect_`sector'_`origine'/s_`sector'_`origine')/2*s_`sector'_`origine'
 	
 	}
 }
 
-if "`nature_choc'" == "chge" save "$dir/Results/Devaluations/decomp_`source'_HC_`yrs'.dta", replace
-if "`nature_choc'" == "oil" save "$dir/Results/secteurs_pays/decomp_`source'_HC_`yrs'.dta", replace
+if "`nature_choc'" == "chge" save "$dir/Results/Devaluations/decomp_`source'_HC_`yrs'_agreg_`agregation'.dta", replace
+if "`nature_choc'" == "oil" save "$dir/Results/secteurs_pays/decomp_`source'_HC_`yrs'_agreg_`agregation'.dta", replace
 
 
 end
@@ -216,8 +225,9 @@ foreach source in /* WIOD */  TIVA_REV4 {
 	*foreach i of numlist 2014  {
 
 	foreach i of numlist $start_year (1) $end_year  {
-		composants_HC `i' `source' oil
-		composants_HC `i' `source' chge
+		composants_HC `i' `source' oil oui
+		composants_HC `i' `source' oil non
+		composants_HC `i' `source' chge oui
 	}
 }
 

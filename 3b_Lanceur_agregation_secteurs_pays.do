@@ -45,7 +45,7 @@ foreach source in  /*WIOD TIVA*/ TIVA_REV4 {
 	Definition_pays_secteur `source'
 	if "`source'"=="WIOD" local start_year 2000
 	if "`source'"=="TIVA" local start_year 1995
-	if "`source'"=="TIVA_REV4" local start_year 2005
+	if "`source'"=="TIVA_REV4" local start_year 2015
 
 
 	if "`source'"=="WIOD" local end_year 2014
@@ -60,8 +60,15 @@ foreach source in  /*WIOD TIVA*/ TIVA_REV4 {
 	foreach i of numlist `start_year' (1)`end_year'  {
 		
 		local HC_fait 0
-    	foreach j in  HC X Y HC_neig_dom HC_alimentaire_dom HC_energie_dom HC_services_dom HC_dom ///
-					HC_neig_impt HC_alimentaire_impt HC_energie_impt HC_services_impt HC_impt   {	
+		foreach s in $sector {
+			foreach origine in impt dom {
+				local liste `liste' HC_`s'_`origine'
+			}
+		}
+		
+		
+    	foreach j in  `liste' HC X Y HC_neig_dom HC_alimentaire_dom HC_energie_dom HC_services_dom HC_dom ///
+					HC_neig_impt HC_alimentaire_impt HC_energie_impt HC_services_impt HC_impt  {	
 
     	    if strpos("`j'","HC")!=0 & `HC_fait'==0 {
 				compute_HC_vect `i' `source'

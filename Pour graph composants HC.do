@@ -245,5 +245,5 @@ end
 *etude_pour_papier 2014 WIOD
 *etude_pour_papier 2015 TIVA_REV4
 *etude_pour_note 2014 WIOD
-etude_pour_note 2014 WIOD
+
 etude_pour_note 2015 TIVA_REV4

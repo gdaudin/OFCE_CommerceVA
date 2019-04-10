@@ -40,52 +40,75 @@ args year source
 
 merge m:1 c using "$dir/Results/secteurs_pays/mean_chg_`source'_HC_`year'.dta"
 
-rename c pays
+*rename c pays
 
 *on met le choc de change à 10€
 
 if `year' == 2015 replace shock1 = shock1*100*(10/47.22)
 
-blink
-foreach yrs of numlist 2018 2019 {
+local scale1 0.0 2.0 
+local scale2 0.0 (0.25) 2.0
+
+foreach type in OE1 OE2 {
+	foreach yrs of numlist 2018 2019 {
+
+	if "`type'" == "OE1" local note "Niveau de départ du prix du pétrole de 35€ (BMEs) et 47€ (PIWIM)"
+	if "`type'" == "OE2" local note "Niveau de départ du prix du pétrole de 55€ (BMEs) et 47€ (PIWIM)"
 	/*regress BME pond_WIOD_HC if year == `yrs'*/
 	/*twoway (scatter BME pond_WIOD_HC if year == `yrs', mlabel(c)) (lfit BME pond_WIOD_HC) if year == `yrs', name(BME_vs_WIOD_`yrs', replace)
 	graph save "$dir/Graphiques/BME_vs_WIOD_`yrs'.gph",  replace
 	*/
-	twoway (scatter BME_1 pond_`source'_HC if year == `yrs' & type == "`type'", mlabel(c)) ///
-		(lfit pond_`source'_HC pond_`source'_HC, range(`scale1')) if year == `yrs', ///
+	twoway (scatter BME_1 shock1 if year == `yrs' & type == "`type'", mlabel(c)) ///
+		(lfit shock1 shock1, range(`scale1')) if year == `yrs', ///
 		ytitle("impact en % BMEs `yrs' (1ere année)") yscale(range(`scale1')) ylabel(`scale2', grid) /// 
-		xtitle("impact en % PIWIM `year' ,`source'") xscale(range(`scale1')) xlabel(`scale2', grid) legend(off) name(BME_1_vs_`yrs', replace) ///
-		note("`note'") 
+		xtitle("impact en % PIWIM `year' ,`source'") xscale(range(`scale1')) xlabel(`scale2', grid) legend(off) name(BME_1_vs_`yrs'_`type', replace)
+		 
+	}
+	graph combine  BME_1_vs_2018_`type' BME_1_vs_2019_`type', note("`note'") 
+	graph save "$dir/Results/secteurs_pays/graphiques/BME_1_vs_`source'_`type'.gph",  replace 
+	graph export "$dir/Results/secteurs_pays/graphiques/BME_1_vs_`source'_`type'.png",  replace 
 }
 
 
-*		(lfit BME_1 pond_`source'_HC if year == `yrs' & type == "`type'", range(`scale1')) ///
-graph combine  BME_1_vs_2018 BME_1_vs_2019
-graph save "$dir/Results/BME_1_vs_`source'_`type'.gph",  replace 
-graph export "$dir/Results/BME_1_vs_`source'_`type'.png",  replace 
+*		(lfit BME_1 shock1 if year == `yrs' & type == "`type'", range(`scale1')) ///
 
 
-format %14.2f pond_`source'_HC BME_3
-foreach yrs of numlist 2018 2019 {
+
+format %14.2f shock1 BME_3
+foreach type in OE1 OE2 { 
+	foreach yrs of numlist 2018 2019 {
+
+	
+	
+	if "`type'" == "OE1" {
+		local scale1 0.0 2.0  
+		local scale2 0.0 (0.25) 2.0  
+		local note "Niveau de départ du prix du pétrole de 35€ (BMEs) et 47€ (PIWIM), hors Chypre" 
+	}
+	if "`type'" == "OE2" {
+		local scale1 0.0 2.0 
+		local scale2 0.0 (0.25) 2.0
+		local note "Niveau de départ du prix du pétrole de 55€ (BMEs) et 47€ (PIWIM), hors Chypre" 
+	}
+		
 	/*regress BME pond_WIOD_HC if year == `yrs'*/
 	/*twoway (scatter BME pond_WIOD_HC if year == `yrs', mlabel(c)) (lfit BME pond_WIOD_HC) if year == `yrs', name(BME_vs_WIOD_`yrs', replace)
 	graph save "$dir/Graphiques/BME_vs_WIOD_`yrs'.gph",  replace
 	*/
-	twoway (scatter BME_3 pond_`source'_HC if year == `yrs' & type == "`type'", mlabel(c)) ///
-	(lfit pond_`source'_HC pond_`source'_HC, range(`scale1')) if year == `yrs', ///
+	twoway (scatter BME_3 shock1 if year == `yrs' & type == "`type'" & c != "CYP", mlabel(c)) ///
+	(lfit shock1 shock1, range(`scale1')) if year == `yrs' & c != "CYP", ///
 		ytitle("impact en % BMEs `yrs' (3e année)") yscale(range(`scale1')) ylabel(`scale2', grid) /// 
-		xtitle("impact en % PIWIM `year', `source'") xscale(range(`scale1')) xlabel(`scale2', grid) legend(off) name(BME_3_vs_`yrs', replace) ///
-		note("`note'")
+		xtitle("impact en % PIWIM `year', `source'") xscale(range(`scale1')) xlabel(`scale2', grid) legend(off) name(BME_3_vs_`yrs'_`type', replace) 
+		
 
-* 	(lfit BME_3 pond_`source'_HC if year == `yrs' & type == "`type'", range(`scale1')) ///
+* 	(lfit BME_3 shock1 if year == `yrs' & type == "`type'", range(`scale1')) ///
 
-}
+	}
 
-graph combine  BME_3_vs_2018 BME_3_vs_2019 
-graph save "$dir/Results/BME_3_vs_`source'_`type'.gph",  replace 
-graph export "$dir/Results/BME_3_vs_`source'`type'.png",  replace 
-
+	graph combine  BME_3_vs_2018_`type' BME_3_vs_2019_`type', note("`note'")
+	graph save "$dir/Results/secteurs_pays/graphiques/BME_3_vs_`source'_`type'.gph",  replace 
+	graph export "$dir/Results/secteurs_pays/graphiques/BME_3_vs_`source'`type'.png",  replace 
+} 
 end
 compar_bme 2015 TIVA_REV4 
 

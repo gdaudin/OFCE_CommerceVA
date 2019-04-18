@@ -205,7 +205,8 @@ if "`nature_choc'" == "chge" {
 
 if "`nature_choc'" == "chge" save "$dir/Results/Devaluations/decomp_`source'_HC_`yrs'_agreg_`agregation'.dta", replace
 if "`nature_choc'" == "oil" save "$dir/Results/secteurs_pays/decomp_`source'_HC_`yrs'_agreg_`agregation'.dta", replace
-
+if "`nature_choc'" == "chge" export excel using "$dir/Results/Devaluations/decomp_`source'_HC_`yrs'_agreg_`agregation'.xls", firstrow(variables) replace
+if "`nature_choc'" == "oil" export excel using "$dir/Results/secteurs_pays/decomp_`source'_HC_`yrs'_agreg_`agregation'.xls", firstrow(variables) replace
 
 end
 

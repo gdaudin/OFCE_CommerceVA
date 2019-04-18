@@ -47,7 +47,8 @@ graph bar (asis) HC_dom HC_impt , over(c,sort(HC_tot)) stack ///
 		
 /*		title("Impact d'une appréciation de 5% de l'euro sur les prix à la consommation", span size(medium)) /// */
 	
-graph export "$dirgit\Rédaction\decomp_origine_`source'_`year'.png", replace
+if "`nature_choc'"=="chge"  graph export "$dirgit\Rédaction\decomp_origine_`source'_`year'.png", replace
+if "`nature_choc'"=="oil"  graph export "$dir\Results\secteurs_pays\graphiques\decomp_origine_`source'_`year'.png", replace
 
 
 foreach sector in neig services food energy {
@@ -65,8 +66,8 @@ graph bar (asis) services neig energy food , over(c,sort(HC_tot)) stack ///
 		note("For DEU and FRA, this is the elasticity to a shock on the Euro")
 		
 /*		title("Impact d'une appréciation de 5% de l'euro sur les prix à la consommation par secteur", span size(medsmall)) /// */
-graph export "$dirgit\Rédaction/decomp_sect_`source'_`year'.png", replace
-
+if "`nature_choc'"=="chge"  graph export "$dirgit\Rédaction\decomp_sect_`source'_`year'.png", replace
+if "`nature_choc'"=="oil"  graph export "$dir\Results\secteurs_pays\graphiques\decomp_sect_`source'_`year'.png", replace
 
 
 
@@ -92,7 +93,8 @@ graph bar (asis) ss_jacente_dom ss_jacente_impt  volatile_dom volatile_impt  , o
 		
 		
 /*		title("Impact d'une appréciation de 5% de l'euro sur les prix à la consommation par secteur et origine", span size(small)) /// */		
-graph export "$dirgit\Rédaction/decomp_sectxorigin_`source'_`year'.png", replace
+if "`nature_choc'"=="chge"  graph export "$dirgit\Rédaction\decomp_sectxorigin_`source'_`year'.png", replace
+if "`nature_choc'"=="oil"  graph export "$dir\Results\secteurs_pays\graphiques\decomp_sectxorigin_`source'_`year'.png", replace
 
 
 
@@ -157,37 +159,53 @@ end
 
 capture program drop etude_pour_note
 program etude_pour_note
-args year source
+args year source nature_choc
 
-use "$dir/Results/Devaluations/decomp_`source'_HC_`year'.dta", clear
+if "`nature_choc'"=="chge" use "$dir/Results/Devaluations/decomp_`source'_HC_`year'_agreg_oui.dta", clear
+if "`nature_choc'"=="oil" use "$dir/Results/secteurs_pays/decomp_`source'_HC_`year'_agreg_oui.dta", clear
 
 
+
+if "`nature_choc'"=="chge" local scale1 -0.6(0.2) 0.0
+if "`nature_choc'"=="chge" local scale2 -0.65 0.0
+if "`nature_choc'"=="oil"  local scale1  0.0 (0.20) 1.0
+if "`nature_choc'"=="oil"  local scale2  0.0 1.0
+drop s_*
+rename sect_* *
+order *, alphabetic
+order c HC_impt
 rename *energie* *energy*
 rename *alimentaire* *food*
 
-foreach var of varlist HC_impt-energy_dom {
-	replace `var' =`var'*.05*100
+foreach var of varlist HC_impt-services_impt {
+	if "`nature_choc'"=="chge"	replace `var' =`var'*.10*100
+	if "`nature_choc'"=="oil" & `year'==2015  replace  `var'  =`var'*100*10/47.22
 }
 
 gen HC_tot=HC_impt+HC_dom
 label var HC_dom "Expliqué par l'évolution des prix des biens finaux de consommation domestiques"
 label var HC_impt "Expliqué par l'évolution des prix des biens finaux de consommation importés"
 
+if "`nature_choc'"=="chge" {
+	keep if c=="FRA_EUR" | c=="DEU_EUR" | c=="ESP_EUR" | c=="ITA_EUR" | c=="NLD_EUR" 
+	replace c=subinstr(c,"_EUR","",.)
+}
 
-keep if c=="FRA_EUR" | c=="DEU_EUR" | c=="ESP_EUR" | c=="ITA_EUR" | c=="NLD_EUR" 
-replace c=subinstr(c,"_EUR"e,"",.)
+if "`nature_choc'"=="oil" keep if c=="FRA" | c=="DEU" | c=="ESP" | c=="ITA" | c=="NLD" 
 gsort HC_tot
 graph bar (asis) HC_dom HC_impt , over(c,sort(HC_tot) descending) stack ///
 		legend(rows(2) size(small)) ///
 		note("Source: PIWIM (`source',`year')") ///
 		scheme(s2mono) ///
-		ylabel(-0.6(0.2) 0.0,format(%9.2fc)) ///
-		yscale(range(-0.65 0.0))  ///
+		ylabel(`scale1',format(%9.2fc)) ///
+		yscale(range(`scale2'))  ///
 		ytitle("%")
 		
 /*		title("Impact d'une appréciation de 5% de l'euro sur les prix à la consommation", span size(medium)) /// */
 	
-graph export "$dirgit/Rédaction_Note/Decomp_origine_`source'_`year'.png", replace
+if "`nature_choc'"=="chge"  graph export "$dirgit/Rédaction_Note/Decomp_origine_`source'_`year'.png", replace
+if "`nature_choc'"=="oil"  graph export "$dir\Results\secteurs_pays\graphiques\decomp_origine_`source'_`year'.png", replace
+
 
 
 foreach sector in neig services food energy {
@@ -202,12 +220,14 @@ graph bar (asis) services neig energie alimentaire , over(c,sort(HC_tot) descend
 		legend(rows(2) size(small)) ///
 		note("Source: PIWIM (`source',`year')") /// 
 		scheme(s2mono) ///
-		ylabel(-0.6(0.2) 0.0,format(%9.2fc)) ///
-		yscale(range(-0.65 0.0))  ///
+		ylabel(`scale1',format(%9.2fc)) ///
+		yscale(range(`scale2'))  ///
 		ytitle("%")
 		
 /*		title("Impact d'une appréciation de 5% de l'euro sur les prix à la consommation par secteur", span size(medsmall)) /// */
-graph export "$dirgit/Rédaction_Note/Decomp_sect_`source'_`year'.png", replace
+if "`nature_choc'"=="chge"  graph export "$dirgit/Rédaction_Note/Decomp_sect_`source'_`year'.png", replace
+if "`nature_choc'"=="oil"  graph export "$dir\Results\secteurs_pays\graphiques\decomp_sect_`source'_`year'.png", replace
+
 
 gen ss_jacente_impt= services_impt+neig_impt
 label var ss_jacente_imp "Inflation sous-jacente importée"
@@ -225,25 +245,23 @@ graph bar (asis) ss_jacente_dom ss_jacente_impt  volatile_dom volatile_impt  , o
 		legend(rows(2) size(vsmall)) ///
 		note("Source: PIWIM (`source',`year')") /// 
 		scheme(s2mono) ///
-		ylabel(-0.6(0.2) 0.0,format(%9.2fc)) ///
-		yscale(range(-0.65 0.0))  ///
+		ylabel(`scale1',format(%9.2fc)) ///
+		yscale(range(`scale2'))  ///
 		ytitle("%")
 		
 /*		title("Impact d'une appréciation de 5% de l'euro sur les prix à la consommation par secteur et origine", span size(small)) /// */		
-graph export "$dirgit/Rédaction_Note/Decomp_sectxorigin_`source'_`year'.png", replace
+if "`nature_choc'"=="chge"  graph export "$dirgit/Rédaction_Note/Decomp_sectxorigin_`source'_`year'.png", replace
+if "`nature_choc'"=="oil"  graph export "$dir\Results\secteurs_pays\graphiques\decomp_sectxorigin_`source'_`year'.png", replace
 
 	
-
-
-
 
 
 
 end
 
 
-*etude_pour_papier 2014 WIOD
-*etude_pour_papier 2015 TIVA_REV4
-*etude_pour_note 2014 WIOD
+*etude_pour_papier 2014 WIOD chge
+*etude_pour_papier 2015 TIVA_REV4 chge
+*etude_pour_note 2014 WIOD chge
 
-etude_pour_note 2015 TIVA_REV4
+etude_pour_note 2015 TIVA_REV4 oil 

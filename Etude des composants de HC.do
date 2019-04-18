@@ -102,6 +102,7 @@ save "$dir/Results/secteurs_pays/decomp_`source'_HC_`yrs'_agreg_`agregation'.dta
 
 
 *****Ici, nous avons les parts sectorielles importées / domestiques calculées pour tous les pays. 
+***** Dans le fichier_mean_chge, on obtient les contributions par secteur à la hausse du prix
 *****Pour le choc euro, la part ne change importée / domestique ne change pas. Les importées sont alors tous les biens venant d'autres pays.
 
 if "`agregation'" == "oui"  local liste_secteurs energie alimentaire neig services
@@ -177,7 +178,7 @@ foreach origine in dom impt {
 		}
 	}
 	if "`nature_choc'" == "oil" {
-		use "$dir/Results/secteurs_pays/mean_chg_`source'_HC_`wgt'_`yrs'.dta"
+		use "$dir/Results/secteurs_pays/mean_chg_`source'_HC_`origine'_`yrs'.dta"
 		gen sect_HC_`origine'=.
 			foreach pays of global country_hc {
 				replace sect_HC_`origine' = shock1
@@ -192,13 +193,13 @@ foreach origine in dom impt {
 
 
 
+**Passage en prix domestique (et en négaitif) uniquement pour le change
 
-**Passage en prix domestiques (et en négatif)
-
-foreach origine in dom impt {
-	foreach sector in HC `liste_secteurs' {
-		replace sect_`sector'_`origine' = -(1-sect_`sector'_`origine'/s_`sector'_`origine')/2*s_`sector'_`origine'
-	
+if "`nature_choc'" == "chge" {
+	foreach origine in dom impt {
+		foreach sector in HC `liste_secteurs' {
+			replace sect_`sector'_`origine' = -(1-sect_`sector'_`origine'/s_`sector'_`origine')/2*s_`sector'_`origine'
+		}		
 	}
 }
 

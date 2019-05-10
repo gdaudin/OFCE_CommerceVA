@@ -166,8 +166,8 @@ if "`nature_choc'"=="oil" use "$dir/Results/secteurs_pays/decomp_`source'_HC_`ye
 
 
 
-if "`nature_choc'"=="chge" local scale1 -0.6(0.2) 0.0
-if "`nature_choc'"=="chge" local scale2 -0.65 0.0
+if "`nature_choc'"=="chge" local scale1 -1.5(0.25) 0.0
+if "`nature_choc'"=="chge" local scale2 -1.5 0.0
 if "`nature_choc'"=="oil"  local scale1  0.0 (0.20) 1.0
 if "`nature_choc'"=="oil"  local scale2  0.0 1.0
 drop s_*
@@ -178,7 +178,7 @@ rename *energie* *energy*
 rename *alimentaire* *food*
 
 foreach var of varlist HC_impt-services_impt {
-	if "`nature_choc'"=="chge"	replace `var' =`var'*.10*100
+	if "`nature_choc'"=="chge"	replace `var' =`var'*10
 	if "`nature_choc'"=="oil" & `year'==2015  replace  `var'  =`var'*100*10/47.22
 }
 
@@ -262,6 +262,6 @@ end
 
 *etude_pour_papier 2014 WIOD chge
 *etude_pour_papier 2015 TIVA_REV4 chge
-*etude_pour_note 2014 WIOD chge
-
+etude_pour_note 2014 WIOD chge
+etude_pour_note 2015  TIVA_REV4 chge
 etude_pour_note 2015 TIVA_REV4 oil 

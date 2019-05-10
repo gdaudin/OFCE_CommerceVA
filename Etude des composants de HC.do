@@ -95,7 +95,7 @@ drop duplicate
 export excel using "$dir/Results/Devaluations/decomp_`source'_HC_`yrs'_agreg_`agregation'.xls", firstrow(variables) replace
 save "$dir/Results/Devaluations/decomp_`source'_HC_`yrs'_agreg_`agregation'.dta", replace
 
-export excel using "$dir/Results/secteurs_pays/decomp_`source'_HC_`yrs'_`agregation'.xls", firstrow(variables) replace
+export excel using "$dir/Results/secteurs_pays/decomp_`source'_HC_`yrs'_agreg_`agregation'.xls", firstrow(variables) replace
 save "$dir/Results/secteurs_pays/decomp_`source'_HC_`yrs'_agreg_`agregation'.dta", replace
 
 
@@ -210,7 +210,7 @@ if "`nature_choc'" == "oil" export excel using "$dir/Results/secteurs_pays/decom
 
 end
 
-foreach source in /* WIOD */  TIVA_REV4 {
+foreach source in  WIOD  TIVA_REV4 {
 
 *foreach source in  WIOD  TIVA TIVA_REV4  {
 
@@ -227,9 +227,10 @@ foreach source in /* WIOD */  TIVA_REV4 {
 	*foreach i of numlist 2014  {
 
 	foreach i of numlist $start_year (1) $end_year  {
-		composants_HC `i' `source' oil oui
-		composants_HC `i' `source' oil non
 		composants_HC `i' `source' chge oui
+		*composants_HC `i' `source' oil oui
+		*composants_HC `i' `source' oil non
+	
 	}
 }
 

@@ -180,6 +180,8 @@ rename *alimentaire* *food*
 foreach var of varlist HC_impt-services_impt {
 	if "`nature_choc'"=="chge"	replace `var' =`var'*10
 	if "`nature_choc'"=="oil" & `year'==2015  replace  `var'  =`var'*100*10/47.22
+	if "`nature_choc'"=="oil" & `year'==2014  replace  `var'  =`var'*100*10/74.47  /*niveau du pétrole en € en 2014*/
+
 }
 
 gen HC_tot=HC_impt+HC_dom
@@ -262,6 +264,8 @@ end
 
 *etude_pour_papier 2014 WIOD chge
 *etude_pour_papier 2015 TIVA_REV4 chge
-etude_pour_note 2014 WIOD chge
-etude_pour_note 2015  TIVA_REV4 chge
+*etude_pour_note 2014 WIOD oil
+*etude_pour_note 2014 WIOD chge
+*etude_pour_note 2015  TIVA_REV4 chge
 etude_pour_note 2015 TIVA_REV4 oil 
+etude_pour_note 2014 TIVA_REV4 oil 

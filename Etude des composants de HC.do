@@ -216,7 +216,7 @@ foreach source in  WIOD  TIVA_REV4 {
 
 	if "`source'"=="WIOD" global start_year 2014
 	if "`source'"=="TIVA" global start_year 1995
-	if "`source'"=="TIVA_REV4" global start_year 2015
+	if "`source'"=="TIVA_REV4" global start_year 2014
 
 
 	if "`source'"=="WIOD" global end_year 2014
@@ -228,7 +228,7 @@ foreach source in  WIOD  TIVA_REV4 {
 
 	foreach i of numlist $start_year (1) $end_year  {
 		composants_HC `i' `source' chge oui
-		*composants_HC `i' `source' oil oui
+		composants_HC `i' `source' oil oui
 		*composants_HC `i' `source' oil non
 	
 	}

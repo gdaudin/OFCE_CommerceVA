@@ -14,8 +14,8 @@ replace pays = upper(c) if type == "CXD"
 replace BME_1=-BME_1*10/clef_CXD if type == "CXD" 
 replace BME_3=-BME_3*10/clef_CXD if type == "CXD" 
 
-replace BME_1=BME_1/10 if type == "ERT" 
-replace BME_3=BME_3/10 if type == "ERT" 
+replace BME_1=BME_1 if type == "ERT" 
+replace BME_3=BME_3 if type == "ERT" 
 
 replace BME_1=. if type == "CXD" & c=="FIN" & year==2018
 replace BME_3=. if type == "CXD" & c=="FIN" & year==2018
@@ -25,7 +25,7 @@ program compar_bme
 args year source type
 
 merge m:1 pays using "$dir/Results/Devaluations/auto_chocs_HC_`source'_`year'.dta"
-
+replace pond_`source'_HC = pond_`source'_HC*10 
 
  format %14.2f pond_`source'_HC BME_1 /*nombre décimales*/
 drop _merge
@@ -37,11 +37,11 @@ replace pond_`source'_HC = pond_`source'_HC
 if "`type'" == "CXD" local note choc prix des compétiteurs -10% (CXD) 
 if "`type'" == "ERT" local note choc de change 10% (ERT)
 
-if "`type'" == "CXD" local scale1 -6.5 0 
-if "`type'" == "ERT" local scale1  -0.35 0 
+if "`type'" == "CXD" local scale1 -7.0 0 
+if "`type'" == "ERT" local scale1  -3.0 0 
 
-if "`type'" == "CXD" local scale2 -6.5(1.0)0 
-if "`type'" == "ERT" local scale2 -0.35(0.05)0
+if "`type'" == "CXD" local scale2 -7(1)0 
+if "`type'" == "ERT" local scale2 -3.0(0.5)0
 
 
 foreach yrs of numlist 2018 2019 {
@@ -84,7 +84,7 @@ graph save "$dir/Results/BME_3_vs_`source'_`type'.gph",  replace
 graph export "$dir/Results/BME_3_vs_`source'`type'.png",  replace 
 
 end
-compar_bme 2015 TIVA_REV4 ERT 
-compar_bme 2014 WIOD ERT
+*compar_bme 2015 TIVA_REV4 ERT 
+*compar_bme 2014 WIOD ERT
 compar_bme 2015 TIVA_REV4 CXD
 compar_bme 2014 WIOD CXD

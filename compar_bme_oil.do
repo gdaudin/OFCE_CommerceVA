@@ -52,7 +52,7 @@ local scale2 0.0 (0.25) 2.0
 foreach type in OE1 OE2 {
 	foreach yrs of numlist 2018 2019 {
 
-	if "`type'" == "OE1" local note "Niveau de départ du prix du pétrole de 35€ (BMEs) et 47€ (PIWIM)"
+	if "`type'" == "OE1" local note "Niveau de départ du prix du pétrole de 30€ (BMEs) et 47€ (PIWIM)"
 	if "`type'" == "OE2" local note "Niveau de départ du prix du pétrole de 55€ (BMEs) et 47€ (PIWIM)"
 	/*regress BME pond_WIOD_HC if year == `yrs'*/
 	/*twoway (scatter BME pond_WIOD_HC if year == `yrs', mlabel(c)) (lfit BME pond_WIOD_HC) if year == `yrs', name(BME_vs_WIOD_`yrs', replace)
@@ -83,7 +83,7 @@ foreach type in OE1 OE2 {
 	if "`type'" == "OE1" {
 		local scale1 0.0 2.0  
 		local scale2 0.0 (0.25) 2.0  
-		local note "Niveau de départ du prix du pétrole de 35€ (BMEs) et 47€ (PIWIM), hors Chypre" 
+		local note "Niveau de départ du prix du pétrole de 30€ (BMEs) et 47€ (PIWIM), hors Chypre" 
 	}
 	if "`type'" == "OE2" {
 		local scale1 0.0 2.0 

@@ -42,10 +42,10 @@ do "$dirgit/Definition_pays_secteur.do"
 do "$dirgit/choc_secteurs_pays.do"
 
 *foreach source in   WIOD { 
-foreach source in   /* WIOD TIVA */ TIVA_REV4 { 
+foreach source in    WIOD /*TIVA TIVA_REV4*/ { 
 
 
-	if "`source'"=="WIOD" local start_year 2000
+	if "`source'"=="WIOD" local start_year 2014
 	if "`source'"=="TIVA" local start_year 1995
 	if "`source'"=="TIVA_REV4" local start_year 2005
 

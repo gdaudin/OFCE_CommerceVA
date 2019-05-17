@@ -297,13 +297,13 @@ end
 
 
 *foreach source in WIOD {
-foreach source in /*  TIVA  TIVA_REV4  */WIOD   {
+foreach source in  TIVA  TIVA_REV4  WIOD   {
 
 
 
-	if "`source'"=="WIOD" global start_year 2014	
+	if "`source'"=="WIOD" global start_year 2000	
 	if "`source'"=="TIVA" global start_year 1995
-	if "`source'"=="TIVA_REV4" global start_year 2015
+	if "`source'"=="TIVA_REV4" global start_year 2005
 
 
 
@@ -327,13 +327,13 @@ foreach source in /*  TIVA  TIVA_REV4  */WIOD   {
 */
 
 *foreach source in  WIOD {
-foreach source in /*  TIVA  TIVA_REV4 */ WIOD  {
+foreach source in   TIVA_REV4 TIVA    WIOD  {
 
 
 
-	if "`source'"=="WIOD" global start_year 2014	
+	if "`source'"=="WIOD" global start_year 2000	
 	if "`source'"=="TIVA" global start_year 1995
-	if "`source'"=="TIVA_REV4" global start_year 2015
+	if "`source'"=="TIVA_REV4" global start_year 2005
 
 
 

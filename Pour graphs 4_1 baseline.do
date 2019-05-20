@@ -26,10 +26,13 @@ insobs 1
 local N_last_obs=_N
 replace pond_TIVA_HC=0 in `N_last_obs'
 
+replace pond_WIOD_HC= -pond_WIOD_HC
+replace pond_TIVA_HC= -pond_TIVA_HC
+
 regress pond_WIOD_HC pond_TIVA_HC
 predict predict
 gen error=abs(predict-pond_WIOD_HC)/pond_WIOD_HC
-gen mylabel= pays if /*error >.25 |*/ pond_WIOD_HC>=0.22 | c=="FRA"
+gen mylabel= pays if /*error >.25 |*/ pond_WIOD_HC>=0.22 | pays=="FRA"
 
 graph twoway (scatter pond_WIOD_HC pond_TIVA_HC, mlabel(mylabel)) ///
 (lfit pond_WIOD_HC pond_TIVA_HC, clpattern(dash)) ///
@@ -39,7 +42,6 @@ graph twoway (scatter pond_WIOD_HC pond_TIVA_HC, mlabel(mylabel)) ///
 			legend(order (2 3)  label(2 "Linear fit") label(3 "45° line") ) scheme(s1mono)
 			
 graph export "$dir/commerce_VA_inflation/Rédaction/Comparaison_WIOD_TIVA_`year'.png", replace
-
 
 	
 ********Figure 1bis (Comparing consumer price elasticity to an exchange rate appreciation for WIOD and TIVA_REV4, 2014)	
@@ -52,21 +54,49 @@ drop if pays =="ROW"
 
 insobs 1
 local N_last_obs=_N
-replace pond_TIVA_HC=0 in `N_last_obs'
+replace pond_TIVA_REV4_HC=0 in `N_last_obs'
+
+replace pond_WIOD_HC= -pond_WIOD_HC
+replace pond_TIVA_REV4_HC= -pond_TIVA_REV4_HC
+
+
 
 regress pond_WIOD_HC pond_TIVA_REV4_HC
 predict predict
 gen error=abs(predict-pond_WIOD_HC)/pond_WIOD_HC
-gen mylabel= pays if /*error >.25 |*/ pond_WIOD_HC>=0.22 | c=="FRA"
+gen mylabel= pays if /*error >.25 |*/ pond_WIOD_HC>=0.22 | pays=="FRA"
 
-graph twoway (scatter pond_WIOD_HC pond_TIVA_HC, mlabel(mylabel)) ///
-(lfit pond_WIOD_HC pond_TIVA_HC, clpattern(dash)) ///
-			(lfit pond_TIVA_HC pond_TIVA_HC), ///
+graph twoway (scatter pond_WIOD_HC pond_TIVA_REV4_HC, mlabel(mylabel)) ///
+            (lfit pond_WIOD_HC pond_TIVA_REV4_HC, clpattern(dash)) ///
+			(lfit pond_TIVA_REV4_HC pond_TIVA_REV4_HC), ///
 			yscale(range(0 0.4)) xscale(range(0 0.4)) ylabel(0 (0.1) 0.4) ///
 			ytitle("WIOD elasticites `year' (absolute value)") xtitle("TIVA_REV4 elasticites `year' (absolute value)") ///
 			legend(order (2 3)  label(2 "Linear fit") label(3 "45° line") ) scheme(s1mono)
 			
 graph export "$dir/commerce_VA_inflation/Rédaction/Comparaison_WIOD_TIVA_REV4_`year'.png", replace
+
+
+
+
+replace pond_WIOD_HC= -pond_WIOD_HC/10
+replace pond_TIVA_REV4_HC= -pond_TIVA_REV4_HC/10
+keep if strpos(pays,"_EUR")!=0
+replace pays=subinstr(pays,"_EUR"e,"",.)
+gen sample=0
+replace sample=1 if pays=="FRA" | pays=="DEU" | pays=="NLD" | pays=="ESP" | pays=="ITA"
+replace pays="" if pays!="FRA" & pays!="DEU" & pays!="NLD"  & pays!="IRL"
+
+graph twoway /// 
+		(scatter pond_WIOD_HC pond_TIVA_REV4_HC if sample==0, mlabel(pays) mlabsize(medium) mlabcolor(sky) mcolor(sky)) ///
+		(scatter pond_WIOD_HC pond_TIVA_REV4_HC if sample==1, mlabel(pays) mlabsize(medium) mcolor(black) mlabcolor(black) ) ///
+		(lfit pond_WIOD_HC pond_TIVA_REV4_HC, clpattern(dash)) ///
+		(lfit pond_WIOD_HC pond_WIOD_HC), ///
+		yscale(range(-0.02 -0.005)) xscale(range(-0.02 -0.005)) ylabel(-0.02 (0.005) -0.00) yscale(range(-0.02 (0.005) -0.00)) ///
+		ytitle("Impact PIWIM (WIOD), en %") xtitle("Impact PIWIM (TIVA_REV4), en %") ///
+		legend(order (3 4)  label(3 "Régression linéaire") label(4 "ligne à 45°") ) scheme(s1mono)
+			
+graph export "$dir/commerce_VA_inflation/Rédaction_note/Comparaison_WIOD_TIVA_REV4_`year'.png", replace
+
 
 blif
 

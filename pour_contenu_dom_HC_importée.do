@@ -24,6 +24,8 @@ program  contenu_dom_HC_impt
 args yrs source hze pays_int
 *Année, source, hze_not ou hze_yes pour pays membres de la ZE et pays hors ZE, pays_int celui auquel on s'intéresse
 
+capture erase "$dir/Bases/contenu_dom_HC_impt_`yrs'_`source'_`hze'.dta"
+
 * exemple  
 
 *Ouverture de la base contenant le vecteur ligne de production par pays et secteurs

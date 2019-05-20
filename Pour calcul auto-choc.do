@@ -106,7 +106,7 @@ foreach source in   TIVA WIOD  TIVA_REV4 {
 	
 	
    capture erase "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`source'_`type'.dta" 
-	foreach type in  HC /* HC_note par_sect*/ {
+	foreach type in  HC HC_note /*par_sect*/ {
 		capture erase "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`source'_`type'.dta"
 
 *		foreach i of numlist 2014  {

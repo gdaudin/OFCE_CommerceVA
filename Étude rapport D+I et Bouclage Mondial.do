@@ -33,7 +33,6 @@ args year source type
 
 use "$dir/Results/Devaluations/auto_chocs_`type'_`source'_`year'.dta", clear
 
-
 *replace c =c+"_EUR" if source_shock=="EUR" 
 
 
@@ -46,14 +45,18 @@ if "`type'"=="par_sect" replace sector=upper(sector)
 
 if "`type'"=="HC" | "`type'" =="HC_note" {
 	merge 1:1 pays using "$dir/Bases/imp_inputs_HC_`year'_`source'_hze_not.dta"
+	
 	drop _merge
+	
 	replace pays =upper(pays) 
+	
 	merge 1:1 pays using "$dir/Bases/contenu_dom_HC_impt_`year'_`source'_hze_not.dta"
 	drop _merge
 	replace pays =upper(pays)
 
 	replace pays =pays+"_AUTO"
 	replace pays = substr(pays,1,3) if strmatch(pays,"*_EUR_AUTO")==1
+	
 	merge 1:1 pays using "$dir/Bases/imp_inputs_HC_`year'_`source'_hze_yes.dta", update
 	drop _merge
 	replace pays =upper(pays) 
@@ -137,17 +140,13 @@ if "`type'"=="HC" {
 
 
 
-
-
-
-
-
 if "`type'"=="HC_note" & ((`year'==2014 & "`source'"=="WIOD") | (`year'==2015 & "`source'"=="TIVA_REV4")) {
-generate c=upper(pays)
+	capture generate c=upper(pays)
 	keep if strpos(c,"_EUR")!=0
 	replace c=subinstr(c,"_EUR"e,"",.)
-	replace pond_`source'_HC=pond_`source'_HC/20*100
-	replace E1HC_E2HC = -E1HC_E2HC/20*100
+	*if "`source'"=="WIOD" replace pond_`source'_HC=-pond_`source'_HC/10*100
+	replace pond_`source'_HC=pond_`source'_HC/10*100
+	replace E1HC_E2HC = -E1HC_E2HC/10*100
 	gen sample = 0
 	replace sample=1 if c=="FRA" | c=="DEU" | c=="NLD" | c=="ESP" | c=="ITA"
 	replace c="" if c!="FRA" & c!="DEU" & c!="NLD"  & c!="IRL"
@@ -159,7 +158,7 @@ generate c=upper(pays)
 			(lfit E1HC_E2HC E1HC_E2HC,lwidth(vthin) color(black)) , ///
 			xtitle("Impact D+I, en %", /*size(vsmall) */) ///
 			ytitle("Impact PIWIM, en %") ///
-			yscale(range(-1  -0.25)) xscale(range(-1  -0.25)) xlabel(-1 (0.25) -0.25,format(%9.2fc)) ylabel(-1  (0.25) -0.25,format(%9.2fc)) ///
+			yscale(range(-2  -0.5)) xscale(range(-2  -0.5)) xlabel(-2 (0.5) -0.25,format(%9.2fc)) ylabel(-2  (0.5) -0.25,format(%9.2fc)) ///
 			legend(off) ///
 			note("PIWIM (`source', `year')")
 	*dans le cas HC, xtitle pourrait se finir par «importées dans la conso dom + part conso importée»			
@@ -250,7 +249,7 @@ end
 ****************************************************************************
 
 *foreach source in  WIOD {
-foreach source in /*  TIVA   */  WIOD TIVA_REV4 {
+foreach source in  /*TIVA*/  WIOD TIVA_REV4     {
 
 
 
@@ -280,7 +279,7 @@ foreach source in /*  TIVA   */  WIOD TIVA_REV4 {
 }
 
 
-
+blif
 
 
 /*

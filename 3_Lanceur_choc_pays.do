@@ -170,5 +170,5 @@ foreach source in  WIOD /*TIVA TIVA_REV4*/ {
 *HC_alimentaire HC_neig HC_services HC_energie
 
 local nbr_sect=wordcount("$sector")	
-log close
+capture log close
 

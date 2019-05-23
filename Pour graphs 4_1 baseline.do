@@ -128,6 +128,38 @@ graph twoway (scatter pond_TIVA_REV4_HC pond_TIVA_HC, mlabel(mylabel)) ///
 graph export "$dir/commerce_VA_inflation/Rédaction/Comparaison_TIVA_REV4_TIVA_`year'.png", replace
 
 
+********Figure 1quart (Comparing consumer price elasticity to an exchange rate appreciation for WIOD and TIVA_REV4, 2011)	
+	
+local year 2011
+	
+use "$dir/Results/Devaluations/auto_chocs_HC_WIOD_`year'.dta", clear
+merge 1:1 pays using  "$dir/Results/Devaluations/auto_chocs_HC_TIVA_REV4_`year'.dta"
+drop if pays =="ROW"
+
+insobs 1
+local N_last_obs=_N
+replace pond_TIVA_REV4_HC=0 in `N_last_obs'
+
+replace pond_WIOD_HC= -pond_WIOD_HC
+replace pond_TIVA_REV4_HC= -pond_TIVA_REV4_HC
+
+
+
+regress pond_WIOD_HC pond_TIVA_REV4_HC
+predict predict
+gen error=abs(predict-pond_WIOD_HC)/pond_WIOD_HC
+gen mylabel= pays if /*error >.25 |*/ pond_WIOD_HC>=0.22 | pays=="FRA"
+
+graph twoway (scatter pond_TIVA_REV4_HC pond_WIOD_HC , mlabel(mylabel)) ///
+            (lfit pond_TIVA_REV4_HC pond_WIOD_HC , clpattern(dash)) ///
+			(lfit pond_WIOD_HC pond_WIOD_HC), ///
+			yscale(range(0 0.4)) xscale(range(0 0.4)) ylabel(0 (0.05) 0.4) xlabel(0 (0.05) 0.4) ///
+			ytitle("WIOD elasticites `year' (absolute value)") xtitle("TIVA_REV4 elasticites `year' (absolute value)") ///
+			legend(order (2 3)  label(2 "Linear fit") label(3 "45° line") ) scheme(s1mono)
+			
+graph export "$dir/commerce_VA_inflation/Rédaction/Comparaison_WIOD_TIVA_REV4_`year'.png", replace
+
+
 blif
 
 

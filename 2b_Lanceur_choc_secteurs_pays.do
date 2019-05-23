@@ -1,6 +1,6 @@
 
 *****HC, GD, 10/2018----------------------------------------
-*****Lanceur du programme de pétrole (attention, c'est très long)
+*****Lanceur du programme de pétrole
 *****Ce lanceur lance pour chaque base, chaque année  un choc pour le ou les secteurs choisi et pour le ou les pays choisis
 *****Attention, lors de chaque mise à jour des données, il faut changer les dates de début/fin dans 1_constr_bases.do (l 20, 53 , 230-235, 327-331)
 *****Pour changer la taille du choc, changer la ligne 98 (ici choc de +100%)
@@ -13,6 +13,7 @@
 clear
 set more off
 *****Mettre global test =1 provoquera la sauvegarde de plein de matrices / vecteurs 
+****Pas sûr que cela ne soit pas obligatoire finalement ?
 global test = 1
 *******Définition du directory
 
@@ -31,7 +32,7 @@ set matsize 7000
 *set mem 700m if earlier version of stata (<stata 12)
 set more off
 
-cd $dir  
+cd "$dir"  
 
 ******Définition des Pays et des secteurs ********************
 **On le lance pour mettre à jour les macros (en mémoire)
@@ -42,10 +43,10 @@ do "$dirgit/Definition_pays_secteur.do"
 do "$dirgit/choc_secteurs_pays.do"
 
 *foreach source in   WIOD { 
-foreach source in    WIOD /*TIVA TIVA_REV4*/ { 
+foreach source in    WIOD TIVA TIVA_REV4 { 
 
 
-	if "`source'"=="WIOD" local start_year 2014
+	if "`source'"=="WIOD" local start_year 2000
 	if "`source'"=="TIVA" local start_year 1995
 	if "`source'"=="TIVA_REV4" local start_year 2005
 
@@ -64,7 +65,7 @@ foreach source in    WIOD /*TIVA TIVA_REV4*/ {
 		
 		vector_shock_secteurs_pays 1 `source' 
 		shock_secteurs_pays `i' `source'
-		use "$dir/Results/Secteurs_pays/`source'_`i'_secteurs_pays.dta"
+		use "$dir/Results/Secteurs_pays/`source'_`i'_secteurs_pays.dta", clear
 		rename S*t1 shock*1
 
 		merge 1:1 _n using "$dir/Bases/csv_`source'"

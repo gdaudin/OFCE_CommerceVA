@@ -263,14 +263,16 @@ global common_sample "$common_sample FRA GBR GRC     HRV HUN IDN IND IRL        
 global common_sample "$common_sample LTU LUX LVA MEX              MLT     NLD NOR        POL PRT"
 global common_sample "$common_sample ROU RUS       SVK SVN SWE       TUR TWN USA        "
 
-foreach source in TIVA WIOD  {
+foreach source in TIVA WIOD TIVA_REV4 {
 
-	if "`source'"=="WIOD" global start_year 2000
-	if "`source'"=="TIVA" global start_year 1995
+	if "`source'"=="WIOD" local start_year 2000
+	if "`source'"=="TIVA" local start_year 1995
+	if "`source'"=="TIVA_REV4" local start_year 2005
 
 
-	if "`source'"=="WIOD" global end_year 2014
-	if "`source'"=="TIVA" global end_year 2011
+	if "`source'"=="WIOD" local end_year 2014
+	if "`source'"=="TIVA" local end_year 2011
+	if "`source'"=="TIVA_REV4" local end_year 2015
 
 	use "$dir/Bases/Y_`source'.dta", clear
 	rename Y Y_`source'
@@ -282,12 +284,12 @@ foreach source in TIVA WIOD  {
 	collapse (sum) Y_`source', by(pays year)
 	*rename pays c
 
-	foreach year of numlist $start_year (1) $end_year  {
+	foreach year of numlist `start_year' (1) `end_year'  {
 		merge 1:1 year pays  using "$dir/Results/Devaluations/auto_chocs_HC_`source'_`year'.dta", update
 		drop _merge
 	}
 
-
+	replace pond_`source'=-pond_`source'
 	egen Y_tot_per_year=total(Y_`source'), by(year)
 	gen weight=Y_`source'/Y_tot_per_year
 	gen elast_pond=pond_`source'_HC*weight
@@ -304,19 +306,25 @@ foreach source in TIVA WIOD  {
 
 use temp_WIOD.dta, clear
 merge 1:1 year pays using temp_TIVA.dta
+drop _merge
+merge 1:1 year pays using temp_TIVA_REV4.dta
+
 sort year
 
 bys year: keep if _n==1
-drop c
+
 
 
 
 twoway 	(line WIOD_elast_annual year, lcolor(blue) lpattern(dash)) ///
 		(line WIOD_elast_annual_pond year, lcolor(blue)) ///
 		(line TIVA_elast_annual year, lcolor(red) lpattern(dash)) ///
-		(line TIVA_elast_annual_pond year, lcolor(red)), ///
+		(line TIVA_elast_annual_pond year, lcolor(red)) ///
+		(line TIVA_REV4_elast_annual year, lcolor(green) lpattern(dash)) ///
+		(line TIVA_REV4_elast_annual_pond year, lcolor(green)), ///
 		legend(label(1 "WIOD") label(2 "WIOD, output weighted") ///
-		label(3 "TIVA") label(4 "TIVA, output weighted"))  /// 
+		label(3 "TIVA") label(4 "TIVA, output weighted")  /// 
+		label(5 "TIVA_REV4") label(6 "TIVA_REV4, output weighted"))  /// 
 		ytitle("elasticity (absolute value)", ) ///
 		note("Computed on a common sample of 43 countries assuming no Eurozone") ///
 		scheme(s1mono)
@@ -325,6 +333,6 @@ twoway 	(line WIOD_elast_annual year, lcolor(blue) lpattern(dash)) ///
 graph export "$dir/commerce_VA_inflation/Rédaction/PIWIM_LONGITUDINAL.png", replace
 	
 
-		
+erase temp_TIVA_REV4.dta		
 erase temp_TIVA.dta
 erase temp_WIOD.dta

@@ -54,20 +54,23 @@ foreach source in  WIOD TIVA TIVA_REV4 {
 	if "`source'"=="TIVA_REV4" local end_year 2015
 
 	
-	// Fabrication des fichiers d'effets moyens des chocs de change
-	// pour le choc CPI, faire tourner compute_HC et compute_leontief, les autres ne sont pas indispensables
+	// Fabrication des fichiers d'effets moyens des chocs
 
 		*  foreach i of numlist 2011 {
 	foreach i of numlist `start_year' (1)`end_year'  {
 		
-		local HC_fait 0
+		
+
+******Cette boucle demande de calculer l'effet du choc sur l'ensemble des secteurs. Elle allonge considérablement le travail
+******A priori, il faut l'exclure, sauf en cas de recherche particulière.
+/*
 		foreach s in $sector {
 			foreach origine in impt dom {
 				local liste `liste' HC_`s'_`origine'
 			}
 		}
-		
-		
+*/		
+	local HC_fait 0
     	foreach j in  `liste' HC X Y HC_neig_dom HC_alimentaire_dom HC_energie_dom HC_services_dom HC_dom ///
 					HC_neig_impt HC_alimentaire_impt HC_energie_impt HC_services_impt HC_impt  {	
 
@@ -91,5 +94,5 @@ foreach source in  WIOD TIVA TIVA_REV4 {
 *HC_alimentaire HC_neig HC_services HC_energie
 
 local nbr_sect=wordcount("$sector")	
-log close
+capture log close
 

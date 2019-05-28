@@ -159,22 +159,20 @@ graph twoway (scatter pond_TIVA_REV4_HC pond_WIOD_HC , mlabel(mylabel)) ///
 			
 graph export "$dir/commerce_VA_inflation/Rédaction/Comparaison_WIOD_TIVA_REV4_`year'.png", replace
 
-
-blif
-
-
 *************Figure 2 (presenting results)
 
 use "$dir/Bases/Y_WIOD.dta", clear
 collapse (sum) Y, by(pays year)
-rename pays c
+
 keep if year==2014
 
 
 merge 1:1 pays using "$dir/Results/Devaluations/auto_chocs_HC_WIOD_2014.dta"
 
 gen blouf = 0
-gen mylabel= pays if strpos("FRA DEU DEU_EUR ITA ITA_EUR GBR CHN USA CAN JPN ",c)!=0
+gen mylabel= pays if strpos("FRA DEU DEU_EUR ITA ITA_EUR GBR CHN USA CAN JPN ",pays)!=0
+
+replace pond_WIOD_HC = -pond_WIOD_HC
 
 twoway histogram pond_WIOD_HC, width(0.05) frequency xscale(range(0.04 0.36)) || ///
 	scatter blouf pond_WIOD_HC if mylabel!="", /// 
@@ -323,8 +321,8 @@ twoway 	(line WIOD_elast_annual year, lcolor(blue) lpattern(dash)) ///
 		(line TIVA_REV4_elast_annual year, lcolor(green) lpattern(dash)) ///
 		(line TIVA_REV4_elast_annual_pond year, lcolor(green)), ///
 		legend(label(1 "WIOD") label(2 "WIOD, output weighted") ///
-		label(3 "TIVA") label(4 "TIVA, output weighted")  /// 
-		label(5 "TIVA_REV4") label(6 "TIVA_REV4, output weighted"))  /// 
+		label(3 "TIVA rev3") label(4 "TIVA rev3, output weighted")  /// 
+		label(5 "TIVA rev4") label(6 "TIVA_rev4, output weighted"))  /// 
 		ytitle("elasticity (absolute value)", ) ///
 		note("Computed on a common sample of 43 countries assuming no Eurozone") ///
 		scheme(s1mono)

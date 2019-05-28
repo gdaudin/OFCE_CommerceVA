@@ -609,7 +609,7 @@ A major part of the shock comes from lower prices for service consumption (Figur
 %\end{figure}
 
 \section{What do we gain from using world input-output matrices?}
-One might wonder whether using world input-ouput matrices provided by WIOD or TIVA to compute the effect of exchange rate shocks on household consumption prices is worth the wait (the latest year covered by WIOD is 2014, and 2015 for TIVA) and the computational complexity. To answer this question, we break down $\overline{s_{i}}^{i,HC}$ into different elements classified by ease of use and computation. Let us start from equation \ref{eq:eqdomcurrency}.
+One might wonder whether using world input-ouput matrices provided by WIOD or TIVA to compute the effect of exchange rate shocks on household consumption prices is worth the wait (the latest year covered by WIOD is 2014, and 2015 for TIVA) and the computational complexity. To answer this question, we break down $\overline{s_{i}}^{i,HC}$ into different elements classified by ease of use and computation. Let us start from equation \ref{eq:eqdomcurrency}. We can obtain:
 
 \begin{equation}
 \begin{array}{lccl}
@@ -633,24 +633,27 @@ When the shock corresponds to an appreciation of the domestic currency, $E1$ and
 Notice this decomposition is not the same as equation \ref{equ:decomp_impexp}. In that equation, we were interested in the contribution of different types of goods to the computed effect of the initial shock. In this equation, we are interested in the different channel through which the shock has an effect.
 
 
-A first appraisal to the value-added by PIWIM is to compute the share $E1.HC^{i,imp}$, $E2.HC^{i,dom}$, $E3.HC^{i,imp}$ and $E4.HC^i$ in $\overline{s}_{i}^{i,HC}$. Figure \ref{fig:decompositionofs} provides the result. $E3.HC^{i,imp}$ is very small, $E1.HC^{i,imp}$ dominates. But, for most countries, $E4.HC^i$ represent between 10\% and 30\% of $\overline{s}_{i}^{i,HC}$.
+A first appraisal to the contribution of PIWIM is to compute the share $E1.HC^{i,imp}$, $E2.HC^{i,dom}$, $E3.HC^{i,imp}$ and $E4.HC^i$ in $\overline{s}_{i}^{i,HC}$. Figure \ref{fig:decompositionofs} provides the result. $E3.HC^{i,imp}$ is very small, $E1.HC^{i,imp}$ dominates. But, for most countries, $E4.HC^i$ represent between 10\% and 30\% of $\overline{s}_{i}^{i,HC}$.
+China is an important exception.
 
 \begin{figure}[!h]
 \centering
 \caption{\footnotesize{\textbf{Decomposition of $\overline{s}_{i}^{i,HC}$}}}
 \begin{tabular}{c}
-\includegraphics[width=5.0in, height=3.5in]{hist_components_WIOD}\\
+\includegraphics[width=5.0in, height=3.5in]{hist_components_WIOD_2014.png}\\
 \floatfoot{Source: WIOD, 2014}. \\
 \end{tabular}
 \label{fig:decompositionofs}
 \end{figure}
 
-Yet, the relative importance of $E4.HC^i$ might not be too much of an issue if it can be deducted from the easier-to-compute elements of $\overline{s}_{i}^{i,HC}$. This is suggested by the correlation matrix of  $E1.HC^{i,imp}$, $E2.HC^{i,dom}$, $E3.HC^{i,imp}$ and $E4.HC^i$ (see Table \ref{table:corretable_1}). 
+Yet, the relative importance of $E4.HC^i$ might not be too much of an issue if it can be deducted from the easier-to-compute elements of $\overline{s}_{i}^{i,HC}$.
 
-\input{corrtable_1.tex}
+%This is suggested by the correlation matrix of  $E1.HC^{i,imp}$, $E2.HC^{i,dom}$, $E3.HC^{i,imp}$ and $E4.HC^i$ (see Table \ref{table:corretable1}). 
+%
+%\input{corrtable_1.tex}
 
 $E3.HC^{i,imp}$ does not require inversing a matrix, but it is still quite data-intensive to compute. As a result, we study wether we can deduct $\overline{s}_{i}^{i,HC}$ from $E1.HC^{i,imp}$ and $E2.HC^{i,dom}$.
-Figure \ref{fig:ratiodir_WIOD} depicts the relationship between $\overline{s}_{i}^{i,HC}$ and $E1.HC^{i,imp}+E2.HC^{i,dom}$. It shows that $E1.HC^{i,imp}+E2.HC^{i,dom}$ is a pretty good predictor of $\overline{s}_{i}^{i,HC}$ (the $R^2$ is over 0.98). Excepting to some extent 2009, this relationship is constant through time (see Figure \ref{fig:evolution_b} and \ref{fig:evolution_cst}).
+Figure \ref{fig:ratiodir_WIOD} depicts the relationship between $\overline{s}_{i}^{i,HC}$ and $E1.HC^{i,imp}+E2.HC^{i,dom}$. It shows that $E1.HC^{i,imp}+E2.HC^{i,dom}$ is a good predictor of $\overline{s}_{i}^{i,HC}$ (the $R^2$ is over 0.98). Excepting to some extent 2009, this relationship is constant through time (see Figure \ref{fig:evolution_b} and \ref{fig:evolution_cst}).
 
  \begin{equation}
 \overline{s}_{i}^{i,HC}=\alpha + \beta  \left(E1.HC^{i,imp}+E2.HC^{i,dom}\right) +\varepsilon_i 
@@ -687,34 +690,7 @@ Figure \ref{fig:ratiodir_WIOD} depicts the relationship between $\overline{s}_{i
 \end{figure}
 
 
-The same results mostly stand using the TiVA database (see Figures \ref{fig:ratiodir_TiVA}, \ref{fig:evolution_b_TiVA} and \ref{fig:evolution_cst_TiVA}).
-
-\begin{figure}[!h]
-\centering
-\caption{\footnotesize{\textbf{Comparing $\overline{s}_{i}^{i,HC}$ and $E1.HC^{i,imp}+E2.HC^{i,dom}$ (TiVA)}}}
-\begin{tabular}{c}
-\includegraphics[width=5.0in, height=3.5in]{graph_2011_TIVA_HC}\\
-\end{tabular}
-\label{fig:ratiodir_TiVA}
-\end{figure}
-
-\begin{figure}[!h]
-\centering
-\caption{\footnotesize{\textbf{Evolution of $\beta$ and $R2$ through time (TiVA)}}}
-\begin{tabular}{c}
-\includegraphics[width=5.0in, height=3.5in]{coef_E_TIVA_HC}\\
-\end{tabular}
-\label{fig:evolution_b_TiVA}
-\end{figure}
-
-\begin{figure}[!h]
-\centering
-\caption{\footnotesize{\textbf{Evolution of $\alpha$ through time (TiVA)}}}
-\begin{tabular}{c}
-\includegraphics[width=5.0in, height=3.5in]{coef_cst_TIVA_HC}\\
-\end{tabular}
-\label{fig:evolution_cst_TiVA}
-\end{figure}
+The same results mostly stand using the TiVA databases (see Appendix).
 
 
 %
@@ -897,6 +873,7 @@ Real integration through the supply chain matters for domestic price dynamics in
 \label{tab:wiodindustries}
 \end{table}
 
+
 \appendix{Contrasting $S$ and $S^i$ in the two-country, one sector case}
 \subsection{Evolution of VA price}
 \begin{gather*}
@@ -973,6 +950,67 @@ If each nation's production only uses national inputs, we have a plausible
 \end{gather*}
 
 This seems to confirm that the exchange rate shock is not the same as the VA price shock.
+
+\appendix{Comparing $\overline{s}_{i}^{i,HC}$ and $E1.HC^{i,imp}+E2.HC^{i,dom}$ in the TIVA rev 3 and TIVA rev4 databases}
+
+Figures \ref{fig:ratiodir_TiVA}, \ref{fig:evolution_b_TiVA} and \ref{fig:evolution_cst_TiVA} for TIVA rev3 and Figures \ref{fig:ratiodir_TiVA_REV4}, \ref{fig:evolution_b_TiVA_REV4} and \ref{fig:evolution_cst_TiVA_REV4} for TIVA rev 4 show that one can get a good prediction of the accounting effects of an exchange rate shock on consumption prices by using simply the share of imported final consumption goods and services and the share of imported intermediary consumption goods in domestic final consumption goods and services.
+
+
+
+\begin{figure}[!h]
+	\centering
+	\caption{\footnotesize{\textbf{Comparing $\overline{s}_{i}^{i,HC}$ and $E1.HC^{i,imp}+E2.HC^{i,dom}$ (TIVA rev3)}}}
+	\begin{tabular}{c}
+		\includegraphics[width=5.0in, height=3.5in]{graph7_2011_TIVA_HC}\\
+	\end{tabular}
+	\label{fig:ratiodir_TiVA}
+\end{figure}
+
+\begin{figure}[!h]
+	\centering
+	\caption{\footnotesize{\textbf{Evolution of $\beta$ and $R2$ through time (TIVA rev3)}}}
+	\begin{tabular}{c}
+		\includegraphics[width=5.0in, height=3.5in]{coef_E_TIVA_HC}\\
+	\end{tabular}
+	\label{fig:evolution_b_TiVA}
+\end{figure}
+
+\begin{figure}[!h]
+	\centering
+	\caption{\footnotesize{\textbf{Evolution of $\alpha$ through time (TIVA rev3)}}}
+	\begin{tabular}{c}
+		\includegraphics[width=5.0in, height=3.5in]{coef_cst_TIVA_HC}\\
+	\end{tabular}
+	\label{fig:evolution_cst_TiVA}
+\end{figure}
+
+\begin{figure}[!h]
+	\centering
+	\caption{\footnotesize{\textbf{Comparing $\overline{s}_{i}^{i,HC}$ and $E1.HC^{i,imp}+E2.HC^{i,dom}$ (TIVA rev 4)}}}
+	\begin{tabular}{c}
+		\includegraphics[width=5.0in, height=3.5in]{graph7_2015_TIVA_REV4_HC}\\
+	\end{tabular}
+	\label{fig:ratiodir_TiVA_REV4}
+\end{figure}
+
+\begin{figure}[!h]
+	\centering
+	\caption{\footnotesize{\textbf{Evolution of $\beta$ and $R2$ through time (TIVA rev 4)}}}
+	\begin{tabular}{c}
+		\includegraphics[width=5.0in, height=3.5in]{coef_E_TIVA_REV4_HC}\\
+	\end{tabular}
+	\label{fig:evolution_b_TiVA_REV4}
+\end{figure}
+
+\begin{figure}[!h]
+	\centering
+	\caption{\footnotesize{\textbf{Evolution of $\alpha$ through time (TIVA rev 4)}}}
+	\begin{tabular}{c}
+		\includegraphics[width=5.0in, height=3.5in]{coef_cst_TIVA_REV4_HC}\\
+	\end{tabular}
+	\label{fig:evolution_cst_TiVA_REV4}
+\end{figure}
+
 
 
 

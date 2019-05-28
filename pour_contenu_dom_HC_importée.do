@@ -24,8 +24,6 @@ program  contenu_dom_HC_impt
 args yrs source hze pays_int
 *Année, source, hze_not ou hze_yes pour pays membres de la ZE et pays hors ZE, pays_int celui auquel on s'intéresse
 
-capture erase "$dir/Bases/contenu_dom_HC_impt_`yrs'_`source'_`hze'.dta"
-
 * exemple  
 
 *Ouverture de la base contenant le vecteur ligne de production par pays et secteurs
@@ -118,7 +116,7 @@ display "after collapse"
 *obtention de deux lignes, l'une de CI, l'autre de prod pour chaque secteur, issue de la base  `source'_`yrs'_OUT
 append using "$dir/Bases/`source'_`yrs'_OUT.dta"
 
-*transpositin en colonne, puis création d'un ratio de CI importées par secteur 
+*transposition en colonne, puis création d'un ratio de CI importées par secteur 
 xpose, clear varname
 rename v1 ci_dom
 rename v2 prod_etranger
@@ -170,18 +168,12 @@ replace contenu_dom_HC_etranger = contenu_dom_HC_etranger/conso
 rename pays_conso pays
 replace pays =upper(pays)
 
-capture append using "$dir/Bases/contenu_dom_HC_impt_`yrs'_`source'_`hze'.dta"
+if $num_pays != 1 append using "$dir/Bases/contenu_dom_HC_impt_`yrs'_`source'_`hze'.dta"
 sort pays
 
 save "$dir/Bases/contenu_dom_HC_impt_`yrs'_`source'_`hze'.dta", replace
+
 * enregistrement des ratio de CI dom par secteur par pays d'interet
-
-
-
-
-
-
-
 
 
 end
@@ -214,11 +206,14 @@ foreach source in  /*WIOD TIVA*/ TIVA_REV4 {
 
 *	foreach i of numlist 2010  {
 	foreach i of numlist $start_year (1)$end_year  {
-		capture erase "$dir/Bases/contenu_dom_HC_impt_`yrs'_`source'_hze_non.dta"
-		capture erase "$dir/Bases/contenu_dom_HC_impt_`yrs'_`source'_hze_yes.dta"
+		capture erase "$dir/Bases/contenu_dom_HC_impt_`i'_`source'_hze_non.dta"
+		capture erase "$dir/Bases/contenu_dom_HC_impt_`i'_`source'_hze_yes.dta"
+		global num_pays 0
 		foreach pays of global country_hc {
+			global num_pays=$num_pays+1
 			contenu_dom_HC_impt `i' `source' hze_not `pays'
 			contenu_dom_HC_impt `i' `source' hze_yes `pays'
 		}
+		blif
 	}
 }

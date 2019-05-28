@@ -18,9 +18,12 @@ if ("`c(hostname)'" == "FP1376CD") use  "T:\CommerceVA\Rédaction\Rédaction 201
 
 capture program drop etude_pour_papier
 program etude_pour_papier
-args year source
+args year source nature_choc
 
-use "$dir/Results/Devaluations/decomp_`source'_HC_`year'.dta", clear
+if "`nature_choc'"=="chge" use "$dir/Results/Devaluations/decomp_`source'_HC_`year'.dta", clear
+if "`nature_choc'"=="oil" use "$dir/Results/secteurs_pays/decomp_`source'_HC_`year'.dta", clear
+
+*use "$dir/Results/Devaluations/decomp_`source'_HC_`year'.dta", clear
 
 rename *energie* *energy*
 rename *alimentaire* *food*
@@ -34,7 +37,7 @@ label var HC_dom  "Explained by the price evolution of domestic goods"
 label var HC_impt "Explained by the price evolution of imported goods"
 
 
-keep if c=="FRA_EUR" | c=="DEU_EUR" | c=="USA" | c=="JPN" | c=="CHN" | c=="GBR" | c=="CAN" 
+keep if c=="FRA_EUR" | c=="DEU_EUR" | | c=="ITA_EUR" | c=="USA" | c=="JPN" | c=="CHN" | c=="GBR" | c=="CAN" 
 replace c=subinstr(c,"_EUR"e,"",.)
 gsort HC_tot
 graph bar (asis) HC_dom HC_impt , over(c,sort(HC_tot)) stack ///
@@ -43,12 +46,12 @@ graph bar (asis) HC_dom HC_impt , over(c,sort(HC_tot)) stack ///
 		scheme(s1mono) ///
 		ylabel(,format(%9.2fc)) ///
 		ytitle("elasticity (absolute value)") ///
-		note("For DEU and FRA, this is the elasticity to a shock on the Euro")
+		note("For Germany, France and Italy, this is the elasticity to a shock on the Euro")
 		
 /*		title("Impact d'une appréciation de 5% de l'euro sur les prix à la consommation", span size(medium)) /// */
 	
-if "`nature_choc'"=="chge"  graph export "$dirgit\Rédaction\decomp_origine_`source'_`year'.png", replace
-if "`nature_choc'"=="oil"  graph export "$dir\Results\secteurs_pays\graphiques\decomp_origine_`source'_`year'.png", replace
+if "`nature_choc'"=="chge"  graph export "$dirgit/Rédaction/decomp_origine_`source'_`year'.png", replace
+if "`nature_choc'"=="oil"  graph export "$dir/Results/secteurs_pays/graphiques/decomp_origine_`source'_`year'.png", replace
 
 
 foreach sector in neig services food energy {
@@ -262,10 +265,11 @@ if "`nature_choc'"=="oil"  graph export "$dir\Results\secteurs_pays\graphiques\d
 end
 
 
-*etude_pour_papier 2014 WIOD chge
-*etude_pour_papier 2015 TIVA_REV4 chge
-*etude_pour_note 2014 WIOD oil
-*etude_pour_note 2014 WIOD chge
-*etude_pour_note 2015  TIVA_REV4 chge
+etude_pour_papier 2014 WIOD chge
+/*
+etude_pour_papier 2015 TIVA_REV4 chge
+etude_pour_note 2014 WIOD oil
+etude_pour_note 2014 WIOD chge
+etude_pour_note 2015  TIVA_REV4 chge
 etude_pour_note 2015 TIVA_REV4 oil 
 etude_pour_note 2014 TIVA_REV4 oil 

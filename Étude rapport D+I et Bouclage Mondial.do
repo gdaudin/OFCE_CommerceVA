@@ -33,6 +33,7 @@ args year source type
 
 use "$dir/Results/Devaluations/auto_chocs_`type'_`source'_`year'.dta", clear
 
+
 *replace c =c+"_EUR" if source_shock=="EUR" 
 
 
@@ -49,7 +50,6 @@ if "`type'"=="HC" | "`type'" =="HC_note" {
 	drop _merge
 	
 	replace pays =upper(pays) 
-	
 	merge 1:1 pays using "$dir/Bases/contenu_dom_HC_impt_`year'_`source'_hze_not.dta"
 	drop _merge
 	replace pays =upper(pays)
@@ -61,6 +61,7 @@ if "`type'"=="HC" | "`type'" =="HC_note" {
 	drop _merge
 	replace pays =upper(pays) 
 	merge 1:1 pays using "$dir/Bases/contenu_dom_HC_impt_`year'_`source'_hze_yes.dta", update 
+	
 	*replace pays =lower(pays) 
 	drop _merge
 	replace pays = pays+"_EUR" if strlen(pays)==3
@@ -70,6 +71,7 @@ if "`type'"=="HC" | "`type'" =="HC_note" {
 	drop if _merge ==1
 	drop _merge year
 	*replace ratio_ci_impt_HC = ratio_ci_impt_HC*(1-contenu_impHC) + contenu_impHC - contenu_dom_HC_etranger
+	
 	
 }
 
@@ -110,23 +112,25 @@ label var pond_`source'_`type' "Élasticité des prix (`type') en monnaie nation
 save "$dir/Results/Étude rapport D+I et Bouclage Mondial/Elast_par_pays_`year'_`source'_`type'.dta", replace
 	
 
-if "`type'"=="HC" {
+if "`type'"=="HC" & ((`year'==2014 & "`source'"=="WIOD") | (`year'==2015 & "`source'"=="TIVA_REV4") | ("`source'"=="TIVA"  & `year'==2011)) {
 
 
-	replace c="" /*if c!="FRA_EUR" & c!="DEU_EUR" & c!="LUX_EUR" & c!="FRA" & c!="DEU" & c!="LUX" ///
+	replace pond_`source'_`type'=-pond_`source'_`type'
+	replace pays="" /*if c!="FRA_EUR" & c!="DEU_EUR" & c!="LUX_EUR" & c!="FRA" & c!="DEU" & c!="LUX" ///
 					& c!="CAN" & c!="JPN" & c!="USA" & c!="CHN" */
-	graph twoway (scatter pond_`source'_`type' E1HC_E2HC, mlabel(c) mlabsize(medium)) ///
+	
+	graph twoway (scatter pond_`source'_`type' E1HC_E2HC, mlabel(pays) mlabsize(medium)) ///
 			(lfit pond_`source'_`type' E1HC_E2HC) ///
 			(lfit pond_`source'_`type' pond_`source'_`type',lwidth(vthin) color(black)) , ///
 			/*title("Comparing direct and modelled effects")*/ ///
 			xtitle("E1HC + E2HC") ytitle("`source' Elasticities `year'") ///
 			yscale(range(0.0 0.3)) xscale(range(0.0 0.3)) xlabel (0.0(0.05) 0.3) ylabel(0.0(0.05) 0.3) ///
-			legend(off)
-	*dans le cas HC, xtitle pourrait se finir par «importées dans la conso dom + part conso importée»			
+			legend(off) ///
+			scheme(s1mono)
+	*dans le cas HC, xtitle pourrait se finir par «importées dans la conso dom + part conso importée»	
 						
-	
 	graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/graph7_`year'_`source'_`type'.pdf", replace
-	
+	graph export "$dirgit/Rédaction/graph7_`year'_`source'_`type'.pdf", replace
 	
 	graph close
 
@@ -171,8 +175,7 @@ if "`type'"=="HC_note" & ((`year'==2014 & "`source'"=="WIOD") | (`year'==2015 & 
 	
 }
 
-
-
+/*
 if "`type'" == "HC" {
 
 	foreach reg in reg_ns reg_sep  {
@@ -240,7 +243,7 @@ gen corr = r(rho)
 	}
 
 }
-
+*/
 
 
 end 
@@ -249,12 +252,12 @@ end
 ****************************************************************************
 
 *foreach source in  WIOD {
-foreach source in  /*TIVA*/  WIOD TIVA_REV4     {
+foreach source in  TIVA  WIOD TIVA_REV4     {
 
 
 
 	if "`source'"=="WIOD" global start_year 2014	
-	if "`source'"=="TIVA" global start_year 1995
+	if "`source'"=="TIVA" global start_year 2011
 	if "`source'"=="TIVA_REV4" global start_year 2015
 
 
@@ -265,7 +268,7 @@ foreach source in  /*TIVA*/  WIOD TIVA_REV4     {
 	
 	
    capture erase "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`source'_`type'.dta" 
-	foreach type in /* HC */ HC_note /*par_sect*/ {
+	foreach type in  HC  /*HC_note par_sect*/ {
 		capture erase "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`source'_`type'.dta"
 
 *		foreach i of numlist 2014  {
@@ -278,9 +281,7 @@ foreach source in  /*TIVA*/  WIOD TIVA_REV4     {
 
 }
 
-
 blif
-
 
 /*
 foreach source in  WIOD  {
@@ -338,7 +339,7 @@ foreach source in  WIOD TIVA TIVA_REV4 {
 	graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/coef_cst_`source'_HC.pdf", replace
 }
 
-foreach source in  WIOD TIVA TIVA_REV4 {
+foreach source in  WIOD /*TIVA TIVA_REV4*/ {
 
 	if "`source'"=="WIOD" global start_year 2014	
 	if "`source'"=="TIVA" global start_year 1995
@@ -359,11 +360,13 @@ foreach source in  WIOD TIVA TIVA_REV4 {
 			gen mylabel= c if strpos("FRA DEU DEU_EUR ITA ITA_EUR GBR CHN USA CAN JPN ",c)!=0
 			foreach var in E1HC E2HC E3HC E4HC {
 				gen share_`var'=`var'/pond_WIOD_HC
-				histogram share_`var', start(-0.2) width(0.1) freq name(`var') ///
-				scatter blouf pond_WIOD_HC if mylabel!="", /// 
-				xscale(range(-0.1 (0.1) 0.8)) xlabel(-0.1 (0.1) 0.8)
+				twoway histogram share_`var', start(-0.2) width(0.1) freq name(`var') || ///
+					scatter blouf share_`var' if mylabel!="", /// 
+					xscale(range(-0.1 (0.1) 0.8)) xlabel(-0.1 (0.1) 0.8) ///
+					mlabel(mylabel) mlabposition(12)  mlabangle(vertical)  mlabgap(huge) mlabsize(vsmall) msymbol(pipe) ///
+					scheme(s1mono)
 			}
-		graph combine 	E1HC E2HC E3HC E4HC, name(hist_components_`source'_`i')
+		graph combine 	E1HC E2HC E3HC E4HC, name(hist_components_`source'_`i') scheme(s1mono)
 		graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/hist_components_`source'_`i'.png", replace
 			
 		}
@@ -372,7 +375,7 @@ foreach source in  WIOD TIVA TIVA_REV4 {
 	
 }
 
-graph use hist_components_WIOD_2014
-graph export "$dir/commerce_VA_inflation/Rédaction/hist_components_si.png", replace
+graph display hist_components_WIOD_2014
+graph export "$dir/commerce_VA_inflation/Rédaction/hist_components_WIOD_2014.png", replace
 
 

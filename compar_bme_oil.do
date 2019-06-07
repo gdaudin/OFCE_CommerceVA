@@ -45,15 +45,17 @@ merge m:1 c using "$dir/Results/secteurs_pays/mean_chg_`source'_HC_`year'.dta"
 *on met le choc de change à 10€
 
 if `year' == 2015 replace shock1 = shock1*100*(10/47.22)
+if `year' == 2014 replace shock1 = shock1*100*(10/74.48)
 
 local scale1 0.0 2.0 
 local scale2 0.0 (0.25) 2.0
 
-foreach type in OE1 OE2 {
+foreach type in OE1 OE2 OE3{
 	foreach yrs of numlist 2018 2019 {
 
-	if "`type'" == "OE1" local note "Niveau de départ du prix du pétrole de 30€ (BMEs) et 47€ (PIWIM)"
-	if "`type'" == "OE2" local note "Niveau de départ du prix du pétrole de 55€ (BMEs) et 47€ (PIWIM)"
+	if "`type'" == "OE1" local note "Niveau de départ du prix du pétrole de 30€ (BMEs) et 74€ (PIWIM)"
+	if "`type'" == "OE2" local note "Niveau de départ du prix du pétrole de 55€ (BMEs) et 74€ (PIWIM)"
+	if "`type'" == "OE3" local note "Niveau de départ du prix du pétrole de 85€ (BMEs) et 74€ (PIWIM)"
 	/*regress BME pond_WIOD_HC if year == `yrs'*/
 	/*twoway (scatter BME pond_WIOD_HC if year == `yrs', mlabel(c)) (lfit BME pond_WIOD_HC) if year == `yrs', name(BME_vs_WIOD_`yrs', replace)
 	graph save "$dir/Graphiques/BME_vs_WIOD_`yrs'.gph",  replace
@@ -75,7 +77,7 @@ foreach type in OE1 OE2 {
 
 
 format %14.2f shock1 BME_3
-foreach type in OE1 OE2 { 
+foreach type in OE1 OE2 OE3{ 
 	foreach yrs of numlist 2018 2019 {
 
 	
@@ -83,14 +85,18 @@ foreach type in OE1 OE2 {
 	if "`type'" == "OE1" {
 		local scale1 0.0 2.0  
 		local scale2 0.0 (0.25) 2.0  
-		local note "Niveau de départ du prix du pétrole de 30€ (BMEs) et 47€ (PIWIM), hors Chypre" 
+		local note "Niveau de départ du prix du pétrole de 30€ (BMEs) et 74€ (PIWIM), hors Chypre" 
 	}
 	if "`type'" == "OE2" {
 		local scale1 0.0 2.0 
 		local scale2 0.0 (0.25) 2.0
-		local note "Niveau de départ du prix du pétrole de 55€ (BMEs) et 47€ (PIWIM), hors Chypre" 
+		local note "Niveau de départ du prix du pétrole de 55€ (BMEs) et 74€ (PIWIM), hors Chypre" 
 	}
-		
+	if "`type'" == "OE3" {
+		local scale1 0.0 2.0 
+		local scale2 0.0 (0.25) 2.0
+		local note "Niveau de départ du prix du pétrole de 85€ (BMEs) et 74€ (PIWIM), hors Chypre" 
+	}
 	/*regress BME pond_WIOD_HC if year == `yrs'*/
 	/*twoway (scatter BME pond_WIOD_HC if year == `yrs', mlabel(c)) (lfit BME pond_WIOD_HC) if year == `yrs', name(BME_vs_WIOD_`yrs', replace)
 	graph save "$dir/Graphiques/BME_vs_WIOD_`yrs'.gph",  replace
@@ -110,6 +116,7 @@ foreach type in OE1 OE2 {
 	graph export "$dir/Results/secteurs_pays/graphiques/BME_3_vs_`source'`type'.png",  replace 
 } 
 end
-compar_bme 2015 TIVA_REV4 
+compar_bme 2014 TIVA_REV4 
+*compar_bme 2014 WIOD
 
-
+*Note : changer la définition du choc d'oil et le niveau du pétrole selon l'année dans les légendes

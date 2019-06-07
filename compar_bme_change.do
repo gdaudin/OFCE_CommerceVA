@@ -11,8 +11,11 @@ if ("`c(hostname)'" == "FP1376CD") use  "T:\CommerceVA\Rédaction\Rédaction 201
 generate pays = upper(c)+"_EUR" if type == "ERT"
 replace pays = upper(c) if type == "CXD"
 
-replace BME_1=-BME_1*10/clef_CXD if type == "CXD" 
-replace BME_3=-BME_3*10/clef_CXD if type == "CXD" 
+replace BME_1=-BME_1*10 if type == "CXD" 
+replace BME_3=-BME_3*10 if type == "CXD" 
+
+//replace BME_1=-BME_1*10/clef_CXD if type == "CXD"  //si on veut BME au format Semap (vu de la BCN et non de la ZE)
+//replace BME_3=-BME_3*10/clef_CXD if type == "CXD"  //si on veut BME au format Semap (vu de la BCN et non de la ZE)
 
 replace BME_1=BME_1 if type == "ERT" 
 replace BME_3=BME_3 if type == "ERT" 
@@ -37,10 +40,10 @@ replace pond_`source'_HC = pond_`source'_HC
 if "`type'" == "CXD" local note choc prix des compétiteurs -10% (CXD) 
 if "`type'" == "ERT" local note choc de change 10% (ERT)
 
-if "`type'" == "CXD" local scale1 -7.0 0 
+if "`type'" == "CXD" local scale1 -3.0 0 
 if "`type'" == "ERT" local scale1  -3.0 0 
 
-if "`type'" == "CXD" local scale2 -7(1)0 
+if "`type'" == "CXD" local scale2 -3.0(0.5)0 
 if "`type'" == "ERT" local scale2 -3.0(0.5)0
 
 

@@ -3,6 +3,7 @@
 *Ligne 49 : source
 *Ligne 82 : années
 *Ligne 86 : Total ou composantes
+*Long...
 
 
 *****Lanceur du programme de choc par pays 
@@ -26,7 +27,7 @@ capture log  using "$dir/Temporaire/$S_DATE.log", replace
 set matsize 7000
 *set mem 700m if earlier version of stata (<stata 12)
 set more off
-cd $dir 
+cd "$dir" 
 
 do "$dirgit/Definition_pays_secteur.do"  
 do "$dirgit/Aggregation_effets_des_chocs_secteurs_pays.do"   
@@ -40,12 +41,12 @@ set more off
 
 
 *foreach source in   TIVA { 
-foreach source in  WIOD /*TIVA TIVA_REV4*/ { 
+foreach source in  WIOD TIVA TIVA_REV4 { 
 
 	Definition_pays_secteur `source'
-	if "`source'"=="WIOD" local start_year 2014
+	if "`source'"=="WIOD" local start_year 2000
 	if "`source'"=="TIVA" local start_year 1995
-	if "`source'"=="TIVA_REV4" local start_year 2015
+	if "`source'"=="TIVA_REV4" local start_year 2005
 
 
 	if "`source'"=="WIOD" local end_year 2014
@@ -53,20 +54,23 @@ foreach source in  WIOD /*TIVA TIVA_REV4*/ {
 	if "`source'"=="TIVA_REV4" local end_year 2015
 
 	
-	// Fabrication des fichiers d'effets moyens des chocs de change
-	// pour le choc CPI, faire tourner compute_HC et compute_leontief, les autres ne sont pas indispensables
+	// Fabrication des fichiers d'effets moyens des chocs
 
 		*  foreach i of numlist 2011 {
 	foreach i of numlist `start_year' (1)`end_year'  {
 		
-		local HC_fait 0
+		
+
+******Cette boucle demande de calculer l'effet du choc sur l'ensemble des secteurs. Elle allonge considérablement le travail
+******A priori, il faut l'exclure, sauf en cas de recherche particulière.
+/*
 		foreach s in $sector {
 			foreach origine in impt dom {
 				local liste `liste' HC_`s'_`origine'
 			}
 		}
-		
-		
+*/		
+	local HC_fait 0
     	foreach j in  `liste' HC X Y HC_neig_dom HC_alimentaire_dom HC_energie_dom HC_services_dom HC_dom ///
 					HC_neig_impt HC_alimentaire_impt HC_energie_impt HC_services_impt HC_impt  {	
 
@@ -90,5 +94,5 @@ foreach source in  WIOD /*TIVA TIVA_REV4*/ {
 *HC_alimentaire HC_neig HC_services HC_energie
 
 local nbr_sect=wordcount("$sector")	
-log close
+capture log close
 

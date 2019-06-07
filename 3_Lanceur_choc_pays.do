@@ -27,7 +27,7 @@ set more off
 cd "$dir" 
 
 do "$dirgit/Definition_pays_secteur.do"   
-do "$dirgit/Aggregation_effets_des_chocs.do"   
+do "$dirgit/Aggregation_effets_des_chocs_chge.do"   
 do "$dirgit/compute_X.do"
 do "$dirgit/compute_HC.do"
 do "$dirgit/compute_Y.do"
@@ -59,7 +59,7 @@ set more off
 
 
 *foreach source in   TIVA { 
-foreach source in  /* WIOD*/ TIVA /*TIVA_REV4*/ { 
+foreach source in  WIOD /*TIVA TIVA_REV4*/ { 
 
 
 	Definition_pays_secteur `source'
@@ -170,5 +170,5 @@ foreach source in  /* WIOD*/ TIVA /*TIVA_REV4*/ {
 *HC_alimentaire HC_neig HC_services HC_energie
 
 local nbr_sect=wordcount("$sector")	
-log close
+capture log close
 

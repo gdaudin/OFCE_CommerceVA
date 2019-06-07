@@ -51,7 +51,7 @@
 \author{
 	Hadrien Camatte\thanks{Banque de France. E-mail: \email{hadrien.camatte@banque-france.fr}}
 	\and
-	Guillaume Daudin\thanks{Université Paris-Dauphine, PSL University, CNRS, 8007, IRD, 260, LEDa, DIAL, 75016, Paris, France. Corresponding author. E-mail: \email{guillaume.daudin@dauphine.psl.eu}}
+	Guillaume Daudin\thanks{Université Paris-Dauphine, PSL University, CNRS, 8007, IRD, 260, LEDa, DIAL, 75016, Paris, France. Sciences Po, OFCE, 75007, Paris. Corresponding author. E-mail: \email{guillaume.daudin@dauphine.psl.eu}}
 	\and
 	Violaine Faubert\thanks{Banque de France. E-mail: \email{violaine.faubert@banque-france.fr}}
 	\and
@@ -244,7 +244,7 @@ Other & Brunei, Israel, Morocco, Russia, Saudi Arabia, South Africa, Tunisia, Tu
 
 \paragraph{Major differences between the WIOD and TiVA databases}
 The WIOD and TiVA databases have a number of distinguishing characteristics (see \cite{Timmer2015} for details). The most relevant difference for our analysis relates to the treatment of imports by use category. National input-output statistics provide the use of products by industries and final consumers, but the country of origin of products is unknown. Therefore, one has to breakdown product import statistics by category of use in the construction of world input-output tables.\\
-The TiVA database relies on the so-called "import proportionality assumption". The domestic input-output tables show transactions between domestic industries. As a complement to these tables, supplementary tables break down total imports by user (industry and the different categories of final demand). Some countries provide these import tables in conjunction with their input-output tables, but in other cases they are derived by the OECD. Mexico and China benefit from a special treatment, but for the other countries the main assumption used is that the share of imports in any product consumed directly as intermediate consumption or final demand (except exports) is the same for all end-uses (the "proportionality assumption") \footnote{See \cite{OECDWTOnd} for details.}.\\
+The TiVA database relies on the so-called "import proportionality assumption". The domestic input-output tables show transactions between domestic industries. As a complement to these tables, supplementary tables break down total imports by user (industry and the different categories of final demand). Some countries provide these import tables in conjunction with their input-output tables, but in other cases they are derived by the OECD. Mexico and China benefit from a special treatment, but for the other countries the main assumption used is that the share of imports in any product consumed directly as intermediate consumption or final demand (except exports) is the same for all end-uses (the "proportionality assumption") \footnote{See \cite{OECD2011} for details.}.\\
 Various studies have found that this assumption can be misleading, as import shares vary significantly across end-uses. \cite{Feenstra2012} find that shares of imported materials may differ substantially across U.S. industries. Based on Asian input-output tables, \cite{Puzzello2012} finds that the proportionality assumption understates the use of foreign intermediate inputs. It is likely to be particularly binding for developing countries, as the import content of exports is usually higher than the import content of products used for domestic consumption.\\
 To address this issue, the WIOD database uses bilateral trade statistics to derive import shares for three end-use categories (intermediate use, final consumption and investment) by mapping detailed six-digit products international trade statistics based on product descriptions \citep{Dietzenbacher2013}.\\
 To sum up, the WIOD includes information on bilateral industry-specific input use, whereas such information exists only in imputed form in TiVA. Therefore, we focus on the WIOD database in our analysis \footnote{Results obtained with the 2016 and 2018 TiVA databases are available upon request.}. 
@@ -424,20 +424,23 @@ Figure \ref{fig:comp_WIOD_TIVA}, shows that, despite their differences, using WI
 
 \begin{figure}[!h]
 \centering
-\caption{\footnotesize{\textbf{Comparing consumer price elasticity to an exchange rate appreciation for WIOD and TIVA, 2011}}}
+\caption{\footnotesize{\textbf{Comparing consumer price elasticity to an exchange rate appreciation of 100\% for WIOD, TIVA and TIVA rev4, 2011 and 2014}}}
 \begin{tabular}{c}
-\includegraphics[width=4.5in, height=3in]{Comparaison_WIOD_TIVA_2011.png}\\
-\floatfoot{Source: WIOD and TIVA}.
+\includegraphics[width=3in, height=2in]{Comparaison_WIOD_TIVA_2011.png}
+\includegraphics[width=3in, height=2in]{Comparaison_TIVA_REV4_TIVA_2011.png}\\
+\includegraphics[width=3in, height=2in]{Comparaison_WIOD_TIVA_REV4_2011.png}
+\includegraphics[width=3in, height=2in]{Comparaison_WIOD_TIVA_REV4_2014.png}\\
+\floatfoot{Source: WIOD, TIVA rev3 and TIVA rev4}.
 \end{tabular}
 \label{fig:comp_WIOD_TIVA}
 \end{figure}
 
 
-The evolution of consumer prices elasticity through time is very similar in both source, even if the small difference shown in Figure \ref{fig:comp_WIOD_TIVA} are enough for the mean value of the elasticity of consumer prices to be slightly different depending on the source (see Figure \ref{fig:PIWIM_LONGITUDINAL}).
+The evolution of consumer prices elasticity through time is very similar in all sources However, computations based on TIVA rev3 yield a slightly higher elasticity than those based on TIVA rev4 and WIOD (see Figure \ref{fig:PIWIM_LONGITUDINAL}).
 
 \begin{figure}[!h]
 	\centering
-	\caption{\footnotesize{\textbf{Comparing mean consumer price elasticity to an exchange rate appreciation for WIOD and TIVA, 1995-2014}}}
+	\caption{\footnotesize{\textbf{Comparing mean consumer price elasticity to an exchange rate appreciation of 100\% for WIOD and TIVA, 1995-2014}}}
 	\begin{tabular}{c}
 		\includegraphics[width=4.5in, height=3in]{PIWIM_LONGITUDINAL.png}\\
 		\floatfoot{Source: WIOD and TIVA}.
@@ -453,7 +456,7 @@ Figure \ref{fig:WIOD_HC_E1HC} shows it is closely, but not strictly, related to 
 
 \begin{figure}[!h]
 	\centering
-	\caption{\footnotesize{\textbf{Distribution of consumer price elasticity to an exchange rate appreciation for WIOD 2014}}}
+	\caption{\footnotesize{\textbf{Distribution of consumer price elasticity to a 100\% exchange rate appreciation for WIOD 2014}}}
 	\begin{tabular}{c}
 		\includegraphics[width=4.5in, height=3in]
 		{WIOD_HC_elasticities.png}\\
@@ -463,17 +466,17 @@ Figure \ref{fig:WIOD_HC_E1HC} shows it is closely, but not strictly, related to 
 \end{figure}
 
 
-
-\begin{figure}[!h]
-	\centering
-	\caption{\footnotesize{\textbf{Consumer price elasticity and share of imported consumption for WIOD 2014}}}
-	\begin{tabular}{c}
-		\includegraphics[width=4.5in, height=3in]
-		{WIOD_HC_E1HC.png}\\
-		\floatfoot{Source: WIOD}.
-	\end{tabular}
-	\label{fig:WIOD_HC_E1HC}
-\end{figure}
+%
+%\begin{figure}[!h]
+%	\centering
+%	\caption{\footnotesize{\textbf{Consumer price elasticity and share of imported consumption for WIOD 2014}}}
+%	\begin{tabular}{c}
+%		\includegraphics[width=4.5in, height=3in]
+%		{WIOD_HC_E1HC.png}\\
+%		\floatfoot{Source: WIOD}.
+%	\end{tabular}
+%	\label{fig:WIOD_HC_E1HC}
+%\end{figure}
 
 
 \subsection{Contribution of different goods}
@@ -512,11 +515,11 @@ Figure \ref{fig:decomp_origine} shows that the prices of imported final consumpt
 
 \begin{figure}[!h]
 	\centering
-	\caption{\footnotesize{\textbf{Contribution to consumer price elasticity of imported and domestic goods}}}
+	\caption{\footnotesize{\textbf{Contribution of imported and domestic goods to the effect on consumer price elasticity of an exchange rate appreciaton of 100\% }}}
 	\begin{tabular}{c}
 		\includegraphics[width=4.5in, height=3in]
-		{decomp_origine.png}\\
-		\floatfoot{Source: WIOD}.
+		{decomp_origine_WIOD_2014.png}\\
+		\floatfoot{Source: WIOD, 2014}.
 	\end{tabular}
 	\label{fig:decomp_origine}
 \end{figure}
@@ -532,7 +535,7 @@ A major part of the shock comes from lower prices for service consumption (Figur
 	\begin{tabular}{c}
 		\includegraphics[width=4.5in, height=3in]
 		{decomp_sect.png}\\
-		\floatfoot{Source: WIOD}.
+		\floatfoot{Source: WIOD, 2014}.
 	\end{tabular}
 	\label{fig:decomp_sect}
 \end{figure}
@@ -545,7 +548,7 @@ A major part of the shock comes from lower prices for service consumption (Figur
 	\begin{tabular}{c}
 		\includegraphics[width=4.5in, height=3in]
 		{decomp_sectxorigin.png}\\
-		\floatfoot{Source: WIOD}.
+		\floatfoot{Source: WIOD, 2014}.
 	\end{tabular}
 	\label{fig:decomp_sectxorigin}
 \end{figure}
@@ -606,7 +609,7 @@ A major part of the shock comes from lower prices for service consumption (Figur
 %\end{figure}
 
 \section{What do we gain from using world input-output matrices?}
-One might wonder whether using world input-ouput matrices provided by WIOD or TIVA to compute the effect of exchange rate shocks on household consumption prices is worth the wait (the latest year covered by WIOD is 2014, and 2015 for TIVA) and the computational complexity. To answer this question, we break down $\overline{s_{i}}^{i,HC}$ into different elements classified by ease of use and computation. Let us start from equation \ref{eq:eqdomcurrency}.
+One might wonder whether using world input-ouput matrices provided by WIOD or TIVA to compute the effect of exchange rate shocks on household consumption prices is worth the wait (the latest year covered by WIOD is 2014, and 2015 for TIVA) and the computational complexity. To answer this question, we break down $\overline{s_{i}}^{i,HC}$ into different elements classified by ease of use and computation. Let us start from equation \ref{eq:eqdomcurrency}. We can obtain:
 
 \begin{equation}
 \begin{array}{lccl}
@@ -630,24 +633,27 @@ When the shock corresponds to an appreciation of the domestic currency, $E1$ and
 Notice this decomposition is not the same as equation \ref{equ:decomp_impexp}. In that equation, we were interested in the contribution of different types of goods to the computed effect of the initial shock. In this equation, we are interested in the different channel through which the shock has an effect.
 
 
-A first appraisal to the value-added by PIWIM is to compute the share $E1.HC^{i,imp}$, $E2.HC^{i,dom}$, $E3.HC^{i,imp}$ and $E4.HC^i$ in $\overline{s}_{i}^{i,HC}$. Figure \ref{fig:decompositionofs} provides the result. $E3.HC^{i,imp}$ is very small, $E1.HC^{i,imp}$ dominates. But, for most countries, $E4.HC^i$ represent between 10\% and 30\% of $\overline{s}_{i}^{i,HC}$.
+A first appraisal to the contribution of PIWIM is to compute the share $E1.HC^{i,imp}$, $E2.HC^{i,dom}$, $E3.HC^{i,imp}$ and $E4.HC^i$ in $\overline{s}_{i}^{i,HC}$. Figure \ref{fig:decompositionofs} provides the result. $E3.HC^{i,imp}$ is very small, $E1.HC^{i,imp}$ dominates. But, for most countries, $E4.HC^i$ represent between 10\% and 30\% of $\overline{s}_{i}^{i,HC}$.
+China is an important exception.
 
 \begin{figure}[!h]
 \centering
 \caption{\footnotesize{\textbf{Decomposition of $\overline{s}_{i}^{i,HC}$}}}
 \begin{tabular}{c}
-\includegraphics[width=5.0in, height=3.5in]{hist_components_WIOD}\\
+\includegraphics[width=5.0in, height=3.5in]{hist_components_WIOD_2014.png}\\
 \floatfoot{Source: WIOD, 2014}. \\
 \end{tabular}
 \label{fig:decompositionofs}
 \end{figure}
 
-Yet, the relative importance of $E4.HC^i$ might not be too much of an issue if it can be deducted from the easier-to-compute elements of $\overline{s}_{i}^{i,HC}$. This is suggested by the correlation matrix of  $E1.HC^{i,imp}$, $E2.HC^{i,dom}$, $E3.HC^{i,imp}$ and $E4.HC^i$ (see Table \ref{table:corretable_1}). 
+Yet, the relative importance of $E4.HC^i$ might not be too much of an issue if it can be deducted from the easier-to-compute elements of $\overline{s}_{i}^{i,HC}$.
 
-\input{corrtable_1.tex}
+%This is suggested by the correlation matrix of  $E1.HC^{i,imp}$, $E2.HC^{i,dom}$, $E3.HC^{i,imp}$ and $E4.HC^i$ (see Table \ref{table:corretable1}). 
+%
+%\input{corrtable_1.tex}
 
 $E3.HC^{i,imp}$ does not require inversing a matrix, but it is still quite data-intensive to compute. As a result, we study wether we can deduct $\overline{s}_{i}^{i,HC}$ from $E1.HC^{i,imp}$ and $E2.HC^{i,dom}$.
-Figure \ref{fig:ratiodir_WIOD} depicts the relationship between $\overline{s}_{i}^{i,HC}$ and $E1.HC^{i,imp}+E2.HC^{i,dom}$. It shows that $E1.HC^{i,imp}+E2.HC^{i,dom}$ is a pretty good predictor of $\overline{s}_{i}^{i,HC}$ (the $R^2$ is over 0.98). Excepting to some extent 2009, this relationship is constant through time (see Figure \ref{fig:evolution_b} and \ref{fig:evolution_cst}).
+Figure \ref{fig:ratiodir_WIOD} depicts the relationship between $\overline{s}_{i}^{i,HC}$ and $E1.HC^{i,imp}+E2.HC^{i,dom}$. It shows that $E1.HC^{i,imp}+E2.HC^{i,dom}$ is a good predictor of $\overline{s}_{i}^{i,HC}$ (the $R^2$ is over 0.98). Excepting to some extent 2009, this relationship is constant through time (see Figure \ref{fig:evolution_b} and \ref{fig:evolution_cst}).
 
  \begin{equation}
 \overline{s}_{i}^{i,HC}=\alpha + \beta  \left(E1.HC^{i,imp}+E2.HC^{i,dom}\right) +\varepsilon_i 
@@ -684,34 +690,7 @@ Figure \ref{fig:ratiodir_WIOD} depicts the relationship between $\overline{s}_{i
 \end{figure}
 
 
-The same results mostly stand using the TiVA database (see Figures \ref{fig:ratiodir_TiVA}, \ref{fig:evolution_b_TiVA} and \ref{fig:evolution_cst_TiVA}).
-
-\begin{figure}[!h]
-\centering
-\caption{\footnotesize{\textbf{Comparing $\overline{s}_{i}^{i,HC}$ and $E1.HC^{i,imp}+E2.HC^{i,dom}$ (TiVA)}}}
-\begin{tabular}{c}
-\includegraphics[width=5.0in, height=3.5in]{graph_2011_TIVA_HC}\\
-\end{tabular}
-\label{fig:ratiodir_TiVA}
-\end{figure}
-
-\begin{figure}[!h]
-\centering
-\caption{\footnotesize{\textbf{Evolution of $\beta$ and $R2$ through time (TiVA)}}}
-\begin{tabular}{c}
-\includegraphics[width=5.0in, height=3.5in]{coef_E_TIVA_HC}\\
-\end{tabular}
-\label{fig:evolution_b_TiVA}
-\end{figure}
-
-\begin{figure}[!h]
-\centering
-\caption{\footnotesize{\textbf{Evolution of $\alpha$ through time (TiVA)}}}
-\begin{tabular}{c}
-\includegraphics[width=5.0in, height=3.5in]{coef_cst_TIVA_HC}\\
-\end{tabular}
-\label{fig:evolution_cst_TiVA}
-\end{figure}
+The same results mostly stand using the TiVA databases (see Appendix).
 
 
 %
@@ -894,6 +873,7 @@ Real integration through the supply chain matters for domestic price dynamics in
 \label{tab:wiodindustries}
 \end{table}
 
+
 \appendix{Contrasting $S$ and $S^i$ in the two-country, one sector case}
 \subsection{Evolution of VA price}
 \begin{gather*}
@@ -970,6 +950,67 @@ If each nation's production only uses national inputs, we have a plausible
 \end{gather*}
 
 This seems to confirm that the exchange rate shock is not the same as the VA price shock.
+
+\appendix{Comparing $\overline{s}_{i}^{i,HC}$ and $E1.HC^{i,imp}+E2.HC^{i,dom}$ in the TIVA rev 3 and TIVA rev4 databases}
+
+Figures \ref{fig:ratiodir_TiVA}, \ref{fig:evolution_b_TiVA} and \ref{fig:evolution_cst_TiVA} for TIVA rev3 and Figures \ref{fig:ratiodir_TiVA_REV4}, \ref{fig:evolution_b_TiVA_REV4} and \ref{fig:evolution_cst_TiVA_REV4} for TIVA rev 4 show that one can get a good prediction of the accounting effects of an exchange rate shock on consumption prices by using simply the share of imported final consumption goods and services and the share of imported intermediary consumption goods in domestic final consumption goods and services.
+
+
+
+\begin{figure}[!h]
+	\centering
+	\caption{\footnotesize{\textbf{Comparing $\overline{s}_{i}^{i,HC}$ and $E1.HC^{i,imp}+E2.HC^{i,dom}$ (TIVA rev3)}}}
+	\begin{tabular}{c}
+		\includegraphics[width=5.0in, height=3.5in]{graph7_2011_TIVA_HC}\\
+	\end{tabular}
+	\label{fig:ratiodir_TiVA}
+\end{figure}
+
+\begin{figure}[!h]
+	\centering
+	\caption{\footnotesize{\textbf{Evolution of $\beta$ and $R2$ through time (TIVA rev3)}}}
+	\begin{tabular}{c}
+		\includegraphics[width=5.0in, height=3.5in]{coef_E_TIVA_HC}\\
+	\end{tabular}
+	\label{fig:evolution_b_TiVA}
+\end{figure}
+
+\begin{figure}[!h]
+	\centering
+	\caption{\footnotesize{\textbf{Evolution of $\alpha$ through time (TIVA rev3)}}}
+	\begin{tabular}{c}
+		\includegraphics[width=5.0in, height=3.5in]{coef_cst_TIVA_HC}\\
+	\end{tabular}
+	\label{fig:evolution_cst_TiVA}
+\end{figure}
+
+\begin{figure}[!h]
+	\centering
+	\caption{\footnotesize{\textbf{Comparing $\overline{s}_{i}^{i,HC}$ and $E1.HC^{i,imp}+E2.HC^{i,dom}$ (TIVA rev 4)}}}
+	\begin{tabular}{c}
+		\includegraphics[width=5.0in, height=3.5in]{graph7_2015_TIVA_REV4_HC}\\
+	\end{tabular}
+	\label{fig:ratiodir_TiVA_REV4}
+\end{figure}
+
+\begin{figure}[!h]
+	\centering
+	\caption{\footnotesize{\textbf{Evolution of $\beta$ and $R2$ through time (TIVA rev 4)}}}
+	\begin{tabular}{c}
+		\includegraphics[width=5.0in, height=3.5in]{coef_E_TIVA_REV4_HC}\\
+	\end{tabular}
+	\label{fig:evolution_b_TiVA_REV4}
+\end{figure}
+
+\begin{figure}[!h]
+	\centering
+	\caption{\footnotesize{\textbf{Evolution of $\alpha$ through time (TIVA rev 4)}}}
+	\begin{tabular}{c}
+		\includegraphics[width=5.0in, height=3.5in]{coef_cst_TIVA_REV4_HC}\\
+	\end{tabular}
+	\label{fig:evolution_cst_TiVA_REV4}
+\end{figure}
+
 
 
 

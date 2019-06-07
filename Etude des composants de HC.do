@@ -210,6 +210,11 @@ if "`nature_choc'" == "oil" export excel using "$dir/Results/secteurs_pays/decom
 
 end
 
+
+
+composants_HC 2014 TIVA_REV4 oil non
+
+/*
 *foreach source in  WIOD  TIVA_REV4 {
 
 foreach source in  WIOD  TIVA TIVA_REV4  {
@@ -229,7 +234,7 @@ foreach source in  WIOD  TIVA TIVA_REV4  {
 	foreach i of numlist $start_year (1) $end_year  {
 		composants_HC `i' `source' chge oui
 		composants_HC `i' `source' oil oui
-		*composants_HC `i' `source' oil non
+		
 	
 	}
 }

@@ -39,7 +39,31 @@ do "$dirgit/Aggregation_effets_des_chocs_secteurs_pays.do"
 clear
 set more off
 
+*Pour obtenir les chocs sur l'ensemble des secteurs
+Definition_pays_secteur TIVA_REV4
 
+foreach s in $sector {
+			foreach origine in impt dom {
+				local liste `liste' HC_`s'_`origine'
+		}
+}
+
+local HC_fait 0
+local i 2014
+   foreach j in  `liste' HC   {	
+
+    if strpos("`j'","HC")!=0 & `HC_fait'==0 {
+				compute_HC_vect `i' TIVA_REV4
+				local HC_fait 1
+	}
+			if strpos("`j'","HC")==0 compute_`j'_vect `i' TIVA_REV4 
+			table_mean `i' `j' 1 TIVA_REV4 
+
+}
+
+   
+* Pour étude habituelle
+/*
 *foreach source in   TIVA { 
 foreach source in  WIOD TIVA TIVA_REV4 { 
 

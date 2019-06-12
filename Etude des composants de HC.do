@@ -108,6 +108,8 @@ save "$dir/Results/secteurs_pays/decomp_`source'_HC_`yrs'_agreg_`agregation'.dta
 if "`agregation'" == "oui"  local liste_secteurs energie alimentaire neig services
 if "`agregation'" == "non"  local liste_secteurs "$sector"
 
+
+*Pour part par secteur
 foreach origine in dom impt {
 	foreach sector in `liste_secteurs' {
 		if "`nature_choc'" == "chge" {
@@ -154,7 +156,7 @@ foreach origine in dom impt {
 	save "$dir/Results/`folder'/decomp_`source'_HC_`yrs'_agreg_`agregation'.dta", replace	
 }
 
-	
+*Pour part importée / domestique
 foreach origine in dom impt {
 	if "`nature_choc'" == "chge" {
 		foreach euro in no_ze ze {		
@@ -203,6 +205,26 @@ if "`nature_choc'" == "chge" {
 	}
 }
 
+****Calcul de la part en % de chaque secteur dans le choc
+foreach origine in dom impt {
+	foreach sector in `liste_secteurs' {
+		gen part_dans_choc_`sector'_`origine' = sect_`sector'_`origine'/(sect_HC_dom+sect_HC_impt)
+	}
+}
+
+foreach origine in dom impt {
+	foreach sector in `liste_secteurs' {
+		label var s_`sector'_`origine' "Part dans la consommation de `sector'_`origine'"
+		label var sect_`sector'_`origine' "Contribution au choc de `sector'_`origine'"
+		label var part_dans_choc_`sector'_`origine' "Part dans le choc de `sector'_`origine'"
+	}
+}
+
+
+
+
+
+
 if "`nature_choc'" == "chge" save "$dir/Results/Devaluations/decomp_`source'_HC_`yrs'_agreg_`agregation'.dta", replace
 if "`nature_choc'" == "oil" save "$dir/Results/secteurs_pays/decomp_`source'_HC_`yrs'_agreg_`agregation'.dta", replace
 if "`nature_choc'" == "chge" export excel using "$dir/Results/Devaluations/decomp_`source'_HC_`yrs'_agreg_`agregation'.xls", firstrow(variables) replace
@@ -210,7 +232,9 @@ if "`nature_choc'" == "oil" export excel using "$dir/Results/secteurs_pays/decom
 
 end
 
-
+*s_ ... ce sont les parts dans la conso
+*sect_... ce sont les contributions au choc
+*part_dans_choc... ce les parts dans le choc
 
 composants_HC 2014 TIVA_REV4 oil non
 

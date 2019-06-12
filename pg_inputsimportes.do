@@ -70,7 +70,7 @@ foreach var of varlist $var_entree_sortie {
 	if "`source'" == "WIOD" local pays_colonne = substr("`var'",2,3)
 	
 	
-	replace `var' = 0 if pays=="`pays_colonne'"
+	replace `var' = 0 if upper(pays)==upper("`pays_colonne'")
 	
 	
 	if strpos(upper("$china"),upper("`pays_colonne'"))!=0  {

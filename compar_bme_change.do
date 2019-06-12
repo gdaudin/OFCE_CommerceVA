@@ -52,11 +52,14 @@ foreach yrs of numlist 2018 2019 {
 	/*twoway (scatter BME pond_WIOD_HC if year == `yrs', mlabel(c)) (lfit BME pond_WIOD_HC) if year == `yrs', name(BME_vs_WIOD_`yrs', replace)
 	graph save "$dir/Graphiques/BME_vs_WIOD_`yrs'.gph",  replace
 	*/
+	correlate BME_1 pond_`source'_HC if year == `yrs' & type == "`type'"
+	local rho =r(rho)
+	local rho : di %3.2f `rho'
 	twoway (scatter BME_1 pond_`source'_HC if year == `yrs' & type == "`type'", mlabel(c)) ///
 		(lfit pond_`source'_HC pond_`source'_HC, range(`scale1')) if year == `yrs', ///
 		ytitle("impact en % BMEs `yrs' (1ere année)") yscale(range(`scale1')) ylabel(`scale2', grid) /// 
 		xtitle("impact en % PIWIM `year' ,`source'") xscale(range(`scale1')) xlabel(`scale2', grid) legend(off) name(BME_1_vs_`yrs', replace) ///
-		note("`note'") 
+		note("`note'" "Corrélation: `rho'") 
 }
 
 
@@ -72,11 +75,14 @@ foreach yrs of numlist 2018 2019 {
 	/*twoway (scatter BME pond_WIOD_HC if year == `yrs', mlabel(c)) (lfit BME pond_WIOD_HC) if year == `yrs', name(BME_vs_WIOD_`yrs', replace)
 	graph save "$dir/Graphiques/BME_vs_WIOD_`yrs'.gph",  replace
 	*/
+	correlate BME_3 pond_`source'_HC if year == `yrs' & type == "`type'"
+	local rho =r(rho)
+	local rho : di %3.2f `rho'
 	twoway (scatter BME_3 pond_`source'_HC if year == `yrs' & type == "`type'", mlabel(c)) ///
 	(lfit pond_`source'_HC pond_`source'_HC, range(`scale1')) if year == `yrs', ///
 		ytitle("impact en % BMEs `yrs' (3e année)") yscale(range(`scale1')) ylabel(`scale2', grid) /// 
 		xtitle("impact en % PIWIM `year', `source'") xscale(range(`scale1')) xlabel(`scale2', grid) legend(off) name(BME_3_vs_`yrs', replace) ///
-		note("`note'")
+		note("`note'" "Corrélation: `rho'") 
 
 * 	(lfit BME_3 pond_`source'_HC if year == `yrs' & type == "`type'", range(`scale1')) ///
 

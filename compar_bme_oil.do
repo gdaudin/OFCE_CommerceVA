@@ -60,10 +60,15 @@ foreach type in OE1 OE2 OE3{
 	/*twoway (scatter BME pond_WIOD_HC if year == `yrs', mlabel(c)) (lfit BME pond_WIOD_HC) if year == `yrs', name(BME_vs_WIOD_`yrs', replace)
 	graph save "$dir/Graphiques/BME_vs_WIOD_`yrs'.gph",  replace
 	*/
+	
+	correlate BME_1 shock1 if year == `yrs' & type == "`type'"
+	local rho =r(rho)
+	local rho : di %3.2f `rho'
 	twoway (scatter BME_1 shock1 if year == `yrs' & type == "`type'", mlabel(c)) ///
 		(lfit shock1 shock1, range(`scale1')) if year == `yrs', ///
 		ytitle("impact en % BMEs `yrs' (1ere année)") yscale(range(`scale1')) ylabel(`scale2', grid) /// 
-		xtitle("impact en % PIWIM `year' ,`source'") xscale(range(`scale1')) xlabel(`scale2', grid) legend(off) name(BME_1_vs_`yrs'_`type', replace)
+		xtitle("impact en % PIWIM `year' ,`source'") xscale(range(`scale1')) xlabel(`scale2', grid) legend(off) name(BME_1_vs_`yrs'_`type', replace) ///
+		note("Corrélation: `rho'")
 		 
 	}
 	graph combine  BME_1_vs_2018_`type' BME_1_vs_2019_`type', note("`note'") 
@@ -101,10 +106,14 @@ foreach type in OE1 OE2 OE3{
 	/*twoway (scatter BME pond_WIOD_HC if year == `yrs', mlabel(c)) (lfit BME pond_WIOD_HC) if year == `yrs', name(BME_vs_WIOD_`yrs', replace)
 	graph save "$dir/Graphiques/BME_vs_WIOD_`yrs'.gph",  replace
 	*/
+	correlate BME_3 shock1 if year == `yrs' & type == "`type'"
+	local rho =r(rho)
+	local rho : di %3.2f `rho'
 	twoway (scatter BME_3 shock1 if year == `yrs' & type == "`type'" & c != "CYP", mlabel(c)) ///
 	(lfit shock1 shock1, range(`scale1')) if year == `yrs' & c != "CYP", ///
 		ytitle("impact en % BMEs `yrs' (3e année)") yscale(range(`scale1')) ylabel(`scale2', grid) /// 
-		xtitle("impact en % PIWIM `year', `source'") xscale(range(`scale1')) xlabel(`scale2', grid) legend(off) name(BME_3_vs_`yrs'_`type', replace) 
+		xtitle("impact en % PIWIM `year', `source'") xscale(range(`scale1')) xlabel(`scale2', grid) legend(off) name(BME_3_vs_`yrs'_`type', replace)  ///
+		note("Corrélation: `rho'")
 		
 
 * 	(lfit BME_3 shock1 if year == `yrs' & type == "`type'", range(`scale1')) ///

@@ -236,7 +236,9 @@ end
 *sect_... ce sont les contributions au choc
 *part_dans_choc... ce les parts dans le choc
 
-composants_HC 2014 TIVA_REV4 oil non
+composants_HC 2014 WIOD chge oui
+
+*composants_HC 2014 TIVA_REV4 oil non
 
 /*
 *foreach source in  WIOD  TIVA_REV4 {

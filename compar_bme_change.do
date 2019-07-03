@@ -43,8 +43,8 @@ if "`type'" == "ERT" local note choc de change 10% (ERT)
 if "`type'" == "CXD" local scale1 -3.0 0 
 if "`type'" == "ERT" local scale1  -3.0 0 
 
-if "`type'" == "CXD" local scale2 -3.0(0.5)0 
-if "`type'" == "ERT" local scale2 -3.0(0.5)0
+if "`type'" == "CXD" local scale2 -3.5(0.5)0 
+if "`type'" == "ERT" local scale2 -3.5(0.5)0
 
 
 foreach yrs of numlist 2018 2019 {
@@ -93,7 +93,7 @@ graph save "$dir/Results/BME_3_vs_`source'_`type'.gph",  replace
 graph export "$dir/Results/BME_3_vs_`source'`type'.png",  replace 
 
 end
-*compar_bme 2015 TIVA_REV4 ERT 
-*compar_bme 2014 WIOD ERT
-compar_bme 2015 TIVA_REV4 CXD
-compar_bme 2014 WIOD CXD
+compar_bme 2015 TIVA_REV4 ERT 
+compar_bme 2014 WIOD ERT
+*compar_bme 2015 TIVA_REV4 CXD
+*compar_bme 2014 WIOD CXD

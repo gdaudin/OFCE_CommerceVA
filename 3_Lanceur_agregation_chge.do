@@ -30,7 +30,7 @@ set more off
 cd "$dir" 
 
 do "$dirgit/Definition_pays_secteur.do"   
-do "$dirgit/Aggregation_effets_des_chocs.do"   
+do "$dirgit/Aggregation_effets_des_chocs_chge.do"   
 do "$dirgit/compute_X.do"
 do "$dirgit/compute_HC.do"
 do "$dirgit/compute_Y.do"
@@ -62,11 +62,11 @@ set more off
 
 
 *foreach source in   TIVA { 
-foreach source in  /* WIOD*/ TIVA /*TIVA_REV4*/ { 
+foreach source in   WIOD /*TIVA TIVA_REV4*/ { 
 
 
 	Definition_pays_secteur `source'
-	if "`source'"=="WIOD" local start_year 2000
+	if "`source'"=="WIOD" local start_year 2013
 	if "`source'"=="TIVA" local start_year 1995
 	if "`source'"=="TIVA_REV4" local start_year 2005
 
@@ -110,7 +110,7 @@ foreach source in  /* WIOD*/ TIVA /*TIVA_REV4*/ {
 	foreach i of numlist  `end_year' (-1) `start_year'  {
 		
 		local HC_fait 0
-    	foreach j in  HC X Y /*HC_neig_dom HC_alimentaire_dom HC_energie_dom HC_services_dom HC_dom ///
+    	foreach j in  HC X Y HC_neig_dom HC_alimentaire_dom HC_energie_dom HC_services_dom HC_dom ///
 					HC_neig_impt HC_alimentaire_impt HC_energie_impt HC_services_impt HC_impt */  {	
 
     	    if strpos("`j'","HC")!=0 & `HC_fait'==0 {
@@ -129,7 +129,7 @@ foreach source in  /* WIOD*/ TIVA /*TIVA_REV4*/ {
 ****Faire toutes les variations pour la dernière année
 		
 	local HC_fait 0
-    foreach j in  /*HC X Y*/ HC_neig_dom HC_alimentaire_dom HC_energie_dom HC_services_dom HC_dom ///
+    foreach j in  HC X Y HC_neig_dom HC_alimentaire_dom HC_energie_dom HC_services_dom HC_dom ///
 				HC_neig_impt HC_alimentaire_impt HC_energie_impt HC_services_impt HC_impt   {	
    	    if strpos("`j'","HC")!=0 & `HC_fait'==0 {
 			compute_HC_vect `end_year' `source'
@@ -145,7 +145,7 @@ foreach source in  /* WIOD*/ TIVA /*TIVA_REV4*/ {
 
 	if "`source'"=="TIVA_REV4"	{
 		local HC_fait 0
-		foreach j in  /*HC X Y*/ HC_neig_dom HC_alimentaire_dom HC_energie_dom HC_services_dom HC_dom ///
+		foreach j in  HC X Y HC_neig_dom HC_alimentaire_dom HC_energie_dom HC_services_dom HC_dom ///
 					HC_neig_impt HC_alimentaire_impt HC_energie_impt HC_services_impt HC_impt   {	
 			if strpos("`j'","HC")!=0 & `HC_fait'==0 {
 				compute_HC_vect 2014 `source'

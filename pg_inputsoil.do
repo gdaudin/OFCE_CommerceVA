@@ -1,5 +1,5 @@
-* Obtention de la part des CI importées dans la production (Y), dans les exportations (X) et dans la consommation des ménages (HC)
-*Distinction, pour la ZE, des inputs importés en provenance des pays ZE et hors ZE
+* Obtention de la part des CI de pétrole dans la production (Y), dans les exportations (X) et dans la consommation des ménages (HC)
+* Programme construit à partir de "pg_inputsimportes.do"
 
 clear
 set more off
@@ -19,14 +19,16 @@ set matsize 7000
 
 
 
-capture program drop imp_inputs_par_sect // fournit le % des ci importées/prod par pays*sect
-program imp_inputs_par_sect
-args yrs source hze
+capture program drop oil_inputs_par_sect // fournit le % des ci importées/prod par pays*sect
+program oil_inputs_par_sect
+args yrs source
 
 do "$dirgit/Definition_pays_secteur.do"   
 Definition_pays_secteur `source'
 
-* exemple  hze_not ou hze_yes pour pays membres de la ZE et pays hors ZE
+if "`source'"=="WIOD" local oil B
+if "`source'"=="TIVA" local oil C10T14
+if "`source'"=="TIVA_REV4" local oil 05T06
 
 *Ouverture de la base contenant le vecteur ligne de production par pays et secteurs
 
@@ -59,45 +61,14 @@ if "`source'"=="WIOD" {
 }
 
 
-keep pays $var_entree_sortie
-
+keep pays secteur $var_entree_sortie
 
 
 
 foreach var of varlist $var_entree_sortie {
-*	On cherche à enlever les auto-consommations intermédiaires
-	if "`source'" == "TIVA" | "`source'" == "TIVA_REV4" local pays_colonne = substr("`var'",1,3)
-	if "`source'" == "WIOD" local pays_colonne = substr("`var'",2,3)
-	
-	
-	replace `var' = 0 if upper(pays)==upper("`pays_colonne'")
-	
-	
-	if strpos(upper("$china"),upper("`pays_colonne'"))!=0  {
-			foreach i of global china {	
-			replace `var' = 0 if upper(pays) == upper("`i'")
-		}
-	}
-	
-	
-	if strpos(upper("$mexique"),upper("`pays_colonne'"))!=0 {
-			foreach i of global mexique {	
-			replace `var' = 0 if upper(pays) == upper("`i'")
-		}
-	}
-		
-	if "`hze'"=="hze_yes" & strpos(upper("$eurozone"),upper("`pays_colonne'"))!=0 {
-	
-		*display "turf"
-	
-	*Et les internes dans la zone euro
-		foreach i of global eurozone {	
-			replace `var' = 0 if upper(pays) == upper("`i'")		
-		}
-	}
-	display "`hze' -- `pays_colonne'" 
-}
 
+	replace `var' = 0 if secteur !="`oil'"
+}
 
 *somme des CI pour chaque secteur de chaque pays
 collapse (sum) $var_entree_sortie
@@ -110,23 +81,11 @@ append using "$dir/Bases/`source'_`yrs'_OUT.dta"
 
 *transpositin en colonne, puis création d'un ratio de CI importées par secteur 
 xpose, clear varname
-rename v1 ci_impt
+rename v1 ci_oil
 rename v2 prod
-generate ratio_ci_impt_prod=ci_impt / prod
+generate ratio_ci_oil_prod=ci_oil / prod
 
 
-
-
-/*
-if "`source'"=="TIVA" {
-	generate pays = strlower(substr(_varname,1,3))
-	generate sector = strlower(substr(_varname,strpos(_varname,"_")+1,.))
-}
-
-
-*renomme les pays et secteur à partir de la base csv_WIOD
-if "`source'"=="WIOD" {
-*/
 
 
 merge 1:1 _n using "$dir/Bases/csv_`source'.dta"
@@ -138,64 +97,44 @@ drop p_shock
 drop _merge
  
 *}
-save "$dir/Bases/imp_inputs_par_sect_`yrs'_`source'_`hze'.dta", replace
-* enregistrement des ratio de CI importés par secteur
+save "$dir/Bases/oil_inputs_par_sect_`yrs'_`source'.dta", replace
+* enregistrement des ratio des CI de pétrole par secteur
 end
-
-
-
-
-
-
-
-
 
 
 **************************************
 
 
-
-
-
-
-
-capture program drop imp_inputs // fournit le total des inputs importés par chaque pays
-program imp_inputs
-args yrs source vector hze
+capture program drop oil_inputs // fournit le total des inputs oil pour chaque pays
+program oil_inputs
+args yrs source vector
 
 do  "$dirgit/Definition_pays_secteur.do" `source'
 
-*Création d'un agrégat national pour Chine et Mexique pour ci importées et production 
-*La part des CI importées est à présent calculée pour l'ensemble de l'économie, et non plus par secteurs
+*La part des CI oil est à présent calculée pour l'ensemble de l'économie, et non plus par secteurs
 
 if "`vector'" == "Y" { 
-	use "$dir/Bases/imp_inputs_par_sect_`yrs'_`source'_`hze'.dta", clear
-
-	if "`source'"=="TIVA" | "`source'"=="TIVA_REV4" {
-		gen pays_1 = pays
-		replace pays = "CHN" if pays=="CN1" | pays=="CN2" | pays=="CN3" | pays=="CN4" 
-		replace pays = "MEX" if pays=="MX1" | pays=="MX2" | pays=="MX3"
-		collapse (sum) ci_impt prod, by(pays sector)
-	}
+	use "$dir/Bases/oil_inputs_par_sect_`yrs'_`source'.dta", clear
+	replace pays = "CHN" if strpos("$china",pays)!=0
+	replace pays = "MEX" if strpos("$mexique",pays)!=0
 	
-	collapse (sum) ci_impt prod, by(pays)
-	generate ratio_ci_impt_Y = ci_impt/prod
-	save "$dir/Bases/imp_inputs_Y_`yrs'_`source'_`hze'.dta", replace
+	collapse (sum) ci_oil prod, by(pays)
+	generate ratio_ci_oil_Y = ci_oil/prod
+	save "$dir/Bases/oil_inputs_Y_`yrs'_`source'.dta", replace
 }
 
 
-*Création d'un agrégat national pour ci importées et production pour Chine et Mexique
-*HC présente en revanche déjà une consommation agrégée au niveau de la Chine et du Mexique entiers
+
 if "`vector'" == "HC"  { 
 
 	
 	if "`source'"=="TIVA" | "`source'"=="TIVA_REV4" {
-		use  "$dir/Bases/imp_inputs_par_sect_`yrs'_`source'_`hze'.dta", replace
+		use  "$dir/Bases/oil_inputs_par_sect_`yrs'_`source'.dta", replace
 		replace pays = "CHN" if pays=="CN1" | pays=="CN2" | pays=="CN3" | pays=="CN4" 
 		replace pays = "MEX" if pays=="MX1" | pays=="MX2" | pays=="MX3"
-		collapse (sum) ci_impt prod, by(pays sector)
-		generate ratio_ci_impt_prod=ci_impt / prod
-		save "$dir/Bases/imp_inputs_par_sect_modif.dta", replace
+		collapse (sum) ci_oil prod, by(pays sector)
+		generate ratio_ci_oil_prod=ci_oil / prod
+		save "$dir/Bases/oil_inputs_par_sect_modif.dta", replace
 	}
 	
 
@@ -209,35 +148,35 @@ if "`vector'" == "HC"  {
 	
 	*HC se présente avec le pays d'origine du bien, puis les pays de consommation 
 	*Manipulation de la base de données HC en vue d'ordonner la consommation du pays_conso pour tous les secteurs
-	keep if lower(pays)==lower(pays_conso) 
+	keep if upper(pays)==upper(pays_conso) 
 	keep if year==`yrs'
 	
 	if "`source'"=="WIOD" replace pays=upper(pays)
 	if "`source'"=="WIOD" replace sector=upper(sector)
-	if "`source'"=="WIOD" merge 1:1 pays sector using  "$dir/Bases/imp_inputs_par_sect_`yrs'_`source'_`hze'.dta"
-	if "`source'"=="TIVA" | "`source'"=="TIVA_REV4" merge 1:1 pays sector using  "$dir/Bases/imp_inputs_par_sect_modif.dta" 
-	if "`source'"=="TIVA" | "`source'"=="TIVA_REV4" erase  "$dir/Bases/imp_inputs_par_sect_modif.dta"
+	if "`source'"=="WIOD" merge 1:1 pays sector using  "$dir/Bases/oil_inputs_par_sect_`yrs'_`source'.dta"
+	if "`source'"=="TIVA" | "`source'"=="TIVA_REV4" merge 1:1 pays sector using  "$dir/Bases/oil_inputs_par_sect_modif.dta" 
+	if "`source'"=="TIVA" | "`source'"=="TIVA_REV4" erase  "$dir/Bases/oil_inputs_par_sect_modif.dta"
 	drop _merge
 		
-	gen ci_impt_HC = ratio_ci_impt_prod * conso
-	label var ci_impt_HC "Les CI importées dans la consommation de secteurs domestiques"
+	gen ci_oil_HC = ratio_ci_oil_prod * conso
+	label var ci_oil_HC "Les CI oil dans la consommation de secteurs domestiques"
 	
 	
 	
-	generate ratio_ci_impt_HC = ci_impt_HC/conso
-	label var ratio_ci_impt_HC "Part des CI dans la conso domestique"
+	generate ratio_ci_oil_HC = ci_oil_HC/conso
+	label var ratio_ci_oil_HC "Part des CI oil dans la conso domestique"
 
-	collapse (sum) ci_impt_HC conso ratio_ci_impt_HC, by(pays sector)
+	collapse (sum) ci_oil_HC conso ratio_ci_oil_HC, by(pays sector)
 
 	
-	save "$dir/Bases/imp_inputs_HC_par_secteur_`yrs'_`source'_`hze'.dta", replace
+	save "$dir/Bases/oil_inputs_HC_par_secteur_`yrs'_`source'.dta", replace
 	
-	collapse (sum) ci_impt_HC conso, by(pays)
+	collapse (sum) ci_oil_HC conso, by(pays)
 	
-	generate ratio_ci_impt_HC = ci_impt_HC/conso
-	label var ratio_ci_impt_HC "Part des CI dans la conso domestique"
+	generate ratio_ci_oil_HC = ci_oil_HC/conso
+	label var ratio_ci_oil_HC "Part des CI oil dans la conso domestique"
 	
-	save "$dir/Bases/imp_inputs_HC_`yrs'_`source'_`hze'.dta", replace
+	save "$dir/Bases/oil_inputs_HC_`yrs'_`source'.dta", replace
 }
 
 
@@ -249,12 +188,12 @@ if "`vector'" == "X"  {
 	
 	replace sector=upper(sector)
 	
-	merge 1:1 pays sector using  "$dir/Bases/imp_inputs_par_sect_`yrs'_`source'_`hze'.dta"
+	merge 1:1 pays sector using  "$dir/Bases/oil_inputs_par_sect_`yrs'_`source'.dta"
 	
 
 	drop _merge
 	
-	gen ci_impt_X = ratio_ci_impt_prod * X
+	gen ci_oil_X = ratio_ci_oil_prod * X
 	replace pays=upper(pays)
 	
 	if "`source'"=="TIVA" | "`source'"=="TIVA_REV4"{
@@ -263,9 +202,9 @@ if "`vector'" == "X"  {
 		
 	}
 	
-	collapse (sum) ci_impt_X X, by(pays)
-	generate ratio_ci_impt_X = ci_impt_X/X
-	save "$dir/Bases/imp_inputs_X_`yrs'_`source'_`hze'.dta", replace
+	collapse (sum) ci_oil_X X, by(pays)
+	generate ratio_ci_oil_X = ci_oil_X/X
+	save "$dir/Bases/oil_inputs_X_`yrs'_`source'.dta", replace
 }
 
 end
@@ -282,17 +221,13 @@ end
 
 
 /*
-*imp_inputs_par_sect 2000 WIOD hze_not
-
-*imp_inputs 2000 WIOD X hze_not
-
-*imp_inputs_par_sect 2000 WIOD hze_yes
-
-*imp_inputs 2000 WIOD X hze_yes
-
-*imp_inputs 2000 WIOD HC hze_not
+oil_inputs_par_sect 2015 TIVA_REV4
+oil_inputs 2015 TIVA_REV4 Y
+oil_inputs 2015 TIVA_REV4 HC
+oil_inputs 2015 TIVA_REV4 X
 
 */
+
 
 
 
@@ -314,8 +249,8 @@ foreach source in  TIVA  TIVA_REV4  WIOD   {
 *	foreach i of numlist 2010  {
 	foreach i of numlist $start_year (1)$end_year  {
 		
-		imp_inputs_par_sect `i' `source' hze_not
-		imp_inputs_par_sect `i' `source' hze_yes
+		oil_inputs_par_sect `i' `source' hze_not
+		oil_inputs_par_sect `i' `source' hze_yes
 		
 		clear
 	}
@@ -325,6 +260,8 @@ foreach source in  TIVA  TIVA_REV4  WIOD   {
 }
 
 */
+
+
 
 *foreach source in  WIOD {
 foreach source in   TIVA_REV4 TIVA    WIOD  {
@@ -345,10 +282,8 @@ foreach source in   TIVA_REV4 TIVA    WIOD  {
 *	foreach i of numlist 2015  {
 	foreach i of numlist $start_year (1) $end_year  {
 		
-		imp_inputs `i' `source' HC hze_not
-		imp_inputs `i' `source' HC hze_yes
-		imp_inputs `i' `source' X hze_yes
-		imp_inputs `i' `source' X hze_not
+		oil_inputs `i' `source' HC
+		oil_inputs `i' `source' X
 		
 	
 		clear

@@ -180,6 +180,9 @@ order c HC_impt
 rename *energie* *energy*
 rename *alimentaire* *food*
 
+if  "`nature_choc'"=="chge" local sort_order descending 
+if "`nature_choc'"=="oil" local sort_order  
+
 foreach var of varlist HC_impt-services_impt {
 	if "`nature_choc'"=="chge"	replace `var' =`var'*10
 	if "`nature_choc'"=="oil" & `year'==2015  replace  `var'  =`var'*100*10/47.22
@@ -197,8 +200,11 @@ if "`nature_choc'"=="chge" {
 }
 
 if "`nature_choc'"=="oil" keep if c=="FRA" | c=="DEU" | c=="ESP" | c=="ITA" | c=="NLD" 
+
 gsort HC_tot
-graph bar (asis) HC_dom HC_impt , over(c,sort(HC_tot) descending) stack ///
+
+
+graph bar (asis) HC_dom HC_impt , over(c,sort(HC_tot) `sort_order') stack ///
 		legend(rows(2) size(small)) ///
 		note("Source: PIWIM (`source', `year')") ///
 		scheme(s2color) ///
@@ -221,7 +227,7 @@ rename food alimentaire
 rename energy energie
 
 
-graph bar (asis) services neig energie alimentaire , over(c,sort(HC_tot) descending) stack ///
+graph bar (asis) services neig energie alimentaire , over(c,sort(HC_tot) `sort_order') stack ///
 		legend(rows(2) size(small)) ///
 		note("Source: PIWIM (`source', `year')") /// 
 		scheme(s2color) ///
@@ -246,7 +252,7 @@ label var volatile_impt "Inflation alimentaire et énergie importée"
 gen volatile_dom= energy_dom+food_dom
 label var volatile_dom "Inflation alimentaire et énergie domestique"
 
-graph bar (asis) ss_jacente_dom ss_jacente_impt  volatile_dom volatile_impt  , over(c,sort(HC_tot) descending) stack ///
+graph bar (asis) ss_jacente_dom ss_jacente_impt  volatile_dom volatile_impt  , over(c,sort(HC_tot) `sort_order') stack ///
 		legend(rows(2) size(vsmall)) ///
 		note("Source: PIWIM (`source', `year')") /// 
 		scheme(s2color) ///
@@ -394,7 +400,10 @@ etude_pour_note 2015  TIVA_REV4 chge
 etude_pour_note 2015 TIVA_REV4 oil 
 
 etude_pour_note 2014 WIOD oil
-*/
 etude_pour_note 2014 TIVA_REV4 oil 
 etude_pour_note 2015 TIVA_REV4 oil 
 mix_pour_note 2014 oil
+*/
+
+etude_pour_note 2014 TIVA_REV4 oil
+

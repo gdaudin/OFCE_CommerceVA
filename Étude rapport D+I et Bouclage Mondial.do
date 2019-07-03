@@ -51,6 +51,7 @@ if "`type'"=="HC" | "`type'" =="HC_note" {
 	
 	replace pays =upper(pays) 
 	merge 1:1 pays using "$dir/Bases/contenu_dom_HC_impt_`year'_`source'_hze_not.dta"
+	
 	drop _merge
 	replace pays =upper(pays)
 
@@ -59,6 +60,7 @@ if "`type'"=="HC" | "`type'" =="HC_note" {
 	
 	merge 1:1 pays using "$dir/Bases/imp_inputs_HC_`year'_`source'_hze_yes.dta", update
 	drop _merge
+	
 	replace pays =upper(pays) 
 	merge 1:1 pays using "$dir/Bases/contenu_dom_HC_impt_`year'_`source'_hze_yes.dta", update 
 	
@@ -72,7 +74,7 @@ if "`type'"=="HC" | "`type'" =="HC_note" {
 	drop _merge year
 	*replace ratio_ci_impt_HC = ratio_ci_impt_HC*(1-contenu_impHC) + contenu_impHC - contenu_dom_HC_etranger
 	
-	
+
 }
 
 
@@ -112,7 +114,7 @@ label var pond_`source'_`type' "Élasticité des prix (`type') en monnaie nation
 save "$dir/Results/Étude rapport D+I et Bouclage Mondial/Elast_par_pays_`year'_`source'_`type'.dta", replace
 	
 
-if "`type'"=="HC" & ((`year'==2014 & "`source'"=="WIOD") | (`year'==2015 & "`source'"=="TIVA_REV4") | ("`source'"=="TIVA"  & `year'==2011)) {
+if "`type'"=="HC" & ((`year'==2014 & "`source'"=="WIOD") | (`year'==2015 & "`source'"=="TIVA_REV4") | ("`source'"=="TIVA"  & `year'==2005)) {
 
 
 	replace pond_`source'_`type'=-pond_`source'_`type'
@@ -128,6 +130,7 @@ if "`type'"=="HC" & ((`year'==2014 & "`source'"=="WIOD") | (`year'==2015 & "`sou
 			legend(off) ///
 			scheme(s1mono)
 	*dans le cas HC, xtitle pourrait se finir par «importées dans la conso dom + part conso importée»	
+	
 						
 	graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/graph7_`year'_`source'_`type'.pdf", replace
 	graph export "$dirgit/Rédaction/graph7_`year'_`source'_`type'.pdf", replace
@@ -175,7 +178,7 @@ if "`type'"=="HC_note" & ((`year'==2014 & "`source'"=="WIOD") | (`year'==2015 & 
 	
 }
 
-/*
+
 if "`type'" == "HC" {
 
 	foreach reg in reg_ns reg_sep  {
@@ -252,13 +255,13 @@ end
 ****************************************************************************
 
 *foreach source in  WIOD {
-foreach source in  TIVA  WIOD TIVA_REV4     {
+foreach source in  TIVA WIOD      TIVA_REV4     {
 
 
 
-	if "`source'"=="WIOD" global start_year 2014	
-	if "`source'"=="TIVA" global start_year 2011
-	if "`source'"=="TIVA_REV4" global start_year 2015
+	if "`source'"=="WIOD" global start_year 2000	
+	if "`source'"=="TIVA" global start_year 1995
+	if "`source'"=="TIVA_REV4" global start_year 2005
 
 
 
@@ -281,7 +284,6 @@ foreach source in  TIVA  WIOD TIVA_REV4     {
 
 }
 
-blif
 
 /*
 foreach source in  WIOD  {
@@ -315,7 +317,7 @@ foreach source in  WIOD  {
 
 
 
-foreach source in  WIOD TIVA TIVA_REV4 {
+foreach source in  TIVA WIOD    TIVA_REV4 {
 	use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`source'_HC.dta", clear
 	foreach var in ns cst_reg_ns {
 		gen borne_inf_`var'= b_`var'-1.96*se_`var'

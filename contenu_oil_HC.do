@@ -73,8 +73,8 @@ if "`source'"=="TIVA_REV4" local end_year 2015
 foreach i of numlist `start_year' (1)`end_year'  {
 	preserve
 	keep if year==`i'
-	save "$dir/Bases/contenu_impHC_`source'_`i'.dta", replace
-	export excel using "$dir/Bases/contenu_impHC_`source'_`i'.xls", firstrow(variables) replace
+	save "$dir/Bases/contenu_oilHC_`source'_`i'.dta", replace
+	export excel using "$dir/Bases/contenu_oilHC_`source'_`i'.xls", firstrow(variables) replace
 	restore
 }
 

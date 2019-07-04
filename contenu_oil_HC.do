@@ -35,41 +35,32 @@ use "$dir/Bases/HC_`source'.dta", clear
 
 * Si la consommation est d'origine domestique (pays=pays_conso), imp=0 
 * avec pays_conso le pays consommateur et pays le pays producteur du bien
+
+if "`source'"=="WIOD" local oil B
+if "`source'"=="TIVA" local oil C10T14
+if "`source'"=="TIVA_REV4" local oil 05T06
 			
 	
-gen imp="euro" if (strpos(upper("$eurozone"),upper(pays))!=0 & strpos(upper("$eurozone"),upper(pays_conso))!=0)
-
-replace imp="no" if upper(pays)==upper(pays_conso) ///
-            |  upper(pays_conso)=="CHN" & (upper(pays)=="CN1" | upper(pays)=="CN2" | upper(pays)=="CN3" | upper(pays)=="CN4") ///
-		    |  upper(pays_conso)=="MEX" & (upper(pays)=="MX1" | upper(pays)=="MX2" | upper(pays)=="MX3")
-
-	
-	
-replace imp="yes" if imp=="" 
+gen oil="yes" if sector=="`oil'"
+replace oil="no" if sector !="`oil'"
 	
 
-*conso0= conso domestique, conso1= conso importée
-collapse (sum) conso, by(imp year pays_conso)
+	
 
-tab imp
-reshape wide conso, i(pays_conso year) j(imp) string
+*conso0= conso sans oil, conso1= conso oil
+collapse (sum) conso, by(oil year pays_conso)
 
-replace consoeuro=0 if consoeuro==.
-gen contenu_impHC_0=(consoeuro+consoyes)/(consoeuro+consoyes+consono)
-gen contenu_impHC_EUR=(consoyes)/(consoeuro+consoyes+consono)
+tab oil
 
- reshape long contenu_impHC_, i(year pays_conso) j(euro) string
 
-drop if strpos(upper("$eurozone"),upper(pays))==0 & euro=="EUR" 
- 
-replace pays_conso = pays_conso+"_"+euro if euro=="EUR"
-rename contenu_impHC_ contenu_impHC
+reshape wide conso, i(pays_conso year) j(oil) string
 
-keep year pays_conso contenu_impHC
+gen contenu_oilHC=(consoyes)/(consoyes+consono)
+
 
 rename pays_conso pays
 replace pays = upper(pays)
-label var contenu_impHC "Part des consommations directement importées"
+label var contenu_oilHC "Part des consommations de pétrole importées"
 
 if "`source'"=="WIOD" local start_year 2000
 if "`source'"=="TIVA" local start_year 1995
@@ -90,7 +81,7 @@ foreach i of numlist `start_year' (1)`end_year'  {
 
 end
 
-contenu_imp_HC TIVA
-contenu_imp_HC WIOD
-contenu_imp_HC TIVA_REV4
+contenu_oil_HC TIVA
+contenu_oil_HC WIOD
+contenu_oil_HC TIVA_REV4
 

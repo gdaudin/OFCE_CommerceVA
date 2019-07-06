@@ -107,11 +107,11 @@ if "`type'"=="HC" & ((`year'==2014 & "`source'"=="WIOD") | (`year'==2015 & "`sou
 	
 }
 
-blif
 
 
 
-
+***Pas modifié du programme de change
+/*
 
 if "`type'"=="HC_note" & ((`year'==2014 & "`source'"=="WIOD") | (`year'==2015 & "`source'"=="TIVA_REV4")) {
 	capture generate c=upper(pays)
@@ -143,14 +143,14 @@ if "`type'"=="HC_note" & ((`year'==2014 & "`source'"=="WIOD") | (`year'==2015 & 
 	graph close
 	
 }
-
+*/
 
 if "`type'" == "HC" {
 
 	foreach reg in reg_ns reg_sep  {
 
-		if "`reg'"=="reg_sep" reg pond_`source'_HC E1HC E2HC E3HC
-		if "`reg'"=="reg_ns" reg pond_`source'_HC E1HC_E2HC
+		if "`reg'"=="reg_sep" reg shock1 E1HC E2HC
+		if "`reg'"=="reg_ns" reg shock1 E1HC_E2HC
 		
 		preserve
 		gen year=`year'
@@ -170,11 +170,11 @@ if "`type'" == "HC" {
 			
 			gen b_E1HC=_b[E1HC]
 			gen b_E2HC=_b[E2HC]
-			gen b_E3HC=_b[E3HC]
+			
 			gen se_cst=_se[_cons]
 			gen se_E1HC=_se[E1HC]
 			gen se_E2HC=_se[E2HC]
-			gen se_E3HC=_se[E3HC]
+			
 			gen b_cst_reg_sep=_b[_cons]
 			gen se_cst_reg_sep =_se[_cons] 
 		}
@@ -192,19 +192,19 @@ gen corr = r(rho)
 		
 		keep if _n==1
 		keep year source R2_`reg'-se_cst_`reg'
-		save "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`year'_`source'_`type'_`reg'.dta", replace 
+		save "$dir/Results/Secteurs_pays/Étude rapport D+I et Bouclage Mondial/results_`year'_`source'_`type'_`reg'.dta", replace 
 		if "`reg'"=="reg_sep" {
 			merge 1:1 year source using ///
-			"$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`year'_`source'_`type'_reg_ns.dta"
+			"$dir/Results/Secteurs_pays/Étude rapport D+I et Bouclage Mondial/results_`year'_`source'_`type'_reg_ns.dta"
 			assert _merge==3
 			drop _merge
-			save "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`year'_`source'_`type'.dta", replace 
+			save "$dir/Results/Secteurs_pays/Étude rapport D+I et Bouclage Mondial/results_`year'_`source'_`type'.dta", replace 
 		
 			if `year'!=$start_year {
-				append using "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`source'_`type'.dta"
+				append using "$dir/Results/Secteurs_pays/Étude rapport D+I et Bouclage Mondial/results_`source'_`type'.dta"
 			}
 
-			save "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`source'_`type'.dta", replace
+			save "$dir/Results/Secteurs_pays/Étude rapport D+I et Bouclage Mondial/results_`source'_`type'.dta", replace
 		}
 		restore
 
@@ -220,10 +220,10 @@ end
 
 ****************************************************************************
 
-etude 2015 TIVA_REV4 HC
+*etude 2015 TIVA_REV4 HC
 
 *foreach source in  WIOD {
-foreach source in  TIVA WIOD      TIVA_REV4     {
+foreach source in  TIVA WIOD    TIVA_REV4     {
 
 
 
@@ -238,9 +238,9 @@ foreach source in  TIVA WIOD      TIVA_REV4     {
 	if "`source'"=="TIVA_REV4" global end_year 2015
 	
 	
-   capture erase "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`source'_`type'.dta" 
+   capture erase "$dir/Results/Secteurs_pays/Étude rapport D+I et Bouclage Mondial/results_`source'_`type'.dta" 
 	foreach type in  HC  /*HC_note par_sect*/ {
-		capture erase "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`source'_`type'.dta"
+		capture erase "$dir/Results/Secteurs_pays/Étude rapport D+I et Bouclage Mondial/results_`source'_`type'.dta"
 
 *		foreach i of numlist 2014  {
 		foreach i of numlist $start_year (1) $end_year  {
@@ -286,7 +286,7 @@ foreach source in  WIOD  {
 
 
 foreach source in  TIVA WIOD    TIVA_REV4 {
-	use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`source'_HC.dta", clear
+	use "$dir/Results/Secteurs_pays/Étude rapport D+I et Bouclage Mondial/results_`source'_HC.dta", clear
 	foreach var in ns cst_reg_ns {
 		gen borne_inf_`var'= b_`var'-1.96*se_`var'
 		gen borne_sup_`var' =b_`var'+1.96*se_`var'
@@ -299,17 +299,17 @@ foreach source in  TIVA WIOD    TIVA_REV4 {
 		(connected R2_reg_ns year,  lcolor(turquoise) msize(small) mcolor(turquoise))   ///
 		,/*yscale(range(1 (0.05) 1.15)) ylabel(1 (0.05) 1.15)*/ legend(order (1 4) rows(2))
 
-	graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/coef_E_`source'_HC.pdf", replace
+	graph export "$dir/Results/Secteurs_pays/Étude rapport D+I et Bouclage Mondial/coef_E_`source'_HC.pdf", replace
 	
 	label var b_cst_reg_ns "Constant (with 95% confidence intervals)"
 		graph twoway ///
 		(line b_cst_reg_ns year, lcolor(black) ) (line borne_inf_cst_reg_ns year, lpattern(dash) lwidth(vthin) lcolor(black)) (line borne_sup_cst_reg_ns year,lpattern(dash) lwidth(vthin) lcolor(black) )    ///
 		,/*yscale(range(1 (0.05) 1.15)) ylabel(1 (0.05) 1.15)*/ legend(order (1))
 
-	graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/coef_cst_`source'_HC.pdf", replace
+	graph export "$dir/Results/Secteurs_pays/Étude rapport D+I et Bouclage Mondial/coef_cst_`source'_HC.pdf", replace
 }
 
-foreach source in  WIOD /*TIVA TIVA_REV4*/ {
+foreach source in  TIVA_REV4  /*WIOD TIVA */ {
 
 	if "`source'"=="WIOD" global start_year 2014	
 	if "`source'"=="TIVA" global start_year 1995
@@ -324,20 +324,20 @@ foreach source in  WIOD /*TIVA TIVA_REV4*/ {
 	foreach i of numlist 2014  {
 	graph drop _all
 *	foreach i of numlist $start_year (1) $end_year  {
-			use "$dir/Results/Étude rapport D+I et Bouclage Mondial/Elast_par_pays_`i'_`source'_HC.dta", clear 
-			gen E4HC = pond_WIOD_HC - E1HC - E2HC - E3HC
+			use "$dir/Results/Secteurs_pays/Étude rapport D+I et Bouclage Mondial/Elast_par_pays_`i'_`source'_HC.dta", clear 
+			gen E4HC = shock1 - E1HC - E2HC
 			gen blouf = 0
 			gen mylabel= c if strpos("FRA DEU DEU_EUR ITA ITA_EUR GBR CHN USA CAN JPN ",c)!=0
-			foreach var in E1HC E2HC E3HC E4HC {
-				gen share_`var'=`var'/pond_WIOD_HC
+			foreach var in E1HC E2HC E4HC {
+				gen share_`var'=`var'/shock1
 				twoway histogram share_`var', start(-0.2) width(0.1) freq name(`var') || ///
 					scatter blouf share_`var' if mylabel!="", /// 
-					xscale(range(-0.1 (0.1) 0.8)) xlabel(-0.1 (0.1) 0.8) ///
+					xscale(range(-0.1 (0.1) 1)) xlabel(-0.1 (0.1) 1) ///
 					mlabel(mylabel) mlabposition(12)  mlabangle(vertical)  mlabgap(huge) mlabsize(vsmall) msymbol(pipe) ///
 					scheme(s1mono)
 			}
-		graph combine 	E1HC E2HC E3HC E4HC, name(hist_components_`source'_`i') scheme(s1mono)
-		graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/hist_components_`source'_`i'.png", replace
+		graph combine 	E1HC E2HC E4HC, name(hist_components_`source'_`i') scheme(s1mono)
+		graph export "$dir/Results/Secteurs_pays/Étude rapport D+I et Bouclage Mondial/hist_components_`source'_`i'.png", replace
 			
 		}
 	
@@ -345,7 +345,7 @@ foreach source in  WIOD /*TIVA TIVA_REV4*/ {
 	
 }
 
-graph display hist_components_WIOD_2014
-graph export "$dir/commerce_VA_inflation/Rédaction/hist_components_WIOD_2014.png", replace
+graph display hist_components_TIVA_REV4_2014
+graph export "$dir/commerce_VA_inflation/Rédaction/hist_components_TIVA_REV4_2014.png", replace
 
 

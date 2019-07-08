@@ -334,7 +334,7 @@ foreach source in  TIVA_REV4  /*WIOD TIVA */ {
 					scatter blouf share_`var' if mylabel!="", /// 
 					xscale(range(-0.1 (0.1) 1)) xlabel(-0.1 (0.1) 1) ///
 					mlabel(mylabel) mlabposition(12)  mlabangle(vertical)  mlabgap(huge) mlabsize(vsmall) msymbol(pipe) ///
-					scheme(s1mono)
+					legend(off) /*scheme(s1color)*/
 			}
 		graph combine 	E1HC E2HC E4HC, name(hist_components_`source'_`i') scheme(s1mono)
 		graph export "$dir/Results/Secteurs_pays/Étude rapport D+I et Bouclage Mondial/hist_components_`source'_`i'.png", replace

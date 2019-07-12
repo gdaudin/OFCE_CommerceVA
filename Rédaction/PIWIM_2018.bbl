@@ -1,4 +1,4 @@
-\begin{thebibliography}{28}
+\begin{thebibliography}{37}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 \expandafter\ifx\csname url\endcsname\relax
   \def\url#1{\texttt{#1}}\fi
@@ -18,8 +18,8 @@ Amador, J., Cappariello, R., Stehrer, R., Mar. 2015. Global value chains: A
 {Antoun de Almeida}, L., 2016. Globalization of {{Inflationation}} and
   {{Input}}-{{Output Linkages}}. Mimeo, University of Frankfurt.
 
-\bibitem[{Auer et~al.(2017)Auer, Levchenko, and Saur\'e}]{Auer2017}
-Auer, R.~A., Levchenko, A.~A., Saur\'e, P., 2017. International inflation
+\bibitem[{Auer et~al.(2017)Auer, Levchenko, and Saur{\'e}}]{Auer2017}
+Auer, R.~A., Levchenko, A.~A., Saur{\'e}, P., 2017. International inflation
   spillovers through input linkages. Tech. rep., {National Bureau of Economic
   Research}.
 
@@ -28,9 +28,21 @@ Bems, R., Johnson, R.~C., Apr. 2015. Demand for {{Value Added}} and
   {{Value}}-{{Added Exchange Rates}}. Working {{Paper}} 21070, {National Bureau
   of Economic Research}.
 
+\bibitem[{Ben~Cheikh and Rault(2017)}]{BenCheikh2017}
+Ben~Cheikh, N., Rault, C., 2017. Investigating first-stage exchange rate
+  pass-through: {{Sectoral}} and macro evidence from euro area countries. The
+  World Economy 40~(12), 2611--2638.
+
 \bibitem[{Bournay and Piriou(2015)}]{Bournay2015}
-Bournay, J., Piriou, J.-P., Aug. 2015. {La comptabilit\'e nationale}, 17th
-  Edition. {La D\'ecouverte}, Paris.
+Bournay, J., Piriou, J.-P., Aug. 2015. {La comptabilit{\'e} nationale}, 17th
+  Edition. {La D{\'e}couverte}, Paris.
+
+\bibitem[{Campa and Goldberg(2008)}]{Campa2008}
+Campa, J.~M., Goldberg, L.~S., 2008. Pass-through of exchange rates to
+  consumption prices: What has changed and why? In: International {{Financial
+  Issues}} in the {{Pacific Rim}}: {{Global Imbalances}}, {{Financial
+  Liberalization}}, and {{Exchange Rate Policy}} ({{NBER}}-{{EASE Volume}} 17).
+  {University of Chicago Press}, pp. 139--176.
 
 \bibitem[{Cappariello and Felettigh(2015)}]{Cappariello2015}
 Cappariello, R., Felettigh, A., 2015. How does foreign demand activate domestic
@@ -51,16 +63,23 @@ Cochard, M., Daudin, G., Fronteau, S., Rifflart, C., Feb. 2016. Commerce
 \bibitem[{Daudin et~al.(2006)Daudin, {Monperrus-Veroni}, Rifflart, and
   Schweisguth}]{Daudin2006}
 Daudin, G., {Monperrus-Veroni}, P., Rifflart, C., Schweisguth, D., 2006. Le
-  commerce ext\'erieur en valeur ajout\'ee. Revue de l'OFCE~(3), 129--165.
+  commerce ext{\'e}rieur en valeur ajout{\'e}e. Revue de l'OFCE~(3), 129--165.
 
 \bibitem[{Daudin et~al.(2011)Daudin, Rifflart, and Schweisguth}]{Daudin2011}
 Daudin, G., Rifflart, C., Schweisguth, D., 2011. Who produces for whom in the
-  world economy? Canadian Journal of Economics/Revue canadienne d'\'economie
+  world economy? Canadian Journal of Economics/Revue canadienne d'{\'e}conomie
   44~(4), 1403--1437.
 
 \bibitem[{De~Backer and Yamano(2012)}]{DeBacker2012}
 De~Backer, K., Yamano, N., 2012. International {{Comparative Evidence}} on
   {{Global Value Chains}}. Tech. Rep. 2012/3, {OECD}, Paris.
+
+\bibitem[{De~Soyres et~al.(2018)De~Soyres, Frohm, Gunnella, and
+  Pavlova}]{DeSoyres2018}
+De~Soyres, F. M. M.~R., Frohm, E., Gunnella, V., Pavlova, E., Jul. 2018.
+  Bought, {{Sold}}, and {{Bought Again}}: {{The Impact}} of {{Complex Value
+  Chains}} on {{Export Elasticities}}. {{SSRN Scholarly Paper}} ID 3238378,
+  {Social Science Research Network}, Rochester, NY.
 
 \bibitem[{Dietzenbacher et~al.(2013)Dietzenbacher, Los, Stehrer, Timmer, and
   {de Vries}}]{Dietzenbacher2013}
@@ -81,10 +100,23 @@ Feenstra, R.~C., Jensen, J.~B., Mar. 2012. Evaluating {{Estimates}} of
 Folloni, G., Miglierina, C., 1994. Hypothesis of price formation in
   input-output tables. Economic Systems Research.
 
-\bibitem[{Goldberg and Campa(2010)}]{Goldberg2010}
-Goldberg, L.~S., Campa, J.~M., 2010. The sensitivity of the {{CPI}} to exchange
-  rates: {{Distribution}} margins, imported inputs, and trade exposure. The
-  Review of Economics and Statistics 92~(2), 392--407.
+\bibitem[{Gaulier et~al.(2019)Gaulier, Sztulman, and
+  {\"U}nal-Kesenci}]{Gaulier2019}
+Gaulier, G., Sztulman, A., {\"U}nal-Kesenci, D., Mar. 2019. Are {{Global Value
+  Chains Receding}}? {{The Jury Is Still Out}}. {{Key Findings}} from the
+  {{Analysis}} of {{Deflated World Trade}} in {{Parts}} and {{Components}}.
+  {{SSRN Scholarly Paper}} ID 3359558, {Social Science Research Network},
+  Rochester, NY.
+
+\bibitem[{Georgiadis et~al.(2019)Georgiadis, Gr{\"a}b, and
+  Khalil}]{Georgiadis2019}
+Georgiadis, G., Gr{\"a}b, J., Khalil, M., 2019. Global {{Value Chain
+  Participation}} and {{Exchange Rate Pass}}-{{Through}}. Unpublished, European
+  Central Bank, Frankfurt.
+
+\bibitem[{Hahn(2003)}]{Hahn2003}
+Hahn, E., 2003. Pass-through of external shocks to euro area inflation.
+  European Central Bank Working Paper~(243).
 
 \bibitem[{Hummels et~al.(2001)Hummels, Ishii, and Yi}]{Hummels2001}
 Hummels, D., Ishii, J., Yi, K.-M., Jun. 2001. The nature and growth of vertical
@@ -100,6 +132,16 @@ Johnson, R.~C., Noguera, G., Mar. 2012. Accounting for intermediates:
 Koopman, R., Wang, Z., Wei, S.-J., Feb. 2014. Tracing {{Value}}-{{Added}} and
   {{Double Counting}} in {{Gross Exports}}. American Economic Review 104~(2),
   459--494.
+
+\bibitem[{Kunovac and Comunale(2017)}]{Kunovac2017}
+Kunovac, D., Comunale, M., 2017. Exchange {{Rate Pass}}-{{Through}} in the
+  {{Euro Area}}. European Central Bank Working Paper~(2003).
+
+\bibitem[{Leigh et~al.(2017)Leigh, Lian, {Poplawski-Ribeiro}, Szymanski,
+  Tsyrennikov, and Yang}]{Leigh2017}
+Leigh, M.~D., Lian, W., {Poplawski-Ribeiro}, M., Szymanski, R., Tsyrennikov,
+  V., Yang, H., 2017. Exchange Rates and Trade: {{A}} Disconnect?
+  {International Monetary Fund}.
 
 \bibitem[{Leontief(1951)}]{Leontief1951}
 Leontief, W.~W., 1951. The structure of {{American}} economy, 1919-1939: An
@@ -118,6 +160,10 @@ OECD, Decembre 2018. What's new? {{Differences}} between the 2018 and 2016
 OECD, WTO, 2011. Trave in value-added: Concepts, methodologies and challenges
   (joint oecd-wto note).
 
+\bibitem[{Ortega and Osbat(2019)}]{Ortega2019}
+Ortega, E., Osbat, C., 2019. Exchange rate pass-through in the euro area and in
+  {{EU}} countries.
+
 \bibitem[{Puzzello(2012)}]{Puzzello2012}
 Puzzello, L., 2012. A proportionality assumption and measurement biases in the
   factor content of trade. Journal of International Economics 87~(1), 105--111.
@@ -127,6 +173,10 @@ Sato, K., Shrestha, N., Oct. 2014. Global and {{Regional Shock Transmission}}
   -{{An Asian Perspective}}-. {{CESSA Working Paper}}, {Center for Economic and
   Social Studies in Asia (CESSA), Department of Economics, Yokohama National
   University}, Yokohama.
+
+\bibitem[{Schaeffer(2019)}]{Schaeffer2019}
+Schaeffer, 2019. Exchange rate pass-through in the euro area and in {{EU}}
+  countries.
 
 \bibitem[{Sharify(2013)}]{Sharify2013}
 Sharify, N., 2013. Input-output modelling of the effect of implicit subsidies

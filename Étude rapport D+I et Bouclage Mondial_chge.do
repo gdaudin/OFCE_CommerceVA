@@ -109,7 +109,7 @@ if "`type'"=="HC" | "`type'" =="HC_note" {
 }
 
 gen E1HC_E2HC=E1HC + E2HC
-label var pond_`source'_`type' "Élasticité des prix (`type') en monnaie nationale à un choc de la monnaie nationale"
+label var pond_`source'_`type' "Élasticité des prix (`type') en monnaie nationale à un choc de la monnaie nationale
 
 save "$dir/Results/Étude rapport D+I et Bouclage Mondial/Elast_par_pays_`year'_`source'_`type'.dta", replace
 	
@@ -357,9 +357,10 @@ foreach source in  WIOD /*TIVA TIVA_REV4*/ {
 	graph drop _all
 *	foreach i of numlist $start_year (1) $end_year  {
 			use "$dir/Results/Étude rapport D+I et Bouclage Mondial/Elast_par_pays_`i'_`source'_HC.dta", clear 
+			replace pond_WIOD_HC=-pond_WIOD_HC
 			gen E4HC = pond_WIOD_HC - E1HC - E2HC - E3HC
 			gen blouf = 0
-			gen mylabel= c if strpos("FRA DEU DEU_EUR ITA ITA_EUR GBR CHN USA CAN JPN ",c)!=0
+			gen mylabel= pays if strpos("FRA DEU DEU_EUR ITA ITA_EUR GBR CHN USA CAN JPN ",pays)!=0
 			foreach var in E1HC E2HC E3HC E4HC {
 				gen share_`var'=`var'/pond_WIOD_HC
 				twoway histogram share_`var', start(-0.2) width(0.1) freq name(`var') || ///

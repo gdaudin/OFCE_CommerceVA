@@ -27,7 +27,7 @@ do "$dirgit/Definition_pays_secteur.do"
 Definition_pays_secteur `source'
 
 if "`source'"=="WIOD" local oil B
-if "`source'"=="TIVA" local oil C10T14
+if "`source'"=="TIVA" local oil C10T14MIN
 if "`source'"=="TIVA_REV4" local oil 05T06
 
 *Ouverture de la base contenant le vecteur ligne de production par pays et secteurs
@@ -69,6 +69,7 @@ foreach var of varlist $var_entree_sortie {
 
 	replace `var' = 0 if secteur !="`oil'"
 }
+
 
 *somme des CI pour chaque secteur de chaque pays
 collapse (sum) $var_entree_sortie
@@ -249,9 +250,7 @@ foreach source in  TIVA  TIVA_REV4  WIOD   {
 *	foreach i of numlist 2010  {
 	foreach i of numlist $start_year (1)$end_year  {
 		
-		oil_inputs_par_sect `i' `source' hze_not
-		oil_inputs_par_sect `i' `source' hze_yes
-		
+		oil_inputs_par_sect `i' `source'
 		clear
 	}
 
@@ -264,7 +263,7 @@ foreach source in  TIVA  TIVA_REV4  WIOD   {
 
 
 *foreach source in  WIOD {
-foreach source in   TIVA_REV4 TIVA    WIOD  {
+foreach source in  TIVA TIVA_REV4 WIOD {
 
 
 

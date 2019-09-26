@@ -3,7 +3,7 @@
 clear  
 set more off
 if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
-if ("`c(hostname)'" == "widv269a") global dir  "D:\home\T822289\CommerceVA" 
+if ("`c(hostname)'" == "widv270a") global dir  "D:\home\T822289\CommerceVA" 
 
 *capture log close
 *log using "$dir/$S_DATE.log", replace

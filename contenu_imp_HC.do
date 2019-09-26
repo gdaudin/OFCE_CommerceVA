@@ -4,16 +4,16 @@ clear
 *set trace on
 
 if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
-if ("`c(hostname)'" == "widv269a") global dir  "D:\home\T822289\CommerceVA" 
+if ("`c(hostname)'" == "widv270a") global dir  "D:\home\T822289\CommerceVA" 
 if ("`c(hostname)'" == "FP1376CD") global dir  "T:\CommerceVA" 
 
 if ("`c(username)'"=="guillaumedaudin") global dirgit "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation"
-if ("`c(hostname)'" == "widv269a") global dirgit  "D:\home\T822289\CommerceVA\GIT\commerce_va_inflation" 
+if ("`c(hostname)'" == "widv270a") global dirgit  "D:\home\T822289\CommerceVA\GIT\commerce_va_inflation" 
 if ("`c(hostname)'" == "FP1376CD") global dirgit  "T:\CommerceVA\GIT\commerce_va_inflation" 
 
 
 if ("`c(username)'" == "guillaumedaudin") use "$dir/BME.dta", clear
-if ("`c(hostname)'" == "widv269a") use  "D:\home\T822289\CommerceVA\Rédaction\Rédaction 2019\BME.dta" , clear
+if ("`c(hostname)'" == "widv270a") use  "D:\home\T822289\CommerceVA\Rédaction\Rédaction 2019\BME.dta" , clear
 if ("`c(hostname)'" == "FP1376CD") use  "T:\CommerceVA\Rédaction\Rédaction 2019\BME.dta" , clear
 
 capture log using "$dir/$S_DATE.log", replace

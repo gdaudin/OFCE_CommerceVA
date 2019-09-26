@@ -1,46 +1,28 @@
 
- 
-
+clear  
 set more off
-
-
-
-
 if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
-if ("`c(hostname)'" == "widv269a") global dir  "D:\home\T822289\CommerceVA" 
-if ("`c(hostname)'" == "FP1376CD") global dir  "T:\CommerceVA" 
-
-if ("`c(username)'"=="guillaumedaudin") global dirgit "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation"
-if ("`c(hostname)'" == "widv269a") global dirgit  "D:\home\T822289\CommerceVA\GIT\commerce_va_inflation" 
-if ("`c(hostname)'" == "FP1376CD") global dirgit  "T:\CommerceVA\GIT\commerce_va_inflation" 
+else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
 
 
-if ("`c(username)'" == "guillaumedaudin") use "$dir/BME.dta", clear
-if ("`c(hostname)'" == "widv269a") use  "D:\home\T822289\CommerceVA\Rédaction\Rédaction 2019\BME.dta" , clear
-if ("`c(hostname)'" == "FP1376CD") use  "T:\CommerceVA\Rédaction\Rédaction 2019\BME.dta" , clear
-
+****RQ : ne marche pas pour TIVA car il faudrait traiter la Chine et le Mexique
+***Ce n'est pas trop compliqué, mais c'est vraiment du travail inutile pour l'instant.
 
 
 capture log close
 *log using "$dir/$S_DATE.log", replace
 set matsize 7000
 *set mem 700m if earlier version of stata (<stata 12)
-
-
 set more off
-
-
-
 
 capture program drop composants_HC
 program composants_HC
-args yrs source nature_choc agregation
-*pour nature_choc, il s'agit du change (chge) ou du pétrole (oil)
-*agregation = oui pour 4 secteurs ; non pour avoir l'ensemble des secteurs
+args yrs source
 
+if ("`c(username)'"=="guillaumedaudin") do  "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation/Definition_pays_secteur.do" `source'
+if ("`c(username)'"=="w817186") do "X:\Agents\FAUBERT\commerce_VA_inflation\Definition_pays_secteur.do" `source'
+if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\Definition_pays_secteur.do" `source'
 
-do "$dirgit/Definition_pays_secteur.do"   
-Definition_pays_secteur `source'
 
 
 use "$dir/Bases/HC_`source'.dta", clear
@@ -49,40 +31,27 @@ rename pays_conso c
 keep if year==`yrs'
 
 
-
-merge m:1 s c using "$dir/Bases/csv_`source'.dta", keep(1 3)
+merge m:1 s c using "$dir/Bases/csv_`source'.dta"
 drop _merge
 
-
-
 gen origine = "impt" if lower(c)!=lower(pays)
-replace origine = "dom" if lower(c)==lower(pays) | ///
-		c=="MEX" & strpos("$mexique",pays)!=0 | ///
-		c=="CHN" & strpos("$china",pays)!=0
-
-
-if "`agregation'" == "oui" { 
-	collapse (sum) conso, by(agregat_secteur origine c) 
-	rename agregat_secteur s 
-}
-if "`agregation'" == "non" { 
-	collapse (sum) conso, by(s origine c) 
-}
-
+replace origine = "dom" if lower(c)==lower(pays)
+collapse (sum) conso, by(agregat_secteur origine c)
 egen conso_tot = total(conso), by(c)
 sort c
 gen share = conso/conso_tot
-keep c s origine share
+keep c agregat_secteur origine share
 
-replace s = s + "_" + origine
+
+
+
+replace agregat_secteur = agregat_secteur + "_" + origine
 drop origine
-reshape wide share, i(c) j(s) string
+reshape wide share, i(c) j(agregat_secteur) string
 rename share* s_*
 egen s_HC_impt=rowtotal(s*impt)
 egen s_HC_dom=rowtotal(s*dom)
 replace c = upper(c)
-
-
 
 
  
@@ -91,180 +60,99 @@ expand 2, gen(duplicate)
 drop if strpos("$eurozone",c)==0 & duplicate==1
 replace c = c+"_EUR" if strpos("$eurozone",c)!=0 & duplicate==1
 drop duplicate
-
-export excel using "$dir/Results/Devaluations/decomp_`source'_HC_`yrs'_agreg_`agregation'.xls", firstrow(variables) replace
-save "$dir/Results/Devaluations/decomp_`source'_HC_`yrs'_agreg_`agregation'.dta", replace
-
-export excel using "$dir/Results/secteurs_pays/decomp_`source'_HC_`yrs'_agreg_`agregation'.xls", firstrow(variables) replace
-save "$dir/Results/secteurs_pays/decomp_`source'_HC_`yrs'_agreg_`agregation'.dta", replace
+save "$dir/Results/Devaluations/decomp_`source'_HC_`yrs'.dta", replace
 
 
 
-
-*****Ici, nous avons les parts sectorielles importées / domestiques calculées pour tous les pays. 
-***** Dans le fichier_mean_chge, on obtient les contributions par secteur à la hausse du prix
-*****Pour le choc euro, la part ne change importée / domestique ne change pas. Les importées sont alors tous les biens venant d'autres pays.
-
-if "`agregation'" == "oui"  local liste_secteurs energie alimentaire neig services
-if "`agregation'" == "non"  local liste_secteurs "$sector"
-
-
-*Pour part par secteur
 foreach origine in dom impt {
-	foreach sector in `liste_secteurs' {
-		if "`nature_choc'" == "chge" {
-			foreach euro in no_ze ze {				
-				local wgt `sector'_`origine'
-				use "$dir/Results/Devaluations/mean_chg_`source'_HC_`wgt'_`yrs'_Sdollar.dta", clear
-
-				**Cela cela donne l'effet sur les prix d'un secteur particulir du choc de change
-				** on peut donc ensuite le multiplier par l'importance du secteur
-
-				gen sect_`sector'_`origine'=.
-				foreach pays of global country_hc {
-					if "`euro'"=="no_ze" {
-						replace sect_`sector'_`origine' = shock`pays'1 if c=="`pays'"
-					}
-					if "`euro'"=="ze" & strmatch("$eurozone","*`pays'*")==1 {
-						replace sect_`sector'_`origine' = shockEUR1 if c=="`pays'"
-						replace c="`pays'_EUR" if c=="`pays'"
-					}
-				}
-				if "`euro'"=="ze" keep if strpos(c,"_EUR")!=0
-				keep c sect_`sector'_`origine'
-			
-				merge 1:1 c using   "$dir/Results/Devaluations/decomp_`source'_HC_`yrs'_agreg_`agregation'.dta"
-				drop _merge
-				save "$dir/Results/Devaluations/decomp_`source'_HC_`yrs'_agreg_`agregation'.dta", replace
-				local folder Devaluations
-			}
-		}
-		if "`nature_choc'" == "oil" {
+	foreach sector in energie alimentaire neig services {
+		foreach euro in no_ze ze {				
 			local wgt `sector'_`origine'
-			use "$dir/Results/secteurs_pays/mean_chg_`source'_HC_`wgt'_`yrs'.dta", clear
-			gen sect_`sector'_`origine'=.
-			replace sect_`sector'_`origine' = shock1
-			keep c sect_`sector'_`origine'
-			merge 1:1 c using   "$dir/Results/secteurs_pays/decomp_`source'_HC_`yrs'_agreg_`agregation'.dta"
-			drop _merge
-			save "$dir/Results/secteurs_pays/decomp_`source'_HC_`yrs'_agreg_`agregation'.dta", replace
-			local folder secteurs_pays
-		}
-	}
-	merge 1:1 c using   "$dir/Results/`folder'/decomp_`source'_HC_`yrs'_agreg_`agregation'.dta"
-	drop _merge
-	save "$dir/Results/`folder'/decomp_`source'_HC_`yrs'_agreg_`agregation'.dta", replace	
-}
-
-*Pour part importée / domestique
-foreach origine in dom impt {
-	if "`nature_choc'" == "chge" {
-		foreach euro in no_ze ze {		
-			use "$dir/Results/Devaluations/mean_chg_`source'_HC_`origine'_`yrs'_Sdollar.dta", clear
-			gen sect_HC_`origine'=.
-			foreach pays of global country_hc {
+			use "$dir/Results/Devaluations/mean_chg_`source'_HC_`wgt'_`yrs'.dta", clear
+			gen `sector'_`origine'=.
+			foreach pays of global country {
 				if "`euro'"=="no_ze" {
-						replace sect_HC_`origine' = shock`pays'1 if c=="`pays'"
+					replace `sector'_`origine' = shock`pays'1 if c=="`pays'"
 				}
 				if "`euro'"=="ze" & strmatch("$eurozone","*`pays'*")==1 {
-					replace sect_HC_`origine' = shockEUR1 if c=="`pays'"
+					replace `sector'_`origine' = shockEUR1 if c=="`pays'"
 					replace c="`pays'_EUR" if c=="`pays'"
-				}	
+				}
 			}
-			keep c sect_HC_`origine'
 			if "`euro'"=="ze" keep if strpos(c,"_EUR")!=0
-
-			merge 1:1 c using   "$dir/Results/Devaluations/decomp_`source'_HC_`yrs'_agreg_`agregation'.dta"
+			keep c `sector'_`origine'
+			
+			merge 1:1 c using   "$dir/Results/Devaluations/decomp_`source'_HC_`yrs'.dta
 			drop _merge
-			save "$dir/Results/Devaluations/decomp_`source'_HC_`yrs'_agreg_`agregation'.dta", replace
+			save "$dir/Results/Devaluations/decomp_`source'_HC_`yrs'.dta", replace	
+			
 		}
 	}
-	if "`nature_choc'" == "oil" {
-		use "$dir/Results/secteurs_pays/mean_chg_`source'_HC_`origine'_`yrs'.dta"
-		gen sect_HC_`origine'=.
-			foreach pays of global country_hc {
-				replace sect_HC_`origine' = shock1
+	
+		
+		
+	foreach euro in no_ze ze {		
+		use "$dir/Results/Devaluations/mean_chg_`source'_HC_`origine'_`yrs'.dta", clear
+		gen HC_`origine'=.
+		foreach pays of global country {
+			if "`euro'"=="no_ze" {
+					replace HC_`origine' = shock`pays'1 if c=="`pays'"
 			}
-			keep c sect_HC_`origine'
-			merge 1:1 c using   "$dir/Results/secteurs_pays/decomp_`source'_HC_`yrs'_agreg_`agregation'.dta"
-			drop _merge
-			save "$dir/Results/secteurs_pays/decomp_`source'_HC_`yrs'_agreg_`agregation'.dta", replace
+			if "`euro'"=="ze" & strmatch("$eurozone","*`pays'*")==1 {
+				replace HC_`origine' = shockEUR1 if c=="`pays'"
+				replace c="`pays'_EUR" if c=="`pays'"
+			}	
 		}
-
-}
-
-
-
-**Passage en prix domestique (et en négaitif) uniquement pour le change
-
-if "`nature_choc'" == "chge" {
-	foreach origine in dom impt {
-		foreach sector in HC `liste_secteurs' {
-			replace sect_`sector'_`origine' = -(1-sect_`sector'_`origine'/s_`sector'_`origine')/2*s_`sector'_`origine'
-		}		
+		keep c HC_`origine'
+		if "`euro'"=="ze" keep if strpos(c,"_EUR")!=0
+		
+		merge 1:1 c using   "$dir/Results/Devaluations/decomp_`source'_HC_`yrs'.dta
+		drop _merge
+		save "$dir/Results/Devaluations/decomp_`source'_HC_`yrs'.dta", replace
 	}
 }
 
-****Calcul de la part en % de chaque secteur dans le choc
-foreach origine in dom impt {
-	foreach sector in `liste_secteurs' {
-		gen part_dans_choc_`sector'_`origine' = sect_`sector'_`origine'/(sect_HC_dom+sect_HC_impt)
-	}
-}
+
+
+
+
+
+**Passage en prix domestiques (et en négatif)
 
 foreach origine in dom impt {
-	foreach sector in `liste_secteurs' {
-		label var s_`sector'_`origine' "Part dans la consommation de `sector'_`origine'"
-		label var sect_`sector'_`origine' "Contribution au choc de `sector'_`origine'"
-		label var part_dans_choc_`sector'_`origine' "Part dans le choc de `sector'_`origine'"
+	foreach sector in HC energie alimentaire neig services {
+		replace `sector'_`origine' = -(1-`sector'_`origine'/s_`sector'_`origine')/2*s_`sector'_`origine'
+	
 	}
 }
 
 
-
-
-
-
-if "`nature_choc'" == "chge" save "$dir/Results/Devaluations/decomp_`source'_HC_`yrs'_agreg_`agregation'.dta", replace
-if "`nature_choc'" == "oil" save "$dir/Results/secteurs_pays/decomp_`source'_HC_`yrs'_agreg_`agregation'.dta", replace
-if "`nature_choc'" == "chge" export excel using "$dir/Results/Devaluations/decomp_`source'_HC_`yrs'_agreg_`agregation'.xls", firstrow(variables) replace
-if "`nature_choc'" == "oil" export excel using "$dir/Results/secteurs_pays/decomp_`source'_HC_`yrs'_agreg_`agregation'.xls", firstrow(variables) replace
+save "$dir/Results/Devaluations/decomp_`source'_HC_`yrs'.dta", replace
 
 end
 
-*s_ ... ce sont les parts dans la conso
-*sect_... ce sont les contributions au choc
-*part_dans_choc... ce les parts dans le choc
+foreach source in  WIOD  {
+*foreach source in  WIOD  TIVA {
 
-composants_HC 2014 WIOD chge oui
 
-*composants_HC 2014 TIVA_REV4 oil non
-
-/*
-*foreach source in  WIOD  TIVA_REV4 {
-
-foreach source in  WIOD  TIVA TIVA_REV4  {
 
 	if "`source'"=="WIOD" global start_year 2000
 	if "`source'"=="TIVA" global start_year 1995
-	if "`source'"=="TIVA_REV4" global start_year 2005
 
 
 	if "`source'"=="WIOD" global end_year 2014
 	if "`source'"=="TIVA" global end_year 2011
-	if "`source'"=="TIVA_REV4" global end_year 2015
-
-
-	*foreach i of numlist 2014  {
-
-	foreach i of numlist $start_year (1) $end_year  {
-		composants_HC `i' `source' chge oui
-		composants_HC `i' `source' oil oui
-		
 	
+
+
+*	foreach i of numlist 2014  {
+	foreach i of numlist $start_year (1) $end_year  {
+		composants_HC `i' `source'
 	}
 }
 
 
 
 capture log close
+
+

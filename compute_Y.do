@@ -34,7 +34,7 @@ if "`source'"=="TIVA_REV4" {
 	egen utilisations = rowtotal(ARG_01T03-ZAF_P33)
 	gen Country = substr("v1",1,3)
  	generate pays = strupper(substr(v1,1,3))
-	generate sector = strupper(substr(v1,strpos(v1,"_")+1,.))
+	generate sector = strupper(substr(v1,strpos(v1,"_")+1,strlen(v1)-3-strpos(v1,"_")))
 }
 
 generate Y = utilisations 

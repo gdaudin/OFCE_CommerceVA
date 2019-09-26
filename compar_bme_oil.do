@@ -1,11 +1,11 @@
 
 if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
-if ("`c(hostname)'" == "widv269a") global dir  "D:\home\T822289\CommerceVA" 
+if ("`c(hostname)'" == "widv270a") global dir  "D:\home\T822289\CommerceVA" 
 if ("`c(hostname)'" == "FP1376CD") global dir  "T:\CommerceVA" 
 
 
 if ("`c(username)'" == "guillaumedaudin") use "$dir/BME.dta", clear
-if ("`c(hostname)'" == "widv269a") use  "D:\home\T822289\CommerceVA\Rédaction\Rédaction 2019\BME.dta" , clear
+if ("`c(hostname)'" == "widv270a") use  "D:\home\T822289\CommerceVA\Rédaction\Rédaction 2019\BME.dta" , clear
 if ("`c(hostname)'" == "FP1376CD") use  "T:\CommerceVA\Rédaction\Rédaction 2019\BME.dta" , clear
 
 drop if type == "ERT" | type == "CXD" 

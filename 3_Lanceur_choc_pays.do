@@ -11,13 +11,12 @@ clear
 set more off
 
 if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
-if ("`c(hostname)'" == "widv269a") global dir  "D:\home\T822289\CommerceVA" 
+if ("`c(hostname)'" == "widv270a") global dir  "D:\home\T822289\CommerceVA" 
+
 
 if ("`c(username)'"=="guillaumedaudin") global dirgit "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation"
-if ("`c(hostname)'" == "widv269a") global dirgit  "D:\home\T822289\CommerceVA\GIT\commerce_va_inflation" 
+if ("`c(hostname)'" == "widv270a") global dirgit  "D:\home\T822289\CommerceVA\GIT\commerce_va_inflation" 
 
-
-* else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
 
 capture log  using "$dir/Temporaire/$S_DATE.log", replace
 *log using "$dir/$S_DATE.log", replace
@@ -27,12 +26,12 @@ set more off
 cd "$dir" 
 
 do "$dirgit/Definition_pays_secteur.do"   
-do "$dirgit/Aggregation_effets_des_chocs_chge.do"   
+do "$dirgit/Aggregation_effets_des_chocs.do"   
 do "$dirgit/compute_X.do"
 do "$dirgit/compute_HC.do"
 do "$dirgit/compute_Y.do"
 
-* A faire tourner la 1ere fois
+/* A faire tourner la 1ere fois
 Definition_pays_secteur TIVA
 append_HC TIVA 
 append_X TIVA
@@ -42,7 +41,7 @@ Definition_pays_secteur WIOD
 append_HC WIOD
 append_X WIOD
 append_Y WIOD
-
+*/
 
 Definition_pays_secteur TIVA_REV4
 append_HC TIVA_REV4
@@ -59,8 +58,7 @@ set more off
 
 
 *foreach source in   TIVA { 
-foreach source in  WIOD /*TIVA TIVA_REV4*/ { 
-
+foreach source in  /* WIOD TIVA*/ TIVA_REV4 { 
 
 	Definition_pays_secteur `source'
 	if "`source'"=="WIOD" local start_year 2000
@@ -102,13 +100,11 @@ foreach source in  WIOD /*TIVA TIVA_REV4*/ {
 	}
 	
 	*  foreach i of numlist 2011 {
-	
-**Faire historique des principales pondérations
 	foreach i of numlist  `end_year' (-1) `start_year'  {
 		
 		local HC_fait 0
-    	foreach j in  HC X Y /*HC_neig_dom HC_alimentaire_dom HC_energie_dom HC_services_dom HC_dom ///
-					HC_neig_impt HC_alimentaire_impt HC_energie_impt HC_services_impt HC_impt */  {	
+    	foreach j in  HC X Y HC_neig_dom HC_alimentaire_dom HC_energie_dom HC_services_dom HC_dom ///
+					HC_neig_impt HC_alimentaire_impt HC_energie_impt HC_services_impt HC_impt   {	
 
     	    if strpos("`j'","HC")!=0 & `HC_fait'==0 {
 				compute_HC_vect `i' `source'
@@ -121,47 +117,8 @@ foreach source in  WIOD /*TIVA TIVA_REV4*/ {
 	    }
 
     }
-	
-	
-****Faire toutes les variations pour la dernière année
-		
-	local HC_fait 0
-    foreach j in  /*HC X Y*/ HC_neig_dom HC_alimentaire_dom HC_energie_dom HC_services_dom HC_dom ///
-				HC_neig_impt HC_alimentaire_impt HC_energie_impt HC_services_impt HC_impt   {	
-   	    if strpos("`j'","HC")!=0 & `HC_fait'==0 {
-			compute_HC_vect `end_year' `source'
-			local HC_fait 1
-		}
-		if strpos("`j'","HC")==0 compute_`j'_vect `end_year' `source' 
-		table_mean `end_year' `j' 1 `source' Sdollar
-		table_mean `end_year' `j' 1 `source' S
-	   }
-
- 
-	
-
-	if "`source'"=="TIVA_REV4"	{
-		local HC_fait 0
-		foreach j in  /*HC X Y*/ HC_neig_dom HC_alimentaire_dom HC_energie_dom HC_services_dom HC_dom ///
-					HC_neig_impt HC_alimentaire_impt HC_energie_impt HC_services_impt HC_impt   {	
-			if strpos("`j'","HC")!=0 & `HC_fait'==0 {
-				compute_HC_vect 2014 `source'
-				local HC_fait 1
-			}
-			if strpos("`j'","HC")==0 compute_`j'_vect 2014 `source' 
-			table_mean 2014 `j' 1 `source' Sdollar
-			table_mean 2014 `j' 1 `source' S
-		}
-	}
-		
-	
-	
-	
-	
-	
 
 }
-
 
 *secteurs HC : alimentaire neig services energie
 
@@ -170,5 +127,5 @@ foreach source in  WIOD /*TIVA TIVA_REV4*/ {
 *HC_alimentaire HC_neig HC_services HC_energie
 
 local nbr_sect=wordcount("$sector")	
-capture log close
+log close
 

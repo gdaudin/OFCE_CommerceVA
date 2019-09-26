@@ -17,10 +17,10 @@ global test=1
 
 *******Définition du directory
 if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
-if ("`c(hostname)'" == "widv269a") global dir  "D:\home\T822289\CommerceVA" 
+if ("`c(hostname)'" == "widv270a") global dir  "D:\home\T822289\CommerceVA" 
 
 if ("`c(username)'"=="guillaumedaudin") global dirgit "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation"
-if ("`c(hostname)'" == "widv269a") global dirgit  "D:\home\T822289\CommerceVA\GIT\commerce_va_inflation" 
+if ("`c(hostname)'" == "widv270a") global dirgit  "D:\home\T822289\CommerceVA\GIT\commerce_va_inflation" 
 
 
 
@@ -64,7 +64,7 @@ blink
 */
 */
 *foreach source in   WIOD { 
-foreach source in    WIOD TIVA TIVA_REV4 { 
+foreach source in   /* WIOD TIVA */ TIVA_REV4 { 
 
 
 	if "`source'"=="WIOD" local start_year 2000 /*2000*/

@@ -1,7 +1,7 @@
 clear  
 set more off
 if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
-if ("`c(hostname)'" == "widv269a") global dir  "D:/home/T822289/CommerceVA" 
+if ("`c(hostname)'" == "widv270a") global dir  "D:/home/T822289/CommerceVA" 
 if ("`c(hostname)'" == "FP1376CD") global dir  "T:/CommerceVA" 
 
 *capture log close
@@ -19,7 +19,7 @@ args year source type
 **Exemple : etude 2011 WIOD par_sect
 
 if ("`c(username)'"=="guillaumedaudin") do  "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation/Definition_pays_secteur.do" `source'
-if ("`c(username)'"=="widv269a") do "D:/home/T822289/CommerceVA/GIT/commerce_VA_inflation/Definition_pays_secteur.do" `source'
+if ("`c(username)'"=="widv270a") do "D:/home/T822289/CommerceVA/GIT/commerce_VA_inflation/Definition_pays_secteur.do" `source'
 if ("`c(username)'"=="FP1376CD") do  "T:/CommerceVA/GIT/commerce_VA_inflation/Definition_pays_secteur.do" `source'	
 
 

@@ -143,8 +143,7 @@ Leontief's price model is broadly used in multi-sector, single-country macroecon
 Based on initial work from the OFCE (Observatoire Français des Conjonctures Économiques) \cite{Cochard2016}, we developed a model named «PIWIM» (Push cost Inflation through World Input-output Matrices). This paper makes extensive use of this model.
 
 
-\subsection{Defining a price shock in a I-O model}
-\label{subsec:ioprice}
+\subsection{Defining a price shock in a I-O model}\label{subsec:ioprice}
 To identify which countries are most affected by a price shock through value-added and vertical trade flows in international trade, we need a large structural matrix that integrates input flows between sectors, both within each country and between countries.
 This matrix traces the sectoral and geographical origin of inputs. \\
 The standard I-O model relies on input-output tables registering transactions of goods and services (domestic or imported) at current prices. The I-O tables describe the sale and purchase relationships between producers and consumers within an economy. Each column describes, for each industry $j$, the intermediate consumption of goods and services from the various sectors.
@@ -260,8 +259,7 @@ To address this issue, the WIOD database uses bilateral trade statistics to deri
 To sum up, the WIOD includes information on bilateral industry-specific input use, whereas such information exists only in imputed form in TiVA. Therefore, we focus on the WIOD database in our analysis \footnote{Results obtained with the 2016 and 2018 TiVA databases are available upon request.}. 
 
 
-\subsection{Nominal exchange rate shock}
-\label{subsec:chocchange}
+\subsection{Nominal exchange rate shock} \label{subsec:chocchange}
 
 We implement an exchange rate shock using the WIOD databases described above. 
 The appreciation of a currency against other currencies leads, for the shock-stricken country, to a fall in the domestic-currency price of its imports and an increase in the foreign-currency price of its exports. We focus on the disinflationary impact of this shock on the shock-stricken country though we also estimate, conversely, its inflationary impact on countries that directly and indirectly consume, through third countries linkages, inputs from the shock-stricken country.\\
@@ -815,8 +813,10 @@ Real integration through the supply chain matters for domestic price dynamics in
 
 \newpage
 \bibliography{PapiertransmissiondeschocsenVA.bib}
+
 \newpage
-\appendix{WIOD Sectors}
+\appendix
+\section{WIOD Sectors}
 \begin{table}[!h]
  \centering
  \caption{\footnotesize{\textbf{Industries in WIOD}}}
@@ -883,9 +883,11 @@ Real integration through the supply chain matters for domestic price dynamics in
 \label{tab:wiodindustries}
 \end{table}
 
-
-\appendix{Contrasting $S$ and $S^i$ in the two-country, one sector case}
-\subsection{Evolution of VA price}
+\newpage
+\section{Contrasting $S$ and $S^i$ in the two-country, one sector case}
+In this appendix, we illustrate in the two countries and one good case the difference between a simple price shock (section \ref{subsec:ioprice}) and an exchange rate shock (section \ref{subsec:chocchange})
+\subsection{Effect of a price shock based of VA contents}
+Using the notations of the paper, we have in the two countries and one good case:
 \begin{gather*}
 \cal {A} = \left(\begin{matrix}a_{1,1}&a_{1,2}\\a_{2,1}&a_{2,2}\end{matrix}\right)
 \\
@@ -894,15 +896,17 @@ I-\cal {A}=\left(\begin{matrix}1-a_{1,1}&-a_{1,2}\\-a_{2,1}&1-a_{2,2}\end{matrix
 \left(I-\cal {A}\right)^{-1}=\frac{1}{\left(1-a_{1,1}\right)\left(1-a_{2,2}\right)-a_{2,1}a_{1,2}}\left(\begin{matrix}1-a_{2,2}&a_{1,2}\\a_{2,1}&1-a_{1,1}\end{matrix}\right) =z.\left(\begin{matrix}1-a_{2,2}&a_{1,2}\\a_{2,1}&1-a_{1,1}\end{matrix}\right) \\ 
 =\left(\begin{matrix}u&v\\w&x\end{matrix}\right)
 \\
-\text{French demand shares}=d=\left(\begin{matrix}1-f\\f\end{matrix}\right) \\
+\text{Country 1 demand shares}=d=\left(\begin{matrix}1-f\\f\end{matrix}\right) \\
 \left(I-\cal {A}\right)^{-1}d=\left(\begin{matrix}u-uf+vf\\w-wf+xf\end{matrix}\right)
 \end{gather*}
 
-Donc, en cas de choc $c$ pour le prix de la va dans le pays étranger (en monnaie française), on peut écrire un vecteur de choc : $C=\left(0,c\right)$.  les prix varient tout d'abord de  $C\cal {A}$, puis $C\cal {A}^2$, etc. Donc le vecteur de choc $S$ (en monnaie française) est : 
+In that case, when a shock $c$ occurs on the prices of country 2 (the currency does not matter here), we can write the following initial shock vector : $C=\left(0,c\right)$.
+In the first instance, this has an impact on prices $C\cal {A}$, and then $C{\cal{A}}^{2}$, etc.
+Hence the total effect of the shock $S$ is: 
 
 
 \begin{equation*}
-S=C+C\cal {A}+C\cal {A}^2...=C(I-\cal {A})^{-1}=\left(\begin{matrix}cw  &   cx\end{matrix}\right)
+S=C+C{\cal{A}}+C{\cal{A}}^{2}...=C\left(I-{\cal{A}}\right)^{-1}=\left(\begin{matrix}cw  &   cx\end{matrix}\right)
 \end{equation*}
 
 To measure the effect on French consumption prices, we do a weighted sum of these effects.
@@ -918,7 +922,7 @@ If each nation's production only uses national inputs, we have a plausible :
 
 \subsection{Exchange rate shock}
 
-Using the notations in the paper...
+Again using the notations in the paper, we have:
 
 \begin{gather*}
 C=\left(0,\frac{-c_\$}{1+c_\$}\right)=\left(0,-c\right)
@@ -959,9 +963,10 @@ If each nation's production only uses national inputs, we have a plausible
 \bar{s}=c.f
 \end{gather*}
 
-This seems to confirm that the exchange rate shock is not the same as the VA price shock.
+This confirms that an exchange rate shock is not the same as a price shock.
 
-\appendix{Comparing $\overline{s}_{i}^{i,HC}$ and $E1.HC^{i,imp}+E2.HC^{i,dom}$ in the TIVA rev 3 and TIVA rev4 databases}
+\newpage
+\section{Comparing $\overline{s}_{i}^{i,HC}$ and $E1.HC^{i,imp}+E2.HC^{i,dom}$ in the TIVA rev 3 and TIVA rev4 databases}
 
 Figures \ref{fig:ratiodir_TiVA}, \ref{fig:evolution_b_TiVA} and \ref{fig:evolution_cst_TiVA} for TIVA rev3 and Figures \ref{fig:ratiodir_TiVA_REV4}, \ref{fig:evolution_b_TiVA_REV4} and \ref{fig:evolution_cst_TiVA_REV4} for TIVA rev 4 show that one can get a good prediction of the accounting effects of an exchange rate shock on consumption prices by using simply the share of imported final consumption goods and services and the share of imported intermediary consumption goods in domestic final consumption goods and services.
 
@@ -1022,6 +1027,121 @@ Figures \ref{fig:ratiodir_TiVA}, \ref{fig:evolution_b_TiVA} and \ref{fig:evoluti
 \end{figure}
 
 
+\newpage
+\section{Studying the decomposition of the shock in the two country one sector case}
+\subsection{Presenting the issue}
 
+As a reminder from the paper, where $\overline{s}_{i}^{i,HC}$ is the effect of an exchange rate shock on consumption prices :  
+\begin{equation}
+\begin{array}{lccl}
+\overline{s}_{i}^{i,HC}&=S^i.HC^i=E1.HC^i+E2.HC^i+E3.HC^i+E4.HC^i \\
+&=E1.HC^{i,imp}+E2.HC^{i,dom}+E3.HC^{i,imp}+E4.HC^i
+\end{array} 
+\end{equation}
+
+and
+
+\begin{equation}
+\begin{array}{lccl}
+S^ i&=&C^i	&+ \left(\hat{C}^i_\$.{\cal B}+{C^i}{\tilde{{\cal B}}}\right)*{{(I-{\cal A})}^{-1}} \\
+S^i &=&\underbrace{C^i}_{\substack{\text{(E1) direct effect through} \\ \text{ imported consumption goods}}}&+ \underbrace{{C^i}{\tilde{{\cal B}}}}_{\substack{\text{(E2) effect on} \\ \text{ \emph{domestic} consumption goods} \\ \text{ through \emph{imported} inputs}}}  + \underbrace{\hat{C}^i_\$.{\cal B}}_{\substack{\text{(E3)  effect on} \\ \text{\emph{imported} consumption goods} \\ \text{through \emph{domestic} inputs}}} \\ &&+\underbrace {\left( \hat{C}^i_\$.{\cal B} + {C^i}{\tilde{{\cal B}}}\right)*{{(I-{\cal A})}^{-1}}*{\cal A}}_{\text{(E4) residual}} \\
+\end{array}
+\end{equation}
+
+
+
+When the shock corresponds to an appreciation of the domestic currency, $E1$ and $E2$ reduce country $i$'s household consumption prices and $E3$ increases country $i$'s household consumption prices. Notice that $E1$ and $E2$ are easy to compute with national input-output matrices, whereas world input-output matrices are needed for computing $E3$ and $E4$.
+
+We have the strange result that $E3 + E4$ seems to be constant, whatever the openness rate of the economy (see Figure \ref{fig:ratiodir_WIOD})
+
+
+Let us see what happens in a 2 country, 1 sector economy : 
+
+\begin{gather*}
+E1=C=\left(0,-c\right)
+\\
+E2=C.\tilde{\cal B}=\left(0,-c\right).\left(\begin{matrix}0&0\\a_{2,1}&0\end{matrix}\right)=\left(-c.a_{2,1},0\right)
+\\
+E3=(c,0).\left(\begin{matrix}0&a_{1,2}\\0&0\end{matrix}\right)=\left(0,c.a_{1,2}\right)
+\end{gather*}
+
+\begin{gather*}
+E1.HC = \left(0,-c\right).\left(\begin{matrix}1-f\\f\end{matrix}\right)=-f.c
+\\
+E2.HC=\left(-c.a_{2,1},0\right).\left(\begin{matrix}1-f\\f\end{matrix}\right)=-c.a_{2,1}.\left(1-f\right)
+\\ 
+E3.HC=\left(0,c.a_{1,2}\right).\left(\begin{matrix}1-f\\f\end{matrix}\right)=f.c.a_{1,2}
+\end{gather*}
+
+We do not loose any generality by normalizing the shock $c$ to 1. 
+
+And, developped from SAGE :
+\begin{gather}
+\bar{s}-E1.HC-E2.HC=\left(\begin{array}{r}
+-\frac{a_{12} a_{21}^{2} - a_{11} a_{21} a_{22} + {\left(a_{11} - a_{12}\right)} a_{21} - {\left(a_{12} a_{21}^{2} - a_{11} a_{21} a_{22} - {\left(a_{11} - 1\right)} a_{12} + {\left(a_{11} - 2 \, a_{12}\right)} a_{21}\right)} f}{a_{12} a_{21} - {\left(a_{11} - 1\right)} a_{22} + a_{11} - 1}
+\end{array}\right)
+\end{gather}
+
+In order to be able to study the symbolic form, we assume:
+$\frac{a_{1,1}}{a_{2,1}}=\frac{1-f}{f}$ and $a_{1,1}+a_{2,1}=a$. \\ 
+So
+$a_{1,1}=(1-f)a$ and $a_{2,1}=fa$. \\
+
+Then:
+
+\begin{gather}
+\bar{s}-E1.HC-E2.HC=\left(\begin{array}{r}
+-\frac{{\left(a^{2} a_{12} + a^{2} a_{22} - a^{2}\right)} f^{3} - {\left(2 \, a^{2} a_{22} - 2 \, a^{2} + {\left(a^{2} + a\right)} a_{12}\right)} f^{2} + {\left(a^{2} a_{22} - a^{2} + a_{12}\right)} f}{{\left(a - 1\right)} a_{22} - {\left(a a_{12} + a a_{22} - a\right)} f - a + 1}
+\end{array}\right)
+\end{gather}
+
+According to SAGE, the derivative of this according to f is: 
+\begin{gather*}
+\left(\begin{array}{r}
+-\frac{{\left({\left(a^{2} a_{12} + a^{2} a_{22} - a^{2}\right)} f^{3} - {\left(2 \, a^{2} a_{22} - 2 \, a^{2} + {\left(a^{2} + a\right)} a_{12}\right)} f^{2} + {\left(a^{2} a_{22} - a^{2} + a_{12}\right)} f\right)} {\left(a a_{12} + a a_{22} - a\right)}}{{\left({\left(a - 1\right)} a_{22} - {\left(a a_{12} + a a_{22} - a\right)} f - a + 1\right)}^{2}} \\
+- \frac{a^{2} a_{22} + 3 \, {\left(a^{2} a_{12} + a^{2} a_{22} - a^{2}\right)} f^{2} - a^{2} - 2 \, {\left(2 \, a^{2} a_{22} - 2 \, a^{2} + {\left(a^{2} + a\right)} a_{12}\right)} f + a_{12}}{{\left(a - 1\right)} a_{22} - {\left(a a_{12} + a a_{22} - a\right)} f - a + 1}
+\end{array}\right)
+\end{gather*}
+
+The sign of this expression is difficult to study. We hence move to a numerical application.
+
+\subsection{Numerical application}
+From WIOD2014, we can compute the ration between VA and production. The computation with the WIOD data is : 
+egen total=rowtotal(vAUS1-vROW) and then (161-74)/161=54\%.
+
+For simplification, we assume that the ratio is equal to 0.5.
+\begin{gather*}
+a_{1,1}+a_{1,2}=a_{2,1}+a_{2,2}=50\% \\
+\frac{a_{1,2}}{a_{1,1}+a_{1,2}}=f \\
+a_{2,1}=0.48 \\
+a_{2,2}=0.02
+\end{gather*}
+In that case:
+\begin{gather*}
+\begin{array}{r}
+\bar{s}-E1.HC-E2.HC = \frac{-0.125 \, f^{3} + 0.245 \, f^{2} - 0.11 \, f}{-0.25 \, f - 0.26
+}
+\end{array}\right)
+\end{gather*}
+
+Which yields Figures \ref{fig:resid} and \ref{fig:tous_les_E}.
+\begin{figure}[!h]
+	\begin{center}
+		\includegraphics{etude_residu.png}
+		\caption{$\bar{s}-E1.HC-E2.HC$ as a function of the openness rate}
+		\label{fig:resid}
+	\end{center}
+\end{figure}
+
+The zone of interest is between 0.15 and 0.5. In that zone, the relationship between the openness rate and the residual is not monotonous, and actually does not vary much (see Figure \ref{fig:resid}).
+
+and
+\begin{figure}[!h]
+	\begin{center}
+		\includegraphics{etude_tous_les_E.png}
+		\caption{E1.HC, E2.HC, E3.HC, E4.HC and the "residual" ($\bar{s}-E1.HC-E2.HC$)}
+		\label{fig:tous_les_E}
+	\end{center}
+\end{figure}
 
 \end{document}

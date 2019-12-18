@@ -103,16 +103,21 @@ save "$dir/Bases_Sources/Doigt_mouillé.dta", replace
 
 
 capture erase "$dir/Results/resultats_doigt_mouillé_reg1.dta"
-capture program drop collecter_resultats_reg1
-program collecter_resultats_reg1
-args source y
+capture program drop collecter_resultats_reg
+program collecter_resultats_reg
+args source y reg
 	use "$dir/Bases_Sources/Doigt_mouillé.dta", clear
-	generate ratio_impt_conso=impt_conso/GDP
-	generate ratio_impt_interm = impt_interm/GDP
+	if "`reg'"=="reg1" generate ratio_impt_conso=impt_conso/GDP
+	if "`reg'"=="reg1" generate ratio_impt_interm = impt_interm/GDP
+	
+	if "`reg'"=="reg2" generate ratio_impt_conso=impt_conso/conso
+	if "`reg'"=="reg2" generate ratio_impt_interm = impt_interm/conso_interm*(1-impt_conso/conso)
+	
+	gen E1_E2 = ratio_impt_conso + ratio_impt_interm
 	merge 1:1 year pays using /*
 		'*/ "$dir/Results/Devaluations/auto_chocs_HC_`source'_`y'.dta", keep(3)
 	drop if strmatch(pays,"*_EUR")==1
-	reg pond_`source'_HC ratio_impt_conso ratio_impt_interm
+	reg pond_`source'_HC E1_E2
 	
 	predict x
 	replace x = -x
@@ -121,63 +126,26 @@ args source y
 	gen y=x
 	gen z=pond_`source'_HC
 	graph twoway (scatter x pond_`source'_HC, mlabel(pays)) (line x y) (line z pond_`source'_HC), /*
-	*/ title (Reg1_`source'_`y') /*
-	 */ name("resultats_reg1_`source'_`y'", replace)
-	graph export  "$dir/Results/resultats_doigt_mouillé_reg1_`source'_`y'.pdf", replace
+	*/ title (`reg'_`source'_`y') /*
+	 */ name("resultats_`reg'_`source'_`y'", replace)
+	graph export  "$dir/Results/resultats_doigt_mouillé_`reg'_`source'_`y'.pdf", replace
 	
 	keep year
 	gen source="`source'"
 	gen R2=e(r2)
 	gen b_cst=_b[_cons]
-	gen b_conso=_b[ratio_impt_conso]
-	gen b_interm=_b[ratio_impt_interm]
+	*gen b_conso=_b[ratio_impt_conso]
+	*gen b_interm=_b[ratio_impt_interm]
+	gen b_E1_E2=_b[E1_E2]
 	gen se_cst=_se[_cons]
-	gen se_conso=_se[ratio_impt_conso]
-	gen se_interm=_se[ratio_impt_interm]
+	*gen se_conso=_se[ratio_impt_conso]
+	*gen se_interm=_se[ratio_impt_interm]
+	gen se_E1_E2=_se[E1_E2]
 	gen nbr_obs = e(N)
 	keep if _n==1
-	capture append using "$dir/Results/resultats_doigt_mouillé_reg1.dta"
-	save "$dir/Results/resultats_doigt_mouillé_reg1.dta", replace
+	capture append using "$dir/Results/resultats_doigt_mouillé_`reg'.dta"
+	save "$dir/Results/resultats_doigt_mouillé_`reg'.dta", replace
 	
-end
-
-
-
-capture erase "$dir/Results/resultats_doigt_mouillé_reg2.dta"
-capture program drop collecter_resultats_reg2
-program collecter_resultats_reg2
-args source y
-	use "$dir/Bases_Sources/Doigt_mouillé.dta", clear
-		generate ratio_impt_conso=impt_conso/conso
-	generate ratio_impt_interm = impt_interm/conso_interm*(1-impt_conso/conso)
-	merge 1:1 year pays using /*
-		'*/ "$dir/Results/Devaluations/auto_chocs_HC_`source'_`y'.dta", keep(3)
-	drop if strmatch(pays,"*_EUR")==1
-	reg pond_`source'_HC ratio_impt_conso ratio_impt_interm
-	
-	predict x
-	replace x = -x
-	replace pond_`source'_HC=-pond_`source'_HC
-	gen y=x
-	gen z=pond_`source'_HC
-	graph twoway (scatter x pond_`source'_HC, mlabel(pays)) (line x y) (line z pond_`source'_HC), /*
-	*/ title (Reg2_`source'_`y') /*
-	 */ name("resultats_reg2_`source'_`y'", replace)
-	graph export  "$dir/Results/resultats_doigt_mouillé_reg2_`source'_`y'.pdf", replace
-	
-	keep year
-	gen source="`source'"
-	gen R2=e(r2)
-	gen b_cst=_b[_cons]
-	gen b_conso=_b[ratio_impt_conso]
-	gen b_interm=_b[ratio_impt_interm]
-	gen se_cst=_se[_cons]
-	gen se_conso=_se[ratio_impt_conso]
-	gen se_interm=_se[ratio_impt_interm]
-	gen nbr_obs = e(N)
-	keep if _n==1
-	capture append using "$dir/Results/resultats_doigt_mouillé_reg2.dta"
-	save "$dir/Results/resultats_doigt_mouillé_reg2.dta", replace
 end
 
 
@@ -186,19 +154,19 @@ set graphics off
 
 foreach y of num 1998(1)2011 {
 
-	collecter_resultats_reg1 TIVA `y'
-	collecter_resultats_reg2 TIVA `y'
+	collecter_resultats_reg TIVA `y' reg1
+	collecter_resultats_reg TIVA `y' reg2
 }
 
 foreach y of num 2000(1)2014 {
-	collecter_resultats_reg1 WIOD `y'
-	collecter_resultats_reg2 WIOD `y'
+	collecter_resultats_reg WIOD `y' reg1
+	collecter_resultats_reg WIOD `y' reg2
 }
 
 
 foreach y of num 2005(1)2015 {
-	collecter_resultats_reg1 TIVA_REV4 `y'
-	collecter_resultats_reg2 TIVA_REV4 `y'
+	collecter_resultats_reg TIVA_REV4 `y' reg1
+	collecter_resultats_reg TIVA_REV4 `y' reg2
 }	
 
 set graphics on
@@ -207,36 +175,49 @@ set graphics on
 
 ****************** Graphiques de coefficients
 
-use "$dir/Results/resultats_doigt_mouillé_reg2.dta", clear
+foreach reg in reg2 reg1 {
 
-gen high_conso=b_conso-1.96*se_conso
-gen low_conso=b_conso+1.96*se_conso
-graph twoway (rarea high_conso low_conso year if source=="TIVA", fcolor(%20) ) (connected b_cons year if source=="TIVA") /*
-			*/ (rarea high_conso low_conso year if source=="TIVA_REV4" , fcolor(%20) ) (connected b_cons year if source=="TIVA_REV4") /*
-			*/ (rarea high_conso low_conso year if source=="WIOD" , fcolor(%20)  ) (connected b_cons year if source=="WIOD"), /*
-			*/ legend( order(1 3 5) label(1 TIVA) label(3 TIVA_REV4) label(5 WIOD) ) /*
-			*/ title(beta)
-graph export "$dir/Results/reg2_beta_`source'_`y'.pdf", replace
-
-
-gen high_interm=b_interm-1.96*se_interm
-gen low_interm=b_interm+1.96*se_interm
-graph twoway (rarea high_interm low_interm year if source=="TIVA", fcolor(%20) ) (connected b_interm year if source=="TIVA") /*
-			*/ (rarea high_interm low_interm year if source=="TIVA_REV4" , fcolor(%20) ) (connected b_interm year if source=="TIVA_REV4") /*
-			*/ (rarea high_interm low_interm year if source=="WIOD" , fcolor(%20)  ) (connected b_interm year if source=="WIOD"), /*
-			*/ legend( order(1 3 5) label(1 TIVA) label(3 TIVA_REV4) label(5 WIOD) )  /*
-			*/ title(gamma)
-graph export "$dir/Results/reg2_gamma_`source'_`y'.pdf", replace
-
-gen high_cst=b_cst-1.96*se_cst
-gen low_cst=b_cst+1.96*se_cst
-graph twoway (rarea high_cst low_cst year if source=="TIVA", fcolor(%20) ) (connected b_cst year if source=="TIVA") /*
-			*/ (rarea high_cst low_cst year if source=="TIVA_REV4" , fcolor(%20) ) (connected b_cst year if source=="TIVA_REV4") /*
-			*/ (rarea high_cst low_cst year if source=="WIOD" , fcolor(%20)  ) (connected b_cst year if source=="WIOD"), /*
-			*/ legend( order(1 3 5) label(1 TIVA) label(3 TIVA_REV4) label(5 WIOD) ) /*
-			*/ title(alpha)
-graph export "$dir/Results/reg2_alpha_`source'_`y'.pdf", replace
-
+	use "$dir/Results/resultats_doigt_mouillé_`reg'.dta", clear
+	
+	gen high_E1_E2=b_E1_E2-1.96*se_E1_E2
+	gen low_E1_E2=b_E1_E2+1.96*se_E1_E2
+	graph twoway (rarea high_E1_E2 low_E1_E2 year if source=="TIVA", fcolor(%20) ) (connected b_cons year if source=="TIVA") /*
+				*/ (rarea high_E1_E2 low_E1_E2 year if source=="TIVA_REV4" , fcolor(%20) ) (connected b_cons year if source=="TIVA_REV4") /*
+				*/ (rarea high_E1_E2 low_E1_E2 year if source=="WIOD" , fcolor(%20)  ) (connected b_cons year if source=="WIOD"), /*
+				*/ legend( order(1 3 5) label(1 TIVA) label(3 TIVA_REV4) label(5 WIOD) ) /*
+				*/ title(beta)
+	graph export "$dir/Results/`reg'_beta_`source'.pdf", replace
+	
+	/*
+	gen high_interm=b_interm-1.96*se_interm
+	gen low_interm=b_interm+1.96*se_interm
+	graph twoway (rarea high_interm low_interm year if source=="TIVA", fcolor(%20) ) (connected b_interm year if source=="TIVA") /*
+				*/ (rarea high_interm low_interm year if source=="TIVA_REV4" , fcolor(%20) ) (connected b_interm year if source=="TIVA_REV4") /*
+				*/ (rarea high_interm low_interm year if source=="WIOD" , fcolor(%20)  ) (connected b_interm year if source=="WIOD"), /*
+				*/ legend( order(1 3 5) label(1 TIVA) label(3 TIVA_REV4) label(5 WIOD) )  /*
+				*/ title(gamma)
+	graph export "$dir/Results/`reg'_gamma_`source'_`y'.pdf", replace
+	*/
+	
+	gen high_cst=b_cst-1.96*se_cst
+	gen low_cst=b_cst+1.96*se_cst
+	graph twoway (rarea high_cst low_cst year if source=="TIVA", fcolor(%20) ) (connected b_cst year if source=="TIVA") /*
+				*/ (rarea high_cst low_cst year if source=="TIVA_REV4" , fcolor(%20) ) (connected b_cst year if source=="TIVA_REV4") /*
+				*/ (rarea high_cst low_cst year if source=="WIOD" , fcolor(%20)  ) (connected b_cst year if source=="WIOD"), /*
+				*/ legend( order(1 3 5) label(1 TIVA) label(3 TIVA_REV4) label(5 WIOD) ) /*
+				*/ title(alpha)
+	graph export "$dir/Results/`reg'_alpha_`source'.pdf", replace
+	
+	
+		graph twoway (connected R2 year if source=="TIVA") /*
+				*/   (connected R2 year if source=="TIVA_REV4") /*
+				*/   (connected R2 year if source=="WIOD"), /*
+				*/ legend( order(1 2 3) label(1 TIVA) label(2 TIVA_REV4) label(3 WIOD) ) /*
+				*/ title(R2)
+	graph export "$dir/Results/`reg'_R2_`source'.pdf", replace
+	
+	
+}
 ***************** Pour les calculs en panel
 
 use "$dir/Bases_Sources/Doigt_mouillé.dta", clear

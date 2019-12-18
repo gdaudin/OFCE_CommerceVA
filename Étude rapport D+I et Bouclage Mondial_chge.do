@@ -328,7 +328,8 @@ foreach source in TIVA WIOD TIVA_REV4 {
 	graph twoway ///
 		(line b_ns year, lcolor(black) ) (line borne_inf_ns year, lpattern(dash) lwidth(vthin) lcolor(black)) (line borne_sup_ns year,lpattern(dash) lwidth(vthin) lcolor(black) ) ///
 		(connected R2_reg_ns year,  lcolor(turquoise) msize(small) mcolor(turquoise))   ///
-		,/*yscale(range(1 (0.05) 1.15)) ylabel(1 (0.05) 1.15)*/ legend(order (1 4) rows(2))
+		,/*yscale(range(1 (0.05) 1.15)) ylabel(1 (0.05) 1.15)*/ legend(order (1 4) rows(2)) ///
+		scheme(s1color)
 
 	graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/coef_E_`source'_HC.pdf", replace
 	graph export "$dir/commerce_VA_inflation/Rédaction/coef_E_`source'_HC.png", replace
@@ -337,7 +338,8 @@ foreach source in TIVA WIOD TIVA_REV4 {
 	label var b_cst_reg_ns "Constant (with 95% confidence intervals)"
 		graph twoway ///
 		(line b_cst_reg_ns year, lcolor(black) ) (line borne_inf_cst_reg_ns year, lpattern(dash) lwidth(vthin) lcolor(black)) (line borne_sup_cst_reg_ns year,lpattern(dash) lwidth(vthin) lcolor(black) )    ///
-		,/*yscale(range(1 (0.05) 1.15)) ylabel(1 (0.05) 1.15)*/ legend(order (1))
+		,/*yscale(range(1 (0.05) 1.15)) ylabel(1 (0.05) 1.15)*/ legend(order (1)) ///
+		scheme(s1color)
 
 	graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/coef_cst_`source'_HC.pdf", replace
 	graph export "$dir/commerce_VA_inflation/Rédaction/coef_cst_`source'_HC.png", replace

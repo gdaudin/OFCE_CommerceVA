@@ -32,7 +32,7 @@ merge 1:1 year pays using "$dir/Bases_Sources/Doigt_mouillé.dta"
 drop _merge
 save "$dir/Bases_Sources/Doigt_mouillé.dta", replace
 
-import excel "$dir/Bases_Sources/Eurostat_conso_cstediaires_new.xls", sheet("Data (2)") cellrange(A11:Y43) firstrow clear
+import excel "$dir/Bases_Sources/Eurostat_conso_intermediaires_new.xls", sheet("Data (2)") cellrange(A11:Y43) firstrow clear
 rename GEOTIME pays
 foreach v of varlist B-Y {
     local x : variable label `v'
@@ -294,78 +294,60 @@ foreach source in WIOD TIVA TIVA_REV4 {
 local WIOD_pred=2014
 local TIVA_REV4_pred=2015
 local TIVA_pred = 2011
-/*
-foreach source in WIOD TIVA TIVA_REV4 {
-
-	reg pond_`source'_HC ratio_impt_conso ratio_impt_interm i.pays_num if year !=``source'_out'
-	predict x if year== ``source'_out'
-	replace x = -x
-	replace pond_`source'_HC=-pond_`source'_HC
-	gen y=x
-	gen z=pond_`source'_HC
-	graph twoway (scatter x pond_`source'_HC, mlabel(pays)) (line x y) (line z pond_`source'_HC), /*
-	*/ title (`source'_pred_1y) /*
-	 */ name("`source'_pred_1y", replace)
-	graph export  "$dir/Results/resultats_doigt_mouillé_`source'_pred_1y.pdf", replace
-	drop x
-	drop y
-	drop z
-}
-*/
 
 
-foreach lag_pred of numlist 1(1)8 {
 
-	foreach source in WIOD TIVA TIVA_REV4 {
-		local `source'_out = ``source'_pred'-`lag_pred'+1
-	
-		reg pond_`source'_HC ratio_impt_conso ratio_impt_interm i.pays_num if year >=``source'_out'
-		predict x if year== ``source'_pred'
-		gen y=x
-		gen z=pond_`source'_HC
-		corr x pond_`source'_HC
-		local correlation = r(rho)
-		local correlation : display %4.3f `correlation'
-		graph twoway (scatter x pond_`source'_HC, mlabel(pays)) (line x y) (line z pond_`source'_HC), legend(off) /*
-		*/ title (`source'_reg2_pred_`lag_pred'y) /*
-		 */ name("`source'_pred_`lag_pred'y", replace) /*
-		 */ note("Correlation: `correlation'") 
-		
-		graph export  "$dir/Results/resultats_reg2_doigt_mouillé_`source'_pred_`lag_pred'y.pdf", replace
-		drop x
-		drop y
-		drop z
+*****************Pour les prédictions après Panel
+
+
+foreach reg in reg2 reg1 {
+
+	if "`reg'"=="reg1" {
+		replace ratio_impt_conso=impt_conso/GDP
+		replace ratio_impt_interm = impt_interm/GDP
 	}
-}
-
-
-
-replace ratio_impt_conso=impt_conso/GDP
-replace ratio_impt_interm = impt_interm/GDP
-
-foreach lag_pred of numlist 1(1)8 {
-	
-
-	foreach source in WIOD TIVA TIVA_REV4 {
-		local `source'_out = ``source'_pred'-`lag_pred'+1
-			
-		reg pond_`source'_HC ratio_impt_conso ratio_impt_interm i.pays_num if year >=``source'_out'
-		predict x if year== ``source'_pred'
-		gen y=x
-		gen z=pond_`source'_HC
-		corr x pond_`source'_HC
-		local correlation = r(rho)
-		local correlation : display %4.3f `correlation'
-		graph twoway (scatter x pond_`source'_HC, mlabel(pays)) (line x y) (line z pond_`source'_HC), legend(off) /*
-		*/ title (`source'_reg1_pred_`lag_pred'y) /*
-		 */ name("`source'_pred_`lag_pred'y", replace) /*
-		 */ note("Correlation: `correlation'") 
-		
-		graph export  "$dir/Results/resultats_reg1_doigt_mouillé_`source'_pred_`lag_pred'y.pdf", replace
-		drop x
-		drop y
-		drop z
+	if "`reg'"=="reg2" {
+		replace ratio_impt_conso=impt_conso/conso
+		replace ratio_impt_interm = impt_interm/conso_interm*(1-impt_conso/conso)
 	}
+	
+	foreach lag_pred of numlist 1(1)8 {
+		foreach source in WIOD TIVA TIVA_REV4 {
+			foreach trend in no yes {
+				local `source'_out = ``source'_pred'-`lag_pred'+1
+				
+				if "`trend'"=="no" reg pond_`source'_HC ratio_impt_conso ratio_impt_interm i.pays_num if year <``source'_out'
+				if "`trend'"=="yes" reg pond_`source'_HC ratio_impt_conso ratio_impt_interm i.pays_num year if year <``source'_out'
+				predict x if year== ``source'_pred'
+				gen y=x
+				gen z=pond_`source'_HC
+				corr x pond_`source'_HC
+				local correlation = r(rho)
+				local correlation : display %4.3f `correlation'
+				
+				gen error = abs(x-pond_`source'_HC)/ pond_`source'_HC
+				summarize error
+				local mean_error= r(mean)
+				local mean_error : display %4.3f `mean_error'
+				summarize error, detail
+				local median_error= r(p50)
+				local median_error : display %4.3f `median_error'
+				
+				
+				graph twoway (scatter x pond_`source'_HC, mlabel(pays)) (line x y) (line z pond_`source'_HC), legend(off) /*
+				*/ title (`source'_`reg'_pred_`lag_pred'y trend: `trend') /*
+				 */ name("`source'_pred_`lag_pred'y", replace) /*
+				 */ note("Correlation: `correlation' Mean error: `mean_error' p.c.  Median error: `median_error' p.c.") 
+				
+				graph export  "$dir/Results/resultats_`reg'_doigt_mouillé_`source'_pred_`lag_pred'y_trend_`trend'.pdf", replace
+				drop x
+				drop y
+				drop z
+				drop error
+			}
+		}
+	}
+
 }
 
 

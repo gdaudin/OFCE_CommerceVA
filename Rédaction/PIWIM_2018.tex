@@ -621,7 +621,8 @@ A major part of the shock comes from lower prices for service consumption (Figur
 %\label{fig:intensity_impt}
 %\end{figure}
 
-\section{What do we gain from using world input-output matrices?}
+\section{Can we extrapolate the the consumer price elasticity?}
+\subsection{Doing without the world input-output matrices}
 One might wonder whether using world input-ouput matrices provided by WIOD or TIVA to compute the effect of exchange rate shocks on household consumption prices is worth the wait (the latest year covered by WIOD is 2014, and 2015 for TIVA) and the computational complexity. To answer this question, we break down $\overline{s_{i}}^{i,HC}$ into different elements classified by ease of use and computation. Let us start from equation \ref{eq:eqdomcurrency}. We can obtain:
 
 \begin{equation}
@@ -703,7 +704,27 @@ Figure \ref{fig:ratiodir_WIOD} depicts the relationship between $\overline{s}_{i
 \end{figure}
 
 
-The same results mostly stand using the TiVA databases (see Appendix).
+The same results mostly stand using the TiVA databases (see Appendix \ref{AppendixFonctionLinéaireTIVA}). The functional form might seem a bit counterintuitive (one might expect that the elasticity is affine function of openness as summarized by E1), but the analytical examination  of the two countries, one sector case, shows that it is plausible (see Appendix \ref{AnalyticalAppendix}).
+
+Back to the main point, It turns out that we do not gain much by inversing matrixes. Of course, this realization is only possible because we were able to computes $\overline{s}_{i}^{i,HC}$ in the first place. Still, it suggests that we could extrapolate the elasticities for not-yet-released years, as long as we have the share of imported goods in household consumption and the share of imported inputs in household consumption of domestic goods. 
+
+\subsection{Doing without TiVA and WIOD, but keeping Eurostat}
+Yet, these two data pieces are not actually easy to obtain for a large number of countries and a large number of years. They are not routinely computed by national statistical institutes. The World Bank provides regular estimates of household consumption.\footnote{préciser la source??}. It does not provide an estimate for intermediate consumptions. In the case of European countries\footnote{And some others for selected years}, Eurostat does provide this last number.
+
+We can combine these data from the World Bank and Eurostat with UN Comtrade data for imports in consumption and intermediary goods (using the BEC classification). That allows the computation of the share of imported consumption goods in household consumption and the share of imported inputs in all inputs. 
+
+This allows the mimicking of Figure \ref{fig:evolution_b} by Figure \ref{fig:evolution_b_reg2}. The results are not as good.	
+
+
+\begin{figure}[!h]
+	\centering
+	\caption{\footnotesize{\textbf{Evolution of $\beta$ and $R2$ through time (WIOD) using Eurostat data}}}
+	\begin{tabular}{c}
+		\includegraphics[width=5.0in, height=3.5in]{reg1_beta_WIOD.png}\\
+	\end{tabular}
+	\label{fig:evolution_b_reg2}
+\end{figure}
+
 
 
 %
@@ -971,7 +992,7 @@ If each nation's production only uses national inputs, we have a plausible
 This confirms that an exchange rate shock is not the same as a price shock.
 
 \newpage
-\section{Comparing $\overline{s}_{i}^{i,HC}$ and $E1.HC^{i,imp}+E2.HC^{i,dom}$ in the TIVA rev 3 and TIVA rev4 databases}
+\section{Comparing $\overline{s}_{i}^{i,HC}$ and $E1.HC^{i,imp}+E2.HC^{i,dom}$ in the TIVA rev 3 and TIVA rev4 databases} \label{AppendixFonctionLinéaireTIVA}
 
 Figures \ref{fig:ratiodir_TiVA}, \ref{fig:evolution_b_TiVA} and \ref{fig:evolution_cst_TiVA} for TIVA rev3 and Figures \ref{fig:ratiodir_TiVA_REV4}, \ref{fig:evolution_b_TiVA_REV4} and \ref{fig:evolution_cst_TiVA_REV4} for TIVA rev 4 show that one can get a good prediction of the accounting effects of an exchange rate shock on consumption prices by using simply the share of imported final consumption goods and services and the share of imported intermediary consumption goods in domestic final consumption goods and services.
 
@@ -1033,7 +1054,7 @@ Figures \ref{fig:ratiodir_TiVA}, \ref{fig:evolution_b_TiVA} and \ref{fig:evoluti
 
 
 \newpage
-\section{Studying the decomposition of the shock in the two country one sector case}
+\section{Studying the decomposition of the shock in the two country one sector case}\label{AnalyticalAppendix}
 \subsection{Presenting the issue}
 
 As a reminder from the paper, where $\overline{s}_{i}^{i,HC}$ is the effect of an exchange rate shock on consumption prices :  

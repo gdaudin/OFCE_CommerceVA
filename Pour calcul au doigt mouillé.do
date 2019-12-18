@@ -102,7 +102,7 @@ save "$dir/Bases_Sources/Doigt_mouillé.dta", replace
 *********************************************Régression en cross-section 
 
 
-capture erase "$dir/Results/resultats_doigt_mouillé_reg1.dta"
+
 capture program drop collecter_resultats_reg
 program collecter_resultats_reg
 args source y reg
@@ -117,12 +117,13 @@ args source y reg
 	merge 1:1 year pays using /*
 		'*/ "$dir/Results/Devaluations/auto_chocs_HC_`source'_`y'.dta", keep(3)
 	drop if strmatch(pays,"*_EUR")==1
+	
+	replace pond_`source'_HC=-pond_`source'_HC
 	reg pond_`source'_HC E1_E2
 	
 	predict x
-	replace x = -x
 	
-	replace pond_`source'_HC=-pond_`source'_HC
+	
 	gen y=x
 	gen z=pond_`source'_HC
 	graph twoway (scatter x pond_`source'_HC, mlabel(pays)) (line x y) (line z pond_`source'_HC), /*
@@ -151,6 +152,9 @@ end
 
 
 set graphics off
+
+capture erase "$dir/Results/resultats_doigt_mouillé_reg1.dta"
+capture erase "$dir/Results/resultats_doigt_mouillé_reg2.dta"
 
 foreach y of num 1998(1)2011 {
 
@@ -181,12 +185,27 @@ foreach reg in reg2 reg1 {
 	
 	gen high_E1_E2=b_E1_E2-1.96*se_E1_E2
 	gen low_E1_E2=b_E1_E2+1.96*se_E1_E2
-	graph twoway (rarea high_E1_E2 low_E1_E2 year if source=="TIVA", fcolor(%20) ) (connected b_cons year if source=="TIVA") /*
-				*/ (rarea high_E1_E2 low_E1_E2 year if source=="TIVA_REV4" , fcolor(%20) ) (connected b_cons year if source=="TIVA_REV4") /*
-				*/ (rarea high_E1_E2 low_E1_E2 year if source=="WIOD" , fcolor(%20)  ) (connected b_cons year if source=="WIOD"), /*
+	graph twoway (rarea high_E1_E2 low_E1_E2 year if source=="TIVA", fcolor(%20) ) (connected b_E1_E2 year if source=="TIVA") /*
+				*/ (rarea high_E1_E2 low_E1_E2 year if source=="TIVA_REV4" , fcolor(%20) ) (connected b_E1_E2 year if source=="TIVA_REV4")/*
+				*/ (rarea high_E1_E2 low_E1_E2 year if source=="WIOD" , fcolor(%20)  ) (connected b_E1_E2 year if source=="WIOD"), /*
 				*/ legend( order(1 3 5) label(1 TIVA) label(3 TIVA_REV4) label(5 WIOD) ) /*
 				*/ title(beta)
-	graph export "$dir/Results/`reg'_beta_`source'.pdf", replace
+	graph export "$dir/Results/`reg'_beta.pdf", replace
+	
+	label var b_E1_E2 "Coefficient of E1HC+E2HC (with 95% confidence intervals)"
+	label var R2 "R2"
+	
+	
+	graph twoway ///
+		(line b_E1_E2 year if source=="WIOD", lcolor(black)) ///
+		(line low_E1_E2 year  if source=="WIOD", lpattern(dash) lwidth(vthin) lcolor(black)) ///
+		(line high_E1_E2 year  if source=="WIOD",lpattern(dash) lwidth(vthin) lcolor(black)) ///
+		(connected R2 year  if source=="WIOD",  lcolor(turquoise) msize(small) mcolor(turquoise))   ///
+		,/*yscale(range(1 (0.05) 1.15)) ylabel(1 (0.05) 1.15)*/ legend(order (1 4) rows(2)) ///
+		scheme(s1color)
+	graph export "$dir/Results/`reg'_beta_WIOD.pdf", replace
+	graph export "$dir/commerce_VA_inflation/Rédaction/`reg'_beta_WIOD.pdf", replace
+	
 	
 	/*
 	gen high_interm=b_interm-1.96*se_interm
@@ -206,7 +225,7 @@ foreach reg in reg2 reg1 {
 				*/ (rarea high_cst low_cst year if source=="WIOD" , fcolor(%20)  ) (connected b_cst year if source=="WIOD"), /*
 				*/ legend( order(1 3 5) label(1 TIVA) label(3 TIVA_REV4) label(5 WIOD) ) /*
 				*/ title(alpha)
-	graph export "$dir/Results/`reg'_alpha_`source'.pdf", replace
+	graph export "$dir/Results/`reg'_alpha.pdf", replace
 	
 	
 		graph twoway (connected R2 year if source=="TIVA") /*
@@ -214,10 +233,11 @@ foreach reg in reg2 reg1 {
 				*/   (connected R2 year if source=="WIOD"), /*
 				*/ legend( order(1 2 3) label(1 TIVA) label(2 TIVA_REV4) label(3 WIOD) ) /*
 				*/ title(R2)
-	graph export "$dir/Results/`reg'_R2_`source'.pdf", replace
+	graph export "$dir/Results/`reg'_R2.pdf", replace
 	
 	
 }
+
 ***************** Pour les calculs en panel
 
 use "$dir/Bases_Sources/Doigt_mouillé.dta", clear

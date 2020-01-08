@@ -345,7 +345,8 @@ foreach reg in reg2 reg1 {
 				*/ (line x y) (line z pond_`source'_HC), legend(off) /*
 				*//* title (`source'_`reg'_pred_`lag_pred'y trend: `trend') *//*
 				 */ name("`source'_pred_`lag_pred'y", replace) ytitle("Predicted elasticity")/*
-				 */ note("Correlation: `correlation' Mean error: `mean_error' p.c.  Median error: `median_error' p.c.") 
+				 */ note("Correlation: `correlation' Mean error: `mean_error' p.c.  Median error: `median_error' p.c.") /*
+				 */ scheme(s1color)
 				
 				graph export  "$dir/Results/resultats_`reg'_doigt_mouillé_`source'_pred_`lag_pred'y_trend_`trend'.pdf", replace
 				if "`source'"=="WIOD" & "`trend'"=="no" & `lag_pred'==6 {

@@ -192,8 +192,10 @@ foreach reg in reg2 reg1 {
 				*/ title(beta)
 	graph export "$dir/Results/`reg'_beta.pdf", replace
 	
-	label var b_E1_E2 "Coefficient of E1HC+E2HC (with 95% confidence intervals)"
+	/*if "`reg'"=="reg2"*/ label var b_E1_E2 "Coefficient of the proxy of E1HC+E2HC (with 95% confidence intervals)"
 	label var R2 "R2"
+	
+	
 	
 	
 	graph twoway ///
@@ -201,11 +203,12 @@ foreach reg in reg2 reg1 {
 		(line low_E1_E2 year  if source=="WIOD", lpattern(dash) lwidth(vthin) lcolor(black)) ///
 		(line high_E1_E2 year  if source=="WIOD",lpattern(dash) lwidth(vthin) lcolor(black)) ///
 		(connected R2 year  if source=="WIOD",  lcolor(turquoise) msize(small) mcolor(turquoise))   ///
-		,/*yscale(range(1 (0.05) 1.15)) ylabel(1 (0.05) 1.15)*/ legend(order (1 4) rows(2)) ///
+		,/*yscale(range(1 (0.05) 1.15)) ylabel(1 (0.05) 1.15)*/ legend(order (1 4) rows(2) size(small)) ///
 		scheme(s1color)
 	graph export "$dir/Results/`reg'_beta_WIOD.pdf", replace
 	graph export "$dir/commerce_VA_inflation/Rédaction/`reg'_beta_WIOD.pdf", replace
 	
+
 	
 	/*
 	gen high_interm=b_interm-1.96*se_interm
@@ -334,13 +337,20 @@ foreach reg in reg2 reg1 {
 				local median_error= r(p50)
 				local median_error : display %4.3f `median_error'
 				
+				label var pond_`source'_HC "Elasticity from `source'"
+				label var x "Predicted elasticity"
 				
-				graph twoway (scatter x pond_`source'_HC, mlabel(pays)) (line x y) (line z pond_`source'_HC), legend(off) /*
-				*/ title (`source'_`reg'_pred_`lag_pred'y trend: `trend') /*
-				 */ name("`source'_pred_`lag_pred'y", replace) /*
+				
+				graph twoway (scatter x pond_`source'_HC, mlabel(pays)) (lfit x pond_`source'_HC, lpattern(dash)) /*
+				*/ (line x y) (line z pond_`source'_HC), legend(off) /*
+				*//* title (`source'_`reg'_pred_`lag_pred'y trend: `trend') *//*
+				 */ name("`source'_pred_`lag_pred'y", replace) ytitle("Predicted elasticity")/*
 				 */ note("Correlation: `correlation' Mean error: `mean_error' p.c.  Median error: `median_error' p.c.") 
 				
 				graph export  "$dir/Results/resultats_`reg'_doigt_mouillé_`source'_pred_`lag_pred'y_trend_`trend'.pdf", replace
+				if "`source'"=="WIOD" & "`trend'"=="no" & `lag_pred'==6 {
+					graph export  "$dir/commerce_VA_inflation/Rédaction/resultats_`reg'_doigt_mouille_`source'_pred_`lag_pred'y_trend_`trend'.pdf", replace
+				}
 				drop x
 				drop y
 				drop z

@@ -90,8 +90,7 @@ We examine the extent to which domestic consumer prices react to changes in impo
 We pay particular attention to euro area countries, as the euro area is more involved in global production chains than other large economies, such as the United States and China \citep{ECB2016} and has been less affected by global value chains shortening than other countries in the years following the Great Recession. 
 Building on sectoral data from three different World Input-Output tables, we examine which sectors experience higher spillovers from global inflationary shocks.\\
 To preview our findings, we find that...\\
-The remainder of the paper is organized as follows. Section \ref{sec:lit} briefly describes the related literature. Section \ref{sec:metho} presents the methodology and the data sources.  Section \ref{sec:prixconso} presents the impact of an exchange rate shock on consumer prices.  Section \ref{sec:prixconsosecteur} examines which of the subcomponents of consumer prices experience higher spillovers from global inflationary shocks.
-Section \ref{sec:ccl} provides some concluding remarks and avenues for future research.
+The remainder of the paper is organized as follows. Section \ref{sec:lit} briefly describes the related literature. Section \ref{sec:metho} presents the methodology and the data sources.  Section \ref{sec:prixconso} presents the impact of an exchange rate shock on consumer prices.  Section \ref{sec:extrapo} starts from the recognition that fully taking into account supply chains is very data demanding and can currently only be done up to 2015. It looks for methods that would allow to extrapolate consumer price elasticities based of much less demanding data. We show that, combined with our findings, GDP and trade data are all that is needed to compute the elasticity. This means it is possible to use our results to examine what happened during the second half of the 2010s.
 
 
 
@@ -622,6 +621,7 @@ A major part of the shock comes from lower prices for service consumption (Figur
 %\end{figure}
 
 \section{Can we extrapolate the the consumer price elasticity?}
+\label{sec:extrapo}
 \subsection{Doing without the world input-output matrices}
 One might wonder whether using world input-ouput matrices provided by WIOD or TIVA to compute the effect of exchange rate shocks on household consumption prices is worth the wait (the latest year covered by WIOD is 2014, and 2015 for TIVA) and the computational complexity. To answer this question, we break down $\overline{s_{i}}^{i,HC}$ into different elements classified by ease of use and computation. Let us start from equation \ref{eq:eqdomcurrency}. We can obtain:
 
@@ -667,7 +667,7 @@ Yet, the relative importance of $E4.HC^i$ might not be too much of an issue if i
 %\input{corrtable_1.tex}
 
 $E3.HC^{i,imp}$ does not require inversing a matrix, but it is still quite data-intensive to compute. As a result, we study wether we can deduct $\overline{s}_{i}^{i,HC}$ from $E1.HC^{i,imp}$ and $E2.HC^{i,dom}$.
-Figure \ref{fig:ratiodir_WIOD} depicts the relationship between $\overline{s}_{i}^{i,HC}$ and $E1.HC^{i,imp}+E2.HC^{i,dom}$. It shows that $E1.HC^{i,imp}+E2.HC^{i,dom}$ is a good predictor of $\overline{s}_{i}^{i,HC}$ (the $R^2$ is over 0.98). Excepting to some extent 2009, this relationship is constant through time (see Figure \ref{fig:evolution_b} and \ref{fig:evolution_cst}).
+Figure \ref{fig:ratiodir_WIOD} depicts the relationship between $\overline{s}_{i}^{i,HC}$ and $E1.HC^{i,imp}+E2.HC^{i,dom}$ according to equation \ref{eq:eq7}. It shows that $E1.HC^{i,imp}+E2.HC^{i,dom}$ is a good predictor of $\overline{s}_{i}^{i,HC}$ (the $R^2$ is over 0.98). 
 
  \begin{equation}
 \overline{s}_{i}^{i,HC}=\alpha + \beta  \left(E1.HC^{i,imp}+E2.HC^{i,dom}\right) +\varepsilon_i 
@@ -684,6 +684,8 @@ Figure \ref{fig:ratiodir_WIOD} depicts the relationship between $\overline{s}_{i
 \end{tabular}
 \label{fig:ratiodir_WIOD}
 \end{figure}
+
+We can check if that relationship is constant through time by estimating yearly cross-sections of \ref{eq:eq7}. Excepting to some extent 2009, they show it is the case (see Figures \ref{fig:evolution_b} and \ref{fig:evolution_cst}).
 
 \begin{figure}[!h]
 \centering
@@ -706,25 +708,76 @@ Figure \ref{fig:ratiodir_WIOD} depicts the relationship between $\overline{s}_{i
 
 The same results mostly stand using the TiVA databases (see Appendix \ref{AppendixFonctionLinéaireTIVA}). The functional form might seem a bit counterintuitive (one might expect that the elasticity is affine function of openness as summarized by E1), but the analytical examination  of the two countries, one sector case, shows that it is plausible (see Appendix \ref{AnalyticalAppendix}).
 
-Back to the main point, It turns out that we do not gain much by inversing matrixes. Of course, this realization is only possible because we were able to computes $\overline{s}_{i}^{i,HC}$ in the first place. Still, it suggests that we could extrapolate the elasticities for not-yet-released years, as long as we have the share of imported goods in household consumption and the share of imported inputs in household consumption of domestic goods. 
+Back to the main point, it turns out that we do not gain much by inversing matrixes. Of course, this realization is only possible because we were able to computes $\overline{s}_{i}^{i,HC}$ in the first place. Still, it suggests that we could extrapolate the elasticities for not-yet-released years, as long as we have the share of imported goods in household consumption and the share of imported inputs in household consumption of domestic goods. 
 
 \subsection{Doing without TiVA and WIOD, but keeping Eurostat}
-Yet, these two data pieces are not actually easy to obtain for a large number of countries and a large number of years. They are not routinely computed by national statistical institutes. The World Bank provides regular estimates of household consumption.\footnote{préciser la source??}. It does not provide an estimate for intermediate consumptions. In the case of European countries\footnote{And some others for selected years}, Eurostat does provide this last number.
+Yet, these two data pieces are not actually easy to obtain for a large number of countries and a large number of years. They are not routinely computed by national statistical institutes. We have to use a proxy. It is fairly easy to identify consumption and intermediary goods imports using UN Comtrade data and the BEC classification. The World Bank provides regular estimates of household consumption.\footnote{préciser la source??}. It does not provide an estimate for intermediate consumptions. In the case of European countries\footnote{And some others for selected years}, Eurostat does provide this last number\footnote{préciser la source}.
 
-We can combine these data from the World Bank and Eurostat with UN Comtrade data for imports in consumption and intermediary goods (using the BEC classification). That allows the computation of the share of imported consumption goods in household consumption and the share of imported inputs in all inputs. 
+Combining these three data sources allows the computation of the share of imported consumption goods in household consumption and the share of imported inputs in all inputs. 
 
-This allows the mimicking of Figure \ref{fig:evolution_b} by Figure \ref{fig:evolution_b_reg2}. The results are not as good.	
+This allows the mimicking of equation \ref{eq:eq7} by equation \ref{eq:eq8}. Again, we can estimate successive cross-sections of equation \ref{eq:eq8} to see if the proxy is good enough. 
+
+ \begin{equation}
+ \begin{array}{llll}
+\overline{s}_{i}^{i,HC}= \alpha +  \beta  [&\frac{\textnormal{imported consumption goods}_i}{\textnormal{household consumption}_i} \\ & + \frac{\textnormal{imported intermediate goods}_i}{\textnormal{intermediate consumption}_i}*\left(1-\frac{\textnormal{imported consumption goods}_i}{\textnormal{houshold consumption}_i}\right)] +\varepsilon_i 
+\end{array}
+\label{eq:eq8}
+\end{equation}
+
+
+In the same way, Figure \ref{fig:evolution_b_reg2} mimicks Figure \ref{fig:evolution_b}. The results are not as encouraging : the $R^2$ is smaller and declining through time, and the estimated coefficient is not constant.
 
 
 \begin{figure}[!h]
 	\centering
-	\caption{\footnotesize{\textbf{Evolution of $\beta$ and $R2$ through time (WIOD) using Eurostat data}}}
+	\caption{\footnotesize{\textbf{Evolution of $\beta$ and $R2$ through time (WIOD) using Eurostat data to build a proxy of E1HC + E2HC (limited number of countries)}}}
 	\begin{tabular}{c}
-		\includegraphics[width=5.0in, height=3.5in]{reg1_beta_WIOD.png}\\
+		\includegraphics[width=5.0in, height=3.5in]{reg2_beta_WIOD.pdf}\\
 	\end{tabular}
 	\label{fig:evolution_b_reg2}
 \end{figure}
 
+Yet, estimating successive cross-sections is a pretty demanding test to establish a link between the elastiticy computed by PIWIM based on WIOD data and "public" data assembled from various sources. It does not allow to exploit country-specific information of the link between the elasticity and public data. A less demanding test is to run a panel with country fixed-effects, assuming that $\beta$ is constant through time but that it applies only to within-country variations of the proxy for E1HC + E2HC (see equation \ref{eq:eq9}). 
+
+
+ \begin{equation}
+\begin{array}{llll}
+\overline{s}_{i,t}^{i,t,HC}= \alpha +  \beta  [&\frac{\textnormal{imported consumption goods}_{i,t}}{\textnormal{household consumption}_{i,t}} \\ & + \frac{\textnormal{imported intermediate goods}_{i,t}}{\textnormal{intermediate consumption}_{i,t}}*\left(1-\frac{\textnormal{imported consumption goods}_{i,t}}{\textnormal{houshold consumption}_{i,t}}\right)] +fe_{i}+\varepsilon_{i,t}
+\end{array}
+\label{eq:eq9}
+\end{equation}
+
+Running this panel from 2000 to 2008, we then estimate the out of sample elasticity for each country in 2014. This is very close from the WIOD-computed elasticity (see Figure \ref{fig:panel_pred1}).It is very encouraging: it suggests that the available data (2000-2014) could help predict the WIOD elasticities in 2020, making this an useful prediction tool. 
+
+\begin{figure}[!h]
+	\centering
+	\caption{\footnotesize{\textbf{Comparing the elasticity computed from WIOD in 2014 with the one predicted from a panel regression between 2000 and 2008}}}
+	\begin{tabular}{c}
+		\includegraphics[width=5.0in, height=3.5in]{"resultats_reg2_doigt_mouille_WIOD_pred_6y_trend_no".pdf}\\
+	\end{tabular}
+	\label{fig:panel_pred1}
+\end{figure}
+
+\subsection{Doing without Eurostat}
+We can go even further and notice that requireng intermediate consumption and household production in our computations dramatically reduces the avaibility of the data. One could imagine an even simpler proxy for E1HC+E2HC that would require only trade data from Comtrade and GDP data from the world bank. We can then run another panel (see see equation \ref{eq:eq10})
+
+ \begin{equation}
+\begin{array}{llll}
+\overline{s}_{i,t}^{i,t,HC}= \alpha +  \beta  [&\frac{\textnormal{imported consumption goods}_{i,t}}{\textnormal{GDP}_{i,t}} \\ & + \frac{\textnormal{imported intermediate goods}_{i,t}}{\textnormal{GDP}_{i,t}}] +fe_{i}+\varepsilon_{i,t}
+\end{array}
+\label{eq:eq10}
+\end{equation}
+
+The out-of-sample prediction is still pretty good even if the mean and the median errors are larger (see Figure \ref{fig:panel_pred2}). This result carries to the other two databases we are using (revision 3 and revision 4 of TIVA)\footnote{Results are available upon request}.
+
+\begin{figure}[!h]
+	\centering
+	\caption{\footnotesize{\textbf{Comparing the elasticity computed from WIOD in 2014 with the one predicted from a panel regression between 2000 and 2008}}}
+	\begin{tabular}{c}
+		\includegraphics[width=5.0in, height=3.5in]{"resultats_reg1_doigt_mouille_WIOD_pred_6y_trend_no".pdf}\\
+	\end{tabular}
+	\label{fig:panel_pred2}
+\end{figure}
 
 
 %

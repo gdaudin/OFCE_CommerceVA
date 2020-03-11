@@ -1,6 +1,6 @@
 
 *****HC, GD, 10/2018----------------------------------------
-*****Lanceur du programme de pétrole
+*****Lanceur du programme secteurs abrités
 *****Ce lanceur lance pour chaque base, chaque année  un choc pour le ou les secteurs choisi et pour le ou les pays choisis
 *****Attention, lors de chaque mise à jour des données, il faut changer les dates de début/fin dans 1_constr_bases.do (l 20, 53 , 230-235, 327-331)
 *****Pour changer la taille du choc, changer la ligne 98 (ici choc de +100%)
@@ -34,6 +34,8 @@ set more off
 
 cd "$dir"  
 
+
+
 ******Définition des Pays et des secteurs ********************
 **On le lance pour mettre à jour les macros (en mémoire)
 do "$dirgit/Definition_pays_secteur.do"   
@@ -43,27 +45,28 @@ do "$dirgit/Definition_pays_secteur.do"
 do "$dirgit/choc_secteurs_pays_abrites.do"
 
 *foreach source in   WIOD { 
-foreach source in  WIOD  TIVA_REV4 { /* TIVA */
+foreach source in  TIVA  /*WIOD  TIVA_REV4*/ { 
 
+	Definition_pays_secteur `source'
 
 	if "`source'"=="WIOD" local start_year 2000
-	*if "`source'"=="TIVA" local start_year 1995
+	if "`source'"=="TIVA" local start_year 1996 /* Pour DE, les chocs ne sont disponibles que depuis 1996 */
 	if "`source'"=="TIVA_REV4" local start_year 2005
 
 
 	if "`source'"=="WIOD" local end_year 2014
-	*if "`source'"=="TIVA" local end_year 2011
+	if "`source'"=="TIVA" local end_year 2011
 	if "`source'"=="TIVA_REV4" local end_year 2015
 
 	
-	Definition_pays_secteur `source'
+	
 
 *   foreach i of numlist 2011 {
 	foreach i of numlist `start_year' (1)`end_year'  {
-		clear
+		*clear
 		set more off
 		
-		vector_shock_secteurs_pays_a 1 `source' 
+		vector_shock_secteurs_pays_a `i' `source' 
 		shock_secteurs_pays_a `i' `source'
 		use "$dir/Results/secteurs_pays_abrites/`source'_`i'_secteurs_pays_a.dta", clear
 		rename S*t1 shock*1

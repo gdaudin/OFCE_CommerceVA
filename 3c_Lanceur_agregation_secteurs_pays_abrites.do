@@ -66,18 +66,18 @@ local i 2014
   
 * Pour étude habituelle
 
-*foreach source in   TIVA { 
-foreach source in  WIOD  TIVA_REV4 { /*TIVA*/
+foreach source in   TIVA { 
+*foreach source in  WIOD  TIVA_REV4 { /*TIVA*/
 
 	Definition_pays_secteur `source'
-	if "`source'"=="WIOD" local start_year 2000
-	*if "`source'"=="TIVA" local start_year 1995
-	if "`source'"=="TIVA_REV4" local start_year 2005
+	*if "`source'"=="WIOD" local start_year 2000
+	if "`source'"=="TIVA" local start_year 1996
+	*if "`source'"=="TIVA_REV4" local start_year 2005
 
 
-	if "`source'"=="WIOD" local end_year 2014
-	*if "`source'"=="TIVA" local end_year 2011
-	if "`source'"=="TIVA_REV4" local end_year 2015
+	*if "`source'"=="WIOD" local end_year 2014
+	if "`source'"=="TIVA" local end_year 2011
+	*if "`source'"=="TIVA_REV4" local end_year 2015
 
 	
 	// Fabrication des fichiers d'effets moyens des chocs
@@ -97,22 +97,23 @@ foreach source in  WIOD  TIVA_REV4 { /*TIVA*/
 		}
 */		
 	local HC_fait 0
-    	foreach j in  `liste' HC X Y HC_neig_dom HC_alimentaire_dom HC_energie_dom HC_services_dom HC_dom ///
-					HC_neig_impt HC_alimentaire_impt HC_energie_impt HC_services_impt HC_impt  {	
-
+    	foreach j in  `liste'  X /*HC Y HC_neig_dom HC_alimentaire_dom HC_energie_dom HC_services_dom HC_dom /// 
+					HC_neig_impt HC_alimentaire_impt HC_energie_impt HC_services_impt HC_impt */ {	
+		foreach id_shock in OBS CONTRF {
+					
     	    if strpos("`j'","HC")!=0 & `HC_fait'==0 {
 				compute_HC_vect `i' `source'
 				local HC_fait 1
 			}
-			if strpos("`j'","HC")==0 compute_`j'_vect `i' `source' 
-			table_mean `i' `j' 1 `source' 
+			if strpos("`j'","HC")==0 compute_`j'_vect `i' `source'
+			table_mean `i' `j' `id_shock' `source' 
 
-	    }
+			}
 
-    }
+		}
 
+	}
 }
-
 *secteurs HC : alimentaire neig services energie
 
 *on va le mettre dans weight.

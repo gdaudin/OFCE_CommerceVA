@@ -113,7 +113,7 @@ label var pond_`source'_`type' "Élasticité des prix (`type') en monnaie nation
 
 save "$dir/Results/Étude rapport D+I et Bouclage Mondial/Elast_par_pays_`year'_`source'_`type'.dta", replace
 	
-
+*****Graphique comparant l'élasticité avec E1HC + E2HC
 if "`type'"=="HC" & ((`year'==2014 & "`source'"=="WIOD") | (`year'==2015 & "`source'"=="TIVA_REV4") | ("`source'"=="TIVA"  & `year'==2011)) {
 
 
@@ -132,17 +132,42 @@ if "`type'"=="HC" & ((`year'==2014 & "`source'"=="WIOD") | (`year'==2015 & "`sou
 	*dans le cas HC, xtitle pourrait se finir par «importées dans la conso dom + part conso importée»	
 	
 						
-	graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/graph7_`year'_`source'_`type'.pdf", replace
-	graph export "$dirgit/Rédaction/graph7_`year'_`source'_`type'.pdf", replace
+	graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/Comp_s_E1HCE2HC_`year'_`source'_`type'.pdf", replace
+	graph export "$dirgit/Rédaction/Comp_s_E1HC_`year'_`source'_`type'.pdf", replace
 	
 	graph close
 	
 	replace pond_`source'_`type'=-pond_`source'_`type'
-
-	
-	
 }
 
+
+
+*****Graphique comparant l'élasticité avec E1HC
+if "`type'"=="HC" & ((`year'==2014 & "`source'"=="WIOD") | (`year'==2015 & "`source'"=="TIVA_REV4") | ("`source'"=="TIVA"  & `year'==2011)) {
+
+
+	replace pond_`source'_`type'=-pond_`source'_`type'
+	replace pays="" /*if c!="FRA_EUR" & c!="DEU_EUR" & c!="LUX_EUR" & c!="FRA" & c!="DEU" & c!="LUX" ///
+					& c!="CAN" & c!="JPN" & c!="USA" & c!="CHN" */
+	
+	graph twoway (scatter pond_`source'_`type' E1HC, mlabel(pays) mlabsize(medium)) ///
+			(lfit pond_`source'_`type' E1HC) ///
+			(lfit pond_`source'_`type' pond_`source'_`type',lwidth(vthin) color(black)) , ///
+			/*title("Comparing direct and modelled effects")*/ ///
+			xtitle("Share of imported goods and services in household consumption") ytitle("`source' Elasticities `year'") ///
+			yscale(range(0.0 0.3)) xscale(range(0.0 0.3)) xlabel (0.0(0.05) 0.3) ylabel(0.0(0.05) 0.3) ///
+			legend(off) ///
+			scheme(s1mono)
+	*dans le cas HC, xtitle pourrait se finir par «importées dans la conso dom + part conso importée»	
+	
+						
+	graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/Comp_s_E1HC_`year'_`source'_`type'.pdf", replace
+	graph export "$dirgit/Rédaction/Comp_s_E1HC_`year'_`source'_`type'.pdf", replace
+	
+	graph close
+	
+	replace pond_`source'_`type'=-pond_`source'_`type'
+}
 
 
 

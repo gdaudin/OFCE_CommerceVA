@@ -1,3 +1,8 @@
+capture net install grc1leg2.pkg
+
+
+
+
 clear  
 set more off
 if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
@@ -133,7 +138,7 @@ if "`type'"=="HC" & ((`year'==2014 & "`source'"=="WIOD") | (`year'==2015 & "`sou
 	
 						
 	graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/Comp_s_E1HCE2HC_`year'_`source'_`type'.pdf", replace
-	graph export "$dirgit/Rédaction/Comp_s_E1HC_`year'_`source'_`type'.pdf", replace
+	graph export "$dirgit/Rédaction/Comp_s_E1HCE2HC_`year'_`source'_`type'.pdf", replace
 	
 	graph close
 	

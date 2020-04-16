@@ -315,12 +315,14 @@ Assuming a 100$\%$ appreciation of the currency of country $A$ against the other
 Country $B$ pays more for its imports of inputs, in dollars as well as in national currency, since its exchange rate against the dollar has not changed. 
 Conversely, the prices of imported inputs in country $A$ remain constant in dollars, since the production prices of country $B$ have not changed, and fall by half once expressed in country $A$'s national currency.\\
 We assume that producers completely pass the exchange rate shock on their production prices. 
-The change in the prices of imported goods is therefore transmitted to all domestic prices, both directly and through inter-industry linkages. These upward (downward) movements for country $B$ (country $A$) affect all input prices in each of the countries.\\
+The change in the prices of imported goods is therefore transmitted to all domestic prices, both directly and through inter-industry linkages. 
+These upward (downward) movements for country $B$ (country $A$) affect all input prices in both countries.\\
 The effects of the shock spread over multiple production cycles. At the end of this process, the overall impact of the shock in dollar terms is equal, for the shocked country $A$, to the rise in production prices due to the exchange rate shock, minus direct and indirect decreases (via inter-industry linkages in the country), in national currency and then converted back into dollar terms, in the prices of inputs imported from $B$ and disseminated to all branches. 
-The overall impact on production prices in dollar terms in country $A$ is therefore lower than the initial exchange rate shock. For country $B$, the final impact is to the cumulative direct and indirect effects of higher prices of inputs imported from country $A$ and disseminated to all industries.\\
+The overall impact on production prices in dollar terms in country $A$ is therefore lower than the initial exchange rate shock. 
+For country $B$, the final impact is equal to the cumulative direct and indirect effects of the higher prices of imported inputs.\\
 
 In a global economy composed of $I$ countries, each with $J$ sectors, the appreciation of a country's currency $i$ against all other currencies translates into a rise in country $i$'s prices in dollars. The production price of each sector will vary in dollar terms by: $c_\$^i$ in the shock-stricken country$~i$ and 0 in other countries. \\
-Hence, for each sector $j$ in country  $i$:
+Hence, for each sector $j$ in country $i$:
 \begin{eqnarray*}
  {{\Delta }^{0}}p_{\${ij}}=p_{\${ij}}^{1}-p_{\${ij}}^{0}=c_{\${ij}}=c_{\$}^i
   \end{eqnarray*}	
@@ -328,7 +330,8 @@ And for each sector $j$ in country $k (k\ne i)$,
 \begin{eqnarray*}
  {{\Delta }^{0}}p_{\${kj}}=p_{\${kj}}^{1}-p_{\${kj}}^{0}=c_{\${kj}}=0
  \end{eqnarray*}	
-To simplify, initial output prices for each sector are normalized to 1 and exchange rates to 1:1. A 100$\%$ appreciation in the exchange rate of a currency against other currencies therefore corresponds to an absolute shock of +1, with production prices in the shock-stricken country rising from 1 to 2 dollars.\\
+To simplify, initial output prices for each sector are normalised to 1 and exchange rates to 1:1. 
+A 100$\%$ appreciation in the exchange rate of a currency against other currencies therefore corresponds to an absolute shock of $+1$, with production prices in the shock-stricken country rising from 1 to 2 dollars.\\
 The appreciation affects producers through changes in relative prices between countries and, therefore, through changes in input prices traded between the shock-stricken country $i$ and other countries. \\
 Consider first the direct impact (in absolute terms) on other countries of the rise in imported input prices from shocked country $i$. For any sector l of a country $k$ $(k\ne i)$, the increase in the producer price depends directly on the quantity of inputs imported from the shock-stricken country $i$, weighted by the variation in level of the price of inputs in dollars (i. e. the exchange rate shock):\\
 \begin{eqnarray}
@@ -347,7 +350,9 @@ This level shock can be converted into dollars: \\
 \label{eq:eq2}
 \end{eqnarray}
 We therefore know the direct impact of the shock on all input prices of all countries.
-In matrix notation, we create two matrices that build on the world input-output matrix $A$ defined in \ref{subsec:ioprice}. These two matrices retain only the direct effects of the exchange rate shock on the price of goods imported by the shocked country $i$ and the direct effects of the exchange rate shock on the price of goods imported by the rest of the world from the shocked country $i$. To formalize the initial impact of the shock on the price of traded goods, we neutralize the impact of an input price shock on the price of domestic inputs as well as on the price of inputs traded between countries that are not shocked.\\
+In matrix notation, we create two matrices that build on the world input-output matrix $A$ defined in \ref{subsec:ioprice}. 
+These two matrices retain only the direct effects of the exchange rate shock on the price of goods imported by the shocked country $i$ and the direct effects of the exchange rate shock on the price of goods imported by the rest of the world from country $i$. 
+To formalise the initial impact of the shock on the price of traded goods, we neutralize the impact of an input price shock on the price of domestic inputs as well as on the price of inputs traded between countries that are not shocked.\\
 Let us first look at the shock from the perspective of countries that import inputs from country $i$.\\
 Let $C_\$^i$ be the vector of change in production prices in dollars following the 
 %{100$\%$}
@@ -361,7 +366,9 @@ with $c_{\$ij}=c_{\$ik}=c_\$^i
 %=1
 $
 for all sectors $j$ and $k$ in the shocked country $i$.\\
-Building on Equation \ref{eq:eq1}, we write the direct impact of the exchange rate shock on the other countries as the product of the shock vector $C_\$^i$ and a matrix ${\cal B}$. ${\cal B}$ builds on the large matrix ${\cal A}$ of technical coefficients, but only keeps the coefficients of each country's sectoral inputs imported from the shocked country $i$. The other coefficients are replaced by 0, including those of the block of country $i$ concerning the domestic inputs of the shocked country $i$. The direct impact of the appreciation of a currency against the dollar on the price of inputs in countries that are not shocked is equal to $C_\$^i{\cal B}$ with
+Building on Equation \ref{eq:eq1}, the direct impact of the exchange rate shock on the other countries corresponds to the product of the shock vector $C_\$^i$ and a matrix ${\cal B}$. 
+${\cal B}$ builds on the large matrix ${\cal A}$ of technical coefficients, but only keeps the coefficients of each country's sectoral inputs imported from the shocked country $i$. The other coefficients are replaced by 0, including those of the block of country $i$ concerning the domestic inputs of country $i$. 
+The direct impact of the appreciation of a currency against the dollar on the price of inputs in countries that are not shocked is equal to $C_\$^i{\cal B}$ with
 \begin{eqnarray}
 C_\$^i{\cal B}=\left(0\ldots c_\$^i \ldots 0\right)\left(\begin{matrix}0&\cdots&0\\a_{11,ij}&0&a_{IJ,ij}\\0&\cdots&0\\\end{matrix}\right) 	
 \label{eq:eq3}
@@ -387,7 +394,9 @@ Let us now consider the shock from the perspective of the shocked country $i$.\\
 Define $C^i$ the vector of change in production prices everywhere expressed in country $i$'s currency, 
 $\left(-\frac{c_\$^i}{1+c_\$^i},\ldots0\ldots,-\frac{c_\$^i}{1+c_\$^i} \right)$. \\
 
-From Equation \ref{eq:eq2}, we can write the direct impact for country $i$ of the fall in input prices from the rest of the world. The direct impact corresponds to the product of the shock vector $C^i$  and a matrix ${\tilde{{\cal B}}}$. ${\tilde{{\cal B}}}$ builds on the large matrix ${\cal A}$ of which only the country blocks of the inputs imported by country $i$ from other countries have been retained. The other coefficients are replaced by 0, including those of the block of country $i$ concerning the domestic inputs of the shocked country $i$. \\
+From Equation \ref{eq:eq2}, we can write the direct impact for country $i$ of the fall in input prices from the rest of the world. 
+The direct impact corresponds to the product of the shock vector $C^i$ and a matrix ${\tilde{{\cal B}}}$. ${\tilde{{\cal B}}}$ builds on the large matrix ${\cal A}$ of which only the country blocks of the inputs imported by country $i$ from other countries have been retained. 
+The other coefficients are replaced by 0, including those of the block of country $i$ concerning the domestic inputs of country $i$. \\
 
 The direct impact of the appreciation of the shocked country $i$ on the price of its inputs corresponds, in national currency, to $C^i{\tilde{{\cal B}}}$ with: 
 \begin{eqnarray}
@@ -395,7 +404,7 @@ C^i{\tilde{{\cal B}}}=\left(-\frac{c_\$^i}{1+c_\$^i},\ldots0\ldots,-\frac{c_\$^i
 \label{eq:eq4}
  \end{eqnarray}
 where each ${{{a}}_{{ij,kl}}}$ element in the column block represents imports of inputs by sector $j$ in country $i~$from sector$~l$ of country $k$.
-We can then convert this direct impact in dollars, by multiplying it by the new value of the national currency in dollars, $\left(1+c_\$^i\right)$. The direct impact of the appreciation of the shocked country $i$ on the price of its inputs corresponds, in dollars, to ${\tilde{C}_\$^i}{\tilde{{\cal B}}}$ with: 
+We then convert this direct impact in dollars, by multiplying it by the new value of the national currency in dollars, $\left(1+c_\$^i\right)$. The direct impact of the appreciation of the shocked country $i$ on the price of its inputs corresponds, in dollars, to ${\tilde{C}_\$^i}{\tilde{{\cal B}}}$ with: 
 \begin{eqnarray}
 {\tilde{C}_\$^i}{\tilde{{\cal B}}}=\left(1+c_\$^i\right).C^i{\tilde{{\cal B}}}=
 \left(-c_\$^i\ldots0\ldots-c_\$^i\right)\left(\begin{matrix}0&\ldots{{{a}}_{ij,11}}\ldots&0\\0&0&0\\0&\ldots{{a}_{{ij,IJ}}}\ldots&0\\\end{matrix}\right) 

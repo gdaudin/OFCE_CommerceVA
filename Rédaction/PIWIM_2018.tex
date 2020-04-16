@@ -431,9 +431,10 @@ S_\$^i=\Delta{{P}_{\$}^i}=C_\$^i+ \left(C_\$^i.{\cal B}+{\tilde{C}_\$^i}{\tilde{
 S_\$^i=C_\$^i+\left(C_\$^i.{\cal B}+{\tilde{C}_\$^i}{\tilde{{\cal B}}}\right)*{{(I-{\cal A})}^{-1}}	
 \label{eq:eqinternationalcurrency}
  \end{eqnarray}
-With $S_\$^i$ the total impact vector composed of the elements ${{{s}}^i_{\$kj}}$ showing the total impact of the shock in the exchange rate of country $i$ on country $k$'s sector $j$. Equation \ref{eq:eqinternationalcurrency} gives the absolute evolution of sectoral prices in international currency. The study of this vector is the main objet of \cite{Cochard2016}. //
+With $S_\$^i$ the total impact vector composed of the elements ${{{s}}^i_{\$kj}}$ showing the total impact of a shock on country $i$'s exchange rate on country $k$'s sector $j$. 
+Equation \ref{eq:eqinternationalcurrency} gives the absolute evolution of sectoral prices in international currency. The study of this vector is the main objet of \cite{Cochard2016}. //
 
-In contrast, this paper focuses on the internal effect of an exchange rate shock. To obtain the absolute evolution of the sectoral prices of the shocked country in national currency, we remove the exchange rate shock in international currency, multiply the balance by the scalar of conversion equal to $\frac{1}{1+c_\$^i}$ and add the initial exchange rate shock in national currency.
+By contrast, this paper focuses on the internal effect of an exchange rate shock. To obtain the absolute evolution of the sectoral prices of the shocked country in national currency, we remove the exchange rate shock in international currency, multiply the balance by the scalar of conversion equal to $\frac{1}{1+c_\$^i}$ and add the initial exchange rate shock in national currency.
 
 \begin{equation}
 \begin{aligned}
@@ -445,9 +446,11 @@ In contrast, this paper focuses on the internal effect of an exchange rate shock
 \end{equation}
 Where $\hat{C}^i_\$=\left(0 \ldots \frac{c_\$^i}{1+c_\$^i},\ldots 0 \right)$ is the increase in dollar prices of goods from country $i$ used as inputs in all other countries.\\ 
 $S^i$ represents the overall impact of a shock on prices in each sector of each country expressed in the shocked currency.
-It is quite different from $S$ defined in eq. \eqref{eq:eqchocprix}, because in the case of $S$, the price shock affects all users, whereas in the case of $S^i$, the price shock affects only users that do not share a currency with country $i$. To illustrate the difference, the two country, one sector case is explored in Appendix 1.
+It is quite different from $S$ defined in eq. \eqref{eq:eqchocprix}, because in the case of $S$, the price shock affects all users, whereas in the case of $S^i$, the price shock affects only users that do not share a currency with country $i$. 
+To illustrate the difference, the two-country, one sector case is explored in Appendix 1.
 
-To transform this vector in a price level shock in country $i$, $\bar{s}^i$, we need to compute a weighted average of the sectoral effects of the shock. This paper focuses on the price of household consumption. Let $HC^i$ be the vector of sectoral shares in country $i$'s consumption :
+To convert this vector into a price-level shock in country $i$, $\bar{s}^i$, we compute a weighted average of the sectoral effects of the shock. 
+This paper focuses on the price of household consumption. Let $HC^i$ be the vector of sectoral shares in country $i$'s consumption :
 \begin{eqnarray*}
 HC^i=\left( 
 	\begin{array}{c}
@@ -483,12 +486,23 @@ with ${s}_{kj}^i$ is a coefficient of $S^i$ for country $i$.
 
 \section{The impact of exchange rates fluctuations on consumer prices}
 \label{sec:prixconso}
-\subsection{Baseline results}
-We use the model presented in \ref{subsec:chocchange} to study the absolute value of $\overline{s_{i}}^{i,HC}$ following a 100\% appreciation of the domestic currency versus all other currencies. When the domestic currency appreciates, domestic prices expressed in domestic currency decrease, as imported inputs and imported consumer goods are cheaper. As our model is linear, the exact value of the shock does not matter: choosing 100\% allows us to interpret  $\overline{s_{i}}^{i,HC}$ as an elasticity. As an illustration, using the WIOD database, we find that $\overline{s_{i}}^{i,HC}$ is equal to $-0.055$ for the USA in 2011, meaning that a 100\% appreciation of the dollar would reduce consumer prices by 5.5\%. The following figures report the absolute value of this number ($0.055$).
+%je suggère de ne pas avoir de sous sections, le titre de la 2eme sous section étant peu intelligible \subsection{Baseline results}
+We use the model presented in \ref{subsec:chocchange} to analyse the impact of an exchange rate shock on consumer prices.
+We focus on the absolute value of $\overline{s_{i}}^{i,HC}$ following a 100\% appreciation of the domestic currency versus all other currencies. 
+Following an apreciation of the domestic currency, imported inputs and imported consumer goods become cheaper.
+Hence, domestic prices expressed in domestic currency decrease. 
+As our model is linear, the exact value of the shock does not matter: choosing 100\% allows us to interpret $\overline{s_{i}}^{i,HC}$ as an elasticity. 
+%je propose de simplifier: on a déjà dit plus haut qu'on s'intéresse à  $\overline{s_{i}}^{i,HC}$ 
+%Using the WIOD database, we find that $\overline{s_{i}}^{i,HC}$ is equal to $-0.055$ for the USA in 2011, meaning that a 100\% appreciation of the dollar would reduce consumer prices by 5.5\%. 
+Using the WIOD database, we find that a 100\% appreciation of the dollar reduce the U.S. consumer prices by 5.5\%. 
+% phrase superflue car c'est mentionné dans la légende de chaque graph The following figures report the absolute value of this number ($0.055$).
 
-Additionaly, for Euro area members, we distinguish between the effect of the appreciation of the euro and the effect of the appreciation of a hypothetical national currency. For example, in the case of France, using WIOD in 2011, a 100\% appreciation of the euro would lead to a reduction of domestic prices of 7.6\%. A 100\% appreciation of the hypothetical French national currency would lead to a reduction of domestic prices of 12.2\%. 
+Additionaly, for euro-area members, we distinguish between the effect of the appreciation of the euro and the effect of the appreciation of a hypothetical national currency. 
+For France, using WIOD, a 100\% appreciation of the euro leads to a 7.6\% reduction of domestic prices. 
+A 100\% appreciation of the hypothetical French national currency leads to a 12.2\% reduction of domestic prices. 
 
-Figure \ref{fig:comp_WIOD_TIVA}, shows that, despite their differences, using WIOD or TIVA yields very similar results for consumer prices.
+Using a sample of 43 countries, we plot the elasticity of consumer prices over time.
+Figure \ref{fig:comp_WIOD_TIVA} shows that the evolution is similar, regardless of the database (WIOD or TIVA).
 
 \begin{figure}[!h]
 \centering
@@ -504,11 +518,11 @@ Figure \ref{fig:comp_WIOD_TIVA}, shows that, despite their differences, using WI
 \end{figure}
 
 
-The evolution of consumer prices elasticity through time is very similar in all sources However, computations based on TIVA rev3 yield a slightly higher elasticity than those based on TIVA rev4 and WIOD (see Figure \ref{fig:PIWIM_LONGITUDINAL}).
+However, using data from TIVA rev3 yields a slightly higher elasticity (see Figure \ref{fig:PIWIM_LONGITUDINAL}).
 
 \begin{figure}[!h]
 	\centering
-	\caption{\footnotesize{\textbf{Comparing mean consumer price elasticity to an exchange rate appreciation of 100\% for WIOD and TIVA, 1995-2014}}}
+	\caption{\footnotesize{\textbf{Comparing the elasticity of consumer prices to an exchange rate appreciation of 100\% for WIOD and TIVA, 1995-2014}}}
 	\begin{tabular}{c}
 		\includegraphics[width=4.5in, height=3in]{PIWIM_LONGITUDINAL.png}\\
 		\floatfoot{Source: WIOD and TIVA}.
@@ -518,13 +532,13 @@ The evolution of consumer prices elasticity through time is very similar in all 
 
 
 
-Focusing on the 2014 WIOD results, Figure \ref{fig:WIOD_HC_elasticities} shows that the absolute value of the elasticity is between .05 and .15 for most countries.
-Figure \ref{fig:WIOD_HC_E1HC} shows it is closely, but not strictly, related to the share of imported goods and services in household consumption.
+Using data from WIOD, Figure \ref{fig:WIOD_HC_elasticities} shows that, in absolute terms, the elasticity lies between 0.05 and 0.15 for most countries.
+Figure \ref{fig:WIOD_HC_E1HC} shows that the value of the elasticity is closely related to the share of imported goods and services in household consumption.
 
 
 \begin{figure}[!h]
 	\centering
-	\caption{\footnotesize{\textbf{Distribution of consumer price elasticity to a 100\% exchange rate appreciation for WIOD 2014}}}
+	\caption{\footnotesize{\textbf{Distribution of the elasticity of consumer prices to a 100\% exchange rate appreciation (WIOD)}}}
 	\begin{tabular}{c}
 		\includegraphics[width=4.5in, height=3in]
 		{WIOD_HC_elasticities.png}\\
@@ -535,7 +549,7 @@ Figure \ref{fig:WIOD_HC_E1HC} shows it is closely, but not strictly, related to 
 
 \begin{figure}[!h]
 	\centering
-	\caption{\footnotesize{\textbf{Comparing consumer price elasticity and consumer price elasticity and share of imported consumption for WIOD 2014}}}
+	\caption{\footnotesize{\textbf{Elasticity of consumer prices to an exchange rate shock and the share of imported consumption (WIOD)}}}
 	\begin{tabular}{c}
 		\includegraphics[width=5.0in, height=3.5in]{Comp_s_E1HC_2014_WIOD_HC.pdf}\\
 	\end{tabular}
@@ -556,7 +570,7 @@ Figure \ref{fig:WIOD_HC_E1HC} shows it is closely, but not strictly, related to 
 %\end{figure}
 
 
-\subsection{Contribution of different goods}
+%peu intelligible, je suggère de ne pas avoir de sous sections \subsection{Contribution of different goods}
 
 Looking at the contribution of different types of goods to $\overline{s_{i}}^{i,HC}$ helps understanding the mechanis at work in PIWIM. One possibility is too look at the predicted effect on domestic goods versus imported goods. We can define 
 \begin{eqnarray}

@@ -105,7 +105,8 @@ As a result, production costs increase in the country whose currency depreciates
 Changes in domestic and foreign production costs in turn pass through to the price of inputs for domestic and foreign firms and cause further production costs variations.
 Besides these purely accounting impacts, the pass-through of exchange rate shocks into consumer prices also depends on the intensity of competition in domestic markets: while an exchange rate appreciation lowers the price of imported inputs, a ﬁrm with limited competitive pressure may avail of greater proﬁt margins rather than reduce prices in an eﬀort to maintain market share. 
 %Still, working out the full potential accounting effect illustrates the pressures that the existence of global value chains put on firms.
-Despite the limitations of the accounting approach, it illustrates the vulnerability of each sector to price shocks. Hence, though unrealistic, it is useful for identifying which countries and sectors are under pressure to adjust their prices when subject to exogenous cost shocks.
+Despite some shortcomings, the accounting approach illustrates the vulnerability of each sector to price shocks. 
+Hence, though unrealistic, it is useful for identifying which countries and sectors are under pressure to adjust their prices when subject to exogenous cost shocks.
 
 In this paper, we measure the accounting effect of exchange rate fluctuations on consumer prices. We use world input-output tables covering twenty years of data (from 1995 to 2015).
 Most of the literature on global supply chains has focused on the role of input-output linkages in propagating shocks to production.
@@ -714,7 +715,8 @@ Similarly, domestic core inflation accounts for a significant share of the total
 \section{Can we extrapolate the consumer price elasticity?}
 \label{sec:extrapo}
 \subsection{Doing without the world input-output matrices}
-One might wonder whether using world input-ouput matrices provided by WIOD or TIVA to compute the effect of exchange rate shocks on household consumption prices is worth the wait (the latest year covered by WIOD is 2014, and 2015 for TIVA) and the computational complexity. To answer this question, we break down $\overline{s_{i}}^{i,HC}$ into different elements classified by ease of use and computation. Let us start from equation \ref{eq:eqdomcurrency}. We can obtain:
+One might wonder whether using world input-ouput matrices provided by WIOD or TIVA to compute the effect of exchange rate shocks on household consumption prices is worth the wait (the latest year covered by WIOD is 2014, and 2015 for TIVA) and the computational complexity. To answer this question, we break down $\overline{s_{i}}^{i,HC}$ into different elements classified by ease of use and computation. Let us start from equation \ref{eq:eqdomcurrency}. 
+We have:
 
 \begin{equation}
 \begin{array}{lccl}
@@ -724,22 +726,28 @@ One might wonder whether using world input-ouput matrices provided by WIOD or TI
 \end{equation}
 
 
-$C^i$ and $\hat{C}^i_\$$ have a large number of zeros. So, we have :
+$C^i$ and $\hat{C}^i_\$$ have a large number of zeros. So, we have:
 
 \begin{equation}
 \begin{array}{lccl}
 \overline{s}_{i}^{i,HC}&=S^i.HC^i=E1.HC^i+E2.HC^i+E3.HC^i+E4.HC^i \\
 &=E1.HC^{i,imp}+E2.HC^{i,dom}+E3.HC^{i,imp}+E4.HC^i
  \end{array} 
+ \label{eq:eqtoto}
  \end{equation}
  
-When the shock corresponds to an appreciation of the domestic currency, $E1$ and $E2$ reduce country $i$'s household consumption prices and $E3$ increases country $i$'s household consumption prices. Notice that $E1$ and $E2$ are easy to compute with national input-output matrices (and do not even require inversing any matrix), whereas world input-output matrices are needed for computing $E3$ and $E4$.
+When the domestic currency appreciates, $E1$ and $E2$ reduce country $i$ consumer prices whereas $E3$ increases them. 
+%je suggère de supprimer le fait qu'il n'y a pas besoin d'inverser de matrice car cette opération est relativement facile avec les logiciels disponibles aujourd'hui
+
  
-Notice this decomposition is not the same as equation \ref{equ:decomp_impexp}. In that equation, we were interested in the contribution of different types of goods to the computed effect of the initial shock. In this equation, we are interested in the different channel through which the shock has an effect.
+This decomposition differs from equation \ref{equ:decomp_impexp}. 
+Equation \ref{equ:decomp_impexp} focuses on the contribution of domestic versus imported goods to the total impact of an exchange rate shock on consumer prices. 
+By contrast, equation \ref{eq:eqtoto} highlights the transmission channels of the shock.
 
 
-A first appraisal to the contribution of PIWIM is to compute the share $E1.HC^{i,imp}$, $E2.HC^{i,dom}$, $E3.HC^{i,imp}$ and $E4.HC^i$ in $\overline{s}_{i}^{i,HC}$. Figure \ref{fig:decompositionofs} provides the result. $E3.HC^{i,imp}$ is very small, $E1.HC^{i,imp}$ dominates. But, for most countries, $E4.HC^i$ represent between 10\% and 30\% of $\overline{s}_{i}^{i,HC}$.
-China is an important exception.
+Figure \ref{fig:decompositionofs} plots the shares of $E1.HC^{i,imp}$, $E2.HC^{i,dom}$, $E3.HC^{i,imp}$ and $E4.HC^i$ in $\overline{s}_{i}^{i,HC}$.  
+$E1.HC^{i,imp}$ dominates. 
+While $E3.HC^{i,imp}$ is negligible, $E4.HC^i$ accounts for 10\% to 30\% of $\overline{s}_{i}^{i,HC}$ for most countries except China.
 
 \begin{figure}[!h]
 \centering
@@ -751,14 +759,17 @@ China is an important exception.
 \label{fig:decompositionofs}
 \end{figure}
 
-Yet, the relative importance of $E4.HC^i$ might not be too much of an issue if it can be deducted from the easier-to-compute elements of $\overline{s}_{i}^{i,HC}$.
+$E1$ and $E2$ can be computed with national input-output matrices whereas world input-output matrices are needed for computing $E3$ and $E4$.
+Yet $E4.HC^i$ can be inferred from easier-to-compute elements of $\overline{s}_{i}^{i,HC}$.
 
 %This is suggested by the correlation matrix of  $E1.HC^{i,imp}$, $E2.HC^{i,dom}$, $E3.HC^{i,imp}$ and $E4.HC^i$ (see Table \ref{table:corretable1}). 
 %
 %\input{corrtable_1.tex}
-
-$E3.HC^{i,imp}$ does not require inversing a matrix, but it is still quite data-intensive to compute. As a result, we study wether we can deduct $\overline{s}_{i}^{i,HC}$ from $E1.HC^{i,imp}$ and $E2.HC^{i,dom}$.
-Figure \ref{fig:ratiodir_WIOD} depicts the relationship between $\overline{s}_{i}^{i,HC}$ and $E1.HC^{i,imp}+E2.HC^{i,dom}$ according to equation \ref{eq:eq7}. It shows that $E1.HC^{i,imp}+E2.HC^{i,dom}$ is a good predictor of $\overline{s}_{i}^{i,HC}$ (the $R^2$ is over 0.98). 
+% comme on vient de dire que e3 est petit, je sugère de supprimer la phrase ci-dessous
+%$E3.HC^{i,imp}$ does not require inverting a matrix, but it is still quite data-intensive to compute. 
+We try to infer $\overline{s}_{i}^{i,HC}$ from $E1.HC^{i,imp}$ and $E2.HC^{i,dom}$.
+Figure \ref{fig:ratiodir_WIOD} depicts the relationship between $\overline{s}_{i}^{i,HC}$ and $E1.HC^{i,imp}+E2.HC^{i,dom}$ according to equation \ref{eq:eq7}. 
+The high $R^2$ (0.98) suggests that $E1.HC^{i,imp}+E2.HC^{i,dom}$ is a good predictor of $\overline{s}_{i}^{i,HC}$. 
 
  \begin{equation}
 \overline{s}_{i}^{i,HC}=\alpha + \beta  \left(E1.HC^{i,imp}+E2.HC^{i,dom}\right) +\varepsilon_i 
@@ -776,11 +787,12 @@ Figure \ref{fig:ratiodir_WIOD} depicts the relationship between $\overline{s}_{i
 \label{fig:ratiodir_WIOD}
 \end{figure}
 
-We can check if that relationship is constant through time by estimating yearly cross-sections of \ref{eq:eq7}. Excepting to some extent 2009, they show it is the case (see Figures \ref{fig:evolution_b} and \ref{fig:evolution_cst}).
+We check whether the relationship is constant over time by estimating yearly cross-sections of equation \ref{eq:eq7}. 
+With the exception of 2009, the relationship is broadly stable (see Figures \ref{fig:evolution_b} and \ref{fig:evolution_cst}).
 
 \begin{figure}[!h]
 \centering
-\caption{\footnotesize{\textbf{Evolution of $\beta$ and $R2$ through time (WIOD)}}}
+\caption{\footnotesize{\textbf{Evolution of $\beta$ and $R2$ over time (WIOD)}}}
 \begin{tabular}{c}
 \includegraphics[width=5.0in, height=3.5in]{coef_E_WIOD_HC}\\
 \end{tabular}
@@ -789,7 +801,7 @@ We can check if that relationship is constant through time by estimating yearly 
 
 \begin{figure}[!h]
 \centering
-\caption{\footnotesize{\textbf{Evolution of $\alpha$ through time (WIOD)}}}
+\caption{\footnotesize{\textbf{Evolution of $\alpha$ over time (WIOD)}}}
 \begin{tabular}{c}
 \includegraphics[width=5.0in, height=3.5in]{coef_cst_WIOD_HC}\\
 \end{tabular}
@@ -797,7 +809,9 @@ We can check if that relationship is constant through time by estimating yearly 
 \end{figure}
 
 
-The same results mostly stand using the TiVA databases (see Appendix \ref{AppendixFonctionLinéaireTIVA}). The functional form might seem a bit counterintuitive (one might expect that the elasticity is affine function of openness as summarized by E1), but the analytical examination  of the two countries, one sector case, shows that it is plausible (see Appendix \ref{AnalyticalAppendix}).
+We obtain similar results with the TiVA databases (see Appendix \ref{AppendixFonctionLinéaireTIVA}). 
+% je suggère de retirer cette phrase pour simplifier l'exposé, ou éventuellement d'en faire une note de bas de page
+%The functional form might seem a bit counterintuitive (one might expect that the elasticity is affine function of openness as summarized by E1), but the analytical examination of the two-country, one sector case, shows that it is plausible (see Appendix \ref{AnalyticalAppendix}).
 
 Back to the main point, it turns out that we do not gain much by inversing matrixes. Of course, this realization is only possible because we were able to computes $\overline{s}_{i}^{i,HC}$ in the first place. Still, it suggests that we could extrapolate the elasticities for not-yet-released years, as long as we have the share of imported goods in household consumption and the share of imported inputs in household consumption of domestic goods. 
 

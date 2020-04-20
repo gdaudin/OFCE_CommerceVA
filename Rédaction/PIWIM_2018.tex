@@ -226,24 +226,25 @@ S=C {\left( I+{\cal A}+{\cal A}^2+...+{\cal A}^k+...\right)} =C {\left( I-{\cal 
 
 with ${\left( I-{\cal A} \right)}^{-1}$ the inverse of Leontief's matrix.
 
-\subsection{The choice of WIOD}
+% vous citez aussi bien tiva et wiod dans les résultats, je suggère donc de rebaptiser le titre
+\subsection{Data}
 \label{subsec:data}
 
-The world input-output tables are an extension of the national input-output tables. Input-output tables measure the relationships between the producers of goods and services (including imports) within an economy and the users of these goods and services (including exports). The national tables specify, in line, for each industry, the use of the product as intermediate or final use. In a national table, final use includes exports alongside domestic final uses. Exports are not a final use in world input-output tables. 
-They show which foreign industry produced a specific good, and which foreign industry or final user uses the exports of a given country. 
-For example, world input-output tables show how much international trade is embedded in the consumption of a particular final product. \\
+WIOTs are an extension of the national input-output tables. 
+Input-output tables measure the relationships between the producers of goods and services (including imports) within an economy and the users of these goods and services (including exports). The national tables specify, in line, for each industry, the use of the product as intermediate or final use. 
+In a national table, final use includes exports alongside domestic final uses, whereas exports are not a final use in world input-output tables. 
+WIOTs show which foreign industry produced a specific good, and which foreign industry or final user uses the exports of a given country. 
+For example, WIOTs show how much international trade is embedded in the consumption of a particular final product. \\
 Aggregating national input-output tables into world input-output tables is challenging for many reasons. For example, national input-output tables vary widely in terms of detail and scope, and are therefore not fully consistent. Furthermore, the availability of year-specific national input-output tables is limited, especially for developing economies.  \\
-Two datasets including a time dimension for world intput-output tables are available: (\textit{i}) the World Input Output Database (WIOD) and (\textit{ii}) the OECD-ICIO database TiVA.
+Two datasets are available: (\textit{i}) the World Input Output Database (WIOD) and (\textit{ii}) the OECD-ICIO database TiVA.
+
 \paragraph{The World Input Output Database (WIOD)}
-The World Input Output Database (WIOD) contains time series of inter-country input-output tables from 2000 to 2014. 
-It provides "World Input-Output Tables" that reconcile national input-output tables (or supply-use tables) with bilateral trade statistics to derive the final symmetric world input-output table.
-The WIOD covers 43 countries (of which 28 members of the European Union) accounting for 85$\%$ of global GDP. 
+WIOD contains time series of inter-country input-output tables from 2000 to 2014. 
+It provides wIOTs that reconcile national input-output tables (or supply-use tables) with bilateral trade statistics to derive the final symmetric world input-output table.
+The WIOD covers 43 countries (of which 28 members of the European Union) accounting for 85$\%$ of global GDP (see Table \ref{tab:wiod}). 
 The WIOD contains annual information for 56 industries, including the primary sector, manufacturing and services. Therefore, for each year a full country-sector input-output matrix traces the importance of a supplying industry in one country for an industry in another country. The values in WIOTs are expressed in U.S. dollars; market exchange rates were used for currency conversion \citep{Timmer2015}. 
 
 % All transactions values are in basic prices, reflecting all costs borne by the producer. These tables are accompanied by Socio-Economic Accounts which contain country sector panel data on employment (number of workers, compensation and share of labor in high, medium and low skilled occupations), capital stocks, gross output and value added).
-
-Table \ref{tab:wiod} shows the economies included in the WIOD.
- 
  
 \begin{table}[!h]
 \begin{threeparttable}
@@ -270,16 +271,15 @@ Other & Russia, Turkey\\
 
 \paragraph{The Trade in Value Added (TiVA) database}
 The TiVA database is compiled by the OECD and the WTO. It builds on the OECD harmonized individual country input-output tables to provide matrices of inter-industrial flows of goods and services in current prices (USD).
-We use two versions of this database. The third revision, from 2016, includes for 64 economies (i.e. 35 OECD Countries, 28 non-OECD economies and the Rest of the world) and 34 industries, and covers the every year between 1995 and 2011.
-The fourth revision, from 2018, includes one more economy (Kazakhstan) and 36 sectors and covers every year between 2005 and 2015.
-Beside coverage, there are extensive differences between both TiVA databases (\cite{OECD2018}).
-Table \ref{tab:tiva} shows the economies included in the TiVA databases.
+We use two versions of TiVA (see \cite{OECD2018} on the differences between the two datasets).
+The third revision, released in 2016, includes 64 economies (i.e. 35 OECD Countries, 28 non-OECD economies and the Rest of the world) and 34 industries, and covers the period 1995-2011.
+The fourth revision, released in 2018, includes 65 economies (see Table \ref{tab:tiva}) and 36 sectors and covers the 2005-2015 period.
 
 \begin{table}[!h]
 \begin{threeparttable}
 \centering
 \centering
-\caption{\small{\textbf{Economies included in the TiVA databases}}}
+\caption{\small{\textbf{Economies included in TiVA revisions 3 and 4}}}
 \small
 \begin{tabular}{ll}
 \hline\hline
@@ -290,9 +290,9 @@ Europe & Austria, Belgium, Bulgaria, Croatia, Cyprus, Czech Republic, Denmark,\\
 & United Kingdom\\
 North  America& Canada, United States\\
 Latin America & Argentina, Brazil, Chile, Colombia, Costa Rica, \\ 
-&Mexico (differentiating between three (Rev3) or two (Rev4) Mexico), Peru\\
-Asia-Pacific & Australia, Cambodia, China (differentiating between four (Rev3) or three (Rev4) China), \\
-& Hong Kong SAR, India, Indonesia, Japan, Khazakhstan (in Rev4), Korea, Malaysia, \\
+&Mexico (differentiating between three (Rev. 3) or two (Rev. 4) Mexico), Peru\\
+Asia-Pacific & Australia, Cambodia, China (differentiating between four (Rev. 3) or three (Rev. 4) China), \\
+& Hong Kong SAR, India, Indonesia, Japan, Khazakhstan (in Rev. 4), Korea, Malaysia, \\
 & New Zealand, Philippines, Singapore, Taiwan, Thailand, Viet Nam\\
 Other & Brunei, Israel, Morocco, Russia, Saudi Arabia, South Africa, Tunisia, Turkey\\
 \hline\hline
@@ -316,12 +316,13 @@ By contrast, the WIOD does not rely on the standard import proportionality assum
 Its imputation method relies on a classification of detailed products in bilateral trade statistics.
 Imports are allocated across three use categories (intermediate use, final consumption and investment) by mapping detailed six-digit products in the International Trade Statistics \citep{Dietzenbacher2013}.\\
 
-To sum up, the WIOD includes information on bilateral industry-specific input use, whereas such information exists only in imputed form in TiVA. Therefore, we focus on the WIOD database in our analysis \footnote{Results obtained with the 2016 and 2018 TiVA releases are available upon request.}. 
+To sum up, the WIOD includes information on bilateral industry-specific input use, whereas such information exists only in imputed form in TiVA. 
+% je suggère de supprimer car vous citez à présent les 2 bases Therefore, we focus on the WIOD database in our analysis \footnote{Results obtained with the 2016 and 2018 TiVA releases are available upon request.}. 
 
 
 \subsection{Nominal exchange rate shock} \label{subsec:chocchange}
 
-We implement an exchange rate shock using the WIOD. 
+We implement an exchange rate shock using WIOD. 
 The appreciation of the currency of country $A$ leads to a fall in the domestic-currency price of country $A$'s imports, while the foreign-currency price of its exports increase. 
 We mainly focus on the disinflationary impact of this shock on country $A$. 
 We also estimate the inflationary impact on countries that directly and indirectly consume, through third countries linkages, inputs from country $A$.\\
@@ -726,7 +727,11 @@ Similarly, domestic core inflation accounts for a significant share of the total
 \section{Can we extrapolate the consumer price elasticity?}
 \label{sec:extrapo}
 \subsection{Doing without the world input-output matrices}
-One might wonder whether using world input-ouput matrices provided by WIOD or TIVA to compute the effect of exchange rate shocks on household consumption prices is worth the wait (the latest year covered by WIOD is 2014, and 2015 for TIVA) and the computational complexity. To answer this question, we break down $\overline{s_{i}}^{i,HC}$ into different elements classified by ease of use and computation. Let us start from equation \ref{eq:eqdomcurrency}. 
+World input-output matrices are not available for the most recent years (the latest years covered by WIOD and TiVA are, respectively, 2014 and 2015). 
+In addition, using WIOTs involves complex computations.
+Given these difficulties, we look for a simpler way to compute the elasticity of consumer prices to the exchange rate.
+We break down $\overline{s_{i}}^{i,HC}$ into different elements classified by ease of use and computation. 
+Let us start from equation \ref{eq:eqdomcurrency}. 
 We have:
 
 \begin{equation}
@@ -1025,11 +1030,11 @@ Our findings are robust to using other databases (revision 3 and revision 4 of T
 \label{sec:ccl}
 
 This paper focuses on the accounting effect of exchange rate fluctuations on consumer prices. 
-We rely on several world input-ouptut databases that capture the evolution of global value chains over a twenty-year period (from 1995 to 2015).
+We use different world input-ouptut databases that capture the evolution of global value chains over a twenty-year period (from 1995 to 2015).
 We estimate the elasticity of domestic consumer prices to a shock on the domestic currency.
 The elasticity varies between 0.05 and 0.35 depending on the country.
 It is strongly correlated with the openness rate: the more open a country is, the higher its elasticity. 
-Based on the third revision of TiVA database, we find that the output weighted elasticity has increased by 25\% between 1995 and 2008, to 0.1 in 2008.
+Based on the third revision of TiVA database, we find that the output-weighted elasticity has increased by 25\% between 1995 and 2008, to 0.1 in 2008.
 After contracting in 2009, this elasticity has stabilised below its 2008 level, according to WIOD and the fourth revision of the TiVA database.
 We also analyse the impact of global inflationary shocks on the main components of consumer prices. 
 Domestic core inflation accounts for a significant share of the total impact, reflecting the weight of domestic services and non-energy industrial goods in total consumption.
@@ -1040,8 +1045,10 @@ The first-round effects are a good predictor of the total effects.
 % plutôt que de dire que c'et intriguant il faudrait suggérer une explication Intriguingly, most of the non-first round effects add to the first round effects rather than amplifying them.
 % un peu abscons  We show numerically that something similar exists in the two-country, one sector case. 
 
-Finally, we show that the findings of the data-hungry exercise of computing the elasticity of domestic consumes prices to a shock on the exchange rate using the full set of World Input-Output tables can be extrapolated for periods when the World Input-Output tables are not available by using such easily obtainable statistics as GDP and BEC-classified trade statistics. 
-This is good news for economic forecasters who want to evaluate the role of supply chains diffusion of price shocks in current economic events.
+The construction of World Input-Output tables is data-demanding and WIOTs are typically released with a lag of several years.
+To address this gap, we use more up-to-date GDP and trade data to approximate the accounting impact of an exchange rate shock on consumer prices from 2015 onwards. 
+Our proxy is helpful for assessing the impact of global value chains shocks on inflation from 2015 onwards.
+
 
 \newpage
 \bibliography{PapiertransmissiondeschocsenVA.bib}
@@ -1117,7 +1124,7 @@ This is good news for economic forecasters who want to evaluate the role of supp
 
 \newpage
 \section{Contrasting $S$ and $S^i$ in the two-country, one sector case}
-In this appendix, we illustrate in the two countries and one good case the difference between a simple price shock (section \ref{subsec:ioprice}) and an exchange rate shock (section \ref{subsec:chocchange})
+In this appendix, we use the two-country and one-good case to illustrate the difference between a price shock (section \ref{subsec:ioprice}) and an exchange rate shock (section \ref{subsec:chocchange})
 \subsection{Effect of a price shock based of VA contents}
 Using the notations of the paper, we have in the two-country and one good case:
 \begin{gather*}
@@ -1132,7 +1139,7 @@ I-\cal {A}=\left(\begin{matrix}1-a_{1,1}&-a_{1,2}\\-a_{2,1}&1-a_{2,2}\end{matrix
 \left(I-\cal {A}\right)^{-1}d=\left(\begin{matrix}u-uf+vf\\w-wf+xf\end{matrix}\right)
 \end{gather*}
 
-In that case, when a shock $c$ occurs on the prices of country 2 (the currency does not matter here), we have the following initial shock vector : $C=\left(0,c\right)$.
+When a shock $c$ occurs on the prices of country 2 (the currency does not matter here), we have the following initial shock vector : $C=\left(0,c\right)$.
 In the first instance, this has an impact on prices $C\cal {A}$, and then $C{\cal{A}}^{2}$, etc.
 Hence the total effect of the shock $S$ is: 
 
@@ -1147,14 +1154,14 @@ To measure the effect on French consumption prices, we compute a weighted sum of
 \bar{s}=c.\left[\left(1-f\right)w+xf\right]=c.\frac{\left(1-f\right)a_{2,1}+f\left(1-a_{1,1}\right)}{\left(1-a_{1,1}\right)\left(1-a_{2,2}\right)-a_{2,1}a_{1,2}}
 \end{equation}
 
-If each nation's production only uses national inputs, we have a plausible :
+If each nation's production only uses national inputs, we have:
 \begin{equation*}
 \bar{s}=c.\frac{f}{1-a_{2,2}}
 \end{equation*}
 
 \subsection{Exchange rate shock}
 
-Again using the notations in the paper, we have:
+Using the notations in the paper, we have:
 
 \begin{gather*}
 C=\left(0,\frac{-c_\$}{1+c_\$}\right)=\left(0,-c\right)
@@ -1195,18 +1202,19 @@ If each nation's production only uses national inputs, we have a plausible
 \bar{s}=c.f
 \end{gather*}
 
-This confirms that an exchange rate shock is not the same as a price shock.
+This confirms that an exchange rate shock differs from a price shock.
 
 \newpage
-\section{Comparing $\overline{s}_{i}^{i,HC}$ and $E1.HC^{i,imp}+E2.HC^{i,dom}$ in the TIVA rev 3 and TIVA rev4 databases} \label{AppendixFonctionLinéaireTIVA}
+\section{Comparing $\overline{s}_{i}^{i,HC}$ and $E1.HC^{i,imp}+E2.HC^{i,dom}$ in the TIVA rev. 3 and TIVA rev. 4 databases} \label{AppendixFonctionLinéaireTIVA}
 
-Figures \ref{fig:ratiodir_TiVA}, \ref{fig:evolution_b_TiVA} and \ref{fig:evolution_cst_TiVA} for TIVA rev3 and Figures \ref{fig:ratiodir_TiVA_REV4}, \ref{fig:evolution_b_TiVA_REV4} and \ref{fig:evolution_cst_TiVA_REV4} for TIVA rev 4 show that one can get a good prediction of the accounting effects of an exchange rate shock on consumption prices by using simply the share of imported final consumption goods and services and the share of imported intermediate goods in domestic final consumption goods and services.
+Figures \ref{fig:ratiodir_TiVA}, \ref{fig:evolution_b_TiVA} and \ref{fig:evolution_cst_TiVA} for TIVA rev. 3 and Figures \ref{fig:ratiodir_TiVA_REV4}, \ref{fig:evolution_b_TiVA_REV4} and \ref{fig:evolution_cst_TiVA_REV4} for TIVA rev. 4 show that we get a good prediction of the accounting effects of an exchange rate shock on consumption prices by using simply the share of imported final consumption goods and services and the share of imported intermediate goods in domestic final consumption goods and services.
+
 
 
 
 \begin{figure}[!h]
 	\centering
-	\caption{\footnotesize{\textbf{Comparing $\overline{s}_{i}^{i,HC}$ and $E1.HC^{i,imp}+E2.HC^{i,dom}$ (TIVA rev3)}}}
+	\caption{\footnotesize{\textbf{Comparing $\overline{s}_{i}^{i,HC}$ and $E1.HC^{i,imp}+E2.HC^{i,dom}$ (TIVA rev. 3)}}}
 	\begin{tabular}{c}
 		\includegraphics[width=5.0in, height=3.5in]{graph7_2011_TIVA_HC}\\
 	\end{tabular}
@@ -1215,7 +1223,7 @@ Figures \ref{fig:ratiodir_TiVA}, \ref{fig:evolution_b_TiVA} and \ref{fig:evoluti
 
 \begin{figure}[!h]
 	\centering
-	\caption{\footnotesize{\textbf{Evolution of $\beta$ and $R2$ through time (TIVA rev3)}}}
+	\caption{\footnotesize{\textbf{Evolution of $\beta$ and $R2$ (TIVA rev. 3)}}}
 	\begin{tabular}{c}
 		\includegraphics[width=5.0in, height=3.5in]{coef_E_TIVA_HC}\\
 	\end{tabular}
@@ -1224,7 +1232,7 @@ Figures \ref{fig:ratiodir_TiVA}, \ref{fig:evolution_b_TiVA} and \ref{fig:evoluti
 
 \begin{figure}[!h]
 	\centering
-	\caption{\footnotesize{\textbf{Evolution of $\alpha$ through time (TIVA rev3)}}}
+	\caption{\footnotesize{\textbf{Evolution of $\alpha$ (TIVA rev. 3)}}}
 	\begin{tabular}{c}
 		\includegraphics[width=5.0in, height=3.5in]{coef_cst_TIVA_HC}\\
 	\end{tabular}
@@ -1233,7 +1241,7 @@ Figures \ref{fig:ratiodir_TiVA}, \ref{fig:evolution_b_TiVA} and \ref{fig:evoluti
 
 \begin{figure}[!h]
 	\centering
-	\caption{\footnotesize{\textbf{Comparing $\overline{s}_{i}^{i,HC}$ and $E1.HC^{i,imp}+E2.HC^{i,dom}$ (TIVA rev 4)}}}
+	\caption{\footnotesize{\textbf{Comparing $\overline{s}_{i}^{i,HC}$ and $E1.HC^{i,imp}+E2.HC^{i,dom}$ (TIVA rev. 4)}}}
 	\begin{tabular}{c}
 		\includegraphics[width=5.0in, height=3.5in]{graph7_2015_TIVA_REV4_HC}\\
 	\end{tabular}
@@ -1242,7 +1250,7 @@ Figures \ref{fig:ratiodir_TiVA}, \ref{fig:evolution_b_TiVA} and \ref{fig:evoluti
 
 \begin{figure}[!h]
 	\centering
-	\caption{\footnotesize{\textbf{Evolution of $\beta$ and $R2$ through time (TIVA rev 4)}}}
+	\caption{\footnotesize{\textbf{Evolution of $\beta$ and $R2$ (TIVA rev. 4)}}}
 	\begin{tabular}{c}
 		\includegraphics[width=5.0in, height=3.5in]{coef_E_TIVA_REV4_HC}\\
 	\end{tabular}
@@ -1251,7 +1259,7 @@ Figures \ref{fig:ratiodir_TiVA}, \ref{fig:evolution_b_TiVA} and \ref{fig:evoluti
 
 \begin{figure}[!h]
 	\centering
-	\caption{\footnotesize{\textbf{Evolution of $\alpha$ through time (TIVA rev 4)}}}
+	\caption{\footnotesize{\textbf{Time evolution of $\alpha$ (TIVA rev. 4)}}}
 	\begin{tabular}{c}
 		\includegraphics[width=5.0in, height=3.5in]{coef_cst_TIVA_REV4_HC}\\
 	\end{tabular}
@@ -1260,7 +1268,7 @@ Figures \ref{fig:ratiodir_TiVA}, \ref{fig:evolution_b_TiVA} and \ref{fig:evoluti
 
 
 \newpage
-\section{Studying the decomposition of the shock in the two country one sector case}\label{AnalyticalAppendix}
+\section{Studying the decomposition of the shock in the two-country, one-sector case}\label{AnalyticalAppendix}
 \subsection{Presenting the issue}
 
 As a reminder from the paper, where $\overline{s}_{i}^{i,HC}$ is the effect of an exchange rate shock on consumption prices :  
@@ -1282,12 +1290,12 @@ S^i &=&\underbrace{C^i}_{\substack{\text{(E1) direct effect through} \\ \text{ i
 
 
 
-When the shock corresponds to an appreciation of the domestic currency, $E1$ and $E2$ reduce country $i$'s household consumption prices and $E3$ increases country $i$'s household consumption prices. Notice that $E1$ and $E2$ are easy to compute with national input-output matrices, whereas world input-output matrices are needed for computing $E3$ and $E4$.
+When the shock corresponds to an appreciation of the domestic currency, $E1$ and $E2$ reduce country $i$'s consumer prices whereas $E3$ increases it. $E1$ and $E2$ are easy to compute with national input-output matrices, whereas world input-output matrices are needed for computing $E3$ and $E4$.
 
 We have the strange result that $E3 + E4$ seems to be constant, whatever the openness rate of the economy (see Figure \ref{fig:ratiodir_WIOD})
 
 
-Let us see what happens in a 2 country, 1 sector economy : 
+Let us see what happens in a two-country, one-sector economy : 
 
 \begin{gather*}
 E1=C=\left(0,-c\right)
@@ -1305,7 +1313,7 @@ E2.HC=\left(-c.a_{2,1},0\right).\left(\begin{matrix}1-f\\f\end{matrix}\right)=-c
 E3.HC=\left(0,c.a_{1,2}\right).\left(\begin{matrix}1-f\\f\end{matrix}\right)=f.c.a_{1,2}
 \end{gather*}
 
-We do not loose any generality by normalizing the shock $c$ to 1. 
+We do not lose any generality by normalising the shock $c$ to 1. 
 
 And, developped from SAGE :
 \begin{gather}
@@ -1366,14 +1374,14 @@ Which yields Figures \ref{fig:resid} and \ref{fig:tous_les_E}.
 	\end{center}
 \end{figure}
 
-Actual openess rates in the sample vary between 0.15 and 0.5. In that zone, the relationship between the openness rate and the residual is not monotonous (see Figure \ref{fig:resid}).
+Actual openness rates in the sample vary between 0.15 and 0.5. In that zone, the relationship between the openness rate and the residual is not monotonous (see Figure \ref{fig:resid}).
 
-Figure \ref{fig:tous_les_E} comfirmes that, in that numerical exercice, the total effect is dominated by the direct effect through imported consumption goods and, to a lesser extent, the effect on domestic consumption goods through imported inputs. The other effects are approximately additive if the openess rate is betweem 0.15 and 0.5.
+Figure \ref{fig:tous_les_E} comfirms that, in that numerical exercice, the total effect is dominated by the direct effect through imported consumption goods and, to a lesser extent, the effect on domestic consumption goods through imported inputs. The other effects are approximately additive if the openness rate is betweem 0.15 and 0.5.
 
 \begin{figure}[!h]
 	\begin{center}
 		\includegraphics{etude_tous_les_E.png}
-		\caption{E1.HC, E2.HC, E3.HC, E4.HC and the "residual"  ($\bar{s}-E1.HC-E2.HC$) as a function of the openess rate}
+		\caption{E1.HC, E2.HC, E3.HC, E4.HC and the "residual"  ($\bar{s}-E1.HC-E2.HC$) as a function of the openness rate}
 		\label{fig:tous_les_E}
 	\end{center}
 \end{figure}

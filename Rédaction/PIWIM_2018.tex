@@ -76,7 +76,10 @@ We find that the first-round effects (through imported inputs and final goods) e
 By contrast, we find a limited role for the second-round effect, i.e. the additional transmission of lower domestic input prices to other sectors of the domestic economy and other countries occurring during subsequent production cycles. 
 We also show that the first-round effects are a good predictor of the total effects. 
 Our findings are robust to using different world input-output databases.
-Finally, we establish that the results obtained using sectoral world input-output datastests up to 2015 can be extrapolated to recent years thanks to the use of easily obtainable statistics as GDP and trade statistics. % la compréhension de ce qui est fait est difficile il faut expliquer davanatage 
+World input-output databases are not available for the last five years. 
+To address this gap, we use up-to-date GDP and trade data to approximate the accounting impact of an exchange rate shock on consumer prices for the most recent years.
+%Finally, we establish that the results obtained using sectoral world input-output datasets up to 2015 can be extrapolated to recent years thanks to the use of easily obtainable statistics as GDP and trade statistics. 
+% la compréhension de ce qui est fait est difficile il faut expliquer davanatage 
 %Firms' participation in global value chains strengthens cross-country linkages via trade in intermediate inputs. 
 %In this paper, we build on three sectoral world input-output datasets  to assess the role of global input-output linkages in the propagation of exchange rate shocks in the international economy. 
 % %à faire: productivity shocks More specifically, we study the role of global input-output linkages in transmitting oil prices shocks across economies.
@@ -119,11 +122,19 @@ This limited role is the same in absolute terms for most countries.
 Our findings are robust to using three different datasets (two different releases of the OECD TiVA database and WIOD).
 
 The construction of World Input-Output tables (WIOT hereafter) is data-demanding and WIOTs are typically released with a lag of several years.
-This can be a major obstacle for taking into account the impact of global value chains shocks in inflation forecasts. 
-An additional contribution of this paper is to show that the findings of this data-hungry exercise can be extrapolated through time up to relatively data-poor recent periods.
-This is good news for economic forecasters who want to evaluate the role of supply chains diffusion of price shocks.
+As a result, WIOTs are not available for the last five years.
+To address this gap, we use more up-to-date GDP and trade data to approximate the accounting impact of an exchange rate shock on consumer prices from 2015 onwards.
+Our proxy is helpful for assessing the impact of global value chains shocks on inflation from 2015 onwards.
 
-The remainder of the paper is organised as follows. Section \ref{sec:lit} reviews the related literature. Section \ref{sec:metho} presents the methodology and the data sources. Section \ref{sec:prixconso} computes the accounting impact of an exchange rate shock on consumer prices up to 2015. In Section \ref{sec:extrapo}, we use recent GDP and trade data, combined with the findings in Section \ref{sec:prixconso}, to compute the accounting impact of an exchange rate shock on consumer prices sine 2015.
+% la mention soudaine du forecast est difficile à comprendre alors qu'on était auparavant focalisés sur des effets comptables, je suggère une formulation moins centrée sur la prévision mais sur l'utilité globale du proxy pour les années récentes
+%This can be a major obstacle for taking into account the impact of global value chains shocks in inflation forecasts. 
+
+%An additional contribution of this paper is to show that the findings of this data-hungry exercise can be extrapolated through time up to relatively data-poor recent periods.
+%This is good news for economic forecasters who want to evaluate the role of supply chains diffusion of price shocks.
+
+The paper is organised as follows. Section \ref{sec:lit} reviews the related literature. Section \ref{sec:metho} presents the methodology and the data sources. Section \ref{sec:prixconso} computes the accounting impact of an exchange rate shock on consumer prices up to 2015. 
+World input-output databases are not available for the last five years. 
+To address this gap, Section \ref{sec:extrapo} relies on up-to-date GDP and trade data to approximate the accounting impact of an exchange rate shock on consumer prices from 2015 onwards.
 
 
 \label{sec:intro}
@@ -813,7 +824,7 @@ With the exception of 2009, the relationship is broadly stable (see Figures \ref
 We obtain similar results with TiVA (see Appendix \ref{AppendixFonctionLinéaireTIVA}). 
 % je suggère de retirer cette phrase pour simplifier l'exposé, ou éventuellement d'en faire une note de bas de page
 %The functional form might seem a bit counterintuitive (one might expect that the elasticity is affine function of openness as summarized by E1), but the analytical examination of the two-country, one sector case, shows that it is plausible (see Appendix \ref{AnalyticalAppendix}).
-Our results suggest that we could approximate the elasticity of consumer prices for the most recent years, using the share of imported goods in household consumption and the share of imported inputs in household consumption of domestic goods.
+Our results suggest that we can approximate the elasticity of consumer prices for the most recent years, using the share of imported goods in household consumption and the share of imported inputs in household consumption of domestic goods.
 %Back to the main point, it turns out that we do not gain much by inversing matrixes. Of course, this realization is only possible because we were able to computes $\overline{s}_{i}^{i,HC}$ in the first place. Still, it suggests that we could extrapolate the elasticities for not-yet-released years, as long as we have the share of imported goods in household consumption and the share of imported inputs in household consumption of domestic goods. 
 
 \subsection{Doing without TiVA and WIOD, but keeping Eurostat}
@@ -825,7 +836,7 @@ It does not provide an estimate for intermediate consumptions. In the case of Eu
 Combining these three data sources, we compute the share of imported consumption goods in household consumption and the share of imported inputs in all inputs. 
 
 We mimick equation \ref{eq:eq7} by equation \ref{eq:eq8}. 
-We estimate successive cross-sections of equation \ref{eq:eq8} to check that the proxy is good enough. 
+We estimate successive cross-sections of equation \ref{eq:eq8} to check whether the proxy is satisfactory. 
 
  \begin{equation}
  \begin{array}{llll}
@@ -841,14 +852,20 @@ The results are less encouraging: the $R^2$ is smaller and declining over time, 
 
 \begin{figure}[!h]
 	\centering
-	\caption{\footnotesize{\textbf{Evolution of $\beta$ and $R2$ (WIOD) using Eurostat data to build a proxy of E1HC + E2HC (limited number of countries)}}}
+	\caption{\footnotesize{\textbf{Evolution of $\beta$ and $R2$ (WIOD) using Eurostat data to approximate E1HC + E2HC (limited number of countries)}}}
 	\begin{tabular}{c}
 		\includegraphics[width=5.0in, height=3.5in]{reg2_beta_WIOD.pdf}\\
 	\end{tabular}
 	\label{fig:evolution_b_reg2}
 \end{figure}
 
-Yet, estimating successive cross-sections is a pretty demanding test to establish a link between the elastiticy computed by PIWIM based on WIOD data and "public" data assembled from various sources. It does not allow to exploit country-specific information of the link between the elasticity and public data. A less demanding test is to run a panel with country fixed-effects, assuming that $\beta$ is constant over time but that it applies only to within-country variations of the proxy for E1HC + E2HC (see equation \ref{eq:eq9}). 
+%pas facile à comprendre, je propose de reformuler
+Estimating successive cross-sections of equation \ref{eq:eq8} is a demanding test. 
+In addition, cross-sections do not take advantage of country-specific information.
+To address this caveat, we run a panel regression with country-fixed effects.
+We assume that $\beta$ is constant over time for each country $i$ (equation \ref{eq:eq9}).
+% le passage ci-dessous est un vrai défi! il faut vraiment reformuler, vérifiez svp si ma traduction est ok
+%Yet, estimating successive cross-sections is a demanding test to establish a link between the elastiticy computed by PIWIM based on WIOD data and "public" data assembled from various sources. It does not allow to exploit country-specific information of the link between the elasticity and public data. A less demanding test is to run a panel with country fixed-effects, assuming that $\beta$ is constant over time but that it applies only to within-country variations of the proxy for E1HC + E2HC (see equation \ref{eq:eq9}). 
 
 
  \begin{equation}
@@ -858,7 +875,10 @@ Yet, estimating successive cross-sections is a pretty demanding test to establis
 \label{eq:eq9}
 \end{equation}
 
-Running this panel from 2000 to 2008, we then estimate the out of sample elasticity for each country in 2014. This is very close from the WIOD-computed elasticity (see Figure \ref{fig:panel_pred1}).It is very encouraging: it suggests that the available data (2000-2014) could help predict the WIOD elasticities in 2020, making this an useful prediction tool. 
+We run the panel regressions for the period 2000 to 2008.
+We then estimate the out-of-sample elasticity for each country $i$ for 2014. 
+The outcome is close to the elasticity computed with WIOD for 2014 (see Figure \ref{fig:panel_pred1}).
+Hence, we could use this approach to estimate the elasticity of consumer prices from 2015 onwards.
 
 \begin{figure}[!h]
 	\centering
@@ -870,7 +890,10 @@ Running this panel from 2000 to 2008, we then estimate the out of sample elastic
 \end{figure}
 
 \subsection{Doing without Eurostat}
-We can go even further and notice that requiring data on both intermediate consumption and household consumption dramatically reduces the number of countries we can include in our exercice. It is possible to use an even simpler proxy for E1HC+E2HC that requires only trade data from Comtrade and GDP data from the World Bank. The use of this proxy allows us to include many more countries in the new panel (see equation \ref{eq:eq10}).
+Data on intermediate consumption and household consumption are not available for all countries.
+As a result, our regressions only include a limited number of countries.
+To expand our panel, we use an even simpler proxy for E1HC+E2HC that requires only trade data from Comtrade and GDP data from the World Bank. 
+It is therefore possible to include many more countries in the new panel (see equation \ref{eq:eq10}).
 
  \begin{equation}
 \begin{array}{llll}
@@ -879,7 +902,8 @@ We can go even further and notice that requiring data on both intermediate consu
 \label{eq:eq10}
 \end{equation}
 
-The out-of-sample prediction is still pretty good even if the mean and the median errors are larger (see Figure \ref{fig:panel_pred2}). This result carries to the other two databases we are using (revision 3 and revision 4 of TIVA)\footnote{Results are available upon request}.
+The out-of-sample prediction remains satisfactory, although the mean and median errors are larger (see Figure \ref{fig:panel_pred2}). 
+We obtain similar results with other databases (revision 3 and revision 4 of TIVA)\footnote{Results are available upon request}.
 
 \begin{figure}[!h]
 	\centering
@@ -1097,7 +1121,7 @@ This is good news for economic forecasters who want to evaluate the role of supp
 \section{Contrasting $S$ and $S^i$ in the two-country, one sector case}
 In this appendix, we illustrate in the two countries and one good case the difference between a simple price shock (section \ref{subsec:ioprice}) and an exchange rate shock (section \ref{subsec:chocchange})
 \subsection{Effect of a price shock based of VA contents}
-Using the notations of the paper, we have in the two countries and one good case:
+Using the notations of the paper, we have in the two-country and one good case:
 \begin{gather*}
 \cal {A} = \left(\begin{matrix}a_{1,1}&a_{1,2}\\a_{2,1}&a_{2,2}\end{matrix}\right)
 \\
@@ -1110,7 +1134,7 @@ I-\cal {A}=\left(\begin{matrix}1-a_{1,1}&-a_{1,2}\\-a_{2,1}&1-a_{2,2}\end{matrix
 \left(I-\cal {A}\right)^{-1}d=\left(\begin{matrix}u-uf+vf\\w-wf+xf\end{matrix}\right)
 \end{gather*}
 
-In that case, when a shock $c$ occurs on the prices of country 2 (the currency does not matter here), we can write the following initial shock vector : $C=\left(0,c\right)$.
+In that case, when a shock $c$ occurs on the prices of country 2 (the currency does not matter here), we have the following initial shock vector : $C=\left(0,c\right)$.
 In the first instance, this has an impact on prices $C\cal {A}$, and then $C{\cal{A}}^{2}$, etc.
 Hence the total effect of the shock $S$ is: 
 
@@ -1119,7 +1143,7 @@ Hence the total effect of the shock $S$ is:
 S=C+C{\cal{A}}+C{\cal{A}}^{2}...=C\left(I-{\cal{A}}\right)^{-1}=\left(\begin{matrix}cw  &   cx\end{matrix}\right)
 \end{equation*}
 
-To measure the effect on French consumption prices, we do a weighted sum of these effects.
+To measure the effect on French consumption prices, we compute a weighted sum of these effects.
 
 \begin{equation}
 \bar{s}=c.\left[\left(1-f\right)w+xf\right]=c.\frac{\left(1-f\right)a_{2,1}+f\left(1-a_{1,1}\right)}{\left(1-a_{1,1}\right)\left(1-a_{2,2}\right)-a_{2,1}a_{1,2}}
@@ -1178,7 +1202,7 @@ This confirms that an exchange rate shock is not the same as a price shock.
 \newpage
 \section{Comparing $\overline{s}_{i}^{i,HC}$ and $E1.HC^{i,imp}+E2.HC^{i,dom}$ in the TIVA rev 3 and TIVA rev4 databases} \label{AppendixFonctionLinéaireTIVA}
 
-Figures \ref{fig:ratiodir_TiVA}, \ref{fig:evolution_b_TiVA} and \ref{fig:evolution_cst_TiVA} for TIVA rev3 and Figures \ref{fig:ratiodir_TiVA_REV4}, \ref{fig:evolution_b_TiVA_REV4} and \ref{fig:evolution_cst_TiVA_REV4} for TIVA rev 4 show that one can get a good prediction of the accounting effects of an exchange rate shock on consumption prices by using simply the share of imported final consumption goods and services and the share of imported intermediary consumption goods in domestic final consumption goods and services.
+Figures \ref{fig:ratiodir_TiVA}, \ref{fig:evolution_b_TiVA} and \ref{fig:evolution_cst_TiVA} for TIVA rev3 and Figures \ref{fig:ratiodir_TiVA_REV4}, \ref{fig:evolution_b_TiVA_REV4} and \ref{fig:evolution_cst_TiVA_REV4} for TIVA rev 4 show that one can get a good prediction of the accounting effects of an exchange rate shock on consumption prices by using simply the share of imported final consumption goods and services and the share of imported intermediate goods in domestic final consumption goods and services.
 
 
 

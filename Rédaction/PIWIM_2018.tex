@@ -759,7 +759,8 @@ While $E3.HC^{i,imp}$ is negligible, $E4.HC^i$ accounts for 10\% to 30\% of $\ov
 \label{fig:decompositionofs}
 \end{figure}
 
-$E1$ and $E2$ can be computed with national input-output matrices whereas world input-output matrices are needed for computing $E3$ and $E4$.
+$E1$ and $E2$ can be computed with national input-output matrices whereas world input-output matrices are needed for computing $E3$ and $E4$. 
+World input-output matrices are not available for the most recent years. 
 Yet $E4.HC^i$ can be inferred from easier-to-compute elements of $\overline{s}_{i}^{i,HC}$.
 
 %This is suggested by the correlation matrix of  $E1.HC^{i,imp}$, $E2.HC^{i,dom}$, $E3.HC^{i,imp}$ and $E4.HC^i$ (see Table \ref{table:corretable1}). 
@@ -809,18 +810,22 @@ With the exception of 2009, the relationship is broadly stable (see Figures \ref
 \end{figure}
 
 
-We obtain similar results with the TiVA databases (see Appendix \ref{AppendixFonctionLinéaireTIVA}). 
+We obtain similar results with TiVA (see Appendix \ref{AppendixFonctionLinéaireTIVA}). 
 % je suggère de retirer cette phrase pour simplifier l'exposé, ou éventuellement d'en faire une note de bas de page
 %The functional form might seem a bit counterintuitive (one might expect that the elasticity is affine function of openness as summarized by E1), but the analytical examination of the two-country, one sector case, shows that it is plausible (see Appendix \ref{AnalyticalAppendix}).
-
-Back to the main point, it turns out that we do not gain much by inversing matrixes. Of course, this realization is only possible because we were able to computes $\overline{s}_{i}^{i,HC}$ in the first place. Still, it suggests that we could extrapolate the elasticities for not-yet-released years, as long as we have the share of imported goods in household consumption and the share of imported inputs in household consumption of domestic goods. 
+Our results suggest that we could approximate the elasticity of consumer prices for the most recent years, using the share of imported goods in household consumption and the share of imported inputs in household consumption of domestic goods.
+%Back to the main point, it turns out that we do not gain much by inversing matrixes. Of course, this realization is only possible because we were able to computes $\overline{s}_{i}^{i,HC}$ in the first place. Still, it suggests that we could extrapolate the elasticities for not-yet-released years, as long as we have the share of imported goods in household consumption and the share of imported inputs in household consumption of domestic goods. 
 
 \subsection{Doing without TiVA and WIOD, but keeping Eurostat}
-Yet, these two data pieces are not actually easy to obtain for a large number of countries and a large number of years. They are not routinely computed by national statistical institutes. We have to use a proxy. It is fairly easy to identify consumption and intermediary goods imports using UN Comtrade data and the BEC classification. The World Bank provides regular estimates of household consumption.\footnote{préciser la source??}. It does not provide an estimate for intermediate consumptions. In the case of European countries\footnote{And some others for selected years}, Eurostat does provide this last number\footnote{préciser la source}.
+However, these data are not up-to-date for a large number of countries. 
+These shares are not routinely computed by national statistical institutes. 
+We have to use a proxy. It is fairly easy to identify consumption and intermediary goods imports using UN Comtrade data and the BEC classification. The World Bank provides regular estimates of household consumption.%\footnote{préciser la source??}. 
+It does not provide an estimate for intermediate consumptions. In the case of European countries\footnote{And some others for selected years}, Eurostat provides estimates for intermediate consumptions.%\footnote{préciser la source}.
 
-Combining these three data sources allows the computation of the share of imported consumption goods in household consumption and the share of imported inputs in all inputs. 
+Combining these three data sources, we compute the share of imported consumption goods in household consumption and the share of imported inputs in all inputs. 
 
-This allows the mimicking of equation \ref{eq:eq7} by equation \ref{eq:eq8}. Again, we can estimate successive cross-sections of equation \ref{eq:eq8} to see if the proxy is good enough. 
+We mimick equation \ref{eq:eq7} by equation \ref{eq:eq8}. 
+We estimate successive cross-sections of equation \ref{eq:eq8} to check that the proxy is good enough. 
 
  \begin{equation}
  \begin{array}{llll}
@@ -830,19 +835,20 @@ This allows the mimicking of equation \ref{eq:eq7} by equation \ref{eq:eq8}. Aga
 \end{equation}
 
 
-In the same way, Figure \ref{fig:evolution_b_reg2} mimicks Figure \ref{fig:evolution_b}. The results are not as encouraging : the $R^2$ is smaller and declining through time, and the estimated coefficient is not constant.
+In the same way, Figure \ref{fig:evolution_b_reg2} mimicks Figure \ref{fig:evolution_b}. 
+The results are less encouraging: the $R^2$ is smaller and declining over time, and the estimated coefficient is not constant.
 
 
 \begin{figure}[!h]
 	\centering
-	\caption{\footnotesize{\textbf{Evolution of $\beta$ and $R2$ through time (WIOD) using Eurostat data to build a proxy of E1HC + E2HC (limited number of countries)}}}
+	\caption{\footnotesize{\textbf{Evolution of $\beta$ and $R2$ (WIOD) using Eurostat data to build a proxy of E1HC + E2HC (limited number of countries)}}}
 	\begin{tabular}{c}
 		\includegraphics[width=5.0in, height=3.5in]{reg2_beta_WIOD.pdf}\\
 	\end{tabular}
 	\label{fig:evolution_b_reg2}
 \end{figure}
 
-Yet, estimating successive cross-sections is a pretty demanding test to establish a link between the elastiticy computed by PIWIM based on WIOD data and "public" data assembled from various sources. It does not allow to exploit country-specific information of the link between the elasticity and public data. A less demanding test is to run a panel with country fixed-effects, assuming that $\beta$ is constant through time but that it applies only to within-country variations of the proxy for E1HC + E2HC (see equation \ref{eq:eq9}). 
+Yet, estimating successive cross-sections is a pretty demanding test to establish a link between the elastiticy computed by PIWIM based on WIOD data and "public" data assembled from various sources. It does not allow to exploit country-specific information of the link between the elasticity and public data. A less demanding test is to run a panel with country fixed-effects, assuming that $\beta$ is constant over time but that it applies only to within-country variations of the proxy for E1HC + E2HC (see equation \ref{eq:eq9}). 
 
 
  \begin{equation}

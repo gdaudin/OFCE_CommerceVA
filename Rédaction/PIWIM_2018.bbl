@@ -1,218 +1,310 @@
-\begin{thebibliography}{43}
+\begin{thebibliography}{38}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
-\expandafter\ifx\csname url\endcsname\relax
-  \def\url#1{\texttt{#1}}\fi
-\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
-
-\bibitem[{Acemoglu et~al.(2012)Acemoglu, Carvalho, Ozdaglar, and
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\href}[2]{#2}
+\providecommand{\path}[1]{#1}
+\providecommand{\DOIprefix}{doi:}
+\providecommand{\ArXivprefix}{arXiv:}
+\providecommand{\URLprefix}{URL: }
+\providecommand{\Pubmedprefix}{pmid:}
+\providecommand{\doi}[1]{\href{http://dx.doi.org/#1}{\path{#1}}}
+\providecommand{\Pubmed}[1]{\href{pmid:#1}{\path{#1}}}
+\providecommand{\bibinfo}[2]{#2}
+\ifx\xfnm\relax \def\xfnm[#1]{\unskip,\space#1}\fi
+%Type = Article
+\bibitem[{Acemoglu et~al.(2012)Acemoglu, Carvalho, Ozdaglar and
   {Tahbaz-Salehi}}]{Acemoglu2012}
-Acemoglu, D., Carvalho, V.~M., Ozdaglar, A., {Tahbaz-Salehi}, A., Sep. 2012.
-  The {{Network Origins}} of {{Aggregate Fluctuations}}. Econometrica 80~(5),
-  1977--2016.
-
-\bibitem[{Amador et~al.(2015)Amador, Cappariello, and Stehrer}]{Amador2015}
-Amador, J., Cappariello, R., Stehrer, R., Mar. 2015. Global value chains: A
-  view from the euro area. Working {{Paper Series}} 1761, {ECB}, {Frankfurt}.
-
+\bibinfo{author}{Acemoglu, D.}, \bibinfo{author}{Carvalho, V.M.},
+  \bibinfo{author}{Ozdaglar, A.}, \bibinfo{author}{{Tahbaz-Salehi}, A.},
+  \bibinfo{year}{2012}.
+\newblock \bibinfo{title}{The {{Network Origins}} of {{Aggregate
+  Fluctuations}}}.
+\newblock \bibinfo{journal}{Econometrica} \bibinfo{volume}{80},
+  \bibinfo{pages}{1977--2016}.
+\newblock \DOIprefix\doi{10.3982/ECTA9623}.
+%Type = Techreport
+\bibitem[{Amador et~al.(2015)Amador, Cappariello and Stehrer}]{Amador2015}
+\bibinfo{author}{Amador, J.}, \bibinfo{author}{Cappariello, R.},
+  \bibinfo{author}{Stehrer, R.}, \bibinfo{year}{2015}.
+\newblock \bibinfo{title}{Global Value Chains: A View from the Euro Area}.
+\newblock \bibinfo{type}{Working {{Paper Series}}} \bibinfo{number}{1761}.
+  {ECB}. \bibinfo{address}{{Frankfurt}}.
+%Type = Article
 \bibitem[{{Antoun de Almeida}(2016)}]{AntoundeAlmeida2016}
-{Antoun de Almeida}, L., 2016. Globalization of {{Inflationation}} and
-  {{Input}}-{{Output Linkages}}. Mimeo, University of Frankfurt.
-
-\bibitem[{Auer et~al.(2017)Auer, Levchenko, and Saur{\'e}}]{Auer2017}
-Auer, R.~A., Levchenko, A.~A., Saur{\'e}, P., 2017. International inflation
-  spillovers through input linkages. Tech. rep., {National Bureau of Economic
+\bibinfo{author}{{Antoun de Almeida}, L.}, \bibinfo{year}{2016}.
+\newblock \bibinfo{title}{Globalization of {{Inflationation}} and
+  {{Input}}-{{Output Linkages}}}.
+\newblock \bibinfo{journal}{Mimeo, University of Frankfurt.} .
+%Type = Techreport
+\bibitem[{Auer et~al.(2017)Auer, Levchenko and Saur{\'e}}]{Auer2017}
+\bibinfo{author}{Auer, R.A.}, \bibinfo{author}{Levchenko, A.A.},
+  \bibinfo{author}{Saur{\'e}, P.}, \bibinfo{year}{2017}.
+\newblock \bibinfo{title}{International Inflation Spillovers through Input
+  Linkages}.
+\newblock \bibinfo{type}{Technical Report}. {National Bureau of Economic
   Research}.
-
+%Type = Techreport
 \bibitem[{Bems and Johnson(2015)}]{Bems2015}
-Bems, R., Johnson, R.~C., Apr. 2015. Demand for {{Value Added}} and
-  {{Value}}-{{Added Exchange Rates}}. Working {{Paper}} 21070, {National Bureau
-  of Economic Research}.
-
+\bibinfo{author}{Bems, R.}, \bibinfo{author}{Johnson, R.C.},
+  \bibinfo{year}{2015}.
+\newblock \bibinfo{title}{Demand for {{Value Added}} and {{Value}}-{{Added
+  Exchange Rates}}}.
+\newblock \bibinfo{type}{Working {{Paper}}} \bibinfo{number}{21070}. {National
+  Bureau of Economic Research}.
+%Type = Article
 \bibitem[{Ben~Cheikh and Rault(2017)}]{BenCheikh2017}
-Ben~Cheikh, N., Rault, C., 2017. Investigating first-stage exchange rate
-  pass-through: {{Sectoral}} and macro evidence from euro area countries. The
-  World Economy 40~(12), 2611--2638.
-
+\bibinfo{author}{Ben~Cheikh, N.}, \bibinfo{author}{Rault, C.},
+  \bibinfo{year}{2017}.
+\newblock \bibinfo{title}{Investigating first-stage exchange rate pass-through:
+  {{Sectoral}} and macro evidence from euro area countries}.
+\newblock \bibinfo{journal}{The World Economy} \bibinfo{volume}{40},
+  \bibinfo{pages}{2611--2638}.
+%Type = Article
 \bibitem[{Bourgeois and Briand(2019)}]{Bourgeois2019}
-Bourgeois, A., Briand, A., 2019. Le mod{\`e}le {{Avionic}}~: La
-  mod{\'e}lisation input/output des comptes nationaux - {{Documents}} de
-  travail - {{G2019}}/02 | {{Insee}}. Document de travail INSEE~(No G2019/02).
-
+\bibinfo{author}{Bourgeois, A.}, \bibinfo{author}{Briand, A.},
+  \bibinfo{year}{2019}.
+\newblock \bibinfo{title}{Le mod{\`e}le {{Avionic}}~: La mod{\'e}lisation
+  input/output des comptes nationaux - {{Documents}} de travail - {{G2019}}/02
+  | {{Insee}}}.
+\newblock \bibinfo{journal}{Document de travail INSEE} .
+%Type = Book
 \bibitem[{Bournay and Piriou(2015)}]{Bournay2015}
-Bournay, J., Piriou, J.-P., Aug. 2015. {La comptabilit{\'e} nationale}, 17th
-  Edition. {La D{\'e}couverte}, {Paris}.
-
-\bibitem[{Bussiere(2012)}]{Bussiere2013}
-Bussiere, 2012. Exchange rate pass-through to trade prices: The role of
-  non-linearities and asymmetries. Oxford Bulletin of Economics and Statistics
-  75~(5), 731--758.
-
+\bibinfo{author}{Bournay, J.}, \bibinfo{author}{Piriou, J.P.},
+  \bibinfo{year}{2015}.
+\newblock \bibinfo{title}{{La comptabilit{\'e} nationale}}.
+\newblock \bibinfo{edition}{17e {\'e}dition} ed., \bibinfo{publisher}{{La
+  D{\'e}couverte}}, \bibinfo{address}{{Paris}}.
+%Type = Incollection
 \bibitem[{Campa and Goldberg(2008)}]{Campa2008}
-Campa, J.~M., Goldberg, L.~S., 2008. Pass-through of exchange rates to
-  consumption prices: What has changed and why? In: International {{Financial
+\bibinfo{author}{Campa, J.M.}, \bibinfo{author}{Goldberg, L.S.},
+  \bibinfo{year}{2008}.
+\newblock \bibinfo{title}{Pass-through of exchange rates to consumption prices:
+  What has changed and why?}, in: \bibinfo{booktitle}{International {{Financial
   Issues}} in the {{Pacific Rim}}: {{Global Imbalances}}, {{Financial
-  Liberalization}}, and {{Exchange Rate Policy}} ({{NBER}}-{{EASE Volume}} 17).
-  {University of Chicago Press}, pp. 139--176.
-
+  Liberalization}}, and {{Exchange Rate Policy}} ({{NBER}}-{{EASE Volume}}
+  17)}. \bibinfo{publisher}{{University of Chicago Press}}, pp.
+  \bibinfo{pages}{139--176}.
+%Type = Techreport
 \bibitem[{Cappariello and Felettigh(2015)}]{Cappariello2015}
-Cappariello, R., Felettigh, A., 2015. How does foreign demand activate domestic
-  value added? {{A}} comparison among the major euro-area economies. Banca
-  d'{{Italia Temi}} Di {{Discussione}} 1001, {Bank of Italy, Economic Research
-  and International Relations Area}.
-
+\bibinfo{author}{Cappariello, R.}, \bibinfo{author}{Felettigh, A.},
+  \bibinfo{year}{2015}.
+\newblock \bibinfo{title}{How Does Foreign Demand Activate Domestic Value
+  Added? {{A}} Comparison among the Major Euro-Area Economies}.
+\newblock \bibinfo{type}{Banca d'{{Italia Temi}} Di {{Discussione}}}
+  \bibinfo{number}{1001}. {Bank of Italy, Economic Research and International
+  Relations Area}.
+%Type = Article
 \bibitem[{Carvalho(2014)}]{Carvalho2014}
-Carvalho, V.~M., 2014. From micro to macro via production networks. The Journal
-  of Economic Perspectives, 23--47.
-
-\bibitem[{Cochard et~al.(2016)Cochard, Daudin, Fronteau, and
+\bibinfo{author}{Carvalho, V.M.}, \bibinfo{year}{2014}.
+\newblock \bibinfo{title}{From micro to macro via production networks}.
+\newblock \bibinfo{journal}{The Journal of Economic Perspectives} ,
+  \bibinfo{pages}{23--47}.
+%Type = Techreport
+\bibitem[{Cochard et~al.(2016)Cochard, Daudin, Fronteau and
   Rifflart}]{Cochard2016}
-Cochard, M., Daudin, G., Fronteau, S., Rifflart, C., Feb. 2016. Commerce
-  vertical et propagation des chocs de prix: {{Le}} cas de la zone euro.
-  Sciences {{Po}} Publications info:hdl:2441/lr26q984g9u, {Sciences Po}.
-
-\bibitem[{Colavecchio and Rubene(2012)}]{BenCheikh2012}
-Colavecchio, R., Rubene, I., 2012. Asymmetric exchange rate pass-through in the
-  euro area: new evidence from smooth transition models. economics. The
-  Open-Access, Open-Assessment E-Journal, Discussion Paper~(2012--36).
-
-\bibitem[{Colavecchio and Rubene(2020)}]{Colavecchio2020}
-Colavecchio, R., Rubene, I., 2020. Non-linear exchange rate pass-through to
-  euro area inflation. ECB Working Paper~(2362).
-
-\bibitem[{Daudin et~al.(2006)Daudin, {Monperrus-Veroni}, Rifflart, and
+\bibinfo{author}{Cochard, M.}, \bibinfo{author}{Daudin, G.},
+  \bibinfo{author}{Fronteau, S.}, \bibinfo{author}{Rifflart, C.},
+  \bibinfo{year}{2016}.
+\newblock \bibinfo{title}{Commerce Vertical et Propagation Des Chocs de Prix:
+  {{Le}} Cas de La Zone Euro}.
+\newblock \bibinfo{type}{Sciences {{Po}} Publications}
+  \bibinfo{number}{info:hdl:2441/lr26q984g9u}. {Sciences Po}.
+%Type = Article
+\bibitem[{Daudin et~al.(2006)Daudin, {Monperrus-Veroni}, Rifflart and
   Schweisguth}]{Daudin2006}
-Daudin, G., {Monperrus-Veroni}, P., Rifflart, C., Schweisguth, D., 2006. Le
-  commerce ext{\'e}rieur en valeur ajout{\'e}e. Revue de l'OFCE~(3), 129--165.
-
-\bibitem[{Daudin et~al.(2011)Daudin, Rifflart, and Schweisguth}]{Daudin2011}
-Daudin, G., Rifflart, C., Schweisguth, D., 2011. Who produces for whom in the
-  world economy? Canadian Journal of Economics/Revue canadienne d'{\'e}conomie
-  44~(4), 1403--1437.
-
+\bibinfo{author}{Daudin, G.}, \bibinfo{author}{{Monperrus-Veroni}, P.},
+  \bibinfo{author}{Rifflart, C.}, \bibinfo{author}{Schweisguth, D.},
+  \bibinfo{year}{2006}.
+\newblock \bibinfo{title}{Le commerce ext{\'e}rieur en valeur ajout{\'e}e}.
+\newblock \bibinfo{journal}{Revue de l'OFCE} , \bibinfo{pages}{129--165}.
+%Type = Article
+\bibitem[{Daudin et~al.(2011)Daudin, Rifflart and Schweisguth}]{Daudin2011}
+\bibinfo{author}{Daudin, G.}, \bibinfo{author}{Rifflart, C.},
+  \bibinfo{author}{Schweisguth, D.}, \bibinfo{year}{2011}.
+\newblock \bibinfo{title}{Who produces for whom in the world economy?}
+\newblock \bibinfo{journal}{Canadian Journal of Economics/Revue canadienne
+  d'{\'e}conomie} \bibinfo{volume}{44}, \bibinfo{pages}{1403--1437}.
+%Type = Techreport
 \bibitem[{De~Backer and Yamano(2012)}]{DeBacker2012}
-De~Backer, K., Yamano, N., 2012. International {{Comparative Evidence}} on
-  {{Global Value Chains}}. Tech. Rep. 2012/3, {OECD}, {Paris}.
-
-\bibitem[{De~Soyres et~al.(2018)De~Soyres, Frohm, Gunnella, and
+\bibinfo{author}{De~Backer, K.}, \bibinfo{author}{Yamano, N.},
+  \bibinfo{year}{2012}.
+\newblock \bibinfo{title}{International {{Comparative Evidence}} on {{Global
+  Value Chains}}}.
+\newblock \bibinfo{type}{Technical Report} \bibinfo{number}{2012/3}. {OECD}.
+  \bibinfo{address}{{Paris}}.
+%Type = Techreport
+\bibitem[{De~Soyres et~al.(2018)De~Soyres, Frohm, Gunnella and
   Pavlova}]{DeSoyres2018}
-De~Soyres, F. M. M.~R., Frohm, E., Gunnella, V., Pavlova, E., Jul. 2018.
-  Bought, {{Sold}}, and {{Bought Again}}: {{The Impact}} of {{Complex Value
-  Chains}} on {{Export Elasticities}}. {{SSRN Scholarly Paper}} ID 3238378,
-  {Social Science Research Network}, {Rochester, NY}.
-
-\bibitem[{Delatte and Villavicencio(2012)}]{Delatte2012}
-Delatte, Villavicencio, 2012. Asymmetric exchange rate pass-through: Evidence
-  from major countries. Journal of Macroeconomics 34~(3), 833--844.
-
-\bibitem[{Dietzenbacher et~al.(2013)Dietzenbacher, Los, Stehrer, Timmer, and
-  {de Vries}}]{Dietzenbacher2013}
-Dietzenbacher, E., Los, B., Stehrer, R., Timmer, M., {de Vries}, G.~J., 2013.
-  The {{Construction}} of {{World Input}}-{{Output Tables}} in the {{WIOD
-  Project}}. Routledge 25~(1), 71--98.
-
+\bibinfo{author}{De~Soyres, F.M.M.R.}, \bibinfo{author}{Frohm, E.},
+  \bibinfo{author}{Gunnella, V.}, \bibinfo{author}{Pavlova, E.},
+  \bibinfo{year}{2018}.
+\newblock \bibinfo{title}{Bought, {{Sold}}, and {{Bought Again}}: {{The
+  Impact}} of {{Complex Value Chains}} on {{Export Elasticities}}}.
+\newblock \bibinfo{type}{{{SSRN Scholarly Paper}}} \bibinfo{number}{ID
+  3238378}. {Social Science Research Network}. \bibinfo{address}{{Rochester,
+  NY}}.
+%Type = Article
+\bibitem[{Dietzenbacher et~al.(2013)Dietzenbacher, Los, Stehrer, Timmer and {de
+  Vries}}]{Dietzenbacher2013}
+\bibinfo{author}{Dietzenbacher, E.}, \bibinfo{author}{Los, B.},
+  \bibinfo{author}{Stehrer, R.}, \bibinfo{author}{Timmer, M.},
+  \bibinfo{author}{{de Vries}, G.J.}, \bibinfo{year}{2013}.
+\newblock \bibinfo{title}{The {{Construction}} of {{World Input}}-{{Output
+  Tables}} in the {{WIOD Project}}}.
+\newblock \bibinfo{journal}{Routledge} \bibinfo{volume}{25},
+  \bibinfo{pages}{71--98}.
+%Type = Techreport
 \bibitem[{Feenstra and Jensen(2012)}]{Feenstra2012}
-Feenstra, R.~C., Jensen, J.~B., Mar. 2012. Evaluating {{Estimates}} of
-  {{Materials Offshoring}} from {{U}}.{{S}}. {{Manufacturing}}. {{NBER Working
-  Papers}} 17916, {National Bureau of Economic Research, Inc}.
-
+\bibinfo{author}{Feenstra, R.C.}, \bibinfo{author}{Jensen, J.B.},
+  \bibinfo{year}{2012}.
+\newblock \bibinfo{title}{Evaluating {{Estimates}} of {{Materials Offshoring}}
+  from {{U}}.{{S}}. {{Manufacturing}}}.
+\newblock \bibinfo{type}{{{NBER Working Papers}}} \bibinfo{number}{17916}.
+  {National Bureau of Economic Research, Inc}.
+%Type = Article
 \bibitem[{Folloni and Miglierina(1994)}]{Folloni1994}
-Folloni, G., Miglierina, C., 1994. Hypothesis of price formation in
-  input-output tables. Economic Systems Research.
-
-\bibitem[{Gaulier et~al.(2019)Gaulier, Sztulman, and
-  {\"U}nal-Kesenci}]{Gaulier2019}
-Gaulier, G., Sztulman, A., {\"U}nal-Kesenci, D., Mar. 2019. Are {{Global Value
-  Chains Receding}}? {{The Jury Is Still Out}}. {{Key Findings}} from the
-  {{Analysis}} of {{Deflated World Trade}} in {{Parts}} and {{Components}}.
-  {{SSRN Scholarly Paper}} ID 3359558, {Social Science Research Network},
-  {Rochester, NY}.
-
-\bibitem[{Georgiadis et~al.(2019)Georgiadis, Gr{\"a}b, and
+\bibinfo{author}{Folloni, G.}, \bibinfo{author}{Miglierina, C.},
+  \bibinfo{year}{1994}.
+\newblock \bibinfo{title}{Hypothesis of price formation in input-output
+  tables}.
+\newblock \bibinfo{journal}{Economic Systems Research} .
+%Type = Article
+\bibitem[{Georgiadis et~al.(2019)Georgiadis, Gr{\"a}b and
   Khalil}]{Georgiadis2019}
-Georgiadis, G., Gr{\"a}b, J., Khalil, M., 2019. Global {{Value Chain
-  Participation}} and {{Exchange Rate Pass}}-{{Through}}. Unpublished, European
-  Central Bank, Frankfurt.
-
+\bibinfo{author}{Georgiadis, G.}, \bibinfo{author}{Gr{\"a}b, J.},
+  \bibinfo{author}{Khalil, M.}, \bibinfo{year}{2019}.
+\newblock \bibinfo{title}{Global {{Value Chain Participation}} and {{Exchange
+  Rate Pass}}-{{Through}}}.
+\newblock \bibinfo{journal}{Unpublished, European Central Bank, Frankfurt} .
+%Type = Article
 \bibitem[{Hagemejer(2020)}]{Hagemejer2020}
-Hagemejer, 2020. Global value chains and exchange rate pass through: the role
-  of non-linearities. Narodowy Bank Polski Working Paper~(324).
-
+\bibinfo{author}{Hagemejer}, \bibinfo{year}{2020}.
+\newblock \bibinfo{title}{Global value chains and exchange rate pass through:
+  the role of non-linearities}.
+\newblock \bibinfo{journal}{Narodowy Bank Polski Working Paper} .
+%Type = Article
 \bibitem[{Hahn(2003)}]{Hahn2003}
-Hahn, E., 2003. Pass-through of external shocks to euro area inflation.
-  European Central Bank Working Paper~(243).
-
-\bibitem[{Hummels et~al.(2001)Hummels, Ishii, and Yi}]{Hummels2001}
-Hummels, D., Ishii, J., Yi, K.-M., Jun. 2001. The nature and growth of vertical
-  specialization in world trade. Journal of International Economics 54~(1),
-  75--96.
-
+\bibinfo{author}{Hahn, E.}, \bibinfo{year}{2003}.
+\newblock \bibinfo{title}{Pass-through of external shocks to euro area
+  inflation}.
+\newblock \bibinfo{journal}{European Central Bank Working Paper} .
+%Type = Article
+\bibitem[{Hummels et~al.(2001)Hummels, Ishii and Yi}]{Hummels2001}
+\bibinfo{author}{Hummels, D.}, \bibinfo{author}{Ishii, J.},
+  \bibinfo{author}{Yi, K.M.}, \bibinfo{year}{2001}.
+\newblock \bibinfo{title}{The nature and growth of vertical specialization in
+  world trade}.
+\newblock \bibinfo{journal}{Journal of International Economics}
+  \bibinfo{volume}{54}, \bibinfo{pages}{75--96}.
+%Type = Article
 \bibitem[{Johnson and Noguera(2012)}]{Johnson2012}
-Johnson, R.~C., Noguera, G., Mar. 2012. Accounting for intermediates:
-  {{Production}} sharing and trade in value added. Journal of International
-  Economics 86~(2), 224--236.
-
-\bibitem[{Koopman et~al.(2014)Koopman, Wang, and Wei}]{Koopman2014}
-Koopman, R., Wang, Z., Wei, S.-J., Feb. 2014. Tracing {{Value}}-{{Added}} and
-  {{Double Counting}} in {{Gross Exports}}. American Economic Review 104~(2),
-  459--494.
-
+\bibinfo{author}{Johnson, R.C.}, \bibinfo{author}{Noguera, G.},
+  \bibinfo{year}{2012}.
+\newblock \bibinfo{title}{Accounting for intermediates: {{Production}} sharing
+  and trade in value added}.
+\newblock \bibinfo{journal}{Journal of International Economics}
+  \bibinfo{volume}{86}, \bibinfo{pages}{224--236}.
+\newblock \DOIprefix\doi{10.1016/j.jinteco.2011.10.003}.
+%Type = Article
+\bibitem[{Koopman et~al.(2014)Koopman, Wang and Wei}]{Koopman2014}
+\bibinfo{author}{Koopman, R.}, \bibinfo{author}{Wang, Z.},
+  \bibinfo{author}{Wei, S.J.}, \bibinfo{year}{2014}.
+\newblock \bibinfo{title}{Tracing {{Value}}-{{Added}} and {{Double Counting}}
+  in {{Gross Exports}}}.
+\newblock \bibinfo{journal}{American Economic Review} \bibinfo{volume}{104},
+  \bibinfo{pages}{459--494}.
+%Type = Article
 \bibitem[{Kunovac and Comunale(2017)}]{Kunovac2017}
-Kunovac, D., Comunale, M., 2017. Exchange {{Rate Pass}}-{{Through}} in the
-  {{Euro Area}}. European Central Bank Working Paper~(2003).
-
+\bibinfo{author}{Kunovac, D.}, \bibinfo{author}{Comunale, M.},
+  \bibinfo{year}{2017}.
+\newblock \bibinfo{title}{Exchange {{Rate Pass}}-{{Through}} in the {{Euro
+  Area}}}.
+\newblock \bibinfo{journal}{European Central Bank Working Paper} .
+%Type = Book
 \bibitem[{Leigh et~al.(2017)Leigh, Lian, {Poplawski-Ribeiro}, Szymanski,
-  Tsyrennikov, and Yang}]{Leigh2017}
-Leigh, M.~D., Lian, W., {Poplawski-Ribeiro}, M., Szymanski, R., Tsyrennikov,
-  V., Yang, H., 2017. Exchange Rates and Trade: {{A}} Disconnect?
-  {International Monetary Fund}.
-
+  Tsyrennikov and Yang}]{Leigh2017}
+\bibinfo{author}{Leigh, M.D.}, \bibinfo{author}{Lian, W.},
+  \bibinfo{author}{{Poplawski-Ribeiro}, M.}, \bibinfo{author}{Szymanski, R.},
+  \bibinfo{author}{Tsyrennikov, V.}, \bibinfo{author}{Yang, H.},
+  \bibinfo{year}{2017}.
+\newblock \bibinfo{title}{Exchange Rates and Trade: {{A}} Disconnect?}
+\newblock \bibinfo{publisher}{{International Monetary Fund}}.
+%Type = Techreport
 \bibitem[{Leontief(1951)}]{Leontief1951}
-Leontief, W.~W., 1951. The structure of {{American}} economy, 1919-1939: An
-  empirical application of equilibrium analysis. Tech. rep.
-
-\bibitem[{Los et~al.(2016)Los, Timmer, and {de Vries}}]{Los2016}
-Los, B., Timmer, M.~P., {de Vries}, G.~J., Jul. 2016. Tracing
-  {{Value}}-{{Added}} and {{Double Counting}} in {{Gross Exports}}:
-  {{Comment}}. American Economic Review 106~(7), 1958--1966.
-
+\bibinfo{author}{Leontief, W.W.}, \bibinfo{year}{1951}.
+\newblock \bibinfo{title}{The Structure of {{American}} Economy, 1919-1939: An
+  Empirical Application of Equilibrium Analysis.}
+\newblock \bibinfo{type}{Technical Report}.
+%Type = Article
+\bibitem[{Los et~al.(2016)Los, Timmer and {de Vries}}]{Los2016}
+\bibinfo{author}{Los, B.}, \bibinfo{author}{Timmer, M.P.}, \bibinfo{author}{{de
+  Vries}, G.J.}, \bibinfo{year}{2016}.
+\newblock \bibinfo{title}{Tracing {{Value}}-{{Added}} and {{Double Counting}}
+  in {{Gross Exports}}: {{Comment}}}.
+\newblock \bibinfo{journal}{American Economic Review} \bibinfo{volume}{106},
+  \bibinfo{pages}{1958--1966}.
+%Type = Misc
 \bibitem[{OECD(Decembre 2018)}]{OECD2018}
-OECD, Decembre 2018. What's new? {{Differences}} between the 2018 and 2016
-  edition of the {{TiVA}} indicators. {{Draft}}.
-
+\bibinfo{author}{OECD}, \bibinfo{year}{Decembre 2018}.
+\newblock \bibinfo{title}{What's new? {{Differences}} between the 2018 and 2016
+  edition of the {{TiVA}} indicators. {{Draft}}}.
+%Type = Misc
 \bibitem[{OECD and WTO(2011)}]{OECD2011}
-OECD, WTO, 2011. Trave in value-added: Concepts, methodologies and challenges
-  (joint oecd-wto note).
-
-\bibitem[{Ortega et~al.(2020)Ortega, Osbat, and Rubene}]{Ortega2020}
-Ortega, E., Osbat, C., Rubene, I., 2020. Exchange rate pass-through in the euro
-  area and in {{EU}} countries.
-
+\bibinfo{author}{OECD}, \bibinfo{author}{WTO}, \bibinfo{year}{2011}.
+\newblock \bibinfo{title}{Trave in value-added: Concepts, methodologies and
+  challenges (joint oecd-wto note)}.
+%Type = Misc
+\bibitem[{Ortega and Osbat(2020)}]{Ortega2020}
+\bibinfo{author}{Ortega, E.}, \bibinfo{author}{Osbat, C.},
+  \bibinfo{year}{2020}.
+\newblock \bibinfo{title}{Exchange rate pass-through in the euro area and in
+  {{EU}} countries}.
+%Type = Article
 \bibitem[{Ozyurt(2016)}]{Ozyurt2016}
-Ozyurt, S., 2016. Has the exchange rate pass through recently declined in the
-  euro area? European Central Bank Working Paper~(1955).
-
+\bibinfo{author}{Ozyurt, S.}, \bibinfo{year}{2016}.
+\newblock \bibinfo{title}{Has the exchange rate pass through recently declined
+  in the euro area?}
+\newblock \bibinfo{journal}{European Central Bank Working Paper} .
+%Type = Article
 \bibitem[{Puzzello(2012)}]{Puzzello2012}
-Puzzello, L., 2012. A proportionality assumption and measurement biases in the
-  factor content of trade. Journal of International Economics 87~(1), 105--111.
-
+\bibinfo{author}{Puzzello, L.}, \bibinfo{year}{2012}.
+\newblock \bibinfo{title}{A proportionality assumption and measurement biases
+  in the factor content of trade}.
+\newblock \bibinfo{journal}{Journal of International Economics}
+  \bibinfo{volume}{87}, \bibinfo{pages}{105--111}.
+\newblock \DOIprefix\doi{10.1016/j.jinteco.2011.11}.
+%Type = Techreport
 \bibitem[{Sato and Shrestha(2014)}]{Sato2014}
-Sato, K., Shrestha, N., Oct. 2014. Global and {{Regional Shock Transmission}}
-  -{{An Asian Perspective}}-. {{CESSA Working Paper}}, {Center for Economic and
+\bibinfo{author}{Sato, K.}, \bibinfo{author}{Shrestha, N.},
+  \bibinfo{year}{2014}.
+\newblock \bibinfo{title}{Global and {{Regional Shock Transmission}} -{{An
+  Asian Perspective}}-}.
+\newblock \bibinfo{type}{{{CESSA Working Paper}}}. {Center for Economic and
   Social Studies in Asia (CESSA), Department of Economics, Yokohama National
-  University}, {Yokohama}.
-
+  University}. \bibinfo{address}{{Yokohama}}.
+%Type = Misc
 \bibitem[{Schaeffer(2019)}]{Schaeffer2019}
-Schaeffer, 2019. Exchange rate pass-through in the euro area and in {{EU}}
-  countries.
-
+\bibinfo{author}{Schaeffer}, \bibinfo{year}{2019}.
+\newblock \bibinfo{title}{Exchange rate pass-through in the euro area and in
+  {{EU}} countries}.
+%Type = Article
 \bibitem[{Sharify(2013)}]{Sharify2013}
-Sharify, N., 2013. Input-output modelling of the effect of implicit subsidies
-  on general prices. Economic Modelling 33~(C), 913--917.
-
-\bibitem[{Timmer et~al.(2015)Timmer, Dietzenbacher, Los, Stehrer, and {de
+\bibinfo{author}{Sharify, N.}, \bibinfo{year}{2013}.
+\newblock \bibinfo{title}{Input-output modelling of the effect of implicit
+  subsidies on general prices}.
+\newblock \bibinfo{journal}{Economic Modelling} \bibinfo{volume}{33},
+  \bibinfo{pages}{913--917}.
+\newblock \DOIprefix\doi{10.1016/j.econmod.2013.06}.
+%Type = Article
+\bibitem[{Timmer et~al.(2015)Timmer, Dietzenbacher, Los, Stehrer and {de
   Vries}}]{Timmer2015}
-Timmer, M., Dietzenbacher, E., Los, B., Stehrer, R., {de Vries}, G.~J., 2015.
-  An {{Illustrated User Guide}} to the {{World Input}}-{{Output Database}}: The
-  {{Case}} of {{Global Automotive Production}}. John Wiley and Sons Ltd, 31.
+\bibinfo{author}{Timmer, M.}, \bibinfo{author}{Dietzenbacher, E.},
+  \bibinfo{author}{Los, B.}, \bibinfo{author}{Stehrer, R.},
+  \bibinfo{author}{{de Vries}, G.J.}, \bibinfo{year}{2015}.
+\newblock \bibinfo{title}{An {{Illustrated User Guide}} to the {{World
+  Input}}-{{Output Database}}: The {{Case}} of {{Global Automotive
+  Production}}}.
+\newblock \bibinfo{journal}{John Wiley and Sons Ltd} ,
+  \bibinfo{pages}{31}\DOIprefix\doi{DOI:10.1111/roie.12178}.
 
 \end{thebibliography}

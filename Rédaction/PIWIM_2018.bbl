@@ -132,17 +132,12 @@
   Value Chains}}}.
 \newblock \bibinfo{type}{Technical Report} \bibinfo{number}{2012/3}. {OECD}.
   \bibinfo{address}{{Paris}}.
-%Type = Techreport
-\bibitem[{De~Soyres et~al.(2018)De~Soyres, Frohm, Gunnella and
-  Pavlova}]{DeSoyres2018}
-\bibinfo{author}{De~Soyres, F.M.M.R.}, \bibinfo{author}{Frohm, E.},
-  \bibinfo{author}{Gunnella, V.}, \bibinfo{author}{Pavlova, E.},
-  \bibinfo{year}{2018}.
-\newblock \bibinfo{title}{Bought, {{Sold}}, and {{Bought Again}}: {{The
-  Impact}} of {{Complex Value Chains}} on {{Export Elasticities}}}.
-\newblock \bibinfo{type}{{{SSRN Scholarly Paper}}} \bibinfo{number}{ID
-  3238378}. {Social Science Research Network}. \bibinfo{address}{{Rochester,
-  NY}}.
+%Type = Article
+\bibitem[{De~Soyres and Franco(2019)}]{DeSoyres2019}
+\bibinfo{author}{De~Soyres, F.}, \bibinfo{author}{Franco, S.},
+  \bibinfo{year}{2019}.
+\newblock \bibinfo{title}{Inflation dynamics and global value chains}.
+\newblock \bibinfo{journal}{World Bank, Policy Research Working Paper} .
 %Type = Article
 \bibitem[{Dietzenbacher et~al.(2013)Dietzenbacher, Los, Stehrer, Timmer and {de
   Vries}}]{Dietzenbacher2013}

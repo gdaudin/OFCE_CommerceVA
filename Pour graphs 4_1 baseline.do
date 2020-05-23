@@ -1,3 +1,12 @@
+
+
+
+*gr0034.pkg
+*from:  http://www.stata-journal.com/software/sj8-2/
+
+
+
+
 clear  
 set more off
 if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
@@ -182,12 +191,24 @@ twoway histogram pond_WIOD_HC, width(0.05) frequency xscale(range(0.04 0.36)) ||
 	"*_EUR designate the effet of an shock on the Euro" ///
 	"FRA_EUR is in the same position as JPN") ///
 	 scheme(s1mono)
-	
-
-
-
 graph export "$dir/commerce_VA_inflation/Rédaction/WIOD_HC_elasticities.png", replace
 
+
+****Autre version de WIOD_HC_elasticities.png ?
+sort pond_WIOD_HC
+gen elast_order = _n
+labmask elast_order,values(pays)
+graph dot (asis) pond_WIOD_HC,  over(elast_order, ///
+	label(labsize(tiny))) marker(1, ms(O) mfcolor(gs1) mlcolor(black) msize(tiny)) ///
+	legend(off) title("WIOD elasticites 2014 (absolute value)") ///
+	note("* designate the effect of a shock on the (maybe hypothetical)" "local currency" ///
+	"*_EUR designate the effet of an shock on the Euro") ///
+	xsize(6)  ysize(7)
+
+graph export "$dir/commerce_VA_inflation/Rédaction/WIOD_HC_elasticities_NEW.png", replace
+
+
+********
 replace Y=round(Y,.)
 
 twoway histogram pond_WIOD_HC [fweight=Y],  width(0.05) fraction xscale(range(0.04 0.36)) || ///

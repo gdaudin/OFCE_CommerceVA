@@ -1,4 +1,4 @@
-capture net install grc1leg2.pkg
+search grc1leg2
 
 
 
@@ -137,8 +137,23 @@ if "`type'"=="HC" & ((`year'==2014 & "`source'"=="WIOD") | (`year'==2015 & "`sou
 	*dans le cas HC, xtitle pourrait se finir par «importées dans la conso dom + part conso importée»	
 	
 						
-	graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/Comp_s_E1HCE2HC_`year'_`source'_`type'.pdf", replace
-	graph export "$dirgit/Rédaction/Comp_s_E1HCE2HC_`year'_`source'_`type'.pdf", replace
+	graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/Comp_s_E1HCE2HC_`year'_`source'_`type'.png", replace
+	graph export "$dirgit/Rédaction/Comp_s_E1HCE2HC_`year'_`source'_`type'.png", replace
+	
+*****new graph
+	graph twoway (scatter pond_`source'_`type' E1HC_E2HC, mlabel(pays) mlabsize(medium)) ///
+			(lfit pond_`source'_`type' E1HC_E2HC) ///
+			(lfit pond_`source'_`type' pond_`source'_`type',lwidth(vthin) color(black)) , ///
+			/*title("Comparing direct and modelled effects")*/ ///
+			xtitle("E1HC + E2HC : Direct effect through imported consumption goods" "and effet on domestic consumption goods through imported inputs") ytitle("`source' Elasticities `year'") ///
+			yscale(range(0.0 0.3)) xscale(range(0.0 0.3)) xlabel (0.0(0.05) 0.3) ylabel(0.0(0.05) 0.3) ///
+			legend(off) ///
+			note("The 45° line serves as a comparison to the regression line") ///
+			scheme(s1mono)
+	*dans le cas HC, xtitle pourrait se finir par «importées dans la conso dom + part conso importée»
+						
+	graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/Comp_s_E1HCE2HC_`year'_`source'_`type'NEW.png", replace
+	graph export "$dirgit/Rédaction/Comp_s_E1HCE2HC_`year'_`source'_`type'NEW.png", replace
 	
 	graph close
 	
@@ -166,10 +181,29 @@ if "`type'"=="HC" & ((`year'==2014 & "`source'"=="WIOD") | (`year'==2015 & "`sou
 	*dans le cas HC, xtitle pourrait se finir par «importées dans la conso dom + part conso importée»	
 	
 						
-	graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/Comp_s_E1HC_`year'_`source'_`type'.pdf", replace
-	graph export "$dirgit/Rédaction/Comp_s_E1HC_`year'_`source'_`type'.pdf", replace
+	graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/Comp_s_E1HC_`year'_`source'_`type'.png", replace
+	graph export "$dirgit/Rédaction/Comp_s_E1HC_`year'_`source'_`type'.png", replace
+	
+	
+	
+	graph twoway (scatter pond_`source'_`type' E1HC, mlabel(pays) mlabsize(medium)) ///
+			(lfit pond_`source'_`type' E1HC) ///
+			(lfit pond_`source'_`type' pond_`source'_`type',lwidth(vthin) color(black)) , ///
+			/*title("Comparing direct and modelled effects")*/ ///
+			xtitle("Share of imported goods and services in household consumption") ytitle("`source' Elasticities `year'") ///
+			yscale(range(0.0 0.3)) xscale(range(0.0 0.3)) xlabel (0.0(0.05) 0.3) ylabel(0.0(0.05) 0.3) ///
+			legend(off) ///
+			scheme(s1mono) ///
+			note("The 45° line serves as a comparison to the regression line")
+	*dans le cas HC, xtitle pourrait se finir par «importées dans la conso dom + part conso importée»	
+	
+						
+	graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/Comp_s_E1HC_`year'_`source'_`type'NEW.png", replace
+	graph export "$dirgit/Rédaction/Comp_s_E1HC_`year'_`source'_`type'NEW.png", replace
+
 	
 	graph close
+	
 	
 	replace pond_`source'_`type'=-pond_`source'_`type'
 }
@@ -352,26 +386,26 @@ foreach source in TIVA WIOD TIVA_REV4 {
 		gen borne_inf_`var'= b_`var'-1.96*se_`var'
 		gen borne_sup_`var' =b_`var'+1.96*se_`var'
 	}
-	label var b_ns "Coefficient of E1HC+E2HC (with 95% confidence intervals)"
+	label var b_ns "{&beta} (with 95% confidence intervals)"
 	label var R2_reg_ns "R2"
 	
 	graph twoway ///
-		(line b_ns year, lcolor(black) ) (line borne_inf_ns year, lpattern(dash) lwidth(vthin) lcolor(black)) (line borne_sup_ns year,lpattern(dash) lwidth(vthin) lcolor(black) ) ///
+		(line b_ns year, lcolor(black) ) (line borne_inf_ns year, lpattern(dash) lwidth(vthin) lcolor(black)) ///
+		(line borne_sup_ns year, lpattern(dash) lwidth(vthin) lcolor(black) ) ///
 		(connected R2_reg_ns year,  lcolor(turquoise) msize(small) mcolor(turquoise))   ///
 		,/*yscale(range(1 (0.05) 1.15)) ylabel(1 (0.05) 1.15)*/ legend(order (1 4) rows(2)) ///
 		scheme(s1color)
 
-	graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/coef_E_`source'_HC.pdf", replace
+	graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/coef_E_`source'_HC.png", replace
 	graph export "$dir/commerce_VA_inflation/Rédaction/coef_E_`source'_HC.png", replace
 	
-	
-	label var b_cst_reg_ns "Constant (with 95% confidence intervals)"
+	label var b_cst_reg_ns "{&alpha} (with 95% confidence intervals)"
 		graph twoway ///
 		(line b_cst_reg_ns year, lcolor(black) ) (line borne_inf_cst_reg_ns year, lpattern(dash) lwidth(vthin) lcolor(black)) (line borne_sup_cst_reg_ns year,lpattern(dash) lwidth(vthin) lcolor(black) )    ///
 		,/*yscale(range(1 (0.05) 1.15)) ylabel(1 (0.05) 1.15)*/ legend(order (1)) ///
 		scheme(s1color)
 
-	graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/coef_cst_`source'_HC.pdf", replace
+	graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/coef_cst_`source'_HC.png", replace
 	graph export "$dir/commerce_VA_inflation/Rédaction/coef_cst_`source'_HC.png", replace
 }
 
@@ -395,6 +429,7 @@ foreach source in  WIOD /*TIVA TIVA_REV4 */{
 			gen E4HC = pond_WIOD_HC - E1HC - E2HC - E3HC
 			gen blouf = 0
 			gen mylabel= pays if strpos("FRA DEU DEU_EUR ITA ITA_EUR GBR CHN USA CAN JPN ",pays)!=0
+			
 			foreach var in E1HC E2HC E3HC E4HC {
 				gen share_`var'=`var'/pond_WIOD_HC
 				twoway histogram share_`var', start(-0.2) width(0.1) freq name(`var') || ///
@@ -407,6 +442,27 @@ foreach source in  WIOD /*TIVA TIVA_REV4 */{
 		grc1leg2 	E1HC E2HC E3HC E4HC, name(hist_components_`source'_`i') scheme(s1mono) legendfrom(E1HC)
 		graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/hist_components_`source'_`i'.png", replace
 			
+******* New graph
+			
+	sort E1HC
+	gen E1_order = _n
+	labmask E1_order,values(pays)
+	graph dot (asis) E1HC E2HC E3HC E4HC,  over(E1_order, ///
+		label(labsize(tiny))) ///
+		marker(1, ms(O) mfcolor(gs1) mlcolor(gs1) msize(tiny) ) ///
+		marker(2, ms(O) mfcolor(gs5) mlcolor(gs5) msize(tiny) ) ///
+		marker(3, ms(O) mfcolor(gs9) mlcolor(gs9) msize(tiny) ) ///
+		marker(4, ms(O) mfcolor(gs13) mlcolor(gs13) msize(tiny)) ///
+		xsize(9)  ysize(7) ///
+		name(hist_components_`source'_`i'NEW, replace) ///
+		legend(position(3) cols(1)  size(vsmall) label(1 "Direct effect" "through imported consumption goods") ///
+		label(2 "Effect on domestic consumption goods" "through imported inputs") ///
+		label(3 "Effect on imported consumption goods" "through domestic inputs") ///
+		label(4 "Residual")) ///
+		scheme(s1mono)
+		graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/hist_components_`source'_`i'NEW.png", replace		
+			
+			
 		}
 	
 	
@@ -415,5 +471,9 @@ foreach source in  WIOD /*TIVA TIVA_REV4 */{
 
 graph display hist_components_WIOD_2014
 graph export "$dir/commerce_VA_inflation/Rédaction/hist_components_WIOD_2014.png", replace
+
+graph display hist_components_WIOD_2014NEW
+graph export "$dir/commerce_VA_inflation/Rédaction/hist_components_WIOD_2014NEW.png", replace
+
 
 

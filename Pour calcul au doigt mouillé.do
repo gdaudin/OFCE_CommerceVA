@@ -129,7 +129,10 @@ args source y reg
 	graph twoway (scatter x pond_`source'_HC, mlabel(pays)) (line x y) (line z pond_`source'_HC), /*
 	*/ title (`reg'_`source'_`y') /*
 	 */ name("resultats_`reg'_`source'_`y'", replace)
-	graph export  "$dir/Results/resultats_doigt_mouillé_`reg'_`source'_`y'.pdf", replace
+	graph export  "$dir/Results/resultats_doigt_mouillé_`reg'_`source'_`y'.png", replace
+	
+
+
 	
 	keep year
 	gen source="`source'"
@@ -341,16 +344,23 @@ foreach reg in reg2 reg1 {
 				label var x "Predicted elasticity"
 				
 				
-				graph twoway (scatter x pond_`source'_HC, mlabel(pays)) (lfit x pond_`source'_HC, lpattern(dash)) /*
+				capture drop n 
+				gen n=_n
+				sort x
+				capture drop pays_label 
+				gen pays_label = pays if n/3==int(n/3) | pays=="USA" | pays=="FRA" & pays!="GBR" & pays!= "GRC" /*| pays=="FRA"  ///
+						| pays=="ITA" | pays=="GBR" | pays=="DEU" | pays=="JPN" | pays=="CHN" */
+				graph twoway (scatter x pond_`source'_HC, mlabel(pays_label) mlabposition(4) mlabangle(-45)) (lfit x pond_`source'_HC, lpattern(dash)) /*
 				*/ (line x y) (line z pond_`source'_HC), legend(off) /*
 				*//* title (`source'_`reg'_pred_`lag_pred'y trend: `trend') *//*
 				 */ name("`source'_pred_`lag_pred'y", replace) ytitle("Predicted elasticity")/*
 				 */ note("Correlation: `correlation' Mean error: `mean_error' p.c.  Median error: `median_error' p.c.") /*
 				 */ scheme(s1color)
 				
-				graph export  "$dir/Results/resultats_`reg'_doigt_mouillé_`source'_pred_`lag_pred'y_trend_`trend'.pdf", replace
+				
+				graph export  "$dir/Results/resultats_`reg'_doigt_mouillé_`source'_pred_`lag_pred'y_trend_`trend'.png", replace
 				if "`source'"=="WIOD" & "`trend'"=="no" & `lag_pred'==6 {
-					graph export  "$dir/commerce_VA_inflation/Rédaction/resultats_`reg'_doigt_mouille_`source'_pred_`lag_pred'y_trend_`trend'.pdf", replace
+					graph export  "$dir/commerce_VA_inflation/Rédaction/resultats_`reg'_doigt_mouille_`source'_pred_`lag_pred'y_trend_`trend'.png", replace
 				}
 				drop x
 				drop y

@@ -183,6 +183,9 @@ gen mylabel= pays if strpos("FRA DEU DEU_EUR ITA ITA_EUR GBR CHN USA CAN JPN ",p
 
 replace pond_WIOD_HC = -pond_WIOD_HC
 
+
+******VIEUX GRAPHIQUE
+/*
 twoway histogram pond_WIOD_HC, width(0.05) frequency xscale(range(0.04 0.36)) || ///
 	scatter blouf pond_WIOD_HC if mylabel!="", /// 
 	mlabel(mylabel) mlabposition(12)  mlabangle(vertical)  mlabgap(huge) mlabsize(vsmall) msymbol(pipe) ///
@@ -192,7 +195,7 @@ twoway histogram pond_WIOD_HC, width(0.05) frequency xscale(range(0.04 0.36)) ||
 	"FRA_EUR is in the same position as JPN") ///
 	 scheme(s1mono)
 graph export "$dir/commerce_VA_inflation/Rédaction/WIOD_HC_elasticities.png", replace
-
+*/
 
 ****Autre version de WIOD_HC_elasticities.png ?
 sort pond_WIOD_HC
@@ -203,9 +206,9 @@ graph dot (asis) pond_WIOD_HC,  over(elast_order, ///
 	legend(off) title("WIOD elasticites 2014 (absolute value)") ///
 	note("* designate the effect of a shock on the (maybe hypothetical)" "local currency" ///
 	"*_EUR designate the effet of an shock on the Euro") ///
-	xsize(6)  ysize(7)
+	scheme(s1mono) xsize(6)  ysize(7)
 
-graph export "$dir/commerce_VA_inflation/Rédaction/WIOD_HC_elasticities_NEW.png", replace
+graph export "$dir/commerce_VA_inflation/Rédaction/WIOD_HC_elasticities.png", replace
 
 
 ********

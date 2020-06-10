@@ -44,7 +44,7 @@ gen error=abs(predict-pond_WIOD_HC)/pond_WIOD_HC
 gen mylabel= pays if /*error >.25 |*/ pond_WIOD_HC>=0.22 | pays=="FRA"
 
 graph twoway (scatter pond_WIOD_HC pond_TIVA_HC, mlabel(mylabel)) ///
-(lfit pond_WIOD_HC pond_TIVA_HC, clpattern(dash)) ///
+			(lfit pond_WIOD_HC pond_TIVA_HC, clpattern(dash)) ///
 			(lfit pond_TIVA_HC pond_TIVA_HC), ///
 			yscale(range(0 0.4)) xscale(range(0 0.4)) ylabel(0 (0.05) 0.4) xlabel(0 (0.05) 0.4) ///
 			ytitle("WIOD elasticites `year' (absolute value)") xtitle("TIVA elasticites `year' (absolute value)") ///
@@ -76,8 +76,8 @@ predict predict
 gen error=abs(predict-pond_WIOD_HC)/pond_WIOD_HC
 gen mylabel= pays if /*error >.25 |*/ pond_WIOD_HC>=0.22 | pays=="FRA"
 
-graph twoway (scatter pond_TIVA_REV4_HC pond_WIOD_HC , mlabel(mylabel)) ///
-            (lfit pond_TIVA_REV4_HC pond_WIOD_HC , clpattern(dash)) ///
+graph twoway (scatter pond_WIOD_HC pond_TIVA_REV4_HC , mlabel(mylabel)) ///
+            (lfit pond_WIOD_HC pond_TIVA_REV4_HC  , clpattern(dash)) ///
 			(lfit pond_WIOD_HC pond_WIOD_HC), ///
 			yscale(range(0 0.4)) xscale(range(0 0.4)) ylabel(0 (0.05) 0.4) xlabel(0 (0.05) 0.4) ///
 			ytitle("WIOD elasticites `year' (absolute value)") xtitle("TIVA_REV4 elasticites `year' (absolute value)") ///
@@ -128,10 +128,10 @@ gen error=abs(predict-pond_TIVA_REV4_HC)/pond_TIVA_REV4_HC
 gen mylabel= pays if /*error >.25 |*/ pond_TIVA_REV4_HC>=0.22 | pays=="FRA"
 
 graph twoway (scatter pond_TIVA_REV4_HC pond_TIVA_HC, mlabel(mylabel)) ///
-(lfit pond_TIVA_REV4_HC pond_TIVA_HC, clpattern(dash)) ///
-			(lfit pond_TIVA_HC pond_TIVA_HC), ///
-			yscale(range(0 0.4)) xscale(range(0 0.4)) ylabel(0 (0.05) 0.4) xlabel(0 (0.05) 0.4) ///
-			ytitle("TIVA_REV4 elasticites `year' (absolute value)") xtitle("TIVA elasticites `year' (absolute value)") ///
+			 (lfit pond_TIVA_REV4_HC pond_TIVA_HC, clpattern(dash)) ///
+			 (lfit pond_TIVA_HC pond_TIVA_HC), ///
+			 yscale(range(0 0.4)) xscale(range(0 0.4)) ylabel(0 (0.05) 0.4) xlabel(0 (0.05) 0.4) ///
+			 ytitle("TIVA_REV4 elasticites `year' (absolute value)") xtitle("TIVA elasticites `year' (absolute value)") ///
 			legend(order (2 3)  label(2 "Linear fit") label(3 "45° line") ) scheme(s1mono)
 			
 graph export "$dir/commerce_VA_inflation/Rédaction/Comparaison_TIVA_REV4_TIVA_`year'.png", replace
@@ -159,8 +159,8 @@ predict predict
 gen error=abs(predict-pond_WIOD_HC)/pond_WIOD_HC
 gen mylabel= pays if /*error >.25 |*/ pond_WIOD_HC>=0.22 | pays=="FRA"
 
-graph twoway (scatter pond_TIVA_REV4_HC pond_WIOD_HC , mlabel(mylabel)) ///
-            (lfit pond_TIVA_REV4_HC pond_WIOD_HC , clpattern(dash)) ///
+graph twoway (scatter pond_WIOD_HC pond_TIVA_REV4_HC  , mlabel(mylabel)) ///
+            (lfit pond_WIOD_HC pond_TIVA_REV4_HC  , clpattern(dash)) ///
 			(lfit pond_WIOD_HC pond_WIOD_HC), ///
 			yscale(range(0 0.4)) xscale(range(0 0.4)) ylabel(0 (0.05) 0.4) xlabel(0 (0.05) 0.4) ///
 			ytitle("WIOD elasticites `year' (absolute value)") xtitle("TIVA_REV4 elasticites `year' (absolute value)") ///

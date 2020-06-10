@@ -204,8 +204,7 @@ labmask elast_order,values(pays)
 graph dot (asis) pond_WIOD_HC,  over(elast_order, ///
 	label(labsize(tiny))) marker(1, ms(O) mfcolor(gs1) mlcolor(black) msize(tiny)) ///
 	legend(off) title("WIOD elasticites 2014 (absolute value)") ///
-	note("* designate the effect of a shock on the (maybe hypothetical)" "local currency" ///
-	"*_EUR designate the effet of an shock on the Euro") ///
+	note("Each country is assumed to have its own currency (maybe hypothetical)" "except for countries suffixed by _EUR: the shock is then on the Euro.", size(vsmall)) ///
 	scheme(s1mono) xsize(6)  ysize(7)
 
 graph export "$dir/commerce_VA_inflation/Rédaction/WIOD_HC_elasticities.png", replace

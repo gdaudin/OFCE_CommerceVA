@@ -147,7 +147,7 @@ if "`type'"=="HC" & ((`year'==2014 & "`source'"=="WIOD") | (`year'==2015 & "`sou
 			(lfit pond_`source'_`type' E1HC_E2HC) ///
 			(lfit pond_`source'_`type' pond_`source'_`type',lwidth(vthin) color(black)) , ///
 			/*title("Comparing direct and modelled effects")*/ ///
-			xtitle("E1HC + E2HC : Direct effect through imported consumption goods" "and effet on domestic consumption goods through imported inputs") ytitle("`source' Elasticities `year'") ///
+			xtitle("E1HC + E2HC : Direct effect through imported consumption goods" "and effect on domestic consumption goods through imported inputs") ytitle("`source' Elasticities `year'") ///
 			yscale(range(0.0 0.3)) xscale(range(0.0 0.3)) xlabel (0.0(0.05) 0.3) ylabel(0.0(0.05) 0.3) ///
 			legend(off) ///
 			note("The 45° line serves as a comparison to the regression line") ///

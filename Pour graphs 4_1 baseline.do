@@ -231,11 +231,12 @@ twoway histogram pond_WIOD_HC [fweight=Y],  width(0.05) fraction xscale(range(0.
 
 use "$dir/Bases/Y_WIOD.dta", clear
 collapse (sum) Y, by(pays year)
-rename pays c
+*rename pays c
 keep if year==2014
 
 
-merge 1:1 c using "$dir/Results/Étude rapport D+I et Bouclage Mondial/Elast_par_pays_2014_WIOD_HC.dta"
+merge 1:1 pays using "$dir/Results/Étude rapport D+I et Bouclage Mondial/Elast_par_pays_2014_WIOD_HC.dta"
+rename pays c
 
 gen mylabel1= c if strpos("FRA ITA ITA_EUR CHN CAN JPN",c)!=0
 gen mylabel2= c if c=="FRA_EUR" | c=="USA" | c=="GBR" | c=="DEU_EUR" | c=="DEU"
@@ -331,6 +332,10 @@ merge 1:1 year pays using temp_TIVA.dta
 drop _merge
 merge 1:1 year pays using temp_TIVA_REV4.dta
 
+
+
+keep if pays=="FRA"
+drop pays
 sort year
 
 bys year: keep if _n==1
@@ -348,12 +353,15 @@ twoway 	(line WIOD_elast_annual year, lcolor(blue) lpattern(dash)) ///
 		label(3 "TIVA rev3") label(4 "TIVA rev3, output weighted")  /// 
 		label(5 "TIVA rev4") label(6 "TIVA_rev4, output weighted"))  /// 
 		ytitle("elasticity (absolute value)", ) ///
-		note("Computed on a common sample of 43 countries assuming no Eurozone") ///
+		note("The average CPI elasticity has been computed from each of countries" ///
+		"in a common 43 countries sample (assuming no Eurozone)" ///
+		"and aggregated using either an arithmetic mean or an output weighted mean") ///
 		scheme(s1mono)
-		
+
+
 
 graph export "$dir/commerce_VA_inflation/Rédaction/PIWIM_LONGITUDINAL.png", replace
-	
+
 
 erase temp_TIVA_REV4.dta		
 erase temp_TIVA.dta

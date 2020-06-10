@@ -886,7 +886,7 @@ Hence, we could use this approach to estimate the elasticity of consumer prices 
 
 \begin{figure}[!h]
 	\centering
-	\caption{\footnotesize{\textbf{Comparing the elasticity computed from WIOD in 2014 with the one predicted from a panel regression between 2000 and 2008}}}
+	\caption{\footnotesize{\textbf{Comparing the CPI elasticity in 2014 (WIOD) and the prediction from a panel regression on the 2000-2008 period with fixed effects using Eurostat data. Beta is constant over time for each country}}}
 	\begin{tabular}{c}
 		\includegraphics[width=5.0in, height=3.5in]{"resultats_reg2_doigt_mouille_WIOD_pred_6y_trend_no".png}\\
 	\end{tabular}
@@ -898,7 +898,6 @@ Data on intermediate consumption and household consumption are not available for
 As a result, our regressions only include a limited number of observations.
 To expand our panel, we use an even simpler proxy for E1HC+E2HC that requires only trade data from Comtrade and GDP data from the World Bank. 
 It becomes therefore possible to include many more countries in the new panel (see equation \ref{eq:eq10}).
-%Figure 13: Comparison the CPI elasticity in 2014 (WIOD) and the prediction from a panel regression on the 2000-2008 period with fixed effects. Note: beta is constant over time for each country
  \begin{equation}
 \begin{array}{llll}
 \overline{s}_{i,t}^{i,t,HC}= \alpha +  \beta  [&\frac{\textnormal{imported consumption goods}_{i,t}}{\textnormal{GDP}_{i,t}} \\ & + \frac{\textnormal{imported intermediate goods}_{i,t}}{\textnormal{GDP}_{i,t}}] +fe_{i}+\varepsilon_{i,t}
@@ -911,7 +910,7 @@ Our findings are robust to using other databases (revision 3 and revision 4 of T
 
 \begin{figure}[!h]
 	\centering
-	\caption{\footnotesize{\textbf{Comparing the elasticity computed with WIOD for 2014 with the forecast from a panel regression estimated on the period 2000-2008}}}
+	\caption{\footnotesize{\textbf{Comparing the CPI elasticity in 2014 (WIOD) and the prediction from a panel regression on the 2000-2008 period with fixed effects without using Eurostat data. Beta is constant over time for each country}}}
 	\begin{tabular}{c}
 		\includegraphics[width=5.0in, height=3.5in]{"resultats_reg1_doigt_mouille_WIOD_pred_6y_trend_no".png}\\
 	\end{tabular}

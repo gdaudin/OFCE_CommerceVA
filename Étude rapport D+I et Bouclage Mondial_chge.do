@@ -459,10 +459,10 @@ foreach source in  WIOD /*TIVA TIVA_REV4 */{
 		marker(4, ms(O) mfcolor(gs13) mlcolor(gs13) msize(tiny)) ///
 		xsize(9)  ysize(7) ///
 		name(hist_components_`source'_`i', replace) ///
-		legend(position(3) cols(1)  size(vsmall) label(1 "Direct effect" "through imported consumption goods") ///
-		label(2 "Effect on domestic consumption goods" "through imported inputs") ///
-		label(3 "Effect on imported consumption goods" "through domestic inputs") ///
-		label(4 "Residual")) ///
+		legend(position(3) cols(1)  size(vsmall) label(1 "E1HC: Direct effect" "through imported" "consumption goods") ///
+		label(2 "E2HC: Effect on domestic" "consumption goods" "through imported inputs") ///
+		label(3 "E3HC: Effect on imported" "consumption goods" "through domestic inputs") ///
+		label(4 "E4HC: Residual")) ///
 		scheme(s1mono)
 		graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/hist_components_`source'_`i'.png", replace		
 			

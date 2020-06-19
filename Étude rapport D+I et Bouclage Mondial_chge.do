@@ -466,18 +466,18 @@ foreach source in  WIOD /*TIVA TIVA_REV4 */{
 		scheme(s1mono)
 		
 		graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/distribution_components_`source'_`i'.png", replace	
-		graph export "$dir/commerce_VA_inflation/Rédaction/distribution_components_`source'_`i'.png", replace	
+		if "`source'"=="WIOD" & `i'==2014 graph export "$dir/commerce_VA_inflation/Rédaction/distribution_components_`source'_`i'.png", replace	
 		
 		gen share_IO_mech = (E4HC+E3HC+E2HC)/pond_`source'_HC
 		gen share_IOT     = (E4HC+E3HC)/pond_`source'_HC
 		format share* %9.2f
-		gsort - share_IOT
+		gsort - share_IO_mech
 		list pays share_*
 		
-		gen share_IOT_order = _n
-		labmask share_IOT_order,values(pays)
+		gen share_IO_order = _n
+		labmask share_IO_order,values(pays)
 		
-		graph dot (asis) share_IO_mech share_IOT,  over(share_IOT_order, ///
+		graph dot (asis) share_IO_mech share_IOT,  over(share_IO_order, ///
 			label(labsize(tiny))) ///
 			marker(1, ms(O) mfcolor(gs1) mlcolor(gs1) msize(tiny) ) ///
 			marker(2, ms(O) mfcolor(gs13) mlcolor(gs13) msize(tiny) ) ///
@@ -488,7 +488,7 @@ foreach source in  WIOD /*TIVA TIVA_REV4 */{
 			scheme(s1mono)
 		
 		graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/share_components_`source'_`i'.png", replace	
-		graph export "$dir/commerce_VA_inflation/Rédaction/share_components_`source'_`i'.png", replace	
+		if "`source'"=="WIOD" & `i'==2014 graph export "$dir/commerce_VA_inflation/Rédaction/share_components_`source'_`i'.png", replace	
 				
 		}
 	
@@ -496,8 +496,7 @@ foreach source in  WIOD /*TIVA TIVA_REV4 */{
 	
 }
 
-graph display hist_components_WIOD_2014
-graph export "$dir/commerce_VA_inflation/Rédaction/hist_components_WIOD_2014.png", replace
+*graph export "$dir/commerce_VA_inflation/Rédaction/hist_components_WIOD_2014.png", replace
 
 
 

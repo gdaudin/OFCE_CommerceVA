@@ -72,14 +72,16 @@
 \begin{abstract}
 {\small \noindent
 % je propose d'expliquer directement la différence 1st et 2nd round effect
-Firms’ participation in global value chains strengthens cross-country transmission of price shocks through cost-push inflation.
-We study the impact of exchange rate shocks on consumer price index by using three sectoral world input-output datasets.
-We assume a Leontieff framework with no substitution between different consumer goods or different inputs.
-Firms react to a price increase of inputs by adjusting their prices to maintain their value-added. 
-In a sample of 43 countries, the mean output-weighted elasticity of the CPI to exchange rate shocks according to WIOD increased in absulte value from 0.075 in 2000 to 0.094 in 2008. It then declined to 0.088 in 2014.
+%GD 20200619 c’est pas net ce 1st/2nd round.  Je laisse tomber pour quelque chose de plus central pour le papier
+Global value chains strengthens cross-country transmission of price shocks through cost-push inflation.
+We study the impact of exchange rate shocks on consumer price indexes from 1995 to 2015 by using three sectoral world input-output datasets (two versions of TiVA and WIOD).
+We assume a Leontieff framework with no substitution between different consumer goods or inputs.
+Firms react to price changes of inputs by adjusting their prices to maintain their value-added. 
+In a sample of 43 countries, the mean output-weighted elasticity of the CPI to exchange rate shocks according to WIOD increased in absolute value from 0.075 in 2000 to 0.094 in 2008.
+It then declined to 0.088 in 2014.
 Both recent versions of TIVA yield a similar evolution.
-A defect of our approach is that world input-output databases are only available after a sizeable time gap (currently five years). 
-However, we show that it is possible to use up-to-date GDP and trade data to extrapolate the accounting impact of exchange rate shock on consumer price index.
+An issue with our approach is that world input-output databases are only available after a sizeable time gap (the latest data is from 2015). 
+However we show that it is possible to use up-to-date GDP and trade data to extrapolate the impact of exchange rate shock on consumer price index.
 %Finally, we establish that the results obtained using sectoral world input-output datasets up to 2015 can be extrapolated to recent years thanks to the use of easily obtainable statistics as GDP and trade statistics. 
 % la compréhension de ce qui est fait est difficile il faut expliquer davanatage 
 %Firms' participation in global value chains strengthens cross-country linkages via trade in intermediate inputs. 
@@ -90,7 +92,7 @@ However, we show that it is possible to use up-to-date GDP and trade data to ext
 }
 
 {\small \bigskip \noindent \emph{JEL Classification}\/: C67, E31, F42, F62\\}
-{\small \noindent \emph{Keywords}\/: input-output linkages, spillovers, global value chains, cost-push inflation, euro area \\ }
+{\small \noindent \emph{Keywords}\/: input-output linkages, spillovers, global value chains, cost-push inflation \\ }
 \end{abstract}
 
 \section{Introduction}
@@ -103,27 +105,33 @@ Trade liberalisation and lower transportation and communication costs facilitate
 Participation in global value chains strengthens cross-country linkages via trade in intermediate inputs.
 % Je propose de syntétiser car le mécanisme expliqué est simple et connu et d'expliciter d'emblée ce qu'on appelera 1st and 2nd effects
 %This has to be taken into account to study international interdependence.For example, in the absence of global value chains, the only way currency appreciation  affects consumer prices is through a reduction in the price of imported consumption goods.But if there are global value chain, an other channel  opens.
-When value chains are global, fluctuations in exchange rates (we assume here an appreciation of a currency) aﬀect domestic prices through two distinct price channels: \textit{i)} the prices of imported ﬁnal goods sold directly to domestic consumers and \textit{ii)} the prices of imported inputs feeding through domestic production of intermediate and ﬁnal goods.\\
+When value chains are global, fluctuations in exchange rates (we assume here an appreciation of a currency) aﬀect domestic consumer price indexes through distinct channels: \textit{i)} the prices of imported ﬁnal goods sold directly to domestic consumers,
+\textit{ii)} the prices of imported inputs feeding through domestic production,
 %Hence, a currency appreciation reduces the price of imported inputs, and thus further reduces domestic consumer prices. 
-In addition to this first-round effect, the currency appreciation in the domestic country has a second-round impact. Because exported intermediate goods become more expensive for foreign buyers, production costs increase in these countries whose currency depreciates.
-Changes in domestic and foreign production costs in turn pass through to the price of inputs for domestic and foreign firms and cause further production costs variations.\\
-Besides these purely accounting impacts, the pass-through of exchange rate shocks into consumer prices also depends on the intensity of competition in domestic markets: while an exchange rate appreciation lowers the price of imported inputs, a ﬁrm with limited competitive pressure may avail of greater proﬁt margins rather than reduce prices in an eﬀort to maintain market share.\\
+\textit{iii)} the price of exported inputs feeding through imported foreign production.
+Finally, \textit{iv)}, changes in domestic and foreign production costs in turn pass through to the price of inputs for domestic and foreign goods and cause further production costs variations through a chain of input-output relations.\\
+Assuming that every firms react to every input price changes by adapting their prices to keep their value-added constant, and that there is no substitution between different consumer goods or inputs, it is possible to compute the accounting effects of an exchange rate shock on consumer price indexes. These purely accounting exercice neglects all the much-studied determinants of the pass-through of exchange rate shocks into prices.
+For example, the pass-through depends on the intensity of competition in domestic markets: while an exchange rate appreciation lowers the price of imported inputs, a ﬁrm with limited competitive pressure may avail of greater proﬁt margins rather than reduce prices in an eﬀort to maintain market share.
 %Still, working out the full potential accounting effect illustrates the pressures that the existence of global value chains put on firms.
-Despite some shortcomings, the accounting approach illustrates the vulnerability of each sector to price shocks. 
-Hence, though unrealistic, it is useful for identifying which countries and sectors are under pressure to adjust their prices when subject to exogenous cost shocks.
-
-In this paper, we measure the accounting effect of exchange rate fluctuations on consumer prices. We use world input-output tables covering twenty years of data (from 1995 to 2015).\\
+Despite this shortcomings, the accounting approach provides a first approximation measure of the contrasted suceptibility of different sectors and different countries to exchange rate shocks. 
+Hence, though unrealistic, it is useful for identifying which countries and sectors are under pressure to adjust their prices when subject to exchange rate shocks.\\
+\\
+In this paper, we measure the accounting effect of exchange rate fluctuations on consumer price indexes. We use world input-output tables covering twenty years of data (from 1995 to 2015).\\
 Most of the literature on global supply chains has focused on the role of input-output linkages in propagating shocks to production.
 By contrast, we examine the role of input-output linkages in propagating shocks to consumer prices.\\
 We analyse the impact of global inflationary shocks on the main components of consumer prices (manufacturing goods, services, food and energy). 
 We also analyse the impact of global inflationary shocks on the prices of imported and domestic final goods. \\
-We show that, following an appreciation of the domestic currency, the first-round effects (through imported inputs and imported final goods) explain three-quarters of the propagation of global shocks to the domestic consumer price index. 
-By contrast, we find a limited role for secound-round effects, i.e. the additional transmission of lower domestic input prices to other sectors of the domestic economy and to other countries occurring during subsequent production cycles.
-This limited role is the same in absolute terms for most countries.
-Our findings are robust to using three different datasets (two different releases of the OECD TiVA database and WIOD).
-
+In a sample of 43 countries, the mean output-weighted elasticity of the CPI to exchange rate shocks according to WIOD increased in absolute value from 0.075 in 2000 to 0.094 in 2008.
+It then declined to 0.088 in 2014.
+Both recent versions of TIVA yield a similar evolution.
+Input-output mechasims (i.e. not the change in the prices of imported final goods sold directly to domestic consumers) explain a large share of the elasticity, especially for large countries or countries of the Eurozone subject to a shock on the Euro.\\
+%GD 20200619 c’est pas net ce 1st/2nd round.  Je laisse tomber pour quelque chose de plus central pour le papier
+%We show that, following an appreciation of the domestic currency, the first-round effects (through imported inputs and imported final goods) explain three-quarters of the propagation of global shocks to the domestic consumer price index. 
+%By contrast, we find a limited role for secound-round effects, i.e. the additional transmission of lower domestic input prices to other sectors of the domestic economy and to other countries occurring during subsequent production cycles.
+%This limited role is the same in absolute terms for most countries.
+%Our findings are robust to using three different datasets (two different releases of the OECD TiVA database and WIOD).
 The construction of World Input-Output tables (WIOT hereafter) is data-demanding and WIOTs are typically released with a lag of several years.
-As a result, WIOTs are not available for the last five years.
+As a result, at the time of wrinting, the latest WIOT is five year old (2015).
 To address this gap, we use more up-to-date GDP and trade data to approximate the accounting impact of an exchange rate shock on the consumer price index from 2015 onwards.
 Our proxy is helpful for assessing the impact of global value chains shocks on inflation from 2015 onwards.
 
@@ -766,15 +774,29 @@ By contrast, equation \ref{eq:eqtoto} highlights the transmission channels of th
 Figure \ref{fig:decompositionofs} plots the shares of $E1.HC^{i,imp}$, $E2.HC^{i,dom}$, $E3.HC^{i,imp}$ and $E4.HC^i$ in $\overline{s}_{i}^{i,HC}$.  
 $E1.HC^{i,imp}$ dominates. 
 While $E3.HC^{i,imp}$ is negligible, $E4.HC^i$ accounts for 10\% to 30\% of $\overline{s}_{i}^{i,HC}$ for most countries except China.
+On the whole, as shown by Figure \ref{fig:shareofs}, Input-output mechasims (i.e. everything but E1HC) explain a large share of the elasticity, especially for large countries or countries of the Eurozone subject to a shock on the Euro.
 
 \begin{figure}[!h]
 \centering
-\caption{\footnotesize{\textbf{Decomposition of $\overline{s}_{i}^{i,HC}$}}}
+\caption{\footnotesize{\textbf{Decomposition of $\overline{s}_{i}^{i,HC}$} (1)}}
+%La figure vient de Étude rapport D+I et Bouclage Mondial_oil.do
 \begin{tabular}{c}
-\includegraphics[width=5.0in, height=3.5in]{hist_components_WIOD_2014.png}\\
+\includegraphics[width=5.0in, height=3.5in]{distribution_components_WIOD_2014.png}\\
 \floatfoot{Source: WIOD, 2014}. \\
 \end{tabular}
 \label{fig:decompositionofs}
+\end{figure}
+
+
+\begin{figure}[!h]
+	\centering
+	\caption{\footnotesize{\textbf{Decomposition of $\overline{s}_{i}^{i,HC}$} (2)}}
+	%La figure vient de Étude rapport D+I et Bouclage Mondial_oil.do
+	\begin{tabular}{c}
+		\includegraphics[width=5.0in, height=3.5in]{share_components_WIOD_2014.png}\\
+		\floatfoot{Source: WIOD, 2014}. \\
+	\end{tabular}
+	\label{fig:shareofs}
 \end{figure}
 
 $E1$ and $E2$ can be computed with national input-output matrices whereas world input-output matrices are needed for computing $E3$ and $E4$. 
@@ -830,8 +852,9 @@ With the exception of 2009, the relationship is broadly stable (see Figures \ref
 We obtain similar results with TiVA (see Appendix \ref{AppendixFonctionLinéaireTIVA}). 
 % je suggère de retirer cette phrase pour simplifier l'exposé, ou éventuellement d'en faire une note de bas de page
 %The functional form might seem a bit counterintuitive (one might expect that the elasticity is affine function of openness as summarized by E1), but the analytical examination of the two-country, one sector case, shows that it is plausible (see Appendix \ref{AnalyticalAppendix}).
-Our results suggest that we can approximate the elasticity of consumer prices for the most recent years, using the share of imported goods in household consumption and the share of imported inputs in household consumption of domestic goods. The first-round effects are a good predictor of the total effects.
-Yet, care should be taken in extrapolating them as most of the non-first round effects add to the first round rather than amplifying them. They are of similar size for small open economies and large closed ones.
+Our results suggest that we can approximate the elasticity of consumer prices for the most recent years, using the share of imported goods in household consumption and the share of imported inputs in household consumption of domestic goods. E1HC+E2HC are a good predictor of the total effects.
+Yet, care should be taken in extrapolating them as most of the other effects (E3HC+E4HC) add to the first round rather than amplifying them.
+They are of similar size for small open economies and large closed ones.
 It might be that the small economy counterbalances its large openness rate and vis-versa.\footnote{The functional form might seem a bit counterintuitive (one might expect that the elasticity is affine function of openness as summarized by E1), but the analytical examination of the two-country, one sector case, shows that it is plausible (see Appendix \ref{AnalyticalAppendix}).}
 %Back to the main point, it turns out that we do not gain much by inversing matrixes. Of course, this realization is only possible because we were able to computes $\overline{s}_{i}^{i,HC}$ in the first place. Still, it suggests that we could extrapolate the elasticities for not-yet-released years, as long as we have the share of imported goods in household consumption and the share of imported inputs in household consumption of domestic goods. 
 
@@ -1038,12 +1061,15 @@ Based on the third revision of TiVA database, we find that the output-weighted e
 After contracting in 2009, this elasticity has stabilised below its 2008 level, according to WIOD and the fourth revision of the TiVA database.\\
 We also analyse the impact of global inflationary shocks on the main components of consumer prices. 
 Domestic core inflation accounts for a significant share of the total impact, reflecting the weight of domestic services and non-energy industrial goods in total consumption.
-
-Following an exchange rate shock, the first-round effects (through imported inputs and final goods) explain three-quarters of the propagation of global shocks to domestic prices. 
-By contrast, we find a limited role for the secound-round effects, i.e. the additional transmission of lower domestic input prices to other sectors of the domestic economy and other countries occurring during subsequent production cycles.
-The first-round effects are a good predictor of the total effects.
-Yet, care should be taken in extrapolating them as most of the non-first round effects add to the first round rather than amplifying them.
-They are of similar size for small open economies and large closed ones.
+Input-output mechasims (i.e. not the change in the prices of imported final goods sold directly to domestic consumers) explain a large share of the elasticity, especially for large countries or countries of the Eurozone subject to a shock on the Euro.
+%Following an exchange rate shock, the first-round effects (through imported inputs and final goods) explain three-quarters of the propagation of global shocks to domestic prices. 
+%By contrast, we find a limited role for the secound-round effects, i.e. the additional transmission of lower domestic input prices to other sectors of the domestic economy and other countries occurring during subsequent production cycles.
+%The first-round effects are a good predictor of the total effects.
+%Yet, care should be taken in extrapolating them as most of the non-first round effects add to the first round rather than amplifying them.
+%They are of similar size for small open economies and large closed ones.
+%In a sample of 43 countries, the mean output-weighted elasticity of the CPI to exchange rate shocks according to WIOD increased in absolute value from 0.075 in 2000 to 0.094 in 2008.
+%It then declined to 0.088 in 2014.
+%Both recent versions of TIVA yield a similar evolution.
 
 The construction of World Input-Output tables is data-demanding and WIOTs are typically released with a lag of several years.
 To address this gap, we use more up-to-date GDP and trade data to approximate the accounting impact of an exchange rate shock on consumer prices from 2015 onwards. 

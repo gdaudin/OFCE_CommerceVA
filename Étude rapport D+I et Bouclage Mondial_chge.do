@@ -454,19 +454,42 @@ foreach source in  WIOD /*TIVA TIVA_REV4 */{
 	graph dot (asis) E1HC E2HC E3HC E4HC,  over(E1_order, ///
 		label(labsize(tiny))) ///
 		marker(1, ms(O) mfcolor(gs1) mlcolor(gs1) msize(tiny) ) ///
-		marker(2, ms(O) mfcolor(gs5) mlcolor(gs5) msize(tiny) ) ///
+		marker(2, ms(+) mfcolor(gs5) mlcolor(gs5) msize(small) ) ///
 		marker(3, ms(O) mfcolor(gs9) mlcolor(gs9) msize(tiny) ) ///
 		marker(4, ms(O) mfcolor(gs13) mlcolor(gs13) msize(tiny)) ///
 		xsize(9)  ysize(7) ///
-		name(hist_components_`source'_`i', replace) ///
+		name(distr_components_`source'_`i', replace) ///
 		legend(position(3) cols(1)  size(vsmall) label(1 "E1HC: Direct effect" "through imported" "consumption goods") ///
 		label(2 "E2HC: Effect on domestic" "consumption goods" "through imported inputs") ///
 		label(3 "E3HC: Effect on imported" "consumption goods" "through domestic inputs") ///
 		label(4 "E4HC: Residual")) ///
 		scheme(s1mono)
-		graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/hist_components_`source'_`i'.png", replace		
-			
-			
+		
+		graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/distribution_components_`source'_`i'.png", replace	
+		graph export "$dir/commerce_VA_inflation/Rédaction/distribution_components_`source'_`i'.png", replace	
+		
+		gen share_IO_mech = (E4HC+E3HC+E2HC)/pond_`source'_HC
+		gen share_IOT     = (E4HC+E3HC)/pond_`source'_HC
+		format share* %9.2f
+		gsort - share_IOT
+		list pays share_*
+		
+		gen share_IOT_order = _n
+		labmask share_IOT_order,values(pays)
+		
+		graph dot (asis) share_IO_mech share_IOT,  over(share_IOT_order, ///
+			label(labsize(tiny))) ///
+			marker(1, ms(O) mfcolor(gs1) mlcolor(gs1) msize(tiny) ) ///
+			marker(2, ms(O) mfcolor(gs13) mlcolor(gs13) msize(tiny) ) ///
+			xsize(9)  ysize(7) ///
+			name(share_components_`source'_`i', replace) ///
+			legend(position(3) cols(1)  size(vsmall) label(1 "Share of total effect" "going through" "Input-Output mechanisms" "(E2HC+E3HC+E4HC)/Total") ///
+			label(2 "Share of total effect" "requiring WIOT" "for computation" "(E3HC+E4HC)/Total")) ///
+			scheme(s1mono)
+		
+		graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/share_components_`source'_`i'.png", replace	
+		graph export "$dir/commerce_VA_inflation/Rédaction/share_components_`source'_`i'.png", replace	
+				
 		}
 	
 	

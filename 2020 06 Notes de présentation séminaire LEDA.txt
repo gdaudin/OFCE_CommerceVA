@@ -1,0 +1,55 @@
+# Propositions : 
+- Regarder la part de E1HC et des autres en chronologique. Cela, je peux le faire tout seul.
+- Extrapoler pour 2016-2019 à partir des données disponibles. Hadrien, peux-tu m’envoyer la base de données (ie les PIB, importations de biens de consommation au sens BEC et importations d’inputs au sens BEC) pour ces années ?
+- Rajouter des choses pour l’importance des données pour la politique de BCE qui veut atteindre un niveau d’inflation constant
+- Expliciter certains articles de la biblio qui n’ont même pas de série de working paper.
+
+
+
+
+# Questions :
+## Gianluca Orifice : 
+- Compréhension
+- Est-ce qu’il y a un lien avec l’élasticité qui est importante pour le welfare dans les modèle de trade (pas vraiment, il me semble)
+
+
+## Lise Patureau
+- Contraster avec la littérature sur l’ERPT. Voir, au niveau firme, Berman, N., Martin, P., & Mayer, T. (2012). How do different exporters react to exchange rate changes?. The Quarterly Journal of Economics, 127(1), 437-492.
+- Nous avons probablement une sur-estimation du vrai chiffre.
+- Même dans ce cas, c’est intéressant en cross-section. Lien avec les politiques de la banque centrale européenne.
+- Regarder la part de E1HC en dynamique
+
+
+
+
+# Présentation :
+
+
+Merci à tous d’être venu et de continuer à expérimenter ces sessions "Brainstorming". Dans mon cas, il ne s’agit pas vraiment du début d’un projet, mais d’un projet auquel je participe depuis plusieurs années sur le commerce en valeur ajoutée. Sa dernière itération a été faite lorsque j’étais consultant à la Banque de France, entre 2017 et 2019 à la Direction de la Conjoncture et des Prévisions Macroéconomiques et au Service du diagnostic conjoncturel. J’ai travaillé avec Christine Rifflart (qui est là depuis l’origine du projet à l’OFCE), Hadrien Camatte, Violaine Faubert et Antoine Lalliard qui sont à la BdF.
+
+Ils avaient l’air intéressé là bas (et nous en avons sorti un certain nombre de notes aussi). Mais, bon, ma vraie carrière est dans l’université et je dois publier dans des revues scientifiques. Et je crois les intérêts des éditeurs et des lecteurs de revues scientifiques de sont pas les mêmes que ceux des banquiers centraux. Le thème est en dehors de ma zone de confort, et donc j’espère que vous pourriez m’aider ensemble répondre à ces deux questions :
+- Est-ce que cela intéresse des chercheurs en l’état ? Quels sont les journaux qu’ils lisent ?
+- Si non, est-ce qu’il y a moyen de faire des modifications à la marge pour que cela intéresse des chercheurs (et les éditeurs des journaux qu’ils lisent) ? »
+
+Dans un esprit d’expérimentation, je n’ai pas prévu de présentation pour éviter de partir en mode automatique et de me cacher derrière elle. Éventuellement, je vous montrerai des graphiques tirés de l’article. Par contre, j’ai ouvert un outil "brainstorming" sur wooclap. Vous avez reçu l’invitation par le mal de Clémentine. Je mets le lien dans la conversation. Voici le lien. : https://www.wooclap.com/QMHMXX. Je crois que Daniel a projet différent. Cela nous permet d’expérimenter. Sur Wooclap, je vous encourage à poser des questions ou à faire des remarques, puis à approuver les questions ou les remarques des autres. Il y a quatre catégories dans lesquelles mettre vos questions "Qui peut être intéressé par le papier en l’état?" "Comment modifier le papier à la marge pour le rendre plus intéressant pour qui" "demandes de clarifications" et "remises en causes". Parce qu’après tout, vous pouvez penser que je raconte n’importe quoi et qu’il faut que je me remette sérieusement au travail. C’est triste pour mes vraies amours qui se trouvent au XVIIIe siècle, mais je préfère quand même le savoir.
+
+De quoi s’agit-il ? 
+Le titre est 
+Global value chains and the transmission of exchange rate shocks to consumer prices
+L’abstract : 
+Global value chains strengthens cross-country transmission of price shocks through cost- push inflation. We study the impact of exchange rate shocks on consumer price indexes from 1995 to 2015 by using three sectoral world input-output datasets (two versions of TiVA and WIOD). We assume a Leontief framework with no substitution between different consumer goods or inputs. Firms react to price changes of inputs by adjusting their prices to maintain their value-added. In a sample of 43 countries, the mean output-weighted elasticity of the CPI to exchange rate shocks according to WIOD increased in absolute value from 0.075 in 2000 to 0.094 in 2008. It then declined to 0.088 in 2014. Both recent versions of TIVA yield a similar evolution. An issue with our approach is that world input-output databases are only available after a sizeable time gap (the latest data is from 2015). However we show that it is possible to use up-to-date GDP and trade data to extrapolate the impact of exchange rate shock on consumer price index.
+
+La littérature dont cela se rapproche est celle sur les calculs de l’Exchange Rate Pass-Through, qui s’est intéressé au conséquences de l’existence des chaînes de valeur (qui baissent l’ERPT). Elle est essentiellement peuplée de banquiers centraux qui publient des Documents de travail dans les banques. Donc cela ne nous aide pas beaucoup pour savoir comment le publier.
+
+L’exercice ressemble beaucoup à la résolution du price-dual du modèle de Leontief, qui est bien connu. Le problème avec un choc de taux de change, c’est que contrairement à un choc de prix de production, il a un effet différencié suivant les utilisateurs des produits. Donc il faut reprendre la matrice d’input-output mondiale et mettre des zéros pour les échanges qui ne sont pas touchés (soit à l’intérieur de la zone qui partage la monnaie choquée, soit à l’extérieur de la zone). Ce sont les matrices B du papier. Et cela donne l’équation 8 de la page 12. On multiplie ensuite S par le vecteur des dépenses de consommation finales pour obtenir l’effet du choc sur l’indice de prix. Bien sûr, ce n’est qu’un modèle comptable. Les entreprises n’ont pas de comportement d’ajustement des prix, il n’y a pas de substitution entre les biens de consommation et les consommations intermédiaires. Mais cela donne une idée tout de même des pays les plus susceptibles d’être affectés par les phénomènes entrées-sorties. Cela permet de comparer, par exemple, avec les modèles faits par les différentes banques de la zone euro. Mais cela c’est confidentiel et je ne peux pas en parler.
+
+On peut faire cela par pays, sur trois bases de données entre 1995 et 2015. Les choses sont assez cohérentes, malgré les différences entre les trois bases (voir la figure 2 en page 14). L’interprétation est que, en moyenne, suite à une appréciation de 1% de monnaie, les prix à la consommation baissent de 0.12%. 
+
+Nous calculons bien sûr tout cela par pays, nous différencions la contribution de différents biens à l’effet et de différents canaux. Ce qui m’amène à la figure 8 page 18. Les mécanismes liés aux phénomènes I/O dépassent 50% de l’effet total dans beaucoup de grands pays ou de pays de la zone euro soumis à un choc de l’euro. La part qui nécessite des tableaux entrées sortie mondiaux est beaucoup plus faible (forcément), mais pas négligeable.
+
+Le problème c’est que ces tableaux entrées sorties mondiaux ils sont un peu compliqués à obtenir. Les plus récents sont de 2015. Cela ne permet pas de faire de la conjoncture. Du coup, la dernière partie du papier examine si on peut extrapoler les élasticités passées sur le présent par des méthodes utilisant des données beaucoup plus simples à collecter. C’est effectivement le cas. Nous essayons plusieurs choses, mais le résultat le plus intéressant est la figure 15 de la page 23. Elle compare la prédiction d’une régression en panel sur 2000-2008 pour prédire l’élasticité de 2014 en utilisant simplement le taux d’ouverture restreint aux importations de biens de consommation et de consommation intermédiaire (donc en excluant les importations de bien de capital) grâce à la classification BEC. Le fit entre le prédit et le calculé finement est assez bon, notamment grace à l’utilisation d’effet fixes pays.
+
+Voilà. Nous avons mis au point un modèle comptable sur l’effet des chocs de change sur les prix intérieurs. Ce modèle n’est pas conceptuellement compliqué, mais un peu difficile à implémenter, nous avons comparé les résultats donnés par trois bases de données différentes. Nous avons montré qu’on pouvait extrapoler aux années récentes à partir de données faciles à obtenir. 
+
+Qu’en pensez-vous ?
+

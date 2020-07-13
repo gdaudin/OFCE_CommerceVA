@@ -350,7 +350,7 @@ twoway 	(line WIOD_elast_annual year, lcolor(blue) lpattern(dash)) ///
 		(line TIVA_REV4_elast_annual_pond year, lcolor(green)), ///
 		legend(label(1 "WIOD") label(2 "WIOD, output weighted") ///
 		label(3 "TIVA rev3") label(4 "TIVA rev3, output weighted")  /// 
-		label(5 "TIVA rev4") label(6 "TIVA_rev4, output weighted"))  /// 
+		label(5 "TIVA rev4") label(6 "TIVA rev4, output weighted"))  /// 
 		ytitle("elasticity (absolute value)", ) ///
 		note("The average CPI elasticity has been computed from each of countries" ///
 		"in a common 43 countries sample (assuming no Eurozone)" ///

@@ -302,11 +302,11 @@ local WIOD_pred=2014
 local TIVA_REV4_pred=2015
 local TIVA_pred = 2011
 
-
+save "$dir/Bases_Sources/Doigt_mouillé_panel.dta", replace
 
 *****************Pour les prédictions après Panel
 
-
+use "$dir/Bases_Sources/Doigt_mouillé_panel.dta", clear
 foreach reg in reg2 reg1 {
 
 	if "`reg'"=="reg1" {
@@ -374,5 +374,77 @@ foreach reg in reg2 reg1 {
 
 
 
+***** pour les graphiques de prédiction (en reg1 -- sans eurostat) ni trend
 
+use "$dir/Bases_Sources/Doigt_mouillé_panel.dta", clear
+drop if strpos(pays,"_EUR")!=0
+replace ratio_impt_conso=impt_conso/GDP
+replace ratio_impt_interm = impt_interm/GDP
+drop if ratio_impt_conso==.
+drop if ratio_impt_interm==.
+
+egen Y_tot_per_year=total(GDP), by(year)
+gen weight=GDP/Y_tot_per_year
+
+gen ratio_impt_conso_pond = ratio_impt_conso*weight
+gen ratio_impt_interm_pond = ratio_impt_interm*weight
+
+egen ratio_impt_conso_mean = total(ratio_impt_conso_pond), by(year)
+egen ratio_impt_interm_mean = total(ratio_impt_interm_pond), by(year)
+
+
+
+
+foreach source in WIOD TIVA TIVA_REV4 {
+	*reg pond_`source'_HC ratio_impt_conso ratio_impt_interm i.pays_num
+	reg pond_`source'_HC ratio_impt_conso ratio_impt_interm ratio_impt_conso_mean ratio_impt_interm_mean i.pays_num
+	predict x_`source' /*if year >= 2010  & pond_`source'_HC ==. */
+}
+	
+global common_sample "   AUS AUT BEL BGR BRA CAN CHE" 
+global common_sample "$common_sample CHN CYP CZE DEU DNK ESP EST FIN"
+global common_sample "$common_sample FRA GBR GRC     HRV HUN IDN IND IRL        ITA JPN     KOR"
+global common_sample "$common_sample LTU LUX LVA MEX              MLT     NLD NOR        POL PRT"
+global common_sample "$common_sample ROU RUS       SVK SVN SWE       TUR TWN USA        "
+
+keep if strpos("$common_sample",pays)!=0
+
+
+
+foreach source in WIOD TIVA TIVA_REV4 {	
+	gen elast_pond=pond_`source'_HC*weight
+	gen elast_pond_pred=x_`source'*weight
+	egen `source'_elast_annual_pond=total(elast_pond), by(year)
+	egen `source'_elast_annual_pond_pred=total(elast_pond_pred), by(year)
+	drop elast_pond elast_pond_pred
+	replace `source'_elast_annual_pond=. if `source'_elast_annual_pond==0 
+	replace `source'_elast_annual_pond_pred=. if `source'_elast_annual_pond_pred==0 
+}
+
+
+
+
+drop pays
+sort year
+bys year: keep if _n==1
+keep year WIOD_elast_annual_pond-TIVA_REV4_elast_annual_pond_pred
+
+
+twoway 	(line WIOD_elast_annual_pond year, lcolor(blue)) ///
+		(line WIOD_elast_annual_pond_pred year, lcolor(blue) lpattern(dash)) ///
+		(line TIVA_elast_annual_pond year, lcolor(red)) ///
+		(line TIVA_elast_annual_pond_pred year, lcolor(red) lpattern(dash)) ///
+		(line TIVA_REV4_elast_annual_pond year, lcolor(green)) ///
+		(line TIVA_REV4_elast_annual_pond_pred year, lcolor(green) lpattern(dash)), ///
+		legend(label(2 "predicted WIOD") label(1 "WIOD ") ///
+		label(4 "predicted TIVA rev3") label(3 "TIVA rev3")  /// 
+		label(6 "predicted TIVA rev4") label(5 "TIVA rev4"))  /// 
+		ytitle("elasticity (absolute value)" "output weighted", ) ///
+		note("The average CPI elasticity has been computed from each of countries" ///
+		"in a common 43 countries sample (assuming no Eurozone)" ///
+		"and aggregated using an output weighted mean") ///
+		scheme(s1mono)
+
+
+graph export  "$dir/commerce_VA_inflation/Rédaction/predictions_reg1_doigt_mouille_trend_no.png", replace
 

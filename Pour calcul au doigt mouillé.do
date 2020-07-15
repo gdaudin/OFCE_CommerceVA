@@ -95,6 +95,10 @@ save "$dir/Bases_Sources/Doigt_mouillé.dta", replace
 drop if year==1995 | year==1996 | year==1997
 
 
+egen Y_tot_per_year=total(GDP), by(year)
+gen weight=GDP/Y_tot_per_year
+
+
 save "$dir/Bases_Sources/Doigt_mouillé.dta", replace
 
 
@@ -193,7 +197,7 @@ foreach reg in reg2 reg1 {
 				*/ (rarea high_E1_E2 low_E1_E2 year if source=="WIOD" , fcolor(%20)  ) (connected b_E1_E2 year if source=="WIOD"), /*
 				*/ legend( order(1 3 5) label(1 TIVA) label(3 TIVA_REV4) label(5 WIOD) ) /*
 				*/ title(beta)
-	graph export "$dir/Results/`reg'_beta.pdf", replace
+	graph export "$dir/Results/`reg'_beta.png", replace
 	
 	/*if "`reg'"=="reg2"*/ label var b_E1_E2 "Coefficient of the proxy of E1HC+E2HC (with 95% confidence intervals)"
 	label var R2 "R2"
@@ -208,8 +212,8 @@ foreach reg in reg2 reg1 {
 		(connected R2 year  if source=="WIOD",  lcolor(turquoise) msize(small) mcolor(turquoise))   ///
 		,/*yscale(range(1 (0.05) 1.15)) ylabel(1 (0.05) 1.15)*/ legend(order (1 4) rows(2) size(small)) ///
 		scheme(s1color)
-	graph export "$dir/Results/`reg'_beta_WIOD.pdf", replace
-	graph export "$dir/commerce_VA_inflation/Rédaction/`reg'_beta_WIOD.pdf", replace
+	graph export "$dir/Results/`reg'_beta_WIOD.png", replace
+	graph export "$dir/commerce_VA_inflation/Rédaction/`reg'_beta_WIOD.png", replace
 	
 
 	
@@ -221,7 +225,7 @@ foreach reg in reg2 reg1 {
 				*/ (rarea high_interm low_interm year if source=="WIOD" , fcolor(%20)  ) (connected b_interm year if source=="WIOD"), /*
 				*/ legend( order(1 3 5) label(1 TIVA) label(3 TIVA_REV4) label(5 WIOD) )  /*
 				*/ title(gamma)
-	graph export "$dir/Results/`reg'_gamma_`source'_`y'.pdf", replace
+	graph export "$dir/Results/`reg'_gamma_`source'_`y'.png", replace
 	*/
 	
 	gen high_cst=b_cst-1.96*se_cst
@@ -231,7 +235,7 @@ foreach reg in reg2 reg1 {
 				*/ (rarea high_cst low_cst year if source=="WIOD" , fcolor(%20)  ) (connected b_cst year if source=="WIOD"), /*
 				*/ legend( order(1 3 5) label(1 TIVA) label(3 TIVA_REV4) label(5 WIOD) ) /*
 				*/ title(alpha)
-	graph export "$dir/Results/`reg'_alpha.pdf", replace
+	graph export "$dir/Results/`reg'_alpha.png", replace
 	
 	
 		graph twoway (connected R2 year if source=="TIVA") /*
@@ -239,12 +243,13 @@ foreach reg in reg2 reg1 {
 				*/   (connected R2 year if source=="WIOD"), /*
 				*/ legend( order(1 2 3) label(1 TIVA) label(2 TIVA_REV4) label(3 WIOD) ) /*
 				*/ title(R2)
-	graph export "$dir/Results/`reg'_R2.pdf", replace
+	graph export "$dir/Results/`reg'_R2.png", replace
 	
 	
 }
 
-***************** Pour les calculs en panel
+*******************************************
+***************** Régressions en panel
 
 use "$dir/Bases_Sources/Doigt_mouillé.dta", clear
 	
@@ -279,34 +284,43 @@ tsset pays_num year
 generate ratio_impt_conso=impt_conso/conso
 generate ratio_impt_interm = impt_interm/conso_interm*(1-impt_conso/conso)
 
+gen ratio_impt_conso_pond = ratio_impt_conso*weight
+gen ratio_impt_interm_pond = ratio_impt_interm*weight
 
+egen ratio_impt_conso_mean = total(ratio_impt_conso_pond), by(year)
+egen ratio_impt_interm_mean = total(ratio_impt_interm_pond), by(year)
 
 foreach source in WIOD TIVA TIVA_REV4 {
-
-	reg pond_`source'_HC ratio_impt_conso ratio_impt_interm i.pays_num
-	predict x
-	replace x = -x
 	replace pond_`source'_HC=-pond_`source'_HC
+}
+
+
+save "$dir/Bases_Sources/Doigt_mouillé_panel.dta", replace
+foreach source in WIOD TIVA TIVA_REV4 {
+	reg pond_`source'_HC ratio_impt_conso ratio_impt_interm ratio_impt_conso_mean ratio_impt_interm_mean i.pays_num
+	predict x
 	gen y=x
 	gen z=pond_`source'_HC
 	graph twoway (scatter x pond_`source'_HC, mlabel(pays)) (line x y) (line z pond_`source'_HC), /*
 	*/ title (Reg2_`source'_panel) /*
 	 */ name("resultats_panel_`source'", replace)
-	graph export  "$dir/Results/resultats_doigt_mouillé_panel_`source'.pdf", replace
+	graph export  "$dir/Results/resultats_doigt_mouillé_panel_`source'.png", replace
 	drop x
 	drop y
 	drop z
 }
 
-local WIOD_pred=2014
-local TIVA_REV4_pred=2015
-local TIVA_pred = 2011
 
-save "$dir/Bases_Sources/Doigt_mouillé_panel.dta", replace
+
 
 *****************Pour les prédictions après Panel
 
 use "$dir/Bases_Sources/Doigt_mouillé_panel.dta", clear
+
+local WIOD_pred=2014
+local TIVA_REV4_pred=2015
+local TIVA_pred = 2011
+
 foreach reg in reg2 reg1 {
 
 	if "`reg'"=="reg1" {
@@ -318,22 +332,8 @@ foreach reg in reg2 reg1 {
 		replace ratio_impt_interm = impt_interm/conso_interm*(1-impt_conso/conso)
 	}
 	
-	egen Y_tot_per_year=total(GDP), by(year)
-	gen weight=GDP/Y_tot_per_year
-
-	gen ratio_impt_conso_pond = ratio_impt_conso*weight
-	gen ratio_impt_interm_pond = ratio_impt_interm*weight
-
-	egen ratio_impt_conso_mean = total(ratio_impt_conso_pond), by(year)
-	egen ratio_impt_interm_mean = total(ratio_impt_interm_pond), by(year)
-
-
-	
-	
-	
-	
-	foreach lag_pred of numlist 1(1)8 {
-		foreach source in WIOD TIVA TIVA_REV4 {
+	foreach lag_pred of numlist/*1(1)8*/ 6 {
+		foreach source in WIOD /*TIVA TIVA_REV4*/ {
 			foreach trend in no yes {
 				local `source'_out = ``source'_pred'-`lag_pred'+1
 				
@@ -397,8 +397,14 @@ replace ratio_impt_interm = impt_interm/GDP
 drop if ratio_impt_conso==.
 drop if ratio_impt_interm==.
 
+
+
+drop Y_tot_per_year weight ratio_impt_conso_pond ratio_impt_interm_pond ratio_impt_conso_mean ratio_impt_interm_mean
+
 egen Y_tot_per_year=total(GDP), by(year)
 gen weight=GDP/Y_tot_per_year
+
+
 
 gen ratio_impt_conso_pond = ratio_impt_conso*weight
 gen ratio_impt_interm_pond = ratio_impt_interm*weight

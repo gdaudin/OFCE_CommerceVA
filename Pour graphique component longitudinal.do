@@ -135,6 +135,28 @@ twoway 	(line WIOD_share_IOT year, lcolor(blue) lpattern(dash)) ///
 graph export "$dir/Results/Components en longitudinal/Share_going_through_IOT.png", replace
 		
 
+twoway 	(line WIOD_share_IO_mech_pond year, lcolor(blue) ) ///
+		(line WIOD_share_IOT_pond year, lcolor(blue) lpattern(dash) yaxis(2)) ///
+		(line TIVA_share_IO_mech_pond year, lcolor(red) ) ///
+		(line TIVA_share_IOT_pond year, lcolor(red) lpattern(dash) yaxis(2)) ///
+		(line TIVA_REV4_share_IO_mech_pond year, lcolor(green) ) ///
+		(line TIVA_REV4_share_IOT_pond year, lcolor(green) lpattern(dash) yaxis(2)), ///
+		legend(label(1 "WIOD, share of total effect going through Input-Output mechanisms") ///
+		label(4 "WIOD, share of total effect requiring WIOT (right axis)") ///
+		label(2 "TIVA rev3, share of total effect going through Input-Output mechanisms") ///
+		label(5 "TIVA rev3, share of total effect requiring WIOT (right axis)")  /// 
+		label(3 "TIVA rev4, share of total effect going through Input-Output mechanisms") ///
+		label(6 "TIVA rev4, share of total effect requiring WIOT (right axis)") row(6) size(small)) ///
+		ytitle("Output-weighted mean") ///
+		note("The average share has been computed from each of countries" ///
+		"in a common 43 countries sample (assuming no Eurozone)" ///
+		"and aggregated using an output weighted mean") ///
+		scheme(s1mono)
+
+		
+graph export "$dir/Results/Components en longitudinal/Share_GDP-weighted.png", replace
+graph export "$dir/commerce_VA_inflation/Rédaction/Share_GDP-weighted.png", replace
+		
 
 
 

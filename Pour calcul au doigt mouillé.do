@@ -318,13 +318,27 @@ foreach reg in reg2 reg1 {
 		replace ratio_impt_interm = impt_interm/conso_interm*(1-impt_conso/conso)
 	}
 	
+	egen Y_tot_per_year=total(GDP), by(year)
+	gen weight=GDP/Y_tot_per_year
+
+	gen ratio_impt_conso_pond = ratio_impt_conso*weight
+	gen ratio_impt_interm_pond = ratio_impt_interm*weight
+
+	egen ratio_impt_conso_mean = total(ratio_impt_conso_pond), by(year)
+	egen ratio_impt_interm_mean = total(ratio_impt_interm_pond), by(year)
+
+
+	
+	
+	
+	
 	foreach lag_pred of numlist 1(1)8 {
 		foreach source in WIOD TIVA TIVA_REV4 {
 			foreach trend in no yes {
 				local `source'_out = ``source'_pred'-`lag_pred'+1
 				
-				if "`trend'"=="no" reg pond_`source'_HC ratio_impt_conso ratio_impt_interm i.pays_num if year <``source'_out'
-				if "`trend'"=="yes" reg pond_`source'_HC ratio_impt_conso ratio_impt_interm i.pays_num year if year <``source'_out'
+				if "`trend'"=="no" reg pond_`source'_HC ratio_impt_conso ratio_impt_interm i.pays_num ratio_impt_conso_mean ratio_impt_interm_mean if year <``source'_out'
+				if "`trend'"=="yes" reg pond_`source'_HC ratio_impt_conso ratio_impt_interm i.pays_num year ratio_impt_conso_mean ratio_impt_interm_mean if year <``source'_out'
 				predict x if year== ``source'_pred'
 				gen y=x
 				gen z=pond_`source'_HC
@@ -409,6 +423,9 @@ global common_sample "$common_sample ROU RUS       SVK SVN SWE       TUR TWN USA
 
 keep if strpos("$common_sample",pays)!=0
 
+drop Y_tot_per_year weight
+egen Y_tot_per_year=total(GDP), by(year)
+gen weight=GDP/Y_tot_per_year
 
 
 foreach source in WIOD TIVA TIVA_REV4 {	

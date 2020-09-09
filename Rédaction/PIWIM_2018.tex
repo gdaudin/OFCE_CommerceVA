@@ -220,11 +220,31 @@ The standard I-O model relies on input-output tables registering transactions of
 By extension, a "world" I-O table (WIOT) describes the sale and purchase relationships between producers and consumers in the whole world, differentiating between sectors in different countries.
 The WIOT has, on its diagonal, the country blocks with flows of domestic transactions of intermediate goods and services between industries.
 The "bilateral" blocks outside of the diagonal represent international flows of intermediate goods and services via bilateral sectoral exports and imports. \\
-Assuming no input substitution between industries or countries (i.e. assuming that technical coefficients are fixed) and a complete cost pass-through, we can derive a price equation.\\
+Assuming a Cobb-Douglas production function with coefficent indicated by the technical coefficients and a complete cost pass-through, we can derive a price equation (we follow the method in \citep{DeSoyres2018}. ).\\
 %The rows of the table contain information on the distribution of the output of industries over use categories.
-We define $N$ as the product of the number of countries ($I$) and the number of sectors ($J$), $\cal A$ the matrix of technical input coefficient of dimension $(N, N)$, and $Y$ the output vector of dimension $(1, N)$. \\
-$Y=(y_1\ldots y_N)$ with $y_n=p_n*q_n$, with $p_n$ the price and $q_n$ the quantity of product from country $n$. We normalize quantity units such as  $p_n=1$. \\
+We define $N$ as the product of the number of countries ($I$) and the number of sectors ($J$), $\cal A$ the matrix of technical input coefficient of dimension $(N, N)$, and $Y$ the gross output vector of dimension $(1, N)$. \\
+%$Y=(y_1\ldots y_N)$ with $y_n=p_n*q_n$, with $p_n$ the price and $q_n$ the quantity of product from country $n$. We normalize quantity units such as  $p_n=1$. \\
 %GD20200620 plutôt que $q_n=1$, il me semble. \\
+In each sector of each (country,sector) there is a representative firm producing with domestic production factors ($V$) and domestic and imported intermediary inputs $m$ according to a Cobb-Douglas technology:
+\begin{eqnarray*}
+Y_n=V^{\gamma_n}_n \times \prod_{n’=1}^{n’=N} {m_{n,n’}}^{a_{n,n’}} \text{ with } \gamma_n +\sum_{n’=1}^{n’=N} {a_{n,n’}} =1
+\end{eqnarray*}
+Where $\gamma_n$ is the domestic production factors share, $a_{n,n’}$ the share of output from (country,sector) $n’$ in the total production of (country,sector) $n$. ///
+Assuming perfectly competitive firms and price at marginal cost, standard cost minimization for each country leads to the following pricing system:
+%https://mbounthavong.com/blog/2019/2/19/cobb-douglas-production-function-and-total-costs
+\begin{eqnarray*}
+	p_n=x_n \times w_n^{\gamma_k} \times \prod_{n’=1}^{n’=N}p_{n’}^{a_{n,n’}}, \forall n 
+\end{eqnarray*}
+
+With $x$ the unit income of domestic production factors and $x_n$ a constant depending only on parameters
+
+\begin{eqnarray*}
+	x_n=\gamma_k^{-\gamma_k} \times \prod_{n’=1}^{n’=N}a_{n,n’}^{-a_{n,n’}}
+\end{eqnarray*}
+
+
+
+ for sector 
 Define $P$ the vector of prices of dimension $(1, N)$ and $V$ the vector of factor income of dimension $(1, N)$ needed to produce one unit of good in each sector. The price of each good is equal to the cost of producing it: $P=P{\cal A}+V$. \\
 
 Suppose an exogenous input price shock. Firms face a change in their costs, which - by hypothesis - they pass on directly to their prices to keep factor incomes constant.

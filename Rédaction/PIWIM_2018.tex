@@ -229,38 +229,47 @@ In each sector of each (country,sector) there is a representative firm producing
 \begin{eqnarray*}
 Y_n=V^{\gamma_n}_n \times \prod_{n’=1}^{n’=N} {m_{n,n’}}^{a_{n,n’}} \text{ with } \gamma_n +\sum_{n’=1}^{n’=N} {a_{n,n’}} =1
 \end{eqnarray*}
-Where $\gamma_n$ is the domestic production factors share, $a_{n,n’}$ the share of output from (country,sector) $n’$ in the total production of (country,sector) $n$. ///
+Where $\gamma_n$ is the domestic production factors share, $a_{n,n’}$ the share of output from (country,sector) $n’$ in the total production of (country,sector) $n$. \\ 
 Assuming perfectly competitive firms and price at marginal cost, standard cost minimization for each country leads to the following pricing system:
 %https://mbounthavong.com/blog/2019/2/19/cobb-douglas-production-function-and-total-costs
 \begin{eqnarray*}
 	p_n=x_n \times w_n^{\gamma_k} \times \prod_{n’=1}^{n’=N}p_{n’}^{a_{n,n’}}, \forall n 
 \end{eqnarray*}
 
-With $x$ the unit income of domestic production factors and $x_n$ a constant depending only on parameters
+With $x$ the unit income of domestic production factors and $x_n$ a constant depending only on parameters:
 
 \begin{eqnarray*}
 	x_n=\gamma_k^{-\gamma_k} \times \prod_{n’=1}^{n’=N}a_{n,n’}^{-a_{n,n’}}
 \end{eqnarray*}
 
+Taking logs, we have:
 
-
- for sector 
-Define $P$ the vector of prices of dimension $(1, N)$ and $V$ the vector of factor income of dimension $(1, N)$ needed to produce one unit of good in each sector. The price of each good is equal to the cost of producing it: $P=P{\cal A}+V$. \\
-
-Suppose an exogenous input price shock. Firms face a change in their costs, which - by hypothesis - they pass on directly to their prices to keep factor incomes constant.
-Define ${{\Delta }^{0}}P$ the shock vector of dimension $(1, N)$ computed as the difference between the original price vector $P^0$ and the new  vector $P^1$. Then:
 \begin{eqnarray*}
-\Delta ^{0}P=P^1-P^0=C, 
+	log(p_n) = log(x_n) + \gamma_n log(w_n) + \sum_{n’=1}^{n’=N}a_{n,n’}.log(p_{n’}), \forall n
 \end{eqnarray*}
-with $C$ the shock vector of dimension (1,N) that contains the direct effect of the shock on prices.\\
+
+Define $P$ the vector of prices , $Z$ a vector of $log(x_n)+\gamma_n.log(w_n)$, all of dimension of dimension $(1,N)$ : 
+
+\begin{eqnarray}
+	log(P)=Z + log(P){\cal A}
+	\label{eq:priceequation} 
+\end{eqnarray}
+
+Suppose an exogenous input price shock defined in log points (approximating percentages for small shocks). 
+Define ${{\Delta }^{0}}log(P)$ the shock vector of dimension $(1, N)$ computed as the difference between the original price vector $log(P^0)$ and the new  vector $log(P^1)$. Then:
+\begin{eqnarray*}
+\Delta ^0 log(P)=log(P^1)-log(P^0)=C, 
+\end{eqnarray*}
+with $C$ the shock vector of dimension (1,N) that contains the direct effect of the shock on prices expressed in log points.\\
 $C$ directly affects the consumer price index.
 %Under these conditions, for each industry $i$, the shock can be written as the absolute difference between the initial production price and the new production price invoiced following the shock ("shocked price" hereafter).\\
-Furthermore, the price change is transmitted to country-specific industries that use shocked products as intermediate consumptions. The higher their reliance on shocked inputs, the higher the variation in their prices.\\
-In a first step, the impact of the shock on each country-specific industry's output prices amounts to $\Delta^{1}P=C{\cal A}$.\\
-In a second step, the shock is passed on to all country-specific industries using these shocked inputs in their production processes. For the $k^{th}$ step, the increase in production prices amounts to $\Delta^k P=C{\cal A}^k$.\\
+Firms face a change in their costs, which - by hypothesis - they pass on directly to their prices to keep factor incomes constant.
+Hence, the price change is transmitted to country-specific industries that use shocked products as intermediate consumptions. The higher their reliance on shocked inputs, the higher the variation in their prices.\\
+In a first step, the impact of the shock on each country-specific industry's output prices amounts to $\Delta^{1}log(P)=C{\cal A}$.\\
+In a second step, the shock is passed on to all country-specific industries using these shocked inputs in their production processes. For the $k^{th}$ step, the increase in production prices amounts to $\Delta^k log(P)=C{\cal A}^k$.\\
 As the technical coefficients are smaller than 1, the effect of the shock on input prices wears out as $k$ increases.
 The overall effect of the shock is equal to the sum of the initial shock and all the changes in each step.
-Let us call $S$ the total effect of the shock on prices, a vector $(1, N)$ composed of the elements $s_{ij}$ measuring the total effect of the shock on the price of sector $j$ in country $i$. We have: 
+Let us call $S$ the total effect of the shock on prices (in log points), a vector $(1, N)$ composed of the elements $s_{ij}$ measuring the total effect of the shock on the price of sector $j$ in country $i$. We have: 
 
 \begin{eqnarray}
 S=C {\left( I+{\cal A}+{\cal A}^2+...+{\cal A}^k+...\right)} =C {\left( I-{\cal A} \right)}^{-1}
@@ -268,9 +277,9 @@ S=C {\left( I+{\cal A}+{\cal A}^2+...+{\cal A}^k+...\right)} =C {\left( I-{\cal 
 \end{eqnarray}
 
 
-with ${\left( I-{\cal A} \right)}^{-1}$ the well-known of Leontief inverse matrix.
+with ${\left( I-{\cal A} \right)}^{-1}$ the well-known of Leontief inverse matrix. If the shock is small enough, $S$ can be understood as the elasticity of price to an price shock. 
 
-% vous citez aussi bien tiva et wiod dans les résultats, je suggère donc de rebaptiser le titre
+
 \subsection{Data}
 \label{subsec:data}
 

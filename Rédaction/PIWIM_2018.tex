@@ -220,27 +220,56 @@ The standard I-O model relies on input-output tables registering transactions of
 By extension, a "world" I-O table (WIOT) describes the sale and purchase relationships between producers and consumers in the whole world, differentiating between sectors in different countries.
 The WIOT has, on its diagonal, the country blocks with flows of domestic transactions of intermediate goods and services between industries.
 The "bilateral" blocks outside of the diagonal represent international flows of intermediate goods and services via bilateral sectoral exports and imports. \\
-Assuming no input substitution between industries or countries (i.e. assuming that technical coefficients are fixed) and a complete cost pass-through, we can derive a price equation.\\
+Assuming a Cobb-Douglas production function with coefficent indicated by the technical coefficients and a complete cost pass-through, we can derive a price equation (we follow the method in \citep{DeSoyres2018}. ).\\
 %The rows of the table contain information on the distribution of the output of industries over use categories.
-We define $N$ as the product of the number of countries ($I$) and the number of sectors ($J$), $\cal A$ the matrix of technical input coefficient of dimension $(N, N)$, and $Y$ the output vector of dimension $(1, N)$. \\
-$Y=(y_1\ldots y_N)$ with $y_n=p_n*q_n$, with $p_n$ the price and $q_n$ the quantity of product from country $n$. We normalize quantity units such as  $p_n=1$. \\
+We define $N$ as the product of the number of countries ($I$) and the number of sectors ($J$), $\cal A$ the matrix of technical input coefficient of dimension $(N, N)$, and $Y$ the gross output vector of dimension $(1, N)$. \\
+%$Y=(y_1\ldots y_N)$ with $y_n=p_n*q_n$, with $p_n$ the price and $q_n$ the quantity of product from country $n$. We normalize quantity units such as  $p_n=1$. \\
 %GD20200620 plutôt que $q_n=1$, il me semble. \\
-Define $P$ the vector of prices of dimension $(1, N)$ and $V$ the vector of factor income of dimension $(1, N)$ needed to produce one unit of good in each sector. The price of each good is equal to the cost of producing it: $P=P{\cal A}+V$. \\
-
-Suppose an exogenous input price shock. Firms face a change in their costs, which - by hypothesis - they pass on directly to their prices to keep factor incomes constant.
-Define ${{\Delta }^{0}}P$ the shock vector of dimension $(1, N)$ computed as the difference between the original price vector $P^0$ and the new  vector $P^1$. Then:
+In each sector of each (country,sector) there is a representative firm producing with domestic production factors ($V$) and domestic and imported intermediary inputs $m$ according to a Cobb-Douglas technology:
 \begin{eqnarray*}
-\Delta ^{0}P=P^1-P^0=C, 
+Y_n=V^{\gamma_n}_n \times \prod_{n’=1}^{n’=N} {m_{n,n’}}^{a_{n,n’}} \text{ with } \gamma_n +\sum_{n’=1}^{n’=N} {a_{n,n’}} =1
 \end{eqnarray*}
-with $C$ the shock vector of dimension (1,N) that contains the direct effect of the shock on prices.\\
+Where $\gamma_n$ is the domestic production factors share, $a_{n,n’}$ the share of output from (country,sector) $n’$ in the total production of (country,sector) $n$. \\ 
+Assuming perfectly competitive firms and price at marginal cost, standard cost minimization for each country leads to the following pricing system:
+%https://mbounthavong.com/blog/2019/2/19/cobb-douglas-production-function-and-total-costs
+\begin{eqnarray*}
+	p_n=x_n \times w_n^{\gamma_k} \times \prod_{n’=1}^{n’=N}p_{n’}^{a_{n,n’}}, \forall n 
+\end{eqnarray*}
+
+With $x$ the unit income of domestic production factors and $x_n$ a constant depending only on parameters:
+
+\begin{eqnarray*}
+	x_n=\gamma_k^{-\gamma_k} \times \prod_{n’=1}^{n’=N}a_{n,n’}^{-a_{n,n’}}
+\end{eqnarray*}
+
+Taking logs, we have:
+
+\begin{eqnarray*}
+	log(p_n) = log(x_n) + \gamma_n log(w_n) + \sum_{n’=1}^{n’=N}a_{n,n’}.log(p_{n’}), \forall n
+\end{eqnarray*}
+
+Define $P$ the vector of prices , $Z$ a vector of $log(x_n)+\gamma_n.log(w_n)$, all of dimension of dimension $(1,N)$ : 
+
+\begin{eqnarray}
+	log(P)=Z + log(P){\cal A}
+	\label{eq:priceequation} 
+\end{eqnarray}
+
+Suppose an exogenous input price shock defined in log points (approximating percentages for small shocks). 
+Define ${{\Delta }^{0}}log(P)$ the shock vector of dimension $(1, N)$ computed as the difference between the original price vector $log(P^0)$ and the new  vector $log(P^1)$. Then:
+\begin{eqnarray*}
+\Delta ^0 log(P)=log(P^1)-log(P^0)=C, 
+\end{eqnarray*}
+with $C$ the shock vector of dimension (1,N) that contains the direct effect of the shock on prices expressed in log points.\\
 $C$ directly affects the consumer price index.
 %Under these conditions, for each industry $i$, the shock can be written as the absolute difference between the initial production price and the new production price invoiced following the shock ("shocked price" hereafter).\\
-Furthermore, the price change is transmitted to country-specific industries that use shocked products as intermediate consumptions. The higher their reliance on shocked inputs, the higher the variation in their prices.\\
-In a first step, the impact of the shock on each country-specific industry's output prices amounts to $\Delta^{1}P=C{\cal A}$.\\
-In a second step, the shock is passed on to all country-specific industries using these shocked inputs in their production processes. For the $k^{th}$ step, the increase in production prices amounts to $\Delta^k P=C{\cal A}^k$.\\
+Firms face a change in their costs, which - by hypothesis - they pass on directly to their prices to keep factor incomes constant.
+Hence, the price change is transmitted to country-specific industries that use shocked products as intermediate consumptions. The higher their reliance on shocked inputs, the higher the variation in their prices.\\
+In a first step, the impact of the shock on each country-specific industry's output prices amounts to $\Delta^{1}log(P)=C{\cal A}$.\\
+In a second step, the shock is passed on to all country-specific industries using these shocked inputs in their production processes. For the $k^{th}$ step, the increase in production prices amounts to $\Delta^k log(P)=C{\cal A}^k$.\\
 As the technical coefficients are smaller than 1, the effect of the shock on input prices wears out as $k$ increases.
 The overall effect of the shock is equal to the sum of the initial shock and all the changes in each step.
-Let us call $S$ the total effect of the shock on prices, a vector $(1, N)$ composed of the elements $s_{ij}$ measuring the total effect of the shock on the price of sector $j$ in country $i$. We have: 
+Let us call $S$ the total effect of the shock on prices (in log points), a vector $(1, N)$ composed of the elements $s_{ij}$ measuring the total effect of the shock on the price of sector $j$ in country $i$. We have: 
 
 \begin{eqnarray}
 S=C {\left( I+{\cal A}+{\cal A}^2+...+{\cal A}^k+...\right)} =C {\left( I-{\cal A} \right)}^{-1}
@@ -248,9 +277,9 @@ S=C {\left( I+{\cal A}+{\cal A}^2+...+{\cal A}^k+...\right)} =C {\left( I-{\cal 
 \end{eqnarray}
 
 
-with ${\left( I-{\cal A} \right)}^{-1}$ the well-known of Leontief inverse matrix.
+with ${\left( I-{\cal A} \right)}^{-1}$ the well-known of Leontief inverse matrix. If the shock is small enough, $S$ can be understood as the elasticity of price to an price shock. 
 
-% vous citez aussi bien tiva et wiod dans les résultats, je suggère donc de rebaptiser le titre
+
 \subsection{Data}
 \label{subsec:data}
 
@@ -362,43 +391,41 @@ The effects of the shock spread over multiple simultaneous production cycles. Th
 The overall impact on prices in dollar terms in country $A$ is therefore lower than the initial exchange rate shock, as national currency prices are also affected. 
 For country $B$, the final impact is equal to the cumulative direct and indirect effects of the higher prices of imported inputs.\\
 
-In a global economy composed of $I$ countries, each with $J$ sectors, the appreciation of a country's currency $i$ against all other currencies translates into a rise in country $i$'s prices in dollars. The price of each sector will vary in dollar terms by: $c_\$^i$ for sectors in the shock-stricken country$~i$ and 0 in other countries. \\
+In a global economy composed of $I$ countries, each with $J$ sectors, the appreciation of a country's currency $i$ against all other currencies translates into a rise in country $i$'s prices in dollars. The price of each sector will vary in log points (assimilated to percentages) by: $c_\$^i$ for sectors in the shock-stricken country$~i$ and 0 in other countries. \\
 Hence, for each sector $j$ in country $i$:
 \begin{eqnarray*}
- {{\Delta }^{0}}p_{\${ij}}=p_{\${ij}}^{1}-p_{\${ij}}^{0}=c_{\${ij}}=c_{\$}^i
+ {{\Delta }^{0}}log(p_{\${ij}})=log(p_{\${ij}}^{1})-log(p_{\${ij}}^{0})=c_{\${ij}}=c_{\$}^i
   \end{eqnarray*}	
 And for each sector $j$ in country $k (k\ne i)$,
 \begin{eqnarray*}
- {{\Delta }^{0}}p_{\${kj}}=p_{\${kj}}^{1}-p_{\${kj}}^{0}=c_{\${kj}}=0
+ {{\Delta }^{0}}log(p_{\${kj}})=log(p_{\${kj}}^{1})-log(p_{\${kj}}^{0})=lc_{\${kj}}=0
  \end{eqnarray*}	
-Initial prices for each sector are normalised to 1 and exchange rates to 1:1. 
-A 100$\%$ appreciation in the exchange rate of a currency against other currencies therefore corresponds to an absolute shock of $+1$, with all prices in the shock-stricken country rising from 1 to 2 dollars.\\
 The appreciation affects producers through changes in relative prices between countries and, therefore, through changes in input prices traded between the shock-stricken country $i$ and other countries. \\
-Consider first the direct impact on other countries of the rise in imported input prices from shocked country $i$. For any sector $l$ of a country $k$ $(k\ne i)$, the increase in the producer price depends directly on the quantity of inputs imported from the shock-stricken country $i$, weighted by the variation in level of the price of inputs in dollars (i. e. the exchange rate shock). If $a_{kl,ij}$ is quantity of inputs from the country $i$'s sector $j$ needed to develop a production unit for the country's $k$ sector $l$, we have :\\
+Consider first the direct impact on other countries of the rise in imported input prices from shocked country $i$. For any sector $l$ of a country $k$ $(k\ne i)$, the increase in the producer price depends directly on the quantity of inputs imported from the shock-stricken country $i$, weighted by the variation in level of the price of inputs in dollars (i. e. the exchange rate shock). If $a_{kl,ij}$ is the share of inputs from the country $i$'s sector $j$ needed in the production of country's $k$ sector $l$, we have :\\
 \begin{eqnarray}
-\Delta ^1 p_{\${kl}}=c_\$^i*a_{kl,i1}+\ldots+c_\$^i.a_{kl,ij}+\ldots+c_\$^i.a_{kl,iJ}=\underset{j=1}{\overset{J}{\mathop\sum}}\,c_\$^i.a_{kl,ij}=c_\$^i.\underset{j=1}{\overset{J}{\mathop\sum}}\,a_{kl,ij}  
+\Delta ^1 log(p_{\${kl}})=c_\$^i.a_{kl,i1}+\ldots+c_\$^i.a_{kl,ij}+\ldots+c_\$^i.a_{kl,iJ}=\underset{j=1}{\overset{J}{\mathop\sum}}\,c_\$^i.a_{kl,ij}=c_\$^i.\underset{j=1}{\overset{J}{\mathop\sum}}\,a_{kl,ij}  
 \label{eq:eq1} 
 \end{eqnarray}
 \\
-For the shocked country, an appreciation of the currency has a disinflationary effect. In national currency, the prices of imported inputs fall in each sector by $c^i=-\frac{c_\$^i}{1+{c_\$^i}}$, or by 0.5 with $c_\$^i=1$. \\
+For the shocked country, an appreciation of the currency has a disinflationary effect. In national currency, the prices of imported inputs fall in each sector by $c^i=-\frac{c_\$^i}{1+{c_\$^i}}$, or by $0.5$ log point with $c_\$^i=1$ log point. \\
 This decline then spreads to all domestic-input using sectors. In sector $j$ of the shocked country $i$, this fall amounts in national currency to: \\
 \begin{eqnarray*}
-\Delta^1p_{ij}=\underset{l=1}{\overset{l=J}{\mathop \sum}}\,c^i.a_{ij,1l}+\ldots +\underset{l=1}{\overset{{l}=J}{\mathop \sum }}\,c^i.a_{ij,kl}+\underset{l=1}{\overset{l={J}}{\mathop \sum }}\,c^i.{{a}_{ij,Il}}=\left( -\frac{c_\$^i}{1+c_\$^i}\right).\underset{\begin{matrix}k=1\\k\neq i\\\end{matrix}}{\overset{k=I}{\mathop\sum}}\,\left[\underset{l=1}{\overset{l=J}{\mathop\sum}}\,a_{ij,kl}\right] 
+\Delta^1log(p_{ij})=\underset{l=1}{\overset{l=J}{\mathop \sum}}\,c^i.a_{ij,1l}+\ldots +\underset{l=1}{\overset{{l}=J}{\mathop \sum }}\,c^i.a_{ij,kl}+\underset{l=1}{\overset{l={J}}{\mathop \sum }}\,c^i.{{a}_{ij,Il}}=\left( -\frac{c_\$^i}{1+c_\$^i}\right).\underset{\begin{matrix}k=1\\k\neq i\\\end{matrix}}{\overset{k=I}{\mathop\sum}}\,\left[\underset{l=1}{\overset{l=J}{\mathop\sum}}\,a_{ij,kl}\right] 
 \end{eqnarray*}
 This shock can be converted into dollars: \\
 \begin{eqnarray}
-{{\Delta }^{1}}{{{p}}_{\$ij}}=\left(1+c_\$^i\right).\left(-\frac{c_\$^i}{1+c_\$^i}\right)\underset{\begin{matrix}k=1\\k\neq i\\\end{matrix}}{\overset{{k}={I}}{\mathop\sum}}\,\left[\underset{\text{l}=1}{\overset{{l}={J}}{\mathop\sum}}\,{{{a}}_{ij,kl}}\right] 
+\Delta^1 log(p_{\$ij})=\left(1+c_\$^i\right).\left(-\frac{c_\$^i}{1+c_\$^i}\right)\underset{\begin{matrix}k=1\\k\neq i\\\end{matrix}}{\overset{{k}={I}}{\mathop\sum}}\,\left[\underset{\text{l}=1}{\overset{{l}={J}}{\mathop\sum}}\,{{{a}}_{ij,kl}}\right] 
 \label{eq:eq2}
 \end{eqnarray}
 This yields the first step impact of the shock on all input prices of all countries.\\
-To express this In matrix notation, we have to create two matrices that build on the world input-output matrix $\cal A$ defined in \ref{subsec:ioprice}. 
+To express this in matrix notation, we have to create two matrices that build on the world input-output matrix $\cal A$ defined in \ref{subsec:ioprice}. 
 These two matrices retain only the first-step effects of the exchange rate shock on the price of goods and services imported by the shocked country $i$ and the first-step effects of the exchange rate shock on the price of goods and services imported by the rest of the world from country $i$. 
 %To formalise the initial impact of the shock on the price of traded goods and services
-Comprared to $\cal A$, we "close off" the links between an domestic input price shock and price of goods as well as on the link between non-shocked input price shocks and the price of goods in a non-shocked country.\\
+Compared to $\cal A$, we "close off" the links between an domestic input price shock and price of goods as well as on the link between non-shocked input price shocks and the price of goods in a non-shocked country.\\
 Let us first look at the shock from the perspective of countries that import inputs from country $i$.\\
-Let $C_\$^i$ be the vector of change in prices in dollars following the 
+Let $C_\$^i$ be the vector of log points changes in dollar prices following the 
 %{100$\%$}
-appreciation of the currency of country $i~$ against all other currencies.
+appreciation of the currency of country $i$ against all other currencies.
 %, corresponding to an absolute shock of $+1$ dollar for all sectors in country $i$. \\
 Hence,
 \begin{eqnarray*}
@@ -461,7 +488,7 @@ We then convert this direct impact in dollars, by multiplying it by the new valu
 
 
 The first-step effect on the world is therefore the sum of these vectors from equations  \ref{eq:eq3} and \ref{eq:eq4}, i. e. $C_\$^i.{\cal B}+{\tilde{C}_\$^i}{\tilde{{\cal B}}}.~$\\
-The input price shock then spreads to all sectors in all countries via the global intersectoral exchanges transcribed by the matrix of technical coefficients of the large matrix {\cal A}. This process will be simultaneously repeated several times, until the effects are completely exhausted.
+The input price shock then spreads to all sectors in all countries via the global intersectoral exchanges transcribed by the matrix of technical coefficients of the large matrix $\cal {A}$. This process will be simultaneously repeated several times, until the effects are completely exhausted.
 In the end, the total price effect of the exchange rate shock is equal to the sectoral shock itself, incremented by changes in input prices due to changes in imported input prices (both in the shocked country and in the non-shocked countries), and by all changes in prices during the production processes, i. e.:\\
 \begin{eqnarray*}
 S_\$^i=\Delta{{P}_{\$}^i}=C_\$^i+ \left(C_\$^i.{\cal B}+{\tilde{C}_\$^i}{\tilde{{\cal B}}}\right)+ \left(C_\$^i.{\cal B}+{\tilde{C}_\$^i}{\tilde{{\cal B}}}\right){{\cal A}}+\left(C_\$^i.{\cal B}+{\tilde{C}_\$^i}{\tilde{{\cal B}}}\right){{\cal A}^{2}}+\ldots+\left(C_\$^i.{\cal B}+{\tilde{C}_\$^i}{\tilde{{\cal B}}}\right){\cal A}^k +\ldots \\
@@ -473,7 +500,7 @@ S_\$^i=\Delta{{P}_{\$}^i}=C_\$^i+ \left(C_\$^i.{\cal B}+{\tilde{C}_\$^i}{\tilde{
 S_\$^i=C_\$^i+\left(C_\$^i.{\cal B}+{\tilde{C}_\$^i}{\tilde{{\cal B}}}\right)*{{(I-{\cal A})}^{-1}}	
 \label{eq:eqinternationalcurrency}
  \end{eqnarray}
-With $S_\$^i$ the total impact vector composed of the elements ${{{s}}^i_{\$kj}}$ showing the total impact of a shock on country $i$'s exchange rate on the price of the country $k$'s sector $j$ in international currency. 
+With $S_\$^i$ the total impact vector composed of the elements ${{{s}}^i_{\$kj}}$ showing the total impact of a shock on country $i$'s exchange rate on the price of the country $k$'s sector $j$ in international currency in log points. 
 Equation \ref{eq:eqinternationalcurrency} gives the evolution of sectoral prices in international currency. The study of this vector is the main objet of \cite{Cochard2016}, which is interested in the evolution of price-competitiveness.\\
 By contrast, this paper focuses on the effect of an exchange rate shock on the consumer price index. Hence, we are interested in the same impact expressed in national currency. To obtain the evolution of the sectoral prices of the shocked country in national currency, we remove the exchange rate shock in international currency, multiply the balance by the scalar of conversion equal to $\frac{1}{1+c_\$^i}$ and add the initial exchange rate shock in national currency.
 
@@ -529,17 +556,15 @@ with ${s}_{kj}^i$ is a coefficient of $S^i$ for country $i$.
 \label{sec:prixconso}
 %je suggère de ne pas avoir de sous sections, le titre de la 2eme sous section étant peu intelligible \subsection{Baseline results}
 We use the model presented in \ref{subsec:chocchange} to analyse the impact of an exchange rate shock on consumer price index (CPI).
-We focus on the value of $\overline{s_{i}}^{i,HC}$ following a 100\% appreciation of the national currency versus all other currencies. 
+We assume the shock is small enough to assimilate log and percentage points and hence treat $\overline{s_{i}}^{i,HC}$ as the elasticity following an appreciation of the national currency versus all other currencies. 
 Imported inputs and imported consumer goods become cheaper and domestic prices expressed in national currency decrease. 
-As our model is linear, the exact value of the shock does not matter: choosing 100\% allows us to interpret $\overline{s_{i}}^{i,HC}$ as an elasticity. 
 %je propose de simplifier: on a déjà dit plus haut qu'on s'intéresse à  $\overline{s_{i}}^{i,HC}$ 
 %Using the WIOD database, we find that $\overline{s_{i}}^{i,HC}$ is equal to $-0.055$ for the USA in 2011, meaning that a 100\% appreciation of the dollar would reduce consumer prices by 5.5\%. 
-Using the WIOD database, we find that a 100\% appreciation of the dollar reduces the U.S. CPI by 5.5\%, and hence that the absolute value of the elasticity of the consumer price index to exchange rate shocks in 0.055.
+Using the WIOD database, we find that the absolute value of the elasticity of the consumer price index to exchange rate shocks in 0.055.
 % phrase superflue car c'est mentionné dans la légende de chaque graph The following figures report the absolute value of this number ($0.055$).
 
 For euro-area members, we distinguish between the effect of the appreciation of the euro and the effect of the appreciation of a hypothetical national currency. 
-For France, a 100\% appreciation of the euro leads to a 7.6\% reduction of the CPI. 
-A 100\% appreciation of an hypothetical French national currency leads to a 12.2\% reduction of the CPI. 
+For France, the elasticity of consumer prices to an appreciation of the euro is -0.076. The elastiticy of consumer prices to an appreciation of an hypothetical French national currency is -0.122. 
 
 
 Figure \ref{fig:comp_WIOD_TIVA} shows that the country elasticity is similar, regardless of the different version of the database (WIOD or TIVA) both in 2011 and 2014.

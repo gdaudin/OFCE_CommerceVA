@@ -50,7 +50,7 @@
 
 
 \begin{document}
-\title{Global value chains and the transmission of exchange rate shocks to consumer prices	\thanks{We thank Pavel Diev, Hubert Escaith, Guillaume Gaulier, Yannick Kalantzis, Guy Levy-Rueff, Jean-François Ouvrard and François de Soyres for comments and suggestions, as well as participants at Banque de France seminars. Any remaining errors are ours. All the programs and results used in this paper are available at \url{https://github.com/gdaudin/OFCE_CommerceVA}. Data and results files are available upon request.}\\
+\title{Global value chains and the transmission of exchange rate shocks to consumer prices	\thanks{We thank Pavel Diev, Hubert Escaith, Guillaume Gaulier, Yannick Kalantzis, Guy Levy-Rueff, Jean-François Ouvrard and François de Soyres for comments and suggestions, as well as participants at Banque de France seminars. Any remaining errors are ours. All programs and results are available at \url{https://github.com/gdaudin/OFCE_CommerceVA}. Data and results files are available upon request.}\\
 \vspace{1cm}
 \normalsize{Preliminary version}
 }
@@ -80,14 +80,15 @@ We focus on cost-push inflation through global value chains.
 We build on three sectoral world input-output datasets (WIOD and two versions of TiVA) using Cobb-Douglas production functions in a partial equilibrium setting.
 %VF 27 Sept J'ajoute cette explication sinon il est impossible de comprendre l'intérêt de l'outil proposé
 The construction of World Input-Output tables is data-demanding and WIOTs are typically released with a lag of several years. 
-To address this gap, we use more up-to-date GDP and trade data. 
-By doing so, we provide a tool to approximate the partial equilibrium impact of an exchange rate shock on consumer prices from 2016 onwards.
+To address this gap, we use more up-to-date GDP and trade data, thus providing a tool for approximating the partial equilibrium impact of an exchange rate shock on consumer prices from 2015 onwards.
 Depending on countries, the absolute value of the elasticity of the CPI to exchange rate shocks ranges from 5\% to 35\%, confirming the importance of global value chains in channeling external shocks to domestic inflation.
-Most of the propagation of shocks is throught imported final goods and domestic input-output linkages.
-In a sample of 43 countries, the mean output-weighted elasticity of the CPI to exchange rate shocks according to WIOD increased in absolute value from 7.5\% in 2000 to 9.4\% in 2008.
+Most of the propagation of shocks passes throught imported final goods and domestic input-output linkages.
+Using data from WIOD on a sample of 43 countries, the mean output-weighted elasticity of the CPI to exchange rate shocks increased in absolute value from 7.5\% in 2000 to 9.4\% in 2008.
 It then declined to 8.8\% in 2014.
-Extrapolations show that this decline continued to 2016 and was reversed in 2017 and 2018. 
-Both recent versions of TIVA yield a similar evolution.
+Extrapolations based on more up-to-date GDP and trade data suggest that this decline continued to 2016 and was reversed in 2017 and 2018. 
+% VF 27 Sept je propose de reformuler de manière plus générale car en l'état actuel on ne sait pas si TIVA donne une évolution similaire jusqu'au dernier point disponible avec TIVA (ce que suggère la formulation ci-dessous), ou si on a aussi fait des extrapolations avec TIVA
+These findings are robust to using two recent versions of TIVA.
+%Both recent versions of TIVA yield a similar evolution.
 
 %Our approach suffers from a limitation: world input-output databases are only available after a sizeable time delay.
 %The latest data date back to 2015. 
@@ -111,31 +112,32 @@ Both recent versions of TIVA yield a similar evolution.
 %À citer qqu part : https://www.econpol.eu/publications/policy_brief_18
 
 %HC : AJout 08/2020
+%VF 27 Sept il aurait fallu des réferences pour introduire le débat: Ball et Mazumder (2011), Coibion and Gorodnichenko (2013), voire Mojon pour global inflation... Je propose de situer les 2 débats en ajouter les repères temporels a minima
 Understanding inflation dynamics is key for monetary policy and policy makers.
 Since the Global Financial Crisis of 2008, inflation dynamics have triggered an intense debate in advanced economies.
-Two distinct puzzles have emerged. 
-The "missing disinflation episode” emerged during the economic dowturn (2009-2012), when inflation remained much higher than suggested by the high level of economic slack. 
+While inflation in the pre-crisis period followed a standard Phillips curve relationship, two consecutive puzzles have emerged. 
+The "missing disinflation episode” emerged during the economic dowturn (2009-2011), when inflation remained much higher than suggested by the high level of economic slack. 
 The “missing inflation puzzle" emerged from 2012 onwards, as inflation remained subdued despite the economic recovery.  
 From a central bank perspective, the underlying question is to know whether one can rely on a Phillips curve to explain inflation dynamics in a globalised world.
 This triggered a very intense debate named “Phillips curve war” between supporters (among them \cite{Blanchard2016}, the European Central Bank (see \cite{Eser2020}) and Bank of France (see \cite{Berson2018}) and critics (led by \cite{Farmer2018}.
 All agree that external factors have the potential to modify inflation dynamics, either through more integration or more coordination.
-This paper contributes to this debate by precisely quantifying the role of global value chains in inflation dynamics following an exchange rate shock in a Cobb-Douglas, partial equilibrium framework.
+This paper contributes to this debate by quantifying the role of global value chains in inflation dynamics following an exchange rate shock in a Cobb-Douglas, partial equilibrium framework.
 \\
 Trade liberalisation and lower transportation and communication costs facilitate the fragmentation of production across national borders.
 Participation in global value chains strengthens cross-country linkages via trade in intermediate inputs.
 % Je propose de syntétiser car le mécanisme expliqué est simple et connu et d'expliciter d'emblée ce qu'on appelera 1st and 2nd effects
 %This has to be taken into account to study international interdependence.For example, in the absence of global value chains, the only way currency appreciation  affects consumer prices is through a reduction in the price of imported consumption goods.But if there are global value chain, an other channel  opens.
-When value chains are global, fluctuations in exchange rates (we assume here an appreciation of a currency) aﬀect domestic consumer price indexes through distinct channels: \textit{i)} the prices of imported ﬁnal goods sold directly to domestic consumers,
-\textit{ii)} the prices of imported inputs feeding through domestic production,
+When value chains are global, fluctuations in exchange rates (we assume here an appreciation of a currency) aﬀect domestic consumer price indexes through distinct channels: \textit{i)} the prices of imported ﬁnal goods sold directly to domestic consumers;
+\textit{ii)} the prices of imported inputs feeding through domestic production; and
 %Hence, a currency appreciation reduces the price of imported inputs, and thus further reduces domestic consumer prices. 
 \textit{iii)} the price of exported inputs feeding through imported foreign production.
-Finally, \textit{iv)}, changes in domestic and foreign production costs in turn pass through to the price of inputs for domestic and foreign goods and cause further production costs variations through a chain of input-output relations.\\
-Assuming Cobb-Douglas production functions where firms have a very simple cost-minimizing behaviour, it is possible to compute a partial-equilibrium effects of an exchange rate shock on consumer price indexes.
-This exercice neglects all the much-studied determinants of the pass-through of exchange rate shocks into prices (see for example \cite{Berman2012}).
-For example, the pass-through depends on the intensity of competition in domestic markets: while an exchange rate appreciation lowers the price of imported inputs, a ﬁrm with limited competitive pressure may avail of greater proﬁt margins rather than reduce prices in an eﬀort to maintain market share.
+Finally, \textit{iv)}, changes in domestic and foreign production costs in turn pass through to the price of inputs for domestic and foreign goods and cause further production costs variations through input-output linkages.\\
+Assuming Cobb-Douglas production functions where firms have a simple cost-minimising behaviour, we compute the partial-equilibrium effects of an exchange rate shock on consumer price indexes.
+This exercise neglects all the much-studied determinants of the pass-through of exchange rate shocks into prices (see for example \cite{Berman2012}).
+For example, the pass-through depends on the intensity of competition in domestic markets: while an exchange rate appreciation lowers the price of imported inputs, a ﬁrm with limited competitive pressure may avail of greater proﬁt margins rather than reduce prices in an eﬀort to maintain its market share.
 The elasticity we compute thus overestimates the sensitivity of prices to exchange rate shocks.
 %Still, working out the full potential accounting effect illustrates the pressures that the existence of global value chains put on firms.
-We also assume that all pricing occurs using the currency of the producing country, despite the known importance of dominant currency pricing (\cite{Gopinath2020}).
+We also assume that all pricing occur using the currency of the producing country, despite the well-documented role of dominant-currency pricing (\cite{Gopinath2020}).
 Despite these shortcomings, this partial equilibrium approach is useful for identifying which countries and sectors are under pressure to adjust their prices when subject to exchange rate shocks.\\
 We measure the partial equilibrium effect of exchange rate fluctuations on consumer price indexes, because the stabilisation of the consumer price index is a widespread policy objective for monetary authorities. We use world input-output tables covering twenty years of data (from 1995 to 2015).\\
 Most of the literature on global supply chains has focused on the role of input-output linkages in propagating shocks to production.
@@ -149,9 +151,9 @@ In the euro area, the elasticity of the CPI to changes in the value of the euro 
 Such heterogeneity add to the challenges faced by the European Central Bank in stabilising prices in the monetary union. 
 In a sample of 43 countries, the mean output-weighted elasticity of the CPI to exchange rate shocks based on WIOD increased in absolute value from 7.5\% in 2000 to 9.4\% in 2008.
 It then declined to 8.8\% in 2014.
-Extrapolations show that this decline continued to 2016 and was reversed in 2017 and 2018.
+Extrapolations using more up-to-date GDP and trade data suggest that this decline continued to 2016 and was reversed in 2017 and 2018.
 Both recent versions of TIVA yield a similar evolution.
-Input-output mechanisms (i.e. excluding the change in the prices of imported final goods sold directly to domestic consumers) explain a large share of the elasticity, especially for large countries or countries of the Eurozone subject to a shock on the Euro.\\
+Input-output mechanisms (i.e. excluding the change in the prices of imported final goods sold directly to domestic consumers) explain a large share of the elasticity, especially for large countries or for countries of the Eurozone subject to a shock on the Euro.\\
 %GD 20200619 c’est pas net ce 1st/2nd round.  Je laisse tomber pour quelque chose de plus central pour le papier
 %We show that, following an appreciation of the domestic currency, the first-round effects (through imported inputs and imported final goods) explain three-quarters of the propagation of global shocks to the domestic consumer price index. 
 %By contrast, we find a limited role for secound-round effects, i.e. the additional transmission of lower domestic input prices to other sectors of the domestic economy and to other countries occurring during subsequent production cycles.
@@ -184,8 +186,10 @@ First, it relates to the literature that examines the link between global value 
 % pas très clair+ pas de lien avec notre étude. Je suggère de supprimer \cite{Gaulier2019} show that the intermediate trade share in volume grew at a subdued rate between 2000 and 2016, while the share of intermediate goods in world trade in nominal terms was fairly well correlated to various Global Value Chain indicators based on international input-output matrices. 
 %\cite{DeSoyres2018} find that a higher share of foreign value added in exports reduces the ERPT to export prices and export volumes. 
 % je sugère de retirer car notre papier ne se focalise pas particulièrement sur ces 2 pays In particular, the ERPT declines most in France and Germany. 
-\cite{Georgiadis2019} estimate that the rise of GVC participation accounts for 50\% of the decline in the ERPT to import prices observed since the mid-1990s.\footnote{The intuition is as follow: Exchange rate appreciation will increase foreign-currency price of exports. But if exports in general have high import contents, the appreciation will reduce local-currency price of imported inputs, thus decreasing foreign-currency price of exports. This will lead to a lower ERPT. }
-\cite{Hagemejer2020} works on the non linearity of the ERPT to prices and find that a growing backward GVC participation of the suppliers of imported intermediate inputs reduces the ERPT to producer prices. The ERPT for countries whose suppliers are strongly involved in GVC is significantly smaller than for economies whose suppliers do not participate in GVC. 
+\cite{Georgiadis2019} estimate that the rise of GVC participation accounts for 50\% of the decline in the ERPT to import prices observed since the mid-1990s.\footnote{The intuition is as follow: an exchange rate appreciation will increase the foreign-currency price of exports. However, when exports have high import contents, the appreciation will reduce the local-currency price of imported inputs, thus decreasing the foreign-currency price of exports. This will lead to a lower ERPT. }
+\cite{Hagemejer2020} provide evidence that the decline in ERPT resulting from the enhanced participation in GVC may be nonlinear with respect to the country's position in the global value chain.
+They find that a growing backward GVC participation of the suppliers of imported intermediate inputs reduces the ERPT to producer prices. 
+The ERPT for countries whose suppliers are strongly involved in GVC is significantly smaller than for economies whose suppliers do not participate in GVC. 
 
 Our research also relates to the literature on the cross-border propagation of cost shocks. 
 \cite{Auer2019} document that input-output linkages contribute substantially to synchronising producer price (PPI) inflation across countries. % combining sectoral data from the World Input Output Database (WIOD) and producer price indices (PPI). %By contrast, exchange rate movements and the degree of pricing-to-market are found to play no role in synchronizing inflation across countries. 
@@ -196,11 +200,16 @@ The empirical literature shows that the pass-through declines across the pricing
 
 From an input-output perspective, the ERPT to consumer prices depends on the direct and indirect import content of consumption. Using WIOD and assuming a full exchange rate pass-through to import prices, \cite{Ortega2020}{ (box 1 prepared by Stefan Schaefer)} finds that the sum of the direct and indirect import content in consumption was 16\% in the HICP in 2014 in the euro area.
 
-Another question treated by the literature is whether the ERPT is stable over time. \cite{Campa2008} have documented a declining ERPT to import and consumer prices since the 1980s and 1990s. \cite{Ozyurt2016} also shows that the pass-through is partial in the euro area. The decline in the ERPT observed over the past two decades coincided with the increasing share of emerging economies in world trade and the accession of China to the WTO. By contrast, \cite{Leigh2017} find that both the ERPT and the price elasticity of trade volumes are stable over time. In the euro area, \cite{Ortega2020} show that the ERPT into total import prices has been broadly stable over time (at around 20\%), while the ERPT to extra-euro area import prices has declined.
+Another strand of literature investigates whether the ERPT is stable over time. \cite{Campa2008} have documented a declining ERPT to import and consumer prices since the 1980s and 1990s. \cite{Ozyurt2016} also shows that the pass-through is partial in the euro area. The decline in the ERPT observed over the past two decades coincided with the increasing share of emerging economies in world trade and the accession of China to the WTO. By contrast, \cite{Leigh2017} find that both the ERPT and the price elasticity of trade volumes are stable over time. In the euro area, \cite{Ortega2020} show that the ERPT into total import prices has been broadly stable over time (at around 20\%), while the ERPT to extra-euro area import prices has declined.
 
 % je suggère de supprimer car notre étude ne traite pas des non linéarités. Concerning potential non-linearities, the price response to depreciations and appreciations may differ depending on the firm’s market share strategy, partly determined by the competitive structure of the sector and market power of firms (\cite{Delatte2012}). \cite{BenCheikh2012} finds a higher ERPT to consumer prices after large exchange rate changes. In France and Germany, \cite{Bussiere2013} shows the ERPT tends to be higher after depreciations (and/or strong depreciations) than after appreciations for import prices. Last but not least, more recent work by \cite{Colavecchio2020} on euro area countries found that after one year, large changes in the exchange rate have an impact on import prices and headline HICP inflation, whereas small ones do not. 
 %GD20200620 Oui, tu as raison
-Compared to these literatures, our originality is that: we focus on consumer prices; we compute the full partial equilibrium impact of exchange rate shocks through world input-output tables; we compare the results coming from three different databases; and we point out a way to get up-to-date estimates of the elasticity of consumer prices to exchange rate shocks.
+Our contribution to the literature is fourfold. 
+While most of the literature focuses on producer prices, we focus on consumer prices, a variable of paramount interest for monetary policy. 
+We compute the full partial equilibrium impact of exchange rate shocks through world input-output tables. 
+By comparing the results obtained using three different databases, we make sure our results are robust to using different datasets. 
+The construction of World Input-Output tables is data-demanding and WIOTs are typically released with a lag of several years. 
+To address this gap, we use more up-to-date GDP and trade data, thus providing a tool for computing up-to-date estimates of the elasticity of consumer prices to exchange rate shocks.
 
 
 
@@ -220,7 +229,7 @@ In France, the Insee \citep{Bourgeois2019} has developed the AVIONIC model based
 It measures the impact of an exogenous variation in the price of inputs on the price of production. \\
 Leontief's price model is broadly used in multi-sector, single-country macroeconomic models, for example, to measure the effect of changes in energy prices \citep{Bournay2015, Sharify2013}. Implicitly, \cite{Bems2015} use it to focus on competitiveness. 
 They compute real effective exchange rates weighted by the value-added trade structure to measure the impact of a demand change in value added on value added prices and final expenditure levels. %It is at the center of \cite{Cochard2016}. 
-\cite{Cochard2016} relies on an accounting approach to analyse the effects of costs on prices ("cost-push inflation") and shows that they are all the higher as countries are open.
+\cite{Cochard2016} rely on an accounting approach to analyse the effects of costs on prices ("cost-push inflation") and shows that they are all the higher as countries are open.
 
 % CR je suggère de supprimer la phrase suivante car ce sont plus des hypothèses que des résultats.
 % OK Firms' margins are assumed to be fixed. Prices only adjust to absorb cost changes, production techniques are fixed during successive production cycles and inputs substitution (for instance, between countries producing the same goods) is not accounted for, despite variations in relative prices.\\
@@ -241,7 +250,9 @@ The standard I-O model relies on input-output tables registering transactions of
 By extension, a "world" I-O table (WIOT) describes the sale and purchase relationships between producers and consumers in the whole world, differentiating between sectors in different countries.
 The WIOT has, on its diagonal, the country blocks with flows of domestic transactions of intermediate goods and services between industries.
 The "bilateral" blocks outside of the diagonal represent international flows of intermediate goods and services via bilateral sectoral exports and imports. \\
-Traditionnaly, the WIOT are interpreted in a Leontieff framework of Leontieff production functions. That facilitates the study of the evolution of quantities in the economy. Here, we assume a Cobb-Douglas production function: the technical coefficients are the share of each input in total costs. Hence we can derive a price equation (we follow the method of \citep{DeSoyres2018}).\\
+Traditionnaly, WIOTs are interpreted in a Leontieff framework of Leontieff production functions. That facilitates the study of the evolution of quantities in the economy. 
+Here, we assume a Cobb-Douglas production function: the technical coefficients correspond to the share of each input in total costs. 
+Hence, we can derive a price equation, following \citep{DeSoyres2018}).\\
 %The rows of the table contain information on the distribution of the output of industries over use categories.
 We define $N$ as the product of the number of countries ($I$) and the number of sectors ($J$), $\cal A$ the matrix of technical input coefficient of dimension $(N, N)$, and $Y$ the gross output vector of dimension $(1, N)$. \\
 %$Y=(y_1\ldots y_N)$ with $y_n=p_n*q_n$, with $p_n$ the price and $q_n$ the quantity of product from country $n$. We normalize quantity units such as  $p_n=1$. \\
@@ -251,7 +262,7 @@ In each sector of each (country,sector) there is a representative firm producing
 Y_n=V^{\gamma_n}_n \times \prod_{n’=1}^{n’=N} {m_{n,n’}}^{a_{n,n’}} \text{ with } \gamma_n +\sum_{n’=1}^{n’=N} {a_{n,n’}} =1
 \end{eqnarray*}
 Where $\gamma_n$ is the domestic production factors share, $a_{n,n’}$ the share of output from (country,sector) $n’$ in the total production of (country,sector) $n$. \\ 
-Assuming perfectly competitive firms and price at marginal cost, standard cost minimization for each country leads to the following pricing system:
+Assuming perfectly competitive firms and price at marginal cost, standard cost minimisation for each country leads to the following pricing system:
 %https://mbounthavong.com/blog/2019/2/19/cobb-douglas-production-function-and-total-costs
 \begin{eqnarray*}
 	p_n=x_n \times w_n^{\gamma_k} \times \prod_{n’=1}^{n’=N}p_{n’}^{a_{n,n’}}, \forall n 
@@ -277,17 +288,18 @@ Define $P$ the vector of prices , $Z$ a vector of $log(x_n)+\gamma_n.log(w_n)$, 
 \end{eqnarray}
 
 Suppose an exogenous input price shock defined in log points (approximating percentages for small shocks). 
-Define ${{\Delta }^{0}}log(P)$ the shock vector of dimension $(1, N)$ computed as the difference between the original price vector $log(P^0)$ and the new  vector $log(P^1)$. Then:
+Define ${{\Delta }^{0}}log(P)$ the shock vector of dimension $(1, N)$ computed as the difference between the original price vector $log(P^0)$ and the new vector $log(P^1)$. Then:
 \begin{eqnarray*}
 \Delta ^0 log(P)=log(P^1)-log(P^0)=C, 
 \end{eqnarray*}
 with $C$ the shock vector of dimension (1,N) that contains the direct effect of the shock on prices expressed in log points.\\
 $C$ directly affects the consumer price index.
 %Under these conditions, for each industry $i$, the shock can be written as the absolute difference between the initial production price and the new production price invoiced following the shock ("shocked price" hereafter).\\
-In addition, firms face a change in their costs, which affect their prices according to equation \ref{eq:priceequation}.
+In addition, firms face a change in their costs, which affects their prices according to equation \ref{eq:priceequation}.
 Hence, the price change is transmitted to country-specific industries that use shocked products as intermediate consumptions. The higher their reliance on shocked inputs, the higher the variation in their prices.\\
 In a first step, the impact of the shock on each country-specific industry's output prices amounts to $\Delta^{1}log(P)=C{\cal A}$.\\
-In a second step, the shock is passed on to all country-specific industries using these shocked inputs in their production processes. For the $k^{th}$ step, the increase in production prices amounts to $\Delta^k log(P)=C{\cal A}^k$.\\
+In a second step, the shock is passed on to all country-specific industries that rely on those shocked inputs in their production processes. 
+For the $k^{th}$ step, the increase in production prices amounts to $\Delta^k log(P)=C{\cal A}^k$.\\
 As the technical coefficients are smaller than 1, the effect of the shock on input prices wears out as $k$ increases.
 The overall effect of the shock is equal to the sum of the initial shock and all the changes in each step.
 Let us call $S$ the total effect of the shock on prices (in log points), a vector $(1, N)$ composed of the elements $s_{ij}$ measuring the total effect of the shock on the price of sector $j$ in country $i$. We have: 
@@ -313,9 +325,10 @@ Aggregating national input-output tables into world input-output tables is chall
 This paper uses two multi-year WIOTs: the World Input Output Database (WIOD) and the Trade in Value Added Database (TiVA) from the OECD-ICIO.
 
 \paragraph{The World Input Output Database (WIOD)}
-WIOD is hosted and updated by the University of Groningen (Netherlands) and benefits the financial support of the European Commisssion. It contains time series of inter-country input-output tables from 2000 to 2014. 
+WIOD is hosted and updated by the University of Groningen (Netherlands) and benefits from the financial support of the European Commisssion. 
+It contains time series of inter-country input-output tables from 2000 to 2014. 
 It provides WIOTs that reconcile national input-output tables (or supply-use tables) with bilateral trade statistics.
-The WIOD covers 43 countries (of which 28 members of the European Union) accounting for 85$\%$ of global GDP (see Table \ref{tab:wiod}). 
+WIOD covers 43 countries (of which 28 members of the European Union) accounting for 85$\%$ of global GDP (see Table \ref{tab:wiod}). 
 It contains annual information for 56 industries. Therefore, for each year a full country-sector input-output matrix traces the importance of a supplying industry in one country for an industry in another country. The values in WIOTs are expressed in U.S. dollars at basic prices; market exchange rates were used for currency conversion \citep{Timmer2015}. 
 
 % All transactions values are in basic prices, reflecting all costs borne by the producer. These tables are accompanied by Socio-Economic Accounts which contain country sector panel data on employment (number of workers, compensation and share of labor in high, medium and low skilled occupations), capital stocks, gross output and value added).
@@ -344,7 +357,7 @@ Other & Russia, Turkey\\
 \end{table} 
 % Dans le titre du table 1, je rajouterai (version 2016)
 \paragraph{The Trade in Value Added (TiVA) database}
-The TiVA database is compiled by the OECD and the WTO. It builds on the OECD harmonized individual country input-output tables to provide matrices of inter-industrial flows of goods and services in current prices (U.S. dollars).
+The TiVA database is compiled by the OECD and the WTO. It builds on the OECD harmonised individual country input-output tables to provide matrices of inter-industrial flows of goods and services in current prices (U.S. dollars).
 We use two versions of TiVA (see \cite{OECD2018} on the differences between the two datasets).
 The third revision, released in 2016, includes 64 economies (i.e. 35 OECD Countries, 28 non-OECD economies and the Rest of the world) and 34 industries, and covers the period 1995-2011.
 The fourth revision, released in 2018, includes 65 economies (see Table \ref{tab:tiva}) and 36 sectors and covers the 2005-2015 period.
@@ -377,7 +390,9 @@ Other & Brunei, Israel, Morocco, Russia, Saudi Arabia, South Africa, Tunisia, Tu
 
 
 \paragraph{Major differences between the WIOD and TiVA databases}
-The WIOD and TiVA databases have distinct characteristics (see \cite{Timmer2015}). WIOD assumes that the input mix is independant of the destination market. TiVA does not assume this for Mexico and China, using for both these countries different input-output table for the exporting sector and the import processing sector, the domestic-market orientated sector  depending on the country and the version.\\
+The WIOD and TiVA databases have distinct characteristics (see \cite{Timmer2015}). WIOD assumes that the input mix is independant of the destination market. 
+%VF 27 Sept je ne comprend pas ce qui dépend de quoi dans la dernière partie de la phrase ci-dessous
+TiVA does not rely on this assumption for two countries (Mexico and China), using for both countries different input-output table for the exporting sector and the import processing sector, the domestic-market oriented sector depending on the country and the version of the TiVA database.\\
 Another important difference for our analysis relates to the allocation of specific imports to using industries.
 National input-output statistics provide the use of products by industries and final consumers. 
 However, the breakdown of the use table into domestic and imported origin is not available. 
@@ -387,7 +402,8 @@ The TiVA database relies on the "import proportionality assumption" to allocate 
 This assumption can be misleading. \cite{Feenstra2012} find that shares of imported materials may differ substantially across U.S. industries. Based on Asian input-output tables, \cite{Puzzello2012} finds that the proportionality assumption understates the use of foreign intermediate inputs. It is likely to be particularly binding for developing countries, as the import content of exports is usually higher than the import content of products used for domestic consumption.\\
 By contrast, the WIOD does not rely on the standard import proportionality assumption. 
 Its imputation method relies on a classification of detailed products in bilateral trade statistics.
-Imports are allocated across three use categories (intermediate use, final consumption and investment) by mapping detailed six-digit products in the International Trade Statistics \citep{Dietzenbacher2013}.To sum up, the WIOD includes information on bilateral industry-specific input use, whereas such information exists only in imputed form in TiVA. 
+Imports are allocated across three use categories (intermediate use, final consumption and investment) by mapping detailed six-digit products in the International Trade Statistics \citep{Dietzenbacher2013}.
+To sum up, the WIOD includes information on bilateral industry-specific input use, whereas such information exists only in imputed form in TiVA. 
 % je suggère de supprimer car vous citez à présent les 2 bases Therefore, we focus on the WIOD database in our analysis \footnote{Results obtained with the 2016 and 2018 TiVA releases are available upon request.}. 
 
 
@@ -395,13 +411,14 @@ Imports are allocated across three use categories (intermediate use, final consu
 
 Implementing an exchange rate shock is more complex than implementing a production cost shock. 
 The appreciation of the currency of country $A$ leads to a fall in the national currency price of country $A$'s imports, while the foreign-currency price of its exports increase. 
-Our main interest is the impact of this shock on country the consument price index in country $A$. 
+We are mainly interested is the impact of this shock on the consumer price index in country $A$. 
 Yet, we also estimate the inflationary impact on countries that directly and indirectly, through third countries linkages, consume inputs from country $A$.\\
 % je propose de supprimer car, pour caricaturer, on ne comprend pas pourquoi on a expliqué quelque chose on section ioprice si c'est pour dire ici que ça ne sert à rien However, this shock cannot be analyzed applying the method described in \ref{subsec:ioprice} because the value of the price, besides depending of the nationality of the input-providing sector, also depends on the nationality of the input-using sector. 
 Suppose a world with two countries $A$ and $B$, each having its own national currency, and a third currency for international transactions, the dollar.
-Assum a 5$\%$ appreciation of the currency of country $A$ against the two other currencies, the prices of country $A$ expressed in dollars increase by 5$\%$ compared to those of country $B$ expressed in dollars. 
+Following a 5$\%$ appreciation of the currency of country $A$ against the two other currencies, the prices of country $A$ expressed in dollars increase by 5$\%$ compared to those of country $B$ expressed in dollars. 
 Country $B$ pays more for its imports of inputs, in dollars as well as in national currency, since its exchange rate against the dollar has not changed. 
-Conversely, the prices of imported inputs in country $A$ remain constant in dollars, since the prices of country $B$ have not changed, and fall by half once expressed in country $A$'s national currency. This has an impact on the consumer price index(in national currency) in country $A$.\\
+Conversely, the prices of imported inputs in country $A$ remain constant in dollars, since the prices of country $B$ have not changed, and fall by half once expressed in country $A$'s national currency. 
+This has an impact on the consumer price index (in national currency) in country $A$.\\
 We assume that producers completely pass the exchange rate shock on their production prices. 
 The change in the prices of imported goods is therefore transmitted to all domestic prices, both directly and through inter-industry linkages. 
 These upward (downward) movements for country $B$ (country $A$) affect all input prices in both countries.\\
@@ -423,7 +440,8 @@ And for each sector $j$ in country $k (k\ne i)$,
  {{\Delta }^{0}}log(p_{\${kj}})=log(p_{\${kj}}^{1})-log(p_{\${kj}}^{0})=c_{\${kj}}=0
  \end{eqnarray*}	
 The appreciation affects producers through changes in relative prices between countries and, therefore, through changes in input prices traded between the shock-stricken country $i$ and other countries. \\
-Consider first the direct impact on other countries of the rise in imported input prices from shocked country $i$. For any sector $l$ of a country $k$ $(k\ne i)$, the increase in the producer price depends directly on the quantity of inputs imported from the shock-stricken country $i$, weighted by the variation in level of the price of inputs in dollars (i. e. the exchange rate shock). If $a_{kl,ij}$ is the share of inputs from the country $i$'s sector $j$ needed in the production of country's $k$ sector $l$, we have :\\
+Consider first the direct impact on other countries of the rise in imported input prices from shocked country $i$. 
+For any sector $l$ of a country $k$ $(k\ne i)$, the increase in the producer price depends directly on the quantity of inputs imported from the shock-stricken country $i$, weighed by the variation in level of the price of inputs in dollars (i. e. the exchange rate shock). If $a_{kl,ij}$ is the share of inputs from the country $i$'s sector $j$ needed in the production of country's $k$ sector $l$, we have :\\
 \begin{eqnarray}
 \Delta ^1 log(p_{\${kl}})=c_\$^i.a_{kl,i1}+\ldots+c_\$^i.a_{kl,ij}+\ldots+c_\$^i.a_{kl,iJ}=\underset{j=1}{\overset{J}{\mathop\sum}}\,c_\$^i.a_{kl,ij}=c_\$^i.\underset{j=1}{\overset{J}{\mathop\sum}}\,a_{kl,ij}  
 \label{eq:eq1} 
@@ -440,10 +458,10 @@ This shock can be converted into dollars: \\
 \label{eq:eq2}
 \end{eqnarray}
 This yields the first step impact of the shock on all input prices of all countries.\\
-To express this in matrix notation, we have to create two matrices that build on the world input-output matrix $\cal A$ defined in \ref{subsec:ioprice}. 
+To express this in matrix notation, we define two matrices that build on the world input-output matrix $\cal A$ defined in \ref{subsec:ioprice}. 
 These two matrices retain only the first-step effects of the exchange rate shock on the price of goods and services imported by the shocked country $i$ and the first-step effects of the exchange rate shock on the price of goods and services imported by the rest of the world from country $i$. 
 %To formalise the initial impact of the shock on the price of traded goods and services
-Compared to $\cal A$, we "close off" the links between an domestic input price shock and price of goods as well as on the link between non-shocked input price shocks and the price of goods in a non-shocked country.\\
+Compared to $\cal A$, we "close off" the links between a domestic input price shock and the price of goods as well as on the link between non-shocked input prices and the price of goods in a non-shocked country.\\
 Let us first look at the shock from the perspective of countries that import inputs from country $i$.\\
 Let $C_\$^i$ be the vector of log points changes in dollar prices following the 
 %{100$\%$}
@@ -495,8 +513,8 @@ The other coefficients are replaced by 0, including those of the block of countr
 		\begin{itemize}
 		\item $a_{kl,ij}$: the share of inputs from the country $i$'s sector $j$ in the production of country's $k$ sector $l$.
 		\item ${\cal A}$: Matrix of world input-output coefficients.
-				\item ${\cal B}^i$: ${\cal A}$ including only the coefficients of each country’s sectoral inputs imported from country $i$ (not including domestic inputs in $i$).
-				\item ${\tilde{{\cal B}^i}}$: ${\cal A}$ including only the country blocks of the inputs imported by country $i$ from other countries have been retained (not including domestic inputs in $i$).
+				\item ${\cal B}^i$: ${\cal A}$ including only the coefficients of each country’s sectoral inputs imported from country $i$ (excluding domestic inputs in $i$).
+				\item ${\tilde{{\cal B}^i}}$: ${\cal A}$ including only the country blocks of the inputs imported by country $i$ from other countries (excluding domestic inputs in $i$).
 				\item $c_\$^i$: exchange rate shock on the currency of country $i$ in dollar. If it appreciates by 10\%, 	$c_\$^i = 0.1$.
 				\item $c^i$: exchange rate shock on the price of non-$i$ goods expressed in the currency of $i$. $c^i= -\frac{c_\$^i}{1+c_\$^i}$. If $c_\$^i = 0.1$, $c^i=-0.05$ 
 				\item $C^i$: vector of log point change in prices everywhere expressed in country $i$'s currency:
@@ -545,7 +563,7 @@ S_\$^i=C_\$^i+\left(C_\$^i.{\cal B}^i+{\tilde{C}_\$^i}{\tilde{{\cal B}^i}}\right
 \label{eq:eqinternationalcurrency}
  \end{eqnarray}
 With $S_\$^i$ the total impact vector composed of the elements ${{{s}}^i_{\$kj}}$ showing the total impact of a shock on country $i$'s exchange rate on the price of the country $k$'s sector $j$ in international currency in log points. 
-Equation \ref{eq:eqinternationalcurrency} gives the evolution of sectoral prices in international currency. The study of this vector is the main objet of \cite{Cochard2016}, which is interested in the evolution of price-competitiveness.\\
+Equation \ref{eq:eqinternationalcurrency} gives the evolution of sectoral prices in international currency. Analysing this vector is the main objet of \cite{Cochard2016}, which focuses on the evolution of price-competitiveness.\\
 By contrast, this paper focuses on the effect of an exchange rate shock on the consumer price index. Hence, we are interested in the same impact expressed in national currency. To obtain the evolution of the sectoral prices of the shocked country in national currency, we remove the exchange rate shock in international currency, multiply the balance by the scalar of conversion equal to $\frac{1}{1+c_\$^i}$ and add the initial exchange rate shock in national currency.
 
 \begin{equation}
@@ -558,7 +576,7 @@ By contrast, this paper focuses on the effect of an exchange rate shock on the c
 \end{equation}
 Where $\hat{C}^i_\$=\left(0 \ldots \frac{c_\$^i}{1+c_\$^i},\ldots 0 \right)$ is the increase in dollar prices of goods and services from country $i$ used as inputs in all other countries.\\ 
 $S^i$ represents the overall impact of a shock on prices in each sector of each country expressed in the shocked currency.
-It is quite different from $S$ defined in eq. \eqref{eq:eqchocprix}, because in the case of $S$, the price shock affects all users, whereas in the case of $S^i$, the price shock affects only users that do not share a currency with country $i$. 
+It is quite different from $S$ defined in eq. \eqref{eq:eqchocprix} because in the case of $S$, the price shock affects all users, whereas in the case of $S^i$, the price shock affects only users that do not share a currency with country $i$. 
 To illustrate the difference, the two-country, one sector case is explored in Appendix B. We return to this equation and its interpretation in section  \ref{sec:extrapo}.
 
 To convert this vector into a shock on household consumer prices in country $i$, $\bar{s}^i$, we use the household consumption shares to compute a weighed average of the elements of $S^i$
@@ -599,12 +617,11 @@ where ${s}_{kj}^i$ is a coefficient of $S^i$ for country $i$.
 \section{The impact of exchange rates fluctuations on consumer price index}
 \label{sec:prixconso}
 %je suggère de ne pas avoir de sous sections, le titre de la 2eme sous section étant peu intelligible \subsection{Baseline results}
-We use the model presented in \ref{subsec:chocchange} to analyse the impact of an exchange rate shock on consumer price index (CPI).
-We assume the shock is small enough to assimilate log and percentage points and hence treat $\overline{s_{i}}^{i,HC}$ as the elasticity of the consumer price index following an appreciation of the national currency versus all other currencies. 
-Imported inputs and imported consumer goods become cheaper and domestic prices expressed in national currency decrease. 
+We use the model presented in \ref{subsec:chocchange} to analyse the impact of an exchange rate shock on the consumer price index (CPI).
+We assume taht the shock is small enough to assimilate log and percentage points and hence consider $\overline{s_{i}}^{i,HC}$ as the elasticity of the CPI to the excahnge rate. Following an appreciation of the national currency versus all other currencies, imported inputs and imported consumer goods become cheaper and domestic prices expressed in national currency decrease. 
 %je propose de simplifier: on a déjà dit plus haut qu'on s'intéresse à  $\overline{s_{i}}^{i,HC}$ 
 %Using the WIOD database, we find that $\overline{s_{i}}^{i,HC}$ is equal to $-0.055$ for the USA in 2011, meaning that a 100\% appreciation of the dollar would reduce consumer prices by 5.5\%. 
-Using the WIOD database, we find that the absolute value of the elasticity of the consumer price index to exchange rate shocks in 0.055 (or 5.5\%) for the USA in 2011
+Using WIOD, we find that the absolute value of the elasticity of the consumer price index to exchange rate shocks in 0.055 (or 5.5\%) for the US in 2011
 % phrase superflue car c'est mentionné dans la légende de chaque graph The following figures report the absolute value of this number ($0.055$).
 
 For euro-area members, we distinguish between the effect of the appreciation of the euro and the effect of the appreciation of a hypothetical national currency. 
@@ -626,10 +643,11 @@ Figure \ref{fig:comp_WIOD_TIVA} shows that country elasticities are similar, acc
 \end{figure}
 
 
-Using a sample of 43 countries, we plot the elasticity of consumer price index over time.The anual evolution is the same regardless of the database (WIOD or TIVA) (see Figure \ref{fig:PIWIM_LONGITUDINAL}).
+Using a sample of 43 countries, we plot the elasticity of the CPI to the exchange rate over time.The anual evolution is the same regardless of the database (WIOD or TIVA) (see Figure \ref{fig:PIWIM_LONGITUDINAL}).
 Using data from TIVA rev. 3 yields a slightly higher elasticity.
-Output-weighted results show a lower elasticity, as large, relatively more closed economies are more important there.
-Based on the third revision of TiVA database, we find that the output-weighted elasticity has increased by 25\% between 1995 and 2008, to 10 per cent in 2008. It slightly declines afterwards.\\
+Output-weighed results show a lower elasticity, reflecting the fact that large countries are relatively closed compared to small open economies.
+Based on the third revision of TiVA database, we find that the output-weighed elasticity has increased by 25\% between 1995 and 2008, to 10\% in 2008. 
+The elasticity has slightly declined afterwards.\\
 
 \begin{figure}[!h]
 	\centering
@@ -643,12 +661,13 @@ Based on the third revision of TiVA database, we find that the output-weighted e
 
 
 
-Using data from WIOD, Figure \ref{fig:WIOD_HC_elasticities} shows that, in absolute terms, the elasticity lies between 5 and 15 \%, but can be as high as 35 \%. This elasticity to changes in the value of the euro varies from variation is large in the Eurozone, from 6.5\% to 18\%. This adds to the challenges faced by the European Central Bank in stabilizing prices throughout a monetary union. 
+Using data from WIOD, Figure \ref{fig:WIOD_HC_elasticities} shows that, in absolute terms, the elasticity lies between 5\% and 15\%, but can be as high as 35\%. 
+In the euro area, the elasticity to changes in the value of the euro ranges from 6.5\% to 18\% depending on the member state. This heterogeneity adds to the challenges faced by the European Central Bank in stabilizing prices throughout a monetary union. 
 Figure \ref{fig:WIOD_HC_E1HC} shows that the value of the elasticity is closely related to the share of imported goods and services in household consumption.\\
 
 \begin{figure}[!h]
 	\centering
-	\caption{\footnotesize{\textbf{Distribution of the CPI elasticity to a 100 \% exchange rate appreciation (WIOD) - 2014.}}}
+	\caption{\footnotesize{\textbf{Distribution of the CPI elasticity to a 100\% exchange rate appreciation (WIOD) - 2014.}}}
 	\begin{tabular}{c}
 		\includegraphics[width=4.5in, height=5.25in]
 		{WIOD_HC_elasticities.png}\\
@@ -659,7 +678,7 @@ Figure \ref{fig:WIOD_HC_E1HC} shows that the value of the elasticity is closely 
 
 \begin{figure}[!h]
 	\centering
-	\caption{\footnotesize{\textbf{Elasticity of consumer prices to an exchange rate shock and the share of imported consumption (WIOD)}}}
+	\caption{\footnotesize{\textbf{Elasticity of consumer prices to an exchange rate shock and the share of imported consumption in total consumption (WIOD)}}}
 	\begin{tabular}{c}
 		\includegraphics[width=5.0in, height=3.9in]{Comp_s_E1HC_2014_WIOD_HC.png}\\
 	\end{tabular}
@@ -713,7 +732,7 @@ For example,
  \end{equation}
 
 
-Figure \ref{fig:decomp_origine} shows that the prices change of imported final consumer goods contribute more to the total effect than the price change of domestic goods.
+Figure \ref{fig:decomp_origine} shows that changes in the prices of imported final consumer goods contribute more to the total effect than changes in the prices of domestic goods.
 Although imported final consumer goods account for a smaller share of total consumption than domestic goods, they are the most impacted by the initial exchange rate shock. 
 Imported final consumer goods also explain the differences in price elasticities observed between open and less open economies.\\
 
@@ -823,7 +842,7 @@ Similarly, domestic core inflation (all products except food and energy) account
 \subsection{Doing without the world input-output matrices}
 World input-output matrices are not available for the most recent years: the latest years covered by WIOD and TiVA are, respectively, 2014 and 2015. 
 In addition, using WIOTs involves cumbersome computations.
-Given these difficulties, we look for a simpler way to compute the elasticity of consumer price index to the exchange rate.
+Given these difficulties, we look for a simpler way to compute the elasticity of the CPI to the exchange rate.
 We break down $\overline{s_{i}}^{i,HC}$ into different elements classified by ease of use and computation.
 Let us start from equation \ref{eq:eqdomcurrency}.
 We have:
@@ -858,7 +877,7 @@ By contrast, equation \ref{eq:eqtoto} highlights the transmission channels of th
 Figure \ref{fig:decompositionofs} plots the shares of $E1.HC$, $E2.HC$, $E3.HC$ and $E4.HC^i$ (for short $E4.HC$) in $\overline{s}_{i}^{i,HC}$.  
 $E1.HC$ dominates. 
 While $E3.HC$ is negligible, $E4.HC$ accounts for 10\% to 30\% of $\overline{s}_{i}^{i,HC}$ for most countries except China.
-On the whole, as shown by Figure \ref{fig:shareofs}, input-output mechasims (i.e. everything but $E1.HC$) explain a large share of the elasticity, especially for large countries or countries of the Eurozone subject to a shock on the Euro. This share is growing through time till 2013-2014, as does the share that requires WIOTs (see Figure \ref{fig:shareofsthroughtime}).
+On the whole, as shown by Figure \ref{fig:shareofs}, input-output mechasims (i.e. everything but $E1.HC$) explain a large share of the elasticity, especially for large countries or countries of the Eurozone subject to a shock on the Euro. This share has increased untill 2013-2014, implying an increasing need of data from WIOTs to perform our computations (see Figure \ref{fig:shareofsthroughtime}).
 
 \begin{figure}[!h]
 \centering
@@ -951,14 +970,15 @@ We obtain similar results with TiVA (see Appendix \ref{AppendixFonctionLinéaire
 Our results suggest that we can approximate the elasticity of consumer prices for the most recent years, using the share of imported goods in household consumption and the share of imported inputs in household consumption of domestic goods. $E1HC+E2HC$ is a good predictor of the total effects.
 Yet, they cannot be extrapolated in a multiplicative way, as the other effects ($E3HC+E4HC$) add to them rather than amplifying them.
 They are of similar size for small open economies and large closed ones.
-It might be that the small economy counterbalances its small size with its large openness rate and vis-versa.\footnote{This functional form might seem a bit counterintuitive (one might expect that the elasticity is affine function of openness as summarized by $E1HC$), but the analytical examination of the two-country, one sector case, shows that it is plausible (see Appendix \ref{AnalyticalAppendix}).}
+It might be that the small economy counterbalances its small size with its large openness rate and vice versa.\footnote{Although this functional form might seem counterintuitive (one might expect that the elasticity is an affine function of openness as summarized by $E1HC$), the analytical examination of the two-country, one-sector case shows that it is plausible (see Appendix \ref{AnalyticalAppendix}).}
 %Back to the main point, it turns out that we do not gain much by inversing matrixes. Of course, this realization is only possible because we were able to computes $\overline{s}_{i}^{i,HC}$ in the first place. Still, it suggests that we could extrapolate the elasticities for not-yet-released years, as long as we have the share of imported goods in household consumption and the share of imported inputs in household consumption of domestic goods. 
 
 \subsection{Doing without TiVA and WIOD, but keeping Eurostat}
 However, even these data ($E1HC$ and $E2HC$) are not up-to-date for a large number of countries. 
 The share of imports in household final consumption and in intermediate consumption for the production of domestic household final consumption are not routinely computed by national statistical institutes. 
-We have to use a proxy. It is fairly easy to identify consumption and intermediary goods imports using UN Comtrade data and the BEC classification. 
-While the World Bank provides regular estimates for household consumption, it does not provide an estimate for intermediate consumptions. Eurostat provides estimates for intermediate consumptions in the case of European countries\footnote{And some others for selected years Eurostat, BEC -- PRÉCISER LA SOURCE}. 
+We have to use a proxy. It is easy to identify consumption and intermediary goods imports using UN Comtrade data and the BEC classification. 
+While the World Bank provides regular estimates for household consumption, it does not provide an estimate for intermediate consumptions. Eurostat provides estimates for intermediate consumptions in the case of European countries.
+%VF comme la source n'est pas précisee je mets en commentaire \footnote{And some others for selected years Eurostat, BEC -- PRÉCISER LA SOURCE}. 
 Combining these three data sources, we compute the share of imported consumption goods in household consumption and the share of imported inputs in all inputs. 
 
 We mimick equation \ref{eq:eq7} by equation \ref{eq:eq8}. 
@@ -990,9 +1010,9 @@ The results are less encouraging: the $R^2$ is smaller and declining over time, 
 %In addition, cross-sections do not take advantage of country-specific information.
 %To address this issue, we run a panel regression with country-fixed effects.
 %We assume that $\beta$ is constant over time for each country $i$ (equation \ref{eq:eq9}).
-Yet, estimating successive cross-sections of equation \ref{eq:eq8} is a demanding test to establish a link between the elastiticy computed by PIWIM based on WIOD data and "public" data assembled from various sources.
+Yet, estimating successive cross-sections of equation \ref{eq:eq8} is a demanding test to establish a link between the elastiticy computed by PIWIM based on WIOD data and more up-to-date data assembled from various sources.
 It does not allow to exploit country-specific information on the determinant of the elasticity.
-A less demanding test is to run a panel with country fixed-effects, assuming that $\beta$ is constant over time but that it explains only within-country variations. To take into account year-specific shocks, we add two year specific variables : the GDP-weighted mean of each variable of interest. (see equation \ref{eq:eq9}). 
+A less demanding test is to run a panel with country fixed-effects, assuming that $\beta$ is constant over time but that it explains only within-country variations. To take into account year-specific shocks, we add two year-specific variables : the GDP-weighed mean of each variable of interest. (see equation \ref{eq:eq9}). 
 
 
  \begin{equation}
@@ -1009,7 +1029,7 @@ A less demanding test is to run a panel with country fixed-effects, assuming tha
 We run the panel regressions for the period 2000 to 2008.
 We then estimate the out-of-sample elasticity for each country $i$ for 2014. 
 The outcome is close to the elasticity computed with WIOD for 2014 despite a small downward bias (see Figure \ref{fig:panel_pred1}).
-Hence, we could use this approach to estimate the elasticity of consumer prices from 2015 onwards.
+Hence, we could use this approach to estimate the elasticity of consumer prices to the exchnge rate from 2015 onwards.
 
 \begin{figure}[!h]
 	\centering
@@ -1024,7 +1044,7 @@ Hence, we could use this approach to estimate the elasticity of consumer prices 
 Data on intermediate consumption and household consumption are not available for all countries.
 As a result, our regressions only include a limited number of observations.
 To expand our panel, we use an even simpler proxy for E1HC+E2HC that requires only trade data from Comtrade and GDP data from the World Bank. 
-That allows including many more countries in the new panel (see equation \ref{eq:eq10}).
+As a result, we can include many more countries in the new panel (see equation \ref{eq:eq10}).
  \begin{equation}
 \begin{array}{llll}
 \overline{s}_{i,t}^{i,t,HC}= \alpha & +  \beta_1  \frac{\textnormal{imported consumption goods}_{i,t}}{\textnormal{GDP}_{i,t}} \\ & + \beta_2 \frac{\textnormal{imported intermediate goods}_{i,t}}{\textnormal{GDP}_{i,t}} \\
@@ -1048,12 +1068,13 @@ Our findings are robust to using other databases (revision 3 and revision 4 of T
 	\label{fig:panel_pred2}
 \end{figure}
 
-Using these equations, we can predict the elasticity of consumer prices for 2016 onward when no WIOT are available. Figure \ref{fig:panel_pred3} shows the predictions. The in-sample predictions seem rather rather robust, giving us confidence in the quality of the out-of-sample predictions.
+Using these equations, we can predict the elasticity of consumer prices for 2016 onwards to make up for the lack of WIOTs.
+Figure \ref{fig:panel_pred3} shows the predictions. The in-sample predictions seem rather rather robust, giving us confidence in the quality of the out-of-sample predictions.
 
 
 \begin{figure}[!h]
 	\centering
-	\caption{\footnotesize{\textbf{Comparing the output-weighted CPI elasticity to its prediction without using Eurostat data.}}}
+	\caption{\footnotesize{\textbf{Comparing the output-weighed CPI elasticity to its prediction without using Eurostat data.}}}
 	\begin{tabular}{c}
 		\includegraphics[width=5.0in, height=3.5in]{"predictions_reg1_doigt_mouille_trend_no".png}\\
 	\end{tabular}
@@ -1172,27 +1193,32 @@ Using these equations, we can predict the elasticity of consumer prices for 2016
 
 \section{Conclusion}
 \label{sec:ccl}
-
-In this paper, we investigated the role of GVCs for inflation dynamics within a unified framework of input-output databases (WIOT and TIVA) over a twenty three year period - from 1995 to 2018.  
-
-Our first result confirms the importance of Global Value Chains for inflation dynamics.
-GVC cannot be neglected in the debate about the determinants of inflation.
-The elasticity of domestic consumer price index to a shock on the domestic currency varies between 5\% and 35\%, mainly depending on the openness rate of countries.
+% VF 27 Sept je propose d'enlever la référence aux policy makers, à la BCE etc car le lien me parait bcp trop tenu avec notre papier, cela apparait tout d'un coup et ce n'est pas notre objet. On cite dans l'introduction le débat sur la PC, je pense que c'est suffisant et propose de nous concentrer sur des conclusions factuelles plut^t que sur des références vagues
+In this paper, we investigate the role of GVCs for inflation dynamics within a unified framework of input-output databases (WIOT and TIVA) from 1995 to 2018.  
+Our main results are threefold.
+First, we confirm the importance of Global Value Chains in explaining inflation dynamics.
+%GVC cannot be neglected in the debate about the determinants of inflation.
+The elasticity of domestic consumer price index to a shock on the domestic currency ranges from 5\% and 35\%, depending on the openness of countries.
 By construction, this heterogeneity comes solely from changes in Input-Output structure.
-Within the euro area, the range of elasticities is large, adding to the challenges faced by the European Central Bank in stabilizing prices throughout the monetary union.
-Input-output mechanisms - i.e. not the change in the prices of imported final goods sold directly to domestic consumers - explain a large share of the elasticity, especially for large countries or countries of the Eurozone subject to a shock on the Euro.
-Our results are robust to the various databases (WIOD, TiVA 2016 and TiVA 2018).
-This result is key for policy analysis: while many central banks, such as the ECB, does not have an exchange rate target, our results show the importance of the pass through of the exchange rate to domestic final goods and finally to consumer price index. 
+Within the euro area, the range of elasticities is large, adding to the challenges faced by the European Central Bank in stabilising prices throughout the monetary union.
+Input-output mechanisms explain a large share of the elasticity, especially for large countries or for countries of the Eurozone subject to a shock on the Euro.
+Our results are robust to using different databases (WIOD, TiVA 2016 and TiVA 2018).
 
-Our second result shows that direct impact (imported final goods) and domestic Input-Output links (domestic final goods using foreign inputs) represents most of the propagation of the exchange rate shock price: First-round effects explain three-quarters of the propagation of global shocks to domestic prices.
+Second, we show that the direct impact (through imported final goods) and domestic Input-Output linkages (i.e. domestic final goods produced using foreign inputs) account for most of the propagation of an exchange rate shock to domestic prices.
+First-round effects explain three-quarters of the propagation of global shocks to domestic prices.
 By contrast, we find a limited role for the second-round effects, i.e. the additional transmission of lower domestic input prices to other sectors of the domestic economy and other countries occurring during subsequent production cycles.
-The fact that domestic core inflation accounts for the highest share of the total impact can appear counter-intuitive at first glance, but this reflects the higher weight of domestic services and non-energy industrial goods in total consumption.
+We analyse the impact of global inflationary shocks on the main components of the CPI (manufacturing goods, services, food and energy) and find that non-energy industrial goods make the bulk of the total impact. Services also play a significant role, especially in advanced economies. Indeed, although services are mainly produced domestically and do not rely much on imported inputs, they make up a substantial share of total consumption.
+As a result, domestic core inflation (defined as inflation excluding food and energy) accounts for a significant share of the total impact, reflecting the weight of domestic services and non-energy industrial goods in total consumption.
 
-Our third result bridges the gap between the lack of timely data - that usually prevents policy makers to incorporate Global Value Chains - and Input-Output tables.
-Input-Output tables are typically released with a lag of several years.
-Using up-to-date GDP and trade data – which are easy to update and to use-, we get a good proxy for the partial equilibrium impact of an exchange rate shock on consumer prices from 2015 onwards. 
 
-Our results confirm and quantify the usefulness of the Input-Output approach for understanding inflation dynamics, which is key as for monetary policy as for policy makers. 
+Third, we provide a tool to make up for the lack of timely WIOTs. 
+
+The construction of World Input-Output tables is data-demanding and WIOTs are typically released with a lag of several years. 
+To address this gap, we use more up-to-date GDP and trade data, which can be easily updated and used to make up for the lack of WIOTs;
+We thus provide a tool for approximating the elasticity of the CPI to an exchange rate shock from 2015 onwards.
+
+%je propose d'enlever la phrase ci-dessous, on le dit déà au début de la conclusion. Il serait plus intéressant d'esquisser des pistes pour prolonger ce papier
+%Overall, our results confirm and quantify the usefulness of the Input-Output approach for understanding inflation dynamics, which is key as for monetary policy. 
 
 %%GD20200621Peut-être faudrait-il faire le boulot de la figure 2 pour la période 2016-2019 ???
 

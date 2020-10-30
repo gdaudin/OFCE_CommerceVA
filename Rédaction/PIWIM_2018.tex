@@ -430,7 +430,7 @@ For country $B$, the final impact is equal to the cumulative direct and indirect
 
 
 
-In a global economy composed of $I$ countries, each with $J$ sectors, the appreciation of a country's currency $i$ against all other currencies translates into a rise in country $i$'s prices in dollars. The price of each sector will vary in log points (or equivalently percentages if the shock is small enough) by: $c_\$^i$ for sectors in the shock-stricken country$~i$ and 0 in other countries. \\
+In a global economy composed of $I$ countries, each with $J$ sectors, the appreciation of a country's currency $i$ against all other currencies translates into a rise in country $i$'s prices in dollars. The price of each sector will vary in percentage (approximated as log point assuming the shock is small enough) by: $c_\$^i$ for sectors in the shock-stricken country$~i$ and 0 in other countries. \\
 Hence, for each sector $j$ in country $i$:
 \begin{eqnarray*}
  {{\Delta }^{0}}log(p_{\${ij}})=log(p_{\${ij}}^{1})-log(p_{\${ij}}^{0})=c_{\${ij}}=c_{\$}^i
@@ -447,7 +447,8 @@ For any sector $l$ of a country $k$ $(k\ne i)$, the increase in the producer pri
 \label{eq:eq1} 
 \end{eqnarray}
 \\
-For the shocked country, an appreciation of the currency has a disinflationary effect. In national currency, the prices of imported inputs fall in each sector by $c^i=-\frac{c_\$^i}{1+{c_\$^i}}$, or by $0.5$ log point with $c_\$^i=1$ log point. \\
+For the shocked country, an appreciation of the currency has a disinflationary effect. In national currency, the prices of imported inputs fall in each sector by $c^i=-\frac{c_\$^i}{1+{c_\$^i}}$, or by $-9.09...\%$ with $c_\$^i=10\%$ \\
+We approximate these shocks by their log point equivalent\footnote{We could have used the log point approximation earlier and write that $c^i=-c_\$^i$ with nearly the same results for small shocks.}..
 This decline then spreads to all domestic-input using sectors. In sector $j$ of the shocked country $i$, this fall amounts in national currency to: \\
 \begin{eqnarray*}
 \Delta^1log(p_{ij})=\underset{l=1}{\overset{l=J}{\mathop \sum}}\,c^i.a_{ij,1l}+\ldots +\underset{l=1}{\overset{{l}=J}{\mathop \sum }}\,c^i.a_{ij,kl}+\underset{l=1}{\overset{l={J}}{\mathop \sum }}\,c^i.{{a}_{ij,Il}}=\left( -\frac{c_\$^i}{1+c_\$^i}\right).\underset{\begin{matrix}k=1\\k\neq i\\\end{matrix}}{\overset{k=I}{\mathop\sum}}\,\left[\underset{l=1}{\overset{l=J}{\mathop\sum}}\,a_{ij,kl}\right] 
@@ -513,11 +514,11 @@ The other coefficients are replaced by 0, including those of the block of countr
 		\begin{itemize}
 		\item $a_{kl,ij}$: the share of inputs from the country $i$'s sector $j$ in the production of country's $k$ sector $l$.
 		\item ${\cal A}$: Matrix of world input-output coefficients.
-				\item ${\cal B}^i$: ${\cal A}$ including only the coefficients of each country’s sectoral inputs imported from country $i$ (excluding domestic inputs in $i$).
-				\item ${\tilde{{\cal B}^i}}$: ${\cal A}$ including only the country blocks of the inputs imported by country $i$ from other countries (excluding domestic inputs in $i$).
-				\item $c_\$^i$: exchange rate shock on the currency of country $i$ in dollar. If it appreciates by 10\%, 	$c_\$^i = 0.1$.
-				\item $c^i$: exchange rate shock on the price of non-$i$ goods expressed in the currency of $i$. $c^i= -\frac{c_\$^i}{1+c_\$^i}$. If $c_\$^i = 0.1$, $c^i=-0.05$ 
-				\item $C^i$: vector of log point change in prices everywhere expressed in country $i$'s currency:
+		\item ${\cal B}^i$: ${\cal A}$ including only the coefficients of each country’s sectoral inputs imported from country $i$ (excluding domestic inputs in $i$).
+		\item ${\tilde{{\cal B}^i}}$: ${\cal A}$ including only the country blocks of the inputs imported by country $i$ from other countries (excluding domestic inputs in $i$).
+		\item $c_\$^i$: exchange rate shock on the currency of country $i$ in dollar. If it appreciates by 10\%, 	$c_\$^i = 0.1$.
+		\item $c^i$: exchange rate shock on the price of non-$i$ goods expressed in the currency of $i$. $c^i= -\frac{c_\$^i}{1+c_\$^i}$. If $c_\$^i = 0.1$, $c^i=-0.0909...$ 
+		\item $C^i$: vector of log point change in prices everywhere expressed in country $i$'s currency:
 		$C^i = \left(-\frac{c_\$^i}{1+c_\$^i},\ldots0\ldots,-\frac{c_\$^i}{1+c_\$^i} \right)=\left(c_i,\ldots0\ldots,c_i \right)$ 
 			\item 	$C_\$^i$: vector of log points changes in dollar prices following the 
 		appreciation of the currency of country $i$ against all other currencies.

@@ -51,7 +51,7 @@
 
 
 \begin{document}
-\title{Global value chains and the transmission of exchange rate shocks to consumer prices	\thanks{We thank Pavel Diev, Hubert Escaith, Guillaume Gaulier, Yannick Kalantzis, Guy Levy-Rueff, Jean-François Ouvrard and François de Soyres for comments and suggestions, as well as participants at Banque de France seminars. Any remaining errors are ours. All programs and results are available at \url{https://github.com/gdaudin/OFCE_CommerceVA}. Data and results files are available upon request.}\\
+\title{Global value chains and the transmission of exchange rate shocks to consumer prices	\thanks{We thank Pavel Diev, Hubert Escaith, Guillaume Gaulier, Yannick Kalantzis, Guy Levy-Rueff, Jean-François Ouvrard and François de Soyres for comments and suggestions, as well as participants at Banque de France seminars. Any remaining errors are ours. All programs and are available at \url{https://github.com/gdaudin/OFCE_CommerceVA}. Data and results files are available upon request.}\\
 \vspace{1cm}
 \normalsize{Preliminary version}
 }
@@ -128,7 +128,7 @@ Trade liberalisation and lower transportation and communication costs facilitate
 Participation in global value chains strengthens cross-country linkages via trade in intermediate inputs.
 % Je propose de syntétiser car le mécanisme expliqué est simple et connu et d'expliciter d'emblée ce qu'on appelera 1st and 2nd effects
 %This has to be taken into account to study international interdependence.For example, in the absence of global value chains, the only way currency appreciation  affects consumer prices is through a reduction in the price of imported consumption goods.But if there are global value chain, an other channel  opens.
-When value chains are global, fluctuations in exchange rates (we assume here an appreciation of a currency) aﬀect domestic consumer price indexes through distinct channels: \textit{i)} the prices of imported ﬁnal goods sold directly to domestic consumers;
+When value chains are global, fluctuations in exchange rates (we assume here an appreciation of a currency) aﬀect domestic consumer price indexes (CPI) through distinct channels: \textit{i)} the prices of imported ﬁnal goods sold directly to domestic consumers;
 \textit{ii)} the prices of imported inputs feeding through domestic production; and
 %Hence, a currency appreciation reduces the price of imported inputs, and thus further reduces domestic consumer prices. 
 \textit{iii)} the price of exported inputs feeding through imported foreign production.
@@ -990,7 +990,7 @@ We estimate successive cross-sections of equation \ref{eq:eq8} to check whether 
 
  \begin{equation}
  \begin{array}{llll}
-\overline{s}_{i}^{i,HC}= \alpha &+  \beta_1  \frac{\textnormal{imported consumption goods}_i}{\textnormal{household consumption}_i} \\ & +  \beta_2  \left[    \frac{\textnormal{imported intermediate goods}_i}{\textnormal{intermediate consumption}_i}*\left(1-\frac{\textnormal{imported consumption goods}_i}{\textnormal{household consumption}_i}\right)\right] +\varepsilon_i 
+\overline{s}_{i}^{i,HC}= \alpha &+  \beta_1  \frac{\textnormal{imported consumption goods}_i}{\textnormal{household consumption}_i} \\ & +  \beta_2  \left[    \frac{\textnormal{imported intermediate goods}_i}{\textnormal{intermediate consumption}_i}*\frac{\textnormal{domestic consumption goods}_i}{\textnormal{household consumption}_i}\right] +\varepsilon_i 
 \end{array} 
 \label{eq:eq8}
 \end{equation}
@@ -1002,7 +1002,7 @@ The results are less encouraging: the $R^2$ is smaller and declining over time, 
 
 \begin{figure}[!h]
 	\centering
-	\caption{\footnotesize{\textbf{Evolution of $\beta$ and $R2$ (WIOD) using Eurostat data to approximate E1HC + E2HC (limited number of countries)}}}
+	\caption{\footnotesize{\textbf{Evolution of $\beta$ and $R2$ (WIOD) using Eurostat data to approximate E1.HC + E2.HC (limited number of countries)}}}
 	\begin{tabular}{c}
 		\includegraphics[width=5.0in, height=3.5in]{reg2_beta_WIOD.png}\\
 	\end{tabular}
@@ -1023,9 +1023,9 @@ A less demanding test is to run a panel with country fixed-effects, assuming tha
  \begin{equation}
 \begin{array}{llll}
 \overline{s}_{i,t}^{i,t,HC}= \alpha &+  \beta_1  \frac{\textnormal{imported consumption goods}_{i,t}}{\textnormal{household consumption}_{i,t}} \\
-& + \beta_2 \left[ \frac{\textnormal{imported intermediate goods}_{i,t}}{\textnormal{intermediate consumption}_{i,t}}*\left(1-\frac{\textnormal{imported consumption goods}_{i,t}}{\textnormal{houshold consumption}_{i,t}}\right) \right] \\ 
-&+  \beta_3 \overline{\frac{\textnormal{imported consumption goods}_{i,t}}{\textnormal{household consumption}_{i,t}}}  \\
-& + \beta_4  \overline{\left[ \frac{\textnormal{imported intermediate goods}_{i,t}}{\textnormal{intermediate consumption}_{i,t}}*\left(1-\frac{\textnormal{imported consumption goods}_{i,t}}{\textnormal{household consumption}_{i,t}}\right) \right]} \\ 
+& + \beta_2 \left[ \frac{\textnormal{imported intermediate goods}_{i,t}}{\textnormal{intermediate consumption}_{i,t}}*\frac{\textnormal{domestic consumption goods}_{i,t}}{\textnormal{houshold consumption}_{i,t}}\right] \\ 
+&+  \beta_3 \frac{\textnormal{Total imported consumption goods}_t}{\textnormal{Total household consumption}_t} \\
+& + \beta_4  \left[ \frac{\textnormal{Total imported intermediate goods}_t}{\textnormal{Total intermediate consumption}_t}*\frac{\textnormal{Total domestic consumption goods}_t}{\textnormal{Total household consumption}_t} \right] \\ 
 & +fe_{i}+\varepsilon_{i,t}
 \end{array}
 \label{eq:eq9}
@@ -1053,8 +1053,8 @@ As a result, we can include many more countries in the new panel (see equation \
  \begin{equation}
 \begin{array}{llll}
 \overline{s}_{i,t}^{i,t,HC}= \alpha & +  \beta_1  \frac{\textnormal{imported consumption goods}_{i,t}}{\textnormal{GDP}_{i,t}} \\ & + \beta_2 \frac{\textnormal{imported intermediate goods}_{i,t}}{\textnormal{GDP}_{i,t}} \\
-& +  \beta_3  \overline{\frac{\textnormal{Total imported consumption goods}_{t}}{\textnormal{Total GDP}_{t}}} \\
-& + \beta_4 \overline{ \frac{\textnormal{Total imported intermediate goods}_{t}}{\textnormal{Total GDP}_{t}}} \\
+& +  \beta_3  \frac{\textnormal{Total imported consumption goods}_{t}}{\textnormal{Total GDP}_{t}} \\
+& + \beta_4 \frac{\textnormal{Total imported intermediate goods}_{t}}{\textnormal{Total GDP}_{t}} \\
 & +fe_{i}+\varepsilon_{i,t}
 \end{array}
 \label{eq:eq10}
@@ -1205,7 +1205,7 @@ In this paper, we investigate the role of GVCs for inflation dynamics within a u
 Our main results are threefold.
 First, we confirm the importance of Global Value Chains in explaining inflation dynamics.
 %GVC cannot be neglected in the debate about the determinants of inflation.
-The CPI elasticity to a shock on the domestic currency ranges from 5\% and 35\%, depending mainly on the openness of countries.
+The CPI elasticity to a shock on the domestic currency ranges from 5\% to 35\%, depending mainly on the openness of countries.
 Within the euro area, the range of elasticities is large, adding to the challenges faced by the European Central Bank in stabilising prices throughout the monetary union.
 Input-output mechanisms explain a large share of the elasticity, especially for large countries or for countries of the Eurozone subject to a shock on the Euro.
 Our results are robust to using different databases (WIOD, TiVA 2016 and TiVA 2018).
@@ -1571,4 +1571,5 @@ The other effects are approximately additive if the openness rate is betweem 0.1
 	\end{center}
 \end{figure}
 
+\end{appendices}
 \end{document}

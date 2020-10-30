@@ -147,7 +147,7 @@ if "`type'"=="HC" & ((`year'==2014 & "`source'"=="WIOD") | (`year'==2015 & "`sou
 			(lfit pond_`source'_`type' E1HC_E2HC) ///
 			(lfit pond_`source'_`type' pond_`source'_`type',lwidth(vthin) color(black)) , ///
 			/*title("Comparing direct and modelled effects")*/ ///
-			xtitle("E1HC + E2HC : Direct effect through imported consumption goods" "and effect on domestic consumption goods through imported inputs") ytitle("`source' Elasticities `year'") ///
+			xtitle("E1.HC + E2.HC : Direct effect through imported consumption goods" "and effect on domestic consumption goods through imported inputs") ytitle("`source' Elasticities `year'") ///
 			yscale(range(0.0 0.3)) xscale(range(0.0 0.3)) xlabel (0.0(0.05) 0.3) ylabel(0.0(0.05) 0.3) ///
 			legend(off) ///
 			note("The 45° line serves as a comparison to the regression line") ///
@@ -459,10 +459,10 @@ foreach source in  WIOD /*TIVA TIVA_REV4 */{
 		marker(4, ms(O) mfcolor(gs13) mlcolor(gs13) msize(tiny)) ///
 		xsize(9)  ysize(7) ///
 		name(distr_components_`source'_`i', replace) ///
-		legend(position(3) cols(1)  size(vsmall) label(1 "E1HC: Direct effect" "through imported" "consumption goods") ///
-		label(2 "E2HC: Effect on domestic" "consumption goods" "through imported inputs") ///
-		label(3 "E3HC: Effect on imported" "consumption goods" "through domestic inputs") ///
-		label(4 "E4HC: Residual")) ///
+		legend(position(3) cols(1)  size(vsmall) label(1 "E1.HC: Direct effect" "through imported" "consumption goods") ///
+		label(2 "E2.HC: Effect on domestic" "consumption goods" "through imported inputs") ///
+		label(3 "E3.HC: Effect on imported" "consumption goods" "through domestic inputs") ///
+		label(4 "E4.HC: Residual")) ///
 		scheme(s1mono)
 		
 		graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/distribution_components_`source'_`i'.png", replace	
@@ -483,8 +483,8 @@ foreach source in  WIOD /*TIVA TIVA_REV4 */{
 			marker(2, ms(O) mfcolor(gs13) mlcolor(gs13) msize(tiny) ) ///
 			xsize(9)  ysize(7) ///
 			name(share_components_`source'_`i', replace) ///
-			legend(position(3) cols(1)  size(vsmall) label(1 "Share of total effect" "going through" "Input-Output mechanisms" "(E2HC+E3HC+E4HC)/Total") ///
-			label(2 "Share of total effect" "requiring WIOT" "for computation" "(E3HC+E4HC)/Total")) ///
+			legend(position(3) cols(1)  size(vsmall) label(1 "Share of total effect" "going through" "Input-Output mechanisms" "(E2.HC+E3.HC+E4.HC)/Total") ///
+			label(2 "Share of total effect" "requiring WIOT" "for computation" "(E3.HC+E4.HC)/Total")) ///
 			scheme(s1mono)
 		
 		graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/share_components_`source'_`i'.png", replace	

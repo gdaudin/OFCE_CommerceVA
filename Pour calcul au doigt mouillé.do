@@ -199,7 +199,7 @@ foreach reg in reg2 reg1 {
 				*/ title(beta)
 	graph export "$dir/Results/`reg'_beta.png", replace
 	
-	/*if "`reg'"=="reg2"*/ label var b_E1_E2 "Coefficient of the proxy of E1HC+E2HC (with 95% confidence intervals)"
+	/*if "`reg'"=="reg2"*/ label var b_E1_E2 "Coefficient of the proxy of E1.HC+E2.HC (with 95% confidence intervals)"
 	label var R2 "R2"
 	
 	

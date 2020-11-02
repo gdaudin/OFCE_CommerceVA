@@ -389,21 +389,18 @@ Other & Brunei, Israel, Morocco, Russia, Saudi Arabia, South Africa, Tunisia, Tu
 \end{table} 
 
 
-\paragraph{Major differences between the WIOD and TiVA databases}
-The WIOD and TiVA databases have distinct characteristics (see \cite{Timmer2015}). WIOD assumes that the input mix is independant of the destination market. 
-%VF 27 Sept je ne comprend pas ce qui dépend de quoi dans la dernière partie de la phrase ci-dessous
-TiVA does not rely on this assumption for two countries (Mexico and China), using for both countries different input-output table for the exporting sector and the import processing sector, the domestic-market oriented sector depending on the country and the version of the TiVA database.\\
-Another important difference for our analysis relates to the allocation of specific imports to using industries.
-National input-output statistics provide the use of products by industries and final consumers. 
-However, the breakdown of the use table into domestic and imported origin is not available. 
-Hence, the construction of world input-output tables requires allocating imports to using industries.\\
-The TiVA database relies on the "import proportionality assumption" to allocate specific imports to using industries: for a given product, one assumes that the proportion of intermediates that an industry purchases from abroad is equal to the ratio of imports to total domestic demand in that product\footnote{See \cite{OECD2011} for details.}. 
+\paragraph{Comparison of the WIOD and TiVA databases}
+The WIOD and TiVA databases are constructed using similar assumptions (\cite{OECD2011,Timmer2015,OECD2018}).
+For example, both databases use the "import proportionality assumption" to allocate specific bilateral imports to using industries.
+National input-output statistics provide fow much of each product firms use for intermediary consumption and investment. 
+However, the breakdown of these into domestic and imported product is not available. 
+Hence, the construction of world input-output tables requires allocating imports to using industries.
+The import proportionality assumption assumes that the proportion of intermediates that an industry purchases from abroad is equal to the ratio of imports of intermediates to total domestic demand of intermediates in that product. 
 %The domestic input-output tables show transactions between domestic industries. As a complement to these tables, supplementary tables break down total imports by user (industry and the different categories of final demand). Some countries provide these import tables in conjunction with their input-output tables, but in other cases they are derived by the OECD. Mexico and China benefit from a special treatment, but for the other countries the main assumption used is that the share of imports in any product consumed directly as intermediate consumption or final demand (except exports) is the same for all end-uses (the "proportionality assumption") \\
-This assumption can be misleading. \cite{Feenstra2012} find that shares of imported materials may differ substantially across U.S. industries. Based on Asian input-output tables, \cite{Puzzello2012} finds that the proportionality assumption understates the use of foreign intermediate inputs. It is likely to be particularly binding for developing countries, as the import content of exports is usually higher than the import content of products used for domestic consumption.\\
-By contrast, the WIOD does not rely on the standard import proportionality assumption. 
-Its imputation method relies on a classification of detailed products in bilateral trade statistics.
-Imports are allocated across three use categories (intermediate use, final consumption and investment) by mapping detailed six-digit products in the International Trade Statistics \citep{Dietzenbacher2013}.
-To sum up, the WIOD includes information on bilateral industry-specific input use, whereas such information exists only in imputed form in TiVA. 
+This assumption can be misleading. \cite{Feenstra2012} find that shares of imported materials may differ substantially across U.S. industries. Based on Asian input-output tables, \cite{Puzzello2012} finds that the proportionality assumption understates the use of foreign intermediate inputs. WIOD and TiVA databases, however, rely on the BEC (Broad Economic Categories) classification to map detailed six-digit products into intermediate use, final consumption and investment \citep{Dietzenbacher2013}. \\
+One explicit difference between the databases is that WIOD assumes that the input mix is independant of the destination market. 
+%VF 27 Sept je ne comprend pas ce qui dépend de quoi dans la dernière partie de la phrase ci-dessous
+TiVA databases do not rely on this assumption for two countries (Mexico and China). They use different input-output tables for the exporting, import processeng and domestic-market oriented sectors of these countries (or at least two of those depending on the country and the version of the TiVA database). Yet (probably because our study does not focus on Mexico and China) the results we obtain from these different databases are very similar.\\
 % je suggère de supprimer car vous citez à présent les 2 bases Therefore, we focus on the WIOD database in our analysis \footnote{Results obtained with the 2016 and 2018 TiVA releases are available upon request.}. 
 
 
@@ -447,8 +444,8 @@ For any sector $l$ of a country $k$ $(k\ne i)$, the increase in the producer pri
 \label{eq:eq1} 
 \end{eqnarray}
 \\
-For the shocked country, an appreciation of the currency has a disinflationary effect. In national currency, the prices of imported inputs fall in each sector by $c^i=-\frac{c_\$^i}{1+{c_\$^i}}$, or by $-9.09...\%$ with $c_\$^i=10\%$ \\
-We approximate these shocks by their log point equivalent\footnote{We could have used the log point approximation earlier and write that $c^i=-c_\$^i$ with nearly the same results for small shocks.}..
+For the shocked country, an appreciation of the currency has a disinflationary effect. In national currency, the prices of imported inputs fall in each sector by $c^i=-\frac{c_\$^i}{1+{c_\$^i}}$, or by $-9.09...\%$ with $c_\$^i=10\%$.\\
+We approximate these shocks by their log point equivalent\footnote{We could have used the log point approximation earlier and write that $c^i=-c_\$^i$ with nearly the same results for small shocks.}.
 This decline then spreads to all domestic-input using sectors. In sector $j$ of the shocked country $i$, this fall amounts in national currency to: \\
 \begin{eqnarray*}
 \Delta^1log(p_{ij})=\underset{l=1}{\overset{l=J}{\mathop \sum}}\,c^i.a_{ij,1l}+\ldots +\underset{l=1}{\overset{{l}=J}{\mathop \sum }}\,c^i.a_{ij,kl}+\underset{l=1}{\overset{l={J}}{\mathop \sum }}\,c^i.{{a}_{ij,Il}}=\left( -\frac{c_\$^i}{1+c_\$^i}\right).\underset{\begin{matrix}k=1\\k\neq i\\\end{matrix}}{\overset{k=I}{\mathop\sum}}\,\left[\underset{l=1}{\overset{l=J}{\mathop\sum}}\,a_{ij,kl}\right] 

@@ -82,11 +82,11 @@ We build on three sectoral world input-output datasets (WIOD and two versions of
 %VF 27 Sept J'ajoute cette explication sinon il est impossible de comprendre l'intérêt de l'outil proposé
 The construction of World Input-Output tables is data-demanding and WIOTs are typically released with a lag of several years. 
 To address this gap, we use more up-to-date GDP and trade data, thus providing a tool for approximating the partial equilibrium impact of an exchange rate shock on consumer prices from 2015 onwards.
-Depending on countries, the absolute value of the elasticity of the household consumption expenditure (HCE) deflator to the exchange rate ranges from 5\% to 35\%, confirming the importance of global value chains in channeling external shocks to domestic inflation.
+Depending on countries, the absolute value of the elasticity of the household consumption expenditure (HCE) deflator to the exchange rate ranges from 0.05 to 0.35, confirming the importance of global value chains in channeling external shocks to domestic inflation.
 %%%GD 4 nov 2020 : je l’enlève parce qu’à la lecture cela semble trivial
 %Most of the propagation of shocks passes through imported consumer goods and domestic input-output linkages.
-Using data from WIOD on a sample of 43 countries, we find that the mean output-weighted elasticity of the HCE deflator to the exchange rate increased in absolute value from 7.5\% in 2000 to 9.4\% in 2008. 
-After peaking in 2008, it declined to 8.8\% in 2014.
+Using data from WIOD on a sample of 43 countries, we find that the mean output-weighted elasticity of the HCE deflator to the exchange rate increased in absolute value from 0.075 in 2000 to 0.094 in 2008. 
+After peaking in 2008, it declined to 0.088 in 2014.
 Extrapolations based on more up-to-date GDP and trade data suggest that the decline continued until 2016, before reversing in 2017 and 2018. 
 % VF 27 Sept je propose de reformuler de manière plus générale car en l'état actuel on ne sait pas si TIVA donne une évolution similaire jusqu'au dernier point disponible avec TIVA (ce que suggère la formulation ci-dessous), ou si on a aussi fait des extrapolations avec TIVA
 Our findings are robust to using three different datasets.
@@ -147,11 +147,11 @@ We analyse the impact of exchange rate shocks on the main components of consumer
 The construction of World Input-Output tables (WIOT hereafter) is data-demanding and WIOTs are typically released with a lag of several years.
 As a result, at the time of writing, the latest WIOT is five year old (2015).
 To address this gap, we use more up-to-date GDP and trade data to approximate the partial equilibrium impact of an exchange rate shock on the HCE deflator from 2016 onwards.\\
-The absolute value of the elasticity of the HCE deflator to exchange rate shocks varies widely between countries, from 5\% to 35\%. 
-In the euro area, the elasticity of the HCE delfator to changes in the value of the euro ranges from 6.5\% to 18\%. 
+The absolute value of the elasticity of the HCE deflator to exchange rate shocks varies widely between countries, from 0.05 to 0.35. 
+In the euro area, the elasticity of the HCE delfator to changes in the value of the euro ranges from 0.065 to 0.18. 
 Such heterogeneity add to the challenges faced by the European Central Bank in stabilising prices in the monetary union. 
-In a sample of 43 countries, the mean output-weighted elasticity of the HCE deflator to exchange rate shocks based on WIOD increased in absolute value from 7.5\% in 2000 to 9.4\% in 2008.
-It then declined to 8.8\% in 2014.
+In a sample of 43 countries, the mean output-weighted elasticity of the HCE deflator to exchange rate shocks based on WIOD increased in absolute value from 0.075\ in 2000 to 0.094 in 2008.
+It then declined to 0.088 in 2014.
 Extrapolations using more up-to-date GDP and trade data suggest that this decline continued to 2016 and was reversed in 2017 and 2018.
 Both recent versions of TIVA yield a similar evolution.
 Input-output mechanisms (i.e. excluding the change in the prices of imported final goods sold directly to domestic consumers) explain a large share of the elasticity, especially for large countries or for countries of the Eurozone subject to a shock on the Euro.\\
@@ -310,7 +310,7 @@ S=C {\left( I+{\cal A}+{\cal A}^2+...+{\cal A}^k+...\right)} =C {\left( I-{\cal 
 \end{eqnarray}
 
 
-with ${\left( I-{\cal A} \right)}^{-1}$ the well-known of Leontief inverse matrix. If the shock is small enough, the elements of $S$ can be understood as the elasticity of sectoral price to an input price shock. Using consumption shares to do a weighted average of these elasticities will generate the Household consumption expenditure (HCE) deflator elasticity to an input price shock \footnote{This HCE deflator has different sectoral weights than the headline Consumer price inflation (CPI) as it also covers, for exemple, the rental equivalent of real estate expenditures}.
+with ${\left( I-{\cal A} \right)}^{-1}$ the well-known of Leontief inverse matrix. If the shock is small enough, the elements of $S$ can be understood as the elasticity of sectoral price to an input price shock. Using consumption shares to do a weighted average of these elasticities will generate the Household consumption expenditure (HCE) deflator elasticity to an input price shock \footnote{This HCE deflator has different sectoral weights than the headline Consumer price index (CPI) as it also covers, for exemple, the rental equivalent of real estate expenditures.}.
 
 
 \subsection{Data}
@@ -328,7 +328,7 @@ This paper uses two multi-year WIOTs: the World Input Output Database (WIOD) and
 WIOD is hosted and updated by the University of Groningen (Netherlands) and benefits from the financial support of the European Commisssion. 
 It contains time series of inter-country input-output tables from 2000 to 2014. 
 It provides WIOTs that reconcile national input-output tables (or supply-use tables) with bilateral trade statistics.
-WIOD covers 43 countries (of which 28 members of the European Union) accounting for 85$\%$ of global GDP (see Table \ref{tab:wiod}). 
+WIOD covers 43 countries (of which 28 members of the European Union) accounting for 85\% of global GDP (see Table \ref{tab:wiod}). 
 It contains annual information for 56 industries. Therefore, for each year a full country-sector input-output matrix traces the importance of a supplying industry in one country for an industry in another country. The values in WIOTs are expressed in U.S. dollars at basic prices; market exchange rates were used for currency conversion \citep{Timmer2015}. 
 
 % All transactions values are in basic prices, reflecting all costs borne by the producer. These tables are accompanied by Socio-Economic Accounts which contain country sector panel data on employment (number of workers, compensation and share of labor in high, medium and low skilled occupations), capital stocks, gross output and value added).
@@ -619,7 +619,7 @@ We use the model presented in \ref{subsec:chocchange} to analyse the impact of a
 We assume that the shock is small enough to assimilate log and percentage points and hence consider $\overline{s_{i}}^{i,HC}$ as the HCE defator elasticity to an exchange rate shock. Following an appreciation of the national currency versus all other currencies, imported inputs and imported consumer goods become cheaper and domestic prices expressed in national currency decrease. 
 %je propose de simplifier: on a déjà dit plus haut qu'on s'intéresse à  $\overline{s_{i}}^{i,HC}$ 
 %Using the WIOD database, we find that $\overline{s_{i}}^{i,HC}$ is equal to $-0.055$ for the USA in 2011, meaning that a 100\% appreciation of the dollar would reduce consumer prices by 5.5\%. 
-Using WIOD, we find that the absolute value of the elasticity of the HCE deflator to an exchange rate shock is 0.055 (or 5.5\%) for the US in 2011.
+Using WIOD, we find that the absolute value of the elasticity of the HCE deflator to an exchange rate shock is 0.055 (or 0.055) for the US in 2011.
 % phrase superflue car c'est mentionné dans la légende de chaque graph The following figures report the absolute value of this number ($0.055$).
 
 For euro-area members, we distinguish between the effect of the appreciation of the euro and the effect of the appreciation of a hypothetical national currency. 
@@ -644,7 +644,7 @@ Figure \ref{fig:comp_WIOD_TIVA} shows that country elasticities are similar, acc
 Using a sample of 43 countries, we plot the elasticity of the HCE deflator to the exchange rate over time. The anual evolution is the same regardless of the database (WIOD or TIVA) (see Figure \ref{fig:PIWIM_LONGITUDINAL}).
 Using data from TIVA rev. 3 yields a slightly higher elasticity.
 Output-weighed results show a lower elasticity, reflecting the fact that large countries are relatively closed compared to small economies.
-Based on the third revision of TiVA database, we find that the output-weighed elasticity has increased by 25\% between 1995 and 2008, reaching 10\% in 2008. 
+Based on the third revision of TiVA database, we find that the output-weighed elasticity has increased by 25\% between 1995 and 2008, reaching 0.1 in 2008. 
 The elasticity has slightly declined afterwards.\\
 
 \begin{figure}[H]
@@ -659,13 +659,13 @@ The elasticity has slightly declined afterwards.\\
 
 
 
-Using data from WIOD, Figure \ref{fig:WIOD_HC_elasticities} shows that, in absolute terms, the elasticity lies between 5\% and 15\%, but can be as high as 35\%. 
-In the euro area, the elasticity to changes in the value of the euro ranges from 6.5\% to 18\% depending on the member state. This heterogeneity adds to the challenges faced by the European Central Bank in stabilizing prices throughout a monetary union. 
+Using data from WIOD, Figure \ref{fig:WIOD_HC_elasticities} shows that, in absolute terms, the elasticity lies between 0.05 and 0.15, but can be as high as 0.35. 
+In the euro area, the elasticity to changes in the value of the euro ranges from 0.065 to 0.18 depending on the member state. This heterogeneity adds to the challenges faced by the European Central Bank in stabilizing prices throughout a monetary union. 
 Figure \ref{fig:WIOD_HC_E1HC} shows that the value of the elasticity is closely related to the share of imported goods and services in household consumption.\\
 
 \begin{figure}[H]
 	\centering
-	\caption{\footnotesize{\textbf{Distribution of the HCE deflator elasticity to a 100\% exchange rate appreciation (WIOD) - 2014.}}}
+	\caption{\footnotesize{\textbf{Distribution of the HCE deflator elasticity to an exchange rate shock (WIOD) - 2014.}}}
 	\begin{tabular}{c}
 		\includegraphics[width=4.5in, height=5.25in]
 		{WIOD_HC_elasticities.png}\\
@@ -1203,7 +1203,7 @@ In this paper, we investigate the role of GVCs for inflation dynamics within a u
 Our main results are threefold.
 First, we confirm the importance of Global Value Chains in explaining inflation dynamics.
 %GVC cannot be neglected in the debate about the determinants of inflation.
-The Houshold consumption expenditure (HCE) deflator elasticity to a shock on the domestic currency ranges from 5\% to 35\%, depending mainly on the openness of countries.
+The Houshold consumption expenditure (HCE) deflator elasticity to a shock on the domestic currency ranges from 0.05 to 0.35, depending mainly on the openness of countries.
 Within the euro area, the range of elasticities is large, adding to the challenges faced by the European Central Bank in stabilising prices throughout the monetary union.
 Input-output mechanisms explain a large share of the elasticity, especially for large countries or for countries of the Eurozone subject to a shock on the Euro.
 Our results are robust to using different databases (WIOD, TiVA 2016 and TiVA 2018).
@@ -1529,11 +1529,11 @@ The sign of this expression is difficult to study. We hence move to a numerical 
 
 \subsection{Numerical application}
 Based on WIOD 2014, we compute the ratio between value added and production. The computation with the WIOD data is : 
-egen total=rowtotal(vAUS1-vROW) and then (161-74)/161=54\%.
+egen total=rowtotal(vAUS1-vROW) and then (161-74)/161=0.54.
 
 To simplify, we assume that the ratio is equal to 0.5.
 \begin{gather*}
-a_{1,1}+a_{1,2}=a_{2,1}+a_{2,2}=50\% \\
+a_{1,1}+a_{1,2}=a_{2,1}+a_{2,2}=0.5 \\
 \frac{a_{1,2}}{a_{1,1}+a_{1,2}}=f \\
 a_{2,1}=0.48 \\
 a_{2,2}=0.02

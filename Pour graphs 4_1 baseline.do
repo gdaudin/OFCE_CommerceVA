@@ -352,7 +352,7 @@ twoway 	(line WIOD_elast_annual year, lcolor(blue) lpattern(dash)) ///
 		label(3 "TIVA rev3") label(4 "TIVA rev3, output weighted")  /// 
 		label(5 "TIVA rev4") label(6 "TIVA rev4, output weighted"))  /// 
 		ytitle("elasticity (absolute value)", ) ///
-		note("The average CPI elasticity has been computed from each of countries" ///
+		note("The average HCE deflator elasticity has been computed from each of countries" ///
 		"in a common 43 countries sample (assuming no Eurozone)" ///
 		"and aggregated using either an arithmetic mean or an output weighted mean") ///
 		scheme(s1mono)

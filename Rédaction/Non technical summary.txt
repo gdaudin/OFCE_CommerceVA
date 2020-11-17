@@ -1,0 +1,44 @@
+Non-technical summary
+Following the 2008 financial crisis, inflation rates in advanced economies have been a puzzle. While the Phillips curve suggests an inverse relationship between unemployment rate and inflation, inflation remained much higher than suggested by the high level of economic slack during the economic downturn (2009-2011). From 2012 onwards, inflation remained subdued despite the pick-up in economic activity. The apparent disconnection between inflation and its traditional domestic drivers triggered a debate on the potential growing role of global determinants. 
+We contribute to this debate by investigating the impact of global value chains on inflation dynamics over the past twenty years on a sample of 43 countries. We pay particular attention to inflation dynamics in the euro area. 
+Participation in global value chains strengthens cross-country linkages via trade in intermediate inputs. When value chains are global, fluctuations in exchange rates affect household consumption expenditure (HCE hereafter) deflator through four distinct channels: i) changes in the prices of imported final goods sold directly to domestic consumers; ii) changes in the prices of imported inputs embedded in domestic production; iii) changes in the price of exported inputs embedded in imported foreign production and finally, iv), changes in domestic and foreign production costs passing through to the price of inputs for domestic and foreign goods and causing further production costs variations through input-output linkages. 
+Assuming a Cobb-Douglas production framework where firms follow a simple cost-minimising behaviour, we compute the partial-equilibrium effects of an exchange rate shock on consumer prices. The partial equilibrium approach is useful for identifying which countries and sectors are under pressure to adjust their prices when subject to exchange rate shocks. We use world input-output tables covering twenty years of data (from 1995 to 2015). 
+We analyse the impact of exchange rate shocks on the main components of consumer prices (manufacturing goods, services, food and energy) and on the prices of imported and domestic final goods. We confirm the importance of global value chains in explaining inflation dynamics. 
+We find that the elasticity of the household consumption expenditure deflator to exchange rate shocks ranges from 0.05 to 0.35, depending on the openness rate of each economy. In the euro area, the elasticity of the HCE deflator to changes in the euro exchange rate ranges from 0.07 to 0.18. Such heterogeneity in the pass-through of exchange rate shocks to domestic prices adds to the challenges faced by the European Central Bank in stabilising prices throughout the monetary union. 
+We show that the direct impact (through imported final goods) and domestic input-output linkages (i.e. domestic final goods produced using foreign inputs) account for most of the propagation of an exchange rate shock to domestic prices. First-round effects explain three-quarters of the propagation of exchange rate shocks to domestic prices. By contrast, we find a limited role for the second-round effects, i.e. the additional transmission of lower domestic input prices (in the case of an appreciation of the national currency for example) to other sectors of the domestic economy and other countries occurring during subsequent production cycles. Domestic core inflation (defined as inflation excluding food and energy) accounts for a significant share of the total elasticity, mainly reflecting the weight of domestic services and non-energy industrial goods in total consumption. 
+ 
+The construction of World Input-Output tables (WIOT hereafter) is data-demanding and WIOTs are typically released with a lag of several years. As a result, at the time of writing, the latest WIOT provide five years old data (2015). To address this gap, we show it is possible to exploit more up-to-date GDP and trade data to approximate the partial equilibrium impact of an exchange rate shock on the HCE deflator for recent years. This allows for policy-oriented uses of our work. We analyse time variation in the elasticities over the past two decades. On our sample of 43 countries, the mean output-weighted elasticity of the HCE deflator to exchange rate shocks increased from 0.08 in 2000 to 0.09 in 2008. The elasticity declined in subsequent years. Extrapolations suggest that this decline was reversed in 2017 and 2018. 
+ 
+––––– Ce texte est à effacer (après lecture si c’est votre première visite) ou à conserver en bas de votre pad –––––
+
+Bienvenue sur Framapad !
+
+Ce service s’inscrit dans le réseau associatif Framasoft qui propose un ensemble de sites et de projets autour du logiciel libre, sa culture et son état d’esprit.
+
+➡ Comment commencer ?
+• Renseignez votre nom ou pseudo, en cliquant sur l’icône « utilisateur » en haut à droite.
+• Choisissez votre couleur d'écriture au même endroit.
+• Lancez-vous : écrivez sur votre pad !
+• Les contributions de chacun se synchronisent « en temps réel » sous leur propre couleur.
+
+➡ Comment partager / collaborer ?
+• Sélectionnez et copiez l'URL (l'adresse web dans la grande barre en haut à gauche du navigateur)
+• Partagez-là à vos collaborateurs et collaboratrices (email, messagerie, etc.)
+• Attention : toute personne ayant cette adresse d'accès peut modifier le pad à sa convenance.
+• Utilisez l'onglet chat (en bas à droite) pour séparer les discussions du texte sur lequel vous travaillez.
+
+➡ Comment sauvegarder ?
+• Il n'y a rien à faire : le texte est automatiquement sauvegardé, à chaque caractère tapé.
+• Marquez une version (un état du pad) en cliquant sur l’icône « étoile ».
+• Retrouvez toute l'évolution du pad et vos versions marquées d'une étoile dans l’historique (icône « horloge »).
+• Importez et exportez votre texte avec l'icône « double flèche » (formats HTML, texte brut, PDF, ODF…) ou avec un copier/coller.
+
+Important ! N’oubliez pas de conserver quelque part l’adresse web (URL) de votre pad.
+
+Bon travail collaboratif :)
+
+Merci pour votre attention et votre confiance.
+
+––––– Ce texte est à effacer (après lecture si c’est votre première visite) –––––
+
+	

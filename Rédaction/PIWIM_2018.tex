@@ -51,7 +51,7 @@
 
 
 \begin{document}
-\title{Global value chains and the transmission of exchange rate shocks to consumer prices	\thanks{We thank Marion Cochard, Pavel Diev, Hubert Escaith, Guillaume Gaulier, Yannick Kalantzis, Guy Levy-Rueff, Jean-François Ouvrard and François de Soyres for comments and suggestions, as well as participants at Banque de France seminars. Any remaining errors are ours. All programs and are available at \url{https://github.com/gdaudin/OFCE_CommerceVA}. Data and results files are available upon request.}\\
+\title{Global value chains and the transmission of exchange rate shocks to consumer prices	\thanks{We thank Marion Cochard, Pavel Diev, Hubert Escaith, Guillaume Gaulier, Yannick Kalantzis, Guy Levy-Rueff, Sébastien Miroudot, Jean-François Ouvrard and François de Soyres for comments and suggestions, as well as participants at Banque de France seminars. Any remaining errors are ours. All programs and are available at \url{https://github.com/gdaudin/OFCE_CommerceVA}. Data and results files are available upon request.}\\
 \vspace{1cm}
 }
 \vspace{1cm}
@@ -219,7 +219,7 @@ To address this gap, we use more up-to-date GDP and trade data, thus providing a
 \label{subsec:io}
 The Leontief's production model (or Input-Output model, I-O thereafter) studies the impact of a demand shock in a closed economy \citep{Leontief1951}. 
 The trade in value-added analysis reconciles international trade statistics with national I-O tables, and thus allows to extend Leontief's analysis to an international context.
-A number of studies \citep{Hummels2001,Daudin2006,Daudin2011, DeBacker2012,Johnson2012,Koopman2014, Amador2015,Los2016} analyse the value added content of world trade. Some authors focus on Asia \citep{Sato2014} or on the euro area \citep{Cappariello2015}.
+A number of studies \citep{Hummels2001,Daudin2006,Daudin2011, DeBacker2012,Johnson2012,Koopman2014, Amador2015,Los2016,Miroudot2020} analyse the value added content of world trade. Some authors focus on Asia \citep{Sato2014} or on the euro area \citep{Cappariello2015}.
 
 %HC je ne comprends pas ce que l'on veut dire
 Leontief's production model has a dual: the cost-push price model.
@@ -233,7 +233,7 @@ They compute real effective exchange rates weighted by the value-added trade str
 % CR je suggère de supprimer la phrase suivante car ce sont plus des hypothèses que des résultats.
 % OK Firms' margins are assumed to be fixed. Prices only adjust to absorb cost changes, production techniques are fixed during successive production cycles and inputs substitution (for instance, between countries producing the same goods) is not accounted for, despite variations in relative prices.\\
 %GD20200620 Pas sûr... C’est utile quand même d’expliciter les limitations, non ?
-The limitations of this approach are well known \citep{Folloni1994}. In particular, and although the division of global value chains largely takes place within multinational firms, it assumes a unique pricing system based on market prices and independent of firms' strategies. Still, this method provides a measure of the vulnerability of each sector to price or productivity shocks \citep{Acemoglu2012,Carvalho2014}. 
+Supply-driven input-output models (such as the Gosh model) have come under numerous criticism in the literature (e.g. \cite{Oosterhaven1988}). Supply-driven price models are more widely accepted (\cite{Dietzenbacher1997}). Still, the limitations of this approach are well known \citep{Folloni1994}. In particular, and although the division of global value chains largely takes place within multinational firms, it assumes a unique pricing system based on market prices and independent of firms' strategies. Still, this method provides a measure of the vulnerability of each sector to price or productivity shocks \citep{Acemoglu2012,Carvalho2014}. 
 Hence, though unrealistic, this partial equilibrium approach using input-output tables is useful for identifying which countries and sectors are under pressure to adjust their prices when subject to exogenous cost shocks. For instance, it can show which euro area countries benefit most from an appreciation of the euro or whether adopting the euro has increased interdependence between member states.
 
 
@@ -309,7 +309,7 @@ S=C {\left( I+{\cal A}+{\cal A}^2+...+{\cal A}^k+...\right)} =C {\left( I-{\cal 
 \end{eqnarray}
 
 
-with ${\left( I-{\cal A} \right)}^{-1}$ the well-known of Leontief inverse matrix. If the shock is small enough, the elements of $S$ can be understood as the elasticity of sectoral price to an input price shock. Using consumption shares to do a weighted average of these elasticities will generate the Household consumption expenditure (HCE) deflator elasticity to an input price shock \footnote{This HCE deflator has different sectoral weights than the headline Consumer price index (CPI) as it also covers, for exemple, the rental equivalent of real estate expenditures.}.
+with ${\left( I-{\cal A} \right)}^{-1}$ the well-known of Leontieff inverse matrix. If the shock is small enough, the elements of $S$ can be understood as the elasticity of sectoral price to an input price shock. Using consumption shares to do a weighted average of these elasticities will generate the Household consumption expenditure (HCE) deflator elasticity to an input price shock \footnote{This HCE deflator has different sectoral weights than the headline Consumer price index (CPI) as it also covers, for exemple, the rental equivalent of real estate expenditures.}.
 
 
 \subsection{Data}
@@ -356,10 +356,10 @@ Other & Russia, Turkey\\
 \end{table} 
 % Dans le titre du table 1, je rajouterai (version 2016)
 \paragraph{The Trade in Value Added (TiVA) database}
-The TiVA database is compiled by the OECD and the WTO. It builds on the OECD harmonised individual country input-output tables to provide matrices of inter-industrial flows of goods and services in current prices (U.S. dollars).
-We use two versions of TiVA (see \cite{OECD2018} on the differences between the two datasets).
-The third revision, released in 2016, includes 64 economies (i.e. 35 OECD Countries, 28 non-OECD economies and the Rest of the world) and 34 industries, and covers the period 1995-2011.
-The fourth revision, released in 2018, includes 65 economies (see Table \ref{tab:tiva}) and 36 sectors and covers the 2005-2015 period.
+The TiVA database is compiled by the OECD (initially associated with the WTO, but not for the latter versions). It builds on the OECD harmonised individual country input-output tables to provide matrices of inter-industrial flows of goods and services in current prices (U.S. dollars).
+We use two versions of TiVA (see \cite{OECD2018} on the differences between the two datasets.).
+The third revision, released in 2016, includes 64 economies (i.e. 35 OECD Countries, 28 non-OECD economies and the Rest of the world) and 34 industries, and covers the period 1995-2011. It is based on the 1993 system of national accounts.
+The fourth revision, released in 2018, includes 65 economies (see Table \ref{tab:tiva}) and 36 sectors and covers the 2005-2015 period. It is based (like WIOD) on the 2008 system of national accounts.
 
 \begin{table}[!h]
 \begin{threeparttable}
@@ -390,8 +390,9 @@ Other & Brunei, Israel, Morocco, Russia, Saudi Arabia, South Africa, Tunisia, Tu
 
 \paragraph{Comparison of the WIOD and TiVA databases}
 The WIOD and TiVA databases are constructed using similar assumptions (\cite{OECD2011,Timmer2015,OECD2018}).
-For example, both databases use the "import proportionality assumption" to allocate specific bilateral imports to using industries.
-National input-output statistics provide fow much of each product firms use for intermediary consumption and investment. 
+For example, both start with the construction of harmonized country-specific supply-use tables (SUTs) that are then transformed into world input-output tables.
+Both databases use the "import proportionality assumption" to allocate specific bilateral imports to using industries.
+National input-output statistics provide how much of each product firms use for intermediary consumption and investment. 
 However, the breakdown of these into domestic and imported product is not available. 
 Hence, the construction of world input-output tables requires allocating imports to using industries.
 The import proportionality assumption assumes that the proportion of intermediates that an industry purchases from abroad is equal to the ratio of imports of intermediates to total domestic demand of intermediates in that product. 
@@ -400,6 +401,7 @@ This assumption can be misleading. \cite{Feenstra2012} find that shares of impor
 One explicit difference between the databases is that WIOD assumes that the input mix is independant of the destination market. 
 %VF 27 Sept je ne comprend pas ce qui dépend de quoi dans la dernière partie de la phrase ci-dessous
 TiVA databases do not rely on this assumption for two countries (Mexico and China). They use different input-output tables for the exporting, import processeng and domestic-market oriented sectors of these countries (or at least two of those depending on the country and the version of the TiVA database). Yet (probably because our study does not focus on Mexico and China) the results we obtain from these different databases are very similar.\\
+Another difference is that in harmonizing national data and trade statistics, WIOD treats the shares of imported inputs given by national account as given, and TiVA does not. As a result, TiVA is closer to international trade statistics than WIOD. That explains why the share of imported inputs is smaller in TiVA for some countries (but not China and the USA).
 % je suggère de supprimer car vous citez à présent les 2 bases Therefore, we focus on the WIOD database in our analysis \footnote{Results obtained with the 2016 and 2018 TiVA releases are available upon request.}. 
 
 
@@ -640,8 +642,9 @@ Figure \ref{fig:comp_WIOD_TIVA} shows that country elasticities are similar, acc
 \end{figure}
 
 
-Using a sample of 43 countries, we plot the elasticity of the HCE deflator to the exchange rate over time. The anual evolution is the same regardless of the database (WIOD or TIVA) (see Figure \ref{fig:PIWIM_LONGITUDINAL}).
-Using data from TIVA rev. 3 yields a slightly higher elasticity.
+Using a sample of 43 countries, we plot the elasticity of the HCE deflator to the exchange rate over time. The anual evolution is the same regardless of the database (WIOD or TIVA).
+Using data from TIVA rev. 3 yields a higher elasticity  (see Figure \ref{fig:PIWIM_LONGITUDINAL}): it can be explained by different treatment of contract manufacturing in the 2008 system of national accounts compared to the 1993 one which reduces imported inputs.
+The small difference between WIOD and TiVA rev. 4 comes maybe from their different ways of reconciling national accouts and international trade statistics.
 Output-weighed results show a lower elasticity, reflecting the fact that large countries are relatively closed compared to small economies.
 Based on the third revision of TiVA database, we find that the output-weighed elasticity has increased by 25\% between 1995 and 2008, reaching 0.1 in 2008. 
 The elasticity has slightly declined afterwards.\\

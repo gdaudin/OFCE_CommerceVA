@@ -53,7 +53,7 @@
 
 
 \begin{document}
-\title{Global value chains and the transmission of exchange rate shocks to consumer prices	\thanks{We thank Marion Cochard, Pavel Diev, Hubert Escaith, Guillaume Gaulier, Yannick Kalantzis, Guy Levy-Rueff, Sébastien Miroudot, Jean-François Ouvrard and François de Soyres for comments and suggestions, as well as participants at Banque de France seminars. Any remaining errors are ours. All programs are available at \url{https://github.com/gdaudin/OFCE_CommerceVA}. Data are available at \url{https://gdaudin.github.io/Databases.html} and results files are available upon request.}\\
+\title{Mind the data gap:	\thanks{We thank Marion Cochard, Pavel Diev, Hubert Escaith, Guillaume Gaulier, Yannick Kalantzis, Guy Levy-Rueff, Sébastien Miroudot, Jean-François Ouvrard and François de Soyres for comments and suggestions, as well as participants at Banque de France seminars. Any remaining errors are ours. All programs are available at \url{https://github.com/gdaudin/OFCE_CommerceVA}. Data are available at \url{https://gdaudin.github.io/Databases.html} and results files are available upon request.}\\
 \vspace{1cm}
 }
 \vspace{1cm}
@@ -74,7 +74,12 @@
 \begin{abstract}
 {\small \noindent
 %100w
-We contribute to the debate on the global determinants of domestic prices by investigating cost-push inflation through global value chains. We confirm the importance of global value chains in channelling external shocks to consumer price inflation. Using data from WIOD on a sample of 43 countries, we find that the mean output-weighted elasticity of consumer prices increased in absolute value from 0.075 in 2000 to 0.094 in 2008. After peaking in 2008, it declined to 0.088 in 2014. Extrapolations suggest that this continued until 2016, before reversing in 2017 and 2018. Our findings are robust to using three different datasets.	
+%We focus on cost-push inflation through global value chains.
+%We build on three sectoral world input-output datasets (WIOD and two versions of TiVA). We assume a Cobb-Douglas production framework and work in a partial equilibrium setting.
+We analyse to the global determinants of domestic prices by investigating cost-push inflation through global value chains. 
+The construction of World Input-Output tables is data-demanding and WIOTs are typically released with a lag of several years. 
+To address this gap, we use more up-to-date GDP and trade data, thus providing a tool for approximating the partial equilibrium impact of an exchange rate shock on consumer prices from 2015 onwards.
+%We contribute to the debate on the global determinants of domestic prices by investigating cost-push inflation through global value chains. We confirm the importance of global value chains in channelling external shocks to consumer price inflation. Using data from WIOD on a sample of 43 countries, we find that the mean output-weighted elasticity of consumer prices increased in absolute value from 0.075 in 2000 to 0.094 in 2008. After peaking in 2008, it declined to 0.088 in 2014. Extrapolations suggest that this continued until 2016, before reversing in 2017 and 2018. Our findings are robust to using three different datasets.	
 		
 %%Original abstract: decomment once	
 %%GD 20200619 c’est pas net ce 1st/2nd round.  Je laisse tomber pour quelque chose de plus central pour le papier
@@ -121,20 +126,11 @@ We contribute to the debate on the global determinants of domestic prices by inv
 
 %À citer qqu part : https://www.econpol.eu/publications/policy_brief_18
 
-%HC : AJout 08/2020
-%VF 27 Sept il aurait fallu des réferences pour introduire le débat: Ball et Mazumder (2011), Coibion and Gorodnichenko (2013), voire Mojon pour global inflation... Je propose de situer les 2 débats en ajouter les repères temporels a minima
-Following the 2008 financial crisis, inflation rates in advanced economies have been at odds with the prediction of a standard Phillips curve, which suggests an inverse relationship between unemployment and inflation. 
-While inflation in the pre-crisis period followed a standard Phillips curve relationship, two consecutive puzzles have emerged. 
-The "missing disinflation episode” emerged during the economic downturn (2009-2011), when inflation remained much higher than suggested by the high level of economic slack. 
-The “missing inflation puzzle" emerged from 2012 onwards, as inflation remained subdued despite the economic recovery (see \cite{Ball2011, Coibion2015}). 
-From a central bank perspective, the underlying question is whether the Phillips curve remains a reliable tool to explain inflation in a globalised world, or whether domestic cyclical conditions are superseded by exteral drivers of inflation.
-This triggered a very intense debate named “Phillips curve war” between supporters (among them \cite{Blanchard2016}, the European Central Bank (see \cite{Eser2020}) and Bank of France (see \cite{Berson2018}) and critics (led by \cite{Farmer2018}.
-All agree that external factors play a role in driving domestic inflation, either through more integration or more coordination.
-This paper contributes to this debate by quantifying the role of global value chains in inflation dynamics following an exchange rate shock in a Cobb-Douglas, partial equilibrium framework.\\
+This paper focuses on the role of global value chains in inflation dynamics. We analyse the impact of an exchange rate appreciation using a Cobb-Douglas, partial equilibrium framework.\\
 Participation in global value chains strengthens cross-country linkages via trade in intermediate inputs.
 % Je propose de syntétiser car le mécanisme expliqué est simple et connu et d'expliciter d'emblée ce qu'on appelera 1st and 2nd effects
 %This has to be taken into account to study international interdependence.For example, in the absence of global value chains, the only way currency appreciation affects consumer prices is through a reduction in the price of imported consumption goods.But if there are global value chain, an other channel  opens.
-When value chains are global, fluctuations in exchange rates (we assume here an appreciation of a currency) aﬀect household consumption deflator (HCE hereafter) through distinct channels: \textit{i)} the prices of imported ﬁnal goods sold directly to domestic consumers;
+When value chains are global, an appreciation of the exchange rate aﬀects the household consumption deflator (HCE hereafter) through distinct channels: \textit{i)} the prices of imported ﬁnal goods sold directly to domestic consumers;
 \textit{ii)} the prices of imported inputs feeding through domestic production; and
 %Hence, a currency appreciation reduces the price of imported inputs, and thus further reduces domestic consumer prices. 
 \textit{iii)} the price of exported inputs feeding through imported foreign production.

@@ -94,6 +94,53 @@ if "`source'"=="WIOD" {
 
 }
 
+if "`source'"=="MRIO" {	 
+	*À faire...
+	**Les fichiers excels sont trop importants pour les importer directement. Donc d’abord transformation en 
+	**csv à la main (libre office ? -- non, cela dépasse le nombre de colonnes)
+	
+	*Loop to save data for each year
+	set more off
+
+	import delimited "$dir/Bases_Sources/MRIO/ADB-MRIO-2019.csv", delimiter(";") /*
+		*/ varnames(8) asdouble encoding(UTF-8) rowrange(8:2221) colrange(3:2525) /*
+		*/ clear case(preserve) parselocal(fr)
+
+		
+	rename _ TOT
+	rename v1 pays
+	rename v2 secteur
+	replace secteur=substr(secteur,1,1)+"0"+substr(secteur,2,1) if strlen(secteur)==2
+	replace pays="ZZZ" if pays==""		
+		
+	foreach j of numlist 1 (1) 9 {
+		rename ???_c`j' ???_c0`j'
+	}
+		
+
+		
+	order AUS_c01-RoW_c35, alphabetic
+	order pays secteur
+	sort pays secteur
+	save "$dir/Bases/`source'_ICIO_`yrs'.dta", replace
+
+
+	/*
+	*Same with the database for wages
+	clear
+	set more off
+	local tab "WAGE OUT"
+	foreach n of local tab{
+		foreach i of numlist 1995 2000 2005 {
+		clear
+		import excel "$dir/Bases/ICIO/WAGE_`i'.xlsx", sheet("`n'") firstrow
+		keep A-VNM
+		drop if A == ""
+		save "$dir/Bases/`n'_`i'.dta", replace
+		}
+	}
+	
+	*/
 
 
 
@@ -408,7 +455,7 @@ if "`source'"=="TIVA_REV4" local yr_list 2005(1)2015
 if "`source'"=="WIOD" local yr_list 2000(1)2014
 
 if "`source'"=="TIVA" local first_yr 1995
-if "`source'"=="TIVA_REV4" local yr_list 2005(1)2015
+if "`source'"=="TIVA_REV4" local first_yr 2005
 if "`source'"=="WIOD" local first_yr 2000
 
 foreach y of numlist `yr_list' { 

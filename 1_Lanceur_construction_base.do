@@ -9,7 +9,7 @@ clear
 if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
 if ("`c(hostname)'" == "widv270a") global dir  "D:\home\T822289\CommerceVA" 
 
-if ("`c(username)'"=="guillaumedaudin") global dirgit "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation"
+if ("`c(username)'"=="guillaumedaudin") global dirgit "~/Répertoires Git/OFCE_CommerceVA"
 if ("`c(hostname)'" == "widv270a") global dirgit  "D:\home\T822289\CommerceVA\GIT\commerce_va_inflation" 
 
 capture log using "$dir/Temporaire/$S_DATE.log", replace
@@ -30,6 +30,8 @@ do "$dirgit/Definition_pays_secteur.do"
 ******************** Lancement des programmes ****************
 
 
+
+/*
 foreach i of numlist 1995(1)2011 {
 	clear
 	save_data `i' TIVA
@@ -43,7 +45,7 @@ foreach i of numlist 2000(1)2014 {
 	prepare_database `i' WIOD
 }
 
-*/
+
 
 foreach i of numlist 2005(1)2015 {
 	clear
@@ -54,7 +56,15 @@ foreach i of numlist 2005(1)2015 {
 
 database_csv TIVA
 database_csv TIVA_REV4
-database_csv WIOD
+database_csv WIO
+*/
+
+foreach i of numlist 2019(1)2019 {
+	clear
+	save_data `i' MRIO
+	prepare_database `i' MRIO
+}
+
 
 ******************** Identifie composantes pour IPC ****************
 do GIT/commerce_va_inflation/Definition_composante_HC.do

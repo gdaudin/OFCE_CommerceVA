@@ -98,6 +98,9 @@ if "`source'"=="MRIO" {
 	*À faire...
 	**Les fichiers excels sont trop importants pour les importer directement. Donc d’abord transformation en 
 	**csv à la main (libre office ? -- non, cela dépasse le nombre de colonnes)
+	**Donc à partir de l’excel. Mais il faut créer une ligne du genre =CONCATENER(E6;"_";E7)
+	**Puis s’assurer que le format des chiffres montrent toutes les décimales, et met - pour les termes négatifs
+	**avant de sauver en csv
 	
 	*Loop to save data for each year
 	set more off

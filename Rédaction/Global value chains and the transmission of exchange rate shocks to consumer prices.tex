@@ -440,7 +440,7 @@ One explicit difference between the databases is that WIOD assumes that the inpu
 TiVA databases do not rely on this assumption for two countries (Mexico and China). Instead, TiVA databases use different input-output tables for the exporting, import processing and domestic-market oriented sectors of these countries (or at least two of those, depending on the country and the version of the TiVA database). Despite this difference between TiVA and WIOD, we obtain similar results with TiVA and WIOD, which probably reflects the fact that our study does not focus on Mexico and China.\\
 Another difference relates to the method for harmonising national data and trade statistics. WIOD relies on the shares of imported inputs provided by national account, contrary to TiVA. As a result, TiVA is closer to international trade statistics than WIOD. This explains why the share of imported inputs is smaller in TiVA for some countries (other than China and the USA).
 
-\subsection{Nominal exchange rate shock} \label{subsec:chocchange}
+\subsection{Accounting impact of a change in the nominal exchange rate on domestic prices} \label{subsec:chocchange}
 
 Implementing an exchange rate variation is more complex than implementing a production cost shock. 
 The appreciation of the currency of country $A$ leads to a fall in the national currency price of country $A$'s imports, while the foreign-currency price of its exports increase. 
@@ -651,17 +651,22 @@ where ${s}_{kj}^i$ is a coefficient of $S^i$ for country $i$.
 \section{Accounting impact of an exchange rates variation on consumer prices}
 \label{sec:prixconso}
 We use the model presented in \ref{subsec:chocchange} to analyse the impact of an exchange rate variation on the household consumption expenditure (HCE) deflator.
-We assume that the change in the exchange rate is small enough to assimilate log and percentage points and hence consider $\overline{s_{i}}^{i,HC}$ as the HCE deflator elasticity to an exchange rate shock. Following an appreciation of the national currency versus all other currencies, imported inputs and imported consumer goods become cheaper and domestic prices expressed in national currency decrease. 
+We assume that the variation in the exchange rate is small enough to assimilate log and percentage points and hence consider $\overline{s_{i}}^{i,HC}$ as the HCE deflator elasticity to an exchange rate shock. Following an appreciation of the national currency versus all other currencies, imported inputs and imported consumer goods become cheaper and domestic prices expressed in national currency decrease. 
 %je propose de simplifier: on a déjà dit plus haut qu'on s'intéresse à  $\overline{s_{i}}^{i,HC}$ 
 %Using the WIOD database, we find that $\overline{s_{i}}^{i,HC}$ is equal to $-0.055$ for the USA in 2011, meaning that a 100\% appreciation of the dollar would reduce consumer prices by 5.5\%. 
 \subsection{Heterogeneity across country}\label{subsec:heterogcountry}
+We find that the HCE deflator elasticity is heterogeneous across countries. 
+The elasticity ranges from 0.05 to 0.35, reflecting different degrees of openness to trade. 
+For instance, using WIOD, we find that the elasticity of the HCE deflator to an exchange rate variation is 0.06 for the US in 2011. 
+In the euro area, the elasticity of the HCE deflator ranges from 0.07 in Italy to 0.18 in Ireland. 
+The elasticity is close to 0.10 in Italy, France, Germany, Spain, Portugal and Greece. 
+It is twice higher for small open economies like Luxembourg, Malta, Slovakia and Ireland.\\
 
-Using WIOD, we find that the absolute value of the elasticity of the HCE deflator to an exchange rate shock is 0.055 for the US in 2011.
 % phrase superflue car c'est mentionné dans la légende de chaque graph The following figures report the absolute value of this number ($0.055$).
 
 %VF Spring 2021: je retire la reference a la monnaie ficitive comme convenu 
 %For euro-area members, we distinguish between the effect of the appreciation of the euro and the effect of the appreciation of a hypothetical national currency. 
-For France, the elasticity of the HCE deflator to an appreciation of the euro is -0.08. 
+%For France, the elasticity of the HCE deflator to an appreciation of the euro is -0.08. 
 %The elastiticy of the HCE deflator to an appreciation of an hypothetical French national currency is -0.122. 
 
 
@@ -680,10 +685,16 @@ Figure \ref{fig:comp_WIOD_TIVA} shows that country elasticities are similar, acc
 \end{figure}
 
 \subsection{Evolution over time}\label{subsec:timeevol}
+We find that the elasticity of the HCE deflator to the exchange rate has remained broadly stable over the past two decades.
+Using the WIOD database, which covers a sample of 43 countries, we find that the mean output-weighted elasticity of the HCE deflator increased from 0.08 in 2000 to 0.09 in 2008. 
+After peaking in 2008, the elasticity slightly declined between 2009 and 2015. 
+Our finding concurs with the literature.
+Using comprehensive measures of global value chain integration, \cite{Timmer2016} find that the expansion of global value chain has slowed since the 2008-2009 Great Recession.
 
-Using a sample of 43 countries, we document the elasticity of the HCE deflator to the exchange rate over time. 
+Our results are robust to using different databases. 
 We obtain similar results with WIOD and TIVA.
-Using data from TIVA rev. 3 yields a higher elasticity  (see Figure \ref{fig:PIWIM_LONGITUDINAL}). This result likely reflects different treatment of contract manufacturing in the 2008 system of national accounts compared to the 1993 one, which reduces imported inputs.
+Using data from TIVA rev. 3 yields a higher elasticity  (see Figure \ref{fig:PIWIM_LONGITUDINAL}). 
+This result likely reflects different treatment of contract manufacturing in the 2008 system of national accounts compared to the 1993 one, which reduces imported inputs.
 The small differences observed between WIOD and TiVA rev. 4 likely reflects different ways of reconciling national accounts and international trade statistics.
 Output-weighed results provide a lower elasticity, reflecting the fact that large countries are relatively closed compared to small economies.
 Based on the third revision of TiVA database, we find that the output-weighed elasticity has increased by 25\% between 1995 and 2008, reaching 0.1 in 2008. 

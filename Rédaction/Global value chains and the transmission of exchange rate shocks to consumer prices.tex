@@ -705,9 +705,8 @@ Using the WIOD database, we find that the mean output-weighted elasticity of the
 After peaking in 2008, the elasticity slightly declined between 2009 and 2015. 
 Our finding concurs with the literature.
 Using comprehensive measures of global value chain integration, \cite{Timmer2016} find that the expansion of global value chain has slowed since the 2008-2009 Great Recession.
-Our results are robust to using different databases. 
-We obtain similar results with WIOD and TIVA.
-Using data from TIVA rev. 3 yields a higher elasticity  (see Figure \ref{fig:PIWIM_LONGITUDINAL}). 
+We obtain similar results with WIOD and TIVA (see Figure \ref{fig:PIWIM_LONGITUDINAL}).
+Using data from TIVA rev. 3, which covers a sample of 64 countries, yields a higher elasticity. 
 This result likely reflects the different treatment of contract manufacturing in the 2008 system of national accounts compared to the 1993 system, which reduces imported inputs.
 The small differences observed between WIOD and TiVA rev. 4 likely reflects different ways of reconciling national accounts and international trade statistics.
 Output-weighted results provide a lower elasticity, reflecting the fact that large countries are relatively closed compared to small economies.
@@ -796,9 +795,7 @@ For example,
 Figure \ref{fig:decomp_origine} shows that changes in the prices of imported final consumer goods contribute more to the total effect than changes in the prices of domestic goods.
 Although imported final consumer goods account for a smaller share of total consumption than domestic goods, they are the most impacted by changes in the exchange rate. 
 Imported final consumer goods also explain the differences in price elasticities observed between open and relatively closed economies.\\
-We find that the first two channels explain three quarters of the transmission of an exchange rate appreciation to domestic prices.
-By contrast, the last two channels, which reflect the impact of global value chains, play a more limited role, with marked across-countries heterogeneity.
-Hence, only one-fourth of the HCE elasticity to the exchange rate is attributable to participation in global value chains.\\
+
 Overall, we find that the first two channels explain three quarters of the transmission of an exchange rate appreciation to domestic prices.
 By contrast, the last two channels, which reflect the impact of global value chains, play a more limited role, with marked across-countries heterogeneity.
 Hence, only one-fourth of the HCE elasticity to the exchange rate is attributable to participation in global value chains.\\
@@ -910,13 +907,18 @@ Similarly, domestic core inflation (all products except food and energy) account
 %\label{fig:intensity_impt}
 %\end{figure}
 
-\section{Can we extrapolate the HCE deflator elasticity?}
+\section{Estimating the HCE deflator elasticity without resorting to WIOT}
 \label{sec:extrapo}
 \subsection{Doing without the world input-output matrices}
-World input-output matrices are not available for the most recent years: the latest years covered by WIOD and TiVA rev4 are, respectively, 2014 and 2015. 
+In this section, we show that a precise assessment of the HCE deflator elasticity to the exchange rate can be estimated without resorting to WIOT. 
+The construction of World Input-Output tables is data-demanding and WIOTs are typically released with a lag of several years.
+As a result, world input-output matrices are not available for the most recent years.
+The latest years covered by WIOD and TiVA rev4 are, respectively, 2014 and 2015. 
 In addition, using WIOTs involves cumbersome computations.
 Given these difficulties, we look for a simpler way to compute the elasticity of the HCE deflator to the exchange rate.
-We break down $\overline{s_{i}}^{i,HC}$ into different elements classified by ease of use and computation.
+We estimate the HCE elasticity from 2016 onwards using GDP statistics and trade data on consumption and intermediates.\\
+
+First, we break down $\overline{s_{i}}^{i,HC}$ into different elements classified by ease of use and computation.
 Let us start from equation \ref{eq:eqdomcurrency}.
 We have:
 \begin{equation}
@@ -941,7 +943,6 @@ $C^i$ and $\hat{C}^i_\$$ have a large number of zeros. So, we can write, definin
 When the domestic currency appreciates, $E1.HC^{i,imp}$ (for short $E1.HC$), $E2.HC^{i,dom}$ (for short $E2.HC$) reduce the consumer prices of the country $i$ whereas $E3.HC^{i,imp}$ (for short $E3.HC$) increases them. 
 %je suggère de supprimer le fait qu'il n'y a pas besoin d'inverser de matrice car cette opération est relativement facile avec les logiciels disponibles aujourd'hui
 
- 
 This decomposition differs from equation \ref{equ:decomp_impexp}. 
 Equation \ref{equ:decomp_impexp} focuses on the contribution of domestic versus imported goods to the HCE deflator elasticity to an exchange rate shock.
 By contrast, equation \ref{eq:eqtoto} highlights the transmission channels of the shock.
@@ -950,7 +951,7 @@ By contrast, equation \ref{eq:eqtoto} highlights the transmission channels of th
 Figure \ref{fig:decompositionofs} plots the shares of $E1.HC$, $E2.HC$, $E3.HC$ and $E4.HC$ (shortening $E4.HC^i$) in $\overline{s}_{i}^{i,HC}$.  
 $E1.HC$ dominates. 
 While $E3.HC$ is negligible, $E4.HC$ accounts for 10\% to 30\% of $\overline{s}_{i}^{i,HC}$ for most countries except China.
-On the whole, as shown by Figure \ref{fig:shareofs}, input-output mechanisms (i.e. everything but $E1.HC$) explain a large share of the elasticity, especially for large countries or countries of the Eurozone subject to a shock on the Euro. This share has increased until 2013-2014, implying an increasing need of data from WIOTs to perform our computations (see Figure \ref{fig:shareofsthroughtime}).
+On the whole, as shown by Figure \ref{fig:shareofs}, input-output mechanisms (i.e. all shares except $E1.HC$) explain a large share of the elasticity, especially for large countries or countries of the Eurozone subject to a shock on the Euro. This share has increased until 2013-2014, implying an increasing need of data from WIOTs to perform our computations (see Figure \ref{fig:shareofsthroughtime}).
 
 \begin{figure}[H]
 \centering
@@ -987,7 +988,7 @@ On the whole, as shown by Figure \ref{fig:shareofs}, input-output mechanisms (i.
 	\label{fig:shareofsthroughtime}
 \end{figure}
 
-$E1.HC$ and $E2.HC$ can be computed with national input-output matrices whereas world input-output matrices are needed for computing $E3.HC$ and $E4.HC$. 
+$E1.HC$ and $E2.HC$ can be computed with national input-output matrices, whereas world input-output matrices are needed for computing $E3.HC$ and $E4.HC$. 
 Although world input-output matrices are not available for the most recent years, $E4.HC$ can be inferred from easier-to-compute elements of $\overline{s}_{i}^{i,HC}$.
 
 %This is suggested by the correlation matrix of  $E1.HC^{i,imp}$, $E2.HC^{i,dom}$, $E3.HC^{i,imp}$ and $E4.HC^i$ (see Table \ref{table:corretable1}). 
@@ -1052,8 +1053,9 @@ It might be that the small economy counterbalances its small size with its large
 \subsection{Doing without TiVA and WIOD, but keeping Eurostat}
 However, even these data ($E1.HC$ and $E2.HC$) are not up-to-date for a large number of countries. 
 The share of imports in household final consumption and in intermediate consumption for the production of domestic household final consumption are not routinely computed by national statistical institutes. 
-We have to use a proxy. It is easy to identify consumption and intermediary goods imports using UN Comtrade data and the BEC classification. 
-While the World Bank provides regular estimates for household consumption, it does not provide an estimate for intermediate consumptions. Eurostat provides estimates for intermediate consumptions in the case of European countries.
+We thus rely on a proxy by identifying consumption and intermediary goods imports using UN Comtrade data and the BEC classification. 
+While the World Bank provides regular estimates for household consumption, estimates for intermediate consumptions are lacking. 
+However, Eurostat provides estimates for intermediate consumptions for European countries.
 %VF comme la source n'est pas précisee je mets en commentaire \footnote{And some others for selected years Eurostat, BEC -- PRÉCISER LA SOURCE}. 
 Combining these three data sources, we compute the share of imported consumption goods in household consumption and the share of imported inputs in all inputs. 
 
@@ -1089,7 +1091,8 @@ The results are less encouraging: the $R^2$ is smaller and declining over time, 
 %We assume that $\beta$ is constant over time for each country $i$ (equation \ref{eq:eq9}).
 Yet, estimating successive cross-sections of equation \ref{eq:eq8} is a demanding test to establish a link between the elastiticy computed by PIWIM based on WIOD data and more up-to-date data assembled from various sources.
 It does not allow to exploit country-specific information on the determinant of the elasticity.
-A less demanding test is to run a panel with country fixed-effects, assuming that $\beta$ is constant over time but that it explains only within-country variations. To take into account year-specific shocks, we add two year-specific variables : the GDP-weighted mean of each variable of interest (see equation \ref{eq:eq9}). 
+A less demanding test consists in running a panel regression with country fixed-effects, assuming that $\beta$ is constant over time but that it explains only within-country variations. 
+To take into account year-specific shocks, we add two year-specific variables : the GDP-weighted mean of each variable of interest (see equation \ref{eq:eq9}). 
 
 
  \begin{equation}
@@ -1120,8 +1123,9 @@ Hence, we could use this approach to estimate the HCE deflator elasticity to the
 \subsection{Doing with only World Bank and Comtrade data}
 Data on intermediate consumption and household consumption are not available for all countries.
 As a result, our regressions only include a limited number of observations.
-To expand our panel, we use an even simpler proxy for E1.HC+E2.HC that requires only trade data from Comtrade and GDP data from the World Bank, both available until 2018. 
-As a result, we can include many more countries in the new panel (see equation \ref{eq:eq10}).
+To expand our panel, we use an even simpler proxy for E1.HC+E2.HC. 
+This proxy only requires trade data from Comtrade and GDP data from the World Bank. This data is available until 2018. 
+As a result, we can include more countries in the new panel (see equation \ref{eq:eq10}).
  \begin{equation}
 \begin{array}{llll}
 \overline{s}_{i,t}^{i,t,HC}= \alpha & +  \beta_1  \frac{\textnormal{imported consumption goods}_{i,t}}{\textnormal{GDP}_{i,t}} \\ & + \beta_2 \frac{\textnormal{imported intermediate goods}_{i,t}}{\textnormal{GDP}_{i,t}} \\
@@ -1147,7 +1151,7 @@ Our findings are robust to using other databases (revision 3 and revision 4 of T
 \end{figure}
 
 Using these equations, we can predict the HCE deflator elasticity from 2016 onwards to make up for the lack of WIOTs.
-Figure \ref{fig:panel_pred3} shows the predictions. The in-sample predictions seem  rather robust, giving us confidence in the quality of the out-of-sample predictions.
+Figure \ref{fig:panel_pred3} shows the predictions. The in-sample predictions seem rather robust, giving confidence in the quality of the out-of-sample predictions.
 
 
 \begin{figure}[H]
@@ -1279,7 +1283,8 @@ First, we analyse the composition and determinants of the HCE deflator elasticit
 We use several datasets to ensure the robustness of our results.
 In line with the existing literature, we find a rather modest elasticity of the HCE deflator to the exchange rate of around 0.1.
 The elasticity of the HCE deflator to the exchange rate has remained broadly stable over the past two decades.
-The elasticity is heterogeneous across countries, reflecting different degrees of openness to trade. \\
+The elasticity is heterogeneous across countries, reflecting different degrees of openness to trade. 
+The elasticitly is larger for small open economies and smaller for larger and relatively closed economies. \\
 Second, we examine which sectors experience higher spillovers from an exchange rate appreciation. 
 To do so, we focus on the main components of the HCE deflator. 
 Non-energy industrial goods explain the bulk of the total HCE deflator elasticity to the exchange rate. 
@@ -1287,8 +1292,7 @@ Services also play a significant role, especially in advanced economies, where s
 Third, we analyse the determinants of the HCE elasticity and the role of global value chains in the transmission of an exchange rate appreciation to the HCE deflator.
 We find that direct effects through imported consumption and intermediates entering domestic production explain three quarters of the transmission of an exchange rate appreciation to domestic prices.
 By contrast, global value chains participation plays a limited role, with marked across-countries heterogeneity.\\
-Fourth, we show that a precise assessment of the HCE deflator elasticity to the exchange rate can be estimated without resorting to WIOT.
-As the construction of World Input-Output tables is data-demanding, WIOT are not available for the most recent years. 
+Fourth, we show that a precise assessment of the HCE deflator elasticity to the exchange rate can be estimated without resorting to WIOT, which are not available for the most recent years. 
 To address this gap, we estimate the HCE deflator elasticity from 2016 onwards using GDP statistics and trade data on consumption and intermediates.
 
 % conclusion precedente

@@ -19,6 +19,7 @@ if ("`c(username)'"=="guillaumedaudin") global dirgit "~/Répertoires Git/OFCE_C
 
 
 do  "$dirgit/Definition_pays_secteur.do" `source'
+
 	
 
 	
@@ -197,17 +198,35 @@ graph export "$dirgit/Rédaction/WIOD_HC_elasticities.png", replace
 */
 
 ****Autre version de WIOD_HC_elasticities.png ?
-blif
+
 sort pond_WIOD_HC
 gen elast_order = _n
 labmask elast_order,values(pays)
+
+/* Ça, c’est le graphique avec les monnaies hypothétiques
 graph dot (asis) pond_WIOD_HC,  over(elast_order, ///
+	label(labsize(tiny))) marker(1, ms(O) mfcolor(gs1) mlcolor(black) msize(tiny)) ///
+	legend(off) title("WIOD elasticites 2014 (absolute value)") ///
+	note("Each country is assumed to have its own currency (maybe hypothetical)" "except for countries suffixed by _EUR: the shock is then on the Euro.", size(vsmall)) ///
+	scheme(s1mono) xsize(6)  ysize(7)
+
+graph export "$dirgit/Rédaction/WIOD_HC_elasticities.png", replace
+*/
+
+gen sample=1
+Definition_pays_secteur WIOD
+replace sample=0 if strpos("$eurozone",pays)!=0
+graph dot (asis) pond_WIOD_HC if sample==1,  over(elast_order, ///
 	label(labsize(tiny))) marker(1, ms(O) mfcolor(gs1) mlcolor(black) msize(tiny)) ///
 	legend(off) title("WIOD elasticites 2014 (absolute value)") ///
 	note("Each country is assumed to have its own currency" "except for countries suffixed by _EUR: the shock is then on the Euro.", size(vsmall)) ///
 	scheme(s1mono) xsize(6)  ysize(7)
 
 graph export "$dirgit/Rédaction/WIOD_HC_elasticities.png", replace
+drop sample
+
+
+
 
 
 ********

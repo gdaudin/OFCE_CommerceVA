@@ -10,7 +10,7 @@ if ("`c(hostname)'" == "widv270a") global dir  "D:\home\T822289\CommerceVA"
 if ("`c(hostname)'" == "FP1376CD") global dir  "T:\CommerceVA" 
 
 
-if ("`c(username)'"=="guillaumedaudin") global dirgit "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation"
+if ("`c(username)'"=="guillaumedaudin") global dirgit "~/Répertoires Git/OFCE_CommerceVA"
 if ("`c(hostname)'" == "widv270a") global dirgit  "D:\home\T822289\CommerceVA\GIT\commerce_VA_inflation" 
 if ("`c(hostname)'" == "FP1376CD") global dirgit  "T:\CommerceVA\GIT\commerce_va_inflation" 
 
@@ -451,7 +451,11 @@ foreach source in  WIOD /*TIVA TIVA_REV4 */{
 	sort E1HC
 	gen E1_order = _n
 	labmask E1_order,values(pays)
-	graph dot (asis) E1HC E2HC E3HC E4HC,  over(E1_order, ///
+	
+	gen sample=1
+	Definition_pays_secteur `source'
+	replace sample=0 if strpos("$eurozone",pays)!=0
+	graph dot (asis) E1HC E2HC E3HC E4HC if sample==1,  over(E1_order, ///
 		label(labsize(tiny))) ///
 		marker(1, ms(O) mfcolor(gs1) mlcolor(gs1) msize(tiny) ) ///
 		marker(2, ms(+) mfcolor(gs5) mlcolor(gs5) msize(small) ) ///
@@ -466,7 +470,7 @@ foreach source in  WIOD /*TIVA TIVA_REV4 */{
 		scheme(s1mono)
 		
 		graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/distribution_components_`source'_`i'.png", replace	
-		if "`source'"=="WIOD" & `i'==2014 graph export "$dir/commerce_VA_inflation/Rédaction/distribution_components_`source'_`i'.png", replace	
+		if "`source'"=="WIOD" & `i'==2014 graph export "$dirgit/Rédaction/distribution_components_`source'_`i'.png", replace	
 		
 		gen share_IO_mech = (E4HC+E3HC+E2HC)/pond_`source'_HC
 		gen share_IOT     = (E4HC+E3HC)/pond_`source'_HC
@@ -488,7 +492,7 @@ foreach source in  WIOD /*TIVA TIVA_REV4 */{
 			scheme(s1mono)
 		
 		graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/share_components_`source'_`i'.png", replace	
-		if "`source'"=="WIOD" & `i'==2014 graph export "$dir/commerce_VA_inflation/Rédaction/share_components_`source'_`i'.png", replace	
+		if "`source'"=="WIOD" & `i'==2014 graph export "$dirgit/Rédaction/share_components_`source'_`i'.png", replace	
 				
 		}
 	

@@ -12,14 +12,13 @@ set more off
 if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
 else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
 
+if ("`c(username)'"=="guillaumedaudin") global dirgit "~/Répertoires Git/OFCE_CommerceVA"
 
 *capture log close
 *log using "$dir/$S_DATE.log", replace
 
 
-if ("`c(username)'"=="guillaumedaudin") do  "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation/Definition_pays_secteur.do" `source'
-if ("`c(username)'"=="w817186") do "X:\Agents\FAUBERT\commerce_VA_inflation\Definition_pays_secteur.do" `source'
-if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\Definition_pays_secteur.do" `source'
+do  "$dirgit/Definition_pays_secteur.do" `source'
 	
 
 	
@@ -50,7 +49,7 @@ graph twoway (scatter pond_WIOD_HC pond_TIVA_HC, mlabel(mylabel)) ///
 			ytitle("WIOD elasticites `year' (absolute value)") xtitle("TIVA elasticites `year' (absolute value)") ///
 			legend(order (2 3)  label(2 "Linear fit") label(3 "45° line") ) scheme(s1mono)
 			
-graph export "$dir/commerce_VA_inflation/Rédaction/Comparaison_WIOD_TIVA_`year'.png", replace
+graph export "$dirgit/Rédaction/Comparaison_WIOD_TIVA_`year'.png", replace
 
 
 	
@@ -83,7 +82,7 @@ graph twoway (scatter pond_WIOD_HC pond_TIVA_REV4_HC , mlabel(mylabel)) ///
 			ytitle("WIOD elasticites `year' (absolute value)") xtitle("TIVA_REV4 elasticites `year' (absolute value)") ///
 			legend(order (2 3)  label(2 "Linear fit") label(3 "45° line") ) scheme(s1mono)
 			
-graph export "$dir/commerce_VA_inflation/Rédaction/Comparaison_WIOD_TIVA_REV4_`year'.png", replace
+graph export "$dirgit/Rédaction/Comparaison_WIOD_TIVA_REV4_`year'.png", replace
 
 
 replace pond_WIOD_HC= -pond_WIOD_HC/10
@@ -103,7 +102,7 @@ graph twoway ///
 		ytitle("Impact PIWIM (WIOD), en %") xtitle("Impact PIWIM (TIVA_REV4), en %") ///
 		legend(order (3 4)  label(3 "Régression linéaire") label(4 "ligne à 45°") ) scheme(s1mono)
 			
-graph export "$dir/commerce_VA_inflation/Rédaction_note/Comparaison_WIOD_TIVA_REV4_`year'.png", replace
+graph export "$dirgit/Rédaction_note/Comparaison_WIOD_TIVA_REV4_`year'.png", replace
 
 
 
@@ -134,7 +133,7 @@ graph twoway (scatter pond_TIVA_REV4_HC pond_TIVA_HC, mlabel(mylabel)) ///
 			 ytitle("TIVA_REV4 elasticites `year' (absolute value)") xtitle("TIVA elasticites `year' (absolute value)") ///
 			legend(order (2 3)  label(2 "Linear fit") label(3 "45° line") ) scheme(s1mono)
 			
-graph export "$dir/commerce_VA_inflation/Rédaction/Comparaison_TIVA_REV4_TIVA_`year'.png", replace
+graph export "$dirgit/Rédaction/Comparaison_TIVA_REV4_TIVA_`year'.png", replace
 
 
 ********Figure 1quart (Comparing consumer price elasticity to an exchange rate appreciation for WIOD and TIVA_REV4, 2011)	
@@ -166,7 +165,7 @@ graph twoway (scatter pond_WIOD_HC pond_TIVA_REV4_HC  , mlabel(mylabel)) ///
 			ytitle("WIOD elasticites `year' (absolute value)") xtitle("TIVA_REV4 elasticites `year' (absolute value)") ///
 			legend(order (2 3)  label(2 "Linear fit") label(3 "45° line") ) scheme(s1mono)
 			
-graph export "$dir/commerce_VA_inflation/Rédaction/Comparaison_WIOD_TIVA_REV4_`year'.png", replace
+graph export "$dirgit/Rédaction/Comparaison_WIOD_TIVA_REV4_`year'.png", replace
 
 *************Figure 2 (presenting results)
 
@@ -194,20 +193,21 @@ twoway histogram pond_WIOD_HC, width(0.05) frequency xscale(range(0.04 0.36)) ||
 	"*_EUR designate the effet of an shock on the Euro" ///
 	"FRA_EUR is in the same position as JPN") ///
 	 scheme(s1mono)
-graph export "$dir/commerce_VA_inflation/Rédaction/WIOD_HC_elasticities.png", replace
+graph export "$dirgit/Rédaction/WIOD_HC_elasticities.png", replace
 */
 
 ****Autre version de WIOD_HC_elasticities.png ?
+blif
 sort pond_WIOD_HC
 gen elast_order = _n
 labmask elast_order,values(pays)
 graph dot (asis) pond_WIOD_HC,  over(elast_order, ///
 	label(labsize(tiny))) marker(1, ms(O) mfcolor(gs1) mlcolor(black) msize(tiny)) ///
 	legend(off) title("WIOD elasticites 2014 (absolute value)") ///
-	note("Each country is assumed to have its own currency (maybe hypothetical)" "except for countries suffixed by _EUR: the shock is then on the Euro.", size(vsmall)) ///
+	note("Each country is assumed to have its own currency" "except for countries suffixed by _EUR: the shock is then on the Euro.", size(vsmall)) ///
 	scheme(s1mono) xsize(6)  ysize(7)
 
-graph export "$dir/commerce_VA_inflation/Rédaction/WIOD_HC_elasticities.png", replace
+graph export "$dirgit/Rédaction/WIOD_HC_elasticities.png", replace
 
 
 ********
@@ -257,7 +257,7 @@ twoway scatter pond_WIOD_HC E1HC  if mylabel1=="" & mylabel2=="" , msize(small) 
 	"*_EUR designate the effet of an shock on the Euro") ///
 	 scheme(s1mono)
 	
-graph export "$dir/commerce_VA_inflation/Rédaction/WIOD_HC_E1HC.png", replace
+graph export "$dirgit/Rédaction/WIOD_HC_E1HC.png", replace
 
 /*
 
@@ -359,7 +359,7 @@ twoway 	(line WIOD_elast_annual year, lcolor(blue) lpattern(dash)) ///
 
 
 
-graph export "$dir/commerce_VA_inflation/Rédaction/PIWIM_LONGITUDINAL.png", replace
+graph export "$dirgit/Rédaction/PIWIM_LONGITUDINAL.png", replace
 
 
 erase temp_TIVA_REV4.dta		

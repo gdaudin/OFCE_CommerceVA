@@ -53,7 +53,7 @@
 
 
 \begin{document}
-\title{Mind the data gap: an accounting approach to estimate the elasticity of the household consumption expenditure deflator to the exchange rate	\thanks{We thank Marion Cochard, Pavel Diev, Hubert Escaith, Guillaume Gaulier, Yannick Kalantzis, Guy Levy-Rueff, Sébastien Miroudot, Jean-François Ouvrard and François de Soyres for comments and suggestions, as well as participants at Banque de France seminars. Any remaining errors are ours. All programs are available at \url{https://github.com/gdaudin/OFCE_CommerceVA}. Data are available at \url{https://gdaudin.github.io/Databases.html} and results are available upon request.}\\
+\title{An accounting estimate of the impact of the exchange rate on consumer prices	\thanks{We thank Marion Cochard, Pavel Diev, Hubert Escaith, Guillaume Gaulier, Yannick Kalantzis, Guy Levy-Rueff, Sébastien Miroudot, Jean-François Ouvrard and François de Soyres for comments and suggestions, as well as participants at Banque de France seminars. Any remaining errors are ours. All programs are available at \url{https://github.com/gdaudin/OFCE_CommerceVA}. Data are available at \url{https://gdaudin.github.io/Databases.html} and results are available upon request.}\\
 \vspace{1cm}
 }
 \vspace{1cm}
@@ -137,10 +137,10 @@ Similarly, settlement and invoicing of imports in the domestic currency is anoth
 As a result, our estimates provide an upper bound of the HCE deflator elasticity.
 Using alternative pricing assumptions would entail lower values.
 For instance, assuming that only 60\% of invoices in the euro area goods trade are denominated in foreign currency (see \cite{Ortega2020}) would entail lower elasticity values. 
-We also assume that all pricing occur using the currency of the producing country, despite the well-documented role of dominant-currency pricing (\cite{Gopinath2020}).
-Despite these simplifying assumptions, our estimates provide an accounting-based gauge of how large the exchange rate pass-through could be, considering direct and indirect import content in consumption. 
+In addition, we assume that all pricing occur using the currency of the producing country, despite the well-documented role of dominant-currency pricing (\cite{Gopinath2020}).
+Despite these simplifying assumptions, our estimates provide an accounting-based gauge of how large the exchange rate pass-through could be, considering direct and indirect import content in consumption and global value chain linkages. 
 It helps identifying which countries and sectors are under pressure to adjust their prices when subject to an exchange rate variation. 
-%We also assume that the exchange rate shock is proportional across sectors. \\
+We also assume that the exchange rate shock is proportional across sectors. \\
 %Variation élasticite dans le temps et l'espace
 Our contribution to the literature is fourfold. 
 First, we analyse the evolution of the elasticity of the HCE deflator to the exchange rate and differences accross countries.
@@ -282,7 +282,7 @@ In France, the Insee \citep{Bourgeois2019} has developed the AVIONIC model based
 It measures the impact of an exogenous variation in the price of inputs on the price of production.
 Leontief's price model is broadly used in multi-sector, single-country macroeconomic models, for example, to measure the effect of changes in energy prices \citep{Bournay2015, Sharify2013}. Implicitly, \cite{Bems2015} use it to focus on competitiveness. 
 They compute real effective exchange rates weighted by the value-added trade structure to measure the impact of a demand change in value added on value added prices and final expenditure levels. %It is at the center of \cite{Cochard2016}. 
-\cite{Cochard2016} rely on an accounting approach to analyse the effects of costs on prices ("cost-push inflation") and shows that they are all the higher as countries are open.
+\cite{Cochard2016} rely on an accounting approach to analyse the effects of costs on prices ("cost-push inflation") and show a higher impact for more open countries.
 
 % CR je suggère de supprimer la phrase suivante car ce sont plus des hypothèses que des résultats.
 % OK Firms' margins are assumed to be fixed. Prices only adjust to absorb cost changes, production techniques are fixed during successive production cycles and inputs substitution (for instance, between countries producing the same goods) is not accounted for, despite variations in relative prices.\\
@@ -668,7 +668,7 @@ $\overline{s_{i}}^{i,HC}$ provides the HCE deflator of country $i$ elasticity to
  \end{eqnarray} 
 where ${s}_{kj}^i$ is a coefficient of $S^i$ for country $i$. 
 
-\section{Accounting impact of an exchange rates variation on consumer prices}
+\section{Accounting impact of exchange rate movements on consumer prices}
 \label{sec:prixconso}
 We use the model presented in \ref{subsec:chocchange} to analyse the impact of an exchange rate variation on the household consumption expenditure (HCE) deflator.
 We assume that the variation in the exchange rate is small enough to assimilate log and percentage points and hence consider $\overline{s_{i}}^{i,HC}$ as the HCE deflator elasticity to an exchange rate shock. Following an appreciation of the national currency versus all other currencies, imported inputs and imported consumer goods become cheaper and domestic prices expressed in national currency decrease. 
@@ -930,9 +930,9 @@ Similarly, domestic core inflation (all products except food and energy) account
 %\label{fig:intensity_impt}
 %\end{figure}
 
-\section{Estimating the HCE deflator elasticity without resorting to WIOT}
+\section{Filling the data gap: estimating the HCE deflator elasticity without using WIOT}
 \label{sec:extrapo}
-\subsection{Doing without the world input-output matrices}
+\subsection{Estimating the HCE deflator elasticity without resorting to WIOT}
 In this section, we show that a precise assessment of the HCE deflator elasticity to the exchange rate can be estimated without resorting to WIOT. 
 The construction of World Input-Output tables is data-demanding and WIOTs are typically released with a lag of several years.
 As a result, world input-output matrices are not available for the most recent years.
@@ -1073,14 +1073,14 @@ They are of similar size for small open economies and large closed ones.
 It might be that the small economy counterbalances its small size with its large openness rate and vice versa.\footnote{Although this functional form might seem counterintuitive (one might expect that the elasticity is an affine function of openness as summarized by $E1.HC$), the analytical examination of the two-country, one-sector case shows that it is plausible (see Online Appendix E).}
 %Back to the main point, it turns out that we do not gain much by inversing matrixes. Of course, this realization is only possible because we were able to computes $\overline{s}_{i}^{i,HC}$ in the first place. Still, it suggests that we could extrapolate the elasticities for not-yet-released years, as long as we have the share of imported goods in household consumption and the share of imported inputs in household consumption of domestic goods. 
 
-\subsection{Doing with only World Bank and Comtrade data}
+\subsection{Estimating the HCE deflator elasticity using GDP and trade statistics}
 The sum of the share of imported goods in household consumption and the share of imported inputs in household consumption of domestic goods (E1.HC + E2.HC) are a good predictor of the effect of exchange rate fluctuations on household consumption prices. 
 However, these data ($E1.HC$ and $E2.HC$) are not up-to-date for a large number of countries, as they are not routinely computed by national statistical institutes.
 We show in Online Appendix C that we can rely on a proxy by identifying consumption and intermediary goods imports using UN Comtrade data and the BEC classification and using a measure for household consumption (from the World Bank) and intermediate consumption (from Eurostat).
 Intermediate consumption data are not available for all countries.
 As a result, our regressions in Online Appendix C only include a limited number of observations.
 
-To expand our panel, we use in this section an even simpler proxy for E1.HC+E2.HC. 
+To expand our panel, we use in this section an even simpler proxy for $E1.HC+E2.HC$. 
 This proxy only requires trade data from Comtrade and GDP data from the World Bank. This data is available until 2018. 
 As a result, we can include more countries in the new panel (see equation \ref{eq:eq10}).
  \begin{equation}
@@ -1234,12 +1234,12 @@ Figure \ref{fig:panel_pred3} shows the predictions. The in-sample predictions se
 \section{Conclusion}
 \label{sec:ccl}
 % Avril 2021
-This paper focuses on the elasticity of the household consumption expenditure (HCE hereafter) deflator to the exchange rate.
+This paper focuses on the elasticity of the household consumption expenditure (HCE) deflator to the exchange rate.
 Our contribution to the literature is fourfold. \\
 First, we analyse the composition and determinants of the HCE deflator elasticity using world input-output tables covering twenty years of data, from 1995 to 2015. 
 We use several datasets to ensure the robustness of our results.
 In line with the existing literature, we find a rather modest elasticity of the HCE deflator to the exchange rate of around 0.1.
-The elasticity of the HCE deflator to the exchange rate has remained broadly stable over the past two decades.
+The output-weighted elasticity has remained broadly stable over the past two decades.
 The aggregate figure masks substantial cross-country heterogeneity, reflecting different degrees of openness to trade and differences in foreign product content in domestic consumption. 
 The elasticitly is larger for small open economies with higher import content of consumption. \\
 Second, we examine which sectors experience higher spillovers from an exchange rate appreciation. 
@@ -1248,7 +1248,7 @@ Non-energy industrial goods explain the bulk of the total HCE deflator elasticit
 Services also play a significant role, especially in advanced economies, where services represent a substantial share of total consumption. \\
 Third, we analyse the determinants of the HCE elasticity and the role of global value chains in the transmission of an exchange rate appreciation to the HCE deflator.
 We find that direct effects through imported consumption and intermediates entering domestic production explain three quarters of the transmission of an exchange rate appreciation to domestic prices.
-By contrast, global value chains participation plays a limited role, with marked across-countries heterogeneity.\\
+By contrast, global value chains participation plays a limited role, with marked cross-countries heterogeneity.\\
 Fourth, we show that a precise assessment of the HCE deflator elasticity to the exchange rate can be estimated without resorting to WIOT, which are not available for the most recent years. 
 To address this gap, we estimate the HCE deflator elasticity from 2016 onwards using GDP statistics and trade data on consumption and intermediates.
 

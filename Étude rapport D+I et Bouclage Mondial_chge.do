@@ -481,7 +481,7 @@ foreach source in  WIOD /*TIVA TIVA_REV4 */{
 		gen share_IO_order = _n
 		labmask share_IO_order,values(pays)
 		
-		graph dot (asis) share_IO_mech share_IOT,  over(share_IO_order, ///
+		graph dot (asis) share_IO_mech share_IOT if sample==1,  over(share_IO_order, ///
 			label(labsize(tiny))) ///
 			marker(1, ms(O) mfcolor(gs1) mlcolor(gs1) msize(tiny) ) ///
 			marker(2, ms(O) mfcolor(gs13) mlcolor(gs13) msize(tiny) ) ///

@@ -2,7 +2,7 @@
 if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
 if ("`c(hostname)'" == "widv270a") global dir  "D:\home\T822289\CommerceVA" 
 
-if ("`c(username)'"=="guillaumedaudin") global dirgit "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation"
+if ("`c(username)'"=="guillaumedaudin") global dirgit "~/Répertoires Git/OFC_CommerceVA"
 if ("`c(hostname)'" == "widv270a") global dirgit  "D:\home\T822289\CommerceVA\GIT\commerce_va_inflation" 
 
 import excel "$dir/Bases_Sources/Data_GDP_95_18_new.xlsx", /*
@@ -111,6 +111,7 @@ capture program drop collecter_resultats_reg
 program collecter_resultats_reg
 args source y reg
 	use "$dir/Bases_Sources/Doigt_mouillé.dta", clear
+	blif
 	if "`reg'"=="reg1" generate ratio_impt_conso=impt_conso/GDP
 	if "`reg'"=="reg1" generate ratio_impt_interm = impt_interm/GDP
 	
@@ -213,7 +214,7 @@ foreach reg in reg2 reg1 {
 		,/*yscale(range(1 (0.05) 1.15)) ylabel(1 (0.05) 1.15)*/ legend(order (1 4) rows(2) size(small)) ///
 		scheme(s1color)
 	graph export "$dir/Results/`reg'_beta_WIOD.png", replace
-	graph export "$dir/commerce_VA_inflation/Rédaction/`reg'_beta_WIOD.png", replace
+	graph export "$dirgit/Rédaction/`reg'_beta_WIOD.png", replace
 	
 
 	

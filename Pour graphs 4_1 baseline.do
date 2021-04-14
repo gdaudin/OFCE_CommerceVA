@@ -41,18 +41,22 @@ replace pond_TIVA_HC= -pond_TIVA_HC
 regress pond_WIOD_HC pond_TIVA_HC
 predict predict
 gen error=abs(predict-pond_WIOD_HC)/pond_WIOD_HC
-gen mylabel= pays if /*error >.25 |*/ pond_WIOD_HC>=0.22 | pays=="FRA"
+gen mylabel= pays if strpos("HUN IRL_EUR CZE TWN SVK_EUR",pays)!=0 /*error >.25 | pond_WIOD_HC>=0.22 | pays=="FRA"*/
 
-graph twoway (scatter pond_WIOD_HC pond_TIVA_HC, mlabel(mylabel)) ///
-			(lfit pond_WIOD_HC pond_TIVA_HC, clpattern(dash)) ///
-			(lfit pond_TIVA_HC pond_TIVA_HC), ///
-			yscale(range(0 0.4)) xscale(range(0 0.4)) ylabel(0 (0.05) 0.4) xlabel(0 (0.05) 0.4) ///
+gen sample=1
+Definition_pays_secteur TIVA
+replace sample=0 if strpos("$eurozone",pays)!=0
+
+graph twoway (scatter pond_WIOD_HC pond_TIVA_HC if sample==1, mlabel(mylabel)) ///
+			(lfit pond_WIOD_HC pond_TIVA_HC if sample==1, clpattern(dash)) ///
+			(lfit pond_TIVA_HC pond_TIVA_HC if pond_TIVA_HC <=0.3), ///
+			yscale(range(0 0.3)) xscale(range(0 0.3)) ylabel(0 (0.05) 0.3) xlabel(0 (0.05) 0.3) ///
 			ytitle("WIOD elasticites `year' (absolute value)") xtitle("TIVA elasticites `year' (absolute value)") ///
 			legend(order (2 3)  label(2 "Linear fit") label(3 "45° line") ) scheme(s1mono)
 			
 graph export "$dirgit/Rédaction/Comparaison_WIOD_TIVA_`year'.png", replace
 
-
+drop sample
 	
 ********Figure 1bis (Comparing consumer price elasticity to an exchange rate appreciation for WIOD and TIVA_REV4, 2014)	
 	
@@ -74,17 +78,22 @@ replace pond_TIVA_REV4_HC= -pond_TIVA_REV4_HC
 regress pond_WIOD_HC pond_TIVA_REV4_HC
 predict predict
 gen error=abs(predict-pond_WIOD_HC)/pond_WIOD_HC
-gen mylabel= pays if /*error >.25 |*/ pond_WIOD_HC>=0.22 | pays=="FRA"
+gen mylabel= pays if strpos("HUN IRL_EUR BGR TWN POL",pays)!=0/*if /*error >.25 |*/ pond_WIOD_HC>=0.22 | pays=="FRA*/
 
-graph twoway (scatter pond_WIOD_HC pond_TIVA_REV4_HC , mlabel(mylabel)) ///
-            (lfit pond_WIOD_HC pond_TIVA_REV4_HC  , clpattern(dash)) ///
-			(lfit pond_WIOD_HC pond_WIOD_HC), ///
-			yscale(range(0 0.4)) xscale(range(0 0.4)) ylabel(0 (0.05) 0.4) xlabel(0 (0.05) 0.4) ///
+gen sample=1
+Definition_pays_secteur TIVA
+replace sample=0 if strpos("$eurozone",pays)!=0
+
+graph twoway (scatter pond_WIOD_HC pond_TIVA_REV4_HC if sample==1, mlabel(mylabel)) ///
+            (lfit pond_WIOD_HC pond_TIVA_REV4_HC if sample==1 , clpattern(dash)) ///
+			(lfit pond_WIOD_HC pond_WIOD_HC if pond_WIOD_HC <=0.3), ///
+			yscale(range(0 0.3)) xscale(range(0 0.3)) ylabel(0 (0.05) 0.3) xlabel(0 (0.05) 0.3) ///
 			ytitle("WIOD elasticites `year' (absolute value)") xtitle("TIVA_REV4 elasticites `year' (absolute value)") ///
 			legend(order (2 3)  label(2 "Linear fit") label(3 "45° line") ) scheme(s1mono)
 			
 graph export "$dirgit/Rédaction/Comparaison_WIOD_TIVA_REV4_`year'.png", replace
 
+drop sample
 
 replace pond_WIOD_HC= -pond_WIOD_HC/10
 replace pond_TIVA_REV4_HC= -pond_TIVA_REV4_HC/10
@@ -128,19 +137,21 @@ gen error=abs(predict-pond_TIVA_REV4_HC)/pond_TIVA_REV4_HC
 gen mylabel= pays if /*error >.25 |pond_TIVA_HC>=0.2 | pays=="FRA_EUR"*/ strpos("CZE BGR MAR ISL BRN HUN",pays)!=0
 
 gen sample=1
-Definition_pays_secteur WIOD
+Definition_pays_secteur TIVA
 replace sample=0 if strpos("$eurozone",pays)!=0
 
 graph twoway (scatter pond_TIVA_REV4_HC pond_TIVA_HC if sample==1, mlabel(mylabel)) ///
-			 (lfit pond_TIVA_REV4_HC pond_TIVA_HC, clpattern(dash)) ///
-			 (lfit pond_TIVA_HC pond_TIVA_HC), ///
+			 (lfit pond_TIVA_REV4_HC pond_TIVA_HC if sample==1, clpattern(dash)) ///
+			 (lfit pond_TIVA_HC pond_TIVA_HC if pond_TIVA_HC<=0.3), ///
 			 yscale(range(0 0.3)) xscale(range(0 0.3)) ylabel(0 (0.05) 0.3) xlabel(0 (0.05) 0.3) ///
 			 ytitle("TIVA_REV4 elasticites `year' (absolute value)") xtitle("TIVA elasticites `year' (absolute value)") ///
 			legend(order (2 3)  label(2 "Linear fit") label(3 "45° line") ) scheme(s1mono)
 			
 graph export "$dirgit/Rédaction/Comparaison_TIVA_REV4_TIVA_`year'.png", replace
 
-blif
+drop sample
+
+
 
 
 ********Figure 1quart (Comparing consumer price elasticity to an exchange rate appreciation for WIOD and TIVA_REV4, 2011)	
@@ -163,16 +174,22 @@ replace pond_TIVA_REV4_HC= -pond_TIVA_REV4_HC
 regress pond_WIOD_HC pond_TIVA_REV4_HC
 predict predict
 gen error=abs(predict-pond_WIOD_HC)/pond_WIOD_HC
-gen mylabel= pays if /*error >.25 |*/ pond_WIOD_HC>=0.22 | pays=="FRA"
+gen mylabel= pays  if strpos("HUN IRL_EUR CZE TWN SVK_EUR BGR ",pays)!=0 /*if /*error >.25 |*/ pond_WIOD_HC>=0.22 | pays=="FRA"*/
 
-graph twoway (scatter pond_WIOD_HC pond_TIVA_REV4_HC  , mlabel(mylabel)) ///
-            (lfit pond_WIOD_HC pond_TIVA_REV4_HC  , clpattern(dash)) ///
-			(lfit pond_WIOD_HC pond_WIOD_HC), ///
-			yscale(range(0 0.4)) xscale(range(0 0.4)) ylabel(0 (0.05) 0.4) xlabel(0 (0.05) 0.4) ///
+gen sample=1
+Definition_pays_secteur TIVA_REV4
+replace sample=0 if strpos("$eurozone",pays)!=0
+
+graph twoway (scatter pond_WIOD_HC pond_TIVA_REV4_HC  if sample==1, mlabel(mylabel)) ///
+            (lfit pond_WIOD_HC pond_TIVA_REV4_HC if sample==1 , clpattern(dash)) ///
+			(lfit pond_TIVA_REV4_HC pond_TIVA_REV4_HC if pond_TIVA_REV4_HC <=0.3), ///
+			yscale(range(0 0.3)) xscale(range(0 0.3)) ylabel(0 (0.05) 0.3) xlabel(0 (0.05) 0.3) ///
 			ytitle("WIOD elasticites `year' (absolute value)") xtitle("TIVA_REV4 elasticites `year' (absolute value)") ///
 			legend(order (2 3)  label(2 "Linear fit") label(3 "45° line") ) scheme(s1mono)
 			
 graph export "$dirgit/Rédaction/Comparaison_WIOD_TIVA_REV4_`year'.png", replace
+
+drop sample
 
 *************Figure 2 (presenting results)
 

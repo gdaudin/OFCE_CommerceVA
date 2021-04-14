@@ -125,16 +125,22 @@ replace pond_TIVA_HC= -pond_TIVA_HC
 regress pond_TIVA_REV4_HC pond_TIVA_HC
 predict predict
 gen error=abs(predict-pond_TIVA_REV4_HC)/pond_TIVA_REV4_HC
-gen mylabel= pays if /*error >.25 |*/ pond_TIVA_REV4_HC>=0.22 | pays=="FRA"
+gen mylabel= pays if /*error >.25 |pond_TIVA_HC>=0.2 | pays=="FRA_EUR"*/ strpos("CZE BGR MAR ISL BRN HUN",pays)!=0
 
-graph twoway (scatter pond_TIVA_REV4_HC pond_TIVA_HC, mlabel(mylabel)) ///
+gen sample=1
+Definition_pays_secteur WIOD
+replace sample=0 if strpos("$eurozone",pays)!=0
+
+graph twoway (scatter pond_TIVA_REV4_HC pond_TIVA_HC if sample==1, mlabel(mylabel)) ///
 			 (lfit pond_TIVA_REV4_HC pond_TIVA_HC, clpattern(dash)) ///
 			 (lfit pond_TIVA_HC pond_TIVA_HC), ///
-			 yscale(range(0 0.4)) xscale(range(0 0.4)) ylabel(0 (0.05) 0.4) xlabel(0 (0.05) 0.4) ///
+			 yscale(range(0 0.3)) xscale(range(0 0.3)) ylabel(0 (0.05) 0.3) xlabel(0 (0.05) 0.3) ///
 			 ytitle("TIVA_REV4 elasticites `year' (absolute value)") xtitle("TIVA elasticites `year' (absolute value)") ///
 			legend(order (2 3)  label(2 "Linear fit") label(3 "45° line") ) scheme(s1mono)
 			
 graph export "$dirgit/Rédaction/Comparaison_TIVA_REV4_TIVA_`year'.png", replace
+
+blif
 
 
 ********Figure 1quart (Comparing consumer price elasticity to an exchange rate appreciation for WIOD and TIVA_REV4, 2011)	

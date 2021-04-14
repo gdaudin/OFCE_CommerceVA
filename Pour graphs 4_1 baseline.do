@@ -339,6 +339,10 @@ foreach source in TIVA WIOD TIVA_REV4 {
 	if "`source'"=="TIVA_REV4" local end_year 2015
 
 	use "$dir/Bases/Y_`source'.dta", clear
+	
+	Definition_pays_secteur `source'
+	drop if strpos("$eurozone",pays)!=0
+	
 	rename Y Y_`source'
 	replace pays="CHN" if pays=="CN1" | pays=="CN2" | pays=="CN3" | pays=="CN4"
 	replace pays="MEX" if pays=="MX1" | pays=="MX2" | pays=="MX3"
@@ -351,6 +355,7 @@ foreach source in TIVA WIOD TIVA_REV4 {
 	foreach year of numlist `start_year' (1) `end_year'  {
 		merge 1:1 year pays  using "$dir/Results/Devaluations/auto_chocs_HC_`source'_`year'.dta", update
 		drop _merge
+		drop if strpos("$eurozone",pays)!=0
 	}
 
 	replace pond_`source'=-pond_`source'
@@ -375,7 +380,7 @@ merge 1:1 year pays using temp_TIVA_REV4.dta
 
 
 
-keep if pays=="FRA"
+keep if pays=="FRA_EUR"
 drop pays
 sort year
 
@@ -395,7 +400,8 @@ twoway 	(line WIOD_elast_annual year, lcolor(blue) lpattern(dash)) ///
 		label(5 "TIVA rev4") label(6 "TIVA rev4, output weighted"))  /// 
 		ytitle("elasticity (absolute value)", ) ///
 		note("The average HCE deflator elasticity has been computed from each of countries" ///
-		"in a common 43 countries sample (assuming no Eurozone)" ///
+		"in a common 43 countries sample" ///
+		"assuming all 2020 Eurozone countries already in the Eurozone from 1995" ///
 		"and aggregated using either an arithmetic mean or an output weighted mean") ///
 		scheme(s1mono)
 

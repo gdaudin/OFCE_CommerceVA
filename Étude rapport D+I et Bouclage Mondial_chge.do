@@ -148,10 +148,10 @@ if "`type'"=="HC" & ((`year'==2014 & "`source'"=="WIOD") | (`year'==2015 & "`sou
 *****new graph
 	graph twoway (scatter pond_`source'_`type' E1HC_E2HC if sample==1, /*mlabel(pays)*/ mlabsize(medium)) ///
 			(lfit pond_`source'_`type' E1HC_E2HC if sample==1) ///
-			(lfit E1HC_E2HC E1HC_E2HC if E1HC_E2HC<=0.3,lwidth(vthin) color(black)) , ///
+			(lfit E1HC_E2HC E1HC_E2HC if E1HC_E2HC<=0.22,lwidth(vthin) color(black)) , ///
 			/*title("Comparing direct and modelled effects")*/ ///
 			xtitle("E1.HC + E2.HC : Direct effect through imported consumption goods" "and effect on domestic consumption goods through imported inputs") ytitle("`source' Elasticities `year'") ///
-			yscale(range(0.0 0.25)) xscale(range(0.0 0.25)) xlabel (0.0(0.05) 0.25) ylabel(0.0(0.05) 0.25) ///
+			yscale(range(0.0 0.22)) xscale(range(0.0 0.22)) xlabel (0.0(0.05) 0.22) ylabel(0.0(0.05) 0.22) ///
 			legend(off) ///
 			note("The 45° line serves as a comparison to the regression line") ///
 			scheme(s1mono)

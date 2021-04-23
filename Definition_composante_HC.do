@@ -58,3 +58,18 @@ replace agregat_secteur="services" if s=="45T47" || s=="49T53" ||s=="55T56"|| s=
 replace agregat_secteur="energie" if s=="05T06"  || s=="07T08"  || s=="09"  || s=="19T23" || s=="19"  || s=="35T39"
  save "$dir/Bases/csv_TIVA_REV4.dta", replace
 
+***********TIVA REV4 2018*************
+use "$dir/Bases/csv_MRIO.dta", clear
+
+replace c=upper(c)
+replace s=upper(s)
+
+capture generate agregat_secteur="na" 
+replace agregat_secteur="alimentaire" if s=="C1" || s=="C3"
+*NEIG: bien manuf hors energie (y.c. construction)
+replace agregat_secteur="neig" if s=="C4" || s=="C5" ||s=="C6"|| s=="C7"|| s=="C9"|| s=="C10"|| s=="C11"||s=="C12"||s=="C13"|| s=="C14"||s=="C15" ||s=="C16" ||s=="C18"
+
+replace agregat_secteur="services" if s=="C19" || s=="C20" ||s=="C21"|| s=="C22"|| s=="C23"|| s=="C24"|| s=="C25"||s=="C26"||s=="C27"|| s=="C28"||s=="C29"||s=="C30"||s=="C31"|| s=="C32" || s=="C33"|| s=="C34"|| s=="C35"
+
+replace agregat_secteur="energie" if s=="C2"  || s=="C8"  || s=="C17"
+ save "$dir/Bases/csv_MRIO.dta", replace

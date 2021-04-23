@@ -105,24 +105,26 @@ if "`source'"=="MRIO" {
 	*Loop to save data for each year
 	set more off
 
-	import delimited "$dir/Bases_Sources/MRIO/ADB-MRIO-2019.csv", delimiter(";") /*
+	import delimited "$dir/Bases_Sources/MRIO/ADB-MRIO-`yrs'.csv", delimiter(";") /*
 		*/ varnames(8) asdouble encoding(UTF-8) rowrange(8:2221) colrange(3:2525) /*
-		*/ clear case(preserve) parselocal(fr)
+		*/ clear case(upper) parselocal(fr)
 
 		
-	rename _ TOT
-	rename v1 pays
-	rename v2 secteur
+	rename V2523 TOT
+	rename V1 pays
+	rename V2 secteur
 	replace secteur=substr(secteur,1,1)+"0"+substr(secteur,2,1) if strlen(secteur)==2
-	replace pays="ZZZ" if pays==""		
+	replace pays="ZZZ" if pays==""
+	replace pays=upper(pays)
+	replace secteur=upper(secteur)
 		
 	foreach j of numlist 1 (1) 9 {
-		rename ???_c`j' ???_c0`j'
+		rename ???_C`j' ???_C0`j'
 	}
 		
 
 		
-	order AUS_c01-RoW_c35, alphabetic
+	order AUS_C01-ROW_C35, alphabetic
 	order pays secteur
 	sort pays secteur
 	save "$dir/Bases/`source'_ICIO_`yrs'.dta", replace
@@ -147,7 +149,7 @@ if "`source'"=="MRIO" {
 
 
 
-
+}
 
 
 end
@@ -224,6 +226,26 @@ if "`source'"=="WIOD" {
 	drop IndustryDescription-TOT
 	drop *57 *58 *59 *60 *61
 	save "$dir/Bases/WIOD_`yrs'_Z.dta", replace
+	
+
+}
+
+if "`source'"=="MRIO" {	
+
+*Output vector
+	use "$dir/Bases/`source'_ICIO_`yrs'.dta"
+	keep if secteur == "R69"
+	drop pays secteur *_F* TOT
+	save "$dir/Bases/`source'_`yrs'_OUT.dta", replace
+	
+	* Only the I/O table itself
+	clear
+	use "$dir/Bases/`source'_ICIO_`yrs'.dta"
+	drop if strpos(secteur,"C")==0
+	order pays secteur
+	sort pays secteur
+	drop pays secteur *_F* TOT
+	save "$dir/Bases/`source'_`yrs'_Z.dta", replace
 	
 
 }

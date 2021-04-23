@@ -24,7 +24,7 @@ global country_hc "ARG AUS AUT BEL BGR BRA BRN CAN CHE CHL"
 	global country_hc "$country_hc  ROU ROW RUS SAU SGP SVK SVN SWE THA TUN TUR TWN USA VNM ZAF"
 	
 	
-	global sector "C01T05 C10T14 C15T16 C17T19 C20 C21T22"
+global sector "C01T05 C10T14 C15T16 C17T19 C20 C21T22"
 	global sector "$sector C23 C24 C25 C26 C27 C28 C29 C30T33X C31 C34 C35 C36T37 C40T41 C45"
 	global sector "$sector C50T52 C55 C60T63 C64 C65T67 C70 C71 C72 C73T74 C75 C80 C85 C90T93 C95"
 	
@@ -33,8 +33,10 @@ global country_hc "ARG AUS AUT BEL BGR BRA BRN CAN CHE CHL"
 	global mexique "MEX MX1 MX2 MX3" /* 4 Mexique dans la source --> choquer ce groupe pour choc Mexique (y.c Maquiladoas)"*/
 	
 	global var_entree_sortie  arg_c01t05agr-zaf_c95pvh
+	global eurozone "AUT BEL CYP DEU ESP EST FIN FRA GRC IRL ITA LTU LUX LVA MLT NLD PRT SVK SVN"
+	global eastern "BGR CZE HRV HUN POL ROU"
 	
-	}
+}
 
 	
 	if "`source'"=="TIVA_REV4" {
@@ -60,7 +62,10 @@ global country_hc "ARG AUS AUT BEL BGR BRA BRN CAN CHE CHL"
 	
 	global var_entree_sortie ARG_01T03-ZAF_97T98
 	
-	}
+	global eurozone "AUT BEL CYP DEU ESP EST FIN FRA GRC IRL ITA LTU LUX LVA MLT NLD PRT SVK SVN"
+	global eastern "BGR CZE HRV HUN POL ROU"
+	
+}
 	
 if "`source'"=="WIOD" {
 	global country "   AUS AUT BEL BGR BRA     CAN CHE" 
@@ -83,16 +88,35 @@ if "`source'"=="WIOD" {
 	global mexique "MEX"
 	
 	global var_entree_sortie vAUS01-vUSA56
+	global eurozone "AUT BEL CYP DEU ESP EST FIN FRA GRC IRL ITA LTU LUX LVA MLT NLD PRT SVK SVN"
+	global eastern "BGR CZE HRV HUN POL ROU"
+}
+
+
+if "`source'"=="MRIO" {
+	global country "   AUS AUT BAN BEL BGR BRA BRU CAM  CAN" 
+	global country "$country CYP CZE DEN EST FIN"
+	global country "$country FRA GER GRC  HKG HRV HUN IND INO IRE ITA JPN KAZ KGZ KOR"
+	global country "$country LAO LTU LUX LVA MAL MEX MLD           MLT  MON NEP NET NOR PAK PHI      POL POR"
+	global country "$country PRC ROW SIN SPA        SVK SVN SWE SWI TAP THA      TUR UKG USA VIE"
+	
+	global country_hc $country
+	
+	global sector "C01 C02 C03 C04 C05 C06 C07 C08 C09 C10 C11 C12 C13 C14 C15"
+	global sector "$sector C16 C17 C18 C19 C19 C20 C21 C22 C23 C24"
+	global sector "$sector C25 C26 C27 C28 C29 C30 C31 C32 C33 C34 C35"
+	
+	global noneuro "AUT BEL BGR BRA BRU CAM CAN CZE DEN HKG HRV HUN IND INO JPN KAZ KGZ KOR LAO MAL MEX MLD MON NEP NET NOR PAK PHI POL PRC ROW  SIN SWI TAP THA TUR UKG USA VIE"    
+	global china "PRC"
+	global mexique "MEX"
+	
+	global var_entree_sortie vAUS01-vUSA56
+	global eurozone "AUT BEL CYP GER SPA EST FIN FRA GRC IRE ITA LTU LUX LVA MLT NET POR SVK SVN"
+	global eastern "BGR CZE HRV HUN POL ROM"
 }
 
 global nbr_pays = wordcount("$country")
 global nbr_secteurs = wordcount("$sector")
 global dim_matrice = $nbr_pays*$nbr_secteurs
-
-*agrégats couverts identiquement par les 2 sources
-global eurozone "AUT BEL CYP DEU ESP EST FIN FRA GRC IRL ITA LTU LUX LVA MLT NLD PRT SVK SVN"
-global eastern "BGR CZE HRV HUN POL ROU"
-
-
 
 end

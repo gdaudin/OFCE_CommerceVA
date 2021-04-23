@@ -29,9 +29,14 @@ do "$dirgit/Definition_pays_secteur.do"
 
 ******************** Lancement des programmes ****************
 
+foreach i of numlist 2000 2007(1)2019 {
+	clear
+	save_data `i' MRIO
+	prepare_database `i' MRIO
+}
 
 
-/*
+
 foreach i of numlist 1995(1)2011 {
 	clear
 	save_data `i' TIVA
@@ -57,17 +62,11 @@ foreach i of numlist 2005(1)2015 {
 database_csv TIVA
 database_csv TIVA_REV4
 database_csv WIO
-*/
-
-foreach i of numlist 2019(1)2019 {
-	clear
-	save_data `i' MRIO
-	prepare_database `i' MRIO
-}
+database_csv MRIO
 
 
 ******************** Identifie composantes pour IPC ****************
-do GIT/commerce_va_inflation/Definition_composante_HC.do
+do "$dirgit/Definition_composante_HC.do"
 ********************************************************************
 
 set more off

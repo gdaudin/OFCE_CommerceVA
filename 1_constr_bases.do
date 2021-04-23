@@ -269,6 +269,7 @@ Definition_pays_secteur `source'
 local nbr_sect=wordcount("$sector")	
 local nbr_ctry=wordcount("$country")
 local nbr_lig= `nbr_ctry'*`nbr_sect'
+
 				
 				
 generate c = ""

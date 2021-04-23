@@ -94,23 +94,23 @@ if "`source'"=="WIOD" {
 
 
 if "`source'"=="MRIO" {
-	global country "   AUS AUT BAN BEL BGR BRA BRU CAM  CAN" 
-	global country "$country CYP CZE DEN EST FIN"
+	global country "   AUS AUT BAN BEL BGR BHU BRA BRU CAM  CAN" 
+	global country "$country CYP CZE DEN EST FIJ FIN"
 	global country "$country FRA GER GRC  HKG HRV HUN IND INO IRE ITA JPN KAZ KGZ KOR"
 	global country "$country LAO LTU LUX LVA MAL MEX MLD           MLT  MON NEP NET NOR PAK PHI      POL POR"
-	global country "$country PRC ROW SIN SPA        SVK SVN SWE SWI TAP THA      TUR UKG USA VIE"
+	global country "$country PRC ROM ROW RUS SIN SPA  SRI      SVK SVN SWE SWI TAP THA      TUR UKG USA VIE"
 	
 	global country_hc $country
 	
 	global sector "C01 C02 C03 C04 C05 C06 C07 C08 C09 C10 C11 C12 C13 C14 C15"
-	global sector "$sector C16 C17 C18 C19 C19 C20 C21 C22 C23 C24"
+	global sector "$sector C16 C17 C18 C19 C20 C21 C22 C23 C24"
 	global sector "$sector C25 C26 C27 C28 C29 C30 C31 C32 C33 C34 C35"
 	
-	global noneuro "AUT BEL BGR BRA BRU CAM CAN CZE DEN HKG HRV HUN IND INO JPN KAZ KGZ KOR LAO MAL MEX MLD MON NEP NET NOR PAK PHI POL PRC ROW  SIN SWI TAP THA TUR UKG USA VIE"    
+	global noneuro "AUT BEL BGR BHU BRA BRU CAM CAN CZE DEN HKG HRV HUN IND INO JPN KAZ KGZ KOR LAO MAL MEX MLD MON NEP NET NOR PAK PHI POL PRC ROM ROW RUS SIN SRI SWI TAP THA TUR UKG USA VIE"    
 	global china "PRC"
 	global mexique "MEX"
 	
-	global var_entree_sortie vAUS01-vUSA56
+	global var_entree_sortie AUS_C01-VIE_C35
 	global eurozone "AUT BEL CYP GER SPA EST FIN FRA GRC IRE ITA LTU LUX LVA MLT NET POR SVK SVN"
 	global eastern "BGR CZE HRV HUN POL ROM"
 }

@@ -21,6 +21,8 @@ mkmat $var_entree_sortie, matrix(Y)
 use "$dir/Bases/`source'_`yrs'_Z.dta"
 mkmat $var_entree_sortie, matrix (Z)
 
+
+
 *From vector Y create a diagonal matrix Yd which contains all elements of vector Y on the diagonal
 matrix Yd=diag(Y)
 
@@ -44,7 +46,12 @@ mat I=I($dim_matrice)
 matrix L=(I-A_`yrs')
 
 *Leontief inverse
-matrix L1_`yrs'=inv(L)
+mata: l=st_matrix("Z")
+mata: li=pinv(l)
+mata: st_matrix("LI",li)
+
+
+matrix L1_`yrs'=LI
 
 clear
 svmat L1_`yrs', names(col)
@@ -111,7 +118,9 @@ foreach var of varlist $var_entree_sortie {
 	
 	
 	if "`source'"=="TIVA" |"`source'"=="TIVA_REV4"  replace pays_origine = strupper(substr("`var'",1,strpos("`var'","_")-1))
-		if "`source'"=="WIOD" replace pays_origine = strupper(substr("`var'",2,3))
+	if "`source'"=="WIOD" replace pays_origine = strupper(substr("`var'",2,3))
+	if "`source'"=="MRIO" replace pays_origine = strupper(substr("`var'",1,3))
+	
 	foreach p of local groupeduchoc {	
 		replace grchoc2 = 1 if pays_origine == "`p'" 
 	
@@ -316,7 +325,7 @@ program shock_exch
 
 
 use "$dir/Bases/`source'_L1_`yrs'.dta", clear
-mkmat r1-r$dim_matrice, matrix (L1)
+mkmat c1-c$dim_matrice, matrix (L1)
 
 
 *Multiplying the transpose of vector shock `v'_shockt by L1 to get the impact of a shock on the output price vector 

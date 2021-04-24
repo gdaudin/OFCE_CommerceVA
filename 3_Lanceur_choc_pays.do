@@ -13,8 +13,7 @@ set more off
 if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
 if ("`c(hostname)'" == "widv270a") global dir  "D:\home\T822289\CommerceVA" 
 
-
-if ("`c(username)'"=="guillaumedaudin") global dirgit "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation"
+if ("`c(username)'"=="guillaumedaudin") global dirgit "~/Répertoires Git/OFCE_CommerceVA"
 if ("`c(hostname)'" == "widv270a") global dirgit  "D:\home\T822289\CommerceVA\GIT\commerce_va_inflation" 
 
 
@@ -41,7 +40,7 @@ Definition_pays_secteur WIOD
 append_HC WIOD
 append_X WIOD
 append_Y WIOD
-*/
+
 
 Definition_pays_secteur TIVA_REV4
 append_HC TIVA_REV4
@@ -49,7 +48,11 @@ append_X TIVA_REV4
 append_Y TIVA_REV4
 
 
-
+Definition_pays_secteur  MRIO
+append_X MRIO
+append_HC MRIO
+append_Y MRIO
+*/
 *--------------------------------------------------------------------------------
 *LIST ALL PROGRAMS AND RUN THEM - agregation effet choc
 *--------------------------------------------------------------------------------
@@ -58,7 +61,7 @@ set more off
 
 
 *foreach source in   TIVA { 
-foreach source in  /* WIOD TIVA*/ TIVA_REV4 { 
+foreach source in  /* WIOD TIVA TIVA_REV4*/ MRIO { 
 
 	Definition_pays_secteur `source'
 	if "`source'"=="WIOD" local start_year 2000
@@ -69,6 +72,13 @@ foreach source in  /* WIOD TIVA*/ TIVA_REV4 {
 	if "`source'"=="WIOD" local end_year 2014
 	if "`source'"=="TIVA" local end_year 2011
 	if "`source'"=="TIVA_REV4" local end_year 2015
+	
+	if "`source'"=="MRIO" local year_list 2000 2007(1)2019
+	if "`source'"=="WIOD" local year_list 2000(1)2014
+	if "`source'"=="TIVA" local year_list 1995(1)2011
+	if "`source'"=="TIVA_REV4" local year_list 2005(1)2015
+	
+	
 
 	
 	// Fabrication des fichiers d'effets moyens des chocs de change
@@ -99,8 +109,18 @@ foreach source in  /* WIOD TIVA*/ TIVA_REV4 {
 		global ori_choc "$ori_choc ROU ROW RUS       SVK SVN SWE       TUR TWN USA        "
 	}
 	
-	*  foreach i of numlist 2011 {
-	foreach i of numlist  `end_year' (-1) `start_year'  {
+	
+	if "`source'"=="MRIO" {
+		global ori_choc "EUR EAS"
+		global ori_choc "$ori_choc AUS AUT BAN BEL BGR BRA BRU CAM  CAN" 
+		global ori_choc "$ori_choc CYP CZE DEN EST FIN"
+		global ori_choc "$ori_choc FRA GER GRC  HKG HRV HUN IND INO IRE ITA JPN KAZ KGZ KOR"
+		global ori_choc "$ori_choc LAO LTU LUX LVA MAL MEX MLD           MLT  MON NEP NET NOR PAK PHI      POL POR"
+		global ori_choc "$ori_choc PRC ROW SIN SPA        SVK SVN SWE SWI TAP THA      TUR UKG USA VIE"
+	}
+
+*   foreach i of numlist 2011 {
+	foreach i of numlist `year_list'  {
 		
 		local HC_fait 0
     	foreach j in  HC X Y HC_neig_dom HC_alimentaire_dom HC_energie_dom HC_services_dom HC_dom ///

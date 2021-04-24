@@ -127,6 +127,7 @@ if "`source'"=="MRIO" {
 	order AUS_C01-ROW_C35, alphabetic
 	order pays secteur
 	sort pays secteur
+	destring AUS_C01-ROW_F5, replace dpcomma
 	save "$dir/Bases/`source'_ICIO_`yrs'.dta", replace
 
 

@@ -56,6 +56,30 @@ rename Year year
 sort year pays sector pays_conso
 replace pays = strupper(pays)
 }
+
+if "`source'"=="MRIO" {
+use "$dir/Bases/`source'_ICIO_`yrs'.dta", clear
+
+
+keep pays secteur *F1
+rename *F1 v*
+reshape long v, i(pays secteur) j(pays_conso) string
+rename  secteur sector 
+replace sector = strupper(sector)
+replace pays_conso=strupper(substr(pays_conso,1,3))
+ 
+drop if pays=="TOT"
+
+generate year = `yrs'
+rename v conso			
+sort year pays sector pays_conso
+replace pays = strupper(pays)
+}
+
+
+
+
+
 *keep year pays HC
 *collapse (sum) HC, by(pays year)
 end
@@ -67,11 +91,13 @@ args source
 if "`source'"=="TIVA" local yr_list 1995(1)2011
 if "`source'"=="TIVA_REV4" local yr_list 2005(1)2015
 if "`source'"=="WIOD" local yr_list 2000(1)2014
+if "`source'"=="MRIO" local yr_list 2000 2007(1)2019
 
 
 if "`source'"=="TIVA" local first_yr 1995
 if "`source'"=="TIVA_REV4" local first_yr 2005
 if "`source'"=="WIOD" local first_yr 2000
+if "`source'"=="MRIO" local first_yr 2000
 
 foreach y of numlist `yr_list' { 
 	compute_HC `source' `y'

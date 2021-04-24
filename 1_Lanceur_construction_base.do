@@ -36,7 +36,7 @@ foreach i of numlist 2000 2007(1)2019 {
 }
 
 
-
+/*
 foreach i of numlist 1995(1)2011 {
 	clear
 	save_data `i' TIVA
@@ -61,7 +61,8 @@ foreach i of numlist 2005(1)2015 {
 
 database_csv TIVA
 database_csv TIVA_REV4
-database_csv WIO
+database_csv WIOD
+*/
 database_csv MRIO
 
 

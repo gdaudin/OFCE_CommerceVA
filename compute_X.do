@@ -31,6 +31,28 @@ drop if Country=="TOT"
 
 }
 
+
+if "`source'"=="MRIO" {
+	
+	if `yrs'==2014 destring ROW_F5, replace dpcomma
+	egen utilisations = rowtotal(AUS_C01-ROW_F5)
+	gen utilisations_dom = .
+	drop if pays=="ZZZ"
+	
+	
+	foreach j of global country {
+		local i = "`j'"
+		egen blouk = rowtotal(*`i'*)
+		display "`i'" "`j'"
+		replace utilisations_dom = blouk if pays=="`j'"
+*		codebook utilisations_dom if Country=="`j'"
+		drop blouk
+		
+	}
+	rename pays Country
+
+}
+
 if "`source'"=="TIVA" {
 drop if v1=="VA+TAXSUB" | v1=="OUT"
 egen utilisations = rowtotal(arg_c01t05agr-nps_zaf)
@@ -55,10 +77,10 @@ gen Country = substr("v1",1,3)
 }
 
 if "`source'"=="TIVA_REV4" {
-drop if v1 == "VALU" | strmatch(v1, "*TAXSUB") == 1 | v1 == "OUTPUT"
-egen utilisations = rowtotal(ARG_01T03-ZAF_P33)
-gen utilisations_dom = .
-* liste de countrys
+	drop if v1 == "VALU" | strmatch(v1, "*TAXSUB") == 1 | v1 == "OUTPUT"
+	egen utilisations = rowtotal(ARG_01T03-ZAF_P33)
+	gen utilisations_dom = .
+	* liste de countrys
 
 gen Country = substr("v1",1,3)
  
@@ -100,6 +122,11 @@ if "`source'"=="WIOD" {
 	rename IndustryCode sector
 }
 
+if "`source'"=="MRIO" {
+	generate pays =upper(Country)
+	rename secteur sector
+}
+
 keep pays sector  year X
 
 display "fin compute_X"	
@@ -116,11 +143,15 @@ args source
 if "`source'"=="TIVA" local yr_list 1995(1)2011
 if "`source'"=="TIVA_REV4" local yr_list 2005(1)2015
 if "`source'"=="WIOD" local yr_list 2000(1)2014
+if "`source'"=="MRIO" local yr_list 2000 2007(1)2019
 
 
 if "`source'"=="TIVA" local first_yr 1995
 if "`source'"=="TIVA_REV4" local first_yr 2005
 if "`source'"=="WIOD" local first_yr 2000
+if "`source'"=="MRIO" local first_yr 2000
+
+
 foreach y of numlist `yr_list' { 
 	compute_X `source' `y'
 	if `y'!=`first_yr' {

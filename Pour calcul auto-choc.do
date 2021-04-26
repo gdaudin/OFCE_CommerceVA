@@ -4,6 +4,9 @@ if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 B
 if ("`c(hostname)'" == "widv270a") global dir  "D:/home/T822289/CommerceVA" 
 if ("`c(hostname)'" == "FP1376CD") global dir  "T:/CommerceVA" 
 
+if ("`c(username)'"=="guillaumedaudin") global dirgit "~/Répertoires Git/OFCE_CommerceVA"
+if ("`c(hostname)'" == "widv270a") global dirgit  "D:\home\T822289\CommerceVA\GIT\commerce_va_inflation" 
+
 *capture log close
 *log using "$dir/$S_DATE.log", replace
 
@@ -18,13 +21,14 @@ args year source type
 **Exemple : etude 2011 WIOD HC
 **Exemple : etude 2011 WIOD par_sect
 
-if ("`c(username)'"=="guillaumedaudin") do  "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation/Definition_pays_secteur.do" `source'
-if ("`c(username)'"=="widv270a") do "D:/home/T822289/CommerceVA/GIT/commerce_VA_inflation/Definition_pays_secteur.do" `source'
-if ("`c(username)'"=="FP1376CD") do  "T:/CommerceVA/GIT/commerce_VA_inflation/Definition_pays_secteur.do" `source'	
+do  "$dirgit/Definition_pays_secteur.do" `source'
 
 
 if "`source'"=="TIVA" |  "`source'"=="TIVA_REV4" local liste_chocs shockEUR1-shockZAF1
 if "`source'"=="WIOD" local liste_chocs shockEUR1-shockUSA1
+
+if "`source'"=="MRIO" global eurozone "AUT BEL CYP GER SPA EST FIN FRA GRC IRE ITA LTU LUX LVA MLT NET POR SVK SVN"
+if "`source'"=="MRIO" local liste_chocs shockEUR1-shockVIE1
 
 if "`type'"=="HC" | "`type'" =="HC_note" use "$dir/Results/Devaluations/mean_chg_`source'_HC_`year'_S.dta", clear
 //if "`type'"=="par_sect" use "$dir/Results/Devaluations/`source'_C_`year'_exch.dta", clear
@@ -90,19 +94,23 @@ end
 ***********
 *foreach source in  WIOD {
 
-foreach source in   TIVA WIOD  TIVA_REV4 {
+foreach source in  /* TIVA WIOD  TIVA_REV4*/ MRIO {
 
 			
 
-	if "`source'"=="WIOD" global start_year 2000
-	if "`source'"=="TIVA" global start_year 1995
-	if "`source'"=="TIVA_REV4" global start_year 2005
+	if "`source'"=="WIOD" local start_year 2000 /*2000*/
+	if "`source'"=="TIVA" local start_year 1995
+	if "`source'"=="TIVA_REV4" local start_year 2005
 
-
-
-	if "`source'"=="WIOD" global end_year 2014
-	if "`source'"=="TIVA" global end_year 2011
-	if "`source'"=="TIVA_REV4" global end_year 2015
+	if "`source'"=="WIOD" local end_year 2014
+	if "`source'"=="TIVA" local end_year 2011
+	if "`source'"=="TIVA_REV4" local end_year 2015
+	
+	
+	if "`source'"=="MRIO" local year_list 2000 2007(1)2019
+	if "`source'"=="WIOD" local year_list 2000(1)2014
+	if "`source'"=="TIVA" local year_list 1995(1)2011
+	if "`source'"=="TIVA_REV4" local year_list 2005(1)2015
 	
 	
    capture erase "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`source'_`type'.dta" 
@@ -110,7 +118,7 @@ foreach source in   TIVA WIOD  TIVA_REV4 {
 		capture erase "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`source'_`type'.dta"
 
 *		foreach i of numlist 2014  {
-		foreach i of numlist $start_year (1) $end_year  {
+		foreach i of numlist `year_list'  {
 			etude `i' `source' `type'		
 		}
 	

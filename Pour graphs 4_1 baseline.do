@@ -327,16 +327,23 @@ global common_sample "$common_sample FRA GBR GRC     HRV HUN IDN IND IRL        
 global common_sample "$common_sample LTU LUX LVA MEX              MLT     NLD NOR        POL PRT"
 global common_sample "$common_sample ROU RUS       SVK SVN SWE       TUR TWN USA        "
 
-foreach source in TIVA WIOD TIVA_REV4 {
 
-	if "`source'"=="WIOD" local start_year 2000
+
+foreach source in TIVA WIOD TIVA_REV4 MRIO {
+
+	if "`source'"=="WIOD" local start_year 2000 /*2000*/
 	if "`source'"=="TIVA" local start_year 1995
 	if "`source'"=="TIVA_REV4" local start_year 2005
-
 
 	if "`source'"=="WIOD" local end_year 2014
 	if "`source'"=="TIVA" local end_year 2011
 	if "`source'"=="TIVA_REV4" local end_year 2015
+	
+	
+	if "`source'"=="MRIO" local year_list 2000 2007(1)2019
+	if "`source'"=="WIOD" local year_list 2000(1)2014
+	if "`source'"=="TIVA" local year_list 1995(1)2011
+	if "`source'"=="TIVA_REV4" local year_list 2005(1)2015
 
 	use "$dir/Bases/Y_`source'.dta", clear
 	
@@ -352,7 +359,7 @@ foreach source in TIVA WIOD TIVA_REV4 {
 	collapse (sum) Y_`source', by(pays year)
 	*rename pays c
 
-	foreach year of numlist `start_year' (1) `end_year'  {
+	foreach year of numlist `year_list'  {
 		merge 1:1 year pays  using "$dir/Results/Devaluations/auto_chocs_HC_`source'_`year'.dta", update
 		drop _merge
 		drop if strpos("$eurozone",pays)!=0
@@ -369,7 +376,22 @@ foreach source in TIVA WIOD TIVA_REV4 {
 	
 	drop Y_tot_per_year weight elast_pond
 	
+	if "`source'"=="MRIO" {
+		replace pays="DNK" if pays=="DEN"
+		replace pays="DEU" if pays=="GER"
+		replace pays="IDN" if pays=="INO"
+		replace pays="IRL" if pays=="IRE"
+		replace pays="NDL" if pays=="NET"
+		replace pays="PRT" if pays=="POR"
+		replace pays="CHN" if pays=="PRC"
+		replace pays="ROU" if pays=="ROM"
+		replace pays="CHE" if pays=="SWI"
+		replace pays="SPA" if pays=="ESP"
+		replace pays="TWN" if pays=="TAP"
+		replace pays="GBR" if pays=="UKG"
+		*il en manque... Mais ce sont ceux du sample
 	
+	}
 	save temp_`source'.dta, replace
 }
 
@@ -377,6 +399,8 @@ use temp_WIOD.dta, clear
 merge 1:1 year pays using temp_TIVA.dta
 drop _merge
 merge 1:1 year pays using temp_TIVA_REV4.dta
+drop _merge
+merge 1:1 year pays using temp_MRIO.dta
 
 
 
@@ -387,7 +411,7 @@ sort year
 bys year: keep if _n==1
 
 
-
+/*
 
 twoway 	(line WIOD_elast_annual year, lcolor(blue) lpattern(dash)) ///
 		(line WIOD_elast_annual_pond year, lcolor(blue)) ///
@@ -405,7 +429,30 @@ twoway 	(line WIOD_elast_annual year, lcolor(blue) lpattern(dash)) ///
 		"and aggregated using either an arithmetic mean or an output weighted mean") ///
 		scheme(s1mono)
 
+*/
 
+twoway 	(line WIOD_elast_annual year, lcolor(blue) lpattern(dash)) ///
+		(line WIOD_elast_annual_pond year, lcolor(blue)) ///
+		(line TIVA_elast_annual year, lcolor(red) lpattern(dash)) ///
+		(line TIVA_elast_annual_pond year, lcolor(red)) ///
+		(line TIVA_REV4_elast_annual year, lcolor(green) lpattern(dash)) ///
+		(line TIVA_REV4_elast_annual_pond year, lcolor(green)) ///
+		(line MRIO_elast_annual year, lcolor(black) lpattern(dash)) ///
+		(line MRIO_elast_annual_pond year, lcolor(black)), ///
+		legend(label(1 "WIOD") label(2 "WIOD, output weighted") ///
+		label(3 "TIVA rev3") label(4 "TIVA rev3, output weighted")  /// 
+		label(5 "TIVA rev4") label(6 "TIVA rev4, output weighted")  /// 
+		label(7 "MRIO") label(8 "MRIO, output weighted"))  /// 
+		ytitle("elasticity (absolute value)", ) ///
+		note("The average HCE deflator elasticity has been computed from each of countries" ///
+		"in a common 43 countries sample" ///
+		"assuming all 2020 Eurozone countries already in the Eurozone from 1995" ///
+		"and aggregated using either an arithmetic mean or an output weighted mean") ///
+		scheme(s1mono)
+
+
+
+		
 
 graph export "$dirgit/Rédaction/PIWIM_LONGITUDINAL.png", replace
 
@@ -413,3 +460,4 @@ graph export "$dirgit/Rédaction/PIWIM_LONGITUDINAL.png", replace
 erase temp_TIVA_REV4.dta		
 erase temp_TIVA.dta
 erase temp_WIOD.dta
+erase temp_MRIO.dta

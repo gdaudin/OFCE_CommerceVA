@@ -46,7 +46,7 @@ mat I=I($dim_matrice)
 matrix L=(I-A_`yrs')
 
 *Leontief inverse
-mata: l=st_matrix("Z")
+mata: l=st_matrix("L")
 mata: li=pinv(l)
 mata: st_matrix("LI",li)
 

@@ -123,8 +123,8 @@ foreach source in  /* WIOD TIVA TIVA_REV4*/ MRIO {
 	foreach i of numlist `year_list'  {
 		
 		local HC_fait 0
-    	foreach j in  HC X Y HC_neig_dom HC_alimentaire_dom HC_energie_dom HC_services_dom HC_dom ///
-					HC_neig_impt HC_alimentaire_impt HC_energie_impt HC_services_impt HC_impt   {	
+    	foreach j in  HC /*X Y HC_neig_dom HC_alimentaire_dom HC_energie_dom HC_services_dom HC_dom ///
+					HC_neig_impt HC_alimentaire_impt HC_energie_impt HC_services_impt HC_impt */  {	
 
     	    if strpos("`j'","HC")!=0 & `HC_fait'==0 {
 				compute_HC_vect `i' `source'

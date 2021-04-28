@@ -321,11 +321,11 @@ twoway scatter pond_WIOD_HC E1HC   [w=Y], msize(small) msymbol(circle_hollow)
 *************Figure 4 (évolutions dans le temps)
 
 	
-global common_sample "   AUS AUT BEL BGR BRA CAN CHE" 
-global common_sample "$common_sample CHN CYP CZE DEU DNK ESP EST FIN"
-global common_sample "$common_sample FRA GBR GRC     HRV HUN IDN IND IRL        ITA JPN     KOR"
-global common_sample "$common_sample LTU LUX LVA MEX              MLT     NLD NOR        POL PRT"
-global common_sample "$common_sample ROU RUS       SVK SVN SWE       TUR TWN USA        "
+global common_sample "   AUS AUT_EUR BEL_EUR BGR BRA CAN CHE" 
+global common_sample "$common_sample CHN CYP_EUR CZE DEU_EUR DNK ESP_EUR EST_EUR FIN_EUR"
+global common_sample "$common_sample FRA_EUR GBR GRC_EUR    HRV HUN IDN IND IRL_EUR        ITA_EUR JPN     KOR"
+global common_sample "$common_sample LTU_EUR LUX_EUR LVA_EUR MEX              MLT_EUR     NLD_EUR NOR        POL PRT_EUR"
+global common_sample "$common_sample ROU RUS       SVK_EUR SVN_EUR SWE       TUR TWN USA        "
 
 
 
@@ -348,12 +348,12 @@ foreach source in TIVA WIOD TIVA_REV4 MRIO {
 	use "$dir/Bases/Y_`source'.dta", clear
 	
 	Definition_pays_secteur `source'
-	drop if strpos("$eurozone",pays)!=0
+	replace pays=pays+"_EUR" if strpos("$eurozone",pays)!=0 
 	
 	rename Y Y_`source'
 	replace pays="CHN" if pays=="CN1" | pays=="CN2" | pays=="CN3" | pays=="CN4"
 	replace pays="MEX" if pays=="MX1" | pays=="MX2" | pays=="MX3"
-	keep if strpos("$common_sample",pays)!=0
+	
 
 
 	collapse (sum) Y_`source', by(pays year)
@@ -364,6 +364,24 @@ foreach source in TIVA WIOD TIVA_REV4 MRIO {
 		drop _merge
 		drop if strpos("$eurozone",pays)!=0
 	}
+	
+	if "`source'"=="MRIO" {
+		replace pays=subinstr(pays,"DEN","DNK",.)
+		replace pays=subinstr(pays,"GER","DEU",.)
+		replace pays=subinstr(pays,"INO","IDN",.)
+		replace pays=subinstr(pays,"IRE","IRL",.)
+		replace pays=subinstr(pays,"NET","NLD",.)
+		replace pays=subinstr(pays,"POR","PRT",.)
+		replace pays=subinstr(pays,"PRC","CHN",.)
+		replace pays=subinstr(pays,"ROM","ROU",.)
+		replace pays=subinstr(pays,"SWI","CHE",.)
+		replace pays=subinstr(pays,"SPA","ESP",.)
+		replace pays=subinstr(pays,"TAP","TWN",.)
+		replace pays=subinstr(pays,"UKG","GBR",.)
+		*il en manque... Mais ce sont ceux du sample
+	}
+	
+	keep if strpos("$common_sample",pays)!=0
 
 	replace pond_`source'=-pond_`source'
 	egen Y_tot_per_year=total(Y_`source'), by(year)
@@ -376,22 +394,7 @@ foreach source in TIVA WIOD TIVA_REV4 MRIO {
 	
 	drop Y_tot_per_year weight elast_pond
 	
-	if "`source'"=="MRIO" {
-		replace pays="DNK" if pays=="DEN"
-		replace pays="DEU" if pays=="GER"
-		replace pays="IDN" if pays=="INO"
-		replace pays="IRL" if pays=="IRE"
-		replace pays="NDL" if pays=="NET"
-		replace pays="PRT" if pays=="POR"
-		replace pays="CHN" if pays=="PRC"
-		replace pays="ROU" if pays=="ROM"
-		replace pays="CHE" if pays=="SWI"
-		replace pays="SPA" if pays=="ESP"
-		replace pays="TWN" if pays=="TAP"
-		replace pays="GBR" if pays=="UKG"
-		*il en manque... Mais ce sont ceux du sample
-	
-	}
+
 	save temp_`source'.dta, replace
 }
 
@@ -402,7 +405,7 @@ merge 1:1 year pays using temp_TIVA_REV4.dta
 drop _merge
 merge 1:1 year pays using temp_MRIO.dta
 
-
+blif
 
 keep if pays=="FRA_EUR"
 drop pays
@@ -456,7 +459,7 @@ twoway 	(line WIOD_elast_annual year, lcolor(blue) lpattern(dash)) ///
 
 graph export "$dirgit/Rédaction/PIWIM_LONGITUDINAL.png", replace
 
-
+/*
 erase temp_TIVA_REV4.dta		
 erase temp_TIVA.dta
 erase temp_WIOD.dta

@@ -69,11 +69,12 @@ replace sector = strupper(sector)
 replace pays_conso=strupper(substr(pays_conso,1,3))
  
 drop if pays=="TOT"
-
+drop if pays=="ZZZ"
 generate year = `yrs'
 rename v conso			
 sort year pays sector pays_conso
 replace pays = strupper(pays)
+
 }
 
 

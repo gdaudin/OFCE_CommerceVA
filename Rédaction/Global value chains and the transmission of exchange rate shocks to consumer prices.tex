@@ -53,7 +53,7 @@
 
 
 \begin{document}
-\title{An accounting estimate of the impact of the exchange rate on consumer prices	\thanks{We thank Marion Cochard, Pavel Diev, Hubert Escaith, Guillaume Gaulier, Yannick Kalantzis, Guy Levy-Rueff, Sébastien Miroudot, Jean-François Ouvrard, François de Soyres and an anonymous referee for comments and suggestions, as well as participants at Banque de France seminars. Any remaining errors are ours. All programs are available at \url{https://github.com/gdaudin/OFCE_CommerceVA}. Data are available at \url{https://gdaudin.github.io/Databases.html} and results are available upon request.}\\
+\title{Estimating the impact of exchange rate fluctuations on consumer prices: an accounting approach	\thanks{We thank Marion Cochard, Pavel Diev, Hubert Escaith, Guillaume Gaulier, Yannick Kalantzis, Guy Levy-Rueff, Sébastien Miroudot, Jean-François Ouvrard, François de Soyres and an anonymous referee for comments and suggestions, as well as participants at Banque de France seminars. Any remaining errors are ours. All programs are available at \url{https://github.com/gdaudin/OFCE_CommerceVA}. Data are available at \url{https://gdaudin.github.io/Databases.html} and results are available upon request.}\\
 \vspace{1cm}
 }
 \vspace{1cm}
@@ -125,7 +125,7 @@ By doing so, we compute a precise estimate of the elasticity without resorting t
 This paper focuses on the elasticity of the household consumption expenditure (HCE hereafter) deflator to the exchange rate. 
 %Data
 We analyse the composition and determinants of the HCE deflator elasticity using world input-output tables (WIOT hereafter) covering twenty years of data, from 1995 to 2015.
-For the sake of robustness, we use several datasets (WIOD and two distinct releases of the OECD TiVA database). 
+For the sake of robustness, we use several datasets (WIOD, two distinct releases of the OECD TiVA database and the MRIO database developed by the Asian Development Bank). 
 %Method
 We perform an accounting exercise based on information contained in the WIOT with large matrices inversion. 
 %We assume a Cobb-Douglas production framework where firms have a simple cost-minimising behaviour and work in a partial equilibrium setting.
@@ -415,6 +415,13 @@ Other & Russia, Turkey\\
 \label{tab:wiod}
 \end{threeparttable}
 \end{table} 
+\paragraph{The Asian Development Bank's MRIO database}
+In the WIOD database, disaggregate information is available for a limited number of Asian economies. 
+To address the analytical needs related to the Asian and the Pacific Region, the Asian
+Development Bank (ADB) has augmented the WIOD with details for additional Asian economies. 
+The industrial aggregations and the conceptual framework of the ADB MRIO (and hence the methods used in the construction of the
+tables) are the same as that of the WIOD.
+
 \paragraph{The Trade in Value Added (TiVA) database}
 The TiVA database is compiled by the OECD. 
 It builds on the OECD harmonised country-level input-output tables to provide matrices of inter-industrial flows of goods and services in current prices (U.S. dollars).
@@ -450,8 +457,8 @@ Other & Brunei, Israel, Morocco, Russia, Saudi Arabia, South Africa, Tunisia, Tu
 \end{table} 
 
 
-\paragraph{Comparison of the WIOD and TiVA databases}
-WIOD and TiVA databases are constructed using similar assumptions (\cite{OECD2011,Timmer2015,OECD2018}).
+\paragraph{Comparison of the databases}
+The WIOD and TiVA databases are constructed using similar assumptions (\cite{OECD2011,Timmer2015,OECD2018}).
 For example, both start with the construction of harmonised country-specific supply-use tables (SUTs) that are then transformed into world input-output tables.
 Both databases use the "import proportionality assumption" to allocate specific bilateral imports to using industries.
 National input-output statistics provide how much of each product firms use for intermediary consumption and investment. 

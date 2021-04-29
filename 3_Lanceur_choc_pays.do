@@ -47,12 +47,12 @@ append_HC TIVA_REV4
 append_X TIVA_REV4
 append_Y TIVA_REV4
 
-
+*/
 Definition_pays_secteur  MRIO
 append_X MRIO
 append_HC MRIO
 append_Y MRIO
-*/
+
 *--------------------------------------------------------------------------------
 *LIST ALL PROGRAMS AND RUN THEM - agregation effet choc
 *--------------------------------------------------------------------------------

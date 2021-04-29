@@ -405,7 +405,7 @@ merge 1:1 year pays using temp_TIVA_REV4.dta
 drop _merge
 merge 1:1 year pays using temp_MRIO.dta
 
-blif
+
 
 keep if pays=="FRA_EUR"
 drop pays

@@ -112,11 +112,11 @@ foreach source in  /* WIOD TIVA TIVA_REV4*/ MRIO {
 	
 	if "`source'"=="MRIO" {
 		global ori_choc "EUR EAS"
-		global ori_choc "$ori_choc AUS AUT BAN BEL BGR BRA BRU CAM  CAN" 
-		global ori_choc "$ori_choc CYP CZE DEN EST FIN"
+		global ori_choc "$ori_choc AUS AUT BAN BEL BGR BRA BRU BHU CAM  CAN" 
+		global ori_choc "$ori_choc CYP CZE DEN EST FIJ FIN"
 		global ori_choc "$ori_choc FRA GER GRC  HKG HRV HUN IND INO IRE ITA JPN KAZ KGZ KOR"
 		global ori_choc "$ori_choc LAO LTU LUX LVA MAL MEX MLD           MLT  MON NEP NET NOR PAK PHI      POL POR"
-		global ori_choc "$ori_choc PRC ROW SIN SPA        SVK SVN SWE SWI TAP THA      TUR UKG USA VIE"
+		global ori_choc "$ori_choc PRC ROM ROW RUS SIN SPA   SRI     SVK SVN SWE SWI TAP THA      TUR UKG USA VIE"
 	}
 
 *   foreach i of numlist 2011 {

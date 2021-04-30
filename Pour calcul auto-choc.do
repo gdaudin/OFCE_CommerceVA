@@ -39,8 +39,9 @@ foreach var of varlist `liste_chocs' {
 	local pays = substr("`var'",6,3)
 	replace `var' = 0 if strmatch(c,"*`pays'*")==0 ///
 	& strpos("$china",c)==0 & strpos("$mexique",c)==0
-	replace `var' = 0 if "`var'"!="shockCHN1" & strpos("$china",c)!=0
 	replace `var' = 0 if "`var'"!="shockMEX1" & strpos("$mexique",c)!=0
+	if "`source'" !="MRIO" replace `var' = 0 if "`var'"!="shockCHN1" & strpos("$china",c)!=0	
+	if "`source'" =="MRIO" replace `var' = 0 if "`var'"!="shockPRC1" & strpos("$china",c)!=0
 }
 
 

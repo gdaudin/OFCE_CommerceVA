@@ -131,7 +131,7 @@ foreach source in  /* WIOD TIVA TIVA_REV4*/ MRIO {
 				local HC_fait 1
 			}
 			if strpos("`j'","HC")==0 compute_`j'_vect `i' `source' 
-			table_mean `i' `j' 1 `source' Sdollar
+*			table_mean `i' `j' 1 `source' Sdollar
 			table_mean `i' `j' 1 `source' S
 
 	    }

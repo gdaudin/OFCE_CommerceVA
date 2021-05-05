@@ -8,20 +8,31 @@ if ("`c(hostname)'" == "widv270a") global dirgit  "D:\home\T822289\CommerceVA\GI
 
 global eurozone "AUT BEL CYP DEU ESP EST FIN FRA GRC IRL ITA LTU LUX LVA MLT NLD PRT SVK SVN"
 
+import delimited "$dir/Bases_Sources/MRIO/Pays_MRIO_ISO3.csv", clear varnames(1)
+expand 2 if strpos("$eurozone",iso3)!=0, gen(pourchoceuro)
+replace pays_mrio = pays_mrio+"_EUR" if pourchoceuro==1
+replace iso3 = iso3+"_EUR" if pourchoceuro==1
+drop pourchoceuro
+sort iso3
+save "$dir/Bases_Sources/MRIO/Pays_MRIO_ISO3.dta", replace
 
-import excel "$dir/Bases_Sources/Data_GDP_95_18_new.xlsx", /*
-			*/sheet("WEO_Data (4)") firstrow clear
-keep CodeTiva y*
-drop if CodeTiva==""
-reshape long y, i(CodeTiva) j(year)
+import excel "$dir/Bases_Sources/Data_GDP_WEO.xlsx", /*
+			*/sheet("WEO_Data (2)") firstrow clear
+
+keep ISO y*
+destring y*, replace force
+
+drop if ISO==""
+reshape long y, i(ISO) j(year)
+rename ISO pays
 rename y GDP
-rename CodeTiva pays
 replace GDP=GDP*1000000000
+drop if GDP==.
 
 save "$dir/Bases_Sources/Doigt_mouillé.dta", replace
 
 
-import excel "$dir/Bases_Sources/banque_mondiale_conso_finale.xlsx", sheet("conso_a_utiliser") cellrange(A7:AC69) firstrow clear
+import excel "$dir/Bases_Sources/Banque_mondiale_conso_finale_menages_isblsm.xls", sheet("Data") cellrange(A4:AC268) firstrow clear
 foreach v of varlist E-AC {
     local x : variable label `v'
 	rename `v' y`x'
@@ -30,7 +41,7 @@ foreach v of varlist E-AC {
 keep CountryCode y*
 rename y* conso*
 reshape long conso,i(CountryCode) j(year)
-replace conso=conso*1000000000
+*replace conso=conso*1000000000
 rename CountryCode pays
 merge 1:1 year pays using "$dir/Bases_Sources/Doigt_mouillé.dta"
 drop _merge
@@ -38,13 +49,14 @@ save "$dir/Bases_Sources/Doigt_mouillé.dta", replace
 
 
 
-
-import excel "$dir/Bases_Sources/Eurostat_conso_intermediaires_new.xls", sheet("Data (2)") cellrange(A11:Y43) firstrow clear
-rename GEOTIME pays
-foreach v of varlist B-Y {
+import excel "$dir/Bases_Sources/Eurostat_conso_intermédiaires.xls", sheet("Intermediate_consumption_") cellrange(A10:AB218) firstrow clear
+rename A pays
+drop B
+foreach v of varlist C-AB {
     local x : variable label `v'
 	rename `v' y`x'
 }
+drop if pays==""
 rename y* conso_interm*
 reshape long conso_interm,i(pays) j(year)
 destring conso_interm, replace force
@@ -305,7 +317,27 @@ foreach y of num 2005(1)2015 {
 		'*/ "$dir/Results/Devaluations/auto_chocs_HC_TIVA_REV4_`y'.dta",  update
 		drop _merge
 	
-}	
+}
+
+rename pays iso3
+
+merge m:1 iso3 using "$dir/Bases_Sources/MRIO/Pays_MRIO_ISO3.dta", keep(3)
+drop country note
+drop _merge
+
+rename pays_mrio pays
+
+
+foreach y of numlist 2000 2007(1)2019 {
+	merge 1:1 year pays using /*
+		'*/ "$dir/Results/Devaluations/auto_chocs_HC_MRIO_`y'.dta",  update
+		drop _merge
+	
+}
+
+drop if iso3==""
+drop pays
+rename iso3 pays
 
 	
 
@@ -322,13 +354,13 @@ gen ratio_impt_interm_pond = ratio_impt_interm*weight
 egen ratio_impt_conso_mean = total(ratio_impt_conso_pond), by(year)
 egen ratio_impt_interm_mean = total(ratio_impt_interm_pond), by(year)
 
-foreach source in WIOD TIVA TIVA_REV4 {
+foreach source in WIOD TIVA TIVA_REV4 MRIO {
 	replace pond_`source'_HC=-pond_`source'_HC
 }
 
 
 save "$dir/Bases_Sources/Doigt_mouillé_panel.dta", replace
-foreach source in WIOD TIVA TIVA_REV4 {
+foreach source in WIOD TIVA TIVA_REV4 MRIO {
 	reg pond_`source'_HC ratio_impt_conso ratio_impt_interm ratio_impt_conso_mean ratio_impt_interm_mean i.pays_num
 	predict x
 	gen y=x
@@ -352,6 +384,7 @@ use "$dir/Bases_Sources/Doigt_mouillé_panel.dta", clear
 local WIOD_pred=2014
 local TIVA_REV4_pred=2015
 local TIVA_pred = 2011
+local MRIO_pred = 2019
 
 foreach reg in reg1 reg2 {
 
@@ -365,7 +398,7 @@ foreach reg in reg1 reg2 {
 	}
 	
 	foreach lag_pred of numlist/*1(1)8*/ 6 {
-		foreach source in WIOD /*TIVA TIVA_REV4*/ {
+		foreach source in WIOD /*TIVA TIVA_REV4 MRIO*/ {
 			foreach trend in no yes {
 				local `source'_out = ``source'_pred'-`lag_pred'+1
 				
@@ -451,11 +484,13 @@ egen ratio_impt_interm_mean = total(ratio_impt_interm_pond), by(year)
 
 
 
-foreach source in WIOD TIVA TIVA_REV4 {
+foreach source in WIOD TIVA TIVA_REV4 MRIO {
 	*reg pond_`source'_HC ratio_impt_conso ratio_impt_interm i.pays_num
 	reg pond_`source'_HC ratio_impt_conso ratio_impt_interm ratio_impt_conso_mean ratio_impt_interm_mean i.pays_num
 	predict x_`source' /*if year >= 2010  & pond_`source'_HC ==. */
 }
+
+
 	
 global common_sample "   AUS AUT_EUR BEL_EUR BGR BRA CAN CHE" 
 global common_sample "$common_sample CHN CYP_EUR CZE DEU_EUR DNK ESP_EUR EST_EUR FIN_EUR"
@@ -470,7 +505,7 @@ egen Y_tot_per_year=total(GDP), by(year)
 gen weight=GDP/Y_tot_per_year
 
 
-foreach source in WIOD TIVA TIVA_REV4 {	
+foreach source in WIOD TIVA TIVA_REV4 MRIO {	
 	gen elast_pond=pond_`source'_HC*weight
 	gen elast_pond_pred=x_`source'*weight
 	egen `source'_elast_annual_pond=total(elast_pond), by(year)
@@ -486,7 +521,7 @@ foreach source in WIOD TIVA TIVA_REV4 {
 drop pays
 sort year
 bys year: keep if _n==1
-keep year WIOD_elast_annual_pond-TIVA_REV4_elast_annual_pond_pred
+keep year WIOD_elast_annual_pond-MRIO_elast_annual_pond_pred
 
 
 twoway 	(line WIOD_elast_annual_pond year, lcolor(blue)) ///
@@ -494,14 +529,16 @@ twoway 	(line WIOD_elast_annual_pond year, lcolor(blue)) ///
 		(line TIVA_elast_annual_pond year, lcolor(red)) ///
 		(line TIVA_elast_annual_pond_pred year, lcolor(red) lpattern(dash)) ///
 		(line TIVA_REV4_elast_annual_pond year, lcolor(green)) ///
-		(line TIVA_REV4_elast_annual_pond_pred year, lcolor(green) lpattern(dash)), ///
+		(line TIVA_REV4_elast_annual_pond_pred year, lcolor(green) lpattern(dash)) ///
+		(connected MRIO_elast_annual_pond year, lcolor(black) lstyle(solid) msize(vsmall)) ///
+		/*(line MRIO_elast_annual_pond_pred year, lcolor(black) lpattern(dash))*/, ///
 		legend(label(2 "predicted WIOD") label(1 "WIOD ") ///
 		label(4 "predicted TIVA rev3") label(3 "TIVA rev3")  /// 
-		label(6 "predicted TIVA rev4") label(5 "TIVA rev4"))  /// 
-		ytitle("elasticity (absolute value)" "output weighted", ) ///
+		label(6 "predicted TIVA rev4") label(5 "TIVA rev4")  /// 
+		/*label(8 "predicted MRIO rev4")*/ label(7 "MRIO rev4"))  /// 
+		ytitle("elasticity (absolute value)" "output weighted", margin(medium)) ///
 		note("The average CPI elasticity has been computed from each of countries" ///
-		"in a common 43 countries sample" ///
-		"assuming all 2020 Eurozone countries already in the Eurozone from 1995" ///
+		"in a common 43 countries sample assuming all 2020 Eurozone countries already in the Eurozone from 1995" ///
 		"and aggregated using an output weighted mean") ///
 		scheme(s1mono)
 

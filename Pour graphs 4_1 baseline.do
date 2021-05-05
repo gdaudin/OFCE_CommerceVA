@@ -440,8 +440,8 @@ twoway 	(line WIOD_elast_annual year, lcolor(blue) lpattern(dash)) ///
 		(line TIVA_elast_annual_pond year, lcolor(red)) ///
 		(line TIVA_REV4_elast_annual year, lcolor(green) lpattern(dash)) ///
 		(line TIVA_REV4_elast_annual_pond year, lcolor(green)) ///
-		(line MRIO_elast_annual year, lcolor(black) lpattern(dash)) ///
-		(line MRIO_elast_annual_pond year, lcolor(black)), ///
+		(connected MRIO_elast_annual year, lcolor(black) lstyle(solid) msize(small)) ///
+		(connected MRIO_elast_annual_pond year, lcolor(black) lstyle(solid) msize(small)), ///
 		legend(label(1 "WIOD") label(2 "WIOD, output weighted") ///
 		label(3 "TIVA rev3") label(4 "TIVA rev3, output weighted")  /// 
 		label(5 "TIVA rev4") label(6 "TIVA rev4, output weighted")  /// 

@@ -538,7 +538,8 @@ twoway 	(line WIOD_elast_annual_pond year, lcolor(blue)) ///
 		/*label(8 "predicted MRIO rev4")*/ label(7 "MRIO rev4"))  /// 
 		ytitle("elasticity (absolute value)" "output weighted", margin(medium)) ///
 		note("The average CPI elasticity has been computed from each of countries" ///
-		"in a common 43 countries sample assuming all 2020 Eurozone countries already in the Eurozone from 1995" ///
+		"in a common 43 countries sample" ///
+		"assuming all 2020 Eurozone countries already in the Eurozone from 1995" ///
 		"and aggregated using an output weighted mean") ///
 		scheme(s1mono)
 

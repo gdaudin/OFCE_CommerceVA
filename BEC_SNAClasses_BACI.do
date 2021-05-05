@@ -24,6 +24,7 @@ drop _merge
 save "$dir/Bases/BACI_BEC/HS199892_SNAClasses.dta", replace
 
 ***
+capture mkdir "$dir/Bases_Sources/BACI_BEC/BACI_HS92_V202102"
 cd "$dir/Bases_Sources/BACI_BEC/BACI_HS92_V202102"
 unzipfile "$dir/Bases_Sources/BACI_BEC/BACI_HS92_V202102.zip", replace
 

@@ -137,7 +137,7 @@ save "$dir/Bases_Sources/Doigt_mouillé.dta", replace
 
 *********************************************Régression en cross-section 
 
-
+/*
 
 capture program drop collecter_resultats_reg
 program collecter_resultats_reg
@@ -279,7 +279,7 @@ foreach reg in reg2 reg1 {
 	
 	
 }
-
+*/
 *******************************************
 ***************** Régressions en panel
 
@@ -353,7 +353,7 @@ local WIOD_pred=2014
 local TIVA_REV4_pred=2015
 local TIVA_pred = 2011
 
-foreach reg in reg2 reg1 {
+foreach reg in reg1 reg2 {
 
 	if "`reg'"=="reg1" {
 		replace ratio_impt_conso=impt_conso/GDP
@@ -394,19 +394,23 @@ foreach reg in reg2 reg1 {
 				gen n=_n
 				sort x
 				capture drop pays_label 
-				gen pays_label = pays if n/3==int(n/3) | pays=="USA" | pays=="FRA" & pays!="GBR" & pays!= "GRC" /*| pays=="FRA"  ///
-						| pays=="ITA" | pays=="GBR" | pays=="DEU" | pays=="JPN" | pays=="CHN" */
-				graph twoway (scatter x pond_`source'_HC, mlabel(pays_label) mlabposition(4) mlabangle(-45)) (lfit x pond_`source'_HC, lpattern(dash)) /*
-				*/ (line x y) (line z pond_`source'_HC), legend(off) /*
+				gen pays_label = "" /*pays if n/20==int(n/20) | pays=="USA" | pays=="FRA_EUR" & pays!="GBR" & pays!= "GRC_EUR" /*| pays=="FRA"  ///
+						| pays=="ITA" | pays=="GBR" | pays=="DEU" | pays=="JPN" | pays=="CHN" */ */
+				graph twoway (scatter x pond_`source'_HC if (x!=. & pond_`source'_HC !=.) , mlabel(pays_label) mlabposition(4) mlabangle(-45)  ) /*
+				*/ (lfit x pond_`source'_HC if x!=. & pond_`source'_HC !=., lpattern(dash) ) /*
+				*/ (line x y if x!=. & pond_`source'_HC !=.) (line y y if x!=. & pond_`source'_HC !=.), legend(off) /*
 				*//* title (`source'_`reg'_pred_`lag_pred'y trend: `trend') *//*
 				 */ name("`source'_pred_`lag_pred'y", replace) ytitle("Predicted elasticity")/*
 				 */ note("Correlation: `correlation' Mean error: `mean_error' p.c.  Median error: `median_error' p.c.") /*
-				 */ scheme(s1color)
+				 */ scheme(s1color) /*
+				 */ yscale(range(0.05 (0.05) 0.2)) ylabel(0.05 (0.05) 0.2)/*
+				 */ xscale(range(0.05 (0.05) 0.2)) xlabel(0.05 (0.05) 0.2)
 				
 				
 				graph export  "$dir/Results/resultats_`reg'_doigt_mouillé_`source'_pred_`lag_pred'y_trend_`trend'.png", replace
 				if "`source'"=="WIOD" & "`trend'"=="no" & `lag_pred'==6 {
 					graph export  "$dirgit/Rédaction/resultats_`reg'_doigt_mouille_`source'_pred_`lag_pred'y_trend_`trend'.png", replace
+		
 				}
 				drop x
 				drop y

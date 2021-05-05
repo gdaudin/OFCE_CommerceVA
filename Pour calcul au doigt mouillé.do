@@ -1,9 +1,13 @@
 
 if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
-if ("`c(hostname)'" == "widv270a") global dir  "D:\home\T822289\CommerceVA" 
+if ("`c(hostname)'" == "widv270a") global dir  "D:/home/T822289/CommerceVA" 
+if ("`c(hostname)'" == "FP1376CD") global dir  "T:/CommerceVA" 
 
-if ("`c(username)'"=="guillaumedaudin") global dirgit "~/Répertoires Git/OFC_CommerceVA"
+if ("`c(username)'"=="guillaumedaudin") global dirgit "~/Répertoires Git/OFCE_CommerceVA"
 if ("`c(hostname)'" == "widv270a") global dirgit  "D:\home\T822289\CommerceVA\GIT\commerce_va_inflation" 
+
+global eurozone "AUT BEL CYP DEU ESP EST FIN FRA GRC IRL ITA LTU LUX LVA MLT NLD PRT SVK SVN"
+
 
 import excel "$dir/Bases_Sources/Data_GDP_95_18_new.xlsx", /*
 			*/sheet("WEO_Data (4)") firstrow clear
@@ -32,6 +36,9 @@ merge 1:1 year pays using "$dir/Bases_Sources/Doigt_mouillé.dta"
 drop _merge
 save "$dir/Bases_Sources/Doigt_mouillé.dta", replace
 
+
+
+
 import excel "$dir/Bases_Sources/Eurostat_conso_intermediaires_new.xls", sheet("Data (2)") cellrange(A11:Y43) firstrow clear
 rename GEOTIME pays
 foreach v of varlist B-Y {
@@ -47,6 +54,35 @@ drop _merge
 save "$dir/Bases_Sources/Doigt_mouillé.dta", replace
 
 
+egen Y_tot_per_year=total(GDP), by(year)
+gen weight=GDP/Y_tot_per_year
+save "$dir/Bases_Sources/Doigt_mouillé.dta", replace
+
+***Pour zone euro
+expand 2 if strpos("$eurozone",pays)!=0, gen(pourchoceuro)
+replace pays = pays+"_EUR" if pourchoceuro==1
+drop pourchoceuro
+save "$dir/Bases_Sources/Doigt_mouillé.dta", replace
+****
+
+*****Pour les données de commerce
+
+merge 1:1 pays year using "$dir/Bases/BACI_BEC/BACI_SNAClasses_Y.dta"
+
+**1995-1998 manque pour LUX. 2019 manque pour TWN (qui est approximé par "Autre Asie" dans BACI)
+generate impt_tot = (vCapital+ vConsumption+ vIntermediate+ vNC)
+generate impt_conso = vConsumption*1000
+generate impt_interm = vIntermediate*1000
+keep pays year impt*
+merge 1:1 year pays using "$dir/Bases_Sources/Doigt_mouillé.dta"
+assert _merge!=2
+keep if _merge==3
+drop _merge
+
+save "$dir/Bases_Sources/Doigt_mouillé.dta", replace
+
+
+/*
 import excel "$dir/Bases_Sources/UN_comtrade_biens_de_conso_95_2018.xlsx", /*
 	*/sheet("UN_comtrade_biens_de_conso") firstrow clear
 keep Year ReporterISO TradeValueUS
@@ -62,11 +98,7 @@ save "$dir/Bases_Sources/Doigt_mouillé.dta", replace
 
 import excel "$dir/Bases_Sources/UN_comtrade_biens_intermediaires_95_2018.xlsx", /*
 	*/sheet("Biens intermédiaires") firstrow clear
-***Rq : on a enlevé un secteur qui manquait parfois
-*Il y a un sujet sur les imports 321* Fuels and lubricants, processed (motor spirit)
-*qui disparaissent certaines années dans certains 
-*pays... A ce stade, je les ai exclues de la base, ce qui n'est pas très satisfaisant.
-******	
+
 	
 keep Year ReporterISO TradeValueUS
 collapse (sum) TradeValueUS, by (ReporterISO Year)
@@ -93,11 +125,11 @@ save "$dir/Bases_Sources/Doigt_mouillé.dta", replace
 */
 
 drop if year==1995 | year==1996 | year==1997
+*/
 
+****On enlève les pays ZE -- monnaie notionnelle
 
-egen Y_tot_per_year=total(GDP), by(year)
-gen weight=GDP/Y_tot_per_year
-
+drop if strpos("$eurozone",pays)!=0
 
 save "$dir/Bases_Sources/Doigt_mouillé.dta", replace
 
@@ -111,7 +143,6 @@ capture program drop collecter_resultats_reg
 program collecter_resultats_reg
 args source y reg
 	use "$dir/Bases_Sources/Doigt_mouillé.dta", clear
-	blif
 	if "`reg'"=="reg1" generate ratio_impt_conso=impt_conso/GDP
 	if "`reg'"=="reg1" generate ratio_impt_interm = impt_interm/GDP
 	
@@ -121,7 +152,7 @@ args source y reg
 	gen E1_E2 = ratio_impt_conso + ratio_impt_interm
 	merge 1:1 year pays using /*
 		'*/ "$dir/Results/Devaluations/auto_chocs_HC_`source'_`y'.dta", keep(3)
-	drop if strmatch(pays,"*_EUR")==1
+	*drop if strmatch(pays,"*_EUR")==1
 	
 	replace pond_`source'_HC=-pond_`source'_HC
 	reg pond_`source'_HC E1_E2
@@ -375,7 +406,7 @@ foreach reg in reg2 reg1 {
 				
 				graph export  "$dir/Results/resultats_`reg'_doigt_mouillé_`source'_pred_`lag_pred'y_trend_`trend'.png", replace
 				if "`source'"=="WIOD" & "`trend'"=="no" & `lag_pred'==6 {
-					graph export  "$dir/commerce_VA_inflation/Rédaction/resultats_`reg'_doigt_mouille_`source'_pred_`lag_pred'y_trend_`trend'.png", replace
+					graph export  "$dirgit/Rédaction/resultats_`reg'_doigt_mouille_`source'_pred_`lag_pred'y_trend_`trend'.png", replace
 				}
 				drop x
 				drop y
@@ -392,7 +423,7 @@ foreach reg in reg2 reg1 {
 ***** pour les graphiques de prédiction (en reg1 -- sans eurostat) ni trend
 
 use "$dir/Bases_Sources/Doigt_mouillé_panel.dta", clear
-drop if strpos(pays,"_EUR")!=0
+*drop if strpos(pays,"_EUR")!=0
 replace ratio_impt_conso=impt_conso/GDP
 replace ratio_impt_interm = impt_interm/GDP
 drop if ratio_impt_conso==.
@@ -422,11 +453,11 @@ foreach source in WIOD TIVA TIVA_REV4 {
 	predict x_`source' /*if year >= 2010  & pond_`source'_HC ==. */
 }
 	
-global common_sample "   AUS AUT BEL BGR BRA CAN CHE" 
-global common_sample "$common_sample CHN CYP CZE DEU DNK ESP EST FIN"
-global common_sample "$common_sample FRA GBR GRC     HRV HUN IDN IND IRL        ITA JPN     KOR"
-global common_sample "$common_sample LTU LUX LVA MEX              MLT     NLD NOR        POL PRT"
-global common_sample "$common_sample ROU RUS       SVK SVN SWE       TUR TWN USA        "
+global common_sample "   AUS AUT_EUR BEL_EUR BGR BRA CAN CHE" 
+global common_sample "$common_sample CHN CYP_EUR CZE DEU_EUR DNK ESP_EUR EST_EUR FIN_EUR"
+global common_sample "$common_sample FRA_EUR GBR GRC_EUR    HRV HUN IDN IND IRL_EUR        ITA_EUR JPN     KOR"
+global common_sample "$common_sample LTU_EUR LUX_EUR LVA_EUR MEX              MLT_EUR     NLD_EUR NOR        POL PRT_EUR"
+global common_sample "$common_sample ROU RUS       SVK_EUR SVN_EUR SWE       TUR TWN USA        "
 
 keep if strpos("$common_sample",pays)!=0
 
@@ -465,10 +496,11 @@ twoway 	(line WIOD_elast_annual_pond year, lcolor(blue)) ///
 		label(6 "predicted TIVA rev4") label(5 "TIVA rev4"))  /// 
 		ytitle("elasticity (absolute value)" "output weighted", ) ///
 		note("The average CPI elasticity has been computed from each of countries" ///
-		"in a common 43 countries sample (assuming no Eurozone)" ///
+		"in a common 43 countries sample" ///
+		"assuming all 2020 Eurozone countries already in the Eurozone from 1995" ///
 		"and aggregated using an output weighted mean") ///
 		scheme(s1mono)
 
 
-graph export  "$dir/commerce_VA_inflation/Rédaction/predictions_reg1_doigt_mouille_trend_no.png", replace
+graph export  "$dirgit/Rédaction/predictions_reg1_doigt_mouille_trend_no.png", replace
 

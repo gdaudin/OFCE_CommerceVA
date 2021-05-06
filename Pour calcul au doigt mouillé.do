@@ -459,7 +459,14 @@ foreach reg in reg1 reg2 {
 
 ***** pour les graphiques de prédiction (en reg1 -- sans eurostat) ni trend
 
+local sanslachine wochina
+
+*il faut juste enlever la ligne pour faire sans la Chine
+
 use "$dir/Bases_Sources/Doigt_mouillé_panel.dta", clear
+
+if "`sanslachine'"=="wochina" drop if pays=="CHN"
+
 *drop if strpos(pays,"_EUR")!=0
 replace ratio_impt_conso=impt_conso/GDP
 replace ratio_impt_interm = impt_interm/GDP
@@ -544,5 +551,5 @@ twoway 	(line WIOD_elast_annual_pond year, lcolor(blue)) ///
 		scheme(s1mono)
 
 
-graph export  "$dirgit/Rédaction/predictions_reg1_doigt_mouille_trend_no.png", replace
+graph export  "$dirgit/Rédaction/predictions_reg1_doigt_mouille_trend_no`sanslachine'.png", replace
 

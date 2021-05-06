@@ -459,13 +459,15 @@ foreach reg in reg1 reg2 {
 
 ***** pour les graphiques de prédiction (en reg1 -- sans eurostat) ni trend
 
-local sanslachine wochina
+local sanslachine wochinaindia
 
 *il faut juste enlever la ligne pour faire sans la Chine
 
 use "$dir/Bases_Sources/Doigt_mouillé_panel.dta", clear
 
 if "`sanslachine'"=="wochina" drop if pays=="CHN"
+if "`sanslachine'"=="wochinaindia" drop if pays=="CHN"
+if "`sanslachine'"=="wochinaindia" drop if pays=="IND"
 
 *drop if strpos(pays,"_EUR")!=0
 replace ratio_impt_conso=impt_conso/GDP

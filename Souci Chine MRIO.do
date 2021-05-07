@@ -19,11 +19,17 @@ generate pays_labelblouf=pays
 replace pays_labelblouf="" if ln(pond_MRIO_HC2016/pond_MRIO_HC2017) <=0.2 & ln(pond_MRIO_HC2016/pond_MRIO_HC2017) >=-0.2
 
 twoway (scatter pond_MRIO_HC2017 pond_MRIO_HC2018, mlabel(pays_labelblif)) (lfit pond_MRIO_HC2017 pond_MRIO_HC2017), ////
-	ytitle("2017") xtitle("2018") name(blif,replace) legend(off)
-twoway (scatter pond_MRIO_HC2016 pond_MRIO_HC2017 , mlabel(pays_labelblouf)) (lfit pond_MRIO_HC2017 pond_MRIO_HC2017), ////
-	ytitle("2016") xtitle("2017") name(blouf,replace) legend(off) 
+	ytitle("2017") xtitle("2018") name(blif,replace) legend(off) scheme(s1mono) ///
+	ylabel(0.05 (0.05) 0.3) yscale(range(0.05 0.3)) xlabel(0.05 (0.05) 0.3) xscale(range(0.05 0.3))
+	
+	
+twoway (scatter pond_MRIO_HC2016 pond_MRIO_HC2017 , mlabel(pays_labelblouf)) (lfit pond_MRIO_HC2016 pond_MRIO_HC2016), ////
+	ytitle("2016") xtitle("2017") name(blouf,replace) legend(off) scheme(s1mono)  ///
+	ylabel(0.05 (0.05) 0.3) yscale(range(0.05 0.3)) xlabel(0.05 (0.05) 0.3) xscale(range(0.05 0.3))
+	
+	
 graph combine blif blouf, note("Comparing elasticites 2017/2018 and 2016/2017" ///
-	"Label if the difference is larger than 0.2 log points")
+	"Label if the difference is larger than 0.2 log points") scheme(s1mono)
 
 
 graph export  "$dirgit/Rédaction/pays_en_soucis_2018_MRIO.png", replace
@@ -85,6 +91,35 @@ twoway (hist ln_diff2018ratio if ln_diff2018ratio >= 1 | ln_diff2018ratio <= -1,
 blif
 keep if pays_conso=="PRC"
 br pays sector pays_conso conso2017 conso2018 diff2018  diff2018ratio
+
+
+************
+
+use "$dir/Bases_Sources/Doigt_mouillé_panel.dta", clear
+
+
+keep pond_WIOD_HC pays year
+reshape wide pond_WIOD_HC, i(pays) j(year)
+generate pays_labelblif=pays
+replace pays_labelblif="" if ln(pond_WIOD_HC2014/pond_WIOD_HC2013) <=0.2 & ln(pond_WIOD_HC2014/pond_WIOD_HC2013) >=-0.2
+generate pays_labelblouf=pays
+replace pays_labelblouf="" if ln(pond_WIOD_HC2013/pond_WIOD_HC2012) <=0.2 & ln(pond_WIOD_HC2013/pond_WIOD_HC2012) >=-0.2
+
+
+twoway (scatter pond_WIOD_HC2014 pond_WIOD_HC2013, mlabel(pays_labelblif)) (lfit pond_WIOD_HC2013 pond_WIOD_HC2013), ////
+	ytitle("2014") xtitle("2013") name(blif,replace) legend(off) scheme(s1mono)
+twoway (scatter pond_WIOD_HC2013 pond_WIOD_HC2012 , mlabel(pays_labelblouf)) (lfit pond_WIOD_HC2013 pond_WIOD_HC2013), ////
+	ytitle("2013") xtitle("2012") name(blouf,replace) legend(off) ///
+	scheme(s1mono)
+	
+	
+	
+graph combine blif blouf, note("Comparing elasticites 2013/2014 and 2012/2013" ///
+	"Label if the difference is larger than 0.2 log points") scheme(s1mono)
+
+graph export  "$dirgit/Rédaction/pays_en_soucis_Comp_WIOD.png", replace
+
+
 
 
 

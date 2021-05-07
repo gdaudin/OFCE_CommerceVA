@@ -459,7 +459,7 @@ foreach reg in reg1 reg2 {
 
 ***** pour les graphiques de prédiction (en reg1 -- sans eurostat) ni trend
 
-local sanslachine wochinaindia
+*local sanslachine wochinaindia
 
 *il faut juste enlever la ligne pour faire sans la Chine
 
@@ -539,7 +539,7 @@ twoway 	(line WIOD_elast_annual_pond year, lcolor(blue)) ///
 		(line TIVA_elast_annual_pond_pred year, lcolor(red) lpattern(dash)) ///
 		(line TIVA_REV4_elast_annual_pond year, lcolor(green)) ///
 		(line TIVA_REV4_elast_annual_pond_pred year, lcolor(green) lpattern(dash)) ///
-		(connected MRIO_elast_annual_pond year, lcolor(black) lstyle(solid) msize(vsmall)) ///
+		(connected MRIO_elast_annual_pond year, lcolor(black) lstyle(solid) msize(medium) mfcolor(black*100)) ///
 		/*(line MRIO_elast_annual_pond_pred year, lcolor(black) lpattern(dash))*/, ///
 		legend(label(2 "predicted WIOD") label(1 "WIOD ") ///
 		label(4 "predicted TIVA rev3") label(3 "TIVA rev3")  /// 

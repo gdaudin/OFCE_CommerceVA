@@ -383,11 +383,12 @@ For example, WIOTs show how much international trade is embedded in the consumpt
 Aggregating national input-output tables into world input-output tables is challenging for a number of reasons. First, national input-output tables vary widely in terms of detail and scope, and are therefore not fully consistent. Furthermore, the availability of year-specific national input-output tables is limited, especially for developing economies.  \\
 This paper uses several multi-year WIOTs for the sake of robustness: the World Input Output Database (WIOD), the multi-regional input-output tables (MRIO) developed by the Asian Development Bank (ADB) and the Trade in Value Added Database (TiVA) from the OECD-ICIO.
 
-\paragraph{The World Input Output Database (WIOD)} is hosted and updated by the University of Groningen (Netherlands) and benefits from the financial support of the European Commission. 
-It contains time series of inter-country input-output tables from 2000 to 2014. 
+\paragraph{The World Input Output Database (WIOD)} is hosted and updated by the University of Groningen (Netherlands). 
+It benefits from the financial support of the European Commission. 
+The WIOD contains time series of inter-country input-output tables from 2000 to 2014. 
 It provides WIOTs that reconcile national input-output tables (or supply-use tables) with bilateral trade statistics.
-WIOD covers 43 countries (of which 28 members of the European Union) accounting for 85\% of global GDP (see Table \ref{tab:wiod}). 
-WIOD contains annual information for 56 industries. Therefore, for each year, a full country-sector input-output matrix traces the importance of a supplying industry in country $j$ for an industry in country $i$. The values in WIOTs are expressed in U.S. dollars at basic prices. Market exchange rates were used for currency conversion \citep{Timmer2015}. 
+The WIOD covers 43 countries (of which 28 members of the European Union) accounting for 85\% of global GDP (see Table \ref{tab:wiod}). 
+It contains annual information for 56 industries. Therefore, for each year, a full country-sector input-output matrix traces the importance of a supplying industry in country $j$ for an industry in country $i$. The values in WIOTs are expressed in U.S. dollars at basic prices. Market exchange rates were used for currency conversion \citep{Timmer2015}. 
 
 % All transactions values are in basic prices, reflecting all costs borne by the producer. These tables are accompanied by Socio-Economic Accounts which contain country sector panel data on employment (number of workers, compensation and share of labor in high, medium and low skilled occupations), capital stocks, gross output and value added).
  
@@ -456,7 +457,7 @@ Other & Brunei, Israel, Morocco, Russia, Saudi Arabia, South Africa, Tunisia, Tu
 
 
 \paragraph{Comparison of databases}\\
-WIOD and the TiVA databases are constructed using similar assumptions (\cite{OECD2011,Timmer2015,OECD2018}).
+WIOD and the TiVA database are constructed using similar assumptions (\cite{OECD2011,Timmer2015,OECD2018}).
 For example, both start with the construction of harmonised country-specific supply-use tables (SUTs) that are then transformed into world input-output tables.
 Both databases use the "import proportionality assumption" to allocate specific bilateral imports to using industries.
 National input-output statistics provide how much of each product firms use for intermediary consumption and investment. 
@@ -770,7 +771,7 @@ Our results concur with the literature.
 Using comprehensive measures of global value chain integration, \cite{Timmer2016} find that the expansion of global value chain has slowed down since the Great Recession.\\
 While the latest dataset available for WIOD dates back to 2014, MRIO covers the most recent years, up to 2018. 
 Results from the MRIO database suggest that the elasticity has bounced back from 2016 onwards, reaching 0.09 in 2018.
-However, MRIO suffers from data quality issues in 2018. From 2017 to 2018, the HCE deflator elasticity sharply increases in a number of countries (e.g. China\footnote{For instance, we observe large shifts in the consumption of services in China: between 2017 and 2018, the consumption of education increases by 43\%, whereas the consumption of transport decreases by 43\%. Such large shifts suggest data quality problems in MRIO.} and India) between 2017 and 2018. 
+However, MRIO suffers from data quality issues in 2018 (see Online Appendix F). From 2017 to 2018, the HCE deflator elasticity sharply increased in a number of countries (e.g. China\footnote{For instance, we observe large shifts in the consumption of services in China (see Online Appendix F), suggesting data quality problems in MRIO.} and India). 
 Hence, the elasticity estimated with MRIO is not reliable for this last year.\\
 Overall, our estimates are robust to using different databases.
 Unsurprisingly, WIOD and MRIO provide similar elasticities. 
@@ -850,8 +851,7 @@ For example,
 Figure \ref{fig:decomp_origine} shows that changes in the prices of imported final consumer goods contribute more to the total effect than changes in the prices of domestic goods.
 Although imported final consumer goods account for a smaller share of total consumption than domestic goods, they are the most impacted by changes in the exchange rate. 
 Imported final consumer goods also explain the differences in price elasticities observed between open and relatively closed economies.\\
-
-Overall, we find that the first two channels explain three-quarters of the transmission of an exchange rate appreciation to domestic prices.
+Overall, the first two channels explain three-quarters of the transmission of an exchange rate appreciation to domestic prices.
 By contrast, the last two channels, which reflect the impact of global value chains, play a more limited role, with marked across-countries heterogeneity.
 Hence, only one-fourth of the HCE elasticity to the exchange rate is attributable to participation in global value chains.\\
 
@@ -962,15 +962,15 @@ Similarly, domestic core inflation (i.e. all products except food and energy) ac
 %\label{fig:intensity_impt}
 %\end{figure}
 
-\section{Filling the data gap: estimating the HCE deflator elasticity without using WIOT}
+\section{Filling the data gap: estimating the HCE deflator elasticity without using WIOTs}
 \label{sec:extrapo}
 \subsection{Estimating the HCE deflator elasticity without resorting to WIOT}
-In this section, we show that a precise assessment of the HCE deflator elasticity to the exchange rate can be estimated without resorting to WIOT. 
+In this section, we show that a precise assessment of the HCE deflator elasticity to the exchange rate can be estimated without resorting to WIOTs. 
 The construction of World Input-Output tables is data-demanding and WIOTs are typically released with a lag of several years.
 As a result, world input-output matrices are not available for the most recent years.
 The latest years covered by WIOD and TiVA rev. 4 are, respectively, 2014 and 2015. 
-Although the MRIO database covers most recent years, up to 2018, MRIO is fraught with data quality issues for 2018, as highlighted in Section \ref{subsec:timeevol}.
-In addition, using WIOTs involves cumbersome computations.
+While the MRIO database covers more recent years, it is fraught with data quality issues for 2018 (see Section \ref{subsec:timeevol} and Online Appendix F).
+Using WIOTs also involves cumbersome computations.
 Given these difficulties, we look for a simpler way to compute the elasticity of the HCE deflator to the exchange rate.
 We estimate the HCE deflator elasticity from 2016 onwards using GDP statistics and trade data on consumption and intermediates.\\
 
@@ -997,17 +997,13 @@ $C^i$ and $\hat{C}^i_\$$ have a large number of zeros. Hence, we can write, defi
  \end{equation}
  
 When the domestic currency appreciates, $E1.HC^{i,imp}$ ($E1.HC$ hereafter) and $E2.HC^{i,dom}$ ($E2.HC$ hereafter) reduce the consumer prices of the country $i$ whereas $E3.HC^{i,imp}$ ($E3.HC$) increases them. 
-%je suggère de supprimer le fait qu'il n'y a pas besoin d'inverser de matrice car cette opération est relativement facile avec les logiciels disponibles aujourd'hui
-
 This decomposition differs from equation \ref{equ:decomp_impexp}. 
-Equation \ref{equ:decomp_impexp} focuses on the contribution of domestic versus imported goods to the HCE deflator elasticity to a change in the exchange rate.
+Equation \ref{equ:decomp_impexp} focuses on the contribution of domestic versus imported goods to the HCE deflator elasticity to the exchange rate.
 By contrast, equation \ref{eq:eqtoto} highlights the transmission channels of the exchange rate fluctuation.
-
-
 Figure \ref{fig:decompositionofs} plots the shares of $E1.HC$, $E2.HC$, $E3.HC$ and $E4.HC$ (shortening $E4.HC^i$) in $\overline{s}_{i}^{i,HC}$.  
 $E1.HC$ dominates. 
 While $E3.HC$ is negligible, $E4.HC$ accounts for 10\% to 30\% of $\overline{s}_{i}^{i,HC}$ for most countries except China.
-On the whole, as shown by Figure \ref{fig:shareofs}, input-output mechanisms (i.e. all shares except $E1.HC$) explain a large share of the elasticity, especially for large countries or euro area countries subject to an appreciation of the euro. This share has increased until 2013-2014, implying an increasing need of data from WIOTs to perform our computations (see Figure \ref{fig:shareofsthroughtime}).
+On the whole, as shown by Figure \ref{fig:shareofs}, input-output mechanisms (i.e. all shares except $E1.HC$) explain a large share of the elasticity, especially for large countries or euro area countries. This share has increased until 2013-2014, implying an increasing need of data from WIOTs to perform our computations (see Figure \ref{fig:shareofsthroughtime}).
 
 \begin{figure}[H]
 \centering
@@ -1107,14 +1103,13 @@ This likely reflects the fact that a small economy compensates for its small siz
 %Back to the main point, it turns out that we do not gain much by inversing matrixes. Of course, this realization is only possible because we were able to computes $\overline{s}_{i}^{i,HC}$ in the first place. Still, it suggests that we could extrapolate the elasticities for not-yet-released years, as long as we have the share of imported goods in household consumption and the share of imported inputs in household consumption of domestic goods. 
 
 \subsection{Estimating the HCE deflator elasticity using GDP and trade statistics}
-The sum of the share of imported goods in household consumption and the share of imported inputs in household consumption of domestic goods ($E1.HC + E2.HC$) are a good predictor of the effect of exchange rate fluctuations on household consumption prices. 
+The sum of the share of imported goods in household consumption and the share of imported inputs in household consumption of domestic goods ($E1.HC + E2.HC$) are a good predictor of the impact of exchange rate fluctuations on household consumption prices. 
 However, these data ($E1.HC$ and $E2.HC$) are not up-to-date for a large number of countries, as they are not routinely computed by national statistical institutes.
-We can rely on a proxy (see Online Appendix C) by identifying consumption and intermediary goods imports using UN Comtrade data and the BEC classification and using a measure for household consumption (from the World Bank) and intermediate consumption (from Eurostat).
-Intermediate consumption data are not available for all countries.
-As a result, the regressions provided in Online Appendix C only include a limited number of observations.
+We can rely on a proxy (see Online Appendix C) by identifying consumption and intermediary goods imports using the CEPII BACI database\footnote{BACI provides disaggregated data on bilateral trade flows for more than 5000 products and 200 countries. The database is built from data directly reported by each country to the United Nations Statistical Division (Comtrade). Products are defined as items from the Harmonized System nomenclature, at the 6-digit level.} and the BEC classification and using a measure for household consumption (from the World Bank) and intermediate consumption (from Eurostat).
+As intermediate consumption data is not available for all countries, the regressions provided in Online Appendix C only include a limited number of observations.
 
 To expand our panel, we use in this section an even simpler proxy for $E1.HC+E2.HC$. 
-This proxy only requires trade data from Comtrade and GDP data from the World Bank. This data is available until 2018. 
+This proxy only requires trade data from BACI and GDP data from the World Bank. This data is available until 2018. 
 As a result, we can include more countries in the new panel (see equation \ref{eq:eq10}).
  \begin{equation}
 \begin{array}{llll}
@@ -1127,7 +1122,7 @@ As a result, we can include more countries in the new panel (see equation \ref{e
 \end{equation}
 
 The out-of-sample prediction remains satisfactory, although the mean and median errors are larger (see Figure \ref{fig:panel_pred2}). 
-Our findings are robust to using other databases (revision 3 and revision 4 of TIVA).\footnote{Results are available upon request}
+Our findings are robust to using other databases (revision 3 and revision 4 of TIVA).\footnote{Results are available upon request.}
 
 
 \begin{figure}[!h]

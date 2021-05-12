@@ -224,7 +224,7 @@ In section \ref{sec:extrapo}, we use up-to-date GDP and trade data to estimate t
 A large body of literature documents the exchange rate pass-through (ERPT hereafter) to domestic prices. 
 A regular finding is that the pass-through differs between countries, across sectors and over time. 
 The pass-through depends, among other things, on trade openness, integration in international production chains, firms' pricing strategies and the currency of invoicing for trade. \\
-\cite{Campa2008} have documented a declining ERPT to import and consumer prices since the 1980s, whereas \cite{Leigh2017} find that the ERPT is stable over time. 
+%\cite{Campa2008} have documented a declining ERPT to import and consumer prices since the 1980s, whereas \cite{Leigh2017} find that the ERPT is stable over time. 
 In the euro area, \cite{Ozyurt2016} shows that the pass-through is partial and has declined in the 2000s. 
 This decline coincided with the increasing share of emerging economies in world trade and the accession of China to the WTO. 
 The lowest degree of pass-through is found for Germany, most likely reflecting the large size of the country and the high share of local currency pricing.
@@ -239,7 +239,7 @@ The ‘dominant currency paradigm’ (\cite{Gopinath2020}) implies that for non-
 The ERPT also depends on integration in global value chains. 
 Based on Belgian firm-product-level data, \cite{Amiti2014} find that import intensity and market share are key determinants of the ERPT to
 export prices.
-According to \cite{DeSoyres2018}, the ERPT decreases as the foreign value added increases. \\
+%According to \cite{DeSoyres2018}, the ERPT decreases as the foreign value added increases. \\
 Although we do not estimate the ERPT (we rather assume a full exchange rate pass-through to simplify our computations), our approach provides an accounting-based gauge of how large the exchange rate pass-through could be, considering direct and indirect import content in consumption. In this respect, the elasticity of the HCE deflator to the exchange rate can be regarded as an upper bound. \\
 
 %Another strand of literature examines the link between global value chain (GVC) participation and the exchange rate pass-through (ERPT) to domestic prices.
@@ -473,7 +473,7 @@ Another difference relates to the method for harmonising national data and trade
 \subsection{Accounting impact of an exchange rate variation on domestic prices} \label{subsec:chocchange}
 Implementing an exchange rate variation is more complex than implementing a change in production costs. 
 The appreciation of the currency of country $A$ leads to a fall in the national currency price of country $A$'s imports, while the foreign-currency price of its exports increase. 
-We are mainly interested in the impact of an exchange rate appreciation on consumer prices in country $A$. 
+We are primarily interested in the impact of an exchange rate appreciation on consumer prices in country $A$. 
 We also estimate the inflationary impact on countries that directly and indirectly, through third countries linkages, consume inputs from country $A$.\\
 % je propose de supprimer car, pour caricaturer, on ne comprend pas pourquoi on a expliqué quelque chose on section ioprice si c'est pour dire ici que ça ne sert à rien However, this shock cannot be analyzed applying the method described in \ref{subsec:ioprice} because the value of the price, besides depending of the nationality of the input-providing sector, also depends on the nationality of the input-using sector. 
 Suppose a world with two countries $A$ and $B$, each having its own national currency, and a third currency for international transactions, the dollar.
@@ -765,16 +765,16 @@ The U.S. is Ireland's major trading partner outside of the EU. According to the 
 
 \subsection{Evolution over time of the HCE deflator elasticity}\label{subsec:timeevol}
 The elasticity of the HCE deflator to the exchange rate has remained broadly stable over the past two decades.
-Using the WIOD database, we find that the mean output-weighted elasticity of the HCE deflator increased from 0.06 in 2000 to 0.08 in 2008  (see Figure \ref{fig:PIWIM_LONGITUDINAL}). 
+Using the WIOD, we find that the mean output-weighted elasticity of the HCE deflator increased from 0.06 in 2000 to 0.08 in 2008  (see Figure \ref{fig:PIWIM_LONGITUDINAL}). 
 After peaking in 2008, the elasticity sharply declined in 2009. It has hovered around 0.08 in subsequent years. 
 Our results concur with the literature.
 Using comprehensive measures of global value chain integration, \cite{Timmer2016} find that the expansion of global value chain has slowed down since the Great Recession.\\
 While the latest dataset available for WIOD dates back to 2014, MRIO covers the most recent years, up to 2018. 
 Results from the MRIO database suggest that the elasticity has bounced back from 2016 onwards, reaching 0.09 in 2018.
-However, MRIO suffers from data quality issues in 2018 (see Online Appendix F). From 2017 to 2018, the HCE deflator elasticity sharply increased in a number of countries (e.g. China\footnote{For instance, we observe large shifts in the consumption of services in China (see Online Appendix F), suggesting data quality problems in MRIO.} and India). 
+However, MRIO suffers from data quality issues in 2018 (see Online Appendix F). Between 2017 and 2018, the HCE deflator elasticity sharply increased in a number of countries (e.g. China\footnote{For instance, we observe large shifts in the consumption of services in China (see Online Appendix F), suggesting data quality issues in 2018.} and India). 
 Hence, the elasticity estimated with MRIO is not reliable for this last year.\\
 Overall, our estimates are robust to using different databases.
-Unsurprisingly, WIOD and MRIO provide similar elasticities. 
+WIOD and MRIO provide similar elasticities. 
 The main difference between the two databases relates to the broader geographic coverage of MRIO, which includes nineteen additional emerging Asian economies. 
 Given these economies' relative small size, using MRIO provides aggregate results similar to those of WIOD.
 By contrast, using data from TIVA rev. 3, which covers a sample of 64 countries up to 2011, yields a higher elasticity. 
@@ -962,9 +962,9 @@ Similarly, domestic core inflation (i.e. all products except food and energy) ac
 %\label{fig:intensity_impt}
 %\end{figure}
 
-\section{Filling the data gap: estimating the HCE deflator elasticity without using WIOTs}
+\section{Filling the data gap: estimating the HCE deflator elasticity without resorting to WIOTs}
 \label{sec:extrapo}
-\subsection{Estimating the HCE deflator elasticity without resorting to WIOT}
+\subsection{Estimating the HCE deflator elasticity using the share of imported goods and imported inputs in household consumption}
 In this section, we show that a precise assessment of the HCE deflator elasticity to the exchange rate can be estimated without resorting to WIOTs. 
 The construction of World Input-Output tables is data-demanding and WIOTs are typically released with a lag of several years.
 As a result, world input-output matrices are not available for the most recent years.
@@ -1105,7 +1105,7 @@ This likely reflects the fact that a small economy compensates for its small siz
 \subsection{Estimating the HCE deflator elasticity using GDP and trade statistics}
 The sum of the share of imported goods in household consumption and the share of imported inputs in household consumption of domestic goods ($E1.HC + E2.HC$) are a good predictor of the impact of exchange rate fluctuations on household consumption prices. 
 However, these data ($E1.HC$ and $E2.HC$) are not up-to-date for a large number of countries, as they are not routinely computed by national statistical institutes.
-We can rely on a proxy (see Online Appendix C) by identifying consumption and intermediary goods imports using the CEPII BACI database\footnote{BACI provides disaggregated data on bilateral trade flows for more than 5000 products and 200 countries. The database is built from data directly reported by each country to the United Nations Statistical Division (Comtrade). Products are defined as items from the Harmonized System nomenclature, at the 6-digit level.} and the BEC classification and using a measure for household consumption (from the World Bank) and intermediate consumption (from Eurostat).
+We rely on a proxy (see Online Appendix C) by identifying consumption and intermediary goods imports using the CEPII BACI database\footnote{BACI provides disaggregated data on bilateral trade flows for more than 5000 products and 200 countries. The database is built from data directly reported by each country to the United Nations Statistical Division (Comtrade). Products are defined as items from the Harmonized System nomenclature, at the 6-digit level.} and the BEC classification and using a measure for household consumption (from the World Bank) and intermediate consumption (from Eurostat).
 As intermediate consumption data is not available for all countries, the regressions provided in Online Appendix C only include a limited number of observations.
 
 To expand our panel, we use in this section an even simpler proxy for $E1.HC+E2.HC$. 
@@ -1135,8 +1135,10 @@ Our findings are robust to using other databases (revision 3 and revision 4 of T
 	\floatfoot{Sources: WIOD, World Bank, BACI and authors’ calculations}
 \end{figure}
 
-Using these equations, we can predict the HCE deflator elasticity from 2016 onwards to make up for the lack of WIOTs.
+Using these equations, we can predict the HCE deflator elasticity from 2016 onwards.
 Figure \ref{fig:panel_pred3} shows that the in-sample predictions are robust, giving confidence in the quality of the out-of-sample predictions.
+We also compare our predictions with the elaticity estimated using MRIO, which provides WIOTs up to 2018. 
+Our predictions from 2015 onwards are in line with results from MRIO.
 
 
 \begin{figure}[H]
@@ -1267,19 +1269,17 @@ Our contribution to the literature is fourfold. \\
 First, we analyse the composition and determinants of the HCE deflator elasticity using world input-output tables covering twenty years of data, from 1995 to 2018. 
 We use several datasets to ensure the robustness of our results.
 In line with the existing literature, we find a rather modest elasticity of the HCE deflator to the exchange rate of around 0.1.
-The output-weighted elasticity has remained broadly stable over the past two decades. 
-However, results from the MRIO database suggest an upward trend in recent years.
+The output-weighted elasticity has remained broadly stable over the past two decades.
 Aggregate figures mask substantial cross-country heterogeneity, reflecting different degrees of openness to trade and differences in foreign product content in domestic consumption. 
 The elasticity is larger for small open economies with higher import content of consumption. \\
 Second, we examine which sectors experience higher spillovers from an exchange rate appreciation. 
-To do so, we focus on the main components of the HCE deflator. 
 Non-energy industrial goods explain the bulk of the total HCE deflator elasticity to the exchange rate. 
 Services also play a significant role, especially in advanced economies, as they represent a substantial share of total consumption. \\
 Third, we analyse the determinants of the HCE deflator elasticity and the role of global value chains in the transmission of an exchange rate appreciation to domestic prices.
-We find that direct effects through imported consumption and intermediates entering domestic production explain three-quarters of the transmission of an exchange rate appreciation to domestic prices.
+Direct effects through imported consumption and intermediates entering domestic production explain three-quarters of the transmission of an exchange rate appreciation to domestic prices.
 By contrast, global value chains participation plays a limited role, with marked cross-countries heterogeneity.\\
 Fourth, we show that a precise assessment of the HCE deflator elasticity to the exchange rate can be estimated without resorting to WIOT, which are not available for the most recent years. 
-To address this data gap, we estimate the HCE deflator elasticity from 2016 onwards using GDP statistics and trade data on consumption and intermediates.
+To address this data gap, we estimate the HCE deflator elasticity using GDP statistics and trade data on consumption and intermediates.
 
 % conclusion precedente
 %In this paper, we investigate the role of GVCs for inflation dynamics within a unified framework of input-output databases (WIOT and TIVA) from 1995 to 2018.  

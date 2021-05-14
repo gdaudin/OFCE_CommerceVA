@@ -1,4 +1,4 @@
-\documentclass[12pt,a4paper]{paper}
+\documentclass[11pt,a4paper]{paper} %taille WP BCE
 \usepackage[T1]{fontenc}
 %\usepackage[latin1]{inputenc}
 %\usepackage{amssymb,amsmath,a4wide}
@@ -45,8 +45,10 @@
 \DeclareUnicodeCharacter{FB00}{ff}
 %\linespread{1.2}
 \usepackage{setspace}
-\doublespacing
-
+\setstretch{1.5} % BCE line spacing 1.5
+%\doublespacing
+\pagenumbering{gobble} %BCE: NO PAGE NUMBERS, nor any other items in the page headers or footers
+\usepackage[hmargin=2.5cm,vmargin=3.5cm]{geometry} %BCE: The margins are 2.5 cm (horizontal) and 3.5 cm (vertical)
 
 
 % !TeX spellcheck = en_US
@@ -70,6 +72,7 @@
 	Christine Rifflart\thanks{Sciences Po, OFCE. E-mail: \email{christine.rifflart@sciencespo.fr}}
 }
 %\vspace*{\fill}
+\newpage % BCE: abstract sur une nouvelle page
 \maketitle
 \begin{abstract}
 {\small \noindent

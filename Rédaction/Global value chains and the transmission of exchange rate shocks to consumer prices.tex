@@ -1,4 +1,4 @@
-\documentclass[12pt,a4paper]{paper}
+\documentclass[11pt,a4paper]{paper} %taille WP BCE
 \usepackage[T1]{fontenc}
 %\usepackage[latin1]{inputenc}
 %\usepackage{amssymb,amsmath,a4wide}
@@ -45,8 +45,10 @@
 \DeclareUnicodeCharacter{FB00}{ff}
 %\linespread{1.2}
 \usepackage{setspace}
-\doublespacing
-
+\setstretch{1.5} % BCE line spacing 1.5
+%\doublespacing
+\pagenumbering{gobble} %BCE: NO PAGE NUMBERS, nor any other items in the page headers or footers
+\usepackage[hmargin=2.5cm,vmargin=3.5cm]{geometry} %BCE: The margins are 2.5 cm (horizontal) and 3.5 cm (vertical)
 
 
 % !TeX spellcheck = en_US
@@ -70,6 +72,7 @@
 	Christine Rifflart\thanks{Sciences Po, OFCE. E-mail: \email{christine.rifflart@sciencespo.fr}}
 }
 %\vspace*{\fill}
+\newpage % BCE: abstract sur une nouvelle page
 \maketitle
 \begin{abstract}
 {\small \noindent
@@ -133,6 +136,7 @@ We perform an accounting exercise based on information contained in WIOTs with l
 %We assume a Cobb-Douglas production framework where firms have a simple cost-minimising behaviour and work in a partial equilibrium setting.
 We make three assumptions to simplify our computations. 
 First, we assume a full exchange rate pass-through to import prices. 
+Hence, wo do not consider the fact that the pass-through might be incomplete, as suggested by a large body of literature (see for example \cite{Berman2012}).
 %Hence, we do not consider other relevant determinants of the exchange rate pass-through.
 %For instance, pricing-to-market strategies of exporters aiming to defend their market shares would imply a lower exchange rate pass-through.
 %Similarly, settlement and invoicing of imports in the domestic currency is another factor likely to weaken the elasticity of domestic prices to exchange rate movements.

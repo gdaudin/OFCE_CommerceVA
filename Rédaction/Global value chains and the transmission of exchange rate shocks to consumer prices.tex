@@ -585,12 +585,12 @@ For any sector $l$ of a country $k$ $(k\ne i)$, the increase in the producer pri
 \end{eqnarray}
 \\
 For the shocked country, an appreciation of the currency has a disinflationary effect. In national currency, the prices of imported inputs fall in each sector by $c^i=-\frac{c_\$^i}{1+{c_\$^i}}$, or by $-\frac{10}{11}\%$ with $c_\$^i=10\%$.\\
-We approximate these changes by their log point equivalent\footnote{We could have used the log point approximation earlier and write that $c^i=-c_\$^i$ with nearly the same results for small shocks.}.
+We approximate these changes by their log point equivalent\footnote{We could have used the log point approximation earlier and write that $c^i=-c_\$^i$ with nearly the same results for small changes.}.
 This decline then spreads to all domestic-input using sectors. In sector $j$ of the shocked country $i$, this fall amounts in national currency to: \\
 \begin{eqnarray*}
 \Delta^1log(p_{ij})=\underset{l=1}{\overset{l=J}{\mathop \sum}}\,c^i.a_{ij,1l}+\ldots +\underset{l=1}{\overset{{l}=J}{\mathop \sum }}\,c^i.a_{ij,kl}+\underset{l=1}{\overset{l={J}}{\mathop \sum }}\,c^i.{{a}_{ij,Il}}=\left( -\frac{c_\$^i}{1+c_\$^i}\right).\underset{\begin{matrix}k=1\\k\neq i\\\end{matrix}}{\overset{k=I}{\mathop\sum}}\,\left[\underset{l=1}{\overset{l=J}{\mathop\sum}}\,a_{ij,kl}\right] 
 \end{eqnarray*}
-This shock can be converted into dollars: \\
+This change can be converted into dollars: \\
 \begin{eqnarray}
 \Delta^1 log(p_{\$ij})=\left(1+c_\$^i\right).\left(-\frac{c_\$^i}{1+c_\$^i}\right)\underset{\begin{matrix}k=1\\k\neq i\\\end{matrix}}{\overset{{k}={I}}{\mathop\sum}}\,\left[\underset{\text{l}=1}{\overset{{l}={J}}{\mathop\sum}}\,{{{a}}_{ij,kl}}\right] 
 \label{eq:eq2}
@@ -599,7 +599,7 @@ This yields the first step impact of the exchange rate variation on all input pr
 To express this in matrix notation, we define two matrices that build on the world input-output matrix $\cal A$ defined in \ref{subsec:ioprice}. 
 These two matrices retain only the first-step effects of the exchange rate variation on the price of goods and services imported by the shocked country $i$ and the first-step effects of the exchange rate variation on the price of goods and services imported by the rest of the world from country $i$. 
 %To formalise the initial impact of the shock on the price of traded goods and services
-Compared to $\cal A$, we "close off" the links between a domestic input price shock and the price of goods as well as the link between non-shocked input prices and the price of goods in a non-shocked country.\\
+Compared to $\cal A$, we "close off" the links between a change in domestic input prices and the price of goods as well as the link between non-shocked input prices and the price of goods in a non-shocked country.\\
 Let us first consider the impact of the exchange rate variation from the perspective of countries that import inputs from country $i$.\\
 Let $C_\$^i$ be the vector of log points changes in dollar prices following the 
 %{100$\%$}
@@ -713,7 +713,7 @@ By contrast, we focus on the effect of an exchange rate variation on consumer pr
 Where $\hat{C}^i_\$=\left(0 \ldots \frac{c_\$^i}{1+c_\$^i},\ldots 0 \right)$ is the increase in dollar prices of goods and services from country $i$ used as inputs in all other countries.\\ 
 $S^i$ represents the overall impact of an exchange rate variation on prices in each sector of each country expressed in the currency of country $i$. $S^i$ is expressed in log points. If the variation is small enough, the elements of $S^i$ correspond to the elasticities to the exchange rate of consumer prices in country $i$.
 %%It is quite different from $S$ defined in eq. \eqref{eq:eqchocprix} because in the case of $S$, the price shock affects all consumers, whereas in the case of $S^i$, the price shock affects only consumers that do not share a currency with country $i$. To illustrate the difference, the two-country, one sector case is explored in Appendix B.
-We return to this equation and its interpretation in section \ref{sec:extrapo}.
+%We return to this equation and its interpretation in section \ref{sec:extrapo}.
 
 To convert this vector into the HCE deflator elasticity in country $i$, $\bar{s}^i$, we use the household consumption shares to compute a weighed average of the elements of $S^i$.
 Let $HC^i$ be the vector of sectoral shares in country $i$'s household consumption\footnote{Consumption is at market prices, whereas the WIOTs are all at basic prices. This is not an issue as long as we assume that all taxes and subsidies on products are proportional, like the value-added tax.}:

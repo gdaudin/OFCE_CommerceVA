@@ -551,13 +551,15 @@ Following a 5$\%$ appreciation of the currency of country $A$ against the two ot
 Country $B$ pays more for its imports of inputs, in dollars as well as in national currency, since its exchange rate against the dollar has not changed. 
 Conversely, the price of imported inputs in country $A$ remains constant in dollars, since the prices of country $B$ have not changed, and halves once expressed in country $A$'s national currency. 
 It has an impact on consumer prices (in national currency) in country $A$.\\
-For the sake of simplicity, producers are assumed to completely pass the exchange rate appreciation on their production prices.  
-Hence, we do not consider other relevant determinants of the exchange rate pass-through.
+Note that, for the sake of simplicity, we make the implausible hypothesis that producers completely pass the exchange rate appreciation on their production prices.  
+We do not consider other relevant determinants of the exchange rate pass-through.
 % Christine Mai 2021: j'ai du mal à comprendre en quoi l'appréciation de la monnaie de facturation (le $ par exemple) accroit le déflateur conso en monnaie nationale d'un pays si le prix du producteur n'a pas changé (tj sous hypothèse théorique que pas de comportement de marge). Car au final, les TC bilatéraux exportateur/importateur n'ont pas varié
 For instance, pricing-to-market strategies of exporters aiming to defend their market shares would imply a lower exchange rate pass-through.
 Similarly, settlement and invoicing of imports in the domestic currency is another factor likely to weaken the elasticity of domestic prices to exchange rate movements.
-As a result, our estimates provide an upper bound of the HCE deflator elasticity\footnote{Using alternative pricing assumptions would entail lower values.
-For instance, assuming that only 60\% of invoices in the euro area goods trade are denominated in foreign currency (see \cite{Ortega2020}) would entail lower elasticity values.}. \\
+For instance, assuming that only 60\% of invoices in the euro area goods trade are denominated in foreign currency (see \cite{Ortega2020}) would entail lower elasticity values.
+To anticipate on our results (see Figure \ref{fig:decompositionofs}), reducing the exchange rate pass-through on consumption goods will entail lower elasticity values than reducing it on inputs.
+Our estimates thus provide an upper bound of the HCE deflator elasticity.\\
+Back to our exercise.
 The change in the prices of imported goods is therefore transmitted to all domestic prices, both directly and through inter-industry linkages. 
 These upward (downward) movements for country $B$ (country $A$) affect all input prices in both countries.\\
 The effects of the change in prices spread over multiple simultaneous production cycles. 
@@ -813,10 +815,12 @@ Our findinngs concur with the literature. For instance, \cite{Ortega2020} find t
 
 
 \subsection{Impact of an appreciation of the US dollar}\label{subsec:usdelasticity}
-Using WIOD, we estimate the impact of an appreciation of the US dollar (USD) on its trading partners, with a focus on the euro area.
-A large portion of extra-EU imports are denominated in US dollars and hence movements in the dollar also have a significant impact on import prices for countries in
-the euro area.
-Unsurprisingly, we obtain the highest elasticities for the neighbouring countries of the US. 
+The model can also track the effect of movements in the currency of other countries.
+For illustration, we estimate the impact of an appreciation of the US dollar (USD) on its trading partners using WIOD.
+This exercise assumes that exports are always invoiced in the exporter’s currency.
+It does not take into account the large role of the dollar in international trade invoicing.\\
+The US example illustrates that countries are affected in proportion to their trading links with the country which currency appreciates.
+We obtain the highest elasticities for the neighbouring countries of the US. 
 The elasticity of the HCE deflator to the USD is close to 0.12 for Canada and 0.09 for Mexico (see Figure \ref{fig:WIOD_HC_elasticities_USD}).
 The elasticity is below 0.06 for most euro area countries.
 Ireland stands out, with an elasticity of 0.09, i.e. close to that of Canada and Mexico. 
@@ -1071,8 +1075,8 @@ This decomposition differs from equation \ref{equ:decomp_impexp}.
 Equation \ref{equ:decomp_impexp} focuses on the contribution of domestic versus imported goods to the HCE deflator elasticity to the exchange rate.
 By contrast, equation \ref{eq:eqtoto} highlights the transmission channels of the exchange rate fluctuation.
 Figure \ref{fig:decompositionofs} plots the shares of $E1.HC$, $E2.HC$, $E3.HC$ and $E4.HC$ (shortening $E4.HC^i$) in $\overline{s}_{i}^{i,HC}$.  
-$E1.HC$ dominates. 
-While $E3.HC$ is negligible, $E4.HC$ accounts for 10\% to 30\% of $\overline{s}_{i}^{i,HC}$ for most countries except China.
+$E1.HC$ dominates and $E2.HC$ is consistently important.
+While $E3.HC$ is negligible, $E4.HC$ accounts for 10\% to 30\% of $\overline{s}_{i}^{i,HC}$ for most countries. The less open to trade is a country, the larger the share of $E4.HC$. \\
 On the whole, as shown by Figure \ref{fig:shareofs}, input-output mechanisms (i.e. all shares except $E1.HC$) explain a large share of the elasticity, especially for large countries or euro area countries. This share has increased until 2013-2014, implying an increasing need of data from WIOTs to perform our computations (see Figure \ref{fig:shareofsthroughtime}).
 
 \begin{figure}[H]
@@ -1110,7 +1114,8 @@ On the whole, as shown by Figure \ref{fig:shareofs}, input-output mechanisms (i.
 	\label{fig:shareofsthroughtime}
 \end{figure}
 
-$E1.HC$ and $E2.HC$ can be computed with national input-output matrices, whereas world input-output matrices are needed for computing $E3.HC$ and $E4.HC$. 
+Still, $E1.HC$ and $E2.HC$ are relatively important (especially for small countries). This means, for example, that although the model as it stands cannot easily accommodate simultaneous exchange rate changes in different currencies (as that would require increasing the number of $\cal{B}$ matrices and $C$ vectors) we can expect their effect to be correctly approximated through a own-currency exchange rate change of the trade-weighted average of the country-specific exchange rate changes.\\
+It must also be noted that $E1.HC$ and $E2.HC$ can be computed with national input-output matrices, whereas world input-output matrices are needed for computing $E3.HC$ and $E4.HC$. 
 Although world input-output matrices are not available for the most recent years, $E4.HC$ can be inferred from easier-to-compute elements of $\overline{s}_{i}^{i,HC}$.
 
 %This is suggested by the correlation matrix of  $E1.HC^{i,imp}$, $E2.HC^{i,dom}$, $E3.HC^{i,imp}$ and $E4.HC^i$ (see Table \ref{table:corretable1}). 

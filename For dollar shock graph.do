@@ -22,8 +22,11 @@ labmask elast_order,values(c)
 graph dot (asis) shockUSA1,  over(elast_order, ///
 	label(labsize(tiny))) marker(1, ms(O) mfcolor(gs1) mlcolor(black) msize(tiny)) ///
 	legend(off) title("Elasticites of HCE" "to a USD appreciation") ///
-	scheme(s1mono) xsize(6)  ysize(7) ///
-	note("WIOD, 2014", size(small))
+	scheme(s1mono) xsize(6)  ysize(7)
+	
+	
+	
+*	note("WIOD, 2014", size(small))
 
 graph export "$dir_git/Rédaction/WIOD_HC_elasticities_dollar_appreciation.png", replace
 

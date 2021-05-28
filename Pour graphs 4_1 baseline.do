@@ -51,7 +51,7 @@ graph twoway (scatter pond_WIOD_HC pond_TIVA_HC if sample==1, mlabel(mylabel)) /
 			(lfit pond_WIOD_HC pond_TIVA_HC if sample==1, clpattern(dash)) ///
 			(lfit pond_TIVA_HC pond_TIVA_HC if pond_TIVA_HC <=0.3), ///
 			yscale(range(0 0.3)) xscale(range(0 0.3)) ylabel(0 (0.05) 0.3) xlabel(0 (0.05) 0.3) ///
-			ytitle("WIOD elasticites `year' (absolute value)") xtitle("TIVA elasticites `year' (absolute value)") ///
+			ytitle("WIOD elasticites `year' (absolute value)") xtitle("TIVA_REV3 elasticites `year' (absolute value)") ///
 			legend(order (2 3)  label(2 "Linear fit") label(3 "45° line") ) scheme(s1mono)
 			
 graph export "$dirgit/Rédaction/Comparaison_WIOD_TIVA_`year'.png", replace
@@ -144,7 +144,7 @@ graph twoway (scatter pond_TIVA_REV4_HC pond_TIVA_HC if sample==1, mlabel(mylabe
 			 (lfit pond_TIVA_REV4_HC pond_TIVA_HC if sample==1, clpattern(dash)) ///
 			 (lfit pond_TIVA_HC pond_TIVA_HC if pond_TIVA_HC<=0.3), ///
 			 yscale(range(0 0.3)) xscale(range(0 0.3)) ylabel(0 (0.05) 0.3) xlabel(0 (0.05) 0.3) ///
-			 ytitle("TIVA_REV4 elasticites `year' (absolute value)") xtitle("TIVA elasticites `year' (absolute value)") ///
+			 ytitle("TIVA_REV4 elasticites `year' (absolute value)") xtitle("TIVA_REV3 elasticites `year' (absolute value)") ///
 			legend(order (2 3)  label(2 "Linear fit") label(3 "45° line") ) scheme(s1mono)
 			
 graph export "$dirgit/Rédaction/Comparaison_TIVA_REV4_TIVA_`year'.png", replace

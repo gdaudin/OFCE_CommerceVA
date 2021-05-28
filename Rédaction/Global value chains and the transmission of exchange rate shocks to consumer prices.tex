@@ -36,9 +36,7 @@
 % style de la biblio : necessaire pour utiliser BibTex, necessite le deuxieme fichier exemple.bib
 \usepackage{caption}
 %\usepackage[longnamesfirst]{natbib}
-\usepackage{natbib}
-%\bibliographystyle{elsarticle-harv}
-\bibliographystyle{plainnat}
+\usepackage[round,sort]{natbib}
 \newcommand{\tqdl}{\textquotedblleft}
 \newcommand{\tqdr}{\textquotedblright}
 \DeclareUnicodeCharacter{FB01}{fi}
@@ -775,11 +773,11 @@ The elasticity is twice higher for small open economies like Luxembourg, Malta, 
 
 \begin{figure}[H]
 	\centering
-	\caption{\footnotesize{\textbf{Elasticity of the HCE deflator to the domestic currency (WIOD) - 2014.}}}
+	\caption{\footnotesize{\textbf{Elasticity of the HCE deflator to the domestic currency (WIOD), 2014.}}}
 	\begin{tabular}{c}
 		\includegraphics[width=4.5in, height=5.25in]
 		{WIOD_HC_elasticities.png}\\
-		\floatfoot{Sources: WIOD and authors’ calculations}.
+		\floatfoot{Sources: WIOD and authors’ calculations.}
 	\end{tabular}
 	\label{fig:WIOD_HC_elasticities}
 \end{figure}
@@ -946,7 +944,7 @@ Hence, only one-fourth of the HCE deflator elasticity to the exchange rate is at
 
 \begin{figure}[H]
 	\centering
-	\caption{\footnotesize{\textbf{Contribution of imported and domestic final goods and services to the HCE deflator elasticity}}}
+	\caption{\footnotesize{\textbf{Contribution of imported and domestic final goods and services to the HCE deflator elasticity (WIOD, 2014)}}}
 	\begin{tabular}{c}
 		\includegraphics[width=4.5in, height=3in]
 		{decomp_origine_WIOD_2014.png}\\
@@ -973,7 +971,7 @@ Similarly, domestic core inflation (i.e. all products except food and energy) ac
 
 \begin{figure}[H]
 	\centering
-	\caption{\footnotesize{\textbf{Contribution of different products to the HCE deflator elasticity (2014)}}}
+	\caption{\footnotesize{\textbf{Contribution of different products to the HCE deflator elasticity (WIOD, 2014)}}}
 	\begin{tabular}{c}
 		\includegraphics[width=4.5in, height=3in]
 		{decomp_sect.png}\\.
@@ -986,7 +984,7 @@ Similarly, domestic core inflation (i.e. all products except food and energy) ac
 
 \begin{figure}[H]
 	\centering
-	\caption{\footnotesize{\textbf{Contribution of domestic and imported components to the HCE deflator elasticity (2014)}}}
+	\caption{\footnotesize{\textbf{Contribution of domestic and imported components to the HCE deflator elasticity (WIOD, 2014)}}}
 	\begin{tabular}{c}
 		\includegraphics[width=4.5in, height=3in]
 		{decomp_sectxorigin.png}\\
@@ -1159,28 +1157,17 @@ The high $R^2$ (0.98) suggests that $E1.HC+E2.HC$ is a good predictor of $\overl
 \end{figure}
 
 We check whether the relationship is constant over time by estimating yearly cross-sections of equation \ref{eq:eq7}. 
-With the exception of 2009, the relationship is broadly stable (see Figures \ref{fig:evolution_b} and \ref{fig:evolution_cst}).
+With the exception of 2009, the relationship is broadly stable (see Figures \ref{fig:evolution_coef}).
 
 \begin{figure}[H]
 \centering
-\caption{\footnotesize{\textbf{Evolution of $\beta$ (the coefficent of E1.HC+E2.HC) and $R^2$ over time (WIOD)}}}
+\caption{\footnotesize{\textbf{Evolution of  $\alpha$ (the constant), $\beta$ (the coefficent of E1.HC+E2.HC) and $R^2$ over time (WIOD)}}}
 \begin{tabular}{c}
-\includegraphics[width=5.0in, height=3.5in]{coef_E_WIOD_HC.png}\\
+\includegraphics[width=5.0in, height=3.5in]{coef_WIOD_HC.png}\\
 \end{tabular}
-\label{fig:evolution_b}
+\label{fig:evolution_coef}
 \floatfoot{Sources: WIOD and authors’ calculations}
 \end{figure}
-
-\begin{figure}[H]
-\centering
-\caption{\footnotesize{\textbf{Evolution of $\alpha$ (the constant) over time (WIOD)}}}
-\begin{tabular}{c}
-\includegraphics[width=5.0in, height=3.5in]{coef_cst_WIOD_HC.png}\\
-\end{tabular}
-\label{fig:evolution_cst}
-\floatfoot{Sources: WIOD and authors’ calculations}
-\end{figure}
-
 
 We obtain similar results with TiVA (see Online Appendix B). 
 % je suggère de retirer cette phrase pour simplifier l'exposé, ou éventuellement d'en faire une note de bas de page
@@ -1227,7 +1214,7 @@ Our findings are robust to using other databases (revision 3 and revision 4 of T
 Using these equations, we can predict the HCE deflator elasticity from 2016 onwards.
 Figure \ref{fig:panel_pred3} shows that the in-sample predictions are robust, giving confidence in the quality of the out-of-sample predictions.
 We also compare our predictions with the elaticity estimated using MRIO, which provides WIOTs up to 2019. 
-Our predictions are in line with results from MRIO up to 2016. For the most recent years, MRIO is fraught with data quality issues (see Online Appendix F), which makes the comparison irrelevant. 
+Our predictions are in line with results from MRIO up to 2016. For the most recent years, there seem to be data issues MRIO (see Online Appendix F), which the comparison irrelevant can help detect. 
 
 
 \begin{figure}[H]
@@ -1392,6 +1379,10 @@ To address this data gap, we estimate the HCE deflator elasticity using GDP stat
 
 
 \newpage
+%\bibliographystyle{agsm}
+%\bibliographystyle{elsarticle-harv}
+%\bibliographystyle{plainnat}
+\bibliographystyle{apalike}
 \bibliography{PapiertransmissiondeschocsenVA.bib}
 
 \end{document}

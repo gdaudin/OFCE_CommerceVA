@@ -1,4 +1,4 @@
-net install grc1leg2
+*net install grc1leg2
 
 
 
@@ -404,7 +404,7 @@ foreach source in  WIOD  {
 
 
 
-foreach source in TIVA WIOD TIVA_REV4 {
+foreach source in WIOD TIVA TIVA_REV4 {
 	use "$dir/Results/Étude rapport D+I et Bouclage Mondial/results_`source'_HC.dta", clear
 	foreach var in ns cst_reg_ns {
 		gen borne_inf_`var'= b_`var'-1.96*se_`var'
@@ -418,20 +418,27 @@ foreach source in TIVA WIOD TIVA_REV4 {
 		(line borne_sup_ns year, lpattern(dash) lwidth(vthin) lcolor(black) ) ///
 		(connected R2_reg_ns year,  lcolor(turquoise) msize(small) mcolor(turquoise))   ///
 		,/*yscale(range(1 (0.05) 1.15)) ylabel(1 (0.05) 1.15)*/ legend(order (1 4) rows(2)) ///
-		scheme(s1color)
+		scheme(s1color) name(coef_E_`source'_HC, replace)
 
-	graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/coef_E_`source'_HC.png", replace
-	graph export "$dirgit/Rédaction/coef_E_`source'_HC.png", replace
+*	graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/coef_E_`source'_HC.png", replace
+*	graph export "$dirgit/Rédaction/coef_E_`source'_HC.png", replace
 	
 	
 	label var b_cst_reg_ns "{&alpha} (with 95% confidence intervals)"
 		graph twoway ///
 		(line b_cst_reg_ns year, lcolor(black) ) (line borne_inf_cst_reg_ns year, lpattern(dash) lwidth(vthin) lcolor(black)) (line borne_sup_cst_reg_ns year,lpattern(dash) lwidth(vthin) lcolor(black) )    ///
 		,/*yscale(range(1 (0.05) 1.15)) ylabel(1 (0.05) 1.15)*/ legend(order (1)) ///
-		scheme(s1color)
+		scheme(s1color) name(coef_cst_`source'_HC, replace)
 
-	graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/coef_cst_`source'_HC.png", replace
-	graph export "$dirgit/Rédaction/coef_cst_`source'_HC.png", replace
+*	graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/coef_cst_`source'_HC.png", replace
+*	graph export "$dirgit/Rédaction/coef_cst_`source'_HC.png", replace
+	
+	graph combine coef_E_`source'_HC coef_cst_`source'_HC 
+	graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/coef_`source'_HC.png", replace
+	graph export "$dirgit/Rédaction/coef_`source'_HC.png", replace
+	
+	
+
 }
 
 foreach source in  WIOD /*TIVA TIVA_REV4 */{
@@ -484,7 +491,7 @@ foreach source in  WIOD /*TIVA TIVA_REV4 */{
 		marker(1, ms(O) mfcolor(gs1) mlcolor(gs1) msize(tiny) ) ///
 		marker(2, ms(+) mfcolor(gs5) mlcolor(gs5) msize(small) ) ///
 		marker(3, ms(O) mfcolor(gs9) mlcolor(gs9) msize(tiny) ) ///
-		marker(4, ms(O) mfcolor(gs13) mlcolor(gs13) msize(tiny)) ///
+		marker(4, ms(O) mfcolor(gs13) mlcolor(gs13) msize(small)) ///
 		xsize(9)  ysize(7) ///
 		name(distr_components_`source'_`i', replace) ///
 		legend(position(3) cols(1)  size(vsmall) label(1 "E1.HC: Direct effect" "through imported" "consumption goods") ///
@@ -508,7 +515,7 @@ foreach source in  WIOD /*TIVA TIVA_REV4 */{
 		graph dot (asis) share_IO_mech share_IOT if sample==1,  over(share_IO_order, ///
 			label(labsize(tiny))) ///
 			marker(1, ms(O) mfcolor(gs1) mlcolor(gs1) msize(tiny) ) ///
-			marker(2, ms(O) mfcolor(gs13) mlcolor(gs13) msize(tiny) ) ///
+			marker(2, ms(O) mfcolor(gs13) mlcolor(gs13) msize(small) ) ///
 			xsize(9)  ysize(7) ///
 			name(share_components_`source'_`i', replace) ///
 			legend(position(3) cols(1)  size(vsmall) label(1 "Share of total effect" "going through" "Input-Output mechanisms" "(E2.HC+E3.HC+E4.HC)/Total") ///

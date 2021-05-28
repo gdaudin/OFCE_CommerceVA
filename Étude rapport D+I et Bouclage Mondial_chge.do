@@ -433,7 +433,7 @@ foreach source in WIOD TIVA TIVA_REV4 {
 *	graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/coef_cst_`source'_HC.png", replace
 *	graph export "$dirgit/Rédaction/coef_cst_`source'_HC.png", replace
 	
-	graph combine coef_E_`source'_HC coef_cst_`source'_HC 
+	graph combine coef_E_`source'_HC coef_cst_`source'_HC, scheme(s1mono)
 	graph export "$dir/Results/Étude rapport D+I et Bouclage Mondial/coef_`source'_HC.png", replace
 	graph export "$dirgit/Rédaction/coef_`source'_HC.png", replace
 	

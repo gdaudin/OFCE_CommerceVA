@@ -193,43 +193,47 @@ As a complement to section 4.1, Figures \ref{fig:ratiodir_TiVA}, \ref{fig:evolut
 Section 4.1 shows that the sum of the share of imported goods in household consumption and the share of imported inputs in household consumption of domestic goods ($E1.HC + E2.HC$) is a good predictor of the HCE deflator elasticity to the exchange rate. 
 However, these data ($E1.HC$ and $E2.HC$) are not up-to-date for a large number of countries, as they are not routinely computed by national statistical institutes. 
 Section 4.2 shows that trade and GDP data are a good predictor of the HCE deflator elasticity.
-In this appendix, we perform an intermediate exercise. We rely on a proxy by identifying consumption and intermediary goods imports using the CEPII BACI database and the BEC classification.
+In this appendix, we perform an intermediate exercise.
+As in section 4.2 identify consumption and intermediary goods imports using the CEPII BACI database and the BEC classification.
+In contrast to section 4.2, we relate these imports to household consumption and intermediate consumption.
 While the World Bank provides regular estimates for household consumption, estimates for intermediate consumptions are lacking. 
-By contrast, Eurostat provides estimates for intermediate consumptions for European countries.
+By contrast, Eurostat provides estimates for intermediate consumption for European countries.
 %VF comme la source n'est pas précisee je mets en commentaire \footnote{And some others for selected years Eurostat, BEC -- PRÉCISER LA SOURCE}. 
-Combining these three data sources, we compute the share of imported consumption goods in household consumption and the share of imported inputs in all inputs. 
-%We mimick equation 16 in the main text by equation \ref{eq:eq8}. 
-We estimate successive cross-sections of equation \ref{eq:eq8} to check whether the proxy is reliable. 
-
-\begin{equation}
-	\begin{array}{llll}
-		\overline{s}_{i}^{i,HC}= \alpha &+  \beta_1  \frac{\textnormal{imported consumption goods}_i}{\textnormal{household consumption}_i} \\ & +  \beta_2  \left[    \frac{\textnormal{imported intermediate goods}_i}{\textnormal{intermediate consumption}_i}*\frac{\textnormal{domestic consumption goods}_i}{\textnormal{household consumption}_i}\right] +\varepsilon_i 
-	\end{array} 
-	\label{eq:eq8}
-\end{equation}
-
-Figure \ref{fig:evolution_b_reg2} mirrors Figure 12 in the main text. 
-The results are less promising: the $R^2$ is smaller and declining over time, and the estimated coefficient is not constant.
-
-
-\begin{figure}[H]
-	\centering
-	\caption{\footnotesize{\textbf{Evolution of $\beta$ and $R2$ (WIOD) using Eurostat data to approximate E1.HC + E2.HC (limited number of countries)}}}
-	\begin{tabular}{c}
-		\includegraphics[width=5.0in, height=3.5in]{reg2_beta_WIOD.png}\\
-	\end{tabular}
-	\label{fig:evolution_b_reg2}
-	\floatfoot{Sources: WIOD and authors’ calculations}
-\end{figure}
-
-%pas facile à comprendre, je propose de reformuler
+Combining these three data sources (BACI, World Bank and Eurostat), we compute the share of imported consumption goods in household consumption and the share of imported inputs in all inputs. 
+%%We mimick equation 16 in the main text by equation \ref{eq:eq8}. 
+%We estimate successive cross-sections of equation \ref{eq:eq8} to check whether the proxy is reliable. 
+%
+%\begin{equation}
+%	\begin{array}{llll}
+%		\overline{s}_{i}^{i,HC}= \alpha &+  \beta_1  \frac{\textnormal{imported consumption goods}_i}{\textnormal{household consumption}_i} \\ & +  \beta_2  \left[    \frac{\textnormal{imported intermediate goods}_i}{\textnormal{intermediate consumption}_i}*\frac{\textnormal{domestic consumption goods}_i}{\textnormal{household consumption}_i}\right] +\varepsilon_i 
+%	\end{array} 
+%	\label{eq:eq8}
+%\end{equation}
+%
+%Figure \ref{fig:evolution_b_reg2} mirrors Figure 13 in the main text. 
+%The results are less promising: the $R^2$ is smaller and declining over time, and the estimated coefficient is not constant.
+%
+%
+%\begin{figure}[H]
+%	\centering
+%	\caption{\footnotesize{\textbf{Evolution of $\beta$ and $R2$ (WIOD) using Eurostat data to approximate E1.HC + E2.HC (limited number of countries)}}}
+%	\begin{tabular}{c}
+%		\includegraphics[width=5.0in, height=3.5in]{reg2_WIOD.png}\\
+%	\end{tabular}
+%	\label{fig:evolution_b_reg2}
+%	\floatfoot{Sources: WIOD and authors’ calculations}
+%\end{figure}
+%
+%%pas facile à comprendre, je propose de reformuler
+%%Estimating successive cross-sections of equation \ref{eq:eq8} is a demanding test. 
+%%In addition, cross-sections do not take advantage of country-specific information.
+%%To address this issue, we run a panel regression with country-fixed effects.
+%%We assume that $\beta$ is constant over time for each country $i$ (equation \ref{eq:eq9}).
 %Estimating successive cross-sections of equation \ref{eq:eq8} is a demanding test. 
-%In addition, cross-sections do not take advantage of country-specific information.
-%To address this issue, we run a panel regression with country-fixed effects.
-%We assume that $\beta$ is constant over time for each country $i$ (equation \ref{eq:eq9}).
-Estimating successive cross-sections of equation \ref{eq:eq8} is a demanding test. 
-In addition, these regressions fail to account for country-specific determinants of the HCE deflator elasticity.
-A less demanding test consists in running a panel regression with country fixed-effects, assuming that $\beta$ is constant over time and explains within-country variations. 
+%In addition, these regressions fail to account for country-specific determinants of the HCE deflator elasticity.
+%A less demanding test consists in running
+
+We then run a panel regression with country fixed-effects, assuming that the coefficients are constant over time and explain within-country variations. 
 To take into account year-specific effects, we add two year-specific variables, i.e. the GDP-weighted mean of each variable of interest (see equation \ref{eq:eq9}). 
 
 
@@ -367,7 +371,7 @@ S^i &=&\underbrace{C^i}_{\substack{\text{(E1) direct effect through} \\ \text{ i
 
 When the domestic currency appreciates, $E1$ and $E2$ reduce country $i$'s consumer prices, whereas $E3$ increases them. $E1$ and $E2$ are easy to compute with national input-output matrices, whereas world input-output matrices are needed for computing $E3$ and $E4$.
 
-Unexpectedly, $E3 + E4$ is constant, regardless of the openness rate of the economy (see Figure \ref{fig:ratiodir_WIOD}).
+Unexpectedly, $E3.HC + E4.HC$ does not vary much with the openness rate of the economy (see Figure 10 of the main text).
 
 
 Let us focus on the two-country, one-sector economy: 
@@ -390,7 +394,7 @@ E3.HC=\left(0,c.a_{1,2}\right).\left(\begin{matrix}1-f\\f\end{matrix}\right)=f.c
 
 We do not lose any generality by normalising the shock $c$ to 1. 
 
-And, developped from SAGE:
+And :
 \begin{gather}
 \bar{s}-E1.HC-E2.HC=\left(\begin{array}{r}
 -\frac{a_{12} a_{21}^{2} - a_{11} a_{21} a_{22} + {\left(a_{11} - a_{12}\right)} a_{21} - {\left(a_{12} a_{21}^{2} - a_{11} a_{21} a_{22} - {\left(a_{11} - 1\right)} a_{12} + {\left(a_{11} - 2 \, a_{12}\right)} a_{21}\right)} f}{a_{12} a_{21} - {\left(a_{11} - 1\right)} a_{22} + a_{11} - 1}

@@ -150,7 +150,6 @@ save "$dir/Bases_Sources/Doigt_mouillé.dta", replace
 *********************************************Régression en cross-section 
 
 /*
-
 capture program drop collecter_resultats_reg
 program collecter_resultats_reg
 args source y reg
@@ -243,7 +242,7 @@ foreach reg in reg2 reg1 {
 				*/ title(beta)
 	graph export "$dir/Results/`reg'_beta.png", replace
 	
-	/*if "`reg'"=="reg2"*/ label var b_E1_E2 "Coefficient of the proxy of E1.HC+E2.HC (with 95% confidence intervals)"
+	/*if "`reg'"=="reg2"*/ label var b_E1_E2 "{&beta} (with 95% confidence intervals)"
 	label var R2 "R2"
 	
 	
@@ -255,7 +254,7 @@ foreach reg in reg2 reg1 {
 		(line high_E1_E2 year  if source=="WIOD",lpattern(dash) lwidth(vthin) lcolor(black)) ///
 		(connected R2 year  if source=="WIOD",  lcolor(turquoise) msize(small) mcolor(turquoise))   ///
 		,/*yscale(range(1 (0.05) 1.15)) ylabel(1 (0.05) 1.15)*/ legend(order (1 4) rows(2) size(small)) ///
-		scheme(s1color)
+		scheme(s1mono) name(`reg'_beta_WIOD, replace)
 	graph export "$dir/Results/`reg'_beta_WIOD.png", replace
 	graph export "$dirgit/Rédaction/`reg'_beta_WIOD.png", replace
 	
@@ -272,16 +271,34 @@ foreach reg in reg2 reg1 {
 	graph export "$dir/Results/`reg'_gamma_`source'_`y'.png", replace
 	*/
 	
+	
+	
 	gen high_cst=b_cst-1.96*se_cst
 	gen low_cst=b_cst+1.96*se_cst
 	graph twoway (rarea high_cst low_cst year if source=="TIVA", fcolor(%20) ) (connected b_cst year if source=="TIVA") /*
 				*/ (rarea high_cst low_cst year if source=="TIVA_REV4" , fcolor(%20) ) (connected b_cst year if source=="TIVA_REV4") /*
 				*/ (rarea high_cst low_cst year if source=="WIOD" , fcolor(%20)  ) (connected b_cst year if source=="WIOD"), /*
 				*/ legend( order(1 3 5) label(1 TIVA) label(3 TIVA_REV4) label(5 WIOD) ) /*
-				*/ title(alpha)
+				*/ title(alpha) scheme(s1mono) name(`reg'_alpha, replace)			
 	graph export "$dir/Results/`reg'_alpha.png", replace
+
+	
+	label var b_cst "{&alpha} (with 95% confidence intervals)"
+	
+	graph twoway (line high_cst year if source=="WIOD" , lpattern(dash) lwidth(vthin) lcolor(black)  ) ///
+				 (line low_cst year if source=="WIOD" , lpattern(dash) lwidth(vthin) lcolor(black)  ) ///
+				 (line b_cst year if source=="WIOD", lpattern(solid) lcolor(black)), /*
+				*/ legend( order(3)) /*
+				*/ scheme(s1mono) name(`reg'_alpha_WIOD, replace)
 	
 	
+	
+	graph combine `reg'_beta_WIOD `reg'_alpha_WIOD, scheme(s1mono)
+	
+	graph export "$dir/Results/`reg'_WIOD.png", replace
+	graph export "$dirgit/Rédaction/`reg'_WIOD.png", replace
+	
+
 		graph twoway (connected R2 year if source=="TIVA") /*
 				*/   (connected R2 year if source=="TIVA_REV4") /*
 				*/   (connected R2 year if source=="WIOD"), /*
@@ -434,6 +451,7 @@ foreach reg in reg1 reg2 {
 				*/ (line x y if x!=. & pond_`source'_HC !=.) (line y y if x!=. & pond_`source'_HC !=.), legend(off) /*
 				*//* title (`source'_`reg'_pred_`lag_pred'y trend: `trend') *//*
 				 */ name("`source'_pred_`lag_pred'y", replace) ytitle("Predicted elasticity")/*
+				 */ xtitle("HCE deflator elasticity in 2014 (WIOD)") /*
 				 */ note("Correlation: `correlation' Mean error: `mean_error' p.c.  Median error: `median_error' p.c.") /*
 				 */ scheme(s1color) /*
 				 */ yscale(range(0.05 (0.05) 0.2)) ylabel(0.05 (0.05) 0.2)/*

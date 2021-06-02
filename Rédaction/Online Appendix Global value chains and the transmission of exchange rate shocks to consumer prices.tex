@@ -1,8 +1,9 @@
-\documentclass[12pt,a4paper]{article}
+\documentclass[11pt,a4paper]{article} %format BCE
 \usepackage[T1]{fontenc}
 %\usepackage[latin1]{inputenc}
 %\usepackage{amssymb,amsmath,a4wide}
 \usepackage[utf8]{inputenc}
+\pagenumbering{gobble} % bce: PAS DE NUMERO DE PAGES
 \usepackage{amssymb,amsmath}
 \usepackage{nicefrac}
 \usepackage[pdftex]{graphicx}
@@ -22,9 +23,11 @@
 \usepackage{bm}
 \usepackage{fancybox}
 %\usepackage{harvard}
-\usepackage{geometry}         % Definir les marges
+\usepackage[hmargin=2.5cm,vmargin=3.5cm]{geometry} %Marges format BCE
+%\usepackage{geometry}         % Definir les marges
 \geometry{verbose,a4paper,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
 \usepackage{setspace}
+\setstretch{1.5} % format BCE
 %\usepackage{ccaption}
 \usepackage[colorlinks=true,citecolor=black, urlcolor=black, linkcolor=black]{hyperref}
 \usepackage{url}
@@ -53,7 +56,7 @@
 
 
 \begin{document}
-\title{Estimating the elasticity of consumer prices to the exchange rate: an accounting approach \\ Online Appendix	\thanks{ All programs are available at \url{https://github.com/gdaudin/OFCE_CommerceVA}. Data and results files are available upon request.}\\
+\title{Estimating the elasticity of consumer prices to the exchange rate: an accounting approach \\ Online Appendix	\thanks{ All programs are available at \url{https://github.com/gdaudin/OFCE_CommerceVA}. Data and results are available upon request.}\\
 \vspace{1cm}
 }
 \vspace{1cm}
@@ -72,7 +75,8 @@
 %\vspace*{\fill}
 \maketitle
 
-\section*{Online Appendix A: WIOD Sectors}
+%je propose d'enlever online car c'est deja precise dans le titre du pdf et on a des titres d'appendix deja tres longs
+\section*{Appendix A: WIOD Sectors}
 \begin{table}[H]
  \centering
  \caption{\footnotesize{\textbf{WIOD sectors}}}
@@ -142,9 +146,9 @@
 \end{table}
 
 \newpage
-\section*{Online Appendix B: Estimating the HCE deflator elasticity using the shares of imported consumption and imported intermediates in domestic consumption} \label{AppendixFonctionLinéaireTIVA}
+\section*{Appendix B: Estimating the HCE deflator elasticity using the shares of imported consumption and imported intermediates in domestic consumption} \label{AppendixFonctionLinéaireTIVA}
 
-As a complement to section 4.2, Figures \ref{fig:ratiodir_TiVA} and \ref{fig:evolution_coef_TiVA} for TIVA rev. 3 and Figures \ref{fig:ratiodir_TiVA_REV4}, \ref{fig:evolution_coef_TiVA_REV4} for TIVA rev. 4 show that using the share of imported final consumption goods and services and the share of imported intermediate goods in domestic final consumption provides a good prediction of the elasticity of the HCE deflator to the exchange rate.
+As a complement to section 4.2, Figures \ref{fig:ratiodir_TiVA} and \ref{fig:evolution_coef_TiVA} for TIVA rev. 3 and Figures \ref{fig:ratiodir_TiVA_REV4} and \ref{fig:evolution_coef_TiVA_REV4} for TIVA rev. 4 show that using the share of imported final consumption goods and services and the share of imported intermediate goods in domestic final consumption provides a good prediction of the elasticity of the HCE deflator to the exchange rate.
 
 
 \begin{figure}[H]
@@ -189,13 +193,13 @@ As a complement to section 4.2, Figures \ref{fig:ratiodir_TiVA} and \ref{fig:evo
 
 
 \newpage
-\section*{Online Appendix C: Doing without TiVA and WIOD, but keeping Eurostat}
+\section*{Appendix C: Doing without TiVA and WIOD, but keeping Eurostat}  % je n'avais pas propose un titre plus clair dans une precedent version?
 Section 4.2 shows that the sum of the share of imported goods in household consumption and the share of imported inputs in household consumption of domestic goods ($E1.HC + E2.HC$) is a good predictor of the HCE deflator elasticity to the exchange rate. 
 However, these data ($E1.HC$ and $E2.HC$) are not up-to-date for a large number of countries, as they are not routinely computed by national statistical institutes. 
 Section 4.3 shows that trade and GDP data are a good predictor of the HCE deflator elasticity.
 In this appendix, we perform an intermediate exercise.
-As in section 4.3 we identify consumption and intermediary goods imports using the CEPII BACI database and the BEC classification.
-In contrast to section 4.3, we relate these imports to household consumption and intermediate consumption insteand of the GDP.
+As in section 4.3, we identify consumption and intermediary goods imports using the CEPII BACI database and the BEC classification.
+In contrast to section 4.3, we relate these imports to household consumption and intermediate consumption instead of the GDP.
 While the World Bank provides regular estimates for household consumption, estimates for intermediate consumptions are lacking. 
 Eurostat provides estimates for intermediate consumption for European countries.
 %VF comme la source n'est pas précisee je mets en commentaire \footnote{And some others for selected years Eurostat, BEC -- PRÉCISER LA SOURCE}. 
@@ -263,7 +267,7 @@ The outcome is close to the elasticity computed with WIOD for 2014, despite a sl
 
 
 \newpage
-\section*{Online appendix D: Comparing the impact of a change in prices with that of an excahnge rate variation}
+\section*{Appendix D: Comparing the impact of a change in prices with that of an exchange rate variation}
 In this appendix, we use the two-country and one-good case to illustrate the difference between a change in prices and an exchange rate variation.
 \subsection*{Effect of a change in prices based of value added contents}
 Using the notations of the paper, we have in the two-country and one-good case:
@@ -281,14 +285,14 @@ I-\cal {A}=\left(\begin{matrix}1-a_{1,1}&-a_{1,2}\\-a_{2,1}&1-a_{2,2}\end{matrix
 
 When a change $c$ occurs in the prices of country 2, we have the following initial vector: $C=\left(0,c\right)$.
 In the first instance, this has an impact on prices $C\cal {A}$, and then $C{\cal{A}}^{2}$, etc.
-Hence the total effect of the change in prices $S$ is: 
+Hence, the total effect of the change in prices $S$ is: 
 
 
 \begin{equation*}
 S=C+C{\cal{A}}+C{\cal{A}}^{2}...=C\left(I-{\cal{A}}\right)^{-1}=\left(\begin{matrix}cw  &   cx\end{matrix}\right)
 \end{equation*}
 
-To measure the impact on the household consumption expenditure deflator, we compute a weighted sum of these effects.
+To measure the impact on the household consumption expenditure deflator, we compute a weighted sum of these effects:
 
 \begin{equation}
 \bar{s}=c.\left[\left(1-f\right)w+xf\right]=c.\frac{\left(1-f\right)a_{2,1}+f\left(1-a_{1,1}\right)}{\left(1-a_{1,1}\right)\left(1-a_{2,2}\right)-a_{2,1}a_{1,2}}
@@ -346,10 +350,11 @@ This confirms that the impact of an exchange rate variation differs from that of
 
 
 \newpage
-\section*{Online Appendix E: Exploring the channels of an exchange rate variation in the two-country, one-sector case}\label{AnalyticalAppendix}
-\subsection*{The issue}
+\section*{Appendix E: Transmission channels of an exchange rate variation in the two-country, one-sector case}\label{AnalyticalAppendix}
+%je retire car cést tres bizare ce titre de sous section, j'ai cru que cétait une erreur
+%\subsection*{The issue}
 
-As a reminder from the paper, where $\overline{s}_{i}^{i,HC}$ corresponds to the impact of an exchange rate variation on consumption prices:  
+As a reminder from the paper, where $\overline{s}_{i}^{i,HC}$ corresponds to the impact of an exchange rate variation on consumer prices:  
 \begin{equation}
 \begin{array}{lccl}
 \overline{s}_{i}^{i,HC}&=S^i.HC^i=E1.HC^i+E2.HC^i+E3.HC^i+E4.HC^i \\
@@ -422,7 +427,8 @@ The derivative of this according to f is:
 
 The sign of this expression is difficult to study. We hence move to a numerical application.
 
-\subsection*{Numerical application}
+%\subsection*{Numerical application} 
+%inutile dávoir des sections avec des titres enormes pour láppednix, je propose de retirer, la phrasse precedente annonce l'applicationn numeriique
 Based on WIOD 2014, we compute the ratio between value added and production, which corresponds to: 
 egen total=rowtotal(vAUS1-vROW) and then (161-74)/161=0.54.
 

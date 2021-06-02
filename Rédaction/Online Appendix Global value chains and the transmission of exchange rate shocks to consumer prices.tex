@@ -144,7 +144,7 @@
 \newpage
 \section*{Online Appendix B: Estimating the HCE deflator elasticity using the shares of imported consumption and imported intermediates in domestic consumption} \label{AppendixFonctionLinéaireTIVA}
 
-As a complement to section 4.1, Figures \ref{fig:ratiodir_TiVA}, \ref{fig:evolution_b_TiVA} and \ref{fig:evolution_cst_TiVA} for TIVA rev. 3 and Figures \ref{fig:ratiodir_TiVA_REV4}, \ref{fig:evolution_b_TiVA_REV4} and \ref{fig:evolution_cst_TiVA_REV4} for TIVA rev. 4 show that using the share of imported final consumption goods and services and the share of imported intermediate goods in domestic final consumption provides a good prediction of the elasticity of the HCE deflator to the exchange rate.
+As a complement to section 4.2, Figures \ref{fig:ratiodir_TiVA} and \ref{fig:evolution_coef_TiVA} for TIVA rev. 3 and Figures \ref{fig:ratiodir_TiVA_REV4}, \ref{fig:evolution_coef_TiVA_REV4} for TIVA rev. 4 show that using the share of imported final consumption goods and services and the share of imported intermediate goods in domestic final consumption provides a good prediction of the elasticity of the HCE deflator to the exchange rate.
 
 
 \begin{figure}[H]
@@ -163,7 +163,7 @@ As a complement to section 4.1, Figures \ref{fig:ratiodir_TiVA}, \ref{fig:evolut
 	\begin{tabular}{c}
 		\includegraphics[width=5.0in, height=3.5in]{coef_TIVA_HC}\\
 	\end{tabular}
-	\label{fig:evolution_b_TiVA}
+	\label{fig:evolution_coef_TiVA}
 	\floatfoot{Sources: TIVA rev. 3 and authors’ calculations}.
 \end{figure}
 
@@ -183,21 +183,21 @@ As a complement to section 4.1, Figures \ref{fig:ratiodir_TiVA}, \ref{fig:evolut
 	\begin{tabular}{c}
 		\includegraphics[width=5.0in, height=3.5in]{coef_TIVA_REV4_HC}\\
 	\end{tabular}
-	\label{fig:evolution_b_TiVA_REV4}
+	\label{fig:evolution_coef_TiVA_REV4}
 	\floatfoot{Sources: TIVA rev. 4 and authors’ calculations}.
 \end{figure}
 
 
 \newpage
 \section*{Online Appendix C: Doing without TiVA and WIOD, but keeping Eurostat}
-Section 4.1 shows that the sum of the share of imported goods in household consumption and the share of imported inputs in household consumption of domestic goods ($E1.HC + E2.HC$) is a good predictor of the HCE deflator elasticity to the exchange rate. 
+Section 4.2 shows that the sum of the share of imported goods in household consumption and the share of imported inputs in household consumption of domestic goods ($E1.HC + E2.HC$) is a good predictor of the HCE deflator elasticity to the exchange rate. 
 However, these data ($E1.HC$ and $E2.HC$) are not up-to-date for a large number of countries, as they are not routinely computed by national statistical institutes. 
-Section 4.2 shows that trade and GDP data are a good predictor of the HCE deflator elasticity.
+Section 4.3 shows that trade and GDP data are a good predictor of the HCE deflator elasticity.
 In this appendix, we perform an intermediate exercise.
-As in section 4.2 identify consumption and intermediary goods imports using the CEPII BACI database and the BEC classification.
-In contrast to section 4.2, we relate these imports to household consumption and intermediate consumption.
+As in section 4.3 we identify consumption and intermediary goods imports using the CEPII BACI database and the BEC classification.
+In contrast to section 4.3, we relate these imports to household consumption and intermediate consumption insteand of the GDP.
 While the World Bank provides regular estimates for household consumption, estimates for intermediate consumptions are lacking. 
-By contrast, Eurostat provides estimates for intermediate consumption for European countries.
+Eurostat provides estimates for intermediate consumption for European countries.
 %VF comme la source n'est pas précisee je mets en commentaire \footnote{And some others for selected years Eurostat, BEC -- PRÉCISER LA SOURCE}. 
 Combining these three data sources (BACI, World Bank and Eurostat), we compute the share of imported consumption goods in household consumption and the share of imported inputs in all inputs. 
 %%We mimick equation 16 in the main text by equation \ref{eq:eq8}. 
@@ -250,7 +250,6 @@ To take into account year-specific effects, we add two year-specific variables, 
 
 We run the panel regressions for the period 2000 to 2008 and estimate out-of-sample elasticities for each country $i$ for 2014. 
 The outcome is close to the elasticity computed with WIOD for 2014, despite a slight downward bias (see Figure \ref{fig:panel_pred1}).
-Hence, predictions from the panel regressions provide a reliable estimate of the HCE deflator elasticity to the exchange rate from 2015 onwards.
 
 \begin{figure}[H]
 	\centering
@@ -280,7 +279,7 @@ I-\cal {A}=\left(\begin{matrix}1-a_{1,1}&-a_{1,2}\\-a_{2,1}&1-a_{2,2}\end{matrix
 \left(I-\cal {A}\right)^{-1}d=\left(\begin{matrix}u-uf+vf\\w-wf+xf\end{matrix}\right)
 \end{gather*}
 
-When a change $c$ occurs in the prices of country 2, we have the following initial vector : $C=\left(0,c\right)$.
+When a change $c$ occurs in the prices of country 2, we have the following initial vector: $C=\left(0,c\right)$.
 In the first instance, this has an impact on prices $C\cal {A}$, and then $C{\cal{A}}^{2}$, etc.
 Hence the total effect of the change in prices $S$ is: 
 
@@ -347,7 +346,7 @@ This confirms that the impact of an exchange rate variation differs from that of
 
 
 \newpage
-\section*{Online Appendix E: Impact of an exchange rate variation in the two-country, one-sector case}\label{AnalyticalAppendix}
+\section*{Online Appendix E: Exploring the channels of an exchange rate variation in the two-country, one-sector case}\label{AnalyticalAppendix}
 \subsection*{The issue}
 
 As a reminder from the paper, where $\overline{s}_{i}^{i,HC}$ corresponds to the impact of an exchange rate variation on consumption prices:  
@@ -371,7 +370,7 @@ S^i &=&\underbrace{C^i}_{\substack{\text{(E1) direct effect through} \\ \text{ i
 
 When the domestic currency appreciates, $E1$ and $E2$ reduce country $i$'s consumer prices, whereas $E3$ increases them. $E1$ and $E2$ are easy to compute with national input-output matrices, whereas world input-output matrices are needed for computing $E3$ and $E4$.
 
-Unexpectedly, $E3.HC + E4.HC$ does not vary much with the openness rate of the economy (see Figure 10 of the main text).
+Unexpectedly, $E3.HC + E4.HC$ does not vary much with the openness rate of the economy (see Figure 12 of the main text).
 
 
 Let us focus on the two-country, one-sector economy: 
@@ -413,7 +412,7 @@ Then:
 \end{array}\right)
 \end{gather}
 
-According to SAGE, the derivative of this according to f is: 
+The derivative of this according to f is: 
 \begin{gather*}
 \left(\begin{array}{r}
 -\frac{{\left({\left(a^{2} a_{12} + a^{2} a_{22} - a^{2}\right)} f^{3} - {\left(2 \, a^{2} a_{22} - 2 \, a^{2} + {\left(a^{2} + a\right)} a_{12}\right)} f^{2} + {\left(a^{2} a_{22} - a^{2} + a_{12}\right)} f\right)} {\left(a a_{12} + a a_{22} - a\right)}}{{\left({\left(a - 1\right)} a_{22} - {\left(a a_{12} + a a_{22} - a\right)} f - a + 1\right)}^{2}} \\
@@ -473,8 +472,8 @@ This discrepancy likely reflects data quality issues in MRIO.
 %We believe this result is due to a glitch in MRIO data we acceded on March 2021.
 Figure \ref{fig:pays_soucis_MRIO} shows that the HCE deflator elasticity estimated using MRIO increased by more than 20\% for India and China between 2017 and 2018.
 For China, the increase reaches 100\%, which is not plausible.
-Such a sharp increase was not observed between 2016 and 2017, suggesting that MRIO is fraught with data quality issues in 2018. 
-Computations wiht WIOD confirm that such sharp increases were not observed in the past and are thus unlikely (see Figure \ref{fig:pays_soucis_WIOD}).
+Such a sharp increase was not observed between 2016 and 2017. 
+Computations with WIOD confirm that such sharp increases were not observed in the past and are thus unlikely (see Figure \ref{fig:pays_soucis_WIOD}).
 Looking more closely at MRIO, we observe large shifts in the consumption of services in China in 2018. 
 Chinese households’ consumption of Chinese education services increased by 43\% between 2017 and 2018, whereas the consumption of Chinese transport services decreased by 43\% over the same period. 
 Such large and unlikely shifts suggest data quality issues in MRIO for 2018. 

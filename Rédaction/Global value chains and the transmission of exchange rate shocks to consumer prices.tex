@@ -53,7 +53,7 @@
 
 
 \begin{document}
-\title{Estimating the elasticity of consumer prices to the exchange rate: an accounting approach	\thanks{We thank Marion Cochard, Pavel Diev, Hubert Escaith, Guillaume Gaulier, Yannick Kalantzis, Guy Levy-Rueff, Sébastien Miroudot, Jean-François Ouvrard, François de Soyres and an anonymous referee for comments and suggestions, as well as participants at Banque de France seminars. Any remaining errors are ours. All programs are available at \url{https://github.com/gdaudin/OFCE_CommerceVA}. Data are available at \url{https://gdaudin.github.io/Databases.html} and result files are available upon request.}\\
+\title{Estimating the elasticity of consumer prices to the exchange rate: an accounting approach	\thanks{We thank Marion Cochard, Pavel Diev, Hubert Escaith, Guillaume Gaulier, Yannick Kalantzis, Guy Levy-Rueff, Sébastien Miroudot, Jean-François Ouvrard, François de Soyres and an anonymous referee for comments and suggestions, as well as participants at Banque de France seminars. Any remaining errors are ours. All programs are available at \url{https://github.com/gdaudin/OFCE_CommerceVA}. Data and result files are available upon request.}\\
 \vspace{1cm}
 }
 \vspace{1cm}
@@ -576,7 +576,7 @@ The effects of the change in prices spread over multiple simultaneous production
 The overall impact of the exchange rate appreciation in dollar terms is equal, for the shocked country $A$, to the decline in consumer prices directly due to the exchange rate fluctuation, plus direct and indirect decreases (via inter-industry linkages in the country), in national currency and then converted back into dollar terms, in the prices of inputs imported from $B$ and disseminated to all branches. 
 The overall impact on prices in dollar terms in country $A$ is therefore lower than the initial exchange rate variation, as national currency prices are also affected. 
 For country $B$, the final impact is equal to the cumulative direct and indirect effects of the higher prices of imported inputs.\\
-In a global economy composed of $I$ countries, each with $J$ sectors, the appreciation of a country's currency $i$ against all other currencies translates into a rise in country $i$'s prices in dollars. The dollar price of each sector will vary in percentage (approximated as log point assuming that the exchange rate variation is small enough) by: $c_\$^i$ for sectors in the shock-stricken country$~i$ and 0 in other countries. \\
+In a global economy composed of $I$ countries, each with $J$ sectors,\footnote{Online appendix D explores the 2 countries, 1 sector case and contraste the effect of an exchange rate variation and the effect of a price variation} the appreciation of a country's currency $i$ against all other currencies translates into a rise in country $i$'s prices in dollars. The dollar price of each sector will vary in percentage (approximated as log point assuming that the exchange rate variation is small enough) by: $c_\$^i$ for sectors in the shock-stricken country$~i$ and 0 in other countries. \\
 Hence, for each sector $j$ in country $i$ (see notation table):
 \begin{eqnarray*}
  {{\Delta }^{0}}log(p_{\${ij}})=log(p_{\${ij}}^{1})-log(p_{\${ij}}^{0})=c_{\${ij}}=c_{\$}^i
@@ -1146,7 +1146,7 @@ The high $R^2$ (0.98) suggests that $E1.HC+E2.HC$ is a good predictor of $\overl
 \label{fig:ratiodir_WIOD}
 \end{figure}
 
-We check whether the relationship is constant over time by estimating yearly cross-sections of equation \ref{eq:eq7}. 
+We check whether the relationship is constant over time by estimating yearly cross-sections of equation \ref{eq:infer1}. 
 With the exception of 2009, the relationship is broadly stable (see Figures \ref{fig:evolution_coef}).
 
 \begin{figure}[H]
@@ -1194,7 +1194,7 @@ These data are available until 2019.
 \label{eq:infer2}
 \end{equation}
 
-We do an out-of-sample prediction for WIOD, 2014, using data for preceeding years.
+We do an out-of-sample prediction for WIOD, 2014, using data for years 2000 to 2008.
 The results are satisfactory, although the mean and median errors are larger than in Onliine Appendix C (see Figure \ref{fig:panel_pred2}). 
 Our findings are robust to using other databases (revision 3 and revision 4 of TIVA Results available upon request).
 

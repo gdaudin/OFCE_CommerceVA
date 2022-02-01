@@ -1,19 +1,24 @@
 % Titre à améliorer: pas de forme interrogative
-Exchange rate movements and inflation
+The heterogeneous impact of exchange rate movements on inflation
 
-%Abstract: 80 mots
+%Abstract: 80 mots 5
 Understanding how exchange rate movements will impact inflation is critically important for monetary policy. 
-Based on an accounting approach and using datasets covering most advanced and emerging economies, this column analyses which countries and sectors are under pressure to adjust their prices when subject to an exchange rate variation.
+Using several datasets covering most advanced and emerging economies, this column analyses which countries and sectors are under pressure to adjust their prices when subject to an exchange rate variation.
+It finds that the elasticity of consumer prices to the exchange rate is heterogeneous across countries, reflecting differences in foreign product content of consumption and intermediate products.
 
 %à faire: introduire le débat en citant d'autres articles VoxEU
-
+In a recent paper (Camatte et al., 2021), we analyse the impact of exchange rate variations on domestic consumer prices using several datasets covering most advanced and emerging economies, from 1995 to 2019.
+We perform an accounting exercise based on information contained in world input-output tables. 
+Our accounting approach helps identify which countries and sectors are under pressure to adjust their prices when subject to an exchange rate variation
 
 % Premier apport de notre étude: hétérogénéité entre pays
-The impact of exchange rate variations on consumer prices is heterogeneous across countries, reflecting different degrees of openness to trade %titre en gras de la partie
+The impact of exchange rate variations on consumer prices is heterogeneous across countries %titre en gras de la partie
 
-The impact of a 1% exchange rate fluctuation on domestic consumer prices is heterogeneous across countries.
-It ranges from 0.05% to 0.22%.
-This heterogeneity reflects different degrees of openness to trade and differences in foreign product content in domestic consumption.
+In line with the existing literature, we find that in response to a 1% appreciation of the domestic currency, domestic consumer prices decrease
+by arround 0.10% on average at the world level. 
+The impact of exchange rate variations on consumer prices has remained broadly stable over the past two decades.
+The impact of a 1% exchange rate fluctuation on domestic prices is heterogeneous across countries.
+It ranges from 0.05% to 0.22%, reflecting different degrees of openness to trade and differences in foreign product content in domestic consumption.
 The elasticity is lower for large advanced and developing countries. 
 For instance, we find an elasticity of 0.06 for the US.
 Within the euro area, the elasticity of domestic consumer prices differs substantially, ranging from 0.07 in Italy to 0.18 in Ireland, a small open economy with a large traded sector and a large share of trade outside the euro area.
@@ -30,7 +35,7 @@ Which countries are most impacted by an appreciation of the US dollar? %titre en
 
 We estimate the impact of an appreciation of the US dollar on its trading partners. 
 We rely on the simplifying assumption that exports are always invoiced in the exporter’s currency. 
-Hence, we do not take into account the large role of the dollar in international trade invoicing. 
+Hence, although recent evidence shows that most international prices are set in one dominant currency (Boz et al. 2020), we do not take into account the large role of the U.S. dollar in international trade invoicing. 
 The US example illustrates that countries are affected in proportion to their trading links with the country whose currency appreciates. 
 We obtain the highest elasticities for the major trading partners of the US.
 The elasticity of consumer prices to the USD amounts to 0.12 for Canada and 0.09 for Mexico.
@@ -50,4 +55,5 @@ Thus, even small price changes have a large effect on domestic consumer prices.
 %Conclusion
 
 References
-Hadrien Camatte, Guillaume Daudin, Violaine Faubert, Antoine Lalliard, Christine Rifflart (2021). Estimating the elasticity of consumer prices to the exchange rate: an accounting approach. ECB Working Paper No 2610 / October 2021
+Boz, E, C Casas, G Georgiadis, G Gopinath, H Le Mezo, A Mehl, and T Nguyen (2020), “Patterns in invoicing currency in global trade,” VoxEU.org, 9 October.
+Camatte, H, G Daudin, V Faubert, A Lalliard and C Rifflart (2021), "Estimating the elasticity of consumer prices to the exchange rate: an accounting approach", ECB Working Paper No 2610 / October 2021.

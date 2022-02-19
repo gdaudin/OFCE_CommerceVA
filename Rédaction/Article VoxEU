@@ -11,14 +11,23 @@ In a recent paper (Camatte et al., 2021), we analyse the impact of exchange rate
 We perform an accounting exercise based on information contained in world input-output tables. 
 Our accounting approach helps identify which countries and sectors are under pressure to adjust their prices when subject to an exchange rate variation
 
-% Premier apport de notre étude: hétérogénéité entre pays
-The impact of exchange rate variations on consumer prices is heterogeneous across countries %titre en gras de la partie
+% Premier apport de notre étude: évolution dans le temps
+The elasticity of consumer prices to the exchange rate has remained stable over the past two decades  %titre en gras de la partie
 
 In line with the existing literature, we find that in response to a 1% appreciation of the domestic currency, domestic consumer prices decrease
-by arround 0.10% on average at the world level. 
+by arround 0.10% on average at the world level.  
 The impact of exchange rate variations on consumer prices has remained broadly stable over the past two decades.
-The impact of a 1% exchange rate fluctuation on domestic prices is heterogeneous across countries.
-It ranges from 0.05% to 0.22%, reflecting different degrees of openness to trade and differences in foreign product content in domestic consumption.
+We find that the mean output-weighted elasticity of consumer prices increased from 0.06 in 2000 to 0.08 in 2008. 
+After peaking in 2008, the elasticity sharply declined in 2009. 
+It has hovered around 0.08 in subsequent years. 
+Our results concur with the literature.
+Using comprehensive measures of global value chain integration, Timmer et al. (2016) find that the expansion of global value chain has slowed down since the Great Recession.
+
+
+%Deuxieme apport: hétérogénéité entre pays
+The impact of exchange rate variations on consumer prices is heterogeneous across countries %titre en gras de la partie
+
+The impact of a 1% exchange rate fluctuation on domestic prices ranges from 0.05% to 0.22%, reflecting different degrees of openness to trade and differences in foreign product content in domestic consumption.
 The elasticity is lower for large advanced and developing countries. 
 For instance, we find an elasticity of 0.06 for the US.
 Within the euro area, the elasticity of domestic consumer prices differs substantially, ranging from 0.07 in Italy to 0.18 in Ireland, a small open economy with a large traded sector and a large share of trade outside the euro area.
@@ -29,19 +38,6 @@ The higher the country’s import share in consumption, the higher the elasticit
 We document the evolution over time of the impact of exchange rate variations on consumer prices.
 In line with the existing literature, we find that in response to a 1% appreciation of the domestic currency, domestic consumer prices decrease by around 0.10% on average at the world level.
 The impact of exchange rate variations on consumer prices has remained broadly stable over the past two decades. 
-
-%Deuxieme apport: évolution dans le temps
-The elasticity of consumer prices to the exchange rate has remained stable over the past two decades  %titre en gras de la partie
-
-We document the evolution over time of the impact of exchange rate variations on consumer prices. 
-In line with the existing literature, we find that in response to a 1% appreciation of the domestic currency, domestic consumer prices decrease
-by arround 0.10% on average at the world level. 
-The impact of exchange rate variations on consumer prices has remained broadly stable over the past two decades.
-We find that the mean output-weighted elasticity of consumer prices increased from 0.06 in 2000 to 0.08 in 2008. After peaking in 2008, the elasticity sharply declined
-in 2009. It has hovered around 0.08 in subsequent years. 
-Our results concur with the literature.
-Using comprehensive measures of global value chain integration, Timmer et al. (2016) find that
-the expansion of global value chain has slowed down since the Great Recession.
 
 %Troisieme apport: le rôle du dollar
 Which countries are most impacted by an appreciation of the US dollar? %titre en gras de la partie
@@ -79,6 +75,17 @@ We find that the first two channels explain three-quarters of the transmission o
 The last two channels, which reflect the impact of participation in global value chains, play a limited role, with marked across-countries heterogeneity.
 
 %Conclusion
+
+In a recent paper, we document the heterogeneity of the impact of exchange rate variations on consumer prices.
+We find that in response to a 1% appreciation of the domestic currency, domestic consumer prices decrease
+by arround 0.10% on average at the world level.
+This modest estimate is likely an upper bound. Indeed, we make the simplifying assumption that exchange rate fluctuations completely pass-through to import prices. 
+However, a large body of literature suggests that the pass-through is incomplete, even in the long run, as a
+result of slow nominal price adjustments or the pricing-to-market behaviour of firms. 
+In addition, we work under the producer pricing assumption. However, in large and attractive
+markets, competitive pressures may push producers to adopt local currency pricing strategies,
+where exporting firms adapt their mark-ups depending on the destination market to offset exchange
+rate movements. Hence, using alternative pricing assumptions would entail lower estimates.
 
 References
 Boz, E, C Casas, G Georgiadis, G Gopinath, H Le Mezo, A Mehl, and T Nguyen (2020), “Patterns in invoicing currency in global trade,” VoxEU.org, 9 October.

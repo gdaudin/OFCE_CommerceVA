@@ -30,7 +30,20 @@ We document the evolution over time of the impact of exchange rate variations on
 In line with the existing literature, we find that in response to a 1% appreciation of the domestic currency, domestic consumer prices decrease by around 0.10% on average at the world level.
 The impact of exchange rate variations on consumer prices has remained broadly stable over the past two decades. 
 
-%Deuxieme apport: le rôle du dollar
+%Deuxieme apport: évolution dans le temps
+The elasticity of consumer prices to the exchange rate has remained stable over the past two decades  %titre en gras de la partie
+
+We document the evolution over time of the impact of exchange rate variations on consumer prices. 
+In line with the existing literature, we find that in response to a 1% appreciation of the domestic currency, domestic consumer prices decrease
+by arround 0.10% on average at the world level. 
+The impact of exchange rate variations on consumer prices has remained broadly stable over the past two decades.
+We find that the mean output-weighted elasticity of consumer prices increased from 0.06 in 2000 to 0.08 in 2008. After peaking in 2008, the elasticity sharply declined
+in 2009. It has hovered around 0.08 in subsequent years. 
+Our results concur with the literature.
+Using comprehensive measures of global value chain integration, Timmer et al. (2016) find that
+the expansion of global value chain has slowed down since the Great Recession.
+
+%Troisieme apport: le rôle du dollar
 Which countries are most impacted by an appreciation of the US dollar? %titre en gras de la partie
 
 We estimate the impact of an appreciation of the US dollar on its trading partners. 
@@ -43,17 +56,31 @@ The elasticity is below 0.06 for most euro area countries.
 Ireland stands out, with an elasticity of 0.09, i.e. close to that of Canada and Mexico.
 Indeed, the U.S. is Ireland’s major trading partner outside of the EU, even if a large portion of Irish imports from the US (pharmaceuticals and aircraft) are later exported by Irish-based firms without being purchased by Irish consumers, and therefore have a negligible contribution to domestic consumer goods inflation.
 
-%Troisième apport: impact par produit
-Sectors which experience the highest spillovers from an exchange rate appreciation. %titre en gras de la partie
-
+%Quatrième apport: impact par produit
+Services and industrial goods experience the highest spillovers from an exchange rate appreciation %titre en gras de la partie
+Building on sectoral data, we examine which sectors experience higher spillovers from an appreciation of the national currency. 
+We focus on the main components of consumer prices, i.e. manufacturing goods, services, food and energy. 
 Non-energy industrial goods explain the bulk of the impact of an exchange rate variation on consumer prices. 
 Services also play a significant role, especially in advanced economies such as the US, Japan, Germany and France.
 Although services are mainly produced domestically and do not rely much on imported inputs, they account for a substantial share of total consumption.
 Thus, even small price changes have a large effect on domestic consumer prices.
 
+%Cinquième apport: rôle limité des chaines de valeur mondiales
+Global value chains play a limited role in the transmission of an exchange rate appreciation %titre en gras de la partie
+
+We also analyse the role of global value chains in the transmission of an exchange rate appreciation.
+We identify four channels through which an exchange rate appreciation impacts consumer prices when production processes are global:
+i) the prices of imported final goods sold directly to domestic consumers; 
+ii) the prices of imported inputs entering domestic production;
+iii) the price of exported inputs feeding through imported foreign production; 
+iv) changes in domestic and foreign production costs in turn pass through to the price of inputs for domestic
+and foreign goods, causing further production costs variations through input-output linkages.
+We find that the first two channels explain three-quarters of the transmission of an exchange rate appreciation to domestic prices. 
+The last two channels, which reflect the impact of participation in global value chains, play a limited role, with marked across-countries heterogeneity.
 
 %Conclusion
 
 References
 Boz, E, C Casas, G Georgiadis, G Gopinath, H Le Mezo, A Mehl, and T Nguyen (2020), “Patterns in invoicing currency in global trade,” VoxEU.org, 9 October.
 Camatte, H, G Daudin, V Faubert, A Lalliard and C Rifflart (2021), "Estimating the elasticity of consumer prices to the exchange rate: an accounting approach", ECB Working Paper No 2610 / October 2021.
+Timmer, M. P., Los, B., Stehrer, R., and de Vries, G. J. (2016), "An Anatomy of the Global Trade Slowdown based on the WIOD 2016 Release," Technical report.

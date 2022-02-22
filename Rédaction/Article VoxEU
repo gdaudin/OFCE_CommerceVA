@@ -10,10 +10,10 @@ It documents the heterogeneous reactions of consumer prices to exchange rate var
 %Introduction
 Understanding how exchange rate movements impact inflation is critically important for monetary policy. 
 The transmission of exchange rate movements to consumer prices differs across countries. 
-It depends, among other things, on their respective trade openness, the relative integration of sectors and firms in international  production chains and the currency of invoicing for trade. 
+It depends, among other things, on their respective trade openness, the relative integration of sectors and firms in international production chains and the currency of invoicing for trade. 
 In a recent paper (Camatte et al., 2021), we analyse the impact of exchange rate variations on domestic consumer prices using several datasets covering most advanced and emerging economies, from 1995 to 2019.
 We perform an accounting exercise based on information contained in world input-output tables. 
-Our approach helps identify which countries and sectors are under pressure to adjust their prices when subject to an exchange rate variation
+Our approach helps identify which countries and sectors are under pressure to adjust their prices when subject to an exchange rate variation.
 
 % Premier apport de notre étude: évolution dans le temps
 The elasticity of consumer prices to the exchange rate has remained stable over the past two decades  %titre en gras de la partie
@@ -38,15 +38,15 @@ Within the euro area, the elasticity of domestic consumer prices differs substan
 It ranges from 0.07 in Italy to 0.18 in Ireland, a small open economy with a large traded sector and a large share of trade outside the euro area.
 For larger countries (France, Germany, Italy and Spain) and countries whose trade is concentrated with euro area partners (such as Portugal and Greece), the elasticity is close to 0.10, reflecting a lower degree of openness to trade.
 The elasticity is twice higher for small open economies like Luxembourg, Malta, Slovakia and Ireland.
-The value of the elasticity is closely, but not perfectly, related to the share of imported goods and services (from outside the euro area for euro area countries) in household consumption.
-The higher a country’s import share in consumption, the higher the elasticity of domestic consumer prices to the exchange rate.
+The value of the elasticity is closely, but not perfectly, related to the share of imported goods and services in household consumption.
+Overall, the higher a country’s import share in consumption, the higher the elasticity of domestic consumer prices to the exchange rate.
 
 %Troisieme apport: le rôle du dollar
 Which countries are most impacted by an appreciation of the US dollar? %titre en gras de la partie
 
 We estimate the impact of an appreciation of the US dollar on its trading partners. 
 We rely on the simplifying assumption that exports are always invoiced in the exporter’s currency. 
-Hence, although recent evidence shows that most international prices are set in one dominant currency (Boz et al. 2020), we do not take into account the large role of the US dollar in international trade invoicing. 
+Hence, although recent evidence shows that most international prices are set in one dominant currency (Boz et al. 2020), we do not take into account the large role of the US dollar in international trade invoicing (Boz et al. 2018). 
 The US dollar example illustrates that countries are affected in proportion to their trading links with the country whose currency appreciates. 
 We obtain the highest elasticities for the major trading partners of the US.
 The elasticity of consumer prices to the US dollar amounts to 0.12 for Canada and 0.09 for Mexico.
@@ -86,6 +86,7 @@ However, a large body of literature suggests that the pass-through is incomplete
 Hence, using alternative assumptions would entail lower estimates.
 
 References
-Boz, E, C Casas, G Georgiadis, G Gopinath, H Le Mezo, A Mehl, and T Nguyen (2020), “Patterns in invoicing currency in global trade,” VoxEU.org, 9 October.
+Boz, E, C Casas, G Georgiadis, G Gopinath, H Le Mezo, A Mehl, and T Nguyen (2020), “Patterns in invoicing currency in global trade”, VoxEU.org, 9 October.
+Boz,  E, G Gopinath and M Plagborg-Moller (2018), “Global trade and the dollar”, VoxEU.org, 11 February.
 Camatte, H, G Daudin, V Faubert, A Lalliard and C Rifflart (2021), "Estimating the elasticity of consumer prices to the exchange rate: an accounting approach", ECB Working Paper No 2610 / October 2021.
 Timmer, M. P., Los, B., Stehrer, R., and de Vries, G. J. (2016), "An Anatomy of the Global Trade Slowdown based on the WIOD 2016 Release," Technical report.

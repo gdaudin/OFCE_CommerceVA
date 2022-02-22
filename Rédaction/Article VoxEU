@@ -1,10 +1,11 @@
-% Titre à améliorer: pas de forme interrogative
+% Titre 
 The heterogeneous impact of exchange rate movements on inflation
+Guillaume Daudin and Violaine Faubert % les autres auteurs du papier ne s'étant pas manifesté pour Vox sont cités dans les références
 
-%Abstract: 80 mots 5
+%Abstract: 80 mots 
 Understanding how exchange rate movements will impact inflation is critically important for monetary policy. 
 Using several datasets covering most advanced and emerging economies, this column analyses which countries and sectors are under pressure to adjust their prices when subject to an exchange rate variation.
-It finds that the elasticity of consumer prices to the exchange rate is heterogeneous across countries, reflecting differences in foreign product content of consumption and intermediate products.
+It documents the heterogeneous reactions of consumer prices to exchange rate variations across countries, reflecting differences in foreign product content of consumption and intermediate products.
 
 %à faire: introduire le débat en citant d'autres articles VoxEU
 In a recent paper (Camatte et al., 2021), we analyse the impact of exchange rate variations on domestic consumer prices using several datasets covering most advanced and emerging economies, from 1995 to 2019.
@@ -79,13 +80,11 @@ The last two channels, which reflect the impact of participation in global value
 In a recent paper, we document the heterogeneity of the impact of exchange rate variations on consumer prices.
 We find that in response to a 1% appreciation of the domestic currency, domestic consumer prices decrease
 by arround 0.10% on average at the world level.
-This modest estimate is likely an upper bound. Indeed, we make the simplifying assumption that exchange rate fluctuations completely pass-through to import prices. 
+This modest estimate is likely an upper bound. 
+Indeed, our accounting approach relies on the simplifying assumption that exchange rate fluctuations completely pass-through to import prices. 
 However, a large body of literature suggests that the pass-through is incomplete, even in the long run, as a
 result of slow nominal price adjustments or the pricing-to-market behaviour of firms. 
-In addition, we work under the producer pricing assumption. However, in large and attractive
-markets, competitive pressures may push producers to adopt local currency pricing strategies,
-where exporting firms adapt their mark-ups depending on the destination market to offset exchange
-rate movements. Hence, using alternative pricing assumptions would entail lower estimates.
+Hence, using alternative assumptions would entail lower estimates.
 
 References
 Boz, E, C Casas, G Georgiadis, G Gopinath, H Le Mezo, A Mehl, and T Nguyen (2020), “Patterns in invoicing currency in global trade,” VoxEU.org, 9 October.

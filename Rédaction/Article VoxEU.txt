@@ -1,9 +1,9 @@
-% Titre 
-The heterogeneous impact of exchange rate movements on inflation
-Guillaume Daudin and Violaine Faubert % décider s'il faut mettre les autres auteurs du papier, ou considérer qu'ils sont déjà cités dans les références
+% Titre -- Je mets en Markdown GD
+# The heterogeneous impact of exchange rate movements on inflation
+Guillaume Daudin and Violaine Faubert % décider s'il faut mettre les autres auteurs du papier, ou considérer qu'ils sont déjà cités dans les références -- Je crois qu’il faut les sortir
 
 %Abstract: 80 mots 
-Understanding how exchange rate movements will impact inflation is critically important for monetary policy. 
+Understanding how exchange rate movements impact inflation is critically important for monetary policy. 
 Using several datasets covering most advanced and emerging economies, this column analyses which countries and sectors are under pressure to adjust their prices when subject to an exchange rate variation.
 It documents the heterogeneous reactions of consumer prices to exchange rate variations across countries, reflecting differences in foreign product content of consumption and intermediate products.
 
@@ -16,33 +16,37 @@ We perform an accounting exercise based on information contained in world input-
 Our approach helps identify which countries and sectors are under pressure to adjust their prices when subject to an exchange rate variation.
 
 % Premier apport de notre étude: évolution dans le temps
-The elasticity of consumer prices to the exchange rate has remained stable over the past two decades  %titre en gras de la partie
+## The elasticity of consumer prices to exchange rate variations has remained stable over the past two decades 
+%titre en gras de la partie
 
 In line with the existing literature, we find that in response to a 1% appreciation of the domestic currency, domestic consumer prices decrease
-by arround 0.10% on average at the world level.  
+by around 0.10% on average at the world level.  
 The impact of exchange rate variations on consumer prices has remained broadly stable over the past two decades.
 We find that the mean output-weighted elasticity of consumer prices increased from 0.06 in 2000 to 0.08 in 2008. 
 After peaking in 2008, the elasticity sharply declined in 2009. 
 It has hovered around 0.08 in subsequent years. 
-Our results concur with the literature.
+%0.08 ou 0.1 ? Un peu confus
+~~Our results concur with the literature.~~
+%déjà dit, non ? GD
 Using comprehensive measures of global value chain integration, Timmer et al. (2016) find that the expansion of global value chain has slowed down since the Great Recession.
 
 
 %Deuxieme apport: hétérogénéité entre pays
-The impact of exchange rate variations on consumer prices is heterogeneous across countries %titre en gras de la partie
+## The impact of exchange rate variations on consumer prices is heterogeneous across countries
 
-The impact of a 1% exchange rate fluctuation on domestic prices ranges from 0.05% to 0.22%, reflecting different degrees of openness to trade and differences in foreign product content in domestic consumption.
+
+Depending on the country, the impact of a 1% exchange rate fluctuation on domestic prices ranges from 0.05% to 0.22%, reflecting different degrees of openness to trade and differences in foreign product content in domestic consumption.
 The elasticity is lower for large advanced and developing countries. 
 For instance, we find an elasticity of 0.06 for the US.
 Within the euro area, the elasticity of domestic consumer prices differs substantially.
 It ranges from 0.07 in Italy to 0.18 in Ireland, a small open economy with a large traded sector and a large share of trade outside the euro area.
-For larger countries (France, Germany, Italy and Spain) and countries whose trade is concentrated with euro area partners (such as Portugal and Greece), the elasticity is close to 0.10, reflecting a lower degree of openness to trade.
+For larger countries (France, Germany, Italy and Spain) and countries whose trade is concentrated with euro area partners (such as Portugal and Greece), the elasticity is close to 0.10~~, reflecting a lower degree of openness to trade~~.
 The elasticity is twice higher for small open economies like Luxembourg, Malta, Slovakia and Ireland.
 The value of the elasticity is closely, but not perfectly, related to the share of imported goods and services in household consumption.
 Overall, the higher a country’s import share in consumption, the higher the elasticity of domestic consumer prices to the exchange rate.
 
-%Troisieme apport: le rôle du dollar
-Which countries are most impacted by an appreciation of the US dollar? %titre en gras de la partie
+%Troisième apport: le rôle du dollar
+## Which countries are most impacted by an appreciation of the US dollar?
 
 We estimate the impact of an appreciation of the US dollar on its trading partners. 
 We rely on the simplifying assumption that exports are always invoiced in the exporter’s currency. 
@@ -55,35 +59,42 @@ Ireland stands out, with an elasticity of 0.09, i.e. close to that of Canada and
 Indeed, the U.S. is Ireland’s major trading partner outside of the EU, even if a large portion of Irish imports from the US (pharmaceuticals and aircraft) are later exported by Irish-based firms without being purchased by Irish consumers, and therefore have a negligible contribution to domestic consumer goods inflation.
 
 %Quatrième apport: impact par produit
-Services and industrial goods experience the highest spillovers from an exchange rate appreciation %titre en gras de la partie
+## Services and industrial goods experience the highest spillovers from an exchange rate appreciation
 
 Building on sectoral data, we examine which sectors experience higher spillovers from an appreciation of the national currency. 
+%Unifier avec choc sur le taux de change ?
 We focus on the main components of consumer prices, i.e. manufacturing goods, services, food and energy. 
+%ce ne sont pas les mains, mais les seuls, non ? GD
 Non-energy industrial goods explain the bulk of the impact of an exchange rate variation on consumer prices. 
 Services also play a significant role, especially in advanced economies such as the US, Japan, Germany and France.
 Although services are mainly produced domestically and do not rely much on imported inputs, they account for a substantial share of total consumption.
 Thus, even small price changes have a large effect on domestic consumer prices.
 
 %Cinquième apport: rôle limité des chaines de valeur mondiales
-Global value chains play a limited role in the transmission of an exchange rate appreciation %titre en gras de la partie
+## Global value chains play a limited role in the transmission of an exchange rate appreciation
 
 We also analyse the role of global value chains in the transmission of an exchange rate appreciation.
+%Là aussi, unifier ? Exchange rate shock ?
 We identify four channels through which an exchange rate appreciation impacts consumer prices when production processes are global:
-i) the prices of imported final goods sold directly to domestic consumers; 
-ii) the prices of imported inputs entering domestic production;
+i) the price of imported final goods sold directly to domestic consumers; 
+ii) the price of imported inputs entering domestic production;
 iii) the price of exported inputs feeding through imported foreign production; 
 iv) changes in domestic and foreign production costs in turn pass through to the price of inputs for domestic and foreign goods, causing further production costs variations through input-output linkages.
 We find that the first two channels explain three-quarters of the transmission of an exchange rate appreciation to domestic prices. 
 The last two channels, which reflect the impact of participation in global value chains, play a limited role, with marked across-countries heterogeneity.
 
-%Conclusion
+## Conclusion
 
 In a recent paper, we document the heterogeneity of the impact of exchange rate variations on consumer prices.
-We find that in response to a 1% appreciation of the domestic currency, domestic consumer prices decrease by arround 0.10% on average at the world level.
+We find that in response to a 1% appreciation of the domestic currency, domestic consumer prices decrease by around 0.10% on average at the world level.
 This modest estimate is likely an upper bound. 
 Indeed, our accounting approach relies on the simplifying assumption that exchange rate fluctuations completely pass-through to import prices. 
 However, a large body of literature suggests that the pass-through is incomplete, even in the long run, as a result of slow nominal price adjustments or the pricing-to-market behaviour of firms. 
 Hence, using alternative assumptions would entail lower estimates.
+%Un peu faible comme conclusion, non ? On dit à la fin que finalement, notre méthode n’est pas si intéressante ? 
+
+% Je me demande si on devrait pas l’orienter (de manière un peu artificielle) sur une critique de l’approche pas les value chains -- disant que ce n’est pas si utile.
+%Ou mettre plus en avant l’utilisation de plusieurs sources et/ou l’extrapolation ?
 
 References
 Boz, E, C Casas, G Georgiadis, G Gopinath, H Le Mezo, A Mehl, and T Nguyen (2020), “Patterns in invoicing currency in global trade”, VoxEU.org, 9 October.

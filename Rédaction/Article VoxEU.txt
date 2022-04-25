@@ -90,6 +90,7 @@ Indeed, our accounting approach relies on the simplifying assumption that exchan
 However, a large body of literature suggests that the pass-through is incomplete, even in the long run, as a result of slow nominal price adjustments or the pricing-to-market behaviour of firms. 
 Hence, using alternative assumptions would entail lower estimates.
 %Un peu faible comme conclusion, non ? On dit à la fin que finalement, notre méthode n’est pas si intéressante ? 
+% Oui tu as raison. On retire complétement ou on déplace cette critique dans la partie qui mentionne l'elasticité de 0,1?
 
 % Je me demande si on devrait pas l’orienter (de manière un peu artificielle) sur une critique de l’approche pas les value chains -- disant que ce n’est pas si utile.
 %Ou mettre plus en avant l’utilisation de plusieurs sources et/ou l’extrapolation ?

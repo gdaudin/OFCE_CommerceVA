@@ -1,6 +1,6 @@
 % Titre -- Je mets en Markdown GD
 # The heterogeneous impact of exchange rate movements on inflation
-Guillaume Daudin and Violaine Faubert % décider s'il faut mettre les autres auteurs du papier, ou considérer qu'ils sont déjà cités dans les références -- Je crois qu’il faut les sortir
+Guillaume Daudin and Violaine Faubert 
 
 %Abstract: 80 mots 
 Understanding how exchange rate movements impact inflation is critically important for monetary policy. 
@@ -22,12 +22,10 @@ Our approach helps identify which countries and sectors are under pressure to ad
 In line with the existing literature, we find that in response to a 1% appreciation of the domestic currency, domestic consumer prices decrease
 by around 0.10% on average at the world level.  
 The impact of exchange rate variations on consumer prices has remained broadly stable over the past two decades.
-We find that the mean output-weighted elasticity of consumer prices increased from 0.06 in 2000 to 0.08 in 2008. 
-After peaking in 2008, the elasticity sharply declined in 2009. 
-It has hovered around 0.08 in subsequent years. 
-%0.08 ou 0.1 ? Un peu confus
-~~Our results concur with the literature.~~
-%déjà dit, non ? GD
+We find that the mean output-weighted elasticity of consumer prices slightly increased from 2000 to 2008. 
+After peaking in 2008, the elasticity sharply declined in 2009 and has hovered around 0.1 in subsequent years. 
+
+
 Using comprehensive measures of global value chain integration, Timmer et al. (2016) find that the expansion of global value chain has slowed down since the Great Recession.
 
 

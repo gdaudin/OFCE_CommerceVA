@@ -19,6 +19,36 @@ if ("`c(username)'"=="guillaumedaudin") global dirgit "~/Répertoires Git/OFCE_C
 
 
 do  "$dirgit/Definition_pays_secteur.do" `source'
+global eurozone "AUT BEL CYP DEU ESP EST FIN FRA GRC IRL ITA LTU LUX LVA MLT NLD PRT SVK SVN"
+
+
+*******Pour graphique de sensibilité aux chocs de change
+use "$dir/Bases_Sources/Doigt_mouillé_panel.dta", clear
+
+
+*drop if strpos(pays,"_EUR")!=0
+replace ratio_impt_conso=impt_conso/GDP
+replace ratio_impt_interm = impt_interm/GDP
+drop if ratio_impt_conso==.
+drop if ratio_impt_interm==.
+
+
+
+
+
+
+foreach source in WIOD /*TIVA TIVA_REV4 MRIO*/ {
+	*reg pond_`source'_HC ratio_impt_conso ratio_impt_interm i.pays_num
+	reg pond_`source'_HC ratio_impt_conso ratio_impt_interm ratio_impt_conso_mean ratio_impt_interm_mean i.pays_num
+	predict x_`source' /*if year >= 2010  & pond_`source'_HC ==. */
+}
+
+keep if year==2019
+graph hbar x_WIOD, over(pays, sort(1) label(labsize(tiny))) scheme(s1color) ytitle("Elasticity of the consumer prices" "to a shock in domestic currency, WIOD, 2019") note("Each country is assumed to have is own currency" "Except for countries suffixed by _EUR: the shock is then on the Euro")
+
+graph export "$dirgit/Article VoxEU/Elasticity WIOD 2019.png", replace
+
+blif
 
 	
 

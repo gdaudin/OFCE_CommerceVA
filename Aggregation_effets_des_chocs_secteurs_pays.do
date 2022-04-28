@@ -6,10 +6,10 @@
 *Creation of the vector Y is required before table_adjst : matrix Yt
 capture program drop compute_Y_vect
 program compute_Y_vect
-args yrs source
+args yrs bdd
 clear
 
-use "$dir/Bases/Y_`source'.dta", clear
+use "$dir/Bases/Y_`bdd'.dta", clear
 keep if year == `yrs'
 
 mkmat Y, matrix(Y)
@@ -21,9 +21,9 @@ end
 * 2017-10-17 redondant avec le programme 1!!!
 capture program drop compute_X_vect
 program compute_X_vect
-	args yrs source
+	args yrs bdd
 	
-use "$dir/Bases/X_`source'.dta", clear
+use "$dir/Bases/X_`bdd'.dta", clear
 keep if year == `yrs'
 
 *keep year Country X
@@ -39,7 +39,7 @@ capture program drop compute_VA
 program compute_VA
 	args yrs
 clear
-use "$dir/Bases/`source'_ICIO_`yrs'.dta", clear
+use "$dir/Bases/`bdd'_ICIO_`yrs'.dta", clear
 keep if v1 == "VA.TAXSUB"
 drop v1
 mkmat $var_entree_sortie, matrix(VA)
@@ -48,9 +48,9 @@ end
 */
 capture program drop compute_HC_vect
 program  compute_HC_vect
-	args yrs source 
+	args yrs bdd 
 	
-	use "$dir/Bases/HC_`source'.dta", clear
+	use "$dir/Bases/HC_`bdd'.dta", clear
 	keep if year == `yrs'
 	foreach pays_conso of global country_hc {
 		replace pays_conso=strupper(pays_conso)
@@ -65,17 +65,22 @@ end
 
 capture program drop compute_mean    // matrix shock`cty'
 program compute_mean
-	args yrs wgt source 
+	args yrs wgt bdd csource
+	*Example compute_mean 2014 HC WIOD all
+	*Example compute_mean 2014 HC WIOD RUS
 clear
 *set matsize 7000
 set more off
 clear
 
+if "`csource'"=="all" local csourcefile
+if "`csource'"!="all" local csourcefile = "`csource'"
 
-use "$dir/Results/secteurs_pays/`source'_`yrs'_secteurs_pays.dta"
+if "`csource'"=="all" use "$dir/Results/secteurs_pays/`bdd'_`yrs'_secteurs_pays.dta"
+else use "$dir/Results/secteurs_pays/`bdd'_`yrs'_`csource'_secteurs_pays.dta"
 mkmat shock1, matrix(shock)
 
-use "$dir/Bases/csv_`source'.dta", clear
+use "$dir/Bases/csv_`bdd'.dta", clear
 
 *I decide whether I use the production or export or value-added vector as weight modifying the argument "wgt" : Yt or X or VAt
 *Compute the vector of mean effects :
@@ -148,7 +153,7 @@ if strpos("`wgt'","HC")!=0  {
 
 
 set more off
-display "fin de compute_mean `yrs' `wgt' `source'"
+display "fin de compute_mean `yrs' `wgt' `bdd' `csource'"
 
 
 *Vector shock`cty' contains the mean effects of a shock on exchange rate (coming from the country `cty') on overall prices for each country
@@ -161,7 +166,7 @@ end
 *----------------------------------------------------------------------------------------------------
 capture program drop table_mean
 program table_mean 
-	args yrs wgt shk  source
+	args yrs wgt shk  bdd csource
 *yrs = years, wgt = Yt (output) or X (export) or VAt (value-added) or HC (household consumption)
 clear
 *set matsize 7000
@@ -169,23 +174,29 @@ clear
 set more off
 
 
-compute_mean `yrs' `wgt' `source'
+compute_mean `yrs' `wgt' `bdd' `csource' 
 
 
 
-use "$dir/Bases/pays_en_ligne_`source'.dta", clear
+
+use "$dir/Bases/pays_en_ligne_`bdd'.dta", clear
 drop if c=="MX1" | c=="MX2" |  c=="MX3" |  c=="CN1"  |  c=="CN2"  |  c=="CN3"  |  c=="CN4" 
 set more off
 
 
 svmat shock
 
+if "`csource'"=="all" {
+		save "$dir/Results/secteurs_pays/mean_chg_`bdd'_`wgt'_`yrs'.dta", replace
+		export excel using "$dir/Results/secteurs_pays/mean_chg_`bdd'_`wgt'_`yrs'.xls", firstrow(variables) replace
+}
+else {
+	save "$dir/Results/secteurs_pays/mean_chg_`bdd'_`wgt'_`yrs'_`csource'.dta", replace
+	export excel using "$dir/Results/secteurs_pays/mean_chg_`bdd'_`wgt'_`yrs'_`csource'.xls", firstrow(variables) replace
+	
+}
 
 
-save "$dir/Results/secteurs_pays/mean_chg_`source'_`wgt'_`yrs'.dta", replace
-
-
-export excel using "$dir/Results/secteurs_pays/mean_chg_`source'_`wgt'_`yrs'.xls", firstrow(variables) replace
 
 * set trace off
 set more on

@@ -16,7 +16,7 @@ if ("`c(hostname)'" == "widv270a") global dir  "D:\home\T822289\CommerceVA"
 if ("`c(hostname)'" == "FP1376CD") global dir  "T:\CommerceVA" 
 
 
-if ("`c(username)'"=="guillaumedaudin") global dirgit "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation"
+if ("`c(username)'"=="guillaumedaudin") global dirgit "~/Répertoires Git/OFCE_CommerceVA"
 if ("`c(hostname)'" == "widv270a") global dirgit  "D:\home\T822289\CommerceVA\GIT\commerce_VA_inflation" 
 if ("`c(hostname)'" == "FP1376CD") global dirgit  "T:\CommerceVA\GIT\commerce_va_inflation" 
 
@@ -38,6 +38,15 @@ do "$dirgit/Aggregation_effets_des_chocs_secteurs_pays.do"
 *--------------------------------------------------------------------------------
 clear
 set more off
+
+
+*Pour le choc pétrole russe
+compute_HC_vect 2014 WIOD
+table_mean 2014 HC 1 WIOD all
+table_mean 2014 HC 1 WIOD RUS
+
+blif
+
 
 *Pour obtenir les chocs sur l'ensemble des secteurs
 Definition_pays_secteur TIVA_REV4

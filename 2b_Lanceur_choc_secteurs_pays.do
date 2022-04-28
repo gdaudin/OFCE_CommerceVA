@@ -42,21 +42,30 @@ do "$dirgit/Definition_pays_secteur.do"
 **local nbr_sect=wordcount("$sector")	
 do "$dirgit/choc_secteurs_pays.do"
 
-Definition_pays_secteur WIOD
 
-clear
-set more off
+foreach bdd in   WIOD /*TIVA_REV4*/ {
+	*Cela ne marche pas dans TIVA_REV4. Il semble y avoir un secteur dédoublé dans csv_TIVA_REV4 ? Je laisse tomber 
+	
+	if "`bdd'"=="WIOD" local year 2014
+	if "`bdd'"=="TIVA_REV4" local year 2015
 
-vector_shock_secteurs_pays 1 WIOD RUS
-shock_secteurs_pays 2014 WIOD RUS
-use "$dir/Results/Secteurs_pays/WIOD_2014_RUS_secteurs_pays.dta", clear
-rename S*t1 shock*1
+	Definition_pays_secteur `bdd'
 
-merge 1:1 _n using "$dir/Bases/csv_WIOD"
-drop _merge
-drop p_shock
-order c s
-save "$dir/Results/Secteurs_pays/WIOD_2014_RUS_secteurs_pays", replace	
+	clear
+	set more off
+
+
+	vector_shock_secteurs_pays 1 `bdd' RUS
+	shock_secteurs_pays `year' `bdd' RUS
+	use "$dir/Results/Secteurs_pays/`bdd'_`year'_RUS_secteurs_pays.dta", clear
+	rename S*t1 shock*1
+
+	merge 1:1 _n using "$dir/Bases/csv_`bdd'"
+	drop _merge
+	drop p_shock
+	order c s
+	save "$dir/Results/Secteurs_pays/`bdd'_`year'_RUS_secteurs_pays", replace
+}
 
 
 blif

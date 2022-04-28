@@ -25,6 +25,7 @@ use "$dir/Bases/csv_`bdd'.dta", clear
 mkmat p_shock, matrix(cit)
 matrix ci=cit'  /* transposé*/
 matrix list ci
+blif
 
 
 end

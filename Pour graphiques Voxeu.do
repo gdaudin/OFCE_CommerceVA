@@ -46,12 +46,24 @@ foreach source in WIOD /*TIVA TIVA_REV4 MRIO*/ {
 keep if year==2019
 graph hbar x_WIOD, over(pays, sort(1) label(labsize(tiny))) scheme(s1color) ytitle("Elasticity of the consumer prices" "to a shock in domestic currency, WIOD, 2019") note("Each country is assumed to have is own currency" "Except for countries suffixed by _EUR: the shock is then on the Euro")
 
-graph export "$dirgit/Article VoxEU/Elasticity WIOD 2019.png", replace
+graph export "$dirgit/Article VoxEU/Elasticity change WIOD 2019.png", replace
+
+
+*******Pour graphique de sensibilité aux prix des hydrocarbure
+
+use "$dir/Results/secteurs_pays/mean_chg_WIOD_HC_2014_RUS.dta", clear
+rename shock1 RUS
+merge 1:1 c using "$dir/Results/secteurs_pays/mean_chg_WIOD_HC_2014.dta"
+drop _merge
+gen ratio = RUS/shock1
+sort ratio
+drop if c=="RUS"
+
+graph hbar shock1 ratio , over(c, sort(2) label(labsize(tiny))) scheme(s1color) legend(label(1 "Elasticity to a shock on hydrocarbon prices") label(2  "Share attributable to Russian hydrocarbon prices") rows(2))
+
+graph export "$dirgit/Article VoxEU/Elasticity hydrocarbon WIOD 2019.png", replace
 
 blif
-
-	
-
 	
 ********Figure 1 (Comparing consumer price elasticity to an exchange rate appreciation for WIOD and TIVA, 2011)	
 /*	

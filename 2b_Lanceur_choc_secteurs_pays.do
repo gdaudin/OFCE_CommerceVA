@@ -22,7 +22,7 @@ if ("`c(hostname)'" == "widv270a") global dir  "D:\home\T822289\CommerceVA"
 if ("`c(hostname)'" == "FP1376CD") global dir  "T:\CommerceVA" 
 
 
-if ("`c(username)'"=="guillaumedaudin") global dirgit "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation"
+if ("`c(username)'"=="guillaumedaudin") global dirgit "~/Répertoires Git/OFCE_CommerceVA"
 if ("`c(hostname)'" == "widv270a") global dirgit  "D:\home\T822289\CommerceVA\GIT\commerce_VA_inflation" 
 if ("`c(hostname)'" == "FP1376CD") global dirgit  "T:\CommerceVA\GIT\commerce_va_inflation" 
 
@@ -42,37 +42,58 @@ do "$dirgit/Definition_pays_secteur.do"
 **local nbr_sect=wordcount("$sector")	
 do "$dirgit/choc_secteurs_pays.do"
 
-*foreach source in   WIOD { 
-foreach source in    WIOD TIVA TIVA_REV4 { 
+Definition_pays_secteur WIOD
+
+clear
+set more off
+
+vector_shock_secteurs_pays 1 WIOD RUS
+shock_secteurs_pays 2014 WIOD RUS
+use "$dir/Results/Secteurs_pays/WIOD_2014_RUS_secteurs_pays.dta", clear
+rename S*t1 shock*1
+
+merge 1:1 _n using "$dir/Bases/csv_WIOD"
+drop _merge
+drop p_shock
+order c s
+save "$dir/Results/Secteurs_pays/WIOD_2014_RUS_secteurs_pays", replace	
 
 
-	if "`source'"=="WIOD" local start_year 2000
-	if "`source'"=="TIVA" local start_year 1995
-	if "`source'"=="TIVA_REV4" local start_year 2005
+blif
+
+ ***La suite pour avoir les effets pétrole pour toutes les bases et toutes les années
+
+*foreach bdd in   WIOD { 
+foreach bdd in    WIOD TIVA TIVA_REV4 { 
 
 
-	if "`source'"=="WIOD" local end_year 2014
-	if "`source'"=="TIVA" local end_year 2011
-	if "`source'"=="TIVA_REV4" local end_year 2015
+	if "`bdd'"=="WIOD" local start_year 2000
+	if "`bdd'"=="TIVA" local start_year 1995
+	if "`bdd'"=="TIVA_REV4" local start_year 2005
+
+
+	if "`bdd'"=="WIOD" local end_year 2014
+	if "`bdd'"=="TIVA" local end_year 2011
+	if "`bdd'"=="TIVA_REV4" local end_year 2015
 
 	
-	Definition_pays_secteur `source'
+	Definition_pays_secteur `bdd'
 
 *   foreach i of numlist 2011 {
 	foreach i of numlist `start_year' (1)`end_year'  {
 		clear
 		set more off
 		
-		vector_shock_secteurs_pays 1 `source' 
-		shock_secteurs_pays `i' `source'
-		use "$dir/Results/Secteurs_pays/`source'_`i'_secteurs_pays.dta", clear
+		vector_shock_secteurs_pays 1 `bdd' 
+		shock_secteurs_pays `i' `bdd'
+		use "$dir/Results/Secteurs_pays/`bdd'_`i'_secteurs_pays.dta", clear
 		rename S*t1 shock*1
 
-		merge 1:1 _n using "$dir/Bases/csv_`source'"
+		merge 1:1 _n using "$dir/Bases/csv_`bdd'"
 		drop _merge
 		drop p_shock
 		order c s
-		save "$dir/Results/Secteurs_pays/`source'_`i'_secteurs_pays", replace	
+		save "$dir/Results/Secteurs_pays/`bdd'_`i'_secteurs_pays", replace	
     }
 
 }

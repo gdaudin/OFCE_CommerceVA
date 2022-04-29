@@ -23,7 +23,7 @@ if ("`c(username)'"=="guillaumedaudin") global dirgit "~/Répertoires Git/OFCE_C
 do  "$dirgit/Definition_pays_secteur.do" `source'
 global eurozone "AUT BEL CYP DEU ESP EST FIN FRA GRC IRL ITA LTU LUX LVA MLT NLD PRT SVK SVN"
 
-/*
+
 *******Pour graphique de sensibilité aux chocs de change
 use "$dir/Bases_Sources/Doigt_mouillé_panel.dta", clear
 
@@ -46,9 +46,12 @@ foreach source in WIOD /*TIVA TIVA_REV4 MRIO*/ {
 }
 
 keep if year==2019
+replace pays=substr(pays,1,3)
+drop if pays=="ROW"
 graph hbar x_WIOD, over(pays, sort(1) label(labsize(tiny))) scheme(s1color) ytitle("Elasticity of the consumer prices" "to a shock in domestic currency, WIOD, 2019") note("Each country is assumed to have is own currency" "Except for countries suffixed by _EUR: the shock is then on the Euro")
 
 graph export "$dirgit/Article VoxEU/Elasticity change WIOD 2019.png", replace
+
 
 
 *******Pour graphique de sensibilité aux prix des hydrocarbure
@@ -60,6 +63,9 @@ drop _merge
 gen ratio = RUS/shock1
 sort ratio
 drop if c=="RUS"
+drop if c=="ROW"
+
+replace c=substr(c,1,3)
 
 graph hbar shock1 ratio , over(c, sort(2) label(labsize(tiny))) scheme(s1color) legend(label(1 "Elasticity to a shock on hydrocarbon prices") label(2  "Share attributable to Russian hydrocarbon prices") rows(2))
 
@@ -88,29 +94,31 @@ foreach source in  WIOD /*TIVA TIVA_REV4 */{
 		replace pond_WIOD_HC=-pond_WIOD_HC
 		gen E4HC = pond_WIOD_HC - E1HC - E2HC - E3HC
 		gen blouf = 0
-		gen mylabel= pays if strpos("FRA DEU DEU_EUR ITA ITA_EUR GBR CHN USA CAN JPN ",pays)!=0
+		drop if (strpos("$eurozone",pays)!=0 & strpos("_EUR",pays)!=4)
+		replace pays=substr(pays,1,3)
 			
 
 	sort E1HC
 	gen E1_order = _n
+	
 	labmask E1_order,values(pays)
 	
-	gen sample=1
 	Definition_pays_secteur `source'
-	replace sample=0 if strpos("$eurozone",pays)!=0
 	
-	graph hbar (asis) E1HC E2HC E3HC E4HC if sample==1,  stack over(E1_order, ///
+	gen GVC=E3HC+E4HC
+	
+	drop if pays=="ROW"
+	
+	graph hbar (asis) E1HC E2HC GVC,  stack over(E1_order, ///
 		label(labsize(tiny))) ///
 		marker(1, ms(O) mfcolor(gs1) mlcolor(gs1) msize(tiny) ) ///
 		marker(2, ms(+) mfcolor(gs5) mlcolor(gs5) msize(small) ) ///
 		marker(3, ms(O) mfcolor(gs9) mlcolor(gs9) msize(tiny) ) ///
-		marker(4, ms(O) mfcolor(gs13) mlcolor(gs13) msize(small)) ///
 		xsize(9)  ysize(7) ///
 		name(distr_components_`source'_`i', replace) ///
-		legend(position(3) cols(1)  size(vsmall) label(1 "E1.HC: Direct effect" "through imported" "consumption goods") ///
-		label(2 "E2.HC: Effect on domestic" "consumption goods" "through imported inputs") ///
-		label(3 "E3.HC: Effect on imported" "consumption goods" "through domestic inputs") ///
-		label(4 "E4.HC: Residual")) ///
+		legend(position(3) cols(1)  size(vsmall) label(1 "Direct effect" "through imported" "consumption goods") ///
+		label(2 "Effect on domestic" "consumption goods" "through imported inputs") ///
+		label(3 "Effect through Global value chains")) ///
 		scheme(s1color)
 		
 	graph export "$dirgit/Article VoxEU/distribution_components_`source'_`i'.png", replace	

@@ -55,10 +55,11 @@ graph export "$dirgit/Article VoxEU/Elasticity change WIOD 2019.png", replace
 
 
 *******Pour graphique de sensibilité aux prix des hydrocarbure
+**Voir https://www.statalist.org/forums/forum/general-stata-discussion/general/1481727-graph-bar-with-multiple-yvars-with-different-scales
 
-use "$dir/Results/secteurs_pays/mean_chg_WIOD_HC_2014_RUS.dta", clear
+use "$dir/Results/secteurs_pays/mean_chg_TIVA_REV4_HC_2015_RUS.dta", clear
 rename shock1 RUS
-merge 1:1 c using "$dir/Results/secteurs_pays/mean_chg_WIOD_HC_2014.dta"
+merge 1:1 c using "$dir/Results/secteurs_pays/mean_chg_TIVA_REV4_HC_2015.dta"
 drop _merge
 gen ratio = RUS/shock1
 sort ratio
@@ -67,9 +68,30 @@ drop if c=="ROW"
 
 replace c=substr(c,1,3)
 
-graph hbar shock1 ratio , over(c, sort(2) label(labsize(tiny))) scheme(s1color) legend(label(1 "Elasticity to a shock on hydrocarbon prices") label(2  "Share attributable to Russian hydrocarbon prices") rows(2))
+/*graph hbar shock1 RUS , over(c, sort(2) label(labsize(half_tiny))) scheme(s1color) legend(label(1 "Elasticity to a shock on mined energy products prices") label(2  "Share attributable to Russian mined energy products prices") rows(2))
+*/
 
-graph export "$dirgit/Article VoxEU/Elasticity hydrocarbon WIOD 2019.png", replace
+
+sort ratio
+
+gen sorted_ctry1=(2*_n)-1+(_n-1)
+gen sorted_ctry2=sorted_ctry1+1
+labmask sorted_ctry2, values(c)
+
+twoway line shock1 sorted_ctry1, yaxis(1) ///
+	ytitle("Elasticity to a shock on" "mined energy products prices", axis(1)) || ///
+	bar ratio sorted_ctry2, yaxis(2) /// 
+	ytitle("Share attributable to Russian" "mined energy product prices", axis(2)) ///
+	xlabel(2(3)188, valuelabel angle(90) notick labsize(tiny)) ///
+	|| bar RUS sorted_ctry1,yaxis(1) ///
+	legend(order(1 "Total Elasticity" 3 "Elasticity to Russia" 2 "Share") position (1)) ///
+	xtitle("") ///
+	scheme(s1color)
+
+
+
+
+graph export "$dirgit/Article VoxEU/Elasticity hydrocarbon TIVA_REV4 2015.png", replace
 
 */
 

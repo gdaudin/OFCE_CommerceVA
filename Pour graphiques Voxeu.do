@@ -84,7 +84,7 @@ twoway line shock1 sorted_ctry1, yaxis(1) ///
 	ytitle("Share attributable to Russian" "mined energy product prices", axis(2)) ///
 	xlabel(2(3)188, valuelabel angle(90) notick labsize(tiny)) ///
 	|| bar RUS sorted_ctry1,yaxis(1) ///
-	legend(order(1 "Total Elasticity" 3 "Elasticity to Russia" 2 "Share") position (1)) ///
+	legend(order(1 "Total elasticity" 2 "Elasticity to Russia" 3 "Share attributable to Russia") size(*0.9)) ///
 	xtitle("") ///
 	scheme(s1color)
 

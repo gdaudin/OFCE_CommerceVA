@@ -76,8 +76,8 @@ clear
 if "`csource'"=="all" local csourcefile
 if "`csource'"!="all" local csourcefile = "`csource'"
 
-if "`csource'"=="all" use "$dir/Results/secteurs_pays/`bdd'_`yrs'_secteurs_pays.dta"
-else use "$dir/Results/secteurs_pays/`bdd'_`yrs'_`csource'_secteurs_pays.dta"
+if "`csource'"=="all" use "$dir/Results/Secteurs_pays/`bdd'_`yrs'_secteurs_pays.dta"
+else use "$dir/Results/Secteurs_pays/`bdd'_`yrs'_`csource'_secteurs_pays.dta"
 mkmat shock1, matrix(shock)
 
 use "$dir/Bases/csv_`bdd'.dta", clear

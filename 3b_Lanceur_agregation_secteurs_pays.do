@@ -41,9 +41,14 @@ set more off
 
 
 *Pour le choc pétrole russe
+/*
 compute_HC_vect 2014 WIOD
 table_mean 2014 HC 1 WIOD all
 table_mean 2014 HC 1 WIOD RUS
+*/
+compute_HC_vect 2015 TIVA_REV4
+table_mean 2015 HC 1 TIVA_REV4 all
+table_mean 2015 HC 1 TIVA_REV4 RUS
 
 blif
 

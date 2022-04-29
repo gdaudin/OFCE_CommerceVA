@@ -43,8 +43,9 @@ do "$dirgit/Definition_pays_secteur.do"
 do "$dirgit/choc_secteurs_pays.do"
 
 
-foreach bdd in   WIOD /*TIVA_REV4*/ {
+foreach bdd in   /*WIOD*/ TIVA_REV4 {
 	*Cela ne marche pas dans TIVA_REV4. Il semble y avoir un secteur dédoublé dans csv_TIVA_REV4 ? Je laisse tomber 
+	**C’est reglé !
 	
 	if "`bdd'"=="WIOD" local year 2014
 	if "`bdd'"=="TIVA_REV4" local year 2015

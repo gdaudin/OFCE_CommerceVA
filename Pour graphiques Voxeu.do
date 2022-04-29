@@ -22,7 +22,7 @@ if ("`c(username)'"=="guillaumedaudin") global dirgit "~/Répertoires Git/OFCE_C
 
 do  "$dirgit/Definition_pays_secteur.do" `source'
 global eurozone "AUT BEL CYP DEU ESP EST FIN FRA GRC IRL ITA LTU LUX LVA MLT NLD PRT SVK SVN"
-
+/*
 
 *******Pour graphique de sensibilité aux chocs de change
 use "$dir/Bases_Sources/Doigt_mouillé_panel.dta", clear
@@ -117,7 +117,7 @@ graph combine energy1 energy2, scheme(s1color)
 
 graph export "$dirgit/Article VoxEU/Elasticity hydrocarbon TIVA_REV4 2015.png", replace
 
-*/
+
 
 ********Pour graphique de la distribution des shares
 
@@ -170,8 +170,95 @@ foreach source in  WIOD /*TIVA TIVA_REV4 */{
 	graph export "$dirgit/Article VoxEU/distribution_components_`source'_`i'.png", replace	
 		
 			
-		}
-	
-	
-	
+		}	
 }
+*/
+
+***Pour graphique évolution
+
+
+
+
+use "$dir/Bases_Sources/Doigt_mouillé_panel.dta", clear
+
+
+
+*drop if strpos(pays,"_EUR")!=0
+replace ratio_impt_conso=impt_conso/GDP
+replace ratio_impt_interm = impt_interm/GDP
+drop if ratio_impt_conso==.
+drop if ratio_impt_interm==.
+
+
+
+drop Y_tot_per_year weight ratio_impt_conso_pond ratio_impt_interm_pond ratio_impt_conso_mean ratio_impt_interm_mean
+
+egen Y_tot_per_year=total(GDP), by(year)
+gen weight=GDP/Y_tot_per_year
+
+
+
+gen ratio_impt_conso_pond = ratio_impt_conso*weight
+gen ratio_impt_interm_pond = ratio_impt_interm*weight
+
+egen ratio_impt_conso_mean = total(ratio_impt_conso_pond), by(year)
+egen ratio_impt_interm_mean = total(ratio_impt_interm_pond), by(year)
+
+
+
+
+foreach source in WIOD TIVA TIVA_REV4 MRIO {
+	*reg pond_`source'_HC ratio_impt_conso ratio_impt_interm i.pays_num
+	reg pond_`source'_HC ratio_impt_conso ratio_impt_interm ratio_impt_conso_mean ratio_impt_interm_mean i.pays_num
+	predict x_`source' /*if year >= 2010  & pond_`source'_HC ==. */
+}
+
+
+	
+global common_sample "   AUS AUT_EUR BEL_EUR BGR BRA CAN CHE" 
+global common_sample "$common_sample CHN CYP_EUR CZE DEU_EUR DNK ESP_EUR EST_EUR FIN_EUR"
+global common_sample "$common_sample FRA_EUR GBR GRC_EUR    HRV HUN IDN IND IRL_EUR        ITA_EUR JPN     KOR"
+global common_sample "$common_sample LTU_EUR LUX_EUR LVA_EUR MEX              MLT_EUR     NLD_EUR NOR        POL PRT_EUR"
+global common_sample "$common_sample ROU RUS       SVK_EUR SVN_EUR SWE       TUR TWN USA        "
+
+keep if strpos("$common_sample",pays)!=0
+
+drop Y_tot_per_year weight
+egen Y_tot_per_year=total(GDP), by(year)
+gen weight=GDP/Y_tot_per_year
+
+
+foreach source in WIOD TIVA TIVA_REV4 MRIO {	
+	gen elast_pond=pond_`source'_HC*weight
+	gen elast_pond_pred=x_`source'*weight
+	egen `source'_elast_annual_pond=total(elast_pond), by(year)
+	egen `source'_elast_annual_pond_pred=total(elast_pond_pred), by(year)
+	drop elast_pond elast_pond_pred
+	replace `source'_elast_annual_pond=. if `source'_elast_annual_pond==0 
+	replace `source'_elast_annual_pond_pred=. if `source'_elast_annual_pond_pred==0 
+}
+
+
+
+
+drop pays
+sort year
+bys year: keep if _n==1
+keep year WIOD_elast_annual_pond-MRIO_elast_annual_pond_pred
+
+
+twoway 	(line WIOD_elast_annual_pond year, lcolor(blue)) ///
+		(line WIOD_elast_annual_pond_pred year, lcolor(red) lpattern(dash)) ///
+		(line TIVA_REV4_elast_annual_pond year, lcolor(green)) ///
+		/*(line MRIO_elast_annual_pond_pred year, lcolor(black) lpattern(dash))*/, ///
+		legend(label(2 "extrapolation from WIOD") label(1 "WIOD") ///
+		 label(3 "TIVA rev4"))  /// 
+		ytitle("elasticity (output weighted)", margin(medium)) ///
+		note("The average CPI elasticity has been computed from each of countries" ///
+		"in a common 43 countries sample, assuming all" ///
+		"2020 Eurozone countries already in the Eurozone from 1995." ///
+		"The extrapolation relies on GDP and trade data") ///
+		scheme(s1color)
+
+
+graph export  "$dirgit/Article VoxEU/doigt_mouille.png", replace

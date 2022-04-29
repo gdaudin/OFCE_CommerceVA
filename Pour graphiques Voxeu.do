@@ -66,12 +66,10 @@ sort ratio
 drop if c=="RUS"
 drop if c=="ROW"
 
+
 replace c=substr(c,1,3)
 
-/*graph hbar shock1 RUS , over(c, sort(2) label(labsize(half_tiny))) scheme(s1color) legend(label(1 "Elasticity to a shock on mined energy products prices") label(2  "Share attributable to Russian mined energy products prices") rows(2))
-*/
-
-
+/*
 sort ratio
 
 gen sorted_ctry1=(2*_n)-1+(_n-1)
@@ -87,6 +85,32 @@ twoway line shock1 sorted_ctry1, yaxis(1) ///
 	legend(order(1 "Total elasticity" 2 "Elasticity to Russia" 3 "Share attributable to Russia") size(*0.9)) ///
 	xtitle("") ///
 	scheme(s1color)
+*/	
+
+
+gen shock_reste=shock1-RUS
+
+
+local sample "BRA IND USD CAN IRL CHE CHN LUX MLT NOR ZPN GBR ESP PRT FRA DNK"
+local sample "`sample' TUR KAZ AUT BEL CYP SWE GRC DEU SVN NLD ROU HRV ITA FIN POL"
+local sample "`sample' EST CZE LVA HUN SVK BGR LTU USA JPN"
+gen sample=1 if strpos("`sample'",c)!=0
+
+
+graph hbar  RUS shock_rest if sample==1, stack over(c, sort(1) label(labsize(vsmall))) scheme(s1color) legend(order(2 "Elasticity to a shock on" "mined energy products prices" 1 "Elasticity to a shock on" "Russian mined energy products prices") rows(2) size(small) ) name(energy1, replace)
+
+graph hbar  ratio if sample==1, stack over(c, sort(1) label(labsize(vsmall))) ///
+		scheme(s1color) ///
+		ytitle("Share attributable to Russia") ///
+		name(energy2, replace)
+		
+	*	legend(order(1 "Elasticity to a shock on Russian mined energy products prices")) ///
+
+*keep if strpos(c,")
+
+graph combine energy1 energy2, scheme(s1color)
+
+
 
 
 

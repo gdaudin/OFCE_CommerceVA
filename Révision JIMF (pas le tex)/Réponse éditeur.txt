@@ -40,6 +40,16 @@ b. Difficile de parler de l’hétérogénité par pays. Ou degrés de dollar do
 
 *	The language in the introduction is not always clear. For example: "we assume that the impact of the exchange rate fluctuation is proportional across sector". At page 1 I was not sure to what the proportionality referred, only in section 2.3 I understood that it referred to the use of inputs whose price is affected.  I also found confusing the discussion of channels iii) and iv) at page 2. Most readers are unfamiliar with input-output structures and have not thought of all the ways in which shocks propagate from one country to another through input-output linkages.
 
+We simplified the discussion on channels as follows:
+"Third, we look into the determinants of the HCE deflator elasticity and the role of global value chains in the transmission of an exchange rate appreciation. 
+We identify the main channels through which the exchange rate impacts the HCE deflator when production processes are global.
+We find that the main transmission channels are:
+\textit{i)} the prices of imported ﬁnal goods sold directly to domestic consumers and
+\textit{ii)} the prices of imported inputs entering domestic production. 
+These two channels explain three-quarters of the transmission of an exchange rate appreciation to domestic prices.
+By contrast, other channels reflecting the impact of global value chains (such as the price of exported inputs feeding through imported foreign production) play a more limited role, with marked cross-countries heterogeneity.
+Hence, only one-fourth of the elasticity of the HCE deflator to the exchange rate is attributable to participation in global value chains."
+
 
 Guillaume :
 - Revoir la proportionnalité
@@ -57,6 +67,8 @@ Violaine s’occupe de ces trois points. Hadrien lui donne un coup de main sur l
 *	Section 2 should be re-organised. The focus of the section should be on the derivation of the HCE deflator elasticity. The data could be discussed in a separate section.
 Violaine Data section 1
 Guillaume refocus section 2
+
+As suggested, we discuss the data sources and compare the different databases in a separate section  (section 1). 
 
 *	I am unsure of the purpose of section 2.1.   I am guessing the authors wanted to show that the effect of a change in production costs is different from that due to a change in the exchange rate. But isn't that shown in Online Appendix D?
 

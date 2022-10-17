@@ -45,7 +45,7 @@
 \usepackage{setspace}
 \setstretch{1.5} % BCE line spacing 1.5
 %\doublespacing
-\pagenumbering{gobble} %BCE: NO PAGE NUMBERS, nor any other items in the page headers or footers
+\pagenumbering{arabic} %BCE: NO PAGE NUMBERS, nor any other items in the page headers or footers
 %\usepackage[hmargin=2.5cm,vmargin=3.5cm]{geometry} %BCE: The margins are 2.5 cm (horizontal) and 3.5 cm (vertical)
 
 
@@ -63,7 +63,7 @@
 	\and
 	Guillaume Daudin\thanks{Université Paris-Dauphine, PSL University, CNRS, 8007, IRD, 260, LEDa, DIAL, 75016, Paris, France. Sciences Po, OFCE, 75007, Paris. Corresponding author. E-mail: \email{guillaume.daudin@dauphine.psl.eu}}
 	\and
-	Violaine Faubert\thanks{Banque de France, ECB. E-mail: \email{violaine.faubert@ecb.europa.eu}}
+	Violaine Faubert\thanks{Banque de France. E-mail: \email{violaine.faubert@banque-france.fr}}
 	\and
 	Antoine Lalliard\thanks{Banque de France. E-mail: \email{antoine.lalliard@banque-france.fr}}
 	\and
@@ -508,13 +508,13 @@ Where $\gamma_n$ is the share of domestic production factors, $a_{n,n’}$ the s
 Assuming perfectly competitive firms and prices set at the marginal cost, standard cost minimisation for each country leads to the following pricing system:
 %https://mbounthavong.com/blog/2019/2/19/cobb-douglas-production-function-and-total-costs
 \begin{eqnarray*}
-	p_n=x_n \times w_n^{\gamma_k} \times \prod_{n’=1}^{n’=N}p_{n’}^{a_{n,n’}}, \forall n 
+	p_n=x_n \times w_n^{\gamma_n} \times \prod_{n’=1}^{n’=N}p_{n’}^{a_{n,n’}}, \forall n 
 \end{eqnarray*}
 
 With $w_n$ the unit income of domestic production factors and $x_n$ a constant depending only on parameters:
 
 \begin{eqnarray*}
-	x_n=\gamma_k^{-\gamma_k} \times \prod_{n’=1}^{n’=N}a_{n,n’}^{-a_{n,n’}}
+	x_n=\gamma_n^{-\gamma_n} \times \prod_{n’=1}^{n’=N}a_{n,n’}^{-a_{n,n’}}
 \end{eqnarray*}
 
 Using logs, we have:
@@ -523,7 +523,7 @@ Using logs, we have:
 	log(p_n) = log(x_n) + \gamma_n log(w_n) + \sum_{n’=1}^{n’=N}a_{n,n’}.log(p_{n’}), \forall n
 \end{eqnarray*}
 
-Define $P$ the vector of prices and $Z$ a vector of $log(x_n)+\gamma_n.log(w_n)$, both of dimension $(1,N)$ : 
+Define $P$ the vector of prices and $Z$ a vector of $log(x_n)+\gamma_n.log(w_n)$, both of dimension $(1,N)$: 
 
 \begin{eqnarray}
 	log(P)=Z + log(P){\cal A}
@@ -585,7 +585,7 @@ The effects of the change in prices spread over multiple simultaneous production
 The overall impact of the exchange rate appreciation in dollar terms is equal, for the shocked country $A$, to the decline in consumer prices directly due to the exchange rate fluctuation, plus direct and indirect decreases (via inter-industry linkages in the country), in national currency and then converted back into dollar terms, in the prices of inputs imported from $B$ and disseminated to all branches. 
 The overall impact on prices in dollar terms in country $A$ is therefore lower than the initial exchange rate variation, as national currency prices are also affected. 
 For country $B$, the final impact is equal to the cumulative direct and indirect effects of the higher prices of imported inputs.\\
-In a global economy composed of $I$ countries, each with $J$ sectors,\footnote{Online appendix D explores the two-country, one-sector case and contrasts the effect of an exchange rate variation and the effect of a price variation} the appreciation of a country's currency $i$ against all other currencies translates into a rise in country $i$'s prices in dollars. The dollar price of each sector will vary in percentage (approximated as log point assuming that the exchange rate variation is small enough) by: $c_\$^i$ for sectors in the shock-stricken country$~i$ and 0 in other countries. \\
+In a global economy composed of $I$ countries, each with $J$ sectors,\footnote{Online appendix B explores the two-country, one-sector case and contrasts the effect of an exchange rate variation and the effect of a price variation} the appreciation of a country's currency $i$ against all other currencies translates into a rise in country $i$'s prices in dollars. The dollar price of each sector will vary in percentage (approximated as log point assuming that the exchange rate variation is small enough) by: $c_\$^i$ for sectors in the shock-stricken country$~i$ and 0 in other countries. \\
 Hence, for each sector $j$ in country $i$ (see notation table):
 \begin{eqnarray*}
  {{\Delta }^{0}}log(p_{\${ij}})=log(p_{\${ij}}^{1})-log(p_{\${ij}}^{0})=c_{\${ij}}=c_{\$}^i
@@ -865,7 +865,7 @@ Our results concur with the literature.
 Using comprehensive measures of global value chain integration, \cite{Timmer2016} find that the expansion of global value chain has slowed down since the Great Recession.\\
 While the latest dataset available for WIOD dates back to 2014, MRIO covers the most recent years, up to 2019. 
 Results from the MRIO database suggest that the elasticity has bounced back from 2016 onwards, reaching 0.09 in 2019.
-However, the version of MRIO we use (March 2021) suffers from data quality issues for 2018 and 2019 (see Online Appendix F). Between 2017 and 2018, the HCE deflator elasticity sharply increased in a number of countries (e.g. China and India). 
+However, the version of MRIO we use (March 2021) suffers from data quality issues for 2018 and 2019 (see Online Appendix C). Between 2017 and 2018, the HCE deflator elasticity sharply increased in a number of countries (e.g. China and India). 
 %\footnote{For instance, we observe large shifts in the consumption of services in China (see Online Appendix F), suggesting data quality issues in 2018.}
 Hence, we assume that the elasticity estimated using MRIO is not reliable for 2018 and 2019 (see Section \ref{sec:Extrapolations} for further details).\\
 Overall, our estimates are robust to using different databases.
@@ -1171,7 +1171,7 @@ With the exception of 2009, the relationship is broadly stable (see Figures \ref
 \floatfoot{Sources: WIOD and authors’ calculations}
 \end{figure}
 
-We obtain similar results with TiVA (see Online Appendix B). 
+We obtain similar results with TiVA (see Online Appendix D). 
 % je suggère de retirer cette phrase pour simplifier l'exposé, ou éventuellement d'en faire une note de bas de page
 %The functional form might seem a bit counterintuitive (one might expect that the elasticity is affine function of openness as summarized by E1), but the analytical examination of the two-country, one sector case, shows that it is plausible (see Appendix \ref{AnalyticalAppendix}).
 Our results suggest that we can approximate the HCE deflator elasticity using the share of imported goods in household consumption and the share of imported inputs in household consumption of domestic goods. $E1.HC+E2.HC$ is a good predictor of the total effects.
@@ -1185,14 +1185,14 @@ In this section, we show that a precise assessment of the HCE deflator elasticit
 The construction of World Input-Output tables is data-demanding and WIOTs are typically released with a lag of several years.
 As a result, world input-output matrices are not available for the most recent years.
 The latest years covered by WIOD and TiVA rev. 4 are, respectively, 2014 and 2015. 
-While the MRIO database covers more recent years, it is fraught with data quality issues for 2018 (see Section \ref{subsec:timeevol} and Online Appendix F).
+While the MRIO database covers more recent years, it is fraught with data quality issues for 2018 (see Section \ref{subsec:timeevol} and Online Appendix C).
 Using WIOTs also involves cumbersome computations.
 Given these difficulties, we look for a simpler way to compute the elasticity of the HCE deflator to the exchange rate.
 We estimate the HCE deflator elasticity from 2015 onwards using GDP statistics and trade data on consumption and intermediates.\\
 As a starting point, the sum of the share of imported goods in household consumption and the share of imported inputs in household consumption of domestic goods ($E1.HC + E2.HC$) is a good predictor of the impact of exchange rate fluctuations on household consumption prices. 
 However, these data ($E1.HC$ and $E2.HC$) are not up-to-date for a large number of countries, as they are not routinely computed by national statistical institutes.
 We can rely on a proxy to identify consumption and intermediate goods imports using the CEPII BACI database and the BEC classification \citep{Gaulier2010}\footnote{BACI provides disaggregated data on bilateral trade flows for more than 5000 products and 200 countries. The database is built from data directly reported by each country to the United Nations Statistical Division (Comtrade). Products are defined as items from the Harmonized System nomenclature, at the 6-digit level.}.
-Household consumption and intermediate products are more difficult to collect systematically for many countries and many years. In Online Appendix C, we use data from the World Bank and Eurostat, which are only available for a limited number of countries. Hence, the study reported in Online Appendix C only includes a limited number of observations.
+Household consumption and intermediate products are more difficult to collect systematically for many countries and many years. In Online Appendix F, we use data from the World Bank and Eurostat, which are only available for a limited number of countries. Hence, the study reported in Online Appendix F only includes a limited number of observations.
 
 Here, to expand our panel, we use an even simpler proxy for $E1.HC+E2.HC$, using only trade data from BACI and GDP data from the World Bank (see equation \ref{eq:infer2}).
 These data are available until 2019. 
@@ -1207,7 +1207,7 @@ These data are available until 2019.
 \end{equation}
 
 We perform an out-of-sample prediction for WIOD, 2014, using data for years 2000 to 2008.
-The results are satisfactory, although the mean and median errors are larger than in Online Appendix C (see Figure \ref{fig:panel_pred2}). 
+The results are satisfactory, although the mean and median errors are larger than in Online Appendix F (see Figure \ref{fig:panel_pred2}). 
 Our findings are robust to using other databases (results obtained with TiVA revisions 3 and 4 are available upon request).
 
 
@@ -1224,7 +1224,7 @@ Our findings are robust to using other databases (results obtained with TiVA rev
 Using these equations, we can predict the HCE deflator elasticity from 2015 onwards.
 Figure \ref{fig:panel_pred3} shows that the in-sample predictions are robust, giving confidence in the quality of the out-of-sample predictions.
 We also compare our predictions with the elaticity estimated using MRIO, which provides WIOTs up to 2019. 
-Our predictions are in line with results from MRIO up to 2017. For the most recent years, there seem to be data issues in MRIO (see Online Appendix F), which the comparison helps to identify.
+Our predictions are in line with results from MRIO up to 2017. For the most recent years, there seem to be data issues in MRIO (see Online Appendix C), which the comparison helps to identify.
 We thus provide a simple accounting tool to estimate the percentage change in prices in response to exchange rate variations for the most recent years.
 
 

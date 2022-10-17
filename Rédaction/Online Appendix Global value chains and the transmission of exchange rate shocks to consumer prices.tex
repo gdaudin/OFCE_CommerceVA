@@ -3,7 +3,7 @@
 %\usepackage[latin1]{inputenc}
 %\usepackage{amssymb,amsmath,a4wide}
 \usepackage[utf8]{inputenc}
-\pagenumbering{gobble} % bce: PAS DE NUMERO DE PAGES
+\pagenumbering{arabic} % bce: PAS DE NUMERO DE PAGES ("gooble")
 \usepackage{amssymb,amsmath}
 \usepackage{nicefrac}
 \usepackage[pdftex]{graphicx}
@@ -66,7 +66,7 @@
 	\and
 	Guillaume Daudin\thanks{Université Paris-Dauphine, PSL University, CNRS, 8007, IRD, 260, LEDa, DIAL, 75016, Paris, France. Sciences Po, OFCE, 75007, Paris. Corresponding author. E-mail: \email{guillaume.daudin@dauphine.psl.eu}}
 	\and
-	Violaine Faubert\thanks{Banque de France, ECB. E-mail: \email{violaine.faubert@ecb.europa.eu}}
+	Violaine Faubert\thanks{Banque de France. E-mail: \email{violaine.faubert@banque-france.fr}}
 	\and
 	Antoine Lalliard\thanks{Banque de France. E-mail: \email{antoine.lalliard@banque-france.fr}}
 	\and
@@ -145,8 +145,138 @@
 \label{tab:wiodindustries}
 \end{table}
 
+
+
 \newpage
-\section*{Appendix B: Estimating the HCE deflator elasticity using the shares of imported consumption and imported intermediates in domestic consumption} \label{AppendixFonctionLinéaireTIVA}
+\section*{Appendix B: Comparing the impact of a change in prices with that of an exchange rate variation}
+In this appendix, we use the two-country and one-good case to illustrate the difference between a change in prices and an exchange rate variation.
+\subsection*{Effect of a change in prices based of value added contents}
+Using the notations of the paper, we have in the two-country and one-good case:
+\begin{gather*}
+	\cal {A} = \left(\begin{matrix}a_{1,1}&a_{1,2}\\a_{2,1}&a_{2,2}\end{matrix}\right)
+	\\
+	I-\cal {A}=\left(\begin{matrix}1-a_{1,1}&-a_{1,2}\\-a_{2,1}&1-a_{2,2}\end{matrix}\right)
+	\\
+	\left(I-\cal {A}\right)^{-1}=\frac{1}{\left(1-a_{1,1}\right)\left(1-a_{2,2}\right)-a_{2,1}a_{1,2}}\left(\begin{matrix}1-a_{2,2}&a_{1,2}\\a_{2,1}&1-a_{1,1}\end{matrix}\right) =z.\left(\begin{matrix}1-a_{2,2}&a_{1,2}\\a_{2,1}&1-a_{1,1}\end{matrix}\right) \\ 
+	=\left(\begin{matrix}u&v\\w&x\end{matrix}\right)
+	\\
+	\text{Country 1 demand shares}=d=\left(\begin{matrix}1-f\\f\end{matrix}\right) \\
+	\left(I-\cal {A}\right)^{-1}d=\left(\begin{matrix}u-uf+vf\\w-wf+xf\end{matrix}\right)
+\end{gather*}
+
+When a change $c$ occurs in the prices of country 2, we have the following initial vector: $C=\left(0,c\right)$.
+In the first instance, this has an impact on prices $C\cal {A}$, and then $C{\cal{A}}^{2}$, etc.
+Hence, the total effect of the change in prices $S$ is: 
+
+
+\begin{equation*}
+	S=C+C{\cal{A}}+C{\cal{A}}^{2}...=C\left(I-{\cal{A}}\right)^{-1}=\left(\begin{matrix}cw  &   cx\end{matrix}\right)
+\end{equation*}
+
+To measure the impact on the household consumption expenditure deflator, we compute a weighted sum of these effects:
+
+\begin{equation}
+	\bar{s}=c.\left[\left(1-f\right)w+xf\right]=c.\frac{\left(1-f\right)a_{2,1}+f\left(1-a_{1,1}\right)}{\left(1-a_{1,1}\right)\left(1-a_{2,2}\right)-a_{2,1}a_{1,2}}
+\end{equation}
+
+If each nation's production only uses national inputs, we have:
+\begin{equation*}
+	\bar{s}=c.\frac{f}{1-a_{2,2}}
+\end{equation*}
+
+\subsection*{Impact of an exchange rate variation}
+
+Using the notations in the paper, we have:
+
+\begin{gather*}
+	C=\left(0,\frac{-c_\$}{1+c_\$}\right)=\left(0,-c\right)
+	\\
+	C_\$=\left(c_\$,0\right)
+	\\
+	\tilde{C}_\$=\left(0,-c_\$\right)
+	\\
+	\hat{C}_\$=\left(\frac{c_\$}{1+c_\$},0\right)=\left(c,0\right)
+	\\
+	{\cal B} = \left(\begin{matrix}0&a_{1,2}\\0&0\end{matrix}\right)
+	\\
+	\tilde{\cal B} = \left(\begin{matrix}0&0\\a_{2,1}&0\end{matrix}\right)
+\end{gather*}
+
+Hence:
+
+\begin{gather*}
+	S =\left(0,c\right)+\left[\left(0,-c.a_{1,2}\right)+\left(c.a_{2,1},0\right)\right]*\left(\begin{matrix}u&v\\w&x\end{matrix}\right)
+	\\
+	=\left(0,c\right)+\left(c.a_{2,1},-c.a_{1,2}\right)*\left(\begin{matrix}u&v\\w&x\end{matrix}\right)
+	\\
+	=\left(0,c\right)+\left(u.c.a_{2,1}-w.c.a_{1,2},v.c.a_{2,1}-x.c.a_{1,2}\right)
+	\\
+	=\left(u.c.a_{2,1}-w.c.a_{1,2},c+v.c.a_{2,1}-x.c.a_{1,2}\right)
+\end{gather*}
+and
+\begin{gather*}
+	\bar{s}=\left(u.c.a_{2,1}-w.c.a_{1,2},c+v.c.a_{2,1}-x.c.a_{1,2}\right).\left(\begin{matrix}1-f\\f\end{matrix}\right)
+	\\
+	\bar{s}=c\left[f\left(1+v.a_{2,1}-x.a_{1,2}\right)+\left(1-f\right)\left(u.a_{2,1}-w.a_{1,2}\right)\right]
+\end{gather*}
+
+
+If each nation's production only uses national inputs, we have:
+
+\begin{gather*}
+	\bar{s}=c.f
+\end{gather*}
+
+This confirms that the impact of an exchange rate variation differs from that of a change in prices.
+
+\newpage
+\section*{Appendix C: MRIO data quality issues}
+
+Figure \ref{fig:panel_pred3} shows that the HCE deflator elasticity extrapolated from WIOD, World Bank and BACI data for the period 2015-2019 is close to the elasticity obtained with MRIO in 2016-2017. By contrast, the elasticity estimated using MRIO is much higher in 2018 and 2019. 
+This discrepancy likely reflects data quality issues in MRIO.
+%We believe this result is due to a glitch in MRIO data we acceded on March 2021.
+Figure \ref{fig:pays_soucis_MRIO} shows that the HCE deflator elasticity estimated using MRIO increased by more than 20\% for India and China between 2017 and 2018.
+For China, the increase reaches 100\%, which is not plausible.
+Such a sharp increase was not observed between 2016 and 2017. 
+Computations with WIOD confirm that such sharp increases were not observed in the past and are thus unlikely (see Figure \ref{fig:pays_soucis_WIOD}).
+Looking more closely at MRIO, we observe large shifts in the consumption of services in China in 2018. 
+Chinese households’ consumption of Chinese education services increased by 43\% between 2017 and 2018, whereas the consumption of Chinese transport services decreased by 43\% over the same period. 
+Such large and unlikely shifts suggest data quality issues in MRIO for 2018. 
+
+\begin{figure}[H]
+	\centering
+	\caption{\footnotesize{\textbf{Comparing the output-weighed HCE deflator elasticity to predictions based on World Bank and BACI data.}}}
+	\begin{tabular}{c}
+		\includegraphics[width=5.0in, height=3.5in]{"predictions_reg1_doigt_mouille_trend_no".png}\\
+	\end{tabular}
+	\label{fig:panel_pred3}
+	\floatfoot{Sources: WIOD, TIVA, MRIO, World Bank, BACI and authors’ calculations}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\caption{\footnotesize{\textbf{Comparing country-specific HCE deflator elasticities computed using MRIO in 2016, 2017 and 2018.}}}
+	\begin{tabular}{c}
+		\includegraphics[width=5.0in, height=3.5in]{"pays_en_soucis_2018_MRIO".png}\\
+	\end{tabular}
+	\label{fig:pays_soucis_MRIO}
+	\floatfoot{Sources: MRIO and authors’ calculations}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\caption{\footnotesize{\textbf{Comparing country-specific HCE deflator elasticities computed using WIOD in 2012, 2013 and 2014.}}}
+	\begin{tabular}{c}
+		\includegraphics[width=5.0in, height=3.5in]{"pays_en_soucis_Comp_WIOD".png}\\
+	\end{tabular}
+	\label{fig:pays_soucis_WIOD}
+	\floatfoot{Sources: WIOD and authors’ calculations}
+\end{figure}
+
+
+
+\newpage
+\section*{Appendix D: Estimating the HCE deflator elasticity using the shares of imported consumption and imported intermediates in domestic consumption} \label{AppendixFonctionLinéaireTIVA}
 
 As a complement to section 4.2, Figures \ref{fig:ratiodir_TiVA} and \ref{fig:evolution_coef_TiVA} for TIVA rev. 3 and Figures \ref{fig:ratiodir_TiVA_REV4} and \ref{fig:evolution_coef_TiVA_REV4} for TIVA rev. 4 show that using the share of imported final consumption goods and services and the share of imported intermediate goods in domestic final consumption provides a good prediction of the elasticity of the HCE deflator to the exchange rate.
 
@@ -193,7 +323,7 @@ As a complement to section 4.2, Figures \ref{fig:ratiodir_TiVA} and \ref{fig:evo
 
 
 \newpage
-\section*{Appendix C: Extrapolating the HCE deflator elasticity using household consumption, intermediate consumption and trade statistics}  % je n'avais pas propose un titre plus clair dans une precedent version?
+\section*{Appendix F: Extrapolating the HCE deflator elasticity using household consumption, intermediate consumption and trade statistics}  % je n'avais pas propose un titre plus clair dans une precedent version?
 Section 4.2 shows that the sum of the share of imported goods in household consumption and the share of imported inputs in household consumption of domestic goods ($E1.HC + E2.HC$) is a good predictor of the HCE deflator elasticity to the exchange rate. 
 However, these data ($E1.HC$ and $E2.HC$) are not up-to-date for a large number of countries, as they are not routinely computed by national statistical institutes. 
 Section 4.3 shows that trade and GDP data are a good predictor of the HCE deflator elasticity.
@@ -264,89 +394,6 @@ The outcome is close to the elasticity computed with WIOD for 2014, despite a sl
 	\label{fig:panel_pred1}
 \end{figure}
 
-
-
-\newpage
-\section*{Appendix D: Comparing the impact of a change in prices with that of an exchange rate variation}
-In this appendix, we use the two-country and one-good case to illustrate the difference between a change in prices and an exchange rate variation.
-\subsection*{Effect of a change in prices based of value added contents}
-Using the notations of the paper, we have in the two-country and one-good case:
-\begin{gather*}
-\cal {A} = \left(\begin{matrix}a_{1,1}&a_{1,2}\\a_{2,1}&a_{2,2}\end{matrix}\right)
-\\
-I-\cal {A}=\left(\begin{matrix}1-a_{1,1}&-a_{1,2}\\-a_{2,1}&1-a_{2,2}\end{matrix}\right)
-\\
-\left(I-\cal {A}\right)^{-1}=\frac{1}{\left(1-a_{1,1}\right)\left(1-a_{2,2}\right)-a_{2,1}a_{1,2}}\left(\begin{matrix}1-a_{2,2}&a_{1,2}\\a_{2,1}&1-a_{1,1}\end{matrix}\right) =z.\left(\begin{matrix}1-a_{2,2}&a_{1,2}\\a_{2,1}&1-a_{1,1}\end{matrix}\right) \\ 
-=\left(\begin{matrix}u&v\\w&x\end{matrix}\right)
-\\
-\text{Country 1 demand shares}=d=\left(\begin{matrix}1-f\\f\end{matrix}\right) \\
-\left(I-\cal {A}\right)^{-1}d=\left(\begin{matrix}u-uf+vf\\w-wf+xf\end{matrix}\right)
-\end{gather*}
-
-When a change $c$ occurs in the prices of country 2, we have the following initial vector: $C=\left(0,c\right)$.
-In the first instance, this has an impact on prices $C\cal {A}$, and then $C{\cal{A}}^{2}$, etc.
-Hence, the total effect of the change in prices $S$ is: 
-
-
-\begin{equation*}
-S=C+C{\cal{A}}+C{\cal{A}}^{2}...=C\left(I-{\cal{A}}\right)^{-1}=\left(\begin{matrix}cw  &   cx\end{matrix}\right)
-\end{equation*}
-
-To measure the impact on the household consumption expenditure deflator, we compute a weighted sum of these effects:
-
-\begin{equation}
-\bar{s}=c.\left[\left(1-f\right)w+xf\right]=c.\frac{\left(1-f\right)a_{2,1}+f\left(1-a_{1,1}\right)}{\left(1-a_{1,1}\right)\left(1-a_{2,2}\right)-a_{2,1}a_{1,2}}
-\end{equation}
-
-If each nation's production only uses national inputs, we have:
-\begin{equation*}
-\bar{s}=c.\frac{f}{1-a_{2,2}}
-\end{equation*}
-
-\subsection*{Impact of an exchange rate variation}
-
-Using the notations in the paper, we have:
-
-\begin{gather*}
-C=\left(0,\frac{-c_\$}{1+c_\$}\right)=\left(0,-c\right)
-\\
-C_\$=\left(c_\$,0\right)
-\\
-\tilde{C}_\$=\left(0,-c_\$\right)
-\\
-\hat{C}_\$=\left(\frac{c_\$}{1+c_\$},0\right)=\left(c,0\right)
-\\
-{\cal B} = \left(\begin{matrix}0&a_{1,2}\\0&0\end{matrix}\right)
-\\
-\tilde{\cal B} = \left(\begin{matrix}0&0\\a_{2,1}&0\end{matrix}\right)
-\end{gather*}
-
-Hence:
-
-\begin{gather*}
-S =\left(0,c\right)+\left[\left(0,-c.a_{1,2}\right)+\left(c.a_{2,1},0\right)\right]*\left(\begin{matrix}u&v\\w&x\end{matrix}\right)
-\\
-=\left(0,c\right)+\left(c.a_{2,1},-c.a_{1,2}\right)*\left(\begin{matrix}u&v\\w&x\end{matrix}\right)
-\\
-=\left(0,c\right)+\left(u.c.a_{2,1}-w.c.a_{1,2},v.c.a_{2,1}-x.c.a_{1,2}\right)
-\\
-=\left(u.c.a_{2,1}-w.c.a_{1,2},c+v.c.a_{2,1}-x.c.a_{1,2}\right)
-\end{gather*}
-and
-\begin{gather*}
-\bar{s}=\left(u.c.a_{2,1}-w.c.a_{1,2},c+v.c.a_{2,1}-x.c.a_{1,2}\right).\left(\begin{matrix}1-f\\f\end{matrix}\right)
-\\
-\bar{s}=c\left[f\left(1+v.a_{2,1}-x.a_{1,2}\right)+\left(1-f\right)\left(u.a_{2,1}-w.a_{1,2}\right)\right]
-\end{gather*}
-
-
-If each nation's production only uses national inputs, we have:
-
-\begin{gather*}
-\bar{s}=c.f
-\end{gather*}
-
-This confirms that the impact of an exchange rate variation differs from that of a change in prices.
 
 
 \newpage
@@ -468,50 +515,6 @@ The other effects are approximately additive if the openness rate ranges from 0.
 		\caption{E1.HC, E2.HC, E3.HC, E4.HC and the "residual"  ($\bar{s}-E1.HC-E2.HC$) as a function of the openness rate}
 		\label{fig:tous_les_E}
 	\end{center}
-\end{figure}
-
-\newpage
-\section*{Online Appendix F: MRIO data quality issues}
-
-Figure \ref{fig:panel_pred3} shows that the HCE deflator elasticity extrapolated from WIOD, World Bank and BACI data for the period 2015-2019 is close to the elasticity obtained with MRIO in 2016-2017. By contrast, the elasticity estimated using MRIO is much higher in 2018 and 2019. 
-This discrepancy likely reflects data quality issues in MRIO.
-%We believe this result is due to a glitch in MRIO data we acceded on March 2021.
-Figure \ref{fig:pays_soucis_MRIO} shows that the HCE deflator elasticity estimated using MRIO increased by more than 20\% for India and China between 2017 and 2018.
-For China, the increase reaches 100\%, which is not plausible.
-Such a sharp increase was not observed between 2016 and 2017. 
-Computations with WIOD confirm that such sharp increases were not observed in the past and are thus unlikely (see Figure \ref{fig:pays_soucis_WIOD}).
-Looking more closely at MRIO, we observe large shifts in the consumption of services in China in 2018. 
-Chinese households’ consumption of Chinese education services increased by 43\% between 2017 and 2018, whereas the consumption of Chinese transport services decreased by 43\% over the same period. 
-Such large and unlikely shifts suggest data quality issues in MRIO for 2018. 
-
-\begin{figure}[H]
-	\centering
-	\caption{\footnotesize{\textbf{Comparing the output-weighed HCE deflator elasticity to predictions based on World Bank and BACI data.}}}
-	\begin{tabular}{c}
-		\includegraphics[width=5.0in, height=3.5in]{"predictions_reg1_doigt_mouille_trend_no".png}\\
-	\end{tabular}
-	\label{fig:panel_pred3}
-	\floatfoot{Sources: WIOD, TIVA, MRIO, World Bank, BACI and authors’ calculations}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\caption{\footnotesize{\textbf{Comparing country-specific HCE deflator elasticities computed using MRIO in 2016, 2017 and 2018.}}}
-	\begin{tabular}{c}
-		\includegraphics[width=5.0in, height=3.5in]{"pays_en_soucis_2018_MRIO".png}\\
-	\end{tabular}
-	\label{fig:pays_soucis_MRIO}
-	\floatfoot{Sources: MRIO and authors’ calculations}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\caption{\footnotesize{\textbf{Comparing country-specific HCE deflator elasticities computed using WIOD in 2012, 2013 and 2014.}}}
-	\begin{tabular}{c}
-		\includegraphics[width=5.0in, height=3.5in]{"pays_en_soucis_Comp_WIOD".png}\\
-	\end{tabular}
-	\label{fig:pays_soucis_WIOD}
-	\floatfoot{Sources: WIOD and authors’ calculations}
 \end{figure}
 
 

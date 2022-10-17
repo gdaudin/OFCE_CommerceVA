@@ -1,3 +1,5 @@
+*ssc install estout, replace
+
 
 if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
 if ("`c(hostname)'" == "widv270a") global dir  "D:/home/T822289/CommerceVA" 
@@ -438,6 +440,8 @@ foreach reg in reg1 reg2 {
 				
 				label var pond_`source'_HC "Elasticity from `source'"
 				label var x "Predicted elasticity"
+				tab pays if x!=. & pond_`source'_HC !=.
+				local N=r(N)
 				
 				
 				capture drop n 
@@ -452,11 +456,10 @@ foreach reg in reg1 reg2 {
 				*//* title (`source'_`reg'_pred_`lag_pred'y trend: `trend') *//*
 				 */ name("`source'_pred_`lag_pred'y", replace) ytitle("Predicted elasticity")/*
 				 */ xtitle("HCE deflator elasticity in 2014 (WIOD)") /*
-				 */ note("Correlation: `correlation' Mean error: `mean_error' p.c.  Median error: `median_error' p.c.") /*
+				 */ note("N: `N' Correlation: `correlation' Mean error: `mean_error' p.c.  Median error: `median_error' p.c.") /*
 				 */ scheme(s1color) /*
 				 */ yscale(range(0.05 (0.05) 0.2)) ylabel(0.05 (0.05) 0.2)/*
 				 */ xscale(range(0.05 (0.05) 0.2)) xlabel(0.05 (0.05) 0.2)
-				
 				
 				graph export  "$dir/Results/resultats_`reg'_doigt_mouillé_`source'_pred_`lag_pred'y_trend_`trend'.png", replace
 				if "`source'"=="WIOD" & "`trend'"=="no" & `lag_pred'==6 {
@@ -508,17 +511,42 @@ gen ratio_impt_interm_pond = ratio_impt_interm*weight
 egen ratio_impt_conso_mean = total(ratio_impt_conso_pond), by(year)
 egen ratio_impt_interm_mean = total(ratio_impt_interm_pond), by(year)
 
+/*
+label var ratio_impt_conso "Share of imp. cons. goods over GDP (i,t)"
+label var ratio_impt_interm "Share of imp. inter. goods over GDP (i,t)"
+label var ratio_impt_conso_mean "Mean sample share of imp. consx goods over GDP (t)"
+label var ratio_impt_interm_mean "Mean sample share of imp. inter. goods over GDP (t)"
+*/
 
+label var ratio_impt_conso "\$ \beta_{1} \$"
+label var ratio_impt_interm "\$ \beta_{2} \$"
+label var ratio_impt_conso_mean "\$ \beta_{3} \$"
+label var ratio_impt_interm_mean "\$ \beta_{4} \$"
 
-
+est clear
+global controls ratio_impt_conso ratio_impt_interm ratio_impt_conso_mean ratio_impt_interm_mean
 foreach source in WIOD TIVA TIVA_REV4 MRIO {
 	*reg pond_`source'_HC ratio_impt_conso ratio_impt_interm i.pays_num
-	reg pond_`source'_HC ratio_impt_conso ratio_impt_interm ratio_impt_conso_mean ratio_impt_interm_mean i.pays_num
+	eststo `source' : reg pond_`source'_HC ratio_impt_conso ratio_impt_interm ratio_impt_conso_mean ratio_impt_interm_mean i.pays_num
+	tab pays_num if e(sample)==1
+	local nbrc=r(r)
+	tab year if e(sample)==1
+	local nbry=r(r)
+	estadd local nbrcountry  "`nbrc'"
+	estadd local nbryear  "`nbry'"
+	estadd local FE "Yes"
 	predict x_`source' /*if year >= 2010  & pond_`source'_HC ==. */
 }
 
 
-	
+esttab WIOD TIVA TIVA_REV4 using "$dirgit/Rédaction/reg17.tex", replace b(2) se(2) label star(* 0.10 ** 0.05 *** 0.01) ///
+    title("Regression 17 for our three sources") booktabs ///
+	keep($controls) mtitle("WIOD" "TIVA" "TIVA REV4") ///
+	scalars("FE Country fixed effects" "nbrcountry Number of countries" "nbryear Number of years") ///
+	substitute(\_ _)
+
+
+
 global common_sample "   AUS AUT_EUR BEL_EUR BGR BRA CAN CHE" 
 global common_sample "$common_sample CHN CYP_EUR CZE DEU_EUR DNK ESP_EUR EST_EUR FIN_EUR"
 global common_sample "$common_sample FRA_EUR GBR GRC_EUR    HRV HUN IDN IND IRL_EUR        ITA_EUR JPN     KOR"
@@ -565,7 +593,7 @@ twoway 	(line WIOD_elast_annual_pond year, lcolor(blue)) ///
 		/*label(8 "predicted MRIO rev4")*/ label(7 "MRIO rev4"))  /// 
 		ytitle("elasticity (absolute value)" "output weighted", margin(medium)) ///
 		note("The average CPI elasticity has been computed from each of countries" ///
-		"in a common 43 countries sample" ///
+		"in a common 42 countries sample" ///
 		"assuming all 2020 Eurozone countries already in the Eurozone from 1995" ///
 		"and aggregated using an output weighted mean") ///
 		scheme(s1mono)

@@ -1127,7 +1127,7 @@ Still, $E1.HC$ and $E2.HC$ are relatively important (especially for small countr
 
 
 \subsection{Estimating the HCE deflator elasticity using the shares of imported goods and imported inputs in household consumption}
-
+\label{subsec:estimatingHCEwithnationalaccounts}
 The importance of $E1.HC$ and $E2.HC$ suggests that the HCE deflator elasticity to the exchange rates could be estimated using national accounts data and input-output matrices.
 National accounts data provide $E1.HC$ and $E2.HC$, whereas world input-output matrices are needed for computing $E3.HC$ and $E4.HC$. 
 We investigate whether $E3.HC$ and $E4.HC$ can be inferred from easier-to-compute elements of $\overline{s}_{i}^{i,HC}$.
@@ -1189,16 +1189,18 @@ While the MRIO database covers more recent years, it is fraught with data qualit
 Using WIOTs also involves cumbersome computations.
 Given these difficulties, we look for a simpler way to compute the elasticity of the HCE deflator to the exchange rate.
 We estimate the HCE deflator elasticity from 2015 onwards using GDP statistics and trade data on consumption and intermediates.\\
-As a starting point, the sum of the share of imported goods in household consumption and the share of imported inputs in household consumption of domestic goods ($E1.HC + E2.HC$) is a good predictor of the impact of exchange rate fluctuations on household consumption prices. 
+As discussed in \ref{subsec:estimatingHCEwithnationalaccounts}, the sum of the share of imported goods in household consumption and the share of imported inputs in household consumption of domestic goods ($E1.HC + E2.HC$) is a good predictor of the impact of exchange rate fluctuations on household consumption prices. 
 However, these data ($E1.HC$ and $E2.HC$) are not up-to-date for a large number of countries, as they are not routinely computed by national statistical institutes.
-We can rely on a proxy to identify consumption and intermediate goods imports using the CEPII BACI database and the BEC classification \citep{Gaulier2010}\footnote{BACI provides disaggregated data on bilateral trade flows for more than 5000 products and 200 countries. The database is built from data directly reported by each country to the United Nations Statistical Division (Comtrade). Products are defined as items from the Harmonized System nomenclature, at the 6-digit level.}.
-Household consumption and intermediate products are more difficult to collect systematically for many countries and many years. In Online Appendix F, we use data from the World Bank and Eurostat, which are only available for a limited number of countries. Hence, the study reported in Online Appendix F only includes a limited number of observations.
+We cannot use them to easily extrapolate HCE deflators.
 
-Here, to expand our panel, we use an even simpler proxy for $E1.HC+E2.HC$, using only trade data from BACI and GDP data from the World Bank (see equation \ref{eq:infer2}).
+Online Appendix F explores the using consumption and intermediate goods imports from the CEPII BACI database and the BEC classification \citep{Gaulier2010}\footnote{BACI provides disaggregated data on bilateral trade flows for more than 5000 products and 200 countries. The database is built from data directly reported by each country to the United Nations Statistical Division (Comtrade). Products are defined as items from the Harmonized System nomenclature, at the 6-digit level.} to extrapolate HCE deflators.
+Still, household consumption and intermediate products are more difficult to collect systematically for many countries and many years. In Online Appendix F, we use data from the World Bank and Eurostat, which are only available for a limited number of countries. This limits the number of countries to 29.
+
+Here, to expand our panel to 42, we use an even simpler proxy for $E1.HC+E2.HC$, using only trade data from BACI and GDP data from the World Bank (see equation \ref{eq:infer2}).
 These data are available until 2019. 
  \begin{equation}
 \begin{array}{llll}
-\overline{s}_{i,t}^{i,t,HC}= \alpha & +  \beta_1  \frac{\textnormal{imported consumption goods}_{i,t}}{\textnormal{GDP}_{i,t}} \\ & + \beta_2 \frac{\textnormal{imported intermediate goods}_{i,t}}{\textnormal{GDP}_{i,t}} \\
+\overline{s}_{i,t}^{i,t,HC}=  &  \beta_1  \frac{\textnormal{imported consumption goods}_{i,t}}{\textnormal{GDP}_{i,t}} \\ & + \beta_2 \frac{\textnormal{imported intermediate goods}_{i,t}}{\textnormal{GDP}_{i,t}} \\
 & +  \beta_3  \frac{\textnormal{Total sample imported consumption goods}_{t}}{\textnormal{Total sample GDP}_{t}} \\
 & + \beta_4 \frac{\textnormal{Total sample imported intermediate goods}_{t}}{\textnormal{Total sample GDP}_{t}} \\
 & +fe_{i}+\varepsilon_{i,t}
@@ -1206,7 +1208,9 @@ These data are available until 2019.
 \label{eq:infer2}
 \end{equation}
 
-We perform an out-of-sample prediction for WIOD, 2014, using data for years 2000 to 2008.
+\input{reg17.tex}
+
+We then perform an out-of-sample prediction for WIOD, 2014, using data for years 2000 to 2008.
 The results are satisfactory, although the mean and median errors are larger than in Online Appendix F (see Figure \ref{fig:panel_pred2}). 
 Our findings are robust to using other databases (results obtained with TiVA revisions 3 and 4 are available upon request).
 

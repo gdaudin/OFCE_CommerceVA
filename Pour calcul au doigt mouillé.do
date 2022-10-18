@@ -527,11 +527,15 @@ est clear
 global controls ratio_impt_conso ratio_impt_interm ratio_impt_conso_mean ratio_impt_interm_mean
 foreach source in WIOD TIVA TIVA_REV4 MRIO {
 	*reg pond_`source'_HC ratio_impt_conso ratio_impt_interm i.pays_num
-	eststo `source' : reg pond_`source'_HC ratio_impt_conso ratio_impt_interm ratio_impt_conso_mean ratio_impt_interm_mean i.pays_num
+	eststo `source' : reg pond_`source'_HC ratio_impt_conso ratio_impt_interm ratio_impt_conso_mean ratio_impt_interm_mean i.pays_num, vce(cluster pays_num)
 	tab pays_num if e(sample)==1
 	local nbrc=r(r)
 	tab year if e(sample)==1
 	local nbry=r(r)
+	test ratio_impt_conso ratio_impt_interm ratio_impt_conso_mean ratio_impt_interm_mean
+	local test r(p)
+	local test : di %10.2f `test'
+	estadd local pF_test=`test'
 	estadd local nbrcountry  "`nbrc'"
 	estadd local nbryear  "`nbry'"
 	estadd local FE "Yes"
@@ -540,10 +544,13 @@ foreach source in WIOD TIVA TIVA_REV4 MRIO {
 
 
 esttab WIOD TIVA TIVA_REV4 using "$dirgit/Rédaction/reg17.tex", replace b(2) se(2) label star(* 0.10 ** 0.05 *** 0.01) ///
-    title("Regression 17 for our three sources") booktabs ///
+    booktabs ///
 	keep($controls) mtitle("WIOD" "TIVA" "TIVA REV4") ///
-	scalars("FE Country fixed effects" "nbrcountry Number of countries" "nbryear Number of years") ///
-	substitute(\_ _)
+	scalars("FE Country fixed effects" "nbrcountry Number of countries" "nbryear Number of years" ///
+	"r2_a Adj. R-square" "pF_test p-value joint significance test (excluding fixed effects)" ) ///
+	substitute(\_ _) nonotes 
+	
+	*	stats(r2_a, label ("Adj. R-square")) ///
 
 
 

@@ -1208,7 +1208,14 @@ These data are available until 2019.
 \label{eq:infer2}
 \end{equation}
 
+
+\begin{table}[htbp]\centering
+	\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+	\caption{Regression 17 for WIOD, TIVA and TIVA rev4 }
 \input{reg17.tex}
+\\
+Note: Country-clustered standard errors in parentheses, \sym{*} \(p<0.10\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\)
+\end{table}
 
 We then perform an out-of-sample prediction for WIOD, 2014, using data for years 2000 to 2008.
 The results are satisfactory, although the mean and median errors are larger than in Online Appendix F (see Figure \ref{fig:panel_pred2}). 

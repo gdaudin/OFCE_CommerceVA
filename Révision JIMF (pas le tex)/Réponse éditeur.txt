@@ -44,8 +44,8 @@ We simplified the discussion on channels as follows:
 "Third, we look into the determinants of the HCE deflator elasticity and the role of global value chains in the transmission of an exchange rate appreciation. 
 We identify the main channels through which the exchange rate impacts the HCE deflator when production processes are global.
 We find that the main transmission channels are:
-\textit{i)} the prices of imported ﬁnal goods sold directly to domestic consumers and
-\textit{ii)} the prices of imported inputs entering domestic production. 
+i) the prices of imported ﬁnal goods sold directly to domestic consumers and
+ii) the prices of imported inputs entering domestic production. 
 These two channels explain three-quarters of the transmission of an exchange rate appreciation to domestic prices.
 By contrast, other channels reflecting the impact of global value chains (such as the price of exported inputs feeding through imported foreign production) play a more limited role, with marked cross-countries heterogeneity.
 Hence, only one-fourth of the elasticity of the HCE deflator to the exchange rate is attributable to participation in global value chains."

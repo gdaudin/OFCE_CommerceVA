@@ -71,11 +71,10 @@ As suggested, we discuss the data sources and compare the different databases in
 
 *	I am unsure of the purpose of section 2.1.   I am guessing the authors wanted to show that the effect of a change in production costs is different from that due to a change in the exchange rate. But isn't that shown in Online Appendix D?
 
-Guillaume : le simplifier / passer en Online Appendix
-
+Thank you for this comment. This section was meant initially as an introduction to the rest of the analysis, but we agree it was actually redundant. We have moved it to Online Appendix. 
 *	The analysis in section 4.3 is poorly explained. Are all countries included when equation (17) is estimated? What are the estimated coefficients? Why is the estimated specification that in equation (17)? What happens if the time-varying variables are replaced by time fixed-effects?
 
-Thank you for this comment. We assume you meant section 5.3 in the first version of the paper, where the equation (17) lies. We now explain why we do not use the time-fixed effects. We give and comment the regression results (and explain why we are more interested in the goodness-of-fit than the coefficient value and coefficients). We give the number of countries and years over which the equation is estimated. We hope to have thus clarified the discussion and answered your concerns
+Thank you for this comment. We have changed that section. We now explain why we do not use the time-fixed effects. We give and comment the regression results (and explain why we are more interested in the goodness-of-fit than the coefficient value and coefficients). We give the number of countries and years over which the equation is estimated. We hope to have thus clarified the discussion and answered your concerns
 **Vérifier les numéros de sections dans l’appendice !**
 
 *	For the exercise in 4.3 to be helpful, it would be good if the authors could validate their estimated elasticities. Is there any other study that for a subset of the sampled countries has obtained relatively precise estimated HCE deflator elasticities?  In the abstract, the authors mention their elasticity estimates are in line with the literature- so that should be feasible. A lot of the correlations highlighted in the paper feel mechanical.

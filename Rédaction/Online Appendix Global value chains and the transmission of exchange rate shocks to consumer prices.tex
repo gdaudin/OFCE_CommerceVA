@@ -145,10 +145,40 @@
 \label{tab:wiodindustries}
 \end{table}
 
+\newpage
+\section*{Appendix B: Defining the impact of a change in prices using an I-O model}\label{subsec:ioprice}
+In this appendix we compute the well-know effect of the impact of a change in prices using an I-O model.
+Suppose an exogenous change in input prices defined in log points (i.e. approximating percentages for small changes). 
+Define ${{\Delta }^{0}}log(P)$ the vector of dimension $(1, N)$ computed as the difference between the original price vector $log(P^0)$ and the new vector $log(P^1)$. Then:
+\begin{eqnarray*}
+	\Delta ^0 log(P)=log(P^1)-log(P^0)=C, 
+\end{eqnarray*}
+with $C$ the vector of dimension (1,N) that contains the direct effect of the change in prices expressed in log points.\\
+$C$ directly affects the HCE deflator.
+%Under these conditions, for each industry $i$, the shock can be written as the absolute difference between the initial production price and the new production price invoiced following the shock ("shocked price" hereafter).\\
+In addition, firms face a change in their costs, which affects their prices according to equation 1 in the main text.
+Hence, the price change is transmitted to country-specific industries that are using domestic input through the change in input prices. 
+The higher the country-specific industries' reliance on those inputs, the higher the change in their production prices.\\
+In a first step, the impact of the change in input prices on each country-specific industry's output prices amounts to $\Delta^{1}log(P)=C{\cal A}$.\\
+In a second step, the impact of the change in input prices is passed on to all the country-specific industries using these inputs. 
+For the $k^{th}$ step, the increase in production prices amounts to $\Delta^k log(P)=C{\cal A}^k$.\\
+As the technical coefficients are smaller than 1, the effect of the change in input prices wears out as $k$ increases.
+The overall effect of the change in input prices is equal to the sum of the initial change in prices and all the subsequent changes in each step.
+Let us call $S$ the total effect of the change in input prices (in log points), a vector $(1, N)$ composed of the elements $s_{ij}$ measuring the total effect of the shock on the price of sector $j$ in country $i$. We have: 
+
+\begin{eqnarray}
+	S=C {\left( I+{\cal A}+{\cal A}^2+...+{\cal A}^k+...\right)} =C {\left( I-{\cal A} \right)}^{-1}
+	\label{eq:eqchocprix} 
+\end{eqnarray}
+
+
+with ${\left( I-{\cal A} \right)}^{-1}$ the Leontieff inverse matrix. 
+If the change in the input prices is small enough, the elements of $S$ correspond to the elasticity of sectoral prices to a change in input prices. 
+
 
 
 \newpage
-\section*{Appendix B: Comparing the impact of a change in prices with that of an exchange rate variation}
+\section*{Appendix C: Comparing the impact of a change in prices with that of an exchange rate variation}
 In this appendix, we use the two-country and one-good case to illustrate the difference between a change in prices and an exchange rate variation.
 \subsection*{Effect of a change in prices based of value added contents}
 Using the notations of the paper, we have in the two-country and one-good case:
@@ -230,7 +260,7 @@ If each nation's production only uses national inputs, we have:
 This confirms that the impact of an exchange rate variation differs from that of a change in prices.
 
 \newpage
-\section*{Appendix C: MRIO data quality issues}
+\section*{Appendix D: MRIO data quality issues}
 
 Figure \ref{fig:panel_pred3} shows that the HCE deflator elasticity extrapolated from WIOD, World Bank and BACI data for the period 2015-2019 is close to the elasticity obtained with MRIO in 2016-2017. By contrast, the elasticity estimated using MRIO is much higher in 2018 and 2019. 
 This discrepancy likely reflects data quality issues in MRIO.
@@ -276,7 +306,7 @@ Such large and unlikely shifts suggest data quality issues in MRIO for 2018.
 
 
 \newpage
-\section*{Appendix D: Estimating the HCE deflator elasticity using the shares of imported consumption and imported intermediates in domestic consumption} \label{AppendixFonctionLinéaireTIVA}
+\section*{Appendix E: Estimating the HCE deflator elasticity using the shares of imported consumption and imported intermediates in domestic consumption} \label{AppendixFonctionLinéaireTIVA}
 
 As a complement to section 4.2, Figures \ref{fig:ratiodir_TiVA} and \ref{fig:evolution_coef_TiVA} for TIVA rev. 3 and Figures \ref{fig:ratiodir_TiVA_REV4} and \ref{fig:evolution_coef_TiVA_REV4} for TIVA rev. 4 show that using the share of imported final consumption goods and services and the share of imported intermediate goods in domestic final consumption provides a good prediction of the elasticity of the HCE deflator to the exchange rate.
 
@@ -397,7 +427,7 @@ The outcome is close to the elasticity computed with WIOD for 2014, despite a sl
 
 
 \newpage
-\section*{Appendix E: Transmission channels of an exchange rate variation in the two-country, one-sector case}\label{AnalyticalAppendix}
+\section*{Appendix G: Transmission channels of an exchange rate variation in the two-country, one-sector case}\label{AnalyticalAppendix}
 %je retire car cést tres bizare ce titre de sous section, j'ai cru que cétait une erreur
 %\subsection*{The issue}
 

@@ -353,7 +353,129 @@ As a complement to section 4.2, Figures \ref{fig:ratiodir_TiVA} and \ref{fig:evo
 
 
 \newpage
-\section*{Appendix F: Extrapolating the HCE deflator elasticity using household consumption, intermediate consumption and trade statistics}  % je n'avais pas propose un titre plus clair dans une precedent version?
+\section*{Appendix F: Transmission channels of an exchange rate variation in the two-country, one-sector case}\label{AnalyticalAppendix}
+%je retire car cést tres bizare ce titre de sous section, j'ai cru que cétait une erreur
+%\subsection*{The issue}
+
+As a reminder from the paper, where $\overline{s}_{i}^{i,HC}$ corresponds to the impact of an exchange rate variation on consumer prices:  
+\begin{equation}
+	\begin{array}{lccl}
+		\overline{s}_{i}^{i,HC}&=S^i.HC^i=E1.HC^i+E2.HC^i+E3.HC^i+E4.HC^i \\
+		&=E1.HC^{i,imp}+E2.HC^{i,dom}+E3.HC^{i,imp}+E4.HC^i
+	\end{array} 
+\end{equation}
+
+and
+
+\begin{equation}
+	\begin{array}{lccl}
+		S^ i&=&C^i	&+ \left(\hat{C}^i_\$.{\cal B}^i+{C^i}{\tilde{{\cal B}^i}}\right)*{{(I-{\cal A})}^{-1}} \\
+		S^i &=&\underbrace{C^i}_{\substack{\text{(E1) direct effect through} \\ \text{ imported consumption goods}}}&+ \underbrace{{C^i}{\tilde{{\cal B}^i}}}_{\substack{\text{(E2) effect on} \\ \text{ \emph{domestic} consumption goods} \\ \text{ through \emph{imported} inputs}}}  + \underbrace{\hat{C}^i_\$.{\cal B}^i}_{\substack{\text{(E3)  effect on} \\ \text{\emph{imported} consumption goods} \\ \text{through \emph{domestic} inputs}}} \\ &&+\underbrace {\left( \hat{C}^i_\$.{\cal B}^i + {C^i}{\tilde{{\cal B}^i}}\right)*{{(I-{\cal A})}^{-1}}*{\cal A}}_{\text{(E4) residual}} \\
+	\end{array}
+\end{equation}
+
+
+
+When the domestic currency appreciates, $E1$ and $E2$ reduce country $i$'s consumer prices, whereas $E3$ increases them. $E1$ and $E2$ are easy to compute with national input-output matrices, whereas world input-output matrices are needed for computing $E3$ and $E4$.
+
+Unexpectedly, $E3.HC + E4.HC$ does not vary much with the openness rate of the economy (see Figure 12 of the main text).
+
+
+Let us focus on the two-country, one-sector economy: 
+
+\begin{gather*}
+	E1=C=\left(0,-c\right)
+	\\
+	E2=C.\tilde{\cal B}^i=\left(0,-c\right).\left(\begin{matrix}0&0\\a_{2,1}&0\end{matrix}\right)=\left(-c.a_{2,1},0\right)
+	\\
+	E3=(c,0).\left(\begin{matrix}0&a_{1,2}\\0&0\end{matrix}\right)=\left(0,c.a_{1,2}\right)
+\end{gather*}
+
+\begin{gather*}
+	E1.HC = \left(0,-c\right).\left(\begin{matrix}1-f\\f\end{matrix}\right)=-f.c
+	\\
+	E2.HC=\left(-c.a_{2,1},0\right).\left(\begin{matrix}1-f\\f\end{matrix}\right)=-c.a_{2,1}.\left(1-f\right)
+	\\ 
+	E3.HC=\left(0,c.a_{1,2}\right).\left(\begin{matrix}1-f\\f\end{matrix}\right)=f.c.a_{1,2}
+\end{gather*}
+
+We do not lose any generality by normalising the shock $c$ to 1. 
+
+And :
+\begin{gather}
+	\bar{s}-E1.HC-E2.HC=\left(\begin{array}{r}
+		-\frac{a_{12} a_{21}^{2} - a_{11} a_{21} a_{22} + {\left(a_{11} - a_{12}\right)} a_{21} - {\left(a_{12} a_{21}^{2} - a_{11} a_{21} a_{22} - {\left(a_{11} - 1\right)} a_{12} + {\left(a_{11} - 2 \, a_{12}\right)} a_{21}\right)} f}{a_{12} a_{21} - {\left(a_{11} - 1\right)} a_{22} + a_{11} - 1}
+	\end{array}\right)
+\end{gather}
+We assume that:
+$\frac{a_{1,1}}{a_{2,1}}=\frac{1-f}{f}$ and $a_{1,1}+a_{2,1}=a$. \\ 
+So
+$a_{1,1}=(1-f)a$ and $a_{2,1}=fa$. \\
+
+Then:
+
+\begin{gather}
+	\bar{s}-E1.HC-E2.HC=\left(\begin{array}{r}
+		-\frac{{\left(a^{2} a_{12} + a^{2} a_{22} - a^{2}\right)} f^{3} - {\left(2 \, a^{2} a_{22} - 2 \, a^{2} + {\left(a^{2} + a\right)} a_{12}\right)} f^{2} + {\left(a^{2} a_{22} - a^{2} + a_{12}\right)} f}{{\left(a - 1\right)} a_{22} - {\left(a a_{12} + a a_{22} - a\right)} f - a + 1}
+	\end{array}\right)
+\end{gather}
+
+The derivative of this according to f is: 
+\begin{gather*}
+	\left(\begin{array}{r}
+		-\frac{{\left({\left(a^{2} a_{12} + a^{2} a_{22} - a^{2}\right)} f^{3} - {\left(2 \, a^{2} a_{22} - 2 \, a^{2} + {\left(a^{2} + a\right)} a_{12}\right)} f^{2} + {\left(a^{2} a_{22} - a^{2} + a_{12}\right)} f\right)} {\left(a a_{12} + a a_{22} - a\right)}}{{\left({\left(a - 1\right)} a_{22} - {\left(a a_{12} + a a_{22} - a\right)} f - a + 1\right)}^{2}} \\
+		- \frac{a^{2} a_{22} + 3 \, {\left(a^{2} a_{12} + a^{2} a_{22} - a^{2}\right)} f^{2} - a^{2} - 2 \, {\left(2 \, a^{2} a_{22} - 2 \, a^{2} + {\left(a^{2} + a\right)} a_{12}\right)} f + a_{12}}{{\left(a - 1\right)} a_{22} - {\left(a a_{12} + a a_{22} - a\right)} f - a + 1}
+	\end{array}\right)
+\end{gather*}
+
+The sign of this expression is difficult to study. We hence move to a numerical application.
+
+%\subsection*{Numerical application} 
+%inutile dávoir des sections avec des titres enormes pour láppednix, je propose de retirer, la phrasse precedente annonce l'applicationn numeriique
+Based on WIOD 2014, we compute the ratio between value added and production, which corresponds to: 
+egen total=rowtotal(vAUS1-vROW) and then (161-74)/161=0.54.
+
+To simplify, we assume that the ratio is equal to 0.5.
+\begin{gather*}
+	a_{1,1}+a_{1,2}=a_{2,1}+a_{2,2}=0.5 \\
+	\frac{a_{1,2}}{a_{1,1}+a_{1,2}}=f \\
+	a_{2,1}=0.48 \\
+	a_{2,2}=0.02
+\end{gather*}
+In that case:
+
+\begin{gather*}
+	\begin{array}{r}
+		\bar{s}-E1.HC-E2.HC = \frac{-0.125 \, f^{3} + 0.245 \, f^{2} - 0.11 \, f}{-0.25 \, f - 0.26
+		}
+	\end{array}
+\end{gather*}
+
+Which yields Figures \ref{fig:resid} and \ref{fig:tous_les_E}.
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics{etude_residu.png}
+		\caption{$\bar{s}-E1.HC-E2.HC$ as a function of the openness rate}
+		\label{fig:resid}
+	\end{center}
+\end{figure}
+
+Actual openness rates in the sample vary between 0.15 and 0.50. In that range, the relationship between the openness rate and the residual is not monotonous (see Figure \ref{fig:resid}).
+
+Figure \ref{fig:tous_les_E} confirms that, in that numerical exercise, the total effect is dominated by the direct effect through imported consumption goods and, to a lesser extent, the effect on domestic consumption goods through imported inputs. 
+The other effects are approximately additive if the openness rate ranges from 0.15 to 0.50.
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics{etude_tous_les_E.png}
+		\caption{E1.HC, E2.HC, E3.HC, E4.HC and the "residual"  ($\bar{s}-E1.HC-E2.HC$) as a function of the openness rate}
+		\label{fig:tous_les_E}
+	\end{center}
+\end{figure}
+
+
+\newpage
+\section*{Appendix G: Extrapolating the HCE deflator elasticity using household consumption, intermediate consumption and trade statistics}  % je n'avais pas propose un titre plus clair dans une precedent version?
 Section 4.2 shows that the sum of the share of imported goods in household consumption and the share of imported inputs in household consumption of domestic goods ($E1.HC + E2.HC$) is a good predictor of the HCE deflator elasticity to the exchange rate. 
 However, these data ($E1.HC$ and $E2.HC$) are not up-to-date for a large number of countries, as they are not routinely computed by national statistical institutes. 
 Section 4.3 shows that trade and GDP data are a good predictor of the HCE deflator elasticity.
@@ -426,126 +548,6 @@ The outcome is close to the elasticity computed with WIOD for 2014, despite a sl
 
 
 
-\newpage
-\section*{Appendix G: Transmission channels of an exchange rate variation in the two-country, one-sector case}\label{AnalyticalAppendix}
-%je retire car cést tres bizare ce titre de sous section, j'ai cru que cétait une erreur
-%\subsection*{The issue}
-
-As a reminder from the paper, where $\overline{s}_{i}^{i,HC}$ corresponds to the impact of an exchange rate variation on consumer prices:  
-\begin{equation}
-\begin{array}{lccl}
-\overline{s}_{i}^{i,HC}&=S^i.HC^i=E1.HC^i+E2.HC^i+E3.HC^i+E4.HC^i \\
-&=E1.HC^{i,imp}+E2.HC^{i,dom}+E3.HC^{i,imp}+E4.HC^i
-\end{array} 
-\end{equation}
-
-and
-
-\begin{equation}
-\begin{array}{lccl}
-S^ i&=&C^i	&+ \left(\hat{C}^i_\$.{\cal B}^i+{C^i}{\tilde{{\cal B}^i}}\right)*{{(I-{\cal A})}^{-1}} \\
-S^i &=&\underbrace{C^i}_{\substack{\text{(E1) direct effect through} \\ \text{ imported consumption goods}}}&+ \underbrace{{C^i}{\tilde{{\cal B}^i}}}_{\substack{\text{(E2) effect on} \\ \text{ \emph{domestic} consumption goods} \\ \text{ through \emph{imported} inputs}}}  + \underbrace{\hat{C}^i_\$.{\cal B}^i}_{\substack{\text{(E3)  effect on} \\ \text{\emph{imported} consumption goods} \\ \text{through \emph{domestic} inputs}}} \\ &&+\underbrace {\left( \hat{C}^i_\$.{\cal B}^i + {C^i}{\tilde{{\cal B}^i}}\right)*{{(I-{\cal A})}^{-1}}*{\cal A}}_{\text{(E4) residual}} \\
-\end{array}
-\end{equation}
-
-
-
-When the domestic currency appreciates, $E1$ and $E2$ reduce country $i$'s consumer prices, whereas $E3$ increases them. $E1$ and $E2$ are easy to compute with national input-output matrices, whereas world input-output matrices are needed for computing $E3$ and $E4$.
-
-Unexpectedly, $E3.HC + E4.HC$ does not vary much with the openness rate of the economy (see Figure 12 of the main text).
-
-
-Let us focus on the two-country, one-sector economy: 
-
-\begin{gather*}
-E1=C=\left(0,-c\right)
-\\
-E2=C.\tilde{\cal B}^i=\left(0,-c\right).\left(\begin{matrix}0&0\\a_{2,1}&0\end{matrix}\right)=\left(-c.a_{2,1},0\right)
-\\
-E3=(c,0).\left(\begin{matrix}0&a_{1,2}\\0&0\end{matrix}\right)=\left(0,c.a_{1,2}\right)
-\end{gather*}
-
-\begin{gather*}
-E1.HC = \left(0,-c\right).\left(\begin{matrix}1-f\\f\end{matrix}\right)=-f.c
-\\
-E2.HC=\left(-c.a_{2,1},0\right).\left(\begin{matrix}1-f\\f\end{matrix}\right)=-c.a_{2,1}.\left(1-f\right)
-\\ 
-E3.HC=\left(0,c.a_{1,2}\right).\left(\begin{matrix}1-f\\f\end{matrix}\right)=f.c.a_{1,2}
-\end{gather*}
-
-We do not lose any generality by normalising the shock $c$ to 1. 
-
-And :
-\begin{gather}
-\bar{s}-E1.HC-E2.HC=\left(\begin{array}{r}
--\frac{a_{12} a_{21}^{2} - a_{11} a_{21} a_{22} + {\left(a_{11} - a_{12}\right)} a_{21} - {\left(a_{12} a_{21}^{2} - a_{11} a_{21} a_{22} - {\left(a_{11} - 1\right)} a_{12} + {\left(a_{11} - 2 \, a_{12}\right)} a_{21}\right)} f}{a_{12} a_{21} - {\left(a_{11} - 1\right)} a_{22} + a_{11} - 1}
-\end{array}\right)
-\end{gather}
-We assume that:
-$\frac{a_{1,1}}{a_{2,1}}=\frac{1-f}{f}$ and $a_{1,1}+a_{2,1}=a$. \\ 
-So
-$a_{1,1}=(1-f)a$ and $a_{2,1}=fa$. \\
-
-Then:
-
-\begin{gather}
-\bar{s}-E1.HC-E2.HC=\left(\begin{array}{r}
--\frac{{\left(a^{2} a_{12} + a^{2} a_{22} - a^{2}\right)} f^{3} - {\left(2 \, a^{2} a_{22} - 2 \, a^{2} + {\left(a^{2} + a\right)} a_{12}\right)} f^{2} + {\left(a^{2} a_{22} - a^{2} + a_{12}\right)} f}{{\left(a - 1\right)} a_{22} - {\left(a a_{12} + a a_{22} - a\right)} f - a + 1}
-\end{array}\right)
-\end{gather}
-
-The derivative of this according to f is: 
-\begin{gather*}
-\left(\begin{array}{r}
--\frac{{\left({\left(a^{2} a_{12} + a^{2} a_{22} - a^{2}\right)} f^{3} - {\left(2 \, a^{2} a_{22} - 2 \, a^{2} + {\left(a^{2} + a\right)} a_{12}\right)} f^{2} + {\left(a^{2} a_{22} - a^{2} + a_{12}\right)} f\right)} {\left(a a_{12} + a a_{22} - a\right)}}{{\left({\left(a - 1\right)} a_{22} - {\left(a a_{12} + a a_{22} - a\right)} f - a + 1\right)}^{2}} \\
-- \frac{a^{2} a_{22} + 3 \, {\left(a^{2} a_{12} + a^{2} a_{22} - a^{2}\right)} f^{2} - a^{2} - 2 \, {\left(2 \, a^{2} a_{22} - 2 \, a^{2} + {\left(a^{2} + a\right)} a_{12}\right)} f + a_{12}}{{\left(a - 1\right)} a_{22} - {\left(a a_{12} + a a_{22} - a\right)} f - a + 1}
-\end{array}\right)
-\end{gather*}
-
-The sign of this expression is difficult to study. We hence move to a numerical application.
-
-%\subsection*{Numerical application} 
-%inutile dávoir des sections avec des titres enormes pour láppednix, je propose de retirer, la phrasse precedente annonce l'applicationn numeriique
-Based on WIOD 2014, we compute the ratio between value added and production, which corresponds to: 
-egen total=rowtotal(vAUS1-vROW) and then (161-74)/161=0.54.
-
-To simplify, we assume that the ratio is equal to 0.5.
-\begin{gather*}
-a_{1,1}+a_{1,2}=a_{2,1}+a_{2,2}=0.5 \\
-\frac{a_{1,2}}{a_{1,1}+a_{1,2}}=f \\
-a_{2,1}=0.48 \\
-a_{2,2}=0.02
-\end{gather*}
-In that case:
-
-\begin{gather*}
-\begin{array}{r}
-\bar{s}-E1.HC-E2.HC = \frac{-0.125 \, f^{3} + 0.245 \, f^{2} - 0.11 \, f}{-0.25 \, f - 0.26
-}
-\end{array}
-\end{gather*}
-
-Which yields Figures \ref{fig:resid} and \ref{fig:tous_les_E}.
-\begin{figure}[H]
-	\begin{center}
-		\includegraphics{etude_residu.png}
-		\caption{$\bar{s}-E1.HC-E2.HC$ as a function of the openness rate}
-		\label{fig:resid}
-	\end{center}
-\end{figure}
-
-Actual openness rates in the sample vary between 0.15 and 0.50. In that range, the relationship between the openness rate and the residual is not monotonous (see Figure \ref{fig:resid}).
-
-Figure \ref{fig:tous_les_E} confirms that, in that numerical exercise, the total effect is dominated by the direct effect through imported consumption goods and, to a lesser extent, the effect on domestic consumption goods through imported inputs. 
-The other effects are approximately additive if the openness rate ranges from 0.15 to 0.50.
-
-\begin{figure}[H]
-	\begin{center}
-		\includegraphics{etude_tous_les_E.png}
-		\caption{E1.HC, E2.HC, E3.HC, E4.HC and the "residual"  ($\bar{s}-E1.HC-E2.HC$) as a function of the openness rate}
-		\label{fig:tous_les_E}
-	\end{center}
-\end{figure}
 
 
 

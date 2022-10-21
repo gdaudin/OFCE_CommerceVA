@@ -1193,34 +1193,43 @@ As discussed in \ref{subsec:estimatingHCEwithnationalaccounts}, the sum of the s
 However, these data ($E1.HC$ and $E2.HC$) are not up-to-date for a large number of countries, as they are not routinely computed by national statistical institutes.
 We cannot use them to easily extrapolate HCE deflators.
 
-Online Appendix F explores the using consumption and intermediate goods imports from the CEPII BACI database and the BEC classification \citep{Gaulier2010}\footnote{BACI provides disaggregated data on bilateral trade flows for more than 5000 products and 200 countries. The database is built from data directly reported by each country to the United Nations Statistical Division (Comtrade). Products are defined as items from the Harmonized System nomenclature, at the 6-digit level.} to extrapolate HCE deflators.
-Still, household consumption and intermediate products are more difficult to collect systematically for many countries and many years. In Online Appendix F, we use data from the World Bank and Eurostat, which are only available for a limited number of countries. This limits the number of countries to 29.
+Consumption and intermediate goods imports are available from the CEPII BACI database and the BEC classification \citep{Gaulier2010}\footnote{BACI provides disaggregated data on bilateral trade flows for more than 5000 products and 200 countries. The database is built from data directly reported by each country to the United Nations Statistical Division (Comtrade). Products are defined as items from the Harmonized System nomenclature, at the 6-digit level.}.
+Still, household consumption and intermediate products are more difficult to collect systematically for many countries and many years. In Online Appendix F, we use data from the World Bank and Eurostat, which are only available for only 29 countries in our sample.
 
-Here, to expand our panel to 42, we use an even simpler proxy for $E1.HC+E2.HC$, using only trade data from BACI and GDP data from the World Bank (see equation \ref{eq:infer2}).
+Here, to expand our panel to 42 countries, we use an even simpler proxy for $E1.HC$ and $E2.HC$, using only trade data from BACI and GDP data from the World Bank.
 These data are available until 2019. 
+As our aim is to do an out-of-sample prediction, we do not use time fixed-effects and instead assumes each year is characterised by the importance of imported consumption and intermediate goods over the whole sample (see equation \ref{eq:infer2}).
+We do use country fixed effects ($fe_{i}$).
+
  \begin{equation}
-\begin{array}{llll}
-\overline{s}_{i,t}^{i,t,HC}=  &  \beta_1  \frac{\textnormal{imported consumption goods}_{i,t}}{\textnormal{GDP}_{i,t}} \\ & + \beta_2 \frac{\textnormal{imported intermediate goods}_{i,t}}{\textnormal{GDP}_{i,t}} \\
-& +  \beta_3  \frac{\textnormal{Total sample imported consumption goods}_{t}}{\textnormal{Total sample GDP}_{t}} \\
-& + \beta_4 \frac{\textnormal{Total sample imported intermediate goods}_{t}}{\textnormal{Total sample GDP}_{t}} \\
-& +fe_{i}+\varepsilon_{i,t}
-\end{array}
-\label{eq:infer2}
+	\begin{array}{llll}
+		\overline{s}_{i,t}^{i,t,HC}=  &  \beta_1  \frac{\textnormal{imported consumption goods}_{i,t}}{\textnormal{GDP}_{i,t}} \\ & + \beta_2 \frac{\textnormal{imported intermediate goods}_{i,t}}{\textnormal{GDP}_{i,t}} \\
+		& +  \beta_3  \frac{\textnormal{Total sample imported consumption goods}_{t}}{\textnormal{Total sample GDP}_{t}} \\
+		& + \beta_4 \frac{\textnormal{Total sample imported intermediate goods}_{t}}{\textnormal{Total sample GDP}_{t}} \\
+		& +fe_{i}+\varepsilon_{i,t}
+	\end{array}
+	\label{eq:infer2}
 \end{equation}
+
+We start by estimating equation \ref{eq:infer2} for our three databases for all available years.
+Table \ref{tab:reg_infer2} provides the results.
+This individual coefficents and their statistical significance are difficult to interpret because of multicolinearities among the explanantory variables.
+The important thing for our purpose is the quality of the model fit.
+
 
 
 \begin{table}[htbp]\centering
 	\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
-	\caption{Regression 17 for WIOD, TIVA and TIVA rev4 }
+	\caption{Regression \ref{eq:infer2} for WIOD, TIVA and TIVA rev4, using all available years }
 \input{reg17.tex}
 \\
 Note: Country-clustered standard errors in parentheses, \sym{*} \(p<0.10\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\)
+\label{tab:reg_infer2}
 \end{table}
 
-We then perform an out-of-sample prediction for WIOD, 2014, using data for years 2000 to 2008.
-The results are satisfactory, although the mean and median errors are larger than in Online Appendix F (see Figure \ref{fig:panel_pred2}). 
+To confirm this fit, we perform an out-of-sample prediction for the year 2014 using WIOD, and pretending we only have data for years 2000 to 2008 (the regression results are similar to Table \ref{tab:reg_infer2} and are not provided).
+The results of this out-of-sample prediction are close to the WIOT-computed elasticities for 2014  (see Figure \ref{fig:panel_pred2}). 
 Our findings are robust to using other databases (results obtained with TiVA revisions 3 and 4 are available upon request).
-
 
 \begin{figure}[!h]
 	\centering
@@ -1232,11 +1241,12 @@ Our findings are robust to using other databases (results obtained with TiVA rev
 	\floatfoot{Sources: WIOD, World Bank, BACI and authors’ calculations}
 \end{figure}
 
-Using these equations, we can predict the HCE deflator elasticity from 2015 onwards.
+Because the quality of fit of Equation \ref{eq:infer2} shown in Table \ref{tab:reg_infer2} is high and the out-of-sample prediction for 2014 is very similar to  WIOT-computed elasticities (figure \ref{fig:panel_pred2}) we feel confident in using the results from table \ref{tab:reg_infer2} to predict the HCE deflator elasticity from the missing years, especially 2015 onwards.
 Figure \ref{fig:panel_pred3} shows that the in-sample predictions are robust, giving confidence in the quality of the out-of-sample predictions.
 We also compare our predictions with the elaticity estimated using MRIO, which provides WIOTs up to 2019. 
 Our predictions are in line with results from MRIO up to 2017. For the most recent years, there seem to be data issues in MRIO (see Online Appendix C), which the comparison helps to identify.
-We thus provide a simple accounting tool to estimate the percentage change in prices in response to exchange rate variations for the most recent years.
+For all these reasons, we are confident our out-of-sample predictions are good proxies for WIOT-estimated elasticities.
+We have thus provided a less data-demanding tool to estimate the percentage change in prices in response to exchange rate variations for the most recent years.
 
 
 \begin{figure}[H]

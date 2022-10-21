@@ -53,7 +53,6 @@ Hence, only one-fourth of the elasticity of the HCE deflator to the exchange rat
 
 Guillaume :
 - Revoir la proportionnalité
-- Supprimer la discussion des channels dans l’intro et dire que c’est mieux expliqué ailleurs.
 
 *	In the introduction, main findings are discussed only for the third and fourth exercise in the paper but not for the first two 
 
@@ -76,8 +75,7 @@ Guillaume : le simplifier / passer en Online Appendix
 
 *	The analysis in section 4.3 is poorly explained. Are all countries included when equation (17) is estimated? What are the estimated coefficients? Why is the estimated specification that in equation (17)? What happens if the time-varying variables are replaced by time fixed-effects?
 
-Guillaume. Le dernier point : avec TVV, on ne peut plus extrapoler. 
-We assume you meant 5.3, where the equation (17) lies. 
+Thank you for this comment. We assume you meant section 5.3 in the first version of the paper, where the equation (17) lies. We now explain why we do not use the time-fixed effects. We give and comment the regression results (and explain why we are more interested in the goodness-of-fit than the coefficient value and coefficients). We give the number of countries and years over which the equation is estimated. We hope to have thus clarified the discussion and answered your concerns
 **Vérifier les numéros de sections dans l’appendice !**
 
 *	For the exercise in 4.3 to be helpful, it would be good if the authors could validate their estimated elasticities. Is there any other study that for a subset of the sampled countries has obtained relatively precise estimated HCE deflator elasticities?  In the abstract, the authors mention their elasticity estimates are in line with the literature- so that should be feasible. A lot of the correlations highlighted in the paper feel mechanical.

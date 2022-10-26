@@ -56,6 +56,11 @@ Guillaume :
 
 *	In the introduction, main findings are discussed only for the third and fourth exercise in the paper but not for the first two 
 
+As suggested, we redrafted the introduction in order to discuss the main findings of all the exercises performed in the paper. 
+To do so, we added a short summary of the section which focuses on the impact of an appreciation of the US dollar:
+
+"We also analyse the impact on the domestic economy of variations in the currency of foreign countries. For example, we estimate the impact of an appreciation of the US dollar. We show that countries are affected in proportion to their trading links with the country whose currency appreciates." 
+
 C’est quoi le 1er et 2e ? Après réflexion, Violaine sur $ et comparaison des bases.
 
 *	The motivation and contribution of the paper to the literature should be included in the introduction.  Section 1 could be thus incorporated in the introduction.

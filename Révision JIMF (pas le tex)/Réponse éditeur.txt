@@ -38,10 +38,12 @@ a. Discuter sur la sur-évaluation. Hadrien
 b. Difficile de parler de l’hétérogénité par pays. Ou degrés de dollar dominance. FMI Gitta / Rapport de la BCE ? Hadrien 
 
 
-*	The language in the introduction is not always clear. For example: "we assume that the impact of the exchange rate fluctuation is proportional across sector". At page 1 I was not sure to what the proportionality referred, only in section 2.3 I understood that it referred to the use of inputs whose price is affected.  I also found confusing the discussion of channels iii) and iv) at page 2. Most readers are unfamiliar with input-output structures and have not thought of all the ways in which shocks propagate from one country to another through input-output linkages.
+*	The language in the introduction is not always clear. For example: "we assume that the impact of the exchange rate fluctuation is proportional across sector". At page 1 I was not sure to what the proportionality referred, only in section 2.3 I understood that it referred to the use of inputs whose price is affected. 
 
-We simplified the discussion on channels as follows:
-"Third, we look into the determinants of the HCE deflator elasticity and the role of global value chains in the transmission of an exchange rate appreciation. 
+I also found confusing the discussion of channels iii) and iv) at page 2. Most readers are unfamiliar with input-output structures and have not thought of all the ways in which shocks propagate from one country to another through input-output linkages.
+
+We simplified the discussion on channels iii) and iv) and redrafted the introduction as follows:
+"We look into the determinants of the HCE deflator elasticity and the role of global value chains in the transmission of an exchange rate appreciation. 
 We identify the main channels through which the exchange rate impacts the HCE deflator when production processes are global.
 We find that the main transmission channels are:
 i) the prices of imported ﬁnal goods sold directly to domestic consumers and
@@ -59,7 +61,25 @@ Guillaume :
 As suggested, we redrafted the introduction in order to discuss the main findings of all the exercises performed in the paper. 
 To do so, we added a short summary of the section which focuses on the impact of an appreciation of the US dollar:
 
-"We also analyse the impact on the domestic economy of variations in the currency of foreign countries. For example, we estimate the impact of an appreciation of the US dollar. We show that countries are affected in proportion to their trading links with the country whose currency appreciates." 
+"We analyse the impact on the domestic economy of variations in the currency of their trading partners. 
+We show that countries are affected in proportion to their trading links with the country whose currency appreciates. 
+For example, we estimate the impact of an appreciation of the US dollar." 
+
+We also strive to better emphasize our contributions to the literature when we mention the extrapolations performed with up-to-date data: 
+
+"We show that a precise assessment of the HCE deflator elasticity to the exchange rate can be estimated for recent years without resorting to WIOTs. 
+The construction of World Input- Output tables is data-demanding and WIOTs are typically released with a lag of several years.
+As a result, WIOTs are not available for the most recent years. For instance, the latest WIOD
+dataset dates back to 2014. Although the MRIO dataset covers most recent years, it suffers from data quality issues in 2018. 
+To address the data gap in WIOTs, we extrapolate the HCE deflator elasticity from 2015 onwards using up-to-date GDP statistics and trade data on consumption
+and intermediates. 
+We obtain a reliable estimate of the HCE deflator elasticity up to to 2019.
+While most of the existing literature focuses on average elasticities, computed over a period covering several years, this approach allows us to analyse how elasticities change in a more up-to-date way, from one year to another." 
+
+We also stress that we used several datasets (which is seldom the case in the existing lierature) for the sake of robustness: 
+"Last but not least, we use several WIOTs databases and show that our findings are robust to different datasets (i.e. WIOD, two distinct releases
+of the OECD TiVA database and the MRIO database)."
+
 
 C’est quoi le 1er et 2e ? Après réflexion, Violaine sur $ et comparaison des bases.
 
@@ -74,7 +94,9 @@ Hadrien a regardé Stefan Schleffer, c’est décevant
 Violaine Data section 1
 Guillaume refocus section 2
 
-As suggested, we discuss the data sources and compare the different databases in a separate section  (section 1). Section 2 now only has the derivation of the HCE deflator elasticity.
+As suggested, we re_organised Section 2. 
+We now discuss the data sources and compare the different databases in a separate section (section 1). 
+As a result, Section 2 now only focuses on the derivation of the HCE deflator elasticity.
 
 *	I am unsure of the purpose of section 2.1.   I am guessing the authors wanted to show that the effect of a change in production costs is different from that due to a change in the exchange rate. But isn't that shown in Online Appendix D?
 

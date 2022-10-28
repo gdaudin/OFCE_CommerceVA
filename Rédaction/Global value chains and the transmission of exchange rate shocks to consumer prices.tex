@@ -350,9 +350,7 @@ In section \ref{sec:extrapo}, we use up-to-date GDP and trade data to estimate t
  
 %This paper relates to several strands of literature.
 %First, it relates to the literature that examines the link between global value chain (GVC) participation and the exchange rate pass-through (ERPT) to domestic %prices. \cite{DeSoyres2018} found evidence that an increase in production linkages, as proxied by trade in intermediate inputs, is strongly associated with higher %inflation correlation. 
-% pas très clair+ pas de lien avec notre étude. Je suggère de supprimer \cite{Gaulier2019} show that the intermediate trade share in volume grew at a subdued rate %between 2000 and 2016, while the share of intermediate goods in world trade in nominal terms was fairly well correlated to various Global Value Chain indicators %based on international input-output matrices. 
 %\cite{DeSoyres2018} find that a higher share of foreign value added in exports reduces the ERPT to export prices and export volumes. 
-% je sugère de retirer car notre papier ne se focalise pas particulièrement sur ces 2 pays In particular, the ERPT declines most in France and Germany. 
 %\cite{Georgiadis2019} estimate that the rise of GVC participation accounts for 50\% of the decline in the ERPT to import prices observed since the mid-%1990s.\footnote{The intuition is as follow: an exchange rate appreciation will increase the foreign-currency price of exports. However, when exports have high import %contents, the appreciation will reduce the local-currency price of imported inputs, thus decreasing the foreign-currency price of exports. This will lead to a lower %ERPT. }
 %\cite{Hagemejer2020} provide evidence that the decline in ERPT resulting from the enhanced participation in GVC may be nonlinear with respect to the country's %position in the global value chain.
 %They find that a growing backward GVC participation of the suppliers of imported intermediate inputs reduces the ERPT to producer prices. 
@@ -403,23 +401,23 @@ In section \ref{sec:extrapo}, we use up-to-date GDP and trade data to estimate t
 \section{Data}
 \label{sec:data}
 
-In this paper, we perform an accounting exercise based on information contained in WIOTs with large matrices inversion. 
-WIOTs are an extension of the national input-output tables. 
-National input-output tables measure the relationships between the producers of goods and services (including imports) within an economy and the users of these goods and services (including exports). The national tables specify, in line, for each industry, the use of their product as intermediate or final use. 
+In this paper, we perform an accounting exercise based on information contained in WIOTs, by way of large matrices inversion. 
+WIOTs are an extension of national input-output tables. \\
+National input-output tables measure the relationships between the producers of goods and services (including imports) within an economy and the users of these goods and services (including exports). 
+National tables specify, in line, for each industry, the use of their product as intermediate or final use. 
 In a national table, final use includes exports alongside domestic final uses, whereas exports are not a final use in world input-output tables. 
 WIOTs show which foreign industry produces a good for a specific final use, and which foreign industry or final user uses the exports of a given country. \\
-%WIOTs show how much international trade is embedded in the consumption of a particular final product. \\
-Aggregating national input-output tables into world input-output tables is challenging for a number of reasons. National input-output tables vary widely in terms of detail and scope, and are therefore not fully consistent. Furthermore, the availability of year-specific national input-output tables is limited, especially for developing economies.  \\
-This paper uses several multi-year WIOTs for the sake of robustness: the World Input Output Database (WIOD), the multi-regional input-output tables (MRIO) developed by the Asian Development Bank (ADB) and the Trade in Value Added Database (TiVA) from the OECD-ICIO.
+%WIOTs show how much international trade is embedded in the consumption of a particular final product.\\
+Aggregating national input-output tables into world input-output tables is challenging for a number of reasons. National input-output tables vary widely in terms of detail and scope, and are therefore not fully consistent. Furthermore, the availability of year-specific national input-output tables is limited, especially for developing economies. \\
+In this paper, we use several multi-year WIOTs for the sake of robustness: \textit{i)} the World Input Output Database (WIOD), \textit{ii)} the multi-regional input-output tables (MRIO) developed by the Asian Development Bank (ADB) and \textit{iii)} the Trade in Value Added Database (TiVA) from the OECD-ICIO.
 
 \subsection{The World Input Output Database (WIOD)} 
 The World Input Output Database (WIOD) is hosted and updated by the University of Groningen (Netherlands). 
 It benefits from the financial support of the European Commission. 
 The WIOD contains time series of inter-country input-output tables from 2000 to 2014. 
 It provides WIOTs that reconcile national input-output tables (or supply-use tables) with bilateral trade statistics.
-The WIOD covers 43 countries (of which 28 members of the European Union, see Table \ref{tab:wiod}) accounting for 85\% of global GDP (see Table \ref{tab:wiod}). 
-It contains information for 56 industries (see Online Appendix A).
-It provides annual WIOTs expressed in U.S. dollars at basic prices. Market exchange rates were used for currency conversion \citep{Timmer2015}. 
+The WIOD covers 43 countries (of which 28 members of the European Union, see Table \ref{tab:wiod}) accounting for 85\% of global GDP. 
+It contains information for 56 industries (see Online Appendix A) and provides annual WIOTs expressed in U.S. dollars at basic prices\footnote{Market exchange rates were used for currency conversion \citep{Timmer2015}.}. 
 
 % All transactions values are in basic prices, reflecting all costs borne by the producer. These tables are accompanied by Socio-Economic Accounts which contain country sector panel data on employment (number of workers, compensation and share of labor in high, medium and low skilled occupations), capital stocks, gross output and value added).
  
@@ -448,19 +446,19 @@ Other & Russia, Turkey\\
 
 \subsection{The Asian Development Bank's MRIO database} 
 The Asian Development Bank's MRIO database is an extension of WIOD for 2000 and 2007-2019.
-WIOD provides disaggregate information for a limited number of Asian economies. 
-The Asian Development Bank (ADB) has augmented the WIOD with details for nineteen additional Asian economies\footnote{The MRIO database includes the following additional economies: Bangladesh, Bhutan, Brunei Darussalam, Cambodia, Fiji, Hong Kong, Kazakhstan, Kyrgyz Republic, Lao People’s Democratic Republic, Malaysia, Maldives, Mongolia, Nepal, Pakistan, Philippines, Singapore, Sri Lanka, Thailand and Viet Nam.}. 
+As the WIOD provides disaggregate information for a limited number of Asian economies, the Asian Development Bank (ADB) has augmented it with details for nineteen additional Asian economies\footnote{The MRIO database includes the following additional economies: Bangladesh, Bhutan, Brunei Darussalam, Cambodia, Fiji, Hong Kong, Kazakhstan, Kyrgyz Republic, Lao People’s Democratic Republic, Malaysia, Maldives, Mongolia, Nepal, Pakistan, Philippines, Singapore, Sri Lanka, Thailand and Viet Nam.}. 
 This wider geographical coverage comes at the price of a less precise industrial desagregation (35 vs 56 sectors in WIOD).
 The conceptual framework of the MRIO database (and hence the methods used in the construction of the tables) are similar to those of WIOD.
 Its main advantage is to be updated up to 2019.  
 
 \subsection{The Trade in Value Added (TiVA) database}
 The Trade in Value Added (TiVA) database is compiled by the OECD. 
-It builds on the OECD harmonised country-level input-output tables to provide matrices of inter-industrial flows of goods and services in current prices (U.S. dollars).
-We use two versions of TiVA (see \cite{OECD2018} on the differences between the two datasets.).
-The 2016 edition of the TiVA database (third revision) includes 64 economies covering OECD, EU28, G20, most East and South-east Asian economies, a selection of South American countries and the Rest of the world (see Table \ref{tab:tiva}). The industry list includes 34 sectors, among which 16 manufacturing and 14 services sectors. 
-It covers the period 1995-2011 and is based on the 1993 system of national accounts.
-The fourth revision, released in 2018, includes 65 economies (see Table \ref{tab:tiva}) and 36 sectors and covers the 2005-2015 period. It is based (like WIOD and MRIO) on the 2008 system of national accounts.
+It builds on the OECD harmonised country-level input-output tables to provide matrices of inter-industrial flows of goods and services in current prices (U.S. dollars).\\
+We use two versions of TiVA (see \cite{OECD2018} on the differences between the two datasets).
+The 2016 edition of the TiVA database (third revision) includes 64 economies covering OECD, EU28, G20, most East and South-east Asian economies, a selection of South American countries and the Rest of the world (see Table \ref{tab:tiva}). It covers 34 sectors, among which 16 manufacturing and 14 services sectors. 
+The third revision of TiVA covers the period 1995-2011 and is based on the 1993 system of national accounts.
+The fourth revision, released in 2018, includes 65 economies (see Table \ref{tab:tiva}) and 36 sectors and covers the 2005-2015 period. 
+Just like WIOD and MRIO, the fourth revision of TiVA is based on the 2008 system of national accounts.
 
 
 \begin{table}[!h]
@@ -494,16 +492,16 @@ Other & Brunei, Israel, Morocco, Russia, Saudi Arabia, South Africa, Tunisia, Tu
 All four databases are constructed using similar assumptions (\cite{OECD2011,Timmer2015,OECD2018}).
 For example, all start with the construction of harmonised country-specific supply-use tables (SUTs) that are then transformed into world input-output tables.
 All databases use the "import proportionality assumption" to allocate specific bilateral imports to using industries.
-National input-output statistics provide how much of each product firms use for intermediary consumption and investment. 
+National input-output statistics provide how much of each product a given firm uses for intermediary consumption and investment. 
 However, the breakdown of these into domestic and imported product is not available. 
-Hence, the construction of world input-output tables requires allocating imports to using industries.
+Hence, the construction of world input-output tables requires allocating imports to using industries.\\
 The import proportionality assumption assumes that the proportion of intermediates that an industry purchases from abroad is equal to the ratio of imports of intermediates to the total domestic demand of intermediates in that product. 
 %The domestic input-output tables show transactions between domestic industries. As a complement to these tables, supplementary tables break down total imports by user (industry and the different categories of final demand). Some countries provide these import tables in conjunction with their input-output tables, but in other cases they are derived by the OECD. Mexico and China benefit from a special treatment, but for the other countries the main assumption used is that the share of imports in any product consumed directly as intermediate consumption or final demand (except exports) is the same for all end-uses (the "proportionality assumption") \\
-This assumption can be misleading. \cite{Feenstra2012} find that shares of imported materials differ substantially across U.S. industries. Based on Asian input-output tables, \cite{Puzzello2012} finds that the proportionality assumption understates the use of foreign intermediate inputs. All databases, however, rely on the BEC (Broad Economic Categories) classification to map detailed six-digit products into intermediate use, final consumption and investment \citep{Dietzenbacher2013}. \\
+However, this assumption can be misleading. \cite{Feenstra2012} find that shares of imported materials differ substantially across U.S. industries. Based on Asian input-output tables, \cite{Puzzello2012} finds that the proportionality assumption understates the use of foreign intermediate inputs. All databases, however, rely on the BEC (Broad Economic Categories) classification to map detailed six-digit products into intermediate use, final consumption and investment \citep{Dietzenbacher2013}. \\
 One explicit difference between the databases is that WIOD and MRIO assume that the input mix is independent from the destination market. 
-The TiVA databases do not rely on this assumption for two countries (Mexico and China). Instead, the TiVA databases use different input-output tables for the exporting, import processing and domestic-market oriented sectors of these countries (or at least two of those, depending on the country and the version of the TiVA database). Despite this difference, we obtain similar results with TiVA, WIOD and MRIO, which probably reflects the fact that we do not focus on Mexico and China.\\
+The TiVA databases do not rely on this assumption for two countries (Mexico and China). Instead, the TiVA databases use different input-output tables for the exporting, import processing and domestic-market oriented sectors of these countries. Despite this difference, we obtain similar results with TiVA, WIOD and MRIO, which probably reflects the fact that we do not focus on Mexico and China.\\
 Another difference relates to the method for harmonising national data and trade statistics. WIOD and MRIO rely on the shares of imported inputs provided by national account, contrary to TiVA. As a result, TiVA is closer to international trade statistics than WIOD. This explains why the share of imported inputs is smaller in TiVA for some countries (other than China and the USA).
-All computations in this paper have been conducted with the four databases.
+All computations in the paper have been conducted with the four databases.
 For ease of exposition, we use the WIOD as a baseline, since it covers the largest number of industries.
 
 \section{An accounting approach to computing the HCE deflator elasticity}

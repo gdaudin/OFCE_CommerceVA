@@ -65,7 +65,7 @@ To do so, we added a short summary of the section which focuses on the impact of
 We show that countries are affected in proportion to their trading links with the country whose currency appreciates. 
 For example, we estimate the impact of an appreciation of the US dollar." 
 
-We also strive to better emphasize our contributions to the literature when we mention the extrapolations performed with up-to-date data: 
+We also strive to better emphasize our contribution to the literature when we refer to the extrapolations performed with up-to-date trade and GDP statistics: 
 
 "We show that a precise assessment of the HCE deflator elasticity to the exchange rate can be estimated for recent years without resorting to WIOTs. 
 The construction of World Input- Output tables is data-demanding and WIOTs are typically released with a lag of several years.
@@ -76,14 +76,16 @@ and intermediates.
 We obtain a reliable estimate of the HCE deflator elasticity up to to 2019.
 While most of the existing literature focuses on average elasticities, computed over a period covering several years, this approach allows us to analyse how elasticities change in a more up-to-date way, from one year to another." 
 
-We also stress that we used several datasets (which is seldom the case in the existing lierature) for the sake of robustness: 
+We also stress the fact that we used several datasets for the sake of robustness, which is seldom the case in the existing lierature: 
 "Last but not least, we use several WIOTs databases and show that our findings are robust to different datasets (i.e. WIOD, two distinct releases
 of the OECD TiVA database and the MRIO database)."
 
 
-C’est quoi le 1er et 2e ? Après réflexion, Violaine sur $ et comparaison des bases.
+*	The motivation and contribution of the paper to the literature should be included in the introduction.  
+We try to better motivate our paper by adding the following sentence at the beginning of the introduction:
+"Understanding the influence of exchange rate on inflation is critically important for setting monetary policy and measuring the extent of expenditure switching that follows exchange rate variations, which, in turn, has an impact on real activity.
 
-*	The motivation and contribution of the paper to the literature should be included in the introduction.  Section 1 could be thus incorporated in the introduction.
+Section 1 could be thus incorporated in the introduction.
 *	I would consider dropping section 1, but including a deeper and more concise discussion of the related literature.  This paper relates to the ERPT literature but also to the large macro-trade literature that sheds light on the transmission of shocks across countries through input-output linkages. The contribution of the paper to each of these strands should be clearly discussed.
 
 Violaine s’occupe de ces trois points. Hadrien lui donne un coup de main sur la littérature (rapport ERPT). Stefan Schleffer ? Box ERPT ?

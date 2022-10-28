@@ -83,10 +83,19 @@ Results from different WIOTs converge."
 
 
 *	The motivation and contribution of the paper to the literature should be included in the introduction.  
-We try to better motivate our paper by adding the following sentence at the beginning of the introduction:
-"Understanding the influence of exchange rate on inflation is critically important for setting monetary policy and measuring the extent of expenditure switching that follows exchange rate variations, which, in turn, has an impact on real activity.
+
+We try to better motivate our paper by adding the following sentences at the beginning of the introduction:
+
+"Over the past two decades, the rise of global value chains has led to a greater use of input-output tables to study international linkages. 
+In this paper, we analyse which countries are most vulnerable to cost-push inflation using world input-output tables. 
+We also document the heterogeneous reactions of consumer prices to exchange rate variations across countries, reflecting differences in foreign product content of consumption and intermediate products. 
+Understanding the influence of exchange rate on inflation is indeed critically important for setting monetary policy and measuring the extent of expenditure switching that follows exchange rate variations, which, in turn, has an impact on real activity.
+To shed light on these mechanisms, we study the elasticity of the household consumption expenditure (HCE hereafter) deflator to the exchange rate."
 
 Section 1 could be thus incorporated in the introduction.
+
+We shortened Section 1 and incorporated it in the introduction. 
+
 *	I would consider dropping section 1, but including a deeper and more concise discussion of the related literature.  This paper relates to the ERPT literature but also to the large macro-trade literature that sheds light on the transmission of shocks across countries through input-output linkages. The contribution of the paper to each of these strands should be clearly discussed.
 
 Violaine s’occupe de ces trois points. Hadrien lui donne un coup de main sur la littérature (rapport ERPT). Stefan Schleffer ? Box ERPT ?
@@ -94,10 +103,8 @@ Hadrien d’abord, Violaine après.
 Hadrien a regardé Stefan Schleffer, c’est décevant
 
 *	Section 2 should be re-organised. The focus of the section should be on the derivation of the HCE deflator elasticity. The data could be discussed in a separate section.
-Violaine Data section 1
-Guillaume refocus section 2
 
-As suggested, we re_organised Section 2. 
+As suggested, we re-organised Section 2. 
 We now discuss the data sources and compare the different databases in a separate section (section 1). 
 As a result, Section 2 now only focuses on the derivation of the HCE deflator elasticity.
 

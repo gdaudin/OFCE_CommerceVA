@@ -29,9 +29,10 @@ Reviewer #1: This paper uses an accounting approach to estimate the elasticity o
 
 *	The paper is difficult to read. Part of it is the organisation of the information and another part of it is the exposition.  I understand input-output linkages well and still had to think hard about all the relationships discussed in section 2, and various parts of the paper (I'll be specific in my comments below).
 
+Thank you for this comment. 
 We strive to simplify the exposition of the information and to better organize the paper. 
 For instance, we moved some parts of Section 2 to the appendix. 
-To simplify the main text and make it easier to read, we have put some technical explanations in footnotes. 
+To simplify the main text and make it easier to read, we have redrafted some parts of the paper and put some technical explanations in footnotes. 
 Responsable rédaction : Violaine pour relecture
 
 
@@ -68,7 +69,7 @@ To do so, we added a short summary of the section which focuses on the impact of
 We show that countries are affected in proportion to their trading links with the country whose currency appreciates. 
 For example, we estimate the impact of an appreciation of the US dollar." 
 
-We also strive to better emphasize our contribution to the literature when we refer to the extrapolations performed with up-to-date trade and GDP statistics: 
+We also better emphasize our contribution to the literature when we refer to the extrapolations performed with up-to-date trade and GDP statistics: 
 
 "We show that a precise assessment of the HCE deflator elasticity to the exchange rate can be estimated for recent years without resorting to WIOTs. 
 The construction of World Input- Output tables is data-demanding and WIOTs are typically released with a lag of several years.
@@ -79,7 +80,8 @@ and intermediates.
 We obtain a reliable estimate of the HCE deflator elasticity up to to 2019.
 While most of the existing literature focuses on average elasticities, computed over a period covering several years, extrapolations allow us to analyse how elasticities change in a more up-to-date way, from one year to another."  
 
-We also stress the fact that we used several datasets for the sake of robustness, which is seldom the case in the existing lierature: 
+We also stress the fact that we used several datasets for the sake of robustness. 
+To the best of our knowledge, such a comprehensive robustness test is seldom performed in the existing lierature: 
 "Last but not least, we use several WIOTs databases for the sake of robustness (i.e. WIOD, two distinct releases
 of the OECD TiVA database and the MRIO database), which is seldom the case in the existing literature. 
 Results from different WIOTs converge."
@@ -92,7 +94,7 @@ We try to better motivate our paper by adding the following sentences at the beg
 "Over the past two decades, the rise of global value chains has led to a greater use of input-output tables to study international linkages. 
 In this paper, we analyse which countries are most vulnerable to cost-push inflation using world input-output tables. 
 We also document the heterogeneous reactions of consumer prices to exchange rate variations across countries, reflecting differences in foreign product content of consumption and intermediate products. 
-Understanding the influence of exchange rate on inflation is indeed critically important for setting monetary policy and measuring the extent of expenditure switching that follows exchange rate variations, which, in turn, has an impact on real activity.
+Understanding the influence of exchange rate on inflation is indeed critically important for measuring the extent of expenditure switching that follows exchange rate variations, which, in turn, has an impact on real activity.
 To shed light on these mechanisms, we study the elasticity of the household consumption expenditure (HCE hereafter) deflator to the exchange rate."
 
 Section 1 could be thus incorporated in the introduction.
@@ -108,7 +110,7 @@ Hadrien a regardé Stefan Schleffer, c’est décevant
 *	Section 2 should be re-organised. The focus of the section should be on the derivation of the HCE deflator elasticity. The data could be discussed in a separate section.
 
 As suggested, we re-organised Section 2. 
-We now discuss the data sources and compare the different databases in a separate section (section 1). 
+We now discuss the data sources and compare the different databases in a separate section (Section 1). 
 As a result, Section 2 now only focuses on the derivation of the HCE deflator elasticity.
 
 *	I am unsure of the purpose of section 2.1.   I am guessing the authors wanted to show that the effect of a change in production costs is different from that due to a change in the exchange rate. But isn't that shown in Online Appendix D?
@@ -117,11 +119,15 @@ Thank you for this comment. This section was meant initially as an introduction 
 
 *	The analysis in section 4.3 is poorly explained. Are all countries included when equation (17) is estimated? What are the estimated coefficients? Why is the estimated specification that in equation (17)? What happens if the time-varying variables are replaced by time fixed-effects?
 
-Thank you for this comment. We have changed that section. We now explain why we do not use the time-fixed effects. We give and comment the regression results of equation 17 (now 16) (and explain why we are more interested in the goodness-of-fit than the coefficient value and coefficients). We give the number of countries and years over which the equation is estimated. We hope to have thus clarified the discussion and answered your concerns
+Thank you for this comment. We have changed that section. We now explain why we do not use the time-fixed effects. We give and comment the regression results of equation 17 (now equation 16) and explain why we are more interested in the goodness-of-fit than the coefficient value and significance per se). 
+We give the number of countries and years over which the equation is estimated. We hope to have thus clarified the discussion and answered your concerns.
 
 **Vérifier les numéros de sections dans l’appendice !**
 
 *	For the exercise in 4.3 to be helpful, it would be good if the authors could validate their estimated elasticities. Is there any other study that for a subset of the sampled countries has obtained relatively precise estimated HCE deflator elasticities?  In the abstract, the authors mention their elasticity estimates are in line with the literature- so that should be feasible. A lot of the correlations highlighted in the paper feel mechanical.
+
+To take into account your comment, we stress that our results are based on an accounting exercise. 
+
 
 ~~Partir des BMEs ? Compliqué pour les BMEs : le modèle de la BCE est moins transparent. Regarder les modèles macro ? Dame turque de la BCE ? Hadrien envoie des références à Christine et Christine remonte la pelote. Puis Christine fait la discussion.~~
 

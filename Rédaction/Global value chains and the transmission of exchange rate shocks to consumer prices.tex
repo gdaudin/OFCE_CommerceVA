@@ -504,7 +504,7 @@ The trade in value-added analysis reconciles international trade statistics with
 Although supply-driven price models have well-documented limitations \citep{Folloni1994} and rely on a number of simplifying assumptions \footnote{In particular, firms' margins are assumed to be fixed; prices only adjust to absorb cost changes; production techniques are fixed during successive production cycles; inputs substitution caused by change in relative prices is not accounted for.}, they provide a measure of the vulnerability of each sector to price or productivity shocks. 
 Hence, though unrealistic, these models are useful for identifying which countries and sectors are under pressure to adjust their prices when subject to exogenous cost shocks. 
 Leontief's production model has a dual: the cost-push price model, which helps to analyse the consequences of changes in production prices.
-Based on initial work from the OFCE (Observatoire Français des Conjonctures Économiques) \cite{Cochard2016}, we have developed the PIWIM model (Push-cost Inflation through World Input-output Matrices). We discuss the main features of the PIWIM model below. 
+Based on initial work from the OFCE (Observatoire Français des Conjonctures Économiques) \cite{Cochard2016}, we have developed the PIWIM model (Push-cost Inflation through World Input-output Matrices). We present the main features of the PIWIM model below. 
 
 
 \subsection{Setup of the model}\label{subsec:piwimsetup}
@@ -555,26 +555,20 @@ Define $P$ the vector of prices and $Z$ a vector of $log(x_n)+\gamma_n.log(w_n)$
 
 
 \subsection{Accounting impact of an exchange rate variation on domestic prices} \label{subsec:chocchange}
-Online appendix B computes  the well-know effect of the impact of a change in input prices using an I-O model on prices. 
-Here, we are interested in the impact of an exchange rate appreciation on consumer prices in the country whose currency’s value is changing (country $A$ by convention). 
+
+In this section, we focus on the impact of an exchange rate appreciation on consumer prices in the country whose currency’s value is changing (country $A$ by convention)\footnote{See Online appendix B for details on the computation of the impact of a change in input prices using an I-O model on prices.}. 
 We also estimate the inflationary impact on countries that directly and indirectly, through third countries linkages, consume inputs from country $A$. Hence, we will also analyse the impact of an appreciation of the US dollar.
-In both cases, implementing an exchange rate variation is more complex than implementing a change in production costs. 
+%VF Je propose d'enelver car on a recentré le propos et on comprend moins la comparaison maintenant que tout est passé dans l'annexe B
+%In both cases, implementing an exchange rate variation is more complex than implementing a change in production costs. 
 The appreciation of the currency of country $A$ leads to a fall in the national currency price of country $A$'s imports, while the foreign-currency price of its exports increases. \\
 % je propose de supprimer car, pour caricaturer, on ne comprend pas pourquoi on a expliqué quelque chose on section ioprice si c'est pour dire ici que ça ne sert à rien However, this shock cannot be analyzed applying the method described in \ref{subsec:ioprice} because the value of the price, besides depending of the nationality of the input-providing sector, also depends on the nationality of the input-using sector. 
 Suppose a world with two countries $A$ and $B$, each having its own national currency, and using a third currency for international transactions, the dollar.
 Following a 5$\%$ appreciation of the currency of country $A$ against the two other currencies, the prices of country $A$ expressed in dollars increase by 5$\%$ compared to those of country $B$ expressed in dollars. 
 Country $B$ pays more for its imports of inputs, in dollars as well as in national currency, since its exchange rate against the dollar has not changed. 
 Conversely, the price of imported inputs in country $A$ remains constant in dollars, since the prices of country $B$ have not changed, and declines once expressed in country $A$'s national currency. 
-This has an impact on consumer prices expressed in national currency in country $A$.\\
-Note that, for the sake of simplicity, we make the strong assumption that producers completely pass the exchange rate appreciation on their production prices.  
-We do not consider other relevant determinants of the exchange rate pass-through.
-% Christine Mai 2021: j'ai du mal à comprendre en quoi l'appréciation de la monnaie de facturation (le $ par exemple) accroit le déflateur conso en monnaie nationale d'un pays si le prix du producteur n'a pas changé (tj sous hypothèse théorique que pas de comportement de marge). Car au final, les TC bilatéraux exportateur/importateur n'ont pas varié
-For instance, pricing-to-market strategies of exporters aiming to defend their market shares would imply a lower exchange rate pass-through.
-Similarly, settlement and invoicing of imports in the domestic currency is another factor likely to weaken the elasticity of domestic prices to exchange rate movements.
-Assuming that only 60\% of invoices in the euro area goods trade are denominated in foreign currency (see \cite{Ortega2020}) would entail lower elasticity values.
-To anticipate on our results (see Figure \ref{fig:decompositionofs}), reducing the exchange rate pass-through on consumption goods would entail lower elasticity values than reducing the pass-through on inputs.
-Our estimates thus provide an upper bound of the HCE deflator elasticity.\\
-Back to our accounting approach, the change in the prices of imported goods is therefore transmitted to all domestic prices, both directly and through inter-industry linkages. 
+This has an impact on consumer prices expressed in national currency in country $A$ \footnote{For the sake of simplicity, we make the strong assumption that producers completely pass the exchange rate appreciation on their production prices.  We do not consider other relevant determinants of the exchange rate pass-through. For instance, pricing-to-market strategies of exporters aiming to defend their market shares would imply a lower exchange rate pass-through.
+Similarly, settlement and invoicing of imports in the domestic currency is another factor likely to weaken the elasticity of domestic prices to exchange rate movements. Assuming that only 60\% of invoices in the euro area goods trade are denominated in foreign currency (see \cite{Ortega2020}) would entail lower elasticity values. To anticipate on our results (see Figure \ref{fig:decompositionofs}), reducing the exchange rate pass-through on consumption goods would entail lower elasticity values than reducing the pass-through on inputs. Our estimates thus provide an upper bound of the HCE deflator elasticity.}.\\
+The change in the prices of imported goods is therefore transmitted to all domestic prices, both directly and through inter-industry linkages. 
 These upward (downward) movements for country $B$ (country $A$) affect all input prices in both countries.\\
 The effects of the change in prices spread over multiple simultaneous production cycles. 
 The overall impact of the exchange rate appreciation in dollar terms is equal, for the shocked country $A$, to the decline in consumer prices directly due to the exchange rate fluctuation, plus direct and indirect decreases (via inter-industry linkages in the country), in national currency and then converted back into dollar terms, in the prices of inputs imported from $B$ and disseminated to all branches. 
@@ -766,7 +760,7 @@ where ${s}_{kj}^i$ is a coefficient of $S^i$ for country $i$.
 
 \section{Accounting impact of an exchange rate variation on consumer prices}
 \label{sec:prixconso}
-We use the model presented in \ref{subsec:chocchange} to analyse the impact of an exchange rate variation on the household consumption expenditure (HCE) deflator.
+We use the model presented in Section \ref{subsec:chocchange} to analyse the impact of an exchange rate variation on the household consumption expenditure (HCE) deflator.
 We assume that the variation in the nominal exchange rate is small enough to assimilate log and percentage points. 
 Hence, we consider $\overline{s_{i}}^{i,HC}$ as the HCE deflator elasticity to its own exchange rate. Following an appreciation of the national currency versus all other currencies, imported inputs and imported consumer goods become cheaper and domestic prices expressed in national currency decrease. 
 %je propose de simplifier: on a déjà dit plus haut qu'on s'intéresse à  $\overline{s_{i}}^{i,HC}$ 

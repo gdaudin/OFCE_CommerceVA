@@ -29,6 +29,9 @@ Reviewer #1: This paper uses an accounting approach to estimate the elasticity o
 
 *	The paper is difficult to read. Part of it is the organisation of the information and another part of it is the exposition.  I understand input-output linkages well and still had to think hard about all the relationships discussed in section 2, and various parts of the paper (I'll be specific in my comments below).
 
+We strive to simplify the exposition of the information and to better organize the paper. 
+For instance, we moved some parts of Section 2 to the appendix. 
+To simplify the main text and make it easier to read, we have put some technical explanations in footnotes. 
 Responsable rédaction : Violaine pour relecture
 
 

@@ -19,7 +19,7 @@ capture program drop etude_pour_papier
 program etude_pour_papier
 args year source
 
-use "$dir/Results/Devaluations/decomp_WIOD_HC_2014.dta", clear
+use "$dir/Results/Devaluations/decomp_`source'_HC_2014.dta", clear
 
 rename *energie* *energy*
 rename *alimentaire* *food*
@@ -33,20 +33,20 @@ label var HC_dom  "Explained by the price evolution of domestic goods"
 label var HC_impt "Explained by the price evolution of imported goods"
 
 
-keep if c=="FRA_EUR" | c=="DEU_EUR" | | c=="ITA_EUR" | c=="USA" | c=="JPN" | c=="CHN" | c=="GBR" | c=="CAN" 
+keep if c=="FRA_EUR" | c=="DEU_EUR" | /*| c=="ITA_EUR" |*/ c=="USA" | c=="JPN" | c=="CHN" | c=="GBR" | c=="CAN" 
 replace c=subinstr(c,"_EUR"e,"",.)
 gsort HC_tot
 graph bar (asis) HC_dom HC_impt , over(c,sort(HC_tot)) stack ///
 		legend(rows(2) size(small)) ///
-		note("Source: PIWIM (`source', `year')") ///
 		scheme(s1mono) ///
 		ylabel(,format(%9.2fc)) ///
 		ytitle("elasticity (absolute value)") ///
-		note("For Germany, France and Italy, this is the elasticity to a shock on the Euro")
+/*		note("For Germany, France and Italy, this is the elasticity to a shock on the Euro")*/
+/*		note("Source: PIWIM (`source', `year')") /// */
 		
 /*		title("Impact d'une appréciation de 5% de l'euro sur les prix à la consommation", span size(medium)) /// */
 	
-if "`nature_choc'"=="chge"  graph export "$dirgit/Rédaction/decomp_origine_`source'_`year'.png", replace
+graph export "$dirgit/Rédaction/decomp_origine.png", replace
 
 
 foreach sector in neig services food energy {
@@ -57,15 +57,15 @@ label var neig "non-energy industrial goods"
 
 graph bar (asis) services neig energy food , over(c,sort(HC_tot)) stack ///
 		legend(rows(2) size(small)) ///
-		note("Source: PIWIM (`source', `year')") /// 
 		scheme(s1mono) ///
 		ylabel(,format(%9.2fc)) ///
 		ytitle("elasticity (absolute value)") ///
-		note("For DEU and FRA, this is the elasticity to a shock on the Euro")
+/*		note("For DEU and FRA, this is the elasticity to a shock on the Euro")*/
+/*		note("Source: PIWIM (`source', `year')") */ ///  
 		
 /*		title("Impact d'une appréciation de 5% de l'euro sur les prix à la consommation par secteur", span size(medsmall)) /// */
-if "`nature_choc'"=="chge"  graph export "$dirgit/Rédaction/decomp_sect_`source'_`year'.png", replace
-if "`nature_choc'"=="oil"  graph export "$dir/Results/secteurs_pays/graphiques/decomp_sect_`source'_`year'.png", replace
+graph export "$dirgit/Rédaction/decomp_sect.png", replace
+
 
 
 
@@ -83,20 +83,20 @@ label var volatile_dom "Domestic food and energy inflation"
 
 graph bar (asis) ss_jacente_dom ss_jacente_impt  volatile_dom volatile_impt  , over(c,sort(HC_tot)) stack ///
 		legend(rows(2) size(vsmall)) ///
-		note("Source: PIWIM (`source', `year')") /// 
 		scheme(s1mono) ///
 		ylabel(,format(%9.2fc)) ///
 		ytitle("elasticity (absolute value)") ///
-		note("For DEU and FRA, this is the elasticity to a shock on the Euro")
+/*		note("For DEU and FRA, this is the elasticity to a shock on the Euro")*/
+/*		note("Source: PIWIM (`source', `year')") */ /// 
 		
 		
 /*		title("Impact d'une appréciation de 5% de l'euro sur les prix à la consommation par secteur et origine", span size(small)) /// */		
-if "`nature_choc'"=="chge"  graph export "$dirgit/Rédaction/decomp_sectxorigin_`source'_`year'.png", replace
-if "`nature_choc'"=="oil"  graph export "$dir/Results/secteurs_pays/graphiques/decomp_sectxorigin_`source'_`year'.png", replace
+graph export "$dirgit/Rédaction/decomp_sectxorigin.png", replace
 
 
 
 
+/*
 
 gen part_import = HC_impt / (HC_impt+HC_dom)
 label var part_import  "all, imported"
@@ -116,12 +116,12 @@ foreach sector in energy neig services food {
 graph combine neig services energy  food, xcommon ycommon ///
 	/*title("Sectoral shares of the impact of a nominal exchange rate shock")*/ note("`source', `year'")
 graph export "$dirgit/Rédaction/Share_sector_HC_`source'_`year'.png", replace
-
+*/
 
 
 local width_`dom' 0.1
 local width_`impt' 0.5
-
+/*
 foreach origin in dom impt {
 	
 	if "`origin'"=="dom" local origine_dev "domestic"
@@ -149,7 +149,7 @@ foreach origin in dom impt {
 
 }
 
-
+*/
 end
 
 
@@ -238,5 +238,5 @@ graph export "$dirgit/Rédaction_Note/Decomp_sectxorigin.png", replace
 end
 
 
-*etude_pour_papier 2014 WIOD
-etude_pour_note 2014 WIOD
+etude_pour_papier 2014 WIOD
+*etude_pour_note 2014 WIOD

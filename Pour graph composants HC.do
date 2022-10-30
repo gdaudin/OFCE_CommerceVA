@@ -3,12 +3,14 @@ set more off
 if ("`c(username)'"=="guillaumedaudin") global dir "~/Documents/Recherche/2017 BDF_Commerce VA"
 else global dir "\\intra\partages\au_dcpm\DiagConj\Commun\CommerceVA"
 
+if ("`c(username)'"=="guillaumedaudin") global dirgit "~/Répertoires Git/OFCE_CommerceVA"
+
 
 *capture log close
 *log using "$dir/$S_DATE.log", replace
 
 
-if ("`c(username)'"=="guillaumedaudin") do  "~/Documents/Recherche/2017 BDF_Commerce VA/commerce_VA_inflation/Definition_pays_secteur.do" `source'
+if ("`c(username)'"=="guillaumedaudin") do  "$dirgit/Definition_pays_secteur.do" `source'
 if ("`c(username)'"=="w817186") do "X:\Agents\FAUBERT\commerce_VA_inflation\Definition_pays_secteur.do" `source'
 if ("`c(username)'"=="n818881") do  "X:\Agents\LALLIARD\commerce_VA_inflation\Definition_pays_secteur.do" `source'
 	
@@ -28,7 +30,7 @@ gen part_import = HC_impt / (HC_impt+HC_dom)
 label var part_import  "all, imported"
 histogram part_import, name(import, replace) kdensity start(0) width(0.05) ///
 			frequency note("`source', `year'")
-graph export "$dir/commerce_VA_inflation/Rédaction/Share_impt_HC_`source'_`year'.png", replace	
+graph export "$dirgit/Rédaction/Share_impt_HC_`source'_`year'.png", replace	
 
 
 
@@ -41,7 +43,7 @@ foreach sector in energy neig services food {
 
 graph combine neig services energy  food, xcommon ycommon ///
 	/*title("Sectoral shares of the impact of a nominal exchange rate shock")*/ note("`source', `year'")
-graph export "$dir/commerce_VA_inflation/Rédaction/Share_sector_HC_`source'_`year'.png", replace
+graph export "$dirgit/Rédaction/Share_sector_HC_`source'_`year'.png", replace
 
 
 
@@ -71,7 +73,7 @@ foreach origin in dom impt {
 	}
 	macro dir 
 	graph combine `liste_graph_`origin'', xcommon ycommon /*title("Intensity, `origine_dev'")*/ note("`source', `year'")
-	graph export "$dir/commerce_VA_inflation/Rédaction/Int_HC_`source'_`year'_`origin'.png", replace
+	graph export "$dirgit/Rédaction/Int_HC_`source'_`year'_`origin'.png", replace
 
 }
 
@@ -111,7 +113,7 @@ graph bar (asis) HC_dom HC_impt , over(c,sort(HC_tot) descending) stack ///
 		
 /*		title("Impact d'une appréciation de 5% de l'euro sur les prix à la consommation", span size(medium)) /// */
 	
-graph export "$dir/commerce_VA_inflation/Rédaction_Note/Decomp_origine.png", replace
+graph export "$dirgit/Rédaction_Note/Decomp_origine.png", replace
 
 
 foreach sector in neig services food energy {
@@ -130,7 +132,7 @@ graph bar (asis) services neig energie alimentaire , over(c,sort(HC_tot) descend
 		ytitle("%")
 		
 /*		title("Impact d'une appréciation de 5% de l'euro sur les prix à la consommation par secteur", span size(medsmall)) /// */
-graph export "$dir/commerce_VA_inflation/Rédaction_Note/Decomp_sect.png", replace
+graph export "$dirgit/Rédaction_Note/Decomp_sect.png", replace
 
 gen ss_jacente_impt= services_impt+neig_impt
 label var ss_jacente_imp "Inflation sous-jacente importée"
@@ -152,7 +154,7 @@ graph bar (asis) ss_jacente_dom ss_jacente_impt  volatile_dom volatile_impt  , o
 		ytitle("%")
 		
 /*		title("Impact d'une appréciation de 5% de l'euro sur les prix à la consommation par secteur et origine", span size(small)) /// */		
-graph export "$dir/commerce_VA_inflation/Rédaction_Note/Decomp_sectxorigin.png", replace
+graph export "$dirgit/Rédaction_Note/Decomp_sectxorigin.png", replace
 
 	
 

@@ -501,16 +501,17 @@ For ease of exposition, we use the WIOD as a baseline, since it covers the large
 
 The Leontief's production model analyses the impact of a demand shock in a closed economy \citep{Leontief1951} and is broadly used in multi-sector, single-country macroeconomic models. 
 The trade in value-added analysis reconciles international trade statistics with national I-O tables, thus extending Leontief's analysis to an international context.
-Although supply-driven price models have well-documented limitations \citep{Folloni1994} and rely on a number of simplifying assumptions \footnote{In particular, firms' margins are assumed to be fixed; prices only adjust to absorb cost changes; production techniques are fixed during successive production cycles; inputs substitution caused by change in relative prices is not accounted for.}, they provide a measure of the vulnerability of each sector to price or productivity shocks. 
-Hence, though unrealistic, these models are useful for identifying which countries and sectors are under pressure to adjust their prices when subject to exogenous cost shocks. 
+Supply-driven price models have well-documented limitations \citep{Folloni1994} and rely on a number of simplifying assumptions \footnote{In particular, firms' margins are assumed to be fixed; prices only adjust to absorb cost changes; production techniques are fixed during successive production cycles; inputs substitution caused by change in relative prices is not accounted for.}. 
+They nevertheless provide a measure of the vulnerability of each sector to price or productivity shocks. 
+Hence, though unrealistic, these models are useful for identifying which countries and sectors are under pressure to adjust their prices when subject to exogenous cost shocks.\\ 
 Leontief's production model has a dual: the cost-push price model, which helps to analyse the consequences of changes in production prices.
-Based on initial work from the OFCE (Observatoire Français des Conjonctures Économiques) \cite{Cochard2016}, we have developed the PIWIM model (Push-cost Inflation through World Input-output Matrices). We present the main features of the PIWIM model below. 
+Based on initial work from the OFCE (Observatoire Français des Conjonctures Économiques) outlined in \cite{Cochard2016}, we have developed the PIWIM model (Push-cost Inflation through World Input-output Matrices). We present the main features of the PIWIM model below. 
 
 
 \subsection{Setup of the model}\label{subsec:piwimsetup}
 To identify which countries are most affected by a change in prices through value-added and vertical international trade flows, we need a large structural matrix that integrates input flows between sectors, both within each country and between countries.
 This matrix traces the sectoral and geographical origin of inputs. \\
-The standard I-O model relies on input-output tables registering transactions of goods and services (domestic or imported) at current prices. The I-O tables describe the sale and purchase relationships between producers and consumers within an economy. Each column indicates, for each industry $j$, the intermediate consumption of goods and services from the various sectors.
+The standard I-O model relies on input-output tables registering transactions of goods and services (domestic or imported) at current prices. The I-O tables describe the sale and purchase relationships between producers and consumers within an economy. Each column indicates, for each industry $j$, the intermediate consumption of goods and services from the various sectors.\\
 By extension, a "world" I-O table (WIOT) describes the sale and purchase relationships between producers and consumers in the whole world, differentiating between sectors in different countries.
 The WIOT has, on its diagonal,  country blocks recording flows of domestic transactions of intermediate goods and services between domestic industries.
 The "bilateral" blocks outside of the diagonal represent international flows of intermediate goods and services via bilateral sectoral exports and imports. \\
@@ -628,7 +629,6 @@ C_\$^i{\cal B}^i=\left(0\ldots c_\$^i \ldots 0\right)\left(\begin{matrix}0&\cdot
 \label{eq:eq3}
 \end{eqnarray}
 where each $a_{kl,ij}$ element of the line block represents the technical coefficient related to imports of inputs by sector $l$ in country $k$ (with $k\ne i$) from sector $j$ of country $i$.\\
-
 Let us now consider the impact of the exchange rate fluctuation from the perspective of the shocked country $i$.\\
 \\%\textcolor {blue}{GD Je ne comprends pas. La valeur en dollar des inputs importés par le pays choqué ne devrait pas varier ? C'est leur valeur en monnaie nationale qui change ?}
 %Define ${{\tilde{C}}_{\$}}$ the vector of change in input prices imported by country i, in dollars, $( -c_{\$i}\ldots0\ldots-c_{\$i})$. 
@@ -647,7 +647,6 @@ Define $C^i$ the vector of change in prices everywhere expressed in country $i$'
 \begin{eqnarray*}
 C^i = \left(-\frac{c_\$^i}{1+c_\$^i},\ldots0\ldots,-\frac{c_\$^i}{1+c_\$^i} \right)
 \end{eqnarray*}
-
 From Equation \ref{eq:eq2}, we write the first-step impact for country $i$ of the fall in input prices from the rest of the world. 
 The first-step impact is the product of the shock vector $C^i$ and a matrix ${\tilde{{\cal B}^i}}$. ${\tilde{{\cal B}^i}}$ builds on the large matrix ${\cal A}$ of which only the country blocks of those inputs imported by country $i$ from other countries have been retained. 
 The other coefficients are replaced by 0, including those of the block of country $i$ concerning the domestic inputs of country $i$. \\
@@ -675,7 +674,6 @@ The other coefficients are replaced by 0, including those of the block of countr
 	}%
 }
 \\
-
 The first-step impact of the appreciation of the country $i$’s currency on the price of its inputs corresponds, in national currency, to $C^i{\tilde{{\cal B}^i}}$ with: 
 \begin{eqnarray}
 C^i{\tilde{{\cal B}^i}}=\left(-\frac{c_\$^i}{1+c_\$^i},\ldots0\ldots,-\frac{c_\$^i}{1+c_\$^i} \right)\left(\begin{matrix}0&\ldots{{{a}}_{ij,11}}\ldots&0\\0&0&0\\0&\ldots{{a}_{{ij,IJ}}}\ldots&0\\\end{matrix}\right) 
@@ -718,10 +716,8 @@ By contrast, we focus on the effect of an exchange rate variation on consumer pr
 \end{aligned}
 \end{equation}
 Where $\hat{C}^i_\$=\left(0 \ldots \frac{c_\$^i}{1+c_\$^i},\ldots 0 \right)$ is the increase in dollar prices of goods and services from country $i$ used as inputs in all other countries.\\ 
-$S^i$ represents the overall impact of an exchange rate variation on prices in each sector of each country expressed in the currency of country $i$. $S^i$ is expressed in log points. If the variation is small enough, the elements of $S^i$ correspond to the elasticities to the exchange rate of consumer prices in country $i$.
+$S^i$ represents the overall impact of an exchange rate variation on prices in each sector of each country expressed in the currency of country $i$. $S^i$ is expressed in log points. If the variation is small enough, the elements of $S^i$ correspond to the elasticities to the exchange rate of consumer prices in country $i$.\footnote{We return to this equation and its interpretation in section \ref{sec:extrapo} (see equation \ref{eq:decomp}).}\\
 %%It is quite different from $S$ defined in eq. \eqref{eq:eqchocprix} because in the case of $S$, the price shock affects all consumers, whereas in the case of $S^i$, the price shock affects only consumers that do not share a currency with country $i$. To illustrate the difference, the two-country, one sector case is explored in Appendix B.
-We return to this equation and its interpretation in section \ref{sec:extrapo} (see equation \ref{eq:decomp}).
-
 To convert this vector into the HCE \footnote{The HCE deflator covers more products and has different sectoral weights than the headline consumer price index (CPI) as the former also encompasses, for example, the rental equivalent of real estate expenditures.}
  deflator elasticity in country $i$, $\bar{s}^i$, we use the household consumption shares to compute a weighted average of the elements of $S^i$. Let $HC^i$ be the vector of sectoral shares in country $i$'s household consumption\footnote{Consumption is at market prices, whereas all WIOTs are at basic prices. To move from one to the other, we make the simplifying assumption that all taxes and subsidies on products are proportional, as is the value-added tax.}:
 \begin{eqnarray*}
@@ -735,7 +731,6 @@ HC^i=\left(
 	 \end{array}
 	 \right)
 \end{eqnarray*}
-
 Where ${hc}_{kj}^i$ corresponds to household consumption in country $i$ of goods and services produced by sector $j$ from country $k$ and $hc^i$ represents the total household consumption of country $i$. \\
 %For each country, we compute a weighted average of the shock effects, based on three types of aggregation: the sectoral structure of output, the sectoral structure of exports and the sectoral structure of household consumption.\\
 %Hence 
@@ -750,7 +745,7 @@ Where ${hc}_{kj}^i$ corresponds to household consumption in country $i$ of goods
 % \end{eqnarray*} 
 %with $x_{ij}$the exports of industry $j$ in country $i$ and $x_{i}$ the total exports of country $i$. \\
 %The last type of aggregation relies on the sectoral structure of household consumption.
-$\overline{s_{i}}^{i,HC}$ provides the elasticity of the HCE deflator of country $i$ to its own exchange rate. 
+The elasticity of the HCE deflator of country $i$ to its own exchange rate is $\overline{s_{i}}^{i,HC}$:  
  \begin{eqnarray}
 \overline{s}_{i}^{i,HC}=S^i.HC^i=\underset{\begin{subarray}{c}j=1\dots J \\ k=1 \dots I \end{subarray}}{\mathop \sum}\,{{s}_{kj}^i}.\frac{{hc}_{kj}^i}{hc^i}
 \label{eq:eq6}
@@ -762,12 +757,13 @@ where ${s}_{kj}^i$ is a coefficient of $S^i$ for country $i$.
 \label{sec:prixconso}
 We use the model presented in Section \ref{subsec:chocchange} to analyse the impact of an exchange rate variation on the household consumption expenditure (HCE) deflator.
 We assume that the variation in the nominal exchange rate is small enough to assimilate log and percentage points. 
-Hence, we consider $\overline{s_{i}}^{i,HC}$ as the HCE deflator elasticity to its own exchange rate. Following an appreciation of the national currency versus all other currencies, imported inputs and imported consumer goods become cheaper and domestic prices expressed in national currency decrease. 
+Hence, we consider $\overline{s_{i}}^{i,HC}$ as the HCE deflator elasticity to its own exchange rate.\\
+Following an appreciation of the national currency versus all other currencies, imported inputs and imported consumer goods become cheaper and domestic prices expressed in national currency decrease. 
 %je propose de simplifier: on a déjà dit plus haut qu'on s'intéresse à  $\overline{s_{i}}^{i,HC}$ 
 %Using the WIOD database, we find that $\overline{s_{i}}^{i,HC}$ is equal to $-0.055$ for the USA in 2011, meaning that a 100\% appreciation of the dollar would reduce consumer prices by 5.5\%. 
 \subsection{Heterogeneity across countries}\label{subsec:heterogcountry}
 Using the WIOD database, which covers a sample of 43 countries, we find that the HCE deflator elasticity ranges from 0.05 to 0.22 depending on the country (see Figure \ref{fig:WIOD_HC_elasticities}). 
-This heterogeneity reflects different degrees of openness to trade and differences in foreign product content in domestic consumption. 
+This heterogeneity reflects different degrees of openness to trade and differences in foreign product content in domestic consumption.\\ 
 The elasticity is lower for large advanced and developing countries.
 For instance, we find an elasticity of 0.06 in 2014 for the US. 
 Within the euro area, the elasticity of the HCE deflator differs substantially, ranging from 0.07 in Italy to 0.18 in Ireland, a small open economy with a large traded sector and a large share of trade outside the euro area. 
@@ -791,7 +787,9 @@ The elasticity is twice higher for small open economies like Luxembourg, Malta, 
 %For France, the elasticity of the HCE deflator to an appreciation of the euro is -0.08. 
 %The elastiticy of the HCE deflator to an appreciation of an hypothetical French national currency is -0.122. 
 
-Figure \ref{fig:comp_WIOD_TIVA} compares the results obtained with WIOD and two distinct releases of TiVA for 2011 and 2014.
+We use several datasets for the sake of robustness. 
+Overall, results obtained with different databses are consistent.
+For instance, Figure \ref{fig:comp_WIOD_TIVA} compares the results obtained with WIOD and those obtained with two distinct releases of TiVA for 2011 and 2014.
 \begin{figure}[H]
 \centering
 \caption{\footnotesize{\textbf{Comparison of the HCE deflator elasticity to the exchange rate for WIOD, TIVA rev. 3 and TIVA rev. 4 (2011 and 2014)}}}
@@ -806,8 +804,7 @@ Figure \ref{fig:comp_WIOD_TIVA} compares the results obtained with WIOD and two 
 \end{figure}
 
 Figure \ref{fig:WIOD_HC_E1HC} shows that the value of the elasticity is closely, but not perfectly, related to the share of imported goods and services (from outside the euro area for euro area countries) in household consumption.
-The higher the country's import share in consumption, the higher the elasticity of the HCE deflator to the exchange rate. 
-We come back to the relations between the HCE deflator and various openness measures in section \ref{sec:extrapo}.
+The higher the country's import share in consumption, the higher the elasticity of the HCE deflator to the exchange rate \footnote{See section \ref{sec:extrapo} for more details on the relationships between the HCE deflator and various indicators of trade openness.}.
 %Small open economies in the euro area post higher import content of consumption. 
 %Our findings concur with the literature. For instance, \cite{Ortega2020} find that the direct and indirect import content in consumption %ranges from 12\% in Italy to 33\% in Ireland and Malta, according to calculations based on input-output tables from WIOD.\\
 
@@ -855,17 +852,16 @@ Our results concur with the literature.
 Using comprehensive measures of global value chain integration, \cite{Timmer2016} find that the expansion of global value chain has slowed down since the Great Recession.\\
 While the latest dataset available for WIOD dates back to 2014, MRIO covers the most recent years, up to 2019. 
 Results from the MRIO database suggest that the elasticity has bounced back from 2016 onwards, reaching 0.09 in 2019.
-However, the version of MRIO we use (March 2021) suffers from data quality issues for 2018 and 2019 (see Online Appendix D). Between 2017 and 2018, the HCE deflator elasticity sharply increased in a number of countries (e.g. China and India). 
+However, the version of MRIO we use (March 2021 release) suffers from data quality issues for 2018 and 2019 \footnote{Between 2017 and 2018, the HCE deflator elasticity sharply increased in a number of countries (e.g. China and India) according to the MRIO database. See Online Appendix D for more details.}. 
 %\footnote{For instance, we observe large shifts in the consumption of services in China (see Online Appendix F), suggesting data quality issues in 2018.}
 Hence, we assume that the elasticity estimated using MRIO is not reliable for 2018 and 2019 (see Section \ref{sec:Extrapolations} for further details).\\
 Overall, our estimates are robust to using different databases.
 WIOD and MRIO provide similar elasticities. 
 The main difference between the two databases relates to the broader geographic coverage of MRIO, which includes nineteen additional emerging Asian economies. 
-Given these economies' relative small size, using MRIO provides aggregate results similar to those of WIOD.
-By contrast, using data from TIVA rev. 3, which covers a sample of 64 countries up to 2011, yields a higher elasticity. 
-TIVA rev. 3 suggests that the output-weighted elasticity has increased by 25\% between 1995 and 2008, reaching 0.10 in 2008. \\
-The higher estimates obtained with TiVA rev. 3 likely reflects the different treatment of contract manufacturing in the 2008 system of national accounts compared to the 1993 system, which reduces imported inputs.
-The slight differences observed between WIOD and TiVA rev. 4 likely reflect different ways of reconciling national accounts and international trade statistics.
+Given the relative small size of these economies, using MRIO provides aggregate results similar to those of WIOD.
+By contrast, using data from TiVA rev.3, which covers a sample of 64 countries up to 2011, yields a higher elasticity. 
+TiVA rev.3 suggests that the output-weighted elasticity has increased by 25\% between 1995 and 2008, reaching 0.10 in 2008 \footnote{The third revision of TiVA is based on the 1993 system of national accounts, whrereas the fourth revision is based on the 2008 system of national accounts. The higher estimates obtained with TiVA rev.3 likely reflects the different treatment of contract manufacturing in the 2008 system of national accounts compared to the 1993 system, which reduces imported inputs.}. \\
+The slight differences observed between WIOD and TiVA rev.4 likely reflect different ways of reconciling national accounts and international trade statistics.
 
 
 \begin{figure}[H]
@@ -873,7 +869,7 @@ The slight differences observed between WIOD and TiVA rev. 4 likely reflect diff
 	\caption{\footnotesize{\textbf{Evolution of the HCE deflator elasticity, 1995-2019}}}
 	\begin{tabular}{c}
 		\includegraphics[width=4.5in, height=3in]{PIWIM_LONGITUDINAL.png}\\
-		\floatfoot{Sources: WIOD, MRIO, TIVA rev. 3, TIVA rev. 4 and authors’ calculations}
+		\floatfoot{Sources: WIOD, MRIO, TIVA rev.3, TIVA rev.4 and authors’ calculations}
 	\end{tabular}
 	\label{fig:PIWIM_LONGITUDINAL}
 \end{figure}
@@ -881,7 +877,7 @@ The slight differences observed between WIOD and TiVA rev. 4 likely reflect diff
 %
 %\begin{figure}[!h]
 %	\centering
-%	\caption{\footnotesize{\textbf{Consumer price elasticity and share of imported consumption for WIOD 2014}}}
+%	\caption{\footnotesize{\textbf{Consumer price elasticity and share of imported consumption computed with WIOD (2014)}}}
 %	\begin{tabular}{c}
 %		\includegraphics[width=4.5in, height=3in]
 %		{WIOD_HC_E1HC.png}\\
@@ -892,8 +888,8 @@ The slight differences observed between WIOD and TiVA rev. 4 likely reflect diff
 
 \subsection{Contributors to the HCE deflator elasticity}\label{subsec:contributors}
 In this section, we analyse the contributions of each part of the consumption basket to the pass-through of exchange rate variations to consumer prices.
-We start with the contributions of domestic versus imported goods.
-%Looking at the contribution of different types of goods to $\overline{s_{i}}^{i,HC}$ helps understanding the mechanis at work in PIWIM. One possibility is too look at the predicted effect on domestic goods versus imported goods.\\ 
+We start with the contributions of domestic versus imported goods.\\ 
+%Looking at the contribution of different types of goods to $\overline{s_{i}}^{i,HC}$ helps understanding the mechanis at work in PIWIM. One possibility is too look at the predicted effect on domestic goods versus imported goods.
 We define 
 \begin{eqnarray}
 \overline{s}_i^{i,HC}=\overline{s}_{i,imp}^{i,HC} + \overline{s}_{i,dom}^{i,HC} = S^i.HC^{i,dom}+ S^i.HC^{i,imp}

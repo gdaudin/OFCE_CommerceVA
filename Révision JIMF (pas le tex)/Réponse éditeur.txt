@@ -29,7 +29,7 @@ Reviewer #1: This paper uses an accounting approach to estimate the elasticity o
 
 *	The paper is difficult to read. Part of it is the organisation of the information and another part of it is the exposition.  I understand input-output linkages well and still had to think hard about all the relationships discussed in section 2, and various parts of the paper (I'll be specific in my comments below).
 
-Thank you for this comment. 
+Thank you for youy comment. 
 We strive to simplify the exposition of the information and to better organize the paper. 
 For instance, we moved some parts of Section 2 to the appendix. 
 To simplify the main text and make it easier to read, we have redrafted some parts of the paper and put some technical explanations in footnotes. 
@@ -38,12 +38,29 @@ Responsable rédaction : Violaine pour relecture
 
 *	The analysis makes assumptions on the degree of the exchange rate pass-through (ERPT) and currency pricing. These assumptions imply estimated elasticities are an upper bound.  It would be great if the authors could incorporate a discussion of the consequences of this for their findings.  While I do agree the assumptions bias estimates elasticities upwards, I am not sure the cross-country heterogeneity is correctly identified. If one looks at Figure 1, Taiwan has a greater elasticity than Canada but that might not be the case if the bias from the assumptions on Taiwan's calculations is worse than that on Canada's.  This point is particularly important given that cross-country heterogeneity is explored in section 3.1. and 3.2.
 
-Thank you for this comment. We incorporated a discussion of the consequences of our simplifying assumptions in the introduction. In particular, we stress that: 
+Thank you for this comment. We incorporated a discussion of the consequences of our simplifying assumptions in the introduction. 
+In particular, we stress that: 
 "we suppose that all pricings occur using the currency of the producing country. The invoicing decision is an active channel through which producers adjust their prices in relation to their own market power and to local competitive pressures. Prices fixed in the local currency are sticky in the currency of the destination market and irresponsive to changes in the bilateral exchange rate between the local currency and the currency of the producer. By contrast, prices fixed in the producer's or dominant currency have a higher ERPT. Contrary to our hypothesis, a large body of empirical literature suggests that the vast majority of trade is invoiced in a small number of ‘dominant currencies’, with the U.S. dollar playing a major role. The ‘dominant currency paradigm’ (\cite{Gopinath2020}) implies that for non-U.S. countries, the ERPT into import prices (in home currency) should be high and driven by the U.S. dollar exchange rate as opposed to the bilateral exchange rate, whereas for the U.S. the pass-through into import prices should be low. \cite{Gopinath2010} also show that there is a large difference in the ERPT of the average good priced in dollars (25\%) versus non-dollars (95\%).
 Hence, using alternative pricing assumptions would entail lower estimates of the elasticity of consumer prices to the exchange rate."
 
-Regarding the cross-country heterogeneity, we underline that "the upward bias stemming from our simplifying assumptions is unlikely to be constant. The magnitude of the bias likely depends on the size of the economy. In particular, it is likely that in large and attractive markets, competitive pressures may push producers to adopt local currency pricing strategies, where exporting firms adapt their mark-ups depending on the destination market to offset exchange rate movements. Hence, we would expect the upward bias in our estimated elasticities to be more pronounced for the largest and most attractive markets represented in our sample." 
+Regarding the cross-country heterogeneity, we underline in the introduction that "the upward bias stemming from our simplifying assumptions is unlikely to be constant. The magnitude of the bias likely depends on the size of the economy. In particular, it is likely that in large and attractive markets, competitive pressures may push producers to adopt local currency pricing strategies, where exporting firms adapt their mark-ups depending on the destination market to offset exchange rate movements. Hence, we would expect the upward bias in our estimated elasticities to be more pronounced for the largest and most attractive markets represented in our sample." 
 
+We also added a discusion of these caveats in section 3, as suggested, when we discuss the cross-country heterogeneity.
+The end of Section 3.1 now reads as follows: 
+"An important caveat is that our computations rely on several simplifying assumptions which biais our estimates upward. 
+First, we assume exchange rate fluctuations completely pass-through to import prices. 
+However, a large body of literature suggests that the pass-through is incomplete, even in the long run, as a
+result of slow nominal price adjustments or the pricing-to-market behaviour of firms. \footnote{For example, the pass-through depends on the intensity
+of competition in domestic markets: while an exchange rate appreciation lowers the price of imported inputs, a firm with limited competitive pressure may avail of greater profit margins rather than reduce prices in an effort to maintain its market share.} 
+Hence, pricing-to-market strategies of exporters aiming to defend their market shares would imply a lower exchange rate pass-through. \\
+In addition, we work under the producer pricing assumption. 
+However, in large and attractive markets, competitive pressures may push producers to adopt local currency pricing strategies,
+where exporting firms adapt their mark-ups depending on the destination market to offset exchange rate movements. 
+Under the local currency pricing paradigm, prices are thus sticky in the currency of the destination market. 
+Hence, using alternative pricing assumptions would entail lower estimates of the HCE deflator elasticity.
+The magnitude of the upward biais stemming from our simplifying assumptions is unlikely to be constant in our sample given the cross-country heterogeneity.
+The magnitude of the bias likely depends on the size of the economy. In particular, it is likely that in large and attractive markets, competitive pressures may push producers to adopt local currency pricing strategies, where exporting firms adapt their mark-ups depending on the destination market to offset exchange rate movements. 
+Hence, we would expect the upward bias in our estimated elasticities to be more pronounced for the largest and most attractive markets represented in our sample."
 
 a. Discuter sur la sur-évaluation. Hadrien
 b. Difficile de parler de l’hétérogénité par pays. Ou degrés de dollar dominance. FMI Gitta / Rapport de la BCE ? Hadrien 

@@ -1097,31 +1097,34 @@ Figure \ref{fig:shareofsthroughtime} shows that input-output mechanisms have exp
 	%La figure vient de Étude rapport D+I et Bouclage Mondial_oil.do
 	\begin{tabular}{c}
 		\includegraphics[width=5.0in, height=3.5in]{Share_GDP-weighted.png}\\
-		\floatfoot{Sources: WIOD, TIVA rev. 3, TIVA rev. 4 and authors’ calculations} \\
+		\floatfoot{Sources: WIOD, TIVA rev.3, TIVA rev.4 and authors’ calculations} \\
 	\end{tabular}
 	\label{fig:shareofsthroughtime}
 \end{figure}
 
-Overall, the first two channels explain three-quarters of the transmission of an exchange rate appreciation to domestic prices.
-By contrast, the last two channels, which reflect the impact of global value chains, play a more limited role, with marked across-countries heterogeneity.
-Approximately one-fourth of the HCE deflator elasticity to the exchange rate is attributable to participation in global value chains.\\
-Still, $E1.HC$ and $E2.HC$ are relatively important (especially for small countries). Although the model as it stands cannot easily accommodate simultaneous exchange rate changes in different currencies (which would require increasing the number of $\cal{B}$ matrices and $C$ vectors), we expect the effect of simultaneous variations of different currencies to be correctly approximated by an own-currency exchange rate change of the trade-weighted average of the country-specific exchange rate changes.\\
+Overall, the main transmission channels are: i) the prices of imported final goods sold directly to domestic consumers and ii) the prices of imported inputs entering domestic production. 
+These channels explain three-quarters of the transmission of an exchange rate appreciation to domestic prices. 
+These are particularly important for small economies.
+By contrast, the channels reflecting the impact of global value chains play a more limited role.
+% je propose de mettre en note car cela répondait à un commentaire BCE et n'est pas très aisé à suivre tel que formulé actuellement
+\footnote{Although the model as it stands cannot easily accommodate simultaneous exchange rate changes in different currencies (which would require increasing the number of $\cal{B}$ matrices and $C$ vectors), we expect the effect of simultaneous variations of different currencies to be correctly approximated by an own-currency exchange rate change of the trade-weighted average of the country-specific exchange rate changes.}\\
 
 
 \subsection{Estimating the HCE deflator elasticity using the shares of imported goods and imported inputs in household consumption}
 \label{subsec:estimatingHCEwithnationalaccounts}
-The importance of $E1.HC$ and $E2.HC$ suggests that the HCE deflator elasticity to the exchange rates could be estimated using national accounts data and input-output matrices.
-National accounts data provide $E1.HC$ and $E2.HC$, whereas world input-output matrices are needed for computing $E3.HC$ and $E4.HC$. 
-We investigate whether $E3.HC$ and $E4.HC$ can be inferred from easier-to-compute elements of $\overline{s}_{i}^{i,HC}$.
-
+In the section above, we have shown the decisive role of $E1.HC$ (the prices of imported final goods sold directly to domestic consumers) and $E2.HC$ (the prices of imported inputs entering domestic production) in explaining the HCE deflator elasticity to the exchange rates.
+The importance of these two channels suggests that the HCE deflator elasticity could be estimated using national accounts data and input-output matrices. 
+National accounts data provide $E1.HC$ and $E2.HC$, whereas world input-output matrices are needed for computing $E3.HC$ (the effect on imported
+consumer goods through domestic inputs) and $E4.HC$. 
+We investigate whether $E3.HC$ and $E4.HC$ can be inferred from easier-to-compute elements of the HCE deflator elasticity $\overline{s}_{i}^{i,HC}$.
 %This is suggested by the correlation matrix of  $E1.HC^{i,imp}$, $E2.HC^{i,dom}$, $E3.HC^{i,imp}$ and $E4.HC^i$ (see Table \ref{table:corretable1}). 
 %
 %\input{corrtable_1.tex}
 % comme on vient de dire que e3 est petit, je sugère de supprimer la phrase ci-dessous
 %$E3.HC^{i,imp}$ does not require inverting a matrix, but it is still quite data-intensive to compute. 
-We infer $\overline{s}_{i}^{i,HC}$ from $E1.HC$ and $E2.HC$ using Equation \ref{eq:infer1}.
+We infer $\overline{s}_{i}^{i,HC}$ from $E1.HC$ and $E2.HC$ using Equation \ref{eq:infer1}.\\
 Figure \ref{fig:ratiodir_WIOD} depicts the relationship between $\overline{s}_{i}^{i,HC}$ and $E1.HC+E2.HC$. 
-The high $R^2$ (0.98) suggests that $E1.HC+E2.HC$ is a good predictor of $\overline{s}_{i}^{i,HC}$. 
+The high $R^2$ (0.98) suggests that $E1.HC+E2.HC$ is a good predictor of the HCE deflator elasticity $\overline{s}_{i}^{i,HC}$. 
 
  \begin{equation}
 \overline{s}_{i}^{i,HC}=\alpha + \beta  \left(E1.HC^{i,imp}+E2.HC^{i,dom}\right) +\varepsilon_i 
@@ -1132,7 +1135,7 @@ The high $R^2$ (0.98) suggests that $E1.HC+E2.HC$ is a good predictor of $\overl
 
 \begin{figure}[H]
 \centering
-\caption{\footnotesize{\textbf{Comparison of $\overline{s}_{i}^{i,HC}$ and $E1.HC^{i,imp}+E2.HC^{i,dom}$ (WIOD, 2014)}}}
+\caption{\footnotesize{\textbf{Estimating the HCE deflator elasticity using the shares of imported goods and imported inputs in household consumption (WIOD, 2014)}}}
 \begin{tabular}{c}
 \includegraphics[width=5.0in, height=3.5in]{Comp_s_E1HCE2HC_2014_WIOD_HC.png}\\
 \end{tabular}
@@ -1145,7 +1148,7 @@ With the exception of 2009, the relationship is broadly stable (see Figures \ref
 
 \begin{figure}[H]
 \centering
-\caption{\footnotesize{\textbf{Evolution of  $\alpha$ (the constant), $\beta$ (the coefficent of E1.HC+E2.HC) and $R^2$ over time (WIOD)}}}
+\caption{\footnotesize{\textbf{Estimating the HCE deflator elasticity using the shares of imported goods and imported inputs in household consumption: evolution of the constant ($\alpha$), the coefficent of E1.HC+E2.HC ($\beta$) and $R^2$ over time (WIOD)}}}
 \begin{tabular}{c}
 \includegraphics[width=5.0in, height=3.5in]{coef_WIOD_HC.png}\\
 \end{tabular}
@@ -1154,10 +1157,11 @@ With the exception of 2009, the relationship is broadly stable (see Figures \ref
 \end{figure}
 
 We obtain similar results with TiVA (see Online Appendix E). 
-Our results suggest that we can approximate the HCE deflator elasticity using the share of imported goods in household consumption and the share of imported inputs in household consumption of domestic goods. $E1.HC+E2.HC$ is a good predictor of the total effects.
-Interestingly, they cannot be extrapolated in a multiplicative way, as the other effects ($E3.HC+E4.HC$) add to them rather than amplifying them.
+Our results suggest that we can approximate the HCE deflator elasticity using the share of imported goods in household consumption and the share of imported inputs in household consumption of domestic goods. Indeed, $E1.HC+E2.HC$ is a good predictor of the total effects.
+% je suggere de mettre toute la discussion additif vs multiplicatif en note pour fluidifier la lecture et propose d'expliciter qui sont les "they"
+\footnote{Interestingly, the total effects cannot be extrapolated in a multiplicative way, as the other effects ($E3.HC+E4.HC$) add to $E1.HC+E2.HC$ rather than amplifying them.
 They are of similar size for small open economies and large closed ones.
-This likely reflects the fact that a small economy compensates for its small size (and small influence on global value chains) by being more open (and hence more sensitive to changes in global value chains).\footnote{Although this functional form might seem counterintuitive (we expected the elasticity to be an affine function of openness as summarized by $E1.HC$), the analytical examination of the two-country, one-sector case shows that it is plausible (see Online Appendix F).}
+This likely reflects the fact that a small economy compensates for its small size (and small influence on global value chains) by being more open (and hence more sensitive to changes in global value chains). Although this functional form might seem counterintuitive (we expected the elasticity to be an affine function of openness as summarized by $E1.HC$), the analytical examination of the two-country, one-sector case shows that it is plausible (see Online Appendix F).}
 %Back to the main point, it turns out that we do not gain much by inversing matrixes. Of course, this realization is only possible because we were able to computes $\overline{s}_{i}^{i,HC}$ in the first place. Still, it suggests that we could extrapolate the elasticities for not-yet-released years, as long as we have the share of imported goods in household consumption and the share of imported inputs in household consumption of domestic goods. 
 
 \subsection{Extrapolating the HCE deflator elasticity using GDP and trade statistics}\label{sec:Extrapolations}

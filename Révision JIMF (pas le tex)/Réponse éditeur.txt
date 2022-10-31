@@ -152,9 +152,16 @@ We give the number of countries and years over which the equation is estimated. 
 
 **Vérifier les numéros de sections dans l’appendice !**
 
-*	For the exercise in 4.3 to be helpful, it would be good if the authors could validate their estimated elasticities. Is there any other study that for a subset of the sampled countries has obtained relatively precise estimated HCE deflator elasticities?  In the abstract, the authors mention their elasticity estimates are in line with the literature- so that should be feasible. A lot of the correlations highlighted in the paper feel mechanical.
+*	For the exercise in 4.3 to be helpful, it would be good if the authors could validate their estimated elasticities. Is there any other study that for a subset of the sampled countries has obtained relatively precise estimated HCE deflator elasticities?  In the abstract, the authors mention their elasticity estimates are in line with the literature- so that should be feasible. 
+
+A lot of the correlations highlighted in the paper feel mechanical.
 
 To take into account your comment, we stress that our results are based on an accounting exercise. 
+In particular, we specify in the conclusion that 
+" We perform an accounting exercise based on information contained in world input-output tables.
+Our accounting approach helps identify which countries and sectors are under pressure to adjust their prices when subject to an exchange rate variation.
+We make several assumptions to simplify our computations.
+As a result, our estimates provide an upper bound of the HCE deflator elasticity.3
 
 
 ~~Partir des BMEs ? Compliqué pour les BMEs : le modèle de la BCE est moins transparent. Regarder les modèles macro ? Dame turque de la BCE ? Hadrien envoie des références à Christine et Christine remonte la pelote. Puis Christine fait la discussion.~~

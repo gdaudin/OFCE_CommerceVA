@@ -1177,12 +1177,12 @@ However, these data ($E1.HC$ and $E2.HC$) are not up-to-date for a large number 
 Hence, we cannot use them to extrapolate the HCE deflator elasticity.
 
 Consumption and intermediate goods imports are available from the CEPII BACI database and the BEC classification \citep{Gaulier2010}\footnote{BACI provides disaggregated data on bilateral trade flows for more than 5000 products and 200 countries. The database is built from data directly reported by each country to the United Nations Statistical Division (Comtrade). Products are defined as items from the Harmonized System nomenclature, at the 6-digit level.}.
-Still, household consumption and intermediate products are more difficult to collect systematically for most countries and years.\footnote{To illustrate this point, in Online Appendix G we use data from the World Bank and Eurostat, which are only available for 29 countries in our sample.}
+Still, household consumption and intermediate products are more difficult to collect systematically for most countries and years.\footnote{To illustrate this point, in Online Appendix G we use data from the World Bank and Eurostat, which are available for only 29 countries in our sample.}
 
 Here, we use a simple proxy for $E1.HC$ and $E2.HC$, using trade data from BACI and GDP data from the World Bank for a panel of 42 countries.
 These data are available until 2019. 
 Since we aim to perform an out-of-sample prediction, we do not use time fixed-effects. We assume instead that each year is characterised by the importance of imported consumption and intermediate goods over the whole sample (see equation \ref{eq:infer2}).
-We do use country fixed effects ($fe_{i}$).
+We use country fixed-effects ($fe_{i}$).
 
  \begin{equation}
 	\begin{array}{llll}
@@ -1194,29 +1194,29 @@ We do use country fixed effects ($fe_{i}$).
 	\label{eq:infer2}
 \end{equation}
 
-We start by estimating Equation \ref{eq:infer2} for our three databases for all available years.
-Table \ref{tab:reg_infer2} provides the results.
-This individual coefficents and their statistical significance are difficult to interpret because of multicolinearities among the explanatory variables.
-The important thing for our purpose is the quality of the model fit.
+We start by estimating Equation \ref{eq:infer2} on all three databases (WIOD, TiVA rev. 3 and rev.4) for all available years.
+Table \ref{tab:reg_infer2} provides the estimation results.
+Individual coefficents and their statistical significance are difficult to interpret because of multicollinearities among the explanatory variables.
+We rather focus on the quality of the model fit, since we aim to perform predictions.
 
 
 
 \begin{table}[htbp]\centering
 	\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
-	\caption{Regression \ref{eq:infer2} for WIOD, TIVA and TIVA rev4, using all available years }
+	\caption{Regression results for Equation \ref{eq:infer2} for WIOD, TiVA rev.3 and TiVA rev.4, using all available years }
 \input{reg17.tex}
 \\
 Note: Country-clustered standard errors in parentheses, \sym{*} \(p<0.10\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\)
 \label{tab:reg_infer2}
 \end{table}
 
-To confirm this fit, we perform an out-of-sample prediction for the year 2014 using WIOD, and pretending we only have data for years 2000 to 2008 (the regression results are similar to Table \ref{tab:reg_infer2} and are not provided).
-The results of this out-of-sample prediction are close to the WIOT-computed elasticities for 2014  (see Figure \ref{fig:panel_pred2}). 
-Our findings are robust to using other databases (results obtained with TiVA revisions 3 and 4 are available upon request).
+To confirm the quality of fit, we perform an out-of-sample prediction for the year 2014 using WIOD, running the regression on the years 2000 to 2008 \footnote{Regression results are similar to those presented in Table \ref{tab:reg_infer2} and are available upon request.}.
+The results of the out-of-sample prediction are close to the WIOT-computed elasticities for 2014  (see Figure \ref{fig:panel_pred2}). 
+Our findings are robust to using other databases\footnote{Results obtained with TiVA revisions 3 and 4 are available upon request.}.
 
 \begin{figure}[!h]
 	\centering
-	\caption{\footnotesize{\textbf{Comparing the HCE deflator elasticity in 2014 (WIOD) and the prediction from a panel regression on the 2000-2008 period with fixed effects using only World Bank and Comtrade data. }}}
+	\caption{\footnotesize{\textbf{Comparing the HCE deflator elasticity in 2014 (WIOD) and the prediction from a panel regression on the 2000-2008 period with fixed-effects}}
 	\begin{tabular}{c}
 		\includegraphics[width=5.0in, height=3.5in]{"resultats_reg1_doigt_mouille_WIOD_pred_6y_trend_no".png}\\
 	\end{tabular}
@@ -1224,17 +1224,20 @@ Our findings are robust to using other databases (results obtained with TiVA rev
 	\floatfoot{Sources: WIOD, World Bank, BACI and authors’ calculations}
 \end{figure}
 
-Because the quality of fit of Equation \ref{eq:infer2} shown in Table \ref{tab:reg_infer2} is high and the out-of-sample prediction for 2014 is very similar to  WIOT-computed elasticities (figure \ref{fig:panel_pred2}) we feel confident in using the results from table \ref{tab:reg_infer2} to predict the HCE deflator elasticity from the missing years, especially 2015 onwards.
-Figure \ref{fig:panel_pred3} shows that the in-sample predictions are robust, giving confidence in the quality of the out-of-sample predictions.
+Overall, the quality of fit of Equation \ref{eq:infer2} shown in Table \ref{tab:reg_infer2} is high and the out-of-sample prediction for 2014 is very similar to the elasticities computed using WIOTs (figure \ref{fig:panel_pred2}).
+Figure \ref{fig:panel_pred3} shows that our in-sample forecasts (in dotted lines) are very close to elasticities computed using WIOTs (plain lines).
 We also compare our predictions with the elaticity estimated using MRIO, which provides WIOTs up to 2019. 
-Our predictions are in line with results from MRIO up to 2017. For the most recent years, there seem to be data issues in MRIO (see Online Appendix D), which the comparison helps to identify.
-For all these reasons, we are confident our out-of-sample predictions are good proxies for WIOT-estimated elasticities.
-We have thus provided a less data-demanding tool to estimate the percentage change in prices in response to exchange rate variations for the most recent years.
+Our predictions are in line with results from MRIO up to 2017 \footnote{For the most recent years, there are data quality issues in MRIO (see Online Appendix D), which the comparison between our prediction and the elasticity computed using MRIO further underlines.}.
+Overall, our out-of-sample forecasts using up-to-date trade and GDP statistics are good proxies for the elasticities computed using WIOTs.
+Hence, we can use the regression results presented in table \ref{tab:reg_infer2} to predict the HCE deflator elasticity for the years for which WIOTs are not available, especially from 2015 onwards.
+We thus provide a tool to estimate the elasticity of domestic prices to the exchange rate for the most recent years.
+Most of the existing literature focuses on average elasticities, computed over a period covering several years. 
+By contrast, our proxies make it possible to highlight how elasticities evolve from one year to the next in an up-to-date way. 
 
 
 \begin{figure}[H]
 	\centering
-	\caption{\footnotesize{\textbf{Comparing the output-weighted HCE deflator elasticity to predictions based on World Bank and BACI data.}}}
+	\caption{\footnotesize{\textbf{Comparing the output-weighted HCE deflator elasticity computed using WIOTs to proxies based on up-to-date trade and GDP statistics.}}}
 	\begin{tabular}{c}
 		\includegraphics[width=5.0in, height=3.5in]{"predictions_reg1_doigt_mouille_trend_no".png}\\
 	\end{tabular}
@@ -1355,26 +1358,24 @@ We have thus provided a less data-demanding tool to estimate the percentage chan
 \section{Conclusion}
 \label{sec:ccl}
 % Avril 2021
-This paper studies the elasticity of the household consumption expenditure (HCE) deflator to the exchange rate.
+This paper studies the elasticity of the household consumption expenditure (HCE) deflator to the exchange rate for a sample covering most advanced and emerging economies.
 We make several contributions to the literature. \\
 First, we analyse the composition and determinants of the HCE deflator elasticity using world input-output tables covering twenty-four years of data, from 1995 to 2019. 
 We use several datasets to ensure the robustness of our results.
 In line with the existing literature, we find a rather modest output-weighted elasticity of the HCE deflator to the exchange rate of around 0.1 at the world level.
 The output-weighted elasticity has remained broadly stable over the past two decades.
 Aggregate figures mask substantial cross-country heterogeneity, reflecting different degrees of openness to trade and differences in foreign product content in domestic consumption. 
-The impact of a 1\% exchange rate fluctuation on domestic prices ranges from 0.05\% to 0.22\%, reflecting different degrees of openness to trade.
+The impact of a 1\% exchange rate fluctuation on domestic prices ranges from 0.05\% to 0.22\%.
 The elasticity is larger for small open economies with higher import content of consumption. 
-In the euro area, the elasticity is close to 0.10 in Italy, France, Germany, Spain, Portugal and Greece, whereas
-it is twice higher for small open economies like Luxembourg, Malta, Slovakia and Ireland.\\
+In the euro area, the elasticity is close to 0.10 in Italy, France, Germany, Spain, Portugal and Greece, whereas it is twice higher for small open economies like Luxembourg, Malta, Slovakia and Ireland.\\
 Second, we estimate the impact of an appreciation of the US dollar on its trading partners. 
 The highest impacts are observed for the US’s major trading partners (Canada, Mexico and Ireland).\\
 Third, we examine which parts of the consumption basket contribute most to the elasticity of the HCE deflator to the exchange rate. 
 Non-energy industrial goods explain the bulk of the total HCE deflator elasticity. 
 Services also play a significant role, especially in advanced economies such as the US, Japan, Germany and France.
-Although services are mainly produced domestically and do not rely much on imported inputs, they account for a substantial share of total consumption.
+Although services are mainly produced domestically and do not require much imported inputs, they account for a substantial share of total consumption.
 Thus, even small price changes have a large effect on the HCE deflator. \\
 Fourth, we analyse the determinants of the HCE deflator elasticity and the role of global value chains in the transmission of an exchange rate appreciation to domestic prices.
-There is a marked cross-countries heterogeneity.
 On the whole, direct effects through imported consumption and intermediates entering domestic production explain three-quarters of the transmission of an exchange rate appreciation to domestic prices.
 By contrast, global value chains participation plays a limited role. \\
 Fifth, we show that a precise assessment of the HCE deflator elasticity to the exchange rate can be extrapolated for recent years, for which good-quality WIOTs are missing. 

@@ -68,6 +68,9 @@ b. Difficile de parler de l’hétérogénité par pays. Ou degrés de dollar do
 
 *	The language in the introduction is not always clear. For example: "we assume that the impact of the exchange rate fluctuation is proportional across sector". At page 1 I was not sure to what the proportionality referred, only in section 2.3 I understood that it referred to the use of inputs whose price is affected. 
 
+For the sake of clarity, we removed the discussion on the proportionality assumption from the introduction. 
+The implications of this assumption are discussed more precisely in the data section (now Section 1).
+
 I also found confusing the discussion of channels iii) and iv) at page 2. Most readers are unfamiliar with input-output structures and have not thought of all the ways in which shocks propagate from one country to another through input-output linkages.
 
 We simplified the discussion on channels iii) and iv) and redrafted the introduction as follows:

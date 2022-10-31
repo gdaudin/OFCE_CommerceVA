@@ -56,6 +56,7 @@ These two channels explain three-quarters of the transmission of an exchange rat
 By contrast, other channels reflecting the impact of global value chains (such as the price of exported inputs feeding through imported foreign production) play a more limited role, with marked cross-countries heterogeneity.
 Hence, only one-fourth of the elasticity of the HCE deflator to the exchange rate is attributable to participation in global value chains."
 
+Similarly, we simplified the discussion on these four channels in Section 4. 
 
 Guillaume :
 - Revoir la proportionnalité

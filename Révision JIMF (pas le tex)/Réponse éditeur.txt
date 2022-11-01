@@ -141,6 +141,11 @@ We give the number of countries and years over which the equation is estimated. 
 
 *	For the exercise in 4.3 to be helpful, it would be good if the authors could validate their estimated elasticities. Is there any other study that for a subset of the sampled countries has obtained relatively precise estimated HCE deflator elasticities?  In the abstract, the authors mention their elasticity estimates are in line with the literature- so that should be feasible. 
 
+The "in line" remark in the introduction actually refers to our work with confidential "Basic Model Elasticities" from the euro system. We have changed it to :
+"We find a modest output-weighted elasticity of around 0.1. This is higher than the rest of the literature because of the accounting nature of our result assuming full pass-through"
+
+As explained in the introduction, it is difficult to compare our elasticities with the ones in the literature. We have year-specific upper bound whereas the literature computes averages over many years."
+
 A lot of the correlations highlighted in the paper feel mechanical.
 
 To take into account your comment, we stress that our results are based on an accounting exercise. As such, the results are indeed mechanical, but that is a feature of our method. 

@@ -43,7 +43,7 @@ Hence, using alternative pricing assumptions would entail lower estimates of the
 
 Regarding the cross-country heterogeneity, we underline in the introduction that "the upward bias stemming from our simplifying assumptions is unlikely to be constant. The magnitude of the bias likely depends on the size of the economy. In particular, it is likely that in large and attractive markets, competitive pressures may push producers to adopt local currency pricing strategies, where exporting firms adapt their mark-ups depending on the destination market to offset exchange rate movements. Hence, we would expect the upward bias in our estimated elasticities to be more pronounced for the largest and most attractive markets represented in our sample." 
 
-We also added a paragraph to discuss these caveats in section 3.1, as suggested, when we discuss the cross-country heterogeneity.
+We have also added a paragraph to discuss these caveats in section 3.1, when we discuss the cross-country heterogeneity.
 The paragraph reads as follows: 
 
 "Caveats and comparison with the existing literature
@@ -64,7 +64,7 @@ The magnitude of the upward bias stemming from our simplifying assumptions is un
 In particular, it is likely that in large and attractive markets, competitive pressures may push producers to adopt local currency pricing strategies, where exporting firms adapt their mark-ups depending on the destination market to offset exchange rate movements. 
 Hence, we would expect the upward bias in our estimated elasticities to be more pronounced for the largest and most attractive markets represented in our sample.\\
 
-Despite these caveats, our results broadly concur with the literature.
+Despite these caveats, our results broadly concur with the literature.\footnote{To the best of our knowledge, the literature using WIOTs mostly focuses on the transmission of production shocks through input-output linkages. By contrast, we use WIOTs to analyse cost-push inflation. As a result, and despite differences in methodologies, we rely on the ERPT literature to compare our estimates of the HCE deflator with the existing literature.}
 For instance, \cite{Colavecchio2020} focus on the ERPT to consumer prices in the euro area from 1997 to 2019 using local projection techniques. 
 The authors find a statistically significant linear ERPT to domestic prices of 0.07 for Italy, 0.08 for Belgium and Portugal, 0.09 for Germany, 0.12 for Spain, 0.13 for Austria and Greece, 0.14 for the Netherlands and Finland and 0.23 for Lithuania after two years. \footnote{The linear ERPT to consumer prices estimated by \cite{Colavecchio2020} for the euro area as a whole is not statistically significant.}
 These figures concur with our estimates ranging from 0.07 to 0.18 for euro area countries (see Figure \ref{fig:WIOD_HC_elasticities})." 
@@ -158,7 +158,7 @@ As explained in the introduction, it is difficult to compare our elasticities wi
 
 We added a discussion of the results found in the existing literature in Section 3.1. 
 In particular, we mention that:
-"our results broadly concur with the literature.
+"our results broadly concur with the literature.\footnote{To the best of our knowledge, the literature using WIOTs mostly focuses on the transmission of production shocks through input-output linkages. By contrast, we use WIOTs to analyse cost-push inflation. As a result, and despite differences in methodologies, we rely on the ERPT literature to compare our estimates of the HCE deflator with the existing literature.}
 For instance, \cite{Colavecchio2020} focus on the ERPT to consumer prices in the euro area from 1997 to 2019 using local projection techniques. 
 The authors find a statistically significant linear ERPT to domestic prices of 0.07 for Italy, 0.08 for Belgium and Portugal, 0.09 for Germany, 0.12 for Spain, 0.13 for Austria and Greece, 0.14 for the Netherlands and Finland and 0.23 for Lithuania after two years. \footnote{The linear ERPT to consumer prices estimated by \cite{Colavecchio2020} for the euro area as a whole is not statistically significant.}
 These figures concur with our estimates ranging from 0.07 to 0.18 for euro area countries (see Figure \ref{fig:WIOD_HC_elasticities})." 
@@ -172,6 +172,12 @@ In particular, we specify in the conclusion that
 Our accounting approach helps identify which countries and sectors are under pressure to adjust their prices when subject to an exchange rate variation.
 We make several assumptions to simplify our computations.
 As a result, our estimates provide an upper bound of the HCE deflator elasticity."
+
+However, to limit the impression that our results are purely mechanical, we try to put them in perspective by providing explanations.
+For instance, in section 3.1, we comment the cross-country heterogeneity. 
+We try to explain differences in the size of elasticities. We also check that our results concur with that of the ERPT literature.
+For instance, we write in Section 3.1: 
+
 
 -	Page numbers should be included.
 -	The order of the online Appendices does not follow the order in which they are referred to in the text.

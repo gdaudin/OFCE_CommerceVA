@@ -175,8 +175,15 @@ As a result, our estimates provide an upper bound of the HCE deflator elasticity
 
 However, to limit the impression that our results are purely mechanical, we try to put them in perspective by providing explanations.
 For instance, in section 3.1, we comment the cross-country heterogeneity. 
-We try to explain differences in the size of elasticities. We also check that our results concur with that of the ERPT literature.
-For instance, we write in Section 3.1: 
+We try to explain differences in the size of elasticities as follows:
+"Within the euro area, the elasticity of the HCE deflator differs substantially, ranging from 0.07 in Italy to 0.18 in Ireland, a small open economy with a large traded sector and a large share of trade outside the euro area. For larger countries (France, Germany, Italy and Spain) and countries whose trade is concentrated with euro area partners (such as Portugal and Greece), the elasticity is close to 0.10, reflecting a lower degree of openness to trade."
+
+
+We also check that our results concur with that of the ERPT literature.
+For instance, we write in Section 3.1:
+"For instance, \cite{Colavecchio2020} focus on the ERPT to consumer prices in the euro area from 1997 to 2019 using local projection techniques. 
+The authors find a statistically significant linear ERPT to domestic prices of 0.07 for Italy, 0.08 for Belgium and Portugal, 0.09 for Germany, 0.12 for Spain, 0.13 for Austria and Greece, 0.14 for the Netherlands and Finland and 0.23 for Lithuania after two years. 
+These figures concur with our estimates ranging from 0.07 to 0.18 for euro area countries."
 
 
 -	Page numbers should be included.

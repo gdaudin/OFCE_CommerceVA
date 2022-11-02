@@ -69,6 +69,25 @@ For instance, \cite{Colavecchio2020} focus on the ERPT to consumer prices in the
 The authors find a statistically significant linear ERPT to domestic prices of 0.07 for Italy, 0.08 for Belgium and Portugal, 0.09 for Germany, 0.12 for Spain, 0.13 for Austria and Greece, 0.14 for the Netherlands and Finland and 0.23 for Lithuania after two years. \footnote{The linear ERPT to consumer prices estimated by \cite{Colavecchio2020} for the euro area as a whole is not statistically significant.}
 These figures concur with our estimates ranging from 0.07 to 0.18 for euro area countries (see Figure \ref{fig:WIOD_HC_elasticities})." 
 
+
+In addition, we have added a paragraph to discuss these caveats in section 3.2, when we discuss the impact of an appreciation of the US dollar.
+The paragraph reads as follows: 
+
+\paragraph{Caveats} \\
+As underlined in Section \ref{subsec:prixconso}, our computations rely on several simplifying assumptions which bias our estimates upwards. 
+Although we assume a full exchange rate pass-through, the theoretical framework underlying the "dominant currency paradigm" (DCP) predicts that pass-through from exchange rates to prices or quantities vary across countries, depending on the share of imports invoiced in dollars. 
+For instance, \cite{Boz2019} find that the dollar pass-through is systematically related to the importing country’s dollar invoicing share.
+According to the authors, importing country’s share of imports invoiced in dollars explains 15\% of the variance of dollar pass-through across country pairs. 
+Country pairs with the largest-in-magnitude pass-through of the dollar into prices or quantities tend to be the dyads with the highest importer dollar invoicing share.
+These findings suggest that the upward bias in our estimates is unlikely to be constant across countries. 
+Since the DCP literature suggests that countries invoicing more in US dollars tend to experience greater US dollar exchange rate pass-through to their import prices, we expect the upward bias in our estimates to be minor for those economies.
+We assess cross-countries variations in the upward bias by building on \cite{Boz2020}, which document the role of vehicle currency invoicing for exchange rate pass-through to import prices for around 100 countries since 1990. \footnote{Invoicing data are not available for several large countries, including China and Mexico.}
+According to \cite{Boz2020}, in 2014 (the year for which we provide estimates of the HCE deflator elasticity in Figure \ref{fig:WIOD_HC_elasticities_USD}), the following countries had the largest share of imports invoiced in US dollar: India (89\% of imports), Brazil (81\% \footnote{In 2017 (data unavailable for 2014).}), Taiwan (80\%\footnote{In 2016 (data unavailable for 2014).}), Indonesia (76\%), South Korea (84\%), Japan (74\%)), Turkey (63\%)) and Australia (57\%).
+Invoicing in US dollar was less prevalent in Europe (where invoicing in euro dominates), ranging from around 20\% (Croatia, Estonia, France, Germany, Hungary, Malta, Norway and Slovenia) to 30\% (Denmark, Finland, Ireland, Italy, Poland, Romania, Switzerland, Sweden, the Netherlands). 
+Invoicing in US dollar was close to 40\% in Spain, Lithuania, the UK, Russia and as high as 50\% in Greece. 
+By contrast, it was much lower for Latvia (7\% \footnote{In 2015 (data unavailable for 2014).}) and Luxembourg (11\% \footnote{In 2016 (data unavailable for 2014).}), suggesting that the upward bias in our estimates is particularly pronounced for these two economies.
+
+
 *	The language in the introduction is not always clear. For example: "we assume that the impact of the exchange rate fluctuation is proportional across sector". At page 1 I was not sure to what the proportionality referred, only in section 2.3 I understood that it referred to the use of inputs whose price is affected. 
 
 For the sake of clarity, we removed the discussion on the proportionality assumption from the introduction. 

@@ -1,0 +1,5 @@
+- We analyse the evolution of the elasticity of the household consumption expenditure deflator to the exchange rate. 
+- We analyse the impact on the domestic economy of variations in the currency of trading partners. We show that countries are affected in proportion to their trading links with the country whose currency appreciates. For illustration, we estimate the accounting impact of an appreciation of the US dollar.
+- Building on sectoral data, we examine which sectors experience higher spillovers from an appreciation of the national currency.
+- We look into the determinants of the HCE deflator elasticity and the role of global value chains in the transmission of an exchange rate appreciation.
+- We show that a precise assessment of the HCE deflator elasticity to the exchange rate can be estimated for recent years without resorting to WIOTs.

@@ -232,9 +232,9 @@ We try to explain differences in the size of elasticities as follows:
 
 
 
--	Page numbers should be included.
--	The order of the online Appendices does not follow the order in which they are referred to in the text.
--	In section 2, gamma_k should be gamma_n in the expressions for p_n and x_n.
+-	`Page numbers should be included.`
+-	`The order of the online Appendices does not follow the order in which they are referred to in the text.`
+-	`In section 2, gamma_k should be gamma_n in the expressions for p_n and x_n.`
 
 Thank you for bringing these aspects to our attention : they have been dealt with.
     

@@ -53,7 +53,7 @@
 
 
 \begin{document}
-\title{Estimating the elasticity of consumer prices to the exchange rate: an accounting approach	\thanks{We thank Marion Cochard, Pavel Diev, Hubert Escaith, Guillaume Gaulier, Yannick Kalantzis, Guy Levy-Rueff, Sébastien Miroudot, Jean-François Ouvrard, François de Soyres and two anonymous referees from the ECB and from the JIMF for comments and suggestions, as well as participants at Banque de France seminars. Any remaining errors are ours. All programs are available at \url{https://github.com/gdaudin/OFCE_CommerceVA}. Data and results are available upon request.}\\
+\title{Estimating the elasticity of consumer prices to the exchange rate: an accounting approach	\thanks{We thank Marion Cochard, Pavel Diev, Hubert Escaith, Guillaume Gaulier, Yannick Kalantzis, Guy Levy-Rueff, Sébastien Miroudot, Jean-François Ouvrard, François de Soyres and two anonymous referees from the ECB and from the JIMF for comments and suggestions, as well as participants at Banque de France seminars. Any remaining errors are ours. Online Appendix and all programs are available at \url{https://github.com/gdaudin/OFCE_CommerceVA}. Data and results are available upon request.}\\
 \vspace{1cm}
 }
 \vspace{1cm}
@@ -78,14 +78,14 @@
 {\small \noindent
 %We focus on cost-push inflation through global value chains.
 %We build on three sectoral world input-output datasets (WIOD and two versions of TiVA). We assume a Cobb-Douglas production framework and work in a partial equilibrium setting.
-We analyse the elasticity of the household consumption expenditure (HCE) deflator to the exchange rate, using world input-output tables (WIOT) from 1995 to 2019. 
+We analyse the elasticity of the household consumption expenditure (HCE) deflator to the exchange rate, using world input-output tables (WIOTs) from 1995 to 2019. 
 In line with the existing literature, we find a modest output-weighted elasticity of around 0.1.
 This elasticity is stable over time but heterogeneous across countries, ranging from 0.05 to 0.22. 
 Such heterogeneity mainly reflects differences in foreign product content of consumption and intermediate products. 
 Direct effects through imported consumption and intermediate products entering domestic production explain most of the transmission of an exchange rate appreciation to domestic prices.
 By contrast, indirect effects linked to participation in global value chains play a limited role. 
-Our results are robust to using four different WIOT datasets. 
-As WIOT are data-demanding and available with a lag of several years, we extrapolate a reliable year- and country-specific estimate of the HCE deflator elasticity from 2015 onwards, using trade data and GDP statistics. 
+Our results are robust to using four different WIOTs datasets. 
+As WIOTs are data-demanding and available with a lag of several years, we extrapolate a reliable year- and country-specific estimate of the HCE deflator elasticity from 2015 onwards, using trade data and GDP statistics. 
 
 %This yields an estimate of the elasticity very close to the one computed from MRIO WIOT.
 
@@ -198,12 +198,12 @@ As WIOT are data-demanding and available with a lag of several years, we extrapo
 
 % Motivation
 Over the past two decades, the rise of global value chains has led to a greater use of input-output tables to study international linkages. 
-In this paper, we analyse which countries are most vulnerable to cost-push inflation using world input-output tables. 
-We also document the heterogeneous reactions of consumer prices to exchange rate variations across countries, reflecting differences in foreign product content of consumption and intermediate products. 
+In this paper, we analyse which countries are most vulnerable to cost-push inflation using world input-output tables (WIOTs hereafter). 
+We also document the heterogeneous sensitivity of consumer prices to exchange rate variations across countries, reflecting differences in foreign product content of consumption and intermediate products. 
 Understanding the influence of exchange rate on inflation is indeed critically important for measuring the extent of expenditure switching that follows exchange rate variations, which, in turn, has an impact on real activity.
 To shed light on these mechanisms, we analyse the elasticity of the household consumption expenditure (HCE hereafter) deflator to the exchange rate.\\
 %Data and method
-We perform an accounting exercise based on information contained in world input-output tables (WIOTs hereafter), by way of large matrices inversions.
+We perform an accounting exercise based on information contained in WIOTs, by way of large matrices inversions.
 We use several datasets covering most advanced and emerging economies, from 1995 to 2019. 
 Our accounting approach helps identify which countries and sectors are under pressure to adjust their prices following an exchange rate variation.\\
 
@@ -215,21 +215,16 @@ In addition to these structural features, some authors analyse the underlying sh
 Another strand of literature sheds light on the transmission of shocks across countries through input-output linkages (I-O thereafter).
 %The Leontief's production model (or Input-Output model, I-O thereafter) analyses the impact of a demand shock in a closed economy \citep{Leontief1951}. 
 The trade in value-added analysis reconciles international trade statistics with national I-O tables, thus allowing to extend Leontief's analysis \citep{Leontief1951} to an international context.
-Our paper contributes to both strands of literature. 
-	Our computations are based on input-output matrices, while our results are comparable with estimations from the macro-trade literature. \\
+Most of this literature focuses on the transmission of production shocks through input-output linkages (e.g. \cite{Johnson2014, Eaton2016}).
+By contrast, we use WIOTs to analyse cost-push inflation (as do \cite{Aydogus2018}).
+Our paper contributes to both strands of literature: our computations are based on input-output matrices, while our results are comparable with estimations from the ERPT literature. \\
 %We assume a Cobb-Douglas production framework where firms have a simple cost-minimising behaviour and work in a partial equilibrium setting.
 We make several assumptions to simplify our computations. 
-First, we assume a full exchange rate pass-through (ERPT hereafter) to import prices. 
-Hence, we do not consider the fact that the pass-through might be incomplete, as suggested by a large body of literature (see for example \cite{Ortega2020} for a literature review of recent studies relying on various methodologies such as VAR, dynamic simultaneous equations, Bayesian VAR or local projections). 
+First, we assume a full exchange rate pass-through (ERPT) to import prices. 
+Hence, we do not consider the fact that the pass-through might be incomplete, as suggested by a large body of literature (see \cite{Ortega2020} for a literature review of recent studies relying on various methodologies such as VAR, dynamic simultaneous equations, Bayesian VAR or local projections). 
 For example, \cite{Ozyurt2016} shows that in the euro area, the pass-through is partial and has declined in the 2000s. The lowest degree of pass-through is found for Germany, most likely reflecting the large size of the German economy and the high share of local currency pricing. 
 As a result, our estimates provide an upper bound of the HCE deflator elasticity compared to results from the ERPT literature. 
-% je modifie pour être sûrs qu'on cite des périmètres comparables, en utilisant Colavecchio2020, et cela montre aussi que nos résultats sont en ligne
-Nevertheless, our results broadly concur with the recent literature.
-For instance, \cite{Colavecchio2020}, using local projections techniques, find an ERPT to consumer prices ranging from 0.07 to 0.23 in the euro area.
-%recent studies using various methodologies (VAR, dynamic simultaneous equations, Bayesian VAR, local projections...) tend to obtain lower ERPT than ours, around 0.05 (see notably \cite{Hahn2003}, \cite{Comunale2017}, \cite{Colavecchio2020}).
-Our results also concur with \cite{Aydogus2018}, which examine pass-through to the domestic price level through an input–output model for 26 countries, using I-O tables. 
-The estimated elasticity of the CPI to the exchange rate ranges from 0.07 for the US to 0.34 for Ireland, with a simple average of 0.18.\\
-Second, we suppose that all pricings occur using the currency of the producing country. The invoicing decision is an active channel through which producers adjust their prices in relation to their own market power and to local competitive pressures. Prices fixed in the local currency are sticky in the currency of the destination market and irresponsive to changes in the bilateral exchange rate between the local currency and the currency of the producer. By contrast, prices fixed in the producer's or dominant currency have a higher ERPT. Contrary to our hypothesis, a large body of empirical literature suggests that the vast majority of trade is invoiced in a small number of ‘dominant currencies’, with the U.S. dollar playing a major role. The ‘dominant currency paradigm’ \citep{Gopinath2020} implies that for non-U.S. countries, the ERPT into import prices (in home currency) should be high and driven by the U.S. dollar exchange rate as opposed to the bilateral exchange rate, whereas for the U.S. the pass-through into import prices should be low. \cite{Gopinath2010} also show that there is a large difference in the ERPT of the average good priced in dollars (25\%) versus non-dollars (95\%).
+Second, we suppose that all invoicing occur using the currency of the producing country. The invoicing decision is an active channel through which producers adjust their prices in relation to their own market power and to local competitive pressures. Prices fixed in the local currency are sticky in the currency of the destination market and irresponsive to changes in the bilateral exchange rate between the local currency and the currency of the producer. By contrast, prices fixed in the producer's or dominant currency have a higher ERPT. Contrary to our hypothesis, a large body of empirical literature suggests that the vast majority of trade is invoiced in a small number of ‘dominant currencies’, with the U.S. dollar playing a major role. The ‘dominant currency paradigm’ \citep{Gopinath2020} implies that for non-U.S. countries, the ERPT into import prices (in home currency) should be high and driven by the U.S. dollar exchange rate as opposed to the bilateral exchange rate, whereas for the U.S. the pass-through into import prices should be low. \cite{Gopinath2010} also show that there is a large difference in the ERPT of the average good priced in dollars (25\%) versus non-dollars (95\%).
 % vf je rajoute une couche sur les implications et le biais pour répndre à la question du referee
 Hence, using alternative pricing assumptions would entail lower estimates of the elasticity of consumer prices to the exchange rate.\footnote{Note that the upward bias stemming from our simplifying assumptions is unlikely to be constant among countries.
 The magnitude of the bias depends on the size of the economy.
@@ -238,6 +233,12 @@ Hence, we would expect the upward bias in our estimated elasticities to be more 
 % VF je propose de le retirer pour limiter la confusion que souligne le referee
 %Third, we also assume that the impact of the exchange rate fluctuation is proportional across sectors while the literature shows the ERPT also depends on integration %in global value chains. Based on Belgian firm-product-level data, \cite{Amiti2014} find that import intensity and market share are key determinants of the ERPT to %export prices.\\
 Despite these simplifying assumptions, our estimates provide an accounting-based gauge of how large the elasticity of consumer prices to the exchange rate could be, considering direct and indirect import content in consumption and global value chain linkages. 
+% je modifie pour être sûrs qu'on cite des périmètres comparables, en utilisant Colavecchio2020, et cela montre aussi que nos résultats sont en ligne
+Furthermore, our results broadly concur with the recent literature.
+For instance, \cite{Colavecchio2020}, using local projections techniques, find an ERPT to consumer prices ranging from 0.07 to 0.23 in the euro area.
+%recent studies using various methodologies (VAR, dynamic simultaneous equations, Bayesian VAR, local projections...) tend to obtain lower ERPT than ours, around 0.05 (see notably \cite{Hahn2003}, \cite{Comunale2017}, \cite{Colavecchio2020}).
+Our results also concur with \cite{Aydogus2018}, which examine pass-through to the domestic price level through an input–output model for 26 countries, using I-O tables. 
+The estimated elasticity of the CPI to the exchange rate ranges from 0.07 for the US to 0.34 for Ireland, with a simple average of 0.18.\\
 %VF je supprime car je l'ai mis plus haut dans le pararaphe motivation/ breve explication de la démarche
 %This accounting approach helps identify which countries and sectors are under pressure to adjust their prices when subject to an exchange rate variation.  
 % je propose de supprimer car je le met plus haut ainsi que dans la partie data de manière plus approfondie
@@ -426,7 +427,7 @@ The World Input Output Database (WIOD) is hosted and updated by the University o
 The WIOD contains time series of inter-country input-output tables from 2000 to 2014. 
 It provides WIOTs that reconcile national input-output tables (or supply-use tables) with bilateral trade statistics.
 The WIOD covers 43 countries (of which 30 European economies, see Table \ref{tab:wiod}) accounting for 85\% of global GDP. 
-It contains information for 56 industries (see Online Appendix A) and provides annual WIOTs expressed in U.S. dollars at basic prices\footnote{Market exchange rates were used for currency conversion \citep{Timmer2015}.}. 
+It contains information for 56 industries (see Online Appendix A) and provides annual WIOTs expressed in U.S. dollars at basic prices.\footnote{Market exchange rates were used for currency conversion \citep{Timmer2015}.}
 
 % All transactions values are in basic prices, reflecting all costs borne by the producer. These tables are accompanied by Socio-Economic Accounts which contain country sector panel data on employment (number of workers, compensation and share of labor in high, medium and low skilled occupations), capital stocks, gross output and value added).
  
@@ -455,7 +456,7 @@ Other & Russia, Turkey\\
 
 \subsection{The Asian Development Bank's MRIO database} 
 The Asian Development Bank's MRIO database is an extension of WIOD for 2000 and 2007-2019.
-As the WIOD covers a limited number of Asian economies, the Asian Development Bank has augmented it with details for nineteen additional Asian economies\footnote{The MRIO database includes the following additional economies: Bangladesh, Bhutan, Brunei Darussalam, Cambodia, Fiji, Hong Kong, Kazakhstan, Kyrgyz Republic, Lao People’s Democratic Republic, Malaysia, Maldives, Mongolia, Nepal, Pakistan, Philippines, Singapore, Sri Lanka, Thailand and Viet Nam.}. 
+As the WIOD covers a limited number of Asian economies, the Asian Development Bank has augmented it with details for nineteen additional Asian economies.\footnote{The MRIO database includes the following additional economies: Bangladesh, Bhutan, Brunei Darussalam, Cambodia, Fiji, Hong Kong, Kazakhstan, Kyrgyz Republic, Lao People’s Democratic Republic, Malaysia, Maldives, Mongolia, Nepal, Pakistan, Philippines, Singapore, Sri Lanka, Thailand and Viet Nam.}
 This wider geographical coverage comes at the price of a lower industrial coverage (35 vs 56 sectors in WIOD).
 The conceptual framework of the MRIO database (and hence the methods used in the construction of the tables) are similar to those of WIOD.
 Its main advantage is to be updated up to 2019.  
@@ -520,7 +521,7 @@ For ease of exposition, we use the WIOD as a baseline, since it covers the large
 
 The Leontief's production model analyses the impact of a demand shock in a closed economy \citep{Leontief1951} and is broadly used in multi-sector, single-country macroeconomic models. 
 The trade in value-added analysis reconciles international trade statistics with national I-O tables, thus extending Leontief's analysis to an international context.
-Supply-driven price models have well-documented limitations \citep{Folloni1994} and rely on a number of simplifying assumptions. \footnote{In particular, firms' margins are assumed to be fixed; prices only adjust to absorb cost changes; production techniques are fixed during successive production cycles; inputs substitution caused by change in relative prices is not accounted for.}
+Supply-driven price models have well-documented limitations \citep{Folloni1994} and rely on a number of simplifying assumptions.\footnote{In particular, firms' margins are assumed to be fixed; prices only adjust to absorb cost changes; production techniques are fixed during successive production cycles; inputs substitution caused by change in relative prices is not accounted for.}
 They nevertheless provide a measure of the vulnerability of each sector to price or productivity shocks. 
 Hence, though unrealistic, these models are useful for identifying which countries and sectors are under pressure to adjust their prices when subject to exogenous cost shocks.\\ 
 Leontief's production model has a dual: the cost-push price model, which helps to analyse the consequences of changes in production prices.
@@ -576,7 +577,7 @@ Define $P$ the vector of prices and $Z$ a vector of $log(x_n)+\gamma_n.log(w_n)$
 
 \subsection{Accounting impact of an exchange rate variation on domestic prices} \label{subsec:chocchange}
 
-In this section, we focus on the impact of an exchange rate appreciation on consumer prices in the country whose currency’s value is changing (country $A$ by convention)\footnote{See Online appendix B for details on the computation of the impact of a change in input prices using an I-O model on prices.}. 
+In this section, we focus on the impact of an exchange rate appreciation on consumer prices in the country whose currency’s value is changing (country $A$ by convention).\footnote{See Online appendix B for details on the computation of the impact of a change in input prices using an I-O model on prices.}
 We also estimate the inflationary impact on countries that directly and indirectly, through third countries linkages, consume inputs from country $A$. Hence, we will also analyse the impact of an appreciation of the US dollar.
 %VF Je propose d'enelver car on a recentré le propos et on comprend moins la comparaison maintenant que tout est passé dans l'annexe B
 %In both cases, implementing an exchange rate variation is more complex than implementing a change in production costs. 
@@ -586,8 +587,8 @@ Suppose a world with two countries $A$ and $B$, each having its own national cur
 Following a 5$\%$ appreciation of the currency of country $A$ against the two other currencies, the prices of country $A$ expressed in dollars increase by 5$\%$ compared to those of country $B$ expressed in dollars. 
 Country $B$ pays more for its imports of inputs, in dollars as well as in national currency, since its exchange rate against the dollar has not changed. 
 Conversely, the price of imported inputs in country $A$ remains constant in dollars, since the prices of country $B$ have not changed, and declines once expressed in country $A$'s national currency. 
-This has an impact on consumer prices expressed in national currency in country $A$ \footnote{For the sake of simplicity, we make the strong assumption that producers completely pass the exchange rate appreciation on their production prices.  We do not consider other relevant determinants of the exchange rate pass-through. For instance, pricing-to-market strategies of exporters aiming to defend their market shares would imply a lower exchange rate pass-through.
-Similarly, settlement and invoicing of imports in the domestic currency is another factor likely to weaken the elasticity of domestic prices to exchange rate movements. Assuming that only 60\% of invoices in the euro area goods trade are denominated in foreign currency (see \cite{Ortega2020}) would entail lower elasticity values. To anticipate on our results (see Figure \ref{fig:decompositionofs}), reducing the exchange rate pass-through on consumption goods would entail lower elasticity values than reducing the pass-through on inputs. Our estimates thus provide an upper bound of the HCE deflator elasticity.}.\\
+This has an impact on consumer prices expressed in national currency in country $A$.\footnote{For the sake of simplicity, we make the strong assumption that producers completely pass the exchange rate appreciation on their production prices.  We do not consider other relevant determinants of the exchange rate pass-through. For instance, pricing-to-market strategies of exporters aiming to defend their market shares would imply a lower exchange rate pass-through.
+Similarly, settlement and invoicing of imports in the domestic currency is another factor likely to weaken the elasticity of domestic prices to exchange rate movements. Assuming that only 60\% of invoices in the euro area goods trade are denominated in foreign currency (see \cite{Ortega2020}) would entail lower elasticity values. To anticipate on our results (see Figure \ref{fig:decompositionofs}), reducing the exchange rate pass-through on consumption goods would entail lower elasticity values than reducing the pass-through on inputs. Our estimates thus provide an upper bound of the HCE deflator elasticity.}\\
 The change in the prices of imported goods is therefore transmitted to all domestic prices, both directly and through inter-industry linkages. 
 These upward (downward) movements for country $B$ (country $A$) affect all input prices in both countries.\\
 The effects of the change in prices spread over multiple simultaneous production cycles. 
@@ -612,7 +613,7 @@ For any sector $l$ of a country $k$ $(k\ne i)$, the increase in producer prices 
 \end{eqnarray}
 \\
 For the shocked country, an appreciation of the currency has a disinflationary effect. In national currency, the prices of imported inputs fall in each sector by $c^i=-\frac{c_\$^i}{1+{c_\$^i}}$, or by $-\frac{10}{1.1}\%$ with $c_\$^i=10\%$.\\
-We approximate these changes by their log point equivalent\footnote{We could have used the log point approximation earlier and write that $c^i=-c_\$^i$ with nearly the same results for small exchange rate variations.}.
+We approximate these changes by their log point equivalent.\footnote{We could have used the log point approximation earlier and write that $c^i=-c_\$^i$ with nearly the same results for small exchange rate variations.}
 This decline then spreads to all domestic-input using sectors. In sector $j$ of the shocked country $i$, this fall amounts in national currency to: \\
 \begin{eqnarray*}
 \Delta^1log(p_{ij})=\underset{l=1}{\overset{l=J}{\mathop \sum}}\,c^i.a_{ij,1l}+\ldots +\underset{l=1}{\overset{{l}=J}{\mathop \sum }}\,c^i.a_{ij,kl}+\underset{l=1}{\overset{l={J}}{\mathop \sum }}\,c^i.{{a}_{ij,Il}}=\left( -\frac{c_\$^i}{1+c_\$^i}\right).\underset{\begin{matrix}k=1\\k\neq i\\\end{matrix}}{\overset{k=I}{\mathop\sum}}\,\left[\underset{l=1}{\overset{l=J}{\mathop\sum}}\,a_{ij,kl}\right] 
@@ -737,8 +738,8 @@ By contrast, we focus on the effect of an exchange rate variation on consumer pr
 Where $\hat{C}^i_\$=\left(0 \ldots \frac{c_\$^i}{1+c_\$^i},\ldots 0 \right)$ is the increase in dollar prices of goods and services from country $i$ used as inputs in all other countries.\\ 
 $S^i$ represents the overall impact of an exchange rate variation on prices in each sector of each country expressed in the currency of country $i$. $S^i$ is expressed in log points. If the variation is small enough, the elements of $S^i$ correspond to the elasticities to the exchange rate of consumer prices in country $i$.\footnote{We return to this equation and its interpretation in section \ref{sec:extrapo} (see equation \ref{eq:decomp}).}\\
 %%It is quite different from $S$ defined in eq. \eqref{eq:eqchocprix} because in the case of $S$, the price shock affects all consumers, whereas in the case of $S^i$, the price shock affects only consumers that do not share a currency with country $i$. To illustrate the difference, the two-country, one sector case is explored in Appendix B.
-To convert this vector into the HCE \footnote{The HCE deflator covers more products and has different sectoral weights than the headline consumer price index (CPI) as the former also encompasses, for example, the rental equivalent of real estate expenditures.}
- deflator elasticity in country $i$, $\bar{s}^i$, we use the household consumption shares to compute a weighted average of the elements of $S^i$. Let $HC^i$ be the vector of sectoral shares in country $i$'s household consumption\footnote{Consumption is at market prices, whereas all WIOTs are at basic prices. To move from one to the other, we make the simplifying assumption that all taxes and subsidies on products are proportional, as is the value-added tax.}:
+To convert this vector into the HCE\footnote{The HCE deflator covers more products and has different sectoral weights than the headline consumer price index (CPI) as the former also encompasses, for example, the rental equivalent of real estate expenditures.}
+ deflator elasticity in country $i$, $\bar{s}^i$, we use the household consumption shares to compute a weighted average of the elements of $S^i$. Let $HC^i$ be the vector of sectoral shares in country $i$'s household consumption:\footnote{Consumption is at market prices, whereas all WIOTs are at basic prices. To move from one to the other, we make the simplifying assumption that all taxes and subsidies on products are proportional, as is the value-added tax.}
 \begin{eqnarray*}
 HC^i=\left( 
 	\begin{array}{c}
@@ -814,7 +815,7 @@ where exporting firms adapt their mark-ups depending on the destination market t
 Under the local currency pricing paradigm, prices are thus sticky in the currency of the destination market. 
 Hence, using alternative pricing assumptions would entail lower estimates of the HCE deflator elasticity.
 The magnitude of the upward bias stemming from our simplifying assumptions is unlikely to be constant in our sample given the cross-country heterogeneity.
-In particular, it is likely that in large and attractive markets, competitive pressures may push producers to adopt local currency pricing strategies, where exporting firms adapt their mark-ups depending on the destination market to offset exchange rate movements. 
+In particular, in large and attractive markets, competitive pressures may push producers to adopt local currency pricing strategies, where exporting firms adapt their mark-ups depending on the destination market to offset exchange rate movements. 
 Hence, we would expect the upward bias in our estimated elasticities to be more pronounced for the largest and most attractive markets represented in our sample.\\
 
 Despite these caveats, our results broadly concur with the literature.
@@ -825,7 +826,7 @@ Overall, elasticities estimated by \cite{Aydogus2018} tend to be slightly higher
 For instance, our results concur with \cite{Aydogus2018} for Australia, the US, Brazil or Canada. 
 However, the authors find an elasticity close to 0.16 for France, Germany, Italy and Spain, whereas our results are closer to 0.10.
 Elasticities estimated by \cite{Aydogus2018} are much higher for Estonia and Ireland (respectively, 0.31 and 0.33 vs 0.15 and 0.18 according to our computations).\\  
-\cite{Colavecchio2020} focus on the ERPT to consumer prices in the euro area from 1997 to 2019 using local projection techniques.\footnote{To the best of our knowledge, the literature using WIOTs mostly focuses on the transmission of production shocks through input-output linkages. By contrast, we use WIOTs to analyse cost-push inflation. As a result, and despite differences in methodologies, we compare our estimates of the HCE deflator elasticity with results from the ERPT literature.} 
+\cite{Colavecchio2020} compute the ERPT to consumer prices in the euro area from 1997 to 2019 using local projection techniques.\footnote{To the best of our knowledge, the literature using WIOTs mostly focuses on the transmission of production shocks through input-output linkages. By contrast, we use WIOTs to analyse cost-push inflation. As a result, and despite differences in methodologies, we compare our estimates of the HCE deflator elasticity with results from the ERPT literature.} 
 The authors find a statistically significant linear ERPT to domestic prices of 0.07 for Italy, 0.08 for Belgium and Portugal, 0.09 for Germany, 0.12 for Spain, 0.13 for Austria and Greece, 0.14 for the Netherlands and Finland and 0.23 for Lithuania after two years.\footnote{The linear ERPT to consumer prices estimated by \cite{Colavecchio2020} for the euro area as a whole is not statistically significant.}
 These figures concur with our estimates ranging from 0.07 to 0.18 for euro area countries (see Figure \ref{fig:WIOD_HC_elasticities}). 
 
@@ -870,8 +871,8 @@ The higher the country's import share in consumption, the higher the elasticity 
 
 \subsection{Impact of an appreciation of the US dollar}\label{subsec:usdelasticity}
 \paragraph{Results} 
-The model can also track the effect on the domestic economy of variations in the currency of foreign countries.
-As an example, we estimate the impact of an appreciation of the US dollar (USD) using WIOD.
+We can use the model to track the effect on the domestic economy of variations in the currency of foreign countries.
+For the sake of illustration, we estimate the impact of an appreciation of the US dollar (USD) using WIOD.
 This exercise assumes that exports are always invoiced in the exporter’s currency.
 Hence, we do not take into account the large role of the dollar in international trade invoicing.
 The US example illustrates that countries are affected in proportion to their trading links with the country whose currency appreciates.
@@ -899,10 +900,10 @@ Country pairs with the largest-in-magnitude pass-through of the dollar into pric
 These findings suggest that the upward bias in our estimates is unlikely to be constant across countries. 
 Since the DCP literature suggests that countries invoicing more in US dollars tend to experience greater US dollar exchange rate pass-through to their import prices, we expect the upward bias in our estimates to be minor for those economies.\\
 We assess cross-countries variations in the upward bias by building on \cite{Boz2020}, which document the role of vehicle currency invoicing for exchange rate pass-through to import prices for around 100 countries since 1990.\footnote{Invoicing data are not available for several large countries, including China and Mexico.}
-According to \cite{Boz2020}, in 2014 (the year for which we provide estimates of the HCE deflator elasticity in Figure \ref{fig:WIOD_HC_elasticities_USD}), the following countries had the largest share of imports invoiced in US dollar: India (89\% of imports), Brazil (81\% \footnote{In 2017 (data unavailable for 2014).}), Taiwan (80\%\footnote{In 2016 (data unavailable for 2014).}), Indonesia (76\%), South Korea (84\%), Japan (74\%), Turkey (63\%) and Australia (57\%).
+According to \cite{Boz2020}, in 2014 (the year for which we provide estimates of the HCE deflator elasticity in Figure \ref{fig:WIOD_HC_elasticities_USD}), the following countries had the largest share of imports invoiced in US dollar: India (89\% of imports), Brazil (81\%\footnote{In 2017 (data unavailable for 2014).}), Taiwan (80\%\footnote{In 2016 (data unavailable for 2014).}), Indonesia (76\%), South Korea (84\%), Japan (74\%), Turkey (63\%) and Australia (57\%).
 Invoicing in US dollar was less prevalent in Europe (where invoicing in euro dominates), ranging from around 20\% (Croatia, Estonia, France, Germany, Hungary, Malta, Norway and Slovenia) to 30\% (Denmark, Finland, Ireland, Italy, Poland, Romania, Switzerland, Sweden, the Netherlands). 
 Invoicing in US dollar was close to 40\% in Spain, Lithuania, the UK, Russia and as high as 50\% in Greece. 
-By contrast, it was much lower for Latvia (7\% \footnote{In 2015 (data unavailable for 2014).}) and Luxembourg (11\% \footnote{In 2016 (data unavailable for 2014).}), suggesting that the upward bias in our estimates is particularly pronounced for these two economies. 
+By contrast, it was much lower for Latvia (7\%\footnote{In 2015 (data unavailable for 2014).}) and Luxembourg (11\%\footnote{In 2016 (data unavailable for 2014).}), suggesting that the upward bias in our estimates is particularly pronounced for these two economies. 
 
 \subsection{Evolution over time of the HCE deflator elasticity}\label{subsec:timeevol}
 The output-weighted elasticity of the HCE deflator to the exchange rate has remained broadly stable over the past two decades.
@@ -913,7 +914,7 @@ Our results concur with the literature.
 Using comprehensive measures of global value chain integration, \cite{Timmer2016} find that the expansion of global value chain has slowed down since the Great Recession.\\
 While the latest dataset available for WIOD dates back to 2014, MRIO covers the most recent years, up to 2019. 
 Results from the MRIO database suggest that the elasticity has bounced back from 2016 onwards, reaching 0.09 in 2019.
-However, the version of MRIO we use (March 2021 release) suffers from data quality issues for 2018 and 2019.\footnote{Between 2017 and 2018, the HCE deflator elasticity sharply increased in a number of countries (e.g. China and India) according to the MRIO database. See Online Appendix D for more details.} 
+However, the version of MRIO we use (March 2021 release) suffers from data quality issues for 2018 and 2019.\footnote{Between 2017 and 2018, according to the MRIO database, the HCE deflator elasticity sharply increased in a number of countries (e.g. China and India). See Online Appendix D for more details.} 
 %\footnote{For instance, we observe large shifts in the consumption of services in China (see Online Appendix F), suggesting data quality issues in 2018.}
 Hence, we assume that the elasticity estimated using MRIO is not reliable for 2018 and 2019 (see Section \ref{sec:Extrapolations} for further details).\\
 Overall, our estimates are robust to using different databases.
@@ -1268,9 +1269,9 @@ Note: Country-clustered standard errors in parentheses, \sym{*} \(p<0.10\), \sym
 \label{tab:reg_infer2}
 \end{table}
 
-To confirm the quality of fit, we perform an out-of-sample prediction for the year 2014 using WIOD, running the regression on the years 2000 to 2008 \footnote{Regression results are similar to those presented in Table \ref{tab:reg_infer2} and are available upon request.}.
+To confirm the quality of fit, we perform an out-of-sample prediction for the year 2014 using WIOD, running the regression on the years 2000 to 2008.\footnote{Regression results are similar to those presented in Table \ref{tab:reg_infer2} and are available upon request.}
 The results of the out-of-sample prediction are close to the WIOT-computed elasticities for 2014  (see Figure \ref{fig:panel_pred2}). 
-Our findings are robust to using other databases\footnote{Results obtained with TiVA revisions 3 and 4 are available upon request.}.
+Our findings are robust to using other databases.\footnote{Results obtained with TiVA revisions 3 and 4 are available upon request.}
 
 \begin{figure}[!h]
 	\centering

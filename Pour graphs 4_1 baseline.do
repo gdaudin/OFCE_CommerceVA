@@ -246,6 +246,8 @@ graph dot (asis) pond_WIOD_HC if sample==1,  over(elast_order, ///
 	scheme(s1mono) xsize(6)  ysize(7)
 
 graph export "$dirgit/Rédaction/WIOD_HC_elasticities.png", replace
+export delimited using "$dirgit/2023 March For correlation computation WIOD_HC_elasticities.csv", replace
+
 drop sample
 
 

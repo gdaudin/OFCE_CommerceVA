@@ -3,7 +3,7 @@ Thank you for all your work on your manuscript and response to my comments. The 
 
 - At page 11, I found the example in the second paragraph confusing. Why prices of country B's inputs imported by A do not change? They should as they include inputs from A. Because you later are very clear about the direct and indirect effects of an appreciation, you might want to consider dropping this introductory example.
 You are right :  there was a mistake. We have replaced 
-
+Conversely, the price of imported inputs in country $A$ remains constant in dollars, since the prices of country $B$ have not changed, and declines once expressed in country $A$'s national currency. 
 by
 Conversely, the price of imported inputs in country $A$ in dollars increase since the prices of country $B$ have increased to accomodate more expensive inputs from country $A$. Prices in country $A$ in national currency decline however, as this effect is more than counter-balanced by the appreciation of country $A$'s national currency.
 
